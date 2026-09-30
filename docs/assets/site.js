@@ -73,7 +73,7 @@
     else {
       var p = P[el.getAttribute("data-personality")];
       if (!p) return;
-      c.phases = window.MD.build(tl, el, p);
+      c.phases = el.hasAttribute("data-film") && window.FILM ? window.FILM.build(tl, el, p) : window.MD.build(tl, el, p);
     }
     tl.repeat(-1).repeatDelay(0.7);
     if (el.hasAttribute("data-cycle")) {
@@ -122,7 +122,7 @@
     });
   }
 
-  // hero: your own opening line, re-tasted live as scene 1 of a three-scene film
+  // hero: your own opening title, re-cut live as scene 1 of a four-scene film
   function initTry() {
     var input = document.getElementById("try-input");
     if (!input) return;
@@ -132,7 +132,7 @@
       t = setTimeout(function () {
         var v = input.value.replace(/\s+/g, " ").trim() || "Rasa Director";
         cells.forEach(function (c) {
-          if (c.el.hasAttribute("data-try")) { c.el.querySelector(".md-block").setAttribute("data-content", v); build(c); }
+          if (c.el.hasAttribute("data-try")) { c.el.setAttribute("data-content", v); build(c); }
         });
       }, 220);
     });

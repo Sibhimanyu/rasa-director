@@ -148,6 +148,41 @@ html.js-motion [data-reveal="center"].is-in { clip-path: inset(-0.1em -0.1em -0.
 .tile .name { font: 600 1.15rem/1.2 var(--display); font-stretch: 90%; }
 .tile .eases { grid-column: 2; color: var(--on-indigo-2); margin-top: 4px; }
 
+
+/* ---------- hero: each tile is a whole mini film (film.js) ---------- */
+.md-cell[data-film] { display: block; }
+.film-stage { position: absolute; inset: 0; }
+.fs { position: absolute; inset: 0; overflow: hidden; background: var(--md-bg); }
+.fcell { position: absolute; display: grid; place-items: center; overflow: hidden; color: var(--md-ink); }
+.fcell > .md-block { grid-area: 1 / 1; }
+.fc-full { inset: 0; }
+.fs-foot { background: #1b1410; }
+.shot { position: absolute; inset: -4%; transform-origin: 60% 45%;
+  background:
+    radial-gradient(ellipse 60% 45% at 72% 30%, rgba(255,196,120,.85), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(90,40,30,.9), transparent 70%),
+    linear-gradient(180deg, #3b2a3f 0%, #7a4b3a 48%, #2a1c17 49%, #140e0c 100%); }
+.shot-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 51%; background: repeating-linear-gradient(100deg, rgba(255,255,255,.035) 0 2px, transparent 2px 38px), linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.55)); }
+.bokeh { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,214,150,.9), rgba(255,170,90,.25) 60%, transparent 70%); filter: blur(2px); }
+.bokeh.b0 { width: 11%; aspect-ratio: 1; left: 62%; top: 18%; } .bokeh.b1 { width: 7%; aspect-ratio: 1; left: 80%; top: 30%; }
+.bokeh.b2 { width: 5%; aspect-ratio: 1; left: 12%; top: 22%; opacity: .7; } .bokeh.b3 { width: 9%; aspect-ratio: 1; left: 30%; top: 12%; opacity: .5; }
+.bokeh.b4 { width: 4%; aspect-ratio: 1; left: 88%; top: 12%; } .bokeh.b5 { width: 6%; aspect-ratio: 1; left: 47%; top: 34%; opacity: .6; }
+.bokeh.b6 { width: 3%; aspect-ratio: 1; left: 22%; top: 40%; }
+.fc-lower { left: 5%; bottom: 24%; width: 56%; height: 34%; background: var(--md-bg); border-radius: 4px; }
+.caps { position: absolute; left: 0; right: 0; bottom: 8%; text-align: center; font: 800 clamp(11px, 1.5vw, 20px)/1.1 var(--display); letter-spacing: .01em; text-transform: uppercase; color: #fff; -webkit-text-stroke: 3px rgba(0,0,0,.8); paint-order: stroke fill; }
+.caps .cw { display: inline-block; margin: 0 .18em; visibility: hidden; }
+.fs-ui { background: color-mix(in srgb, var(--md-bg) 88%, var(--md-ink)); }
+.ui-panel { position: absolute; left: 8%; top: 18%; width: 38%; height: 64%; border-radius: 8px; background: var(--md-bg); box-shadow: 0 10px 30px rgba(0,0,0,.18); display: flex; align-items: flex-end; gap: 9%; padding: 8% 9%; box-sizing: border-box; }
+.ui-panel .bar { flex: 1; background: var(--md-ink); border-radius: 2px 2px 0 0; transform-origin: 50% 100%; }
+.ui-panel .bar:last-child { background: var(--turmeric); }
+.fc-claim { left: 49%; top: 14%; width: 49%; height: 72%; }
+.fchip { position: absolute; left: 8px; top: 8px; z-index: 5; font: 500 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 4px 6px; border-radius: 3px; background: rgba(0,0,0,.55); color: #fff; visibility: hidden; }
+.fstrip { position: absolute; left: 8px; right: 8px; bottom: 6px; height: 4px; z-index: 5; }
+.fseg { position: absolute; top: 0; bottom: 0; background: rgba(255,255,255,.35); border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
+.fseg + .fseg { margin-left: 2px; }
+.fjoin { position: absolute; left: -2px; top: -2px; bottom: -2px; width: 2px; background: var(--turmeric); }
+.fhead { position: absolute; top: -3px; width: 2px; height: 10px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.3); }
+
 /* ---------- motion cells (markup matches tasting.mjs) ---------- */
 .md-cell {
   --md-bg-c: var(--rice); --md-ink-c: var(--ink); --md-acc: var(--turmeric);
@@ -197,7 +232,9 @@ html.js-motion [data-reveal="center"].is-in { clip-path: inset(-0.1em -0.1em -0.
 /* meaning */
 .meaning { background: var(--rice); padding-top: clamp(64px, 8vw, 120px); padding-bottom: clamp(72px, 8vw, 120px); }
 .meaning-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 112px); align-items: center; }
-.word { font-family: var(--tamil); font-weight: 600; font-stretch: 90%; color: var(--indigo); font-size: clamp(4rem, 20vw, 15.5rem); line-height: 1.05; letter-spacing: -0.01em; margin: 0; padding-bottom: 0.08em; }
+.meaning-grid > div:first-child { container-type: inline-size; min-width: 0; }
+/* ரசனை is ~3.36em wide: size it to its column (28cqi leaves room for the reveal clip), not the viewport */
+.word { font-family: var(--tamil); font-weight: 600; font-stretch: 90%; color: var(--indigo); font-size: clamp(4rem, 20vw, 15.5rem); font-size: clamp(3rem, 28cqi, 15.5rem); line-height: 1.05; letter-spacing: -0.01em; margin: 0; padding-bottom: 0.08em; }
 .word-gloss { display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; margin-top: 6px; color: var(--ink-2); }
 .word-gloss b { font-family: var(--display); font-size: 1.6rem; font-weight: 600; color: var(--ink); font-stretch: 88%; }
 .entry ol { margin: 0 0 28px; padding: 0; list-style: none; counter-reset: sense; }
