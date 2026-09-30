@@ -35,7 +35,7 @@
   }
   function syncAll() { cells.forEach(syncCell); }
 
-  // HyperFrames' default entrance, the one every AI motion graphic has:
+  // HyperFrames' default entrance, the one every AI video scene gets:
   // from({ y: 150, opacity: 0, ease: "power4.out" }), scaled to the cell.
   function buildDefault(tl, cell) {
     var text = cell.getAttribute("data-content") || "";
@@ -66,8 +66,7 @@
     if (c.tl) c.tl.kill();
     el.style.removeProperty("--md-bg");
     el.style.removeProperty("--md-ink");
-    var block = el.querySelector(".md-block");
-    gsap.set(block, { clearProps: "all" });
+    gsap.set(el.querySelectorAll(".md-block"), { clearProps: "all" });
     var tl = gsap.timeline({ paused: true });
     var mode = el.getAttribute("data-mode");
     if (mode === "default") c.phases = buildDefault(tl, el);
@@ -123,7 +122,7 @@
     });
   }
 
-  // hero: your own headline, re-tasted live
+  // hero: your own opening line, re-tasted live as scene 1 of a three-scene film
   function initTry() {
     var input = document.getElementById("try-input");
     if (!input) return;
@@ -133,7 +132,7 @@
       t = setTimeout(function () {
         var v = input.value.replace(/\s+/g, " ").trim() || "Rasa Director";
         cells.forEach(function (c) {
-          if (c.el.hasAttribute("data-try")) { c.el.setAttribute("data-content", v); build(c); }
+          if (c.el.hasAttribute("data-try")) { c.el.querySelector(".md-block").setAttribute("data-content", v); build(c); }
         });
       }, 220);
     });

@@ -153,9 +153,10 @@ html.js-motion [data-reveal="center"].is-in { clip-path: inset(-0.1em -0.1em -0.
   --md-bg-c: var(--rice); --md-ink-c: var(--ink); --md-acc: var(--turmeric);
   --md-bg: var(--md-bg-c); --md-ink: var(--md-ink-c);
   position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px;
-  background: var(--md-bg); color: var(--md-ink); display: flex; align-items: center; justify-content: center;
+  background: var(--md-bg); color: var(--md-ink); display: grid; place-items: center;
   outline: 1px solid rgba(255,255,255,0.07); outline-offset: -1px;
 }
+.md-cell > .md-block { grid-area: 1 / 1; }
 .md-block { font-family: var(--display); font-weight: 700; font-stretch: 100%; line-height: 1.02; letter-spacing: -0.02em; text-align: center; position: relative; will-change: transform; }
 .md-line { overflow: hidden; padding: 0.04em 0.06em; white-space: nowrap; }
 .md-line.md-plain { overflow: visible; }
