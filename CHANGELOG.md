@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.4.1 (2026-09-30)
 
 - **Logo**: a lowercase r whose shoulder is an ease-out curve, landing on an amber keyframe. Mark, symbol, wordmark, Rasa Director and bilingual (ரசனை) lockups, light and reverse, in `docs/assets/logo/` (SVG, wordmarks outlined from Anek Latin / Anek Tamil; PNG icons at 1024/512/180). Used for the site favicon, apple-touch icon and nav, the console header and favicon, and the README title.
+- **Design directions**: variants of one visual style never repeat a type pairing, so six looks stay six distinct looks even without HyperFrames' palettes.
+- **Console redesign mockup** (`docs/mockups/console.html`): always shows what Claude is doing (live status, activity feed, results appearing as they're made), five phases instead of 19 steps, one question at a time with Claude's pick preselected, "Claude decides the rest", and a "Your film" panel. For review before it replaces the console.
 
 ## 0.4.0 (2026-09-30)
 
