@@ -59,7 +59,21 @@ function collect(dir, out = []) {
   }
   return out;
 }
-const files = collect(project).filter((f) => /data-composition-id|__timelines/.test(fs.readFileSync(f, "utf8")));
+// In a multi-scene project the workflow assembles the root index.html (between-frame
+// transitions from its registry) and compositions/captions.html (the caption skin):
+// those follow the storyboard's transition_in and the look, not the motion grammar,
+// so only the frames themselves are checked.
+const multiScene = fs.existsSync(path.join(project, "compositions", "frames"));
+const skipped = [];
+const files = collect(project).filter((f) => {
+  if (!/data-composition-id|__timelines/.test(fs.readFileSync(f, "utf8"))) return false;
+  const rel = path.relative(project, f);
+  if (multiScene && (rel === "index.html" || rel === path.join("compositions", "captions.html"))) {
+    skipped.push(rel);
+    return false;
+  }
+  return true;
+});
 if (!files.length) die(`no composition HTML found under ${project}`);
 
 // ---------------------------------------------------------------------------
@@ -170,7 +184,7 @@ function waived(rule, target) {
 
 const findings = [];
 const couldNotRun = [];
-const report = { project, motion: motionPath, files: [], errors: 0, warnings: 0, waived: 0, tweens: 0, exempt: 0 };
+const report = { project, motion: motionPath, files: [], skipped, errors: 0, warnings: 0, waived: 0, tweens: 0, exempt: 0 };
 const add = (f) => {
   if (waived(f.rule, f.target)) {
     report.waived++;

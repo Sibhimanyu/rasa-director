@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0 (2026-09-30)
+
+**Entire videos.** Rasa Director now directs whole multi-scene films, not only single motion units: launch films, explainers, PR videos, brand reels and custom pieces, music videos, and footage with captions or overlay cards.
+
+- New steps: **Route** (which HyperFrames workflow builds it), **Scenes** (the whole film as an editable scene table: on-screen text, voiceover, length, transition, intensity), **Transitions** (your scenes handing off through every transition), **Voice** (your hook line in three voices), **Storyboard** (timeline, then the workflow's sketch pass relayed to the console).
+- The tasting menu plays several of your scenes in sequence (`tasting.mjs --scenes`), so one motion grammar is judged across the film.
+- `scenes.mjs` writes STORYBOARD.md and SCRIPT.md in the workflows' exact format, checked with their own parser.
+- `video.mjs` sets up the project, writes BRIEF.md (the workflow asks nothing), builds frame.md with the motion contract, injects the contract into every frame packet, locks the chosen music track into the mix, and moves an old build aside on revise.
+- `obey.mjs` checks every built scene of a multi-scene project.
+- Memory tracks route, transitions and voice picks. Self-test: 34 checks.
+
 ## 0.1.0 (2026-09-30)
 
 First release as **Rasa Director** (developed as motion-director).

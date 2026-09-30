@@ -113,6 +113,21 @@
   .track audio { width: 100%; margin-top: 6px; }
   .toast { position: fixed; right: 20px; bottom: 20px; background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 8px; max-width: 380px; transform: translateY(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility .25s; }
   .toast.show { transform: none; opacity: 1; visibility: visible; }
+  nav ol button.skipped { opacity: .45; }
+  .timeline { display: flex; height: 54px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); margin: 14px 0 6px; max-width: 1200px; }
+  .timeline div { position: relative; border-right: 2px solid var(--bg); background: var(--panel-2); padding: 6px 8px; font: 500 11px/1.25 var(--mono); color: var(--ink-2); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .timeline div b { display: block; color: var(--ink); font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+  .timeline div i { position: absolute; left: -1px; top: 0; bottom: 0; width: 3px; background: var(--accent); }
+  .tl-meta { font: 500 12px/1 var(--mono); color: var(--ink-3); margin-bottom: 16px; }
+  table.scenes { width: 100%; max-width: 1200px; border-collapse: separate; border-spacing: 0 8px; }
+  table.scenes th { text-align: left; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding: 0 6px; }
+  table.scenes td { background: var(--panel); padding: 8px 6px; vertical-align: top; }
+  table.scenes td:first-child { border-radius: 8px 0 0 8px; font: 500 12px/1 var(--mono); color: var(--ink-3); padding-top: 14px; }
+  table.scenes td:last-child { border-radius: 0 8px 8px 0; white-space: nowrap; }
+  table.scenes input, table.scenes textarea, table.scenes select { width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: 13px; }
+  table.scenes textarea { min-height: 52px; resize: vertical; }
+  table.scenes .num { width: 70px; }
+  .iconbtn { background: none; border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; color: var(--ink-2); margin-left: 4px; }
   .warnbox { border: 1px solid rgba(239,123,107,.45); background: rgba(239,123,107,.08); color: #f3b3a8; padding: 10px 14px; border-radius: 8px; margin: 12px 0; max-width: 980px; }
   @media (max-width: 880px) { body { grid-template-columns: 1fr; grid-template-rows: 56px auto 1fr; } nav { border-right: 0; border-bottom: 1px solid var(--line); } nav ol { grid-auto-flow: column; overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } main { padding: 20px; } }
 </style>
@@ -138,8 +153,9 @@
 (function () {
   var TOKEN = new URLSearchParams(location.search).get("t") || "";
   var STEPS = [
-    ["brief", "Brief"], ["concept", "Concept"], ["look", "Look"], ["motion", "Motion"], ["keyframes", "Keyframes"],
-    ["music", "Music"], ["plan", "Plan"], ["build", "Build"], ["render", "Render"]
+    ["brief", "Brief"], ["route", "Route"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
+    ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
+    ["plan", "Plan"], ["build", "Build"], ["render", "Render"]
   ];
   var S = { steps: {} }, viewing = null, followCurrent = true, local = {};
   var Q = new URLSearchParams(location.search), PINNED = Q.get("step");
@@ -210,7 +226,7 @@
     ol.innerHTML = "";
     STEPS.forEach(function (s, i) {
       var st = (S.steps[s[0]] || {}).status || "pending";
-      ol.appendChild(h("li", null, [h("button", { class: (viewing === s[0] ? "sel" : ""), "aria-current": viewing === s[0] ? "step" : null, onclick: function () { viewing = s[0]; followCurrent = false; render(); } }, [
+      ol.appendChild(h("li", null, [h("button", { class: (viewing === s[0] ? "sel" : "") + (st === "skipped" ? " skipped" : ""), "aria-current": viewing === s[0] ? "step" : null, onclick: function () { viewing = s[0]; followCurrent = false; render(); } }, [
         h("span", { class: "n", text: String(i + 1).padStart(2, "0") }), h("span", { text: s[1] }), h("span", { class: "dot " + st, title: st })
       ])]));
     });
@@ -248,7 +264,7 @@
       var f = d.fields || {};
       var aspects = d.aspects || ["16:9", "9:16", "1:1", "4:5"];
       // typed values live in `local` so clicking an aspect chip never wipes them
-      local.brief = local.brief || { content: f.content || "", sub: f.sub || "", destination: f.destination || "", length_s: f.length_s || "", aspect: f.aspect || aspects[0] };
+      local.brief = local.brief || { content: f.content || "", sub: f.sub || "", destination: f.destination || "", length_s: f.length_s || "", aspect: f.aspect || aspects[0], narration: f.narration == null ? "yes" : f.narration ? "yes" : "no" };
       var B = local.brief;
       function inp(key, ph, extra) {
         var n = h("input", Object.assign({ value: B[key] == null ? "" : String(B[key]), placeholder: ph }, extra || {}));
@@ -259,13 +275,16 @@
         return h("button", { class: "chip" + (B.aspect === a ? " on" : ""), "aria-pressed": B.aspect === a ? "true" : "false", onclick: function () { B.aspect = a; document.getElementById("main")._sig = null; render(); }, text: a });
       }));
       return [h("div", { class: "form" }, [
-        field("Content (required)", inp("content", "The exact headline the piece shows")),
-        field("Secondary line", inp("sub", "Optional: tagline, URL")),
+        field("What's the video? (required)", inp("content", "A product URL, a topic, a pasted script, a PR, a music track, footage…")),
+        field("Key line (optional)", inp("sub", "The one line it must land, e.g. the headline or tagline")),
         h("div", { class: "two" }, [field("Where it plays", inp("destination", "website, reels, youtube, x-feed…")), field("Length (seconds)", inp("length_s", "blank = from content", { inputmode: "decimal" }))]),
         h("div", { class: "field" }, [h("label", { text: "Aspect" }), chips]),
+        h("div", { class: "field" }, [h("label", { text: "Narration" }), h("div", { class: "chips", role: "group", "aria-label": "Narration" }, ["yes", "no"].map(function (v) {
+          return h("button", { class: "chip" + (B.narration === v ? " on" : ""), "aria-pressed": B.narration === v ? "true" : "false", onclick: function () { B.narration = v; document.getElementById("main")._sig = null; render(); }, text: v === "yes" ? "Voiceover" : "No voiceover" });
+        }))]),
         h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () {
           if (!String(B.content).trim()) return toast("Content is the one required input.");
-          send("brief", "submit", { content: String(B.content).trim(), sub: String(B.sub).trim(), destination: String(B.destination).trim(), aspect: B.aspect, length_s: String(B.length_s).trim() ? Number(B.length_s) : null });
+          send("brief", "submit", { content: String(B.content).trim(), sub: String(B.sub).trim(), destination: String(B.destination).trim(), aspect: B.aspect, length_s: String(B.length_s).trim() ? Number(B.length_s) : null, narration: B.narration === "yes" });
         }, text: "Send brief" })])
       ])];
     },
@@ -330,6 +349,110 @@
       }
       drawControls();
       return [scaledFrame(d.tasting, 1920, 1080), controls];
+    },
+    route: function (d) {
+      var opts = d.options || [];
+      if (!opts.length) return [empty("The agent proposes which HyperFrames workflow builds this video (launch film, explainer, PR video, music video, footage edit…).")];
+      return [h("div", { class: "grid cards" }, opts.map(function (o) {
+        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
+          h("div", { class: "meta", text: o.id }), h("h3", { text: o.label || o.id }), o.why ? h("p", { text: o.why }) : null,
+          h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("span", { style: "flex:1" }),
+            h("button", { class: "btn small primary", onclick: function () { send("route", "choose", o.id); }, text: "Build it this way" })])
+        ]);
+      }))];
+    },
+    scenes: function (d) {
+      var src = d.scenes || [];
+      if (!src.length) return [empty("The scene list appears here: every scene's on-screen text, voiceover, length, transition and intensity, editable before anything is built.")];
+      // scenes without their own transition show (and submit) the video's default
+      local.rows = local.rows || src.map(function (x, i) { var r = Object.assign({}, x); if (i && !r.transition_in) r.transition_in = d.transition_default || "cut"; return r; });
+      var R = local.rows;
+      var trans = d.transitions || ["cut", "crossfade", "blur-crossfade", "push-slide LEFT", "push-slide UP", "zoom-through", "squeeze"];
+      var holder = h("div");
+      function total() { return R.reduce(function (a, r) { return a + (Number(r.duration) || 0); }, 0); }
+      function strip() {
+        var t = total() || 1;
+        return h("div", { class: "timeline", role: "img", "aria-label": "Timeline" }, R.map(function (r, i) {
+          return h("div", { style: "flex:" + (Number(r.duration) || 0.1) + " 0 0", title: (r.title || "") + " · " + r.duration + "s" }, [i ? h("i", { title: r.transition_in || "cut" }) : null, h("b", { text: (i + 1) + " " + (r.title || "") }), (Number(r.duration) || 0) + "s"]);
+        }));
+      }
+      function draw() {
+        holder.innerHTML = "";
+        holder.appendChild(strip());
+        holder.appendChild(h("div", { class: "tl-meta", text: R.length + " scenes · " + total().toFixed(1) + "s" + (d.target_s ? " (target " + d.target_s + "s)" : "") }));
+        var tbody = h("tbody");
+        R.forEach(function (r, i) {
+          function cell(key, el) { el.value = r[key] == null ? "" : r[key]; el.addEventListener("input", function () { r[key] = el.value; if (key === "duration" || key === "title") { var s = holder.querySelector(".timeline"); s.replaceWith(strip()); holder.querySelector(".tl-meta").textContent = R.length + " scenes · " + total().toFixed(1) + "s"; } }); el.setAttribute("aria-label", key + " for scene " + (i + 1)); return el; }
+          var tsel = h("select"); trans.forEach(function (t) { tsel.appendChild(h("option", { value: t, text: t })); });
+          var isel = h("select"); ["", "low", "medium", "high"].forEach(function (t) { isel.appendChild(h("option", { value: t, text: t || "—" })); });
+          tbody.appendChild(h("tr", null, [
+            h("td", { text: String(i + 1).padStart(2, "0") }),
+            h("td", null, [cell("title", h("input", { placeholder: "Scene name" }))]),
+            h("td", null, [cell("on_screen", h("textarea", { placeholder: "On-screen text" })), cell("visual", h("textarea", { placeholder: "What we see" }))]),
+            h("td", null, [cell("voiceover", h("textarea", { placeholder: d.narrated === false ? "(no narration)" : "Voiceover line" }))]),
+            h("td", null, [cell("duration", h("input", { class: "num", inputmode: "decimal" }))]),
+            h("td", null, [i ? cell("transition_in", tsel) : h("span", { class: "meta", text: "opens" })]),
+            h("td", null, [cell("intensity", isel)]),
+            h("td", null, [
+              h("button", { class: "iconbtn", "aria-label": "Move scene " + (i + 1) + " up", disabled: i === 0, onclick: function () { R.splice(i - 1, 0, R.splice(i, 1)[0]); draw(); }, text: "↑" }),
+              h("button", { class: "iconbtn", "aria-label": "Move scene " + (i + 1) + " down", disabled: i === R.length - 1, onclick: function () { R.splice(i + 1, 0, R.splice(i, 1)[0]); draw(); }, text: "↓" }),
+              h("button", { class: "iconbtn", "aria-label": "Remove scene " + (i + 1), disabled: R.length <= 2, onclick: function () { R.splice(i, 1); draw(); }, text: "✕" })
+            ])
+          ]));
+        });
+        holder.appendChild(h("table", { class: "scenes" }, [h("thead", null, [h("tr", null, ["#", "Scene", "On screen / visual", "Voiceover", "Sec", "Transition in", "Intensity", ""].map(function (x) { return h("th", { text: x }); }))]), tbody]));
+        holder.appendChild(h("div", { class: "toolbar" }, [
+          h("button", { class: "btn", onclick: function () { R.push({ title: "New scene", on_screen: "", visual: "", voiceover: "", duration: 3, transition_in: d.transition_default || "crossfade", intensity: "" }); draw(); }, text: "+ Add scene" }),
+          h("button", { class: "btn primary", onclick: function () { send("scenes", "submit", { scenes: R.map(function (r) { return Object.assign({}, r, { duration: Number(r.duration) }); }) }); }, text: "Approve this scene list" })
+        ]));
+      }
+      draw();
+      return [holder];
+    },
+    transitions: function (d) {
+      if (!d.menu) return [empty("The transitions menu appears here: two of your scenes handing off through each transition, looping.")];
+      var cells = d.cells || [];
+      local.tr = local.tr || d.recommended || (cells[1] || cells[0] || {}).id;
+      var controls = h("div");
+      function drawC() {
+        controls.innerHTML = "";
+        controls.appendChild(h("div", { class: "cellpick", role: "group", "aria-label": "Transitions" }, cells.map(function (c) {
+          var on = local.tr === c.id;
+          return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.tr = c.id; drawC(); } }, [h("b", { text: c.letter }), c.label + (d.recommended === c.id ? "  ★ recommended" : "")]);
+        })));
+        controls.appendChild(h("p", { class: "context", text: "This becomes the default handoff between scenes. Override single scenes in Scenes (e.g. zoom-through into a new section)." }));
+        controls.appendChild(h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () { send("transitions", "choose", local.tr); }, text: "Use " + (local.tr || "") + " between scenes" })]));
+      }
+      drawC();
+      return [scaledFrame(d.menu, 1920, 1080), controls];
+    },
+    voice: function (d) {
+      var opts = d.options || [];
+      var kids = [];
+      if (!opts.length) kids.push(empty(d.unavailable || "Voice samples appear here: your hook line spoken in a few voices."));
+      kids.push(h("div", { class: "grid", style: "max-width:820px" }, opts.map(function (o) {
+        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
+          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("div", { class: "meta", text: [o.mood, o.source].filter(Boolean).join(" · ") })]),
+            h("button", { class: "btn small primary", onclick: function () { send("voice", "choose", o.id); }, text: "Use this voice" })]),
+          o.file ? h("audio", { controls: true, preload: "none", src: fsUrl(o.file) }) : null
+        ]);
+      })));
+      kids.push(h("div", { class: "toolbar" }, [h("button", { class: "btn", onclick: function () { send("voice", "choose", "none"); }, text: "No voiceover" })]));
+      return kids;
+    },
+    storyboard: function (d) {
+      var kids = [];
+      if (d.timeline) {
+        var T = d.timeline, t = T.total_s || 1;
+        kids.push(h("div", { class: "timeline", role: "img", "aria-label": "Timeline" }, (T.scenes || []).map(function (r, i) {
+          return h("div", { style: "flex:" + (r.duration_s || 0.1) + " 0 0", title: r.title + " · " + r.duration_s + "s · " + (r.transition_in || "cut") }, [i ? h("i") : null, h("b", { text: r.n + " " + r.title }), r.duration_s + "s"]);
+        })));
+        kids.push(h("div", { class: "tl-meta", text: (T.scenes || []).length + " scenes · " + T.total_s + "s · " + (T.narrated ? "narrated" : "no narration") + " · music: " + T.music }));
+      }
+      if (d.sheet) kids.push(scaledFrame(d.sheet, d.sheet_width || 1600, d.sheet_height || 1400, 1100));
+      else kids.push(empty("The storyboard sheet (every scene's layout, drawn in your look) appears here once the workflow sketches it."));
+      if (d.sheet) kids.push(h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () { send("storyboard", "approve", null); }, text: "Approve the storyboard" })]));
+      return kids;
     },
     keyframes: function (d) {
       var kids = [];

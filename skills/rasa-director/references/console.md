@@ -38,13 +38,18 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 
 | Step | Fields |
 |---|---|
-| `brief` | `fields: {content, sub, destination, aspect, length_s}` (prefill), `aspects` (default 16:9, 9:16, 1:1, 4:5) |
+| `brief` | `fields: {content, sub, destination, aspect, length_s, narration}` (prefill; `narration` true/false), `aspects` (default 16:9, 9:16, 1:1, 4:5) |
+| `route` | `options: [{id, label, why}]` (HyperFrames workflow ids) |
 | `concept` | `options: [{id, title, world, hook, rare}]` |
+| `scenes` | `scenes: [{title, on_screen, visual, voiceover, duration, transition_in, intensity, …}]` (scenes.json's list; extra fields pass through), `target_s`, `transition_default`, `narrated` → editable table + timeline strip |
 | `look` | `options: [{id, showcase, description}]` (showcase = the preset's `frame-showcase.html`, rendered live), `note_brand` |
 | `motion` | `tasting` (index.html from tasting.mjs), `cells` (tasting.json's `cells`: `{letter, id, name, oneLiner, parent?, adjust?}`), `adjectives` (the object `motion-md.mjs adjectives` prints, or a list of ids). The default selection is `recommended`. |
+| `transitions` | `menu` (index.html from transition-menu.mjs), `cells` (transitions.json's `cells`: `{letter, id, label, energy, duration_s}`), `recommended` |
+| `voice` | `options: [{id, title, mood, file, source}]` (output of voice.mjs), `recommended`, `unavailable` |
+| `storyboard` | `timeline` (timeline.json from scenes.mjs) → the timing strip; `sheet` (the workflow's storyboard.html, optional `sheet_width`/`sheet_height`) → the sheet plus an Approve button |
 | `keyframes` | none → "show poses / go straight to build" buttons; `board` (board.html) and `issues` (from board.json) → the live board with Approve (disabled while issues exist), `board_height` (optional, px) |
 | `music` | `options: [{id, title, mood, duration, file, source}]` (output of music.mjs), `unavailable` (message when none could be fetched) |
-| `plan` | `shape: {route, category, aspect, length, motion, keyframes, music}`, `stated: [..]`, `agent: [..]` |
+| `plan` | `shape: {route, aspect, length, scenes, look, motion, transitions, voice, music}` (any keys; shown as a table), `stated: [..]`, `agent: [..]` |
 | `build` | written by `log`: `log: [{t, level, msg}]`, `stages: {id: status}`; optional `obey` summary line (push) |
 | `render` | `images: [..]` (snapshots, contact sheet), `videos: [..]` (renders), `studio` (Studio preview URL) |
 
@@ -54,14 +59,18 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 
 | type | step | value |
 |---|---|---|
-| `submit` | brief | `{content, sub, destination, aspect, length_s}` |
+| `submit` | brief | `{content, sub, destination, aspect, length_s, narration}` |
+| `submit` | scenes | `{scenes: [...]}`: the full edited list, in order |
+| `choose` | route | workflow id |
+| `choose` | transitions | the exact `transition_in` string (`cut`, `crossfade`, `push-slide LEFT`…) |
+| `choose` | voice | voice id or `"none"` |
 | `choose` | concept, look, motion | option id (a motion id with `+` is an adjusted variant: `parent+adj1+adj2`) |
 | `choose` | keyframes | `"poses"` or `"skip"` |
 | `choose` | music | track id, `"none"`, or `{file}` |
 | `choose` | render | `"preview"` or `"render"` |
 | `adjust` | motion | `{id, adjust: [adjectives]}` |
 | `more` | motion | `{exclude: [ids]}` |
-| `approve` | keyframes, plan | null |
+| `approve` | storyboard, keyframes, plan | null |
 | `decide` | any | null: "you decide" for that step |
 | `decide-rest` | `*` | null: "you decide the rest" |
 | `note` | any | null; the text is in `note` |

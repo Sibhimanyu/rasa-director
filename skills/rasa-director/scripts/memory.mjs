@@ -14,7 +14,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs, die, STATE_DIR } from "./lib/common.mjs";
 
-const STEPS = ["concept", "look", "motion", "keyframes", "aspect", "music"];
+const STEPS = ["route", "concept", "look", "motion", "transitions", "voice", "keyframes", "aspect", "music"];
 const HISTORY = path.join(STATE_DIR, "history.jsonl");
 
 export function readHistory() {

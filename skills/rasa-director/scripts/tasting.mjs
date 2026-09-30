@@ -12,6 +12,7 @@
 //          --personalities editorial-mask,elastic-playful,brutalist-step \
 //          [--frame path/to/frame.md | --preset editorial-forest] [--aspect 16:9] \
 //          [--sub "secondary line (tagline, URL); animates with the headline"] \
+//          [--scenes "Hook::sub || Middle line || Close::url"  (instead of --content: 2-4 scenes of the video, played in order per cell)] \
 //          --out .rasa-director/run-1/tasting [--stills]
 // Content "|" forces a line break. Text only: for a logo or data piece, preview
 // with the words the piece will show (brand name, the key number + label).
@@ -24,7 +25,16 @@ import {
 import { resolvePreset } from "./lib/hyperframes.mjs";
 
 const args = parseArgs();
-if (!args.content) die("--content is required (the actual headline / text the piece is about)");
+// --scenes "Hook line::sub || Middle line || Closing line::url": several scenes per
+// cell, played in order, so each personality is judged across the video
+const scenes = args.scenes
+  ? String(args.scenes).split("||").map((x) => x.trim()).filter(Boolean).slice(0, 4).map((x) => {
+      const [c, sb] = x.split("::");
+      return { content: c.trim(), sub: (sb || "").trim() };
+    })
+  : null;
+if (!args.content && !scenes) die("--content (one headline) or --scenes (a few scenes of the video) is required");
+if (!args.content) args.content = scenes[0].content;
 if (!args.personalities) die("--personalities is required (comma-separated ids; see personalities/)");
 if (!args.out) die("--out is required (a directory)");
 
@@ -59,7 +69,7 @@ const cellsHtml = personalities
     (p, i) => `
       <figure class="md-fig">
         <div class="md-cell" id="cell-${letters[i]}" data-content="${esc(args.content)}"${args.sub ? ` data-sub="${esc(args.sub)}"` : ""} data-w="${cellW}" data-h="${cellH}" data-personality="${p.id}">
-          <div class="md-block"></div>
+          ${scenes ? scenes.map((sc) => `<div class="md-block" data-content="${esc(sc.content)}"${sc.sub ? ` data-sub="${esc(sc.sub)}"` : ""}></div>`).join("") : `<div class="md-block"></div>`}
         </div>
         <figcaption><b>${letters[i]}</b> ${esc(p.name)}<span>${esc(p.oneLiner)}</span></figcaption>
       </figure>`
@@ -82,7 +92,8 @@ ${googleFontLink(look.font)}
   .md-fig { display: flex; flex-direction: column; gap: 10px; }
   .md-cell { --md-bg-c: ${look.bg}; --md-ink-c: ${look.ink}; --md-bg: var(--md-bg-c); --md-ink: var(--md-ink-c);
     position: relative; width: ${cellW}px; height: ${cellH}px; overflow: hidden; border-radius: 6px;
-    background: var(--md-bg); color: var(--md-ink); display: flex; align-items: center; justify-content: center; }
+    background: var(--md-bg); color: var(--md-ink); display: grid; place-items: center; }
+  .md-cell > .md-block { grid-area: 1 / 1; }
   .md-block { font-family: "${look.font}", Inter, ui-sans-serif, system-ui, sans-serif; font-weight: ${look.fontWeight};
     line-height: 1.02; letter-spacing: -0.02em; text-align: center; position: relative; will-change: transform; }
   .md-line { overflow: hidden; padding: 0.04em 0.06em; white-space: nowrap; }
@@ -139,12 +150,13 @@ ${googleFontLink(look.font)}
 // duration of the HF composition = longest cell; estimate from personality demo
 // timings (the page itself computes exact values; the attribute needs a number).
 // generous: per-character stagger on both entrance and exit, plus two holds
-const nChars = (args.content + (args.sub || "")).replace(/\s|\|/g, "").length + 2;
+const nChars = (scenes ? scenes.map((x) => x.content + x.sub).join("") : args.content + (args.sub || "")).replace(/\s|\|/g, "").length + 2;
 const est = Math.max(
   ...personalities.map((p) => {
     const d = p.demo;
     const hold = Math.max(d.hold_ms, p.holds.min_ms);
-    return (d.enter_ms + d.move_ms * 2 + d.exit_ms + hold * 2 + p.stagger.each_ms * nChars * 2) / 1000 + 0.5;
+    const perScene = d.enter_ms + d.move_ms * 2 + d.exit_ms + hold * 2;
+    return ((scenes ? scenes.length : 1) * perScene + p.stagger.each_ms * nChars * 2) / 1000 + 0.5 + (scenes ? scenes.length * 0.2 : 0);
   })
 );
 const out = path.resolve(args.out);
@@ -154,6 +166,7 @@ writeFile(file, html.replace("__DUR__", est.toFixed(2)));
 const manifest = {
   content: args.content,
   sub: args.sub || null,
+  scenes: scenes || null,
   aspect: `${W}x${H}`,
   look,
   // adjusted variants carry parent + adjust so a lock maps back to

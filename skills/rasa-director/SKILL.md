@@ -1,34 +1,37 @@
 ---
 name: rasa-director
 description: >
-  Rasa Director: creative direction for video made with Claude, so motion graphics stop looking and moving the same. Walks the user
-  through every style decision in order (brief, concept, look, motion personality, keyframes, music), each by
-  eye on previews of their own content in a local Director's Console web page (or in chat), and any step can be
-  skipped with "you decide". Locks the motion in a binding motion.md, hands a finished brief to HyperFrames to
-  build, streams build progress and renders back to the console, and checks the built composition obeys the
-  motion before render. Use when the user asks for a motion graphic / animated title / sting / kinetic type and
-  wants to choose the style, says "/rasa-director", "guide me through the style", "show me motion options",
-  "tasting menu", "show keyframes first", or complains that motion looks generic. Builds with HyperFrames
-  (/hyperframes, /motion-graphics); does not replace them.
+  Rasa Director: creative direction for entire videos made with Claude and HyperFrames (launch films,
+  explainers, PR videos, brand reels, music videos, footage edits with captions or overlays, and short
+  motion graphics). Walks the user through every creative decision in order (brief, route, story, scene
+  list and script, look, motion grammar, transitions, voice, music, storyboard), each by eye or ear on
+  previews of their own content in a local Director's Console web page (or in chat); any step can be
+  skipped with "you decide". Hands the approved plan to the matching HyperFrames workflow at its exact hook
+  points, streams build progress and renders back to the console, and checks every built scene obeys the
+  motion contract. Use when the user wants to make a video and choose how it looks, moves and sounds, says
+  "/rasa-director", "direct my video", "guide me through the style", "show me options first", "tasting
+  menu", "storyboard first", or complains that AI video looks generic. Builds with HyperFrames
+  (/hyperframes and its workflows); does not replace them.
 ---
 
 # Rasa Director
 
-*Rasa* (ரசம், रस): the essence a work makes its audience feel. Rasa Director lets the user direct that for a motion graphic, by eye, before anything is built: they're the director, Rasa handles taste, HyperFrames shoots. It **decides**; HyperFrames **builds**.
+*Rasa* (ரசம், रस): the essence a work makes its audience feel. The user is the director, Rasa handles taste, HyperFrames shoots. Rasa Director **decides** everything creative about a video up front, by eye and ear, then hands the matching HyperFrames workflow an approved plan it executes without re-deciding.
 
-The gap it fills: HyperFrames lets a user pick a *look* (palette, type, layout) by eye, but nothing lets them pick *how things move*, and `/motion-graphics` asks at most one question. So every piece gets the same default choreography (its `slide_bottom` = fade-up-slide on power4.out). This skill adds a motion step judged by eye, writes the choice into a binding `motion.md`, passes it to every build subagent, and checks the build against it.
+Why it exists: left alone, every AI video tells the obvious story, in a default look, where everything fades up and slides on the same ease. Rasa puts each creative decision in front of the user as rendered options of *their* video, remembers their taste, and enforces the motion they chose across every scene.
 
-Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print JSON; read it rather than reconstructing their work by hand.
+Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print JSON; read it rather than reconstructing their work by hand. The integration details per workflow are in `references/video.md`.
 
 ## Hard rules
 
-1. **One path, every step skippable.** Walk the steps in order. At every step the user may pick, say **"you decide"** (this step) or **"you decide the rest"** (every remaining step, keyframes and music included). Never ask who should do what; never split the flow into modes.
-2. **Intent in the request counts.** Anything the request already settles is not asked again: "you decide the look" skips Step 3 only; "show me keyframes" answers Step 5's question; a stated concept skips the pitch round; "no music" skips Step 6. Each such answer gets a line in the receipts summary ("look: you left it to me in your request").
-3. **Content is the only required input:** the exact words the piece shows (headline, plus an optional secondary line such as a tagline or URL), or a logo / data file.
-4. **Show, don't ask.** Decisions are made on rendered previews of the user's content, not adjectives. Every step's options go to the **Director's Console** (below) and, briefly, into chat with the PNG stills inline. The user can answer in either place.
-5. **"You decide" never means the default.** Concept and Motion skips sample wide with a tail constraint; Look skips rotate; Brief, Keyframes and Music skips use fixed defaults (music: pick the first candidate that fits the concept, or none if nothing fits). Every agent decision gets a one-line receipt: what was picked and the obvious option passed over.
-6. **One question per step**, recommended option first. "Go" or silence on a step accepts the recommendation.
-7. **Render is never skipped by "you decide".** The route workflow's own "preview first, or render?" gate always runs.
+1. **One path, every step skippable.** Walk the steps in order. At every step the user may pick, say **"you decide"** (this step) or **"you decide the rest"** (every remaining step). Never ask who should do what; never split the flow into modes.
+2. **Intent in the request counts.** Anything the request already settles is not asked again ("you decide the look" skips Look only; a pasted script answers the script; "no voiceover" skips Voice). Each such answer gets a line in the plan's receipts.
+3. **Only the source is required:** what the video is about (a product URL, a topic, a script, a PR, a music track, footage). Everything else can be decided.
+4. **Show, don't ask.** Decisions are made on rendered previews of the user's own video (their scenes in the tasting menu, their scenes in the transitions menu, their hook line in the voice samples). Every step's options go to the **Director's Console** and, briefly, into chat with stills inline. The user can answer in either place.
+5. **"You decide" never means the default.** Story and Motion skips sample wide with a tail constraint; Look skips rotate; the rest use sensible defaults. Every agent decision gets a one-line receipt: what was picked and the obvious option passed over.
+6. **One question per step**, recommended option first. "Go" or silence accepts the recommendation.
+7. **Render is never skipped by "you decide".** The workflow's own "preview first, or render?" gate always runs.
+8. **HyperFrames builds.** Rasa never hand-writes frames, audio or the assembly; it writes the plan files and runs the workflow at its hook points.
 
 ## Setup (once per run)
 
@@ -42,195 +45,178 @@ npx --yes hyperframes --version && npx --yes hyperframes browser ensure >/dev/nu
 node $SKILL_DIR/scripts/console.mjs serve --run "$RUN" --open
 ```
 
-**Shell variables do not survive between tool calls.** Note the literal `SKILL_DIR` and `RUN` values printed above and write them literally in every later command (below they appear as `$SKILL_DIR` / `$RUN` for readability). Run everything from the workspace root.
+**Shell variables do not survive between tool calls.** Note the literal `SKILL_DIR` and `RUN` values and write them literally in every later command (below they appear as `$SKILL_DIR` / `$RUN`). Run everything from the workspace root.
 
-- The last command starts the Director's Console in the background and opens it; it prints the URL. Give the user that URL in your first message. If they say they'd rather stay in chat ("no console"), skip every console command below and work in chat only.
-- No HyperFrames CLI → tell the user to install it (`npm i -g hyperframes`, or use `npx`); stop.
-- `browser ensure` fails → previews still open as HTML, but there are no stills and obey can't run; say so, never claim a check passed.
-- The user is asking to change a piece that already exists in `videos/` → go to **Revise** instead.
+- The last command starts the Director's Console and opens it; give the user its URL in your first message. If they'd rather stay in chat ("no console"), skip every console command below.
+- No HyperFrames CLI → tell the user to install it (`npm i -g hyperframes`, or use `npx`); stop. Workflows install on demand with `npx hyperframes skills update <workflow>`.
+- `browser ensure` fails → previews still open as HTML but there are no stills and the motion check can't run; say so, never claim a check passed.
+- The user wants to change a video that already exists in `videos/` → **Revise** below.
 
 Then show the step map once:
 
-> Here's how we'll direct this. Seven steps, each decided by eye in the console at <URL> (or right here). Say **"you decide"** on any step, or **"you decide the rest"** to hand me everything after it.
-> 1 Brief · 2 Concept · 3 Look · 4 Motion · 5 Keyframes · 6 Music · 7 Build & render
+> Here's how we'll direct this, each step decided by eye (or ear) in the console at <URL> or right here. Say **"you decide"** on any step, or **"you decide the rest"**.
+> 1 Brief · 2 Route · 3 Story · 4 Scenes · 5 Look · 6 Motion · 7 Transitions · 8 Voice · 9 Music · 10 Storyboard · 11 Build & render
 
 ## The Director's Console
 
-A local page (`console.mjs`, 127.0.0.1 only) with one panel per step: brief form, concept cards, look presets opened live, the live tasting menu with adjust controls, the keyframe board, music with players, the plan, build progress and the renders. The user's clicks come back to you as actions. Payload fields per step: `references/console.md`.
+A local page (`console.mjs`, 127.0.0.1 only, token + session cookie) with one panel per step. Payload fields per step and every action type: `references/console.md`.
 
 **For every step:**
 
-1. **Push** the step's options. A push **replaces** that step's payload (old options, issues and the "you sent" banner are cleared), so always send the full payload. Write it to a file (avoids shell-quoting problems), then:
-   ```bash
-   node $SKILL_DIR/scripts/console.mjs push --run "$RUN" --step <brief|concept|look|motion|keyframes|music|plan|render> --file "$RUN/<step>.json"
-   ```
-   Paths inside payloads are workspace-relative (e.g. `.rasa-director/<run>/tasting/index.html`).
-2. **Say it in chat too:** the question in one or two lines, the recommended option, and any still (tasting, board) inline.
-3. **Wait** for the answer, with `run_in_background: true` so the user can also reply in chat:
-   ```bash
-   node $SKILL_DIR/scripts/console.mjs wait --run "$RUN" --timeout 3000
-   ```
-   You are notified when it returns one JSON action: `{step, type, value, note}`. Exit 3 (`console_down`) means the console stopped: restart it with `serve` (same `--run`) and push the current step again. If the user answers **in chat** instead, record it with `console.mjs record --run "$RUN" --step <step> --type choose --value '<json>' --note "<their words>"` and carry on. A wait that returns later for a step you already settled is a correction if it differs, otherwise ignore it. On timeout (exit 2), start another wait.
-4. **Act** on the action:
-
-   | type | means |
-   |---|---|
-   | `submit` | brief form values (`value` = fields) |
-   | `choose` | the pick (`value` = option id, or `"poses"` / `"skip"`, `"none"`, `"preview"` / `"render"`, `{file}` for own music). A motion id like `luxe-minimal+slower+calmer` is an adjusted variant: lock it with `--personality luxe-minimal --adjust slower,calmer` (its tasting cell also carries `parent` and `adjust`) |
-   | `adjust` | motion: `value` = `{id, adjust:[adjectives]}`: re-preview, then ask to lock |
-   | `more` | motion: `value.exclude` = ids to leave out of a new menu |
-   | `approve` | keyframes or plan approved |
-   | `decide` | "you decide" for this step |
-   | `decide-rest` | step `*`: "you decide the rest" from here on (still ask the render question) |
-   | `note` | free text: a correction, a mix of options, a question. Answer or apply it, and re-push |
-
-5. **Close** the step: `console.mjs push --run "$RUN" --step <step> --status done --data '{"decision":"<what was decided + receipt>"}'`. Then push the next step, which moves the console to it.
+1. **Push** the step's full payload (a push replaces the step): write it to a file, then `node $SKILL_DIR/scripts/console.mjs push --run "$RUN" --step <step> --file "$RUN/<step>.json"`. Paths inside payloads are workspace-relative.
+2. **Say it in chat too:** the question in a line or two, the recommended option, stills inline.
+3. **Wait** with `run_in_background: true` so the user can also reply in chat: `node $SKILL_DIR/scripts/console.mjs wait --run "$RUN" --timeout 3000`. You're notified with one JSON action `{step, type, value, note}`. A chat answer → `console.mjs record --run "$RUN" --step <step> --type choose --value '<json>' --note "<their words>"`. Exit 2 = timeout (wait again); exit 3 = the console died (`serve` again, re-push). A late action for a settled step is a correction if it differs.
+4. **Act** on it (types: `submit`, `choose`, `adjust`, `more`, `approve`, `decide`, `decide-rest` on step `*`, `note`; see `references/console.md`).
+5. **Close** the step: `console.mjs push --run "$RUN" --step <step> --status done --data '{"decision":"<what + receipt>"}'` (or `--status skipped` for steps this route doesn't use), then push the next.
 
 ## Step 1: Brief
 
-Ask for the **content** first. Console: push `brief` with the fields you already know (from the request) and the question; the user fills the form. Then, one question each with a recommended default:
-- **Where it plays** → aspect: website / YouTube 16:9 · feed 1:1 · Reels / TikTok / Stories 9:16 (also 4:5). `node $SKILL_DIR/scripts/memory.mjs recommend --step aspect` returns a remembered value to recommend, with its receipt.
-- **Length:** default from content (about 4–6 s for a line or two).
+Console: push `brief` with what the request already gives. The user fills: **what the video is** (source), an optional key line, where it plays (→ aspect: website/YouTube 16:9 · feed 1:1 · Reels/TikTok/Stories 9:16 · 4:5), length (launch films and explainers are strongest at 30–90 s), and **voiceover or not**. `memory.mjs recommend --step aspect` gives a remembered aspect to recommend. Record the aspect: `node $SKILL_DIR/scripts/memory.mjs record --step aspect --value <WxH> --mode confirmed|auto`.
 
-`destination` is free text (website, youtube, x-feed, reels, tiktok, story...); it goes into BRIEF.md, and into HyperFrames' remembered preferences only if the user stated it.
+## Step 2: Route
 
-**Logo or data pieces:** the previews are text-only. Preview with the words the piece will show (brand name for a logo sting; "40% | faster builds" for a stat), tell the user the real logo / data enters at build, and list the file under `assets` in decisions.json.
+Pick the HyperFrames workflow that builds this video, using HyperFrames' own route table (`~/.claude/skills/hyperframes/SKILL.md` §2 and its "Resolve common ambiguities"):
 
-Skip → 16:9 (1920x1080), length from content. Record: `node $SKILL_DIR/scripts/memory.mjs record --step aspect --value <WxH> --mode confirmed|auto`.
+| The video is… | Route |
+|---|---|
+| a product, app, company or site being launched / promoted / toured | `product-launch-video` |
+| a topic, article, notes or how-to told with invented visuals | `faceless-explainer` |
+| a GitHub pull request / code change | `pr-to-video` |
+| cut to a music track (lyric video, beat-synced promo) | `music-to-video` |
+| existing talking-head footage + plain captions | `embedded-captions` |
+| existing talking-head / interview / podcast footage + designed overlay cards | `talking-head-recut` |
+| anything else: brand reel, montage, longer or custom multi-scene piece, footage remix | `general-video` |
+| one short unnarrated motion unit (a title, sting, stat hit, under ~10 s) | `motion-graphics` → **Single motion units** below |
 
-## Step 2: Concept
-
-Unless the request states a concept: first ask what they are already picturing (an idea they have seeds the round and is never displaced). Then pitch **five concepts**, 3 lines each (the idea · its visual world · its opening hook), with HyperFrames' pitch-round discipline (`~/.claude/skills/hyperframes/references/pitch-round.md`): answer its four questions about the subject, one concept per path, **at least two a model would rarely produce** (mark those `rare: true`), no two with the same silhouette. Present all five before recommending one. Mixing is a valid answer (it arrives as a `note`). Console: push `concept` with `options` and `recommended`.
-
-Also pick the `/motion-graphics` **category** the concept implies: `kinetic-type`, `stat`, `charts`, `logo-reveal`, `lower-thirds`, `maps`, `webpage`, `news`, `tweet`, `asset-fusion`. It goes into decisions.json so the build's planner doesn't re-decide it.
-
-Skip → run the same gate silently, pick one; the receipt names the typical concept left behind. Record: `node $SKILL_DIR/scripts/memory.mjs record --step concept --value "<short concept name>" --mode confirmed|auto`.
-
-## Step 3: Look
+Push `route` with 2–3 plausible options (`id`, `label`, `why`), the best one recommended. Record it (`memory.mjs record --step route --value <route> --mode confirmed|auto`), then set up the project and intake:
 
 ```bash
-node $SKILL_DIR/scripts/pick.mjs look --count 3 --feel "<feel words>" --seed "<content>"
+node $SKILL_DIR/scripts/video.mjs init --route <route> --project <kebab-name> --aspect <aspect>
+# product site:            node $SKILL_DIR/scripts/video.mjs capture --project-dir videos/<name> --url "<URL>"
+# topic / script / no site: node $SKILL_DIR/scripts/video.mjs capture --project-dir videos/<name> --no-capture --title "<title>" --text-file "$RUN/brief.txt"
 ```
 
-- Feel words come from the vocabulary in `references/personalities.md`; `unmatched_feel` in the output lists words it didn't understand, so re-run with vocabulary words.
-- User has a brand spec (frame.md / design.md / guidelines) → use it (`look.frame` in decisions.json; `--frame <path>` for tasting and board) and skip the presets. If the scripts warn that no colours or font were found in it, previews use a default palette: say so, and use a preset for the preview or add a `colors:` block.
-- Otherwise push `look` with the candidates (`id`, `showcase`, `description`): the console shows each showcase live so they pick **by eye**. Say plainly: showcases wear the preset's own sample content and are designed at 16:9; their real content, at their real aspect, appears in Step 4 in this look, and they can reopen Look from there.
-- A non-null `recommended` is listed first with its receipt.
+- A failed or blocked capture is a **hard stop**: report the reason and ask for screenshots or a brief; never build from a partial capture. Show a couple of capture screenshots in the Story panel's context.
+- `pr-to-video`: resolve the project folder with that workflow's `scripts/project-dir.mjs --pr <ref>` and pass it as `--project-dir`; run its Step 1 fetch/ingest scripts (`fetch-pr.mjs`, `ingest.mjs`) before Story.
+- `music-to-video`: the track is the spine; ask for it (run Step 9 now). The workflow plans its cuts from the beat grid with hard cuts, so skip Scenes, Transitions and Voice (push them `--status skipped`).
+- Footage routes (`embedded-captions`, `talking-head-recut`): skip Story, Scenes, Transitions and Voice (push them `--status skipped`); Look becomes the caption identity / overlay style (see `references/video.md`).
 
-Skip → `auto.pick`, receipt `auto.receipt`. Record: `node $SKILL_DIR/scripts/memory.mjs record --step look --value <preset> --mode confirmed|auto`.
+## Step 3: Story
 
-## Step 4: Motion (the tasting menu)
+Unless the request states a concept: ask what they're already picturing, then pitch **five stories**, 3 lines each (the idea · its world · its opening hook), with HyperFrames' pitch-round discipline (`~/.claude/skills/hyperframes/references/pitch-round.md`): one per path, **at least two a model would rarely produce** (`rare: true`), no two with the same silhouette. Use the route's story craft: for launch films the arcs in `~/.claude/skills/product-launch-video/references/story-design.md` (PAS, Future Pacing, Demo Loop, Before-After-Bridge, Feature-Benefit Cascade) and its hook strategies; for explainers `faceless-explainer`'s story references. Push `concept`; a mix arrives as a `note`. Record: `memory.mjs record --step concept --value "<story name>" --mode confirmed|auto` (before a "you decide", check `memory.mjs recent --step concept --n 3` and don't reuse those).
+
+## Step 4: Scenes (the whole film, scene by scene)
+
+Write `$RUN/scenes.json` (format: `references/video.md`): per scene the title, on-screen text, what we see, voiceover line, duration, `type`/`persuasion`/`beat` (launch films), optional `blueprint` (only ids that exist in `hyperframes-animation/blueprints/`), `intensity` (low/medium/high), and `transition_in` (default from Step 7). Plan to the brief's length; every scene has one job.
+
+Push `scenes` with `{"scenes": [...], "target_s": <length>, "transition_default": "...", "narrated": true|false}`. The panel is an editable table with a timeline strip: the user edits text, voiceover, length, transition and intensity, reorders, adds, removes, then **approves** (`submit` with the full list: write it back into scenes.json). Then:
 
 ```bash
-node $SKILL_DIR/scripts/pick.mjs motion --count 6 --feel "<feel words>" --seed "<content>"
-node $SKILL_DIR/scripts/tasting.mjs --content "<headline>" [--sub "<secondary line>"] \
-  --personalities <candidate ids, comma-separated> --preset <look> (or --frame <path>) \
-  --aspect <aspect> --out "$RUN/tasting" --stills
+node $SKILL_DIR/scripts/scenes.mjs --scenes "$RUN/scenes.json" --route <route> --out "$RUN/plan" [--mode autonomous]
 ```
 
-`|` in `--content` forces a line break. The secondary line animates with the headline, so the whole lockup is judged. Push `motion` with `tasting` (`$RUN/tasting/index.html`), `cells` (the `cells` array from `$RUN/tasting/tasting.json`, as is), `adjectives` (the object `motion-md.mjs adjectives` prints, as is) and `recommended`: the console plays the menu live with a picker and adjust chips. In chat, show `tasting-enterMid.png` inline (motion character is visible mid-entrance). Ask one question: **which one (A–F), or adjust one** ("B but slower").
+It writes `STORYBOARD.md` (+ `SCRIPT.md` when narrated) in the workflow's exact format, validated with the workflow's own parser, and `timeline.json`. Exit 1 lists every problem (bad transition, missing blueprint, non-positive duration…): fix scenes.json and re-run. Voiced scene lengths are re-timed to the real narration by the workflow's audio step; say so. Pass `--mode autonomous` only after "you decide the rest".
 
-- **Adjust** (`adjust` action, or said in chat): `node $SKILL_DIR/scripts/motion-md.mjs adjectives` lists the supported adjustments (slower, faster, calmer, punchier, bouncier, stiffer; they combine). Emit the variant with `--emit-personality "$RUN/custom.json"` (and a scratch `--out "$RUN/motion-draft.md"`), re-run tasting with `--personalities <parent>,$RUN/custom.json --out "$RUN/tasting-adjusted"` so they see before and after, re-push `motion` with that tasting, and confirm before locking. Unsupported adjective → say which supported ones come closest.
-- **None fit** (`more` action): ask what felt wrong, map it to vocabulary feel words, and run `pick.mjs motion` again with `--exclude <the ids just shown>` so the new menu is genuinely new (the same inputs give the same menu).
-- Lock it (the `--adjust` list must match what they approved):
+## Step 5: Look
 
 ```bash
-node $SKILL_DIR/scripts/motion-md.mjs write --personality <id> [--adjust a,b] --out "$RUN/motion.md" \
-  --mode confirmed|auto --reason "<one line: why this fits the concept>"
+node $SKILL_DIR/scripts/pick.mjs look --count 3 --feel "<feel words>" --seed "<source>"
+```
+
+Feel words come from `references/personalities.md` (`unmatched_feel` lists ones it didn't understand). A brand spec → `look.frame` (skip presets). Otherwise push `look` with the candidates' showcases so the user picks **by eye**; say plainly that the captured brand colors and fonts will be remixed onto the chosen preset (the pick is the layout bones), and that their real scenes in this look appear in Step 6. `pr-to-video` uses `code-editorial` (fixed by the workflow; skip). Record: `memory.mjs record --step look --value <preset> --mode confirmed|auto`.
+
+## Step 6: Motion (one grammar for the whole film)
+
+```bash
+node $SKILL_DIR/scripts/pick.mjs motion --count 6 --feel "<feel words>" --seed "<source>"
+node $SKILL_DIR/scripts/tasting.mjs --scenes "<hook on-screen>::<sub> || <a middle scene> || <the close>" \
+  --personalities <candidate ids> --preset <look> (or --frame <path>) --aspect <aspect> --out "$RUN/tasting" --stills
+```
+
+Each tasting cell plays **three of the user's own scenes in order** in one personality, so a style is judged across the film, not on one line. Push `motion` with `tasting`, `cells` (tasting.json's `cells`), `adjectives` (the object `motion-md.mjs adjectives` prints) and `recommended`; show `tasting-enterMid.png`. Adjust (`adjust` action): emit the variant with `motion-md.mjs write --personality <id> --adjust a,b --out "$RUN/motion-draft.md" --emit-personality "$RUN/custom.json"`, re-run tasting with `--personalities <parent>,$RUN/custom.json --out "$RUN/tasting-adjusted"`, re-push, confirm. None fit (`more`): `pick.mjs motion --exclude <shown ids>`. Lock:
+
+```bash
+node $SKILL_DIR/scripts/motion-md.mjs write --personality <id> [--adjust a,b] --out "$RUN/motion.md" --mode confirmed|auto --reason "<why it fits this film>"
 node $SKILL_DIR/scripts/memory.mjs record --step motion --value <id> --mode confirmed|auto
 ```
 
-Skip → `auto.pick` from `pick.mjs motion` (tail-weighted, rotates away from the last 3 motion picks); receipt `auto.receipt`.
+One grammar governs every scene; scenes differ only by `intensity` (set in Scenes). A motion id like `x+slower` is an adjusted variant: `--personality x --adjust slower`.
 
-## Step 5: Keyframes
-
-Ask: **see the key poses before the build, or go straight to the build?** Recommend poses for anything longer than about 4 s or with more than two elements. Console: push `keyframes` with just the `question` (no `board`); the panel offers both buttons.
-
-If yes, write `$RUN/keyframes.json` (format: `references/board-format.md`): per shot, the elements (text, position, size, `split` for per-letter / per-word motion) and 4–7 poses. Pick pose times so every animated segment lands on the motion.md scale, staggered segments finish before the next move, and every element holds at least `holds.min_ms` after it has fully arrived. Then:
+## Step 7: Transitions
 
 ```bash
-node $SKILL_DIR/scripts/board.mjs --poses "$RUN/keyframes.json" --motion "$RUN/motion.md" \
-  --preset <look> (or --frame <path>) --out "$RUN/board" --still
+node $SKILL_DIR/scripts/transition-menu.mjs --from "<scene 1 on-screen>" --to "<scene 2 on-screen>" --preset <look> --aspect <aspect> --out "$RUN/transitions" --stills
 ```
 
-Exit code 3 = problems against the contract (listed in the output and on the board): off-scale or off-ease segments, stagger overruns, short holds, and pose pairs that would force a **banned** move. Fix keyframes.json and re-run **before** showing it. Push `keyframes` with `board` (`$RUN/board/board.html`) and `issues` (empty); show `board.png` inline (after a revision, `board.prev.png` is the previous version). Feedback ("hold longer on the tagline", "snap into 4", "drop the label") arrives as a `note` → edit poses / segment `kind` / `ease` (motion.md eases only), re-run, re-push. Loop until `approve`.
+It plays the user's first two scenes handing off through every transition the workflow can inject (hard cut plus the registry's types, run from the workflow's own templates). Push `transitions` with `menu`, `cells` (transitions.json's `cells`) and `recommended` (blur-crossfade when scene backgrounds differ, crossfade when they match; zoom-through at section changes). The `choose` value is the exact `transition_in` string. Record it (`memory.mjs record --step transitions --value "<value>" --mode confirmed|auto`) and set it as `transition_default` in scenes.json and re-run `scenes.mjs` (per-scene overrides live in the Scenes table). `music-to-video` uses hard cuts only; footage routes skip this step.
 
-Skip → no board; the build choreographs from motion.md alone. Record: `node $SKILL_DIR/scripts/memory.mjs record --step keyframes --value yes|no --mode confirmed|auto`.
+## Step 8: Voice (narrated videos)
 
-## Step 6: Music
+```bash
+node $SKILL_DIR/scripts/voice.mjs --run "$RUN" --line "<the hook voiceover line>" --tone "<2-3 words, e.g. warm,confident>" [--lang en]
+```
 
-Optional music bed. Unless the request settled it, fetch 2–3 candidates whose moods come from the concept and the motion personality's feel:
+Real samples of the hook line in 3 voices of different styles (HeyGen via media-use). Push `voice` with that JSON; `unavailable` → say so and let the workflow use its default. `choose <id>` → set `"voice": {"id","name","provider":"heygen"}` in scenes.json (re-run `scenes.mjs` so SCRIPT.md names it). `choose "none"` → no narration (re-run scenes.mjs with `"narration": false`). Record: `memory.mjs record --step voice --value <id|none> --mode confirmed|auto`.
+
+## Step 9: Music
 
 ```bash
 node $SKILL_DIR/scripts/music.mjs --run "$RUN" --intents "<mood one>|<mood two>|<mood three>"
 ```
 
-It prints console-ready `options` (id, title, mood, duration, file) from HyperFrames' media-use catalog. Push `music` with that JSON plus the question; the console plays each track. If the result has `unavailable` (media-use / heygen not set up), push it anyway: the panel explains and still offers "No music" and "Use my track". In chat, list the tracks with their moods.
+Moods come from the story and the motion's feel. Push `music` (players; `unavailable` still offers "No music" / "Use my track"). A pick → `"music": {"path": "<file>", "title": "<title>"}` in the decisions (the exact track is locked into the build); `"none"` → `"music": "none"` and scenes.json `"music": null`; a mood-only choice → `"music": {"mood": "..."}` and scenes.json `"music": "<mood>"`. Record: `memory.mjs record --step music --value <id|none> --mode confirmed|auto`.
 
-Answers: `choose` with an id (use that file), `"none"` (silent piece), or `{file}` (their own track; check it exists). Record: `node $SKILL_DIR/scripts/memory.mjs record --step music --value <id|none> --mode confirmed|auto`. The chosen track goes into decisions.json as `"music": {"path": "<file>", "title": "<title>"}`.
+## Step 10: Storyboard and plan
 
-Skip → the first candidate whose mood fits the concept, or none if none fits; receipt names the choice.
-
-## Step 7: Build & render
-
-**7a. Plan.** Push `plan` with `shape` (route, category, aspect, length, motion, keyframes, music), `stated` (what the user chose, per step) and `agent` (what you decided, each with its receipt). Say the same in chat. A correction (`note`) is folded in and the plan is pushed again; never hand off an edited-but-unconfirmed plan. Continue on `approve`. An agent pick the user explicitly keeps here is re-recorded with `--mode confirmed`.
-
-**7b. Handoff.** Write `$RUN/decisions.json` (format: `references/handoff.md`). Set `confirmed` to only the answers the user actually gave (destination, aspect, language, look), because those become HyperFrames' remembered defaults. Then:
+1. Push `storyboard` with `timeline` (the contents of `$RUN/plan/timeline.json`) and `--status done`, so the user sees the whole film's timing, transitions, narration and music on one strip (it reopens for approval when the workflow draws its sketch sheet in Step 11).
+2. Push `plan` with `shape` (route, length, scenes, look, motion, transitions, voice, music), `stated` (what the user chose) and `agent` (what you decided, each with its receipt). Continue on `approve`; fold in any `note` and re-push.
+3. Write `$RUN/video-decisions.json` (format: `references/video.md`; `confirmed` lists only answers the user actually gave) and hand off:
 
 ```bash
-node $SKILL_DIR/scripts/handoff.mjs --decisions "$RUN/decisions.json"
-node $SKILL_DIR/scripts/console.mjs log --run "$RUN" --stage handoff --stage-status done --level ok --message "project ready: videos/<project>"
+node $SKILL_DIR/scripts/video.mjs write --project-dir videos/<name> --decisions "$RUN/video-decisions.json"
+node $SKILL_DIR/scripts/console.mjs log --run "$RUN" --stage handoff --stage-status done --level ok --message "plan handed to <route>"
 ```
 
-If it stops because `videos/<project>` already exists, ask: revise that piece (go to **Revise**) or use a new name. Otherwise it inits `videos/<project>` for the route, writes `frame.md`, `motion.md`, `keyframes.json`, the music and other assets, a canonical `BRIEF.md` and `DISPATCH.md`, and for `motion-graphics` a host root `index.html` that mounts the Builder's `compositions/index.html`. It records HyperFrames' preference fields. Route: `motion-graphics` for a short unnarrated piece (the normal case); otherwise the route HyperFrames' own table would pick.
+It writes `BRIEF.md` (canonical; the workflow asks nothing), `frame.md` (built from the preset by the workflow's own `build-frame.mjs`, brand-remixed, with the **motion contract appended**, the one file every frame worker reads), `motion.md`, the approved `STORYBOARD.md` / `SCRIPT.md`, the music bed, `DISPATCH.md`, and the confirmed preferences.
 
-**7c. Build through the route workflow.** For a route other than `motion-graphics`, DISPATCH.md carries only the decisions and the motion contract; append it to whichever subagents that workflow uses to plan, design, build or repair, and let its own design step own layout. The rest of 7c is written for `/motion-graphics`. Read its SKILL.md (`~/.claude/skills/<route>/SKILL.md`) and follow it. Its opening "keep this skill fresh" command is already done: handoff's `init` refreshed the skills this run, so don't re-ask. It adopts the project: Step 0 skips `init` because `hyperframes.json` exists, and BRIEF.md answers the director's question. These additions stay in force for the whole build:
+## Step 11: Build & render (the workflow runs; Rasa steers)
 
-1. **Append the full text of `videos/<project>/DISPATCH.md` to every subagent dispatch**: Director Part 1, Director Part 2, Builder, and repair (finalize). Those subagents never read BRIEF.md; DISPATCH.md carries the decisions, the motion contract, the output shape, where it overrides the workflow's references, the music bed, and how approved keyframes map into `shot-plan.json`.
-2. **Stream progress to the console.** At each workflow stage run `console.mjs log --run "$RUN" --stage <plan|design|build|verify|obey|render-gate> --stage-status working|done|failed --message "<one line>"`. Stages: plan = Director Part 1, design = Part 2, build = Builder, verify = lint/check/snapshots.
-3. **After the workflow's verify step** (lint, check, snapshots) and **before its render question**:
-   ```bash
-   node $SKILL_DIR/scripts/obey.mjs --project videos/<project>
-   ```
-   - **Exit 2 = violations.** Dispatch the workflow's repair subagent with: its `agents/finalize.md` + the output of `obey.mjs --project videos/<project> --json` + DISPATCH.md, and one line saying the obey findings are in scope for this repair (finalize otherwise only fixes lint/check/snapshot defects). Then **re-run lint, check and snapshots, then obey again**. At most **2** obey repair passes. If the repair escalates back to design/build, those dispatches carry DISPATCH.md too.
-   - **Exit 1 = could not run** (Chrome, a script error, no tweens found). Nothing was checked: report it plainly, fix the cause if it's a real composition error, and never present it as clean.
-   - Warnings don't block; mention them. Log the result to the console's `obey` stage (`--level ok|warn|error`).
-4. **Violations left after 2 passes** are listed at the render gate with a per-item choice: fix again, or waive. Record each waiver with `node $SKILL_DIR/scripts/obey.mjs waive --project videos/<project> --rule "<rule>" --target "<target>"` (rule and target exactly as obey printed them; don't hand-edit motion.md), then re-run obey. The finding shows as WAIVED.
-5. **The render question goes to the console.** Push `render` with `images` (the proof snapshots / contact sheet under `videos/<project>/snapshots/`), `question` ("preview first, or render?") and, once Studio is running, `studio` (its URL). Wait. `choose "preview"` → open Studio per the workflow and come back to the same question; `choose "render"` → render per the workflow; a `note` → revise and re-verify.
-6. **Deliver.** Push `render` again with `videos` (`videos/<project>/renders/*.mp4`) and `status: done`, log `render-gate` done, and in chat give the workflow's render report plus one line: motion personality, obey status (clean / N warnings / N waived).
+Read `~/.claude/skills/<route>/SKILL.md` and follow it on `videos/<name>` (install first if missing: `npx hyperframes skills update <route>`; `init` already refreshed skills this run, so don't re-ask). `BRIEF.md` exists, so it asks no brief questions, and its **Customizations** name every hook point. Keep these in force:
+
+1. **Adopt the plan.** Don't regenerate STORYBOARD.md/SCRIPT.md or re-run `build-frame.mjs`; the plan gate is satisfied. Continue with the audio step and the visual-design step.
+2. **Voice:** pass `--voice <id>` (and `--provider heygen` for product-launch-video) to the audio step.
+3. **Sketch pass → console.** When the workflow draws `storyboard.html` (collaborative runs), push `storyboard` again with `sheet: "videos/<name>/storyboard.html"` plus the timeline, and relay the user's `approve` / `note` to the workflow's layout gate.
+4. **After `frame-packets.mjs`:** `node $SKILL_DIR/scripts/video.mjs inject --project-dir videos/<name>`, then dispatch the frame workers with `DISPATCH.md` appended to each.
+5. **After `audio.mjs fetch-sfx`, before `assemble-index`** (when a music track was chosen): `node $SKILL_DIR/scripts/video.mjs audio-lock --project-dir videos/<name> --music videos/<name>/assets/music-bed.<ext>`.
+6. **Stream progress:** `console.mjs log --run "$RUN" --stage <plan|design|build|verify|obey|render-gate> --stage-status working|done|failed --message "<one line>"` at each workflow step.
+7. **Check the motion** after the workflow's verify step (transitions verify, lint, check, snapshots) and before its render question: `node $SKILL_DIR/scripts/obey.mjs --project videos/<name>` (it checks every frame; the assembled index.html and captions belong to the workflow). Exit 2 → re-dispatch the failing frames' workers with the obey `--json` findings + DISPATCH.md, then re-run the workflow's verify and obey (at most 2 passes); leftovers go to the render gate as fix-or-waive (`obey.mjs waive --project … --rule … --target …`). Exit 1 = could not run: report it, never call it clean.
+8. **Render gate → console.** Push `render` with `images` (the contact sheet / snapshots), `studio` (the preview URL once running) and the question; `choose "preview"` → the workflow's preview; `choose "render"` → its render; a `note` → revise and re-verify. Deliver: push `render` with `videos` and `status: done`, log `render-gate` done, and give the workflow's render report plus one line: motion personality, obey status.
+
+## Single motion units (route `motion-graphics`)
+
+For one short unnarrated unit (title, sting, stat hit, lower third): Brief → Story (optional) → Look → Motion (tasting with `--content "<headline>" [--sub "<line>"]`) → Key poses (optional keyframe board: `board.mjs`, `references/board-format.md`) → Music (optional) → Plan → `handoff.mjs --decisions "$RUN/decisions.json"` (format: `references/handoff.md`) → build through `/motion-graphics` with `DISPATCH.md` appended to every subagent, `obey.mjs` after verify, and the render gate in the console. Push the video-only steps (route, scenes, transitions, voice, storyboard) as `--status skipped`.
 
 ## Memory
 
-`$RASA_DIRECTOR_HOME/history.jsonl` (default `~/.rasa-director/`), via `scripts/memory.mjs`, one row per pick with `mode`:
-- **Confirmed** picks (the user chose it, or kept an agent pick in the plan) only **pre-select the recommended option when the user is choosing**, with a receipt.
-- **Every** pick (auto or confirmed) feeds rotation. "You decide" never applies a remembered preference; it rotates away from recent picks, so skipping everything doesn't converge on a house style:
-  - Motion and Look: `pick.mjs` excludes the last 3 picks (the window shrinks when the pool gets too small; Motion keeps two tail candidates regardless).
-  - Concept: before deciding, run `node $SKILL_DIR/scripts/memory.mjs recent --step concept --n 3` and don't reuse those concepts.
-  - Brief, Keyframes and Music skips use fixed defaults and don't rotate.
+`$RASA_DIRECTOR_HOME/history.jsonl` (default `~/.rasa-director/`), via `scripts/memory.mjs`, one row per pick with `mode`. **Confirmed** picks only pre-select the recommended option when the user is choosing. **Every** pick feeds rotation: "you decide" never applies a remembered preference; Motion and Look exclude the last 3 picks (`pick.mjs`), Story avoids the last 3 concepts, the rest use defaults. So skipping everything doesn't converge on a house style.
 
-## Revise an existing piece
+## Revise an existing video
 
-When `videos/<name>` already has a project: show the current brief, look and motion (from `BRIEF.md`, `frame.md`, `motion.md`) as pre-filled answers and ask which steps to reopen (`concept`, `look`, `motion`, `keyframes`, `music`, `brief`). Start a console for the new `$RUN` and rework only those steps, reusing the project's files for the rest, then:
-
-```bash
-node $SKILL_DIR/scripts/handoff.mjs --decisions "$RUN/decisions.json" --revise --reopen <steps>
-```
-
-It moves what those steps invalidate (`shot-plan.json`, `compositions/`, `snapshots/`, `renders/`; never the user's `assets/`) into `.superseded/<stamp>/`, so the workflow's resume table rebuilds instead of jumping to the render gate. It rewrites `BRIEF.md`, `DISPATCH.md`, the specs and the host root from decisions.json, which must therefore describe the whole piece (unchanged steps point at the project's existing `motion.md` / `keyframes.json`; keep `look.preset` if a preset was used, since pointing `look.frame` at the project's frame.md would drop `style_preset`; keep `music` pointing at the project's `assets/` file). handoff re-validates any keyframes against the new motion.md and refuses if they no longer pass (after reopening `motion`, re-run `board.mjs`, fix and re-approve the poses). A different aspect needs a new project. Then continue at 7c.
+Show the current plan (BRIEF.md, STORYBOARD.md, frame.md, motion.md) as pre-filled answers in the console and ask which steps to reopen. Rework those in a new `$RUN` (scenes.json can be rebuilt from STORYBOARD.md), then `video.mjs write --project-dir videos/<name> --decisions … --revise`: it moves the built frames, audio, packets and renders into `.superseded/<stamp>/` so the workflow rebuilds from the new plan, and rewrites the plan files. A different aspect needs a new project. Single motion units revise with `handoff.mjs --revise --reopen <steps>`.
 
 ## Failure handling
 
-- A script exits non-zero → show its stderr, fix the input, re-run. Don't hand-write the artifact instead.
-- The console won't start or the user can't open it → carry on in chat; every step works there too. `console.mjs url --run "$RUN"` reprints the URL; `console.mjs stop --run "$RUN"` stops it at the end.
-- Offline: previews and obey use the vendored GSAP, so they still work, but fonts come from Google Fonts and fall back to system fonts (say the stills aren't the real type). Music needs the network. The project's host root and HyperFrames itself load GSAP / fonts from the network at build and render time.
-- tasting.mjs / board.mjs exit 1 with "did not render" → the page hit a script error; open it in a browser, report the console error.
+- A script exits non-zero → show its stderr, fix the input, re-run. Never hand-write an artifact a script owns.
+- The console won't start → carry on in chat. `console.mjs url --run "$RUN"` reprints the URL; `stop` ends it.
+- Offline: previews and the motion check use the vendored GSAP; fonts, capture, voice samples, music and the workflows' TTS need the network.
+- A preview script exits 1 with "did not render" → the page hit a script error; open it in a browser and report the console error.
 
 ## References
 
 | Need | Read |
 |---|---|
-| console payload fields per step, action types | `references/console.md` |
-| motion.md fields, tween classes, rules, banned-pattern signatures, adjectives, waivers | `references/motion-md-contract.md` |
-| keyframes.json format for the board, and how the build uses it | `references/board-format.md` |
-| decisions.json format, what handoff writes, how the route adopts it, revise | `references/handoff.md` |
-| the 10 personalities, feel vocabulary, adding a personality | `references/personalities.md` |
+| per-route integration: what Rasa pre-writes, hook points, scenes.json and video-decisions.json formats, footage routes | `references/video.md` |
+| console payloads per step, action types, security | `references/console.md` |
+| motion.md fields, tween classes, rules, banned patterns, adjectives, waivers | `references/motion-md-contract.md` |
+| the 10 personalities, feel vocabulary | `references/personalities.md` |
+| single units: keyframe board format; decisions.json and handoff | `references/board-format.md`, `references/handoff.md` |

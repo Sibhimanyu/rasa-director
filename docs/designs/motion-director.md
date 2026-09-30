@@ -330,6 +330,10 @@ Stop: CONVERGENCE
 > The Look row now specifies rotation plus a receipt naming the preset the concept most obviously suggested, but Premise 1 ('at least 2 non-obvious options considered') and the Constraints' 'tail constraint' were not relaxed for Look.
 <!-- gstack:office-hours:concerns:end -->
 
+## Scope change: entire videos (0.2.0, 2026-09-30)
+
+The shipped skill directs **entire multi-scene videos**, not only single motion units: it adds Route, Scenes, Transitions, Voice and Storyboard steps and hands the approved plan to the matching HyperFrames workflow (product-launch-video, faceless-explainer, pr-to-video, general-video, music-to-video, talking-head-recut, embedded-captions) at its hook points. The single-unit `/motion-graphics` path described below remains as a secondary path. Current behaviour: SKILL.md and `references/video.md`.
+
 ## Implementation status (2026-09-29)
 
 Built in one pass: M1 and M2 together, plus fixes from two independent audits (a code-vs-docs consistency audit and a fresh-agent dry run of a 9:16 coffee-brand reel).

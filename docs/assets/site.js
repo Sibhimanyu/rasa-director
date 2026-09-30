@@ -235,16 +235,16 @@
 
   // ------------------------------------------------------------ console mock
   var RECEIPTS = [
-    "Brief: I kept 16:9 at 5 s. Passed over: 1:1, since you said it plays on the website.",
-    "Concept: I picked <b>Tide table</b>. Passed over: Dispatch, the concept a launch line usually gets.",
+    "Brief: I kept 16:9 at 45 s, built as a launch film. Passed over: 1:1, since you said it plays on the website.",
+    "Story: I picked <b>The Shoebox Wins</b> and wrote 9 scenes to 45 s. Passed over: the feature tour a launch film usually gets.",
     "Look: I picked <b>cobalt-grid</b>, rotating away from your last three looks.",
     "Motion: I picked <b>Liquid Morph</b> from the tail. Passed over: Swiss Precise, the obvious product-line pick.",
-    "Keyframes: skipped. The build choreographs from motion.md alone.",
+    "Transitions: I picked <b>blur-crossfade</b>, zoom-through into the close. Voice: <b>Maya</b>, warm over the usual announcer.",
     "Music: I picked <b>Felt piano</b>. Passed over: Brass pulse, the usual launch bed.",
     "Render is never skipped by “you decide”. Preview first, or render?",
   ];
   var DEFAULT_STATUS = "Every click goes straight back to Claude in your terminal.";
-  var PRIMARY = ["Continue", "Pick B", "Use cobalt-grid", "Pick C", "Approve poses", "Use Felt piano", "Render"];
+  var PRIMARY = ["Continue", "Approve scenes", "Use cobalt-grid", "Pick C", "Use these", "Use Felt piano", "Render"];
 
   function initConsole() {
     var consoleEl = document.getElementById("console");
@@ -292,7 +292,7 @@
     yd.addEventListener("click", function () { status.innerHTML = RECEIPTS[cur]; });
     pri.addEventListener("click", function () {
       if (cur < tabs.length - 1) setStep(cur + 1);
-      else status.innerHTML = "Rendering <b>renders/ship-it.mp4</b> through HyperFrames.";
+      else status.innerHTML = "Rendering <b>renders/tally-launch.mp4</b> through HyperFrames.";
     });
 
     // desktop: the console follows the step being read

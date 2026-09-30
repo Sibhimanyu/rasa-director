@@ -48,10 +48,11 @@
   // the headline and animates with the same personality, so the user judges
   // how the whole lockup moves, not just the headline.
   var SUB_SCALE = 0.34;
-  function layout(cell, p) {
-    var text = cell.getAttribute("data-content") || "";
-    var sub = cell.getAttribute("data-sub") || "";
-    var block = cell.querySelector(".md-block");
+  function layout(cell, p, block) {
+    block = block || cell.querySelector(".md-block");
+    // a block may carry its own scene text (multi-scene tasting); else the cell's
+    var text = block.getAttribute("data-content") || cell.getAttribute("data-content") || "";
+    var sub = block.hasAttribute("data-content") ? block.getAttribute("data-sub") || "" : cell.getAttribute("data-sub") || "";
     block.innerHTML = "";
     var w = cell.clientWidth || Number(cell.getAttribute("data-w")) || 600;
     var h = cell.clientHeight || Number(cell.getAttribute("data-h")) || 340;
@@ -112,8 +113,29 @@
     return d.lines;
   }
 
+  // One cell may hold several scenes (.md-block each, stacked in the same spot):
+  // they play one after another with the same personality, so a style is judged
+  // across a whole video (hook → middle → close), not one line.
   function build(tl, cell, p) {
-    var d = layout(cell, p);
+    var blocks = [].slice.call(cell.querySelectorAll(".md-block"));
+    if (blocks.length <= 1) return buildBlock(tl, cell, p, blocks[0]);
+    var offset = 0, first = null;
+    blocks.forEach(function (b, i) {
+      var sub = gsap.timeline();
+      var ph = buildBlock(sub, cell, p, b);
+      if (i === 0) first = ph;
+      tl.set(b, { visibility: "hidden" }, 0);
+      tl.set(b, { visibility: "visible" }, offset);
+      tl.add(sub, offset);
+      offset += sub.duration() + 0.2;
+      tl.set(b, { visibility: "hidden" }, offset - 0.2);
+    });
+    first.end = tl.duration();
+    return first;
+  }
+
+  function buildBlock(tl, cell, p, block) {
+    var d = layout(cell, p, block);
     var demo = p.demo;
     var E = p.easing;
     var S = p.tempo.scale_ms;
