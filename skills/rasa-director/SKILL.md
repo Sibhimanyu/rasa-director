@@ -16,7 +16,7 @@ description: >
 
 # Rasa Director
 
-*Rasa* (ரசம், रस): the essence a work makes its audience feel. The user is the director, Rasa handles taste, HyperFrames shoots. Rasa Director **decides** everything creative about a video up front, by eye and ear, then hands the matching HyperFrames workflow an approved plan it executes without re-deciding.
+*Rasa* (रस): the feeling a work leaves in its audience; *rasanai* (ரசனை, Tamil): the taste to choose it. The user is the director, Rasa handles taste, HyperFrames shoots. Rasa Director **decides** everything creative about a video up front, by eye and ear, then hands the matching HyperFrames workflow an approved plan it executes without re-deciding.
 
 Why it exists: left alone, every AI video tells the obvious story, in a default look, where everything fades up and slides on the same ease. Rasa puts each creative decision in front of the user as rendered options of *their* video, remembers their taste, and enforces the motion they chose across every scene.
 

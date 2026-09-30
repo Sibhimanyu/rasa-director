@@ -2,7 +2,7 @@
 
 **Creative direction for entire videos made with Claude.** Launch films, explainers, PR videos, brand reels, music videos, footage with captions or overlays, and short motion graphics. Decide how the whole film tells its story, looks, moves, cuts and sounds, by eye and ear, before anything is built. You're the director, Rasa handles taste, [HyperFrames](https://hyperframes.heygen.com) shoots.
 
-*Rasa* (ரசம் · रस) is the essence a work makes its audience feel. Every AI video has the same one: the obvious story, a default look, and text that fades up and slides into place on the same ease-out curve in every scene. Rasa Director is a Claude Code skill that lets you choose a different one, then makes sure the build actually uses it.
+*Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. Every AI video has the same one: the obvious story, a default look, and text that fades up and slides into place on the same ease-out curve in every scene. Rasa Director is a Claude Code skill that lets you choose a different one, then makes sure the build actually uses it.
 
 ![The tasting menu: your scenes in six motion personalities](docs/img/tasting-enterMid.png)
 
