@@ -181,3 +181,60 @@ export function suggest(dimId, picks, { recent = [], count = 3, seed = "", exclu
 export function findTerm(dim, id) {
   return findOption(dim, id);
 }
+
+// complete directions for the console's Direction step: whole style combinations (combinations.json)
+// ranked against the picks so far, spread so no two share a visual style, one of them unusual, never
+// one built on the generic default. Each becomes a card: name, why, the terms that define it, its picks.
+const CARD_DIMS = ["ui-treatment", "visual-style", "illustration", "typography", "motion-language", "transitions"];
+export function directions(picks, { count = 3, exclude = [], seed = "" } = {}) {
+  const T = loadTaxonomy();
+  const chosen = new Set(Object.entries(picks || {}).flatMap(([k, v]) => [].concat(v).map((x) => `${k.split(":")[0]}/${x}`)));
+  let h = 0;
+  for (const ch of seed + "directions") h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const rnd = (i) => (((h ^ (i * 2654435761)) >>> 0) % 1000) / 1000;
+  const isGeneric = (c) => Object.entries(c.stack).some(([k, v]) => ["visual-style", "motion-language"].includes(k) && [].concat(v)[0] && (GENERIC[k] || []).includes([].concat(v)[0]));
+  const scored = T.combinations
+    .filter((c) => !exclude.includes(c.id))
+    .map((c, i) => {
+      const flat = Object.entries(c.stack).flatMap(([k, v]) => [].concat(v).map((x) => `${k}/${x}`));
+      const fit = flat.filter((x) => chosen.has(x)).length;
+      // a picked value the combination contradicts (another term in a single-pick dimension) counts against it
+      const clash = Object.entries(picks || {}).filter(([k, v]) => !k.includes(":") && c.stack[k] && ![].concat(c.stack[k]).includes([].concat(v)[0])).length;
+      return { c, fit, clash, score: fit * 2 - clash * 3 + rnd(i) * 1.2 - (isGeneric(c) ? 5 : 0) };
+    })
+    .sort((a, b) => b.score - a.score);
+  const out = [];
+  const styles = new Set();
+  const take = (x, rare) => {
+    const vs = [].concat(x.c.stack["visual-style"] || [])[0] || x.c.id;
+    if (styles.has(vs) || out.some((o) => o.id === x.c.id)) return false;
+    styles.add(vs);
+    out.push(toCard(x.c, picks, rare));
+    return true;
+  };
+  // the best fits first, then one from the far end of the list (the one a model would rarely pick)
+  for (const x of scored) { if (out.length >= Math.max(1, count - 1)) break; if (!isGeneric(x.c)) take(x, false); }
+  // unusual in style, never in format: the tail only holds combinations that contradict nothing already decided
+  const tail = scored.slice(Math.floor(scored.length / 3)).filter((x) => !isGeneric(x.c) && !x.clash);
+  for (const x of tail.sort((a, b) => rnd(a.c.id.length) - rnd(b.c.id.length))) { if (out.length >= count) break; take(x, true); }
+  for (const x of scored) { if (out.length >= count) break; take(x, false); }
+  return { directions: out, recommended: out[0] ? out[0].id : null, passed_over: (scored.find((x) => isGeneric(x.c)) || {}).c?.name || null };
+
+  function toCard(c, userPicks, rare) {
+    const p = {};
+    for (const [dim, v] of Object.entries(c.stack)) {
+      const d = T.byId[dim];
+      if (!d) continue;
+      const max = (d.pick && d.pick.max) || 1;
+      p[dim] = [].concat(v).filter((id) => (d.options || []).some((o) => o.id === id)).slice(0, max);
+      if (!p[dim].length) delete p[dim];
+    }
+    // what the user already decided wins over the combination
+    for (const [k, v] of Object.entries(userPicks || {})) p[k] = [].concat(v);
+    const termOf = (dim) => p[dim] && T.byId[dim] ? ((T.byId[dim].options || []).find((o) => o.id === p[dim][0]) || {}).term || p[dim][0] : null;
+    // the defining terms first, then enough of the rest (composition, depth, color…) to describe it in five
+    const terms = CARD_DIMS.map(termOf).filter(Boolean);
+    for (const dim of ["composition", "depth", "material", "color", "pacing", "camera"]) { if (terms.length >= 5) break; const t = termOf(dim); if (t && !terms.includes(t)) terms.push(t); }
+    return { id: c.id, name: c.name, why: c.result, use: c.use, terms, picks: p, rare };
+  }
+}

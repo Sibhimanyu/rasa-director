@@ -137,7 +137,10 @@ if (cmd === "looks") {
   if (!/class="board"/.test(dom)) die("the design board page did not render", 1);
   if (args.stills) {
     chromeScreenshot(`file://${path.join(out, "index.html")}`, path.join(out, "looks.png"), 1920, 1080, 6000);
-    for (const L of looks) chromeScreenshot(`file://${path.join(out, L.id, "board.html")}`, path.join(out, L.id, "board.png"), AW, AH, 5000);
+    for (const L of looks) {
+      chromeScreenshot(`file://${path.join(out, L.id, "board.html")}`, path.join(out, L.id, "board.png"), AW, AH, 5000);
+      L.still = path.relative(process.cwd(), path.join(out, L.id, "board.png"));
+    }
   }
   const manifest = { aspect: `${AW}x${AH}`, brand: brand ? path.relative(process.cwd(), brand.source) : null, page: path.relative(process.cwd(), path.join(out, "index.html")), looks };
   writeFile(path.join(out, "looks.json"), JSON.stringify(manifest, null, 2) + "\n");

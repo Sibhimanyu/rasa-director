@@ -4,9 +4,9 @@
 
 ## The page
 
-- **Top bar**: five phases (Brief · Direction · Look & sound · Approve · Build) instead of the step list, a status line and "Claude decides the rest". The status says "Waiting for you: <step>" while the current step awaits an answer, otherwise what Claude is doing (`session.working`), with a moving bar.
+- **Top bar**: five phases (Brief · Direction · Look & motion · Style frames · Build) instead of the step list, a status line and "Claude decides the rest". The status says "Waiting for you: <step>" while the current step awaits an answer, otherwise what Claude is doing (`session.working`), with a moving bar.
 - **What Claude is doing** (left): `session.activity`, newest first. Entries come from `activity`, `log`, every push ("Ready for you: the look", "Decided the look: …") and every answer the user sends ("You: picked the story: The shoebox wins").
-- **The stage** (centre): only the current step. Its question, and for steps with a `recommended` option (concept, route, look, motion, transitions, voice, music) one button, "Go with Claude's pick: <name>", which sends `choose` with that id; the step's own panel below; "You decide this one". Once the user answers, or while Claude is between questions, the stage shows Claude working (the `working` message, the user's answer, the last few things done) until the next push.
+- **The stage** (centre): only the current step, with its `question` as the heading. Pick-one steps (direction, concept, look, route, voice, music) are cards with the `recommended` one already selected and marked "Claude's pick", so one click on "Use this …" sends it; motion and transitions preselect the recommended letter the same way. Under every step: "Not sure? Let Claude decide this one". Once the user answers, or while Claude is between questions, the stage shows Claude working (the `working` message, the user's answer, the last few things done) until the next push.
 - **Your film** (right): every decided step's `decision`, each with "change" (opens that step again; a new answer is a correction), and "Tell Claude anything", which sends a `note` to the step on screen.
 - The page shows a notice when the last update check found a newer version (`session.app`).
 
@@ -50,12 +50,12 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 | `brief` | `fields: {content, sub, destination, aspect, length_s, narration}` (prefill; `narration` true/false), `aspects` (default 16:9, 9:16, 1:1, 4:5) |
 | `brand` | `brand` (brand.mjs `read` summary: roles, fonts, modes, warnings), `board` (brand-board.html), `unavailable` → brand board, swatches, mode chips, three choices |
 | `route` | `options: [{id, label, why}]` (HyperFrames workflow ids, or `reel`) |
-| `direction` | `dimensions` (direction.mjs `menu`), each with optional `picked` → every dimension as a collapsible group of term cards (term, definition, used-for) and facet chips, "Claude decides" per dimension, a note field, and a live style formula |
+| `direction` | `directions` (direction.mjs `directions`: `{id, name, why, terms, image, rare, picks}`), `recommended`, `dimensions` (direction.mjs `menu`) → three direction cards with Claude's pick selected, "Use this direction", "Show 3 more", and Fine-tune: the key dimensions (UI treatment, illustration, typography, motion language, transitions, pacing) as chips preset to the selected direction, plus "Every dimension", the full form (every dimension as a group of term cards, facet chips, "Claude decides" per dimension, notes, a live style formula). With `dimensions` only, the full form is shown. |
 | `footage` | `clips` (footage.json's clips from `reel.mjs scan`) → a card per clip: contact sheet, facts, transcript, include checkbox |
-| `concept` | `options: [{id, title, world, hook, rare}]` |
+| `concept` | `options: [{id, title, world, hook, rare}]`, `recommended` → story cards, Claude's pick selected, "Use this story" |
 | `scenes` | `scenes: [{title, on_screen, visual, voiceover, duration, transition_in, intensity, …}]` (scenes.json's list; extra fields pass through), `target_s`, `transition_default`, `narrated` → editable table + timeline strip |
 | `styleframes` | `images: [..]`, `captions: [..]` → the stills Claude designed, with Approve |
-| `look` | design directions: `page` (design.mjs looks index.html), `looks` (looks.json's looks), `recommended` → the board grid and letter pickers; or the older preset form `options: [{id, showcase, description}]`, `note_brand` |
+| `look` | design directions: `looks` (looks.json's looks; made with `--stills`, each has a `still`), `recommended` → look cards with Claude's pick selected, "Use this look", "Show 6 more"; without stills, `page` (design.mjs looks index.html) → the board grid and letter pickers; or the older preset form `options: [{id, showcase, description}]`, `note_brand` |
 | `motion` | `tasting` (index.html from tasting.mjs), `cells` (tasting.json's `cells`: `{letter, id, name, oneLiner, parent?, adjust?}`), `adjectives` (the object `motion-md.mjs adjectives` prints, or a list of ids). The default selection is `recommended`. |
 | `reel` | `timeline`, `overlays`, `captions`, `clips: [{name, duration}]`, optional `edl` (reel.edl.json) and `video` (draft render) → the editable cut (references/reel.md) |
 | `transitions` | `menu` (index.html from transition-menu.mjs), `cells` (transitions.json's `cells`: `{letter, id, label, energy, duration_s}`), `recommended` |
@@ -76,7 +76,8 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 | `submit` | brief | `{content, sub, destination, aspect, length_s, narration}` |
 | `submit` | scenes | `{scenes: [...]}`: the full edited list, in order |
 | `submit` | footage | `{include: [clip ids]}` |
-| `submit` | direction | `{picks: {dimension: [term ids], "dim:facet": [id]}, decided_by: {dimension: "user"|"agent"}, notes: {dimension: text}}` |
+| `choose` | direction | a direction id (from `directions`) |
+| `submit` | direction | Fine-tune: `{direction: id, picks: {dimension: [id]}, decided_by, notes}` (the direction plus the changed terms); full form: `{picks: {dimension: [term ids], "dim:facet": [id]}, decided_by: {dimension: "user"|"agent"}, notes: {dimension: text}}` |
 | `choose` | brand | `{use: "direct"|"remix"|"none", mode}` |
 | `submit` | reel | `{timeline, overlays, captions}`: the full edited cut |
 | `choose` | route | workflow id |
@@ -87,7 +88,7 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 | `choose` | music | track id, `"none"`, or `{file}` |
 | `choose` | render | `"preview"` or `"render"` |
 | `adjust` | motion | `{id, adjust: [adjectives]}` |
-| `more` | motion, look | `{exclude: [ids]}` |
+| `more` | direction, motion, look | `{exclude: [ids]}` |
 | `approve` | storyboard, styleframes, keyframes, plan | null |
 | `decide` | any | null: "you decide" for that step |
 | `decide-rest` | `*` | null: "you decide the rest" |

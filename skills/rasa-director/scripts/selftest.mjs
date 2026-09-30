@@ -322,6 +322,28 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   const brandColors = new Set([B.roles.canvas, B.roles.ink, B.roles.accent, B.roles.surface].filter(Boolean));
   ok("brand-locked looks keep the brand's colors and fonts", lb.status === 0 && (lbj.looks || []).length === 4 && lbj.looks.every((x) => brandColors.has(x.palette.canvas) && x.type.display.family === "Geist"), lb.stderr || JSON.stringify((lbj.looks || []).map((x) => x.palette.canvas)));
 
+  // complete directions: fitting, distinct visual styles, never the generic default, each with a board; picking one merges its stack
+  fs.writeFileSync(path.join(TMP, "decd.json"), JSON.stringify({ subject: "Tally", picks: { format: "product-launch-film" } }));
+  const dr = node("direction.mjs", ["directions", "--decisions", path.join(TMP, "decd.json"), "--out", path.join(TMP, "dirs"), "--headline", "Tax season. Again."]);
+  let dj = {};
+  try {
+    dj = JSON.parse(fs.readFileSync(path.join(TMP, "dirs", "directions.json"), "utf8"));
+  } catch {}
+  const ds = dj.directions || [];
+  const vstyles = new Set(ds.map((x) => [].concat(x.picks["visual-style"] || [x.id])[0]));
+  ok("directions: three distinct, fitting, never generic, each with a board image", dr.status === 0 && ds.length === 3 && vstyles.size === 3 && ds.every((x) => x.picks.format && x.picks.format[0] === "product-launch-film" && x.image && fs.existsSync(path.join(TMP, x.image)) && !["saas-minimal", "corporate-flat", "clean-minimal"].includes([].concat(x.picks["visual-style"] || [])[0])) && !!dj.passed_over, dr.stderr || JSON.stringify(ds.map((x) => [x.id, x.image])));
+  const more = node("direction.mjs", ["directions", "--decisions", path.join(TMP, "decd.json"), "--out", path.join(TMP, "dirs2"), "--no-images", "--exclude", ds.map((x) => x.id).join(",")]);
+  let mj = {};
+  try {
+    mj = JSON.parse(more.stdout);
+  } catch {}
+  ok("directions: \"show 3 more\" never repeats one", (mj.directions || []).length === 3 && mj.directions.every((x) => !ds.some((y) => y.id === x.id)), more.stderr);
+  if (ds[0]) {
+    node("direction.mjs", ["pick-direction", "--directions", path.join(TMP, "dirs", "directions.json"), "--id", ds[0].id, "--decisions", path.join(TMP, "decd.json")]);
+    const after = JSON.parse(fs.readFileSync(path.join(TMP, "decd.json"), "utf8"));
+    ok("pick-direction merges the direction's stack and keeps the user's picks", [].concat(after.picks.format)[0] === "product-launch-film" && Object.keys(after.picks).length > 5 && after.direction_card.id === ds[0].id, JSON.stringify(after.picks));
+  }
+
   const page = fs.readFileSync(path.join(HERE, "..", "console", "index.html"), "utf8");
   let parses = true;
   try {
@@ -329,7 +351,7 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   } catch {
     parses = false;
   }
-  ok("console page script parses (every panel)", parses && /direction: function/.test(page) && /brand: function/.test(page) && /styleframes: function/.test(page));
+  ok("console page script parses (every panel)", parses && /direction: function/.test(page) && /choiceCards\(/.test(page) && /d\.directions/.test(page) && /brand: function/.test(page) && /styleframes: function/.test(page));
 }
 
 // 10. setup and updates: setup.sh finds Node or says how to get it; the skill's VERSION matches the plugin manifest; a newer release is reported with how

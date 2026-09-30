@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 (2026-09-30)
+
+- **Every question looks like the redesign, not just the page around it**: 0.5.0 replaced the console's frame, but the steps inside kept their old controls, so an updated console still asked the old way. Now the pick-one steps (direction, story, look, workflow, voice, music) are cards with Claude's pick already selected and marked, one "Use this …" button, and the question as the heading; every step ends with "Not sure? Let Claude decide this one". Phases read Brief · Direction · Look & motion · Style frames · Build, with "2 of 5" on each step.
+- **Direction asks with three complete directions**: `direction.mjs directions` turns whole style combinations into cards (a name, why it fits, its defining terms, a board image in your brand), ranked against what you've already decided, no two with the same visual style, one unusual, never the generic default. "Show 3 more" never repeats one; Fine-tune changes the key terms (UI treatment, typography, motion language, transitions, pacing) as chips, and "Every dimension" still opens all 30. `pick-direction` writes the chosen one into decisions.json.
+- Look cards use each board's still (`design.mjs looks --stills` now records it per look). Screenshots retaken.
+
 ## 0.5.0 (2026-09-30)
 
 - **The console, redesigned**: it always shows what Claude is doing, and asks one thing at a time. A light, calm page with five phases across the top (Brief · Direction · Look & sound · Approve · Build) instead of a 19-step sidebar; a status line that says either what Claude is doing right now or what it's waiting on you for; a live "What Claude is doing" feed; only the current question in the middle, with one button to go with Claude's pick; and "Your film", every decision so far with a "change" link, plus "Tell Claude anything". The moment you answer, the page shows Claude working on it until the next question arrives. Every step panel and action is unchanged, so nothing Claude sends or receives changed.

@@ -1,7 +1,7 @@
 {
   "name": "rasa-director",
   "description": "Direct your whole video in the terms motion designers use (30 dimensions, about 880 terms) or bring your DESIGN.md; Claude designs and animates every frame to that direction through HyperFrames, checked before render. Launch films, explainers, PR videos, music videos, footage reels, motion graphics.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": {
     "name": "Sibhimanyu",
     "url": "https://github.com/Sibhimanyu"

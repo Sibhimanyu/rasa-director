@@ -64,11 +64,14 @@ node scripts/taxonomy.mjs term ui-treatment/simplified-ui   # one full entry
 node scripts/direction.mjs compile --decisions decisions.json --out <dir>     # DIRECTION.md + direction.json
 node scripts/direction.mjs suggest --dimension visual-style --decisions decisions.json [--recent a,b] [--count 3]
 node scripts/direction.mjs menu [--group look | --dims a,b] [--decisions decisions.json]   # console payload
+node scripts/direction.mjs directions --decisions decisions.json --out <dir> [--count 3] [--exclude ids] [--brand DESIGN.md] [--headline "…"] [--sub "…"] [--no-images]
+node scripts/direction.mjs pick-direction --directions <dir>/directions.json --id <id> --decisions decisions.json
 node scripts/direction.mjs analyze     # the reference-analysis template
 node scripts/direction.mjs compare     # the two-reference comparison template
 ```
 
 - **compile** → `DIRECTION.md`: the style name (visual style + subject/treatment + motion/format, e.g. "Swiss / International Typographic Style, simplified-UI product launch film, precise motion"), the style formula as a stack, a one-paragraph brief, how to apply it (tokens from frame.md win on values, motion.md on timing, the direction on everything else), then every decision grouped (format & tone, story, subject, look, motion) with its definition, what it looks like, how it moves, a **Do** instruction and what it is **not**, director's notes, and an Avoid list. `direction.json`: the resolved picks, style name, formula and brief.
+- **directions** → `directions.json`: complete directions for the console's Direction step, each a whole style combination from `combinations.json` ranked against the picks so far (a combination that contradicts a pick ranks low). No two share a visual style, one comes from the far end of the list (unusual in style, never in format), none is built on the generic default (reported as `passed_over`). Each card: `id`, `name`, `why` (the combination's result), `terms` (its defining terms, up to five), `picks` (its full stack, the user's own picks winning) and `image` (that direction's look rendered as a board by `design.mjs looks`, in the brand with `--brand`). **pick-direction** merges the chosen card's picks into decisions.json (the user's picks win; `direction_card` records which).
 - **suggest** ranks a dimension's terms for "you decide": co-occurrence with the picks so far in `combinations.json`, a seeded spread, minus the generic default (`GENERIC` in `lib/direction.mjs`: SaaS minimalism, smooth, crossfade…) and recent picks. It returns the candidates with the combinations they fit and the generic option it passed over (the receipt).
 - **analyze / compare**: templates Claude fills by looking at the user's references (every category: STYLE, EVIDENCE, CONFIDENCE, CLOSE ALTERNATIVES; then a style formula), using valid term ids so the result drops straight into `picks`.
 

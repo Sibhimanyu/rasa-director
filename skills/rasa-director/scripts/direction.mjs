@@ -7,6 +7,11 @@
 //        -> candidates for a "you decide" dimension, coherent with the picks so far, away from the generic default
 //   node direction.mjs menu (--dims visual-style,color | --group look) [--decisions <decisions.json>]
 //        -> the console payload for choosing those dimensions (terms, definitions, looks, uses)
+//   node direction.mjs directions --decisions <decisions.json> --out <dir> [--count 3] [--exclude ids] [--brand DESIGN.md --mode m]
+//        [--aspect 16:9] [--headline "..."] [--sub "..."] [--no-images]
+//        -> <dir>/directions.json: complete directions (whole style combinations) as cards, each with a board image
+//   node direction.mjs pick-direction --directions <dir>/directions.json --id <id> --decisions <decisions.json>
+//        -> merges that direction's picks into decisions.json (what the user already picked wins)
 //   node direction.mjs analyze   -> the reference-analysis template (every category, valid term ids)
 //   node direction.mjs compare   -> the two-reference comparison template
 // decisions.json: { "subject": "...", "picks": { "<dimension>": "<id>"|["<id>"], "<dimension>:<facet>": "<id>" },
@@ -16,7 +21,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { parseArgs, die, readJSON, writeFile, readFrontmatterDoc } from "./lib/common.mjs";
 import { loadTaxonomy } from "./lib/taxonomy.mjs";
-import { resolvePicks, styleName, formula, promptParagraph, directionMd, suggest, STACK_ORDER } from "./lib/direction.mjs";
+import { resolvePicks, styleName, formula, promptParagraph, directionMd, suggest, directions, STACK_ORDER } from "./lib/direction.mjs";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { readDesignMd } from "./lib/design-md.mjs";
 
 const args = parseArgs();
@@ -54,6 +61,46 @@ if (cmd === "compile") {
   };
   writeFile(path.join(out, "direction.json"), JSON.stringify(resolved, null, 2) + "\n");
   console.log(JSON.stringify({ ok: true, direction: path.relative(process.cwd(), path.join(out, "DIRECTION.md")), ...resolved, open_dimensions: STACK_ORDER.filter((d) => !resolved.picks[d]) }, null, 2));
+} else if (cmd === "directions") {
+  if (!args.out) die("--out <dir> required");
+  const D = readDecisions();
+  const out = path.resolve(String(args.out));
+  const r = directions(D.picks || {}, { count: Math.max(2, Math.min(6, Number(args.count || 3))), exclude: String(args.exclude || "").split(",").filter(Boolean), seed: String(args.seed || D.subject || "") });
+  if (!r.directions.length) die("no directions left (every combination was excluded)");
+  // each card's image: that direction's look as a board on the user's words (in the brand's colors and fonts with --brand)
+  if (!args["no-images"]) {
+    const here = path.dirname(fileURLToPath(import.meta.url));
+    for (const d of r.directions) {
+      const dir = path.join(out, d.id);
+      writeFile(path.join(dir, "decisions.json"), JSON.stringify({ subject: D.subject, picks: d.picks }, null, 2));
+      const a = ["looks", "--decisions", path.join(dir, "decisions.json"), "--out", path.join(dir, "look"), "--count", "2", "--stills", "--seed", d.id, "--aspect", String(args.aspect || "16:9")];
+      if (args.headline) a.push("--headline", String(args.headline));
+      if (args.sub) a.push("--sub", String(args.sub));
+      if (args.brand) a.push("--brand", String(args.brand));
+      if (args.mode) a.push("--mode", String(args.mode));
+      const run = spawnSync(process.execPath, [path.join(here, "design.mjs"), ...a], { encoding: "utf8", timeout: 120000 });
+      const png = path.join(dir, "look", "A", "board.png");
+      if (run.status === 0 && fs.existsSync(png)) d.image = path.relative(process.cwd(), png);
+      else d.image_error = (run.stderr || "").trim().split("\n").pop() || "board did not render";
+    }
+  }
+  const manifest = { ...r, created: new Date().toISOString() };
+  writeFile(path.join(out, "directions.json"), JSON.stringify(manifest, null, 2) + "\n");
+  console.log(JSON.stringify({ ok: true, file: path.relative(process.cwd(), path.join(out, "directions.json")), recommended: r.recommended, passed_over: r.passed_over, directions: r.directions.map((d) => ({ id: d.id, name: d.name, terms: d.terms, rare: d.rare, image: d.image || null })) }, null, 2));
+} else if (cmd === "pick-direction") {
+  if (!args.directions || !args.id || !args.decisions) die("--directions <directions.json> --id <id> --decisions <decisions.json> required");
+  const M = readJSON(path.resolve(String(args.directions)));
+  const d = (M.directions || []).find((x) => x.id === String(args.id));
+  if (!d) die(`no direction ${args.id} (have ${(M.directions || []).map((x) => x.id).join(", ")})`);
+  const dp = path.resolve(String(args.decisions));
+  const D = fs.existsSync(dp) ? readJSON(dp) : { picks: {} };
+  const userPicked = new Set(Object.keys(D.picks || {}));
+  D.picks = { ...d.picks, ...(D.picks || {}) };
+  D.decided_by = D.decided_by || {};
+  for (const k of Object.keys(d.picks)) if (!userPicked.has(k)) D.decided_by[k] = "user";
+  D.direction_card = { id: d.id, name: d.name };
+  writeFile(dp, JSON.stringify(D, null, 2) + "\n");
+  console.log(JSON.stringify({ ok: true, direction: d.name, picks: D.picks, decisions: path.relative(process.cwd(), dp) }, null, 2));
 } else if (cmd === "suggest") {
   if (!args.dimension) die("--dimension required");
   const D = readDecisions();

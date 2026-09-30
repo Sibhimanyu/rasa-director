@@ -17,7 +17,7 @@ Two videos can both be "2D UI animation" and look nothing alike, because a style
 
 Your picks compile into **`DIRECTION.md`**: a style name ("Swiss / International Typographic Style, simplified-UI product launch film, precise motion"), the style formula as a stack, and a Do / not-to-be-confused-with instruction for every decision. It goes to every builder with **`motion.md`**, the motion contract of the motion language you chose.
 
-![The Direction step: every dimension in proper terms, with the style formula building up](docs/img/console-direction.jpg)
+![The Direction step: three complete directions, Claude's pick selected, with Fine-tune below](docs/img/console-direction.jpg)
 
 ## What it does
 

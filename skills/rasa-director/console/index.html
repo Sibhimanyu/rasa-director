@@ -83,8 +83,8 @@
   .context { color: var(--ink-2); max-width: 860px; margin-bottom: 16px; }
   .decision { margin: 12px 0 16px; padding: 12px 14px; border-left: 3px solid var(--ok); background: var(--ok-soft); border-radius: 0 10px 10px 0; color: var(--ink-2); max-width: 860px; }
   .decision b { color: var(--ink); font-weight: 600; }
-  .quick { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 16px 0 22px; }
-  .quick .hint { color: var(--ink-3); font-size: 13px; }
+  .decide-row { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .stephead + .context { margin-top: 8px; }
   .link { background: none; border: 0; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; padding: 6px 4px; font-size: 14.5px; }
   .link:hover { color: var(--ink); }
   .update { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; padding: 10px 14px; border-radius: 12px; background: var(--pick-soft); color: #5c4300; font-size: 14px; }
@@ -98,6 +98,32 @@
   .working-card ol li::before { content: "✓"; color: var(--ok); margin-right: 8px; }
   .working-card .answer { margin-left: 34px; padding: 10px 14px; border-radius: 10px; background: var(--panel-2); font-size: 14px; color: var(--ink-2); }
   .empty { color: var(--ink-3); padding: 24px 0; max-width: 620px; }
+
+  /* pick-one cards (direction, story, look, route, voice, music) */
+  .choices { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choices.wide { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .choice { position: relative; display: flex; flex-direction: column; text-align: left; background: var(--panel); border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+  .choice:hover { border-color: var(--line-2); }
+  .choice.on { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
+  .choice > img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--line); background: var(--panel-2); }
+  .choice .body { padding: 14px 16px 16px; display: grid; gap: 6px; }
+  .choice h3 { font: 700 19px/1.15 var(--display); font-stretch: 92%; }
+  .choice p { margin: 0; font-size: 14px; color: var(--ink-2); }
+  .choice p.sub { color: var(--ink-3); font-size: 13px; }
+  .choice .terms { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .choice .terms span { font: 400 11.5px/1 var(--mono); padding: 5px 7px; border-radius: 5px; background: var(--panel-2); color: var(--ink-2); }
+  .choice .rare { font-size: 12.5px; color: var(--ink-3); }
+  .choice audio { width: 100%; margin-top: 6px; }
+  .pick { position: absolute; z-index: 2; top: 10px; left: 10px; background: var(--pick); color: #2a1f00; font: 600 11.5px/1 var(--sans); padding: 6px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  .choice .tick { position: absolute; z-index: 2; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; display: none; place-items: center; font-size: 14px; }
+  .choice.on .tick { display: grid; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
+  .actions .hint { margin-left: auto; color: var(--ink-3); font-size: 13px; }
+  .drawer { display: none; margin-top: 20px; border-top: 1px dashed var(--line-2); padding-top: 18px; }
+  .drawer.open { display: block; }
+  .dim-row { display: grid; grid-template-columns: 190px 1fr; gap: 12px; align-items: center; padding: 7px 0; }
+  .dim-row > span { font-size: 14px; color: var(--ink-2); }
+  .dim-row .chip.on { background: var(--ink); border-color: var(--ink); }
 
   /* shared panel parts (the step panels below use these) */
   .grid { display: grid; gap: 14px; }
@@ -207,7 +233,7 @@
   .warnbox { border: 1px solid rgba(179,54,31,.35); background: #fbeeea; color: var(--err); padding: 10px 14px; border-radius: 10px; margin: 12px 0; }
   @media (prefers-reduced-motion: reduce) { .status.working .dot, .feed li.active i, .spinner, .bar.on::after { animation: none; } }
   @media (max-width: 1200px) { .app { grid-template-columns: minmax(0, 1fr) 280px; } .rail.left { display: none; } }
-  @media (max-width: 860px) { .app { grid-template-columns: 1fr; padding: 14px; } .rail { position: static; max-height: none; } .top-in { grid-template-columns: 1fr; } .phases { overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } .stage-card { padding: 20px; } }
+  @media (max-width: 860px) { .choices { grid-template-columns: 1fr; } .dim-row { grid-template-columns: 1fr; } .app { grid-template-columns: 1fr; padding: 14px; } .rail { position: static; max-height: none; } .top-in { grid-template-columns: 1fr; } .phases { overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } .stage-card { padding: 20px; } }
 </style>
 </head>
 <body>
@@ -251,11 +277,9 @@
   ];
   // five phases instead of nineteen steps; a step only ever appears when Claude has something for it
   var PHASES = [
-    ["Brief", ["brief", "brand", "route", "footage"]], ["Direction", ["direction", "concept", "scenes"]], ["Look & sound", ["look", "motion", "transitions", "voice", "music"]],
-    ["Approve", ["styleframes", "reel", "keyframes", "storyboard", "plan"]], ["Build", ["build", "render"]]
+    ["Brief", ["brief", "brand", "route", "footage"]], ["Direction", ["direction", "concept", "scenes"]], ["Look & motion", ["look", "motion", "transitions", "voice", "music"]],
+    ["Style frames", ["styleframes", "reel", "keyframes", "storyboard", "plan"]], ["Build", ["build", "render"]]
   ];
-  // steps whose recommended option is chosen with one click
-  var PICKABLE = { concept: 1, route: 1, look: 1, motion: 1, transitions: 1, voice: 1, music: 1 };
   var S = { steps: {} }, viewing = null, followCurrent = true, local = {}, online = false;
   var Q = new URLSearchParams(location.search), PINNED = Q.get("step");
 
@@ -325,6 +349,45 @@
     return h("div", { class: "field" }, [h("label", { for: id, text: label }), input]);
   }
 
+  // one pattern for every "pick one" step (the mockup's cards): Claude's pick is already selected,
+  // clicking a card selects it, one primary button sends it
+  function choiceCards(step, d, items, o) {
+    o = o || {};
+    var key = step + "Sel";
+    if (!local[key] || !items.some(function (x) { return x.id === local[key]; })) local[key] = (items.some(function (x) { return x.id === d.recommended; }) ? d.recommended : (items[0] || {}).id);
+    var grid = h("div", { class: "choices" + (o.wide ? " wide" : ""), role: "radiogroup", "aria-label": o.noun || step });
+    var btn = h("button", { class: "btn primary big", onclick: function () { send(step, "choose", local[key]); }, text: o.go || "Use this " + (o.noun || "one") });
+    items.forEach(function (x) {
+      var on = local[key] === x.id;
+      var card = h("div", { class: "choice" + (on ? " on" : ""), role: "radio", tabindex: "0", "aria-checked": on ? "true" : "false" }, [
+        d.recommended === x.id ? h("span", { class: "pick", text: "Claude's pick" }) : null,
+        h("span", { class: "tick", "aria-hidden": "true", text: "✓" }),
+        x.image ? h("img", { src: fsUrl(x.image), alt: "", loading: "lazy" }) : null,
+        h("div", { class: "body" }, [
+          x.meta ? h("div", { class: "meta", text: x.meta }) : null,
+          h("h3", { text: x.title }),
+          x.text ? h("p", { text: x.text }) : null,
+          x.more ? h("p", { class: "sub", text: x.more }) : null,
+          (x.terms || []).length ? h("div", { class: "terms" }, x.terms.map(function (t) { return h("span", { text: t }); })) : null,
+          x.rare ? h("div", { class: "rare", text: "The unusual one" }) : null,
+          x.audio ? h("audio", { controls: true, preload: "none", src: fsUrl(x.audio), onclick: function (e) { e.stopPropagation(); } }) : null
+        ])
+      ]);
+      function select() {
+        local[key] = x.id;
+        [].forEach.call(grid.children, function (c) { c.classList.remove("on"); c.setAttribute("aria-checked", "false"); });
+        card.classList.add("on"); card.setAttribute("aria-checked", "true");
+        if (o.onSelect) o.onSelect(x.id);
+      }
+      card.addEventListener("click", select);
+      card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(); } });
+      grid.appendChild(card);
+    });
+    var row = h("div", { class: "actions" }, [btn].concat((o.links || []).map(function (l) { return h("button", { class: "link", onclick: l.onclick, text: l.label }); }), [d.recommended ? h("span", { class: "hint", text: "Claude's pick is already selected" }) : null]));
+    return [grid, row];
+  }
+  var KEY_DIMS = ["ui-treatment", "illustration", "typography", "motion-language", "transitions", "pacing"];
+
   var PANELS = {
     brief: function (d) {
       var f = d.fields || {};
@@ -355,22 +418,8 @@
       ])];
     },
     concept: function (d) {
-      if (!(d.options || []).length) return [empty("The agent will pitch five concepts here. Tell it what you're already picturing, if anything.")];
-      return [h("div", { class: "grid cards" }, d.options.map(function (o, i) {
-        var chosen = d.sent && d.sent.value === o.id;
-        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (chosen ? " chosen" : "") }, [
-          h("div", { class: "meta", text: "Pitch " + (i + 1) }),
-          h("h3", { text: o.title }),
-          o.world ? h("p", { text: o.world }) : null,
-          o.hook ? h("p", { text: "Opens: " + o.hook }) : null,
-          h("div", { class: "row" }, [
-            d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null,
-            o.rare ? h("span", { class: "tag rare", text: "off the beaten path" }) : null,
-            h("span", { style: "flex:1" }),
-            h("button", { class: "btn small primary", onclick: function () { send("concept", "choose", o.id); }, text: "Pick" })
-          ])
-        ]);
-      }))];
+      if (!(d.options || []).length) return [empty("Claude is writing story pitches for this video. They appear here.")];
+      return choiceCards("concept", d, d.options.map(function (o) { return { id: o.id, title: o.title, text: o.world, more: o.hook ? "Opens: " + o.hook : null, rare: o.rare }; }), { noun: "story", wide: true });
     },
     brand: function (d) {
       var b = d.brand;
@@ -397,7 +446,7 @@
       ]));
       return kids;
     },
-    direction: function (d) {
+    directionForm: function (d) {
       var dims = d.dimensions || [];
       if (!dims.length) return [empty("The creative direction appears here: every decision (format, UI treatment, visual style, typography, color, motion language, transitions, pacing…) in the terms motion designers use. Pick, or hand any of them to Claude.")];
       local.dsel = local.dsel || {};
@@ -478,7 +527,61 @@
       draw();
       return [holder];
     },
+    direction: function (d) {
+      var dirs = d.directions || [];
+      if (!dirs.length || local.full) {
+        var form = PANELS.directionForm(d);
+        return dirs.length ? [h("div", { class: "actions" }, [h("button", { class: "link", onclick: function () { local.full = false; document.getElementById("main")._sig = null; render(); }, text: "Back to the three directions" })])].concat(form) : form;
+      }
+      var dims = {}; (d.dimensions || []).forEach(function (x) { dims[x.id] = x; });
+      if (Q.get("finetune")) local.ftOpen = true; // ?finetune=1 opens the drawer (stills for the docs)
+      var drawer = h("div", { class: "drawer" + (local.ftOpen ? " open" : "") });
+      function selDir() { return dirs.filter(function (x) { return x.id === local.directionSel; })[0] || dirs[0]; }
+      function drawDrawer() {
+        drawer.innerHTML = "";
+        var D = selDir(), rows = [];
+        local.ft = local.ft && local.ft._for === D.id ? local.ft : { _for: D.id };
+        KEY_DIMS.forEach(function (id) {
+          var x = dims[id]; if (!x) return;
+          var cur = local.ft[id] || ((D.picks || {})[id] || [])[0];
+          if (!cur && id === "illustration") return;
+          var opts = (x.options || []).filter(function (op) { return op.id === cur; }).concat((x.options || []).filter(function (op) { return op.id !== cur; }).slice(0, cur ? 3 : 4));
+          rows.push(h("div", { class: "dim-row" }, [h("span", { text: x.name }), h("div", { class: "chips" }, opts.map(function (op) {
+            return h("button", { class: "chip" + (op.id === cur ? " on" : ""), title: op.what || "", "aria-pressed": op.id === cur ? "true" : "false", onclick: function () { local.ft[id] = op.id; drawDrawer(); }, text: op.term });
+          }))]));
+        });
+        drawer.appendChild(h("div", { class: "eyebrow", text: "Fine-tune (optional)" }));
+        rows.forEach(function (r) { drawer.appendChild(r); });
+        var changed = Object.keys(local.ft).filter(function (k) { return k !== "_for" && local.ft[k] !== ((D.picks || {})[k] || [])[0]; });
+        drawer.appendChild(h("div", { class: "actions" }, [
+          h("button", { class: "btn", disabled: !changed.length, onclick: function () {
+            var picks = {}, by = {}; changed.forEach(function (k) { picks[k] = [local.ft[k]]; by[k] = "user"; });
+            send("direction", "submit", { direction: D.id, picks: picks, decided_by: by, notes: {} });
+          }, text: changed.length ? "Use it with " + changed.length + " change" + (changed.length > 1 ? "s" : "") : "Change a term above to use it with changes" }),
+          d.dimensions ? h("button", { class: "link", onclick: function () { local.full = true; document.getElementById("main")._sig = null; render(); }, text: "Every dimension (all " + d.dimensions.length + ")" }) : null
+        ]));
+      }
+      var parts = choiceCards("direction", d, dirs.map(function (x) { return { id: x.id, image: x.image, title: x.name, text: x.why, terms: x.terms, rare: x.rare }; }), {
+        noun: "direction",
+        onSelect: function () { if (local.ftOpen) drawDrawer(); },
+        links: [
+          { label: "Show 3 more", onclick: function () { send("direction", "more", { exclude: dirs.map(function (x) { return x.id; }) }); } },
+          { label: "Fine-tune", onclick: function () { local.ftOpen = !local.ftOpen; drawer.classList.toggle("open", local.ftOpen); if (local.ftOpen) drawDrawer(); } }
+        ]
+      });
+      if (local.ftOpen) drawDrawer();
+      return parts.concat([drawer]);
+    },
     look: function (d) {
+      var looks = d.looks || [];
+      if (!looks.length || !looks.every(function (L) { return L.still; })) return PANELS.lookPage(d);
+      return choiceCards("look", d, looks.map(function (L) {
+        var ty = L.type ? (typeof L.type === "string" ? L.type : (L.type.display && L.type.display.family) + " + " + (L.type.body && L.type.body.family)) : "";
+        return { id: L.id, image: L.still, title: L.name, meta: "Look " + L.id, text: ty };
+      }), { noun: "look", links: [{ label: "Show 6 more", onclick: function () { send("look", "more", { exclude: looks.map(function (L) { return L.id; }) }); } }] })
+;
+    },
+    lookPage: function (d) {
       // design directions: a board grid (design.mjs looks); older payloads with preset options still render as cards
       if (d.page) {
         var looks = d.looks || [];
@@ -554,14 +657,8 @@
     },
     route: function (d) {
       var opts = d.options || [];
-      if (!opts.length) return [empty("The agent proposes which HyperFrames workflow builds this video (launch film, explainer, PR video, music video, footage edit…).")];
-      return [h("div", { class: "grid cards" }, opts.map(function (o) {
-        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
-          h("div", { class: "meta", text: o.id }), h("h3", { text: o.label || o.id }), o.why ? h("p", { text: o.why }) : null,
-          h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("span", { style: "flex:1" }),
-            h("button", { class: "btn small primary", onclick: function () { send("route", "choose", o.id); }, text: "Build it this way" })])
-        ]);
-      }))];
+      if (!opts.length) return [empty("Claude proposes which HyperFrames workflow builds this video (launch film, explainer, PR video, music video, footage edit…).")];
+      return choiceCards("route", d, opts.map(function (o) { return { id: o.id, title: o.label || o.id, text: o.why, meta: o.id }; }), { noun: "workflow", go: "Build it this way", wide: true });
     },
     footage: function (d) {
       var clips = d.clips || [];
@@ -729,17 +826,8 @@
     },
     voice: function (d) {
       var opts = d.options || [];
-      var kids = [];
-      if (!opts.length) kids.push(empty(d.unavailable || "Voice samples appear here: your hook line spoken in a few voices."));
-      kids.push(h("div", { class: "grid", style: "max-width:820px" }, opts.map(function (o) {
-        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
-          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("div", { class: "meta", text: [o.mood, o.source].filter(Boolean).join(" · ") })]),
-            h("button", { class: "btn small primary", onclick: function () { send("voice", "choose", o.id); }, text: "Use this voice" })]),
-          o.file ? h("audio", { controls: true, preload: "none", src: fsUrl(o.file) }) : null
-        ]);
-      })));
-      kids.push(h("div", { class: "toolbar" }, [h("button", { class: "btn", onclick: function () { send("voice", "choose", "none"); }, text: "No voiceover" })]));
-      return kids;
+      if (!opts.length) return [empty(d.unavailable || "Voice samples appear here: your hook line spoken in a few voices."), h("div", { class: "actions" }, [h("button", { class: "btn", onclick: function () { send("voice", "choose", "none"); }, text: "No voiceover" })])];
+      return choiceCards("voice", d, opts.map(function (o) { return { id: o.id, title: o.title || o.id, meta: [o.mood, o.source].filter(Boolean).join(" · "), audio: o.file }; }), { noun: "voice", wide: true, links: [{ label: "No voiceover", onclick: function () { send("voice", "choose", "none"); } }] });
     },
     storyboard: function (d) {
       var kids = [];
@@ -775,19 +863,10 @@
     },
     music: function (d) {
       var opts = d.options || [];
-      var kids = [];
-      if (!opts.length) kids.push(empty(d.unavailable || "Music candidates appear here with players. Or keep it silent."));
-      kids.push(h("div", { class: "grid", style: "max-width:820px" }, opts.map(function (o) {
-        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
-          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("div", { class: "meta", text: [o.mood, o.duration ? o.duration + "s" : "", o.source].filter(Boolean).join(" · ") })]),
-            h("button", { class: "btn small primary", onclick: function () { send("music", "choose", o.id); }, text: "Use this" })]),
-          o.file ? h("audio", { controls: true, preload: "none", src: fsUrl(o.file) }) : null
-        ]);
-      })));
       var own = h("input", { placeholder: "Or a path to your own track, e.g. assets/theme.mp3", "aria-label": "Path to your own track" });
-      kids.push(h("div", { class: "toolbar" }, [h("button", { class: "btn", onclick: function () { send("music", "choose", "none"); }, text: "No music" }),
-        h("div", { class: "field", style: "flex:1;min-width:260px" }, [own]), h("button", { class: "btn", onclick: function () { if (own.value.trim()) send("music", "choose", { file: own.value.trim() }); }, text: "Use my track" })]));
-      return kids;
+      var tail = [h("div", { class: "toolbar" }, [h("div", { class: "field", style: "flex:1;min-width:260px" }, [own]), h("button", { class: "btn", onclick: function () { if (own.value.trim()) send("music", "choose", { file: own.value.trim() }); else toast("Type the path to your track first."); }, text: "Use my track" })])];
+      if (!opts.length) return [empty(d.unavailable || "Music candidates appear here with players. Or keep it silent."), h("div", { class: "actions" }, [h("button", { class: "btn", onclick: function () { send("music", "choose", "none"); }, text: "No music" })])].concat(tail);
+      return choiceCards("music", d, opts.map(function (o) { return { id: o.id, title: o.title || o.id, meta: [o.mood, o.duration ? o.duration + "s" : "", o.source].filter(Boolean).join(" · "), audio: o.file }; }), { noun: "track", wide: true, links: [{ label: "No music", onclick: function () { send("music", "choose", "none"); } }] }).concat(tail);
     },
     plan: function (d) {
       var sh = d.shape || {};
@@ -834,15 +913,6 @@
   function phaseOf(step) { for (var i = 0; i < PHASES.length; i++) if (PHASES[i][1].indexOf(step) > -1) return i; return 0; }
   function cmpVer(a, b) { var x = String(a).split("."), y = String(b).split("."); for (var i = 0; i < 3; i++) { var d = (+x[i] || 0) - (+y[i] || 0); if (d) return d; } return 0; }
   function ago(t) { var s = Math.max(0, (Date.now() - Date.parse(t)) / 1000); return s < 50 ? "just now" : s < 3600 ? Math.round(s / 60) + " min ago" : new Date(t).toTimeString().slice(0, 5); }
-  // the name of the recommended option, for the one-click button
-  function recName(step, d) {
-    var r = d.recommended, pools = [d.options, d.cells, d.looks];
-    for (var i = 0; i < pools.length; i++) {
-      var hit = (pools[i] || []).filter(function (o) { return o.id === r; })[0];
-      if (hit) return hit.title || hit.label || hit.name || hit.id;
-    }
-    return String(r);
-  }
   function sentText(x) { return x.type === "decide" ? "Claude decides" : x.type === "note" ? "a note" : x.name || (typeof x.value === "string" ? x.value : x.type === "approve" ? "approved" : "sent"); }
   function isDone() { return (S.steps.render || {}).status === "done"; }
   function waitingOnUser() { var d = S.steps[S.current] || {}; return d.status === "awaiting" && !d.sent; }
@@ -895,16 +965,12 @@
     var kids = [];
     if (S.app && S.app.latest && cmpVer(S.app.latest, S.app.version) > 0) kids.push(h("div", { class: "update" }, ["Rasa Director " + S.app.latest + " is out (this is " + S.app.version + "). Say “update” to Claude when this video is done."]));
     if (S.decide_rest) kids.push(h("div", { class: "rest", text: "Claude is deciding the remaining steps. It still asks before the final render, and you can step in anywhere." }));
-    var ph = PHASES[phaseOf(step)][0];
-    kids.push(h("div", { class: "eyebrow", text: ph + (step !== S.current && d.status === "done" ? " · already decided" : "") }));
-    kids.push(h("div", { class: "stephead" }, [h("h1", { text: labelOf(step) })]));
-    if (d.question) kids.push(h("p", { class: "question", text: d.question }));
+    var pi = phaseOf(step);
+    kids.push(h("div", { class: "eyebrow", text: (pi + 1) + " of " + PHASES.length + " · " + PHASES[pi][0] + (step !== S.current && d.status === "done" ? " · already decided" : "") }));
+    // the question is the heading ("Pick a direction"); the step's name is already in the eyebrow and the status
+    kids.push(h("div", { class: "stephead" }, [h("h1", { text: d.question || labelOf(step) })]));
     if (d.context) kids.push(h("p", { class: "context", text: d.context }));
     if (d.decision) kids.push(h("div", { class: "decision" }, [h("b", { text: "Decided: " }), d.decision]));
-    var quick = [];
-    if (PICKABLE[step] && d.recommended && d.status === "awaiting" && !d.sent) quick.push(h("button", { class: "btn primary big", onclick: function () { send(step, "choose", d.recommended); }, text: "Go with Claude's pick: " + recName(step, d) }));
-    if (d.status === "awaiting" && step !== "build" && step !== "render") quick.push(h("button", { class: "link", onclick: function () { send(step, "decide", null); }, text: "You decide this one" }));
-    if (quick.length) kids.push(h("div", { class: "quick" }, quick.concat(PICKABLE[step] && d.recommended ? [h("span", { class: "hint", text: "or pick one below" })] : [])));
     return kids;
   }
   function workingCard(d, step) {
@@ -943,6 +1009,7 @@
     } else {
       stepHead(viewing, d).forEach(function (n) { card.appendChild(n); });
       (PANELS[viewing](d) || []).forEach(function (n) { if (n) card.appendChild(n); });
+      if (d.status === "awaiting" && viewing !== "build" && viewing !== "render") card.appendChild(h("div", { class: "decide-row" }, [h("button", { class: "link", onclick: function () { send(viewing, "decide", null); }, text: "Not sure? Let Claude decide this one" })]));
       if (viewing !== S.current && S.current) card.appendChild(h("div", { class: "toolbar" }, [h("button", { class: "link", onclick: function () { followCurrent = true; render(true); }, text: "Back to what's happening now" })]));
     }
     main.appendChild(card);
