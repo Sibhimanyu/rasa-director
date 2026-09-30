@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.0 (2026-09-30)
+
+- **Talk it through with Claude, on every step**: "Discuss this with Claude" under each question opens a thread; you write ("the second one, but warmer", "why this story?"), Claude answers right there (`console.mjs reply`) and redraws the options if you asked for a change. The options stay on screen while Claude replies.
+- **Stories you can see**: each pitch is three sketch frames (the opening, the turn, the close) drawn in your chosen direction's look, with a caption of a word or two and a one-line logline, one story per row. Three pitches, two of them unusual.
+- **Look isn't asked twice**: the direction you pick already includes its look (the card's board), so picking a direction sets the look; variations only when you ask.
+- **Motion you can actually see**: each motion language is its own card with a live tile playing your line, its name and one line; pick one and "Use this motion", or open "Adjust" for slower, faster and so on. Fixed: the motion swatches (and the transitions menu) never animated in a browser, because each loop was detached from GSAP's clock; they play now.
+
 ## 0.7.0 (2026-09-30)
 
 - **The console stays connected**: if the console stops while Claude works (the laptop sleeps, a process is killed), the next thing Claude sends restarts it on the same address, so the tab you have open reconnects by itself and the next question appears live. Before, a restart got a new port and token and the open tab was stranded. The stream now has a heartbeat; the page reconnects after 40 s of silence, when the tab comes back into view and when the network returns. Running setup again for the same video resumes it in the same console instead of opening a second one (`--new` starts a fresh video).

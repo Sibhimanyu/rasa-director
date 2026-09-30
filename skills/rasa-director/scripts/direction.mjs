@@ -86,7 +86,11 @@ if (cmd === "compile") {
       if (args.mode) a.push("--mode", String(args.mode));
       const run = spawnSync(process.execPath, [path.join(here, "design.mjs"), ...a], { encoding: "utf8", timeout: 120000, env: { ...process.env, RASA_DIRECTOR_QUIET: "1" } });
       const png = path.join(dir, "look", "A", "board.png");
-      if (run.status === 0 && fs.existsSync(png)) d.image = path.relative(process.cwd(), png);
+      if (run.status === 0 && fs.existsSync(png)) {
+        d.image = path.relative(process.cwd(), png);
+        // the board is this direction's look: picking the direction picks it too (no second "pick a look")
+        d.looks = path.relative(process.cwd(), path.join(dir, "look", "looks.json"));
+      }
       else d.image_error = (run.stderr || "").trim().split("\n").pop() || "board did not render";
     }
   }
@@ -105,8 +109,20 @@ if (cmd === "compile") {
   D.decided_by = D.decided_by || {};
   for (const k of Object.keys(d.picks)) if (!userPicked.has(k)) D.decided_by[k] = "user";
   D.direction_card = { id: d.id, name: d.name };
+  // the card's board is the look: set it, so the Look step doesn't ask again (variations stay one command away)
+  let look = null;
+  if (d.looks && fs.existsSync(path.resolve(d.looks))) {
+    const M = readJSON(path.resolve(d.looks));
+    const L = (M.looks || [])[0];
+    if (L) {
+      for (const [k, v] of Object.entries(L.picks || {})) if (!userPicked.has(k)) D.picks[k] = v;
+      if (M.brand) D.brand = D.brand || M.brand;
+      D.look = { frame: L.frame, name: `${d.name} (${L.name})`, palette: L.palette, type: L.type, from_direction: d.id };
+      look = D.look;
+    }
+  }
   writeFile(dp, JSON.stringify(D, null, 2) + "\n");
-  console.log(JSON.stringify({ ok: true, direction: d.name, picks: D.picks, decisions: path.relative(process.cwd(), dp) }, null, 2));
+  console.log(JSON.stringify({ ok: true, direction: d.name, look: look ? { frame: look.frame, name: look.name } : null, picks: D.picks, decisions: path.relative(process.cwd(), dp) }, null, 2));
 } else if (cmd === "suggest") {
   if (!args.dimension) die("--dimension required");
   const D = readDecisions();

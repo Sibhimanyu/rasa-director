@@ -122,6 +122,19 @@ ${googleFontLink(look.font)}
       var standalone = !window.__timelines;
       window.__timelines = window.__timelines || {};
       var P = ${JSON.stringify(Object.fromEntries(personalities.map((p) => [p.id, p])))};
+      // ?cell=B: one swatch alone, filling the page (the console shows each motion language as its own card)
+      var solo = new URLSearchParams(location.search).get("cell");
+      if (solo) {
+        [].slice.call(document.querySelectorAll(".md-fig")).forEach(function (f) {
+          var c = f.querySelector(".md-cell");
+          if (!c || c.id !== "cell-" + solo) { f.remove(); return; }
+          var w = Number(c.getAttribute("data-w")), hh = Number(c.getAttribute("data-h"));
+          var k = Math.min(${PAGE_W} / w, ${PAGE_H} / hh);
+          document.body.style.background = getComputedStyle(c).backgroundColor;
+          f.style.cssText = "position:absolute;left:" + (${PAGE_W} - w * k) / 2 + "px;top:" + (${PAGE_H} - hh * k) / 2 + "px;margin:0;transform-origin:0 0;transform:scale(" + k + ")";
+          var cap = f.querySelector("figcaption"); if (cap) cap.remove();
+        });
+      }
       var master = gsap.timeline({ paused: true });
       var cells = [].slice.call(document.querySelectorAll(".md-cell"));
       var phases = {};
@@ -142,7 +155,8 @@ ${googleFontLink(look.font)}
         subs.forEach(function (s, i) { s.pause(); s.seek(phases[cells[i].id][phase] || 0); });
         master.pause();
       } else if (standalone) {
-        subs.forEach(function (s) { master.remove(s); s.repeat(-1).repeatDelay(0.7).play(0); });
+        // a timeline removed from its parent ticks nowhere: hand each cell back to GSAP's root timeline to loop
+        subs.forEach(function (s) { master.remove(s); gsap.globalTimeline.add(s, gsap.globalTimeline.time()); s.repeat(-1).repeatDelay(0.7).play(0); });
       }
     })();
   </script>

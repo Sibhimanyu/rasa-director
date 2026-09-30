@@ -121,7 +121,7 @@ ${googleFontLink(look.font)}
       document.body.setAttribute("data-md-cells", String(subs.length));
       var q = new URLSearchParams(location.search);
       if (q.get("phase") === "mid") { subs.forEach(function (s) { s.tl.pause(); s.tl.seek(s.mid); }); }
-      else if (standalone) { subs.forEach(function (s) { master.remove(s.tl); s.tl.repeat(-1).repeatDelay(0.2).play(0); }); }
+      else if (standalone) { subs.forEach(function (s) { master.remove(s.tl); gsap.globalTimeline.add(s.tl, gsap.globalTimeline.time()); s.tl.repeat(-1).repeatDelay(0.2).play(0); }); }
     })();
   </script>
 </body></html>

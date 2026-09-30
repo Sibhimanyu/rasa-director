@@ -84,7 +84,17 @@
   .context { color: var(--ink-2); max-width: 860px; margin-bottom: 16px; }
   .decision { margin: 12px 0 16px; padding: 12px 14px; border-left: 3px solid var(--ok); background: var(--ok-soft); border-radius: 0 10px 10px 0; color: var(--ink-2); max-width: 860px; }
   .decision b { color: var(--ink); font-weight: 600; }
-  .decide-row { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .decide-row { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; gap: 18px; flex-wrap: wrap; }
+  .discuss { margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: var(--panel-2); }
+  .thread { display: grid; gap: 8px; margin: 6px 0 12px; max-height: 320px; overflow: auto; }
+  .msg { max-width: 78%; padding: 9px 12px; border-radius: 12px; font-size: 14.5px; line-height: 1.45; background: var(--panel); border: 1px solid var(--line); }
+  .msg b { display: block; font: 600 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
+  .msg.you { justify-self: end; background: var(--accent); color: #fff; border-color: var(--accent); } .msg.you b { color: rgba(255,255,255,.7); }
+  .dots { display: inline-flex; gap: 4px; } .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); animation: blink 1.2s infinite; } .dots i:nth-child(2) { animation-delay: .2s; } .dots i:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+  .composer { display: flex; gap: 10px; align-items: flex-end; }
+  .composer textarea { flex: 1; border: 1px solid var(--line-2); border-radius: 12px; padding: 10px 12px; background: var(--panel); resize: vertical; font-size: 14.5px; }
+  .composer textarea:focus { border-color: var(--accent); outline: none; }
   .stephead + .context { margin-top: 8px; }
   .link { background: none; border: 0; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; padding: 6px 4px; font-size: 14.5px; }
   .link:hover { color: var(--ink); }
@@ -116,6 +126,21 @@
   .choice .terms span { font: 400 11.5px/1 var(--mono); padding: 5px 7px; border-radius: 5px; background: var(--panel-2); color: var(--ink-2); }
   .choice .rare { font-size: 12.5px; color: var(--ink-3); }
   .choice audio { width: 100%; margin-top: 6px; }
+  /* stories: one row each, the three frames large, the words beside them */
+  .choices.stack { grid-template-columns: 1fr; }
+  .choices.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice .live { border-bottom: 1px solid var(--line); }
+  .choice .live .frame { border: 0; border-radius: 0; }
+  .choice .live iframe { pointer-events: none; }
+  .choice .live .open { display: none; }
+  .choices.stack .choice { display: grid; grid-template-columns: minmax(0, 3fr) minmax(180px, 1fr); align-items: center; }
+  .choices.stack .choice .strip { border-bottom: 0; border-right: 1px solid var(--line); }
+  .choices.stack .choice .pick { top: 10px; left: 10px; }
+  .choices.stack .choice .body { padding-right: 46px; }
+  .choice .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; background: var(--line); border-bottom: 1px solid var(--line); }
+  .choice .strip figure { margin: 0; position: relative; }
+  .choice .strip img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; background: var(--panel-2); }
+  .choice .strip figcaption { position: absolute; left: 6px; bottom: 6px; font: 600 10.5px/1 var(--sans); background: rgba(22,24,29,.78); color: #fff; padding: 4px 6px; border-radius: 5px; max-width: calc(100% - 12px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .pick { position: absolute; z-index: 2; top: 10px; left: 10px; background: var(--pick); color: #2a1f00; font: 600 11.5px/1 var(--sans); padding: 6px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
   .choice .tick { position: absolute; z-index: 2; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; display: none; place-items: center; font-size: 14px; }
   .choice.on .tick { display: grid; }
@@ -235,7 +260,7 @@
   .warnbox { border: 1px solid rgba(179,54,31,.35); background: #fbeeea; color: var(--err); padding: 10px 14px; border-radius: 10px; margin: 12px 0; }
   @media (prefers-reduced-motion: reduce) { .status.working .dot, .feed li.active i, .spinner, .bar.on::after { animation: none; } }
   @media (max-width: 1200px) { .app { grid-template-columns: minmax(0, 1fr) 280px; } .rail.left { display: none; } }
-  @media (max-width: 860px) { .choices { grid-template-columns: 1fr; } .dim-row { grid-template-columns: 1fr; } .app { grid-template-columns: 1fr; padding: 14px; } .rail { position: static; max-height: none; } .top-in { grid-template-columns: 1fr; } .phases { overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } .stage-card { padding: 20px; } }
+  @media (max-width: 860px) { .choices { grid-template-columns: 1fr; } .choices.stack .choice { grid-template-columns: 1fr; } .choices.stack .choice .strip { border-right: 0; border-bottom: 1px solid var(--line); } .dim-row { grid-template-columns: 1fr; } .app { grid-template-columns: 1fr; padding: 14px; } .rail { position: static; max-height: none; } .top-in { grid-template-columns: 1fr; } .phases { overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } .stage-card { padding: 20px; } }
 </style>
 </head>
 <body>
@@ -357,7 +382,7 @@
     o = o || {};
     var key = step + "Sel";
     if (!local[key] || !items.some(function (x) { return x.id === local[key]; })) local[key] = (items.some(function (x) { return x.id === d.recommended; }) ? d.recommended : (items[0] || {}).id);
-    var grid = h("div", { class: "choices" + (o.wide ? " wide" : ""), role: "radiogroup", "aria-label": o.noun || step });
+    var grid = h("div", { class: "choices" + (o.wide ? " wide" : "") + (o.stack ? " stack" : "") + (o.two ? " two" : ""), role: "radiogroup", "aria-label": o.noun || step });
     var btn = h("button", { class: "btn primary big", onclick: function () { send(step, "choose", local[key]); }, text: o.go || "Use this " + (o.noun || "one") });
     items.forEach(function (x) {
       var on = local[key] === x.id;
@@ -365,6 +390,10 @@
         d.recommended === x.id ? h("span", { class: "pick", text: "Claude's pick" }) : null,
         h("span", { class: "tick", "aria-hidden": "true", text: "✓" }),
         x.image ? h("img", { src: fsUrl(x.image), alt: "", loading: "lazy" }) : null,
+        // a live preview (a motion swatch playing the user's own line)
+        x.live ? h("div", { class: "live" }, [scaledFrame(x.live, 1920, 1080)]) : null,
+        // a story as three sketch frames (the opening, the turn, the close), each with a word or two
+        (x.frames || []).length ? h("div", { class: "strip" }, x.frames.map(function (f, i) { return h("figure", null, [h("img", { src: fsUrl(f), alt: (x.beats || [])[i] || "Frame " + (i + 1), loading: "lazy" }), (x.beats || [])[i] ? h("figcaption", { text: x.beats[i] }) : null]); })) : null,
         h("div", { class: "body" }, [
           x.meta ? h("div", { class: "meta", text: x.meta }) : null,
           h("h3", { text: x.title }),
@@ -421,7 +450,8 @@
     },
     concept: function (d) {
       if (!(d.options || []).length) return [empty("Claude is writing story pitches for this video. They appear here.")];
-      return choiceCards("concept", d, d.options.map(function (o) { return { id: o.id, title: o.title, text: o.world, more: o.hook ? "Opens: " + o.hook : null, rare: o.rare }; }), { noun: "story", wide: true });
+      var visual = d.options.some(function (o) { return (o.frames || []).length; });
+      return choiceCards("concept", d, d.options.map(function (o) { return { id: o.id, title: o.title, text: o.logline || o.world, more: visual || !o.hook ? null : "Opens: " + o.hook, frames: o.frames, beats: o.beats, rare: o.rare }; }), { noun: "story", wide: !visual, stack: visual });
     },
     brand: function (d) {
       var b = d.brand;
@@ -626,36 +656,32 @@
       })), h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () { send("styleframes", "approve", null); }, text: "These are right. Animate them" })])];
     },
     motion: function (d) {
-      if (!d.tasting) return [empty("Motion-language swatches appear here: your lines in several motion languages, side by side, to choose by eye.")];
-      var controls = h("div");
-      function drawControls() {
-        var cells = d.cells || [];
-        var recCell = cells.filter(function (c) { return c.id === d.recommended; })[0];
-        local.cell = local.cell || (recCell || cells[0] || {}).id;
-        local.adj = local.adj || [];
-        var kids = [];
-        kids.push(h("div", { class: "cellpick", role: "group", "aria-label": "Personalities" }, cells.map(function (c) {
-          var on = local.cell === c.id;
-          return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.cell = c.id; drawControls(); }, title: c.oneLiner || "" }, [h("b", { text: c.letter }), c.name + (d.recommended === c.id ? "  · Claude's pick" : "")]);
+      if (!d.tasting) return [empty("Claude is rendering your own lines in a few motion languages. They appear here, playing.")];
+      var cells = d.cells || [];
+      var page = String(d.tasting).split("?")[0];
+      var adjs = d.adjectives || [];
+      if (!Array.isArray(adjs)) adjs = Object.keys(adjs).map(function (k) { return { id: k, doc: d.adjectives[k] }; });
+      local.adj = local.adj || [];
+      var drawer = h("div", { class: "drawer" + (local.adjOpen ? " open" : "") });
+      function drawAdj() {
+        drawer.innerHTML = "";
+        drawer.appendChild(h("div", { class: "eyebrow", text: "Adjust the one you picked (optional)" }));
+        drawer.appendChild(h("div", { class: "chips" }, adjs.map(function (a) {
+          var id = a.id || a, on = local.adj.indexOf(id) > -1;
+          return h("button", { class: "chip" + (on ? " on" : ""), "aria-pressed": on ? "true" : "false", title: a.doc || "", onclick: function () { on ? local.adj.splice(local.adj.indexOf(id), 1) : local.adj.push(id); drawAdj(); }, text: id });
         })));
-        var cur = cells.filter(function (c) { return c.id === local.cell; })[0];
-        if (cur && cur.oneLiner) kids.push(h("p", { class: "context", text: cur.letter + " · " + cur.oneLiner }));
-        var adjs = d.adjectives || [];
-        // accept the object motion-md.mjs prints ({slower: "doc", ...}) as well as a list
-        if (!Array.isArray(adjs)) adjs = Object.keys(adjs).map(function (k) { return { id: k, doc: d.adjectives[k] }; });
-        if (adjs.length) kids.push(h("div", null, [h("div", { class: "field" }, [h("label", { text: "Adjust the selected one (optional, combine)" })]), h("div", { class: "chips", role: "group", "aria-label": "Adjustments" }, adjs.map(function (a) {
-          var id = a.id || a; var on = local.adj.indexOf(id) > -1;
-          return h("button", { class: "chip" + (on ? " on" : ""), "aria-pressed": on ? "true" : "false", title: a.doc || "", onclick: function () { on ? local.adj.splice(local.adj.indexOf(id), 1) : local.adj.push(id); drawControls(); }, text: id });
-        }))]));
-        kids.push(h("div", { class: "toolbar" }, [
-          h("button", { class: "btn primary", disabled: !cur, onclick: function () { if (local.adj.length) send("motion", "adjust", { id: local.cell, adjust: local.adj.slice() }); else send("motion", "choose", local.cell); }, text: local.adj.length ? "Preview " + (cur ? cur.letter : "") + " adjusted: " + local.adj.join(", ") : "Lock " + (cur ? cur.letter + " · " + cur.name : "") }),
-          h("button", { class: "btn", onclick: function () { send("motion", "more", { exclude: cells.map(function (c) { return c.id; }) }); }, text: "None of these. Show others" })
-        ]));
-        controls.innerHTML = "";
-        kids.forEach(function (k) { controls.appendChild(k); });
+        drawer.appendChild(h("div", { class: "actions" }, [h("button", { class: "btn", disabled: !local.adj.length, onclick: function () { send("motion", "adjust", { id: local.motionSel, adjust: local.adj.slice() }); }, text: local.adj.length ? "See it " + local.adj.join(" and ") : "Pick an adjustment above" })]));
       }
-      drawControls();
-      return [scaledFrame(d.tasting, 1920, 1080), controls];
+      if (local.adjOpen) drawAdj();
+      var parts = choiceCards("motion", d, cells.map(function (c) {
+        return { id: c.id, title: c.name, text: c.oneLiner, live: page + "?cell=" + encodeURIComponent(c.letter) };
+      }), {
+        noun: "motion", two: cells.length === 4 || cells.length === 2,
+        links: [
+          { label: "Show others", onclick: function () { send("motion", "more", { exclude: cells.map(function (c) { return c.id; }) }); } }
+        ].concat(adjs.length ? [{ label: "Adjust", onclick: function () { local.adjOpen = !local.adjOpen; drawer.classList.toggle("open", local.adjOpen); if (local.adjOpen) drawAdj(); } }] : [])
+      });
+      return [h("p", { class: "context", text: "Each card plays your own line the way the whole film will move. Watch a few loops, then pick one." })].concat(parts, [drawer]);
     },
     route: function (d) {
       var opts = d.options || [];
@@ -917,7 +943,7 @@
   function ago(t) { var s = Math.max(0, (Date.now() - Date.parse(t)) / 1000); return s < 50 ? "just now" : s < 3600 ? Math.round(s / 60) + " min ago" : new Date(t).toTimeString().slice(0, 5); }
   function sentText(x) { return x.type === "decide" ? "Claude decides" : x.type === "note" ? "a note" : x.name || (typeof x.value === "string" ? x.value : x.type === "approve" ? "approved" : "sent"); }
   function isDone() { return (S.steps.render || {}).status === "done"; }
-  function waitingOnUser() { var d = S.steps[S.current] || {}; return d.status === "awaiting" && !d.sent; }
+  function waitingOnUser() { var d = S.steps[S.current] || {}; return d.status === "awaiting" && (!d.sent || d.sent.type === "note"); }
 
   function renderTop() {
     document.getElementById("proj").textContent = S.title && S.title !== "Rasa Director" ? S.title : "";
@@ -998,6 +1024,31 @@
     ]);
   }
 
+  // talk to Claude about this step: questions, "make the second one darker", "mix 1 and 3"; Claude answers here
+  function discussion(step, d) {
+    var th = d.thread || [];
+    var open = th.length || local.discussOpen === step;
+    var waiting = d.sent && d.sent.type === "note";
+    var box = h("div", { class: "discuss" });
+    var row = h("div", { class: "decide-row" }, [
+      !open ? h("button", { class: "link", onclick: function () { local.discussOpen = step; document.getElementById("main")._sig = null; render(); setTimeout(function () { var t = document.getElementById("discussInput"); if (t) t.focus(); }, 0); }, text: "Discuss this with Claude" }) : null,
+      d.status === "awaiting" && step !== "render" ? h("button", { class: "link", onclick: function () { send(step, "decide", null); }, text: "Not sure? Let Claude decide this one" }) : null
+    ]);
+    if (open) {
+      var list = h("div", { class: "thread", role: "log", "aria-label": "Discussion with Claude" }, th.map(function (m) { return h("div", { class: "msg " + (m.who === "you" ? "you" : "claude") }, [h("b", { text: m.who === "you" ? "You" : "Claude" }), m.text]); }));
+      if (waiting) list.appendChild(h("div", { class: "msg claude typing" }, [h("b", { text: "Claude" }), h("span", { class: "dots", "aria-label": "Claude is replying" }, [h("i"), h("i"), h("i")])]));
+      var ta = h("textarea", { id: "discussInput", rows: "2", placeholder: "Ask about these, or say what to change…", "aria-label": "Message to Claude about " + labelOf(step).toLowerCase() });
+      ta.value = local.draft || "";
+      ta.addEventListener("input", function () { local.draft = ta.value; });
+      function go() { var v = ta.value.trim(); if (!v) return; local.draft = ""; ta.value = ""; send(step, "note", null, v); }
+      ta.addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); go(); } });
+      box.appendChild(h("div", { class: "eyebrow", text: "Discuss with Claude" }));
+      box.appendChild(list);
+      box.appendChild(h("div", { class: "composer" }, [ta, h("button", { class: "btn primary", onclick: go, text: "Send" })]));
+    }
+    return h("div", null, [open ? box : null, row]);
+  }
+
   var seenUpdated = {};
   function render(force) {
     renderTop(); renderFeed(); renderFilm();
@@ -1009,8 +1060,10 @@
     seenUpdated[viewing] = d.updated;
     var main = document.getElementById("main");
     // Claude is between questions (you answered, or it's preparing the next one): show it working
-    var busy = viewing === S.current && !isDone() && viewing !== "build" && (d.sent || d.status === "working" || (!waitingOnUser() && S.working && d.status !== "awaiting"));
-    var sig = viewing + "|" + (d.updated || "") + "|" + (d.status || "") + "|" + (busy ? "busy:" + (S.working && S.working.msg) + (S.activity || []).length : "") + "|" + (S.app && S.app.latest) + "|" + !!S.decide_rest + "|" + !!d.sent;
+    // a note is a conversation, not an answer: the options stay on screen while Claude replies in the thread
+    var answered = d.sent && d.sent.type !== "note";
+    var busy = viewing === S.current && !isDone() && viewing !== "build" && (answered || d.status === "working" || (!waitingOnUser() && S.working && d.status !== "awaiting" && !(d.sent && d.sent.type === "note")));
+    var sig = viewing + "|" + (d.updated || "") + "|" + (d.status || "") + "|" + (d.thread || []).length + "|" + (d.sent ? d.sent.type : "") + "|" + (busy ? "busy:" + (S.working && S.working.msg) + (S.activity || []).length : "") + "|" + (S.app && S.app.latest) + "|" + !!S.decide_rest + "|" + !!d.sent;
     if (!force && main._sig === sig && viewing !== "build") return; // same view: leave live previews playing
     main._sig = sig;
     var scroll = window.scrollY;
@@ -1024,7 +1077,7 @@
     } else {
       stepHead(viewing, d).forEach(function (n) { card.appendChild(n); });
       (PANELS[viewing](d) || []).forEach(function (n) { if (n) card.appendChild(n); });
-      if (d.status === "awaiting" && viewing !== "build" && viewing !== "render") card.appendChild(h("div", { class: "decide-row" }, [h("button", { class: "link", onclick: function () { send(viewing, "decide", null); }, text: "Not sure? Let Claude decide this one" })]));
+      if (viewing !== "build") card.appendChild(discussion(viewing, d));
       if (viewing !== S.current && S.current) card.appendChild(h("div", { class: "toolbar" }, [h("button", { class: "link", onclick: function () { followCurrent = true; render(true); }, text: "Back to what's happening now" })]));
     }
     main.appendChild(card);

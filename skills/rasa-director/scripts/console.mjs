@@ -8,6 +8,7 @@
 //   node console.mjs serve --run <run dir> [--root <workspace>] [--port 0] [--open]   (detaches; prints the URL)
 //   node console.mjs push  --run <dir> --step <id> (--data '<json>' | --file f.json) [--status awaiting|working|done|skipped] [--current]
 //   node console.mjs activity --run <dir> --message "Reading your DESIGN.md" [--level info|ok|warn]   (what Claude is doing now)
+//   node console.mjs reply --run <dir> --step <id> --message "..."   (Claude answers the user in that step's discussion)
 //   node console.mjs log   --run <dir> --message "..." [--level info|ok|warn|error] [--stage <id>] [--stage-status working|done|failed]
 //   node console.mjs wait  --run <dir> [--step <id>] [--timeout <sec, default 3000>]   -> prints the next action JSON (exit 2 on timeout)
 //   node console.mjs record --run <dir> --step <id> --type <type> [--value '<json>'] [--note "..."]   (a choice made in chat)
@@ -143,7 +144,7 @@ function ensureServer() {
 }
 
 // ---------------------------------------------------------------------------
-if (["push", "log", "activity"].includes(cmd)) ensureServer();
+if (["push", "log", "activity", "reply"].includes(cmd)) ensureServer();
 if (cmd === "push") {
   if (!args.step || !STEPS.includes(args.step)) die(`--step must be one of ${STEPS.join(", ")}`);
   const s = session();
@@ -155,6 +156,8 @@ if (cmd === "push") {
   const base = args.merge ? prev : {};
   const next = { ...base, ...data, status: args.status || data.status || (args.step === "build" ? "working" : "awaiting"), updated: now() };
   delete next.sent;
+  // the step's discussion survives a re-push (Claude revising the options is the answer to it)
+  if (prev.thread && !data.thread) next.thread = prev.thread;
   if (args.step === "build" && !args.merge) {
     next.log = data.log || prev.log || [];
     next.stages = data.stages || prev.stages || {};
@@ -181,6 +184,18 @@ if (cmd === "push") {
   else if (b.status !== "done") b.status = "working";
   // only pull the page to Build while the build is the thing happening (never away from the render gate)
   if (!s.current || ["plan", "build"].includes(s.current)) s.current = "build";
+  saveSession(s);
+  console.log(JSON.stringify({ ok: true }));
+} else if (cmd === "reply") {
+  // Claude's answer in a step's discussion thread, shown on the page under that step
+  if (!args.step || !STEPS.includes(args.step)) die(`--step must be one of ${STEPS.join(", ")}`);
+  if (!args.message) die("--message is required");
+  const s = session();
+  const st = (s.steps[args.step] = s.steps[args.step] || { status: "awaiting" });
+  st.thread = (st.thread || []).concat({ who: "claude", text: String(args.message).slice(0, 4000), t: now() }).slice(-50);
+  // the note has been answered: the step is the user's again
+  if (st.sent && st.sent.type === "note") delete st.sent;
+  activity(s, `Claude answered about ${LABELS[args.step] || args.step}`, "ok", null);
   saveSession(s);
   console.log(JSON.stringify({ ok: true }));
 } else if (cmd === "activity") {
@@ -380,6 +395,8 @@ function serve() {
         const verb = { choose: "picked", submit: "sent", approve: "approved", adjust: "adjusted", more: "asked for more of" }[action.type] || action.type;
         const said = action.type === "decide-rest" ? "Claude decides the rest" : action.type === "decide" ? `Claude decides ${LABELS[step] || step}` : action.type === "note" ? `Note: "${action.note}"` : `${verb} ${LABELS[step] || step}${nm ? ": " + nm : ""}`;
         if (s.steps[step] && s.steps[step].sent && nm) s.steps[step].sent.name = nm;
+        // anything the user writes becomes part of that step's discussion
+        if (action.note && s.steps[step]) s.steps[step].thread = (s.steps[step].thread || []).concat({ who: "you", text: action.note, t: action.ts }).slice(-50);
         activity(s, `You: ${said}`, "you", "Claude is reading your answer…");
         saveSession(s);
         send(200, { ok: true, action });
