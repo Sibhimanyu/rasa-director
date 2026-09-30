@@ -1,0 +1,58 @@
+{
+  "id": "kinetic-punch",
+  "name": "Kinetic Punch",
+  "oneLiner": "Words slam in oversized and hit the frame. Short, percussive, beat-driven.",
+  "feel": [
+    "punchy",
+    "urgent",
+    "sporty"
+  ],
+  "median_likelihood": 0.17,
+  "tempo": {
+    "scale_ms": [
+      120,
+      200,
+      320,
+      500,
+      800
+    ]
+  },
+  "easing": {
+    "enter": "power4.out",
+    "exit": "power4.in",
+    "move": "expo.out"
+  },
+  "stagger": {
+    "each_ms": 90
+  },
+  "holds": {
+    "min_ms": 450
+  },
+  "entrances": [
+    "word-slam"
+  ],
+  "exits": [
+    "punch-out"
+  ],
+  "transitions": [
+    "hard-cut",
+    "zoom-punch"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "linear-entrance",
+    "blur-in",
+    "bounce"
+  ],
+  "demo": {
+    "split": "words",
+    "enter": "word-slam",
+    "move": "shake",
+    "exit": "punch-out",
+    "enter_ms": 200,
+    "move_ms": 320,
+    "exit_ms": 200,
+    "hold_ms": 450
+  },
+  "builder_notes": "Each word arrives oversized (scale 1.8-2.4 -> 1) in 120-200ms, one per beat, with a tiny camera shake on impact. Holds are short. Exits punch forward (scale up, opacity out) fast. Everything lands on a beat grid."
+}

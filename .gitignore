@@ -1,0 +1,10 @@
+.rasa-director/
+videos/
+node_modules/
+.DS_Store
+.context/
+.impeccable/
+
+# vendored agent tooling (installed per developer, not part of Rasa Director)
+.claude/skills/
+.agents/skills/

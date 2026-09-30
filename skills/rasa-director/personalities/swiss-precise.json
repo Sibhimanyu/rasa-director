@@ -1,0 +1,60 @@
+{
+  "id": "swiss-precise",
+  "name": "Swiss Precise",
+  "oneLiner": "Type snaps into a grid from behind masks. Fast in, long confident holds, no decoration.",
+  "feel": [
+    "precise",
+    "confident",
+    "systematic"
+  ],
+  "median_likelihood": 0.22,
+  "tempo": {
+    "scale_ms": [
+      200,
+      300,
+      450,
+      700,
+      1000
+    ]
+  },
+  "easing": {
+    "enter": "expo.out",
+    "exit": "expo.in",
+    "move": "expo.inOut"
+  },
+  "stagger": {
+    "each_ms": 80
+  },
+  "holds": {
+    "min_ms": 900
+  },
+  "entrances": [
+    "clip-rise"
+  ],
+  "exits": [
+    "clip-drop"
+  ],
+  "transitions": [
+    "hard-cut",
+    "grid-shift"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "fade-slide",
+    "bounce",
+    "overshoot",
+    "blur-in",
+    "opacity-only-entrance"
+  ],
+  "demo": {
+    "split": "lines",
+    "enter": "clip-rise",
+    "move": "grid-shift",
+    "exit": "clip-drop",
+    "enter_ms": 450,
+    "move_ms": 450,
+    "exit_ms": 300,
+    "hold_ms": 900
+  },
+  "builder_notes": "Every element enters from behind an overflow-hidden mask (yPercent 100 -> 0, opacity untouched). Align everything to a strict column grid; moves are whole-block shifts to the next grid position. Exits reverse the mask. No blur, no bounce, no fades."
+}

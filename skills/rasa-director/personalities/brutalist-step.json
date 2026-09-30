@@ -1,0 +1,60 @@
+{
+  "id": "brutalist-step",
+  "name": "Brutalist Step",
+  "oneLiner": "No easing at all. Hard cuts, stepped jumps, jitter. Raw and loud.",
+  "feel": [
+    "raw",
+    "loud",
+    "anti-design"
+  ],
+  "median_likelihood": 0.05,
+  "tempo": {
+    "scale_ms": [
+      100,
+      160,
+      250,
+      400,
+      600
+    ]
+  },
+  "easing": {
+    "enter": "steps(4)",
+    "exit": "steps(3)",
+    "move": "steps(6)"
+  },
+  "stagger": {
+    "each_ms": 60
+  },
+  "holds": {
+    "min_ms": 500
+  },
+  "entrances": [
+    "hard-cut"
+  ],
+  "exits": [
+    "hard-cut-out"
+  ],
+  "transitions": [
+    "hard-cut",
+    "jitter-cut"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "fade-slide",
+    "blur-in",
+    "bounce",
+    "overshoot",
+    "opacity-only-entrance"
+  ],
+  "demo": {
+    "split": "words",
+    "enter": "hard-cut",
+    "move": "jitter",
+    "exit": "hard-cut-out",
+    "enter_ms": 250,
+    "move_ms": 400,
+    "exit_ms": 160,
+    "hold_ms": 500
+  },
+  "builder_notes": "Nothing interpolates smoothly: use steps(N) eases or zero-duration tl.set() cuts on the timeline (never on a .clip element). Words appear on the frame, offset in x on stepped jitters, then snap to place. Mis-registration and inversion (swap ink/background for 2-3 frames) are welcome. Exits are instant cuts."
+}

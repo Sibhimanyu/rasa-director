@@ -1,0 +1,61 @@
+{
+  "id": "luxe-minimal",
+  "name": "Luxe Minimal",
+  "oneLiner": "A slow reveal opens from the centre, a hairline draws, then stillness. Expensive restraint.",
+  "feel": [
+    "luxury",
+    "restrained",
+    "quiet"
+  ],
+  "median_likelihood": 0.1,
+  "tempo": {
+    "scale_ms": [
+      600,
+      900,
+      1400,
+      2000,
+      2800
+    ]
+  },
+  "easing": {
+    "enter": "circ.out",
+    "exit": "circ.in",
+    "move": "power1.inOut"
+  },
+  "stagger": {
+    "each_ms": 200
+  },
+  "holds": {
+    "min_ms": 1800
+  },
+  "entrances": [
+    "center-reveal"
+  ],
+  "exits": [
+    "center-close"
+  ],
+  "transitions": [
+    "center-wipe",
+    "long-hold-cut"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "fade-slide",
+    "bounce",
+    "overshoot",
+    "scale-pop",
+    "linear-entrance",
+    "blur-in"
+  ],
+  "demo": {
+    "split": "lines",
+    "enter": "center-reveal",
+    "move": "hairline",
+    "exit": "center-close",
+    "enter_ms": 2000,
+    "move_ms": 1400,
+    "exit_ms": 900,
+    "hold_ms": 1800
+  },
+  "builder_notes": "Reveals open symmetrically from the centre (clip-path inset 0 50% -> 0 0%) with an almost imperceptible scale settle (0.985 -> 1). A single hairline rule draws out from the centre. Holds are long and completely still. Fewer moves than you think."
+}

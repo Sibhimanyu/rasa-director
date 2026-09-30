@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rasa Director · Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Anek+Latin:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+  :root {
+    --bg: #0d0c0b; --panel: #151412; --panel-2: #1c1a17; --line: #2c2925; --ink: #efe9df; --ink-2: #b9b1a4; --ink-3: #948c80;
+    --accent: #e8a14b; --accent-ink: #1a1206; --ok: #7fbf8a; --warn: #e3c05b; --err: #ef7b6b; --focus: #f2c689;
+    --r: 10px; --display: "Young Serif", Georgia, serif; --sans: "Anek Latin", ui-sans-serif, system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); display: grid; grid-template-columns: 248px 1fr; grid-template-rows: 56px 1fr; }
+  button, input, textarea, select { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  header { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; padding: 0 20px; border-bottom: 1px solid var(--line); background: #0b0a09; }
+  .brand { font: 400 18px/1 var(--display); letter-spacing: .01em; display: flex; align-items: baseline; gap: 10px; }
+  .brand small { font: 500 11px/1 var(--mono); color: var(--ink-3); letter-spacing: .14em; text-transform: uppercase; }
+  .kolam { width: 22px; height: 22px; align-self: center; }
+  .proj { color: var(--ink-2); font-size: 13px; margin-left: 8px; }
+  .spacer { flex: 1; }
+  .conn { font: 500 11px/1 var(--mono); color: var(--ink-3); display: flex; align-items: center; gap: 6px; }
+  .conn i { width: 7px; height: 7px; border-radius: 50%; background: var(--err); display: inline-block; }
+  .conn.on i { background: var(--ok); }
+  nav { border-right: 1px solid var(--line); padding: 18px 12px; overflow: auto; background: #0b0a09; }
+  nav ol { list-style: none; display: grid; gap: 2px; counter-reset: s; }
+  nav ol button { width: 100%; text-align: left; background: none; border: 0; border-radius: 8px; padding: 9px 10px; display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 8px; color: var(--ink-2); }
+  nav ol button:hover { background: var(--panel); color: var(--ink); }
+  nav ol button.sel { background: var(--panel-2); color: var(--ink); }
+  nav .n { font: 500 11px/1 var(--mono); color: var(--ink-3); }
+  nav .dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
+  nav .dot.awaiting { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px rgba(232,161,75,.16); }
+  nav .dot.working { border-color: var(--warn); border-top-color: transparent; animation: spin 1s linear infinite; }
+  nav .dot.done { background: var(--ok); border-color: var(--ok); }
+  nav .dot.skipped { background: var(--ink-3); border-color: var(--ink-3); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { nav .dot.working { animation: none; } }
+  .navfoot { margin-top: 18px; padding: 12px 10px; border-top: 1px solid var(--line); display: grid; gap: 8px; }
+  main { overflow: auto; padding: 28px 36px 60px; }
+  .stephead { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
+  .stephead h1 { font: 400 30px/1.1 var(--display); letter-spacing: -.01em; }
+  .badge { font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 5px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--ink-2); }
+  .badge.awaiting { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .badge.done { color: var(--ok); border-color: rgba(127,191,138,.4); }
+  .question { font: 400 19px/1.45 var(--display); color: var(--ink); max-width: 820px; margin: 10px 0 6px; }
+  .context { color: var(--ink-2); max-width: 820px; margin-bottom: 18px; }
+  .decision { margin: 12px 0 18px; padding: 12px 14px; border-left: 3px solid var(--ok); background: rgba(127,191,138,.07); border-radius: 0 8px 8px 0; color: var(--ink-2); max-width: 820px; }
+  .decision b { color: var(--ink); font-weight: 600; }
+  .sent { margin: 12px 0; padding: 10px 14px; border-left: 3px solid var(--accent); background: rgba(232,161,75,.08); border-radius: 0 8px 8px 0; color: var(--ink-2); max-width: 820px; font-size: 13px; }
+  .empty { color: var(--ink-3); padding: 40px 0; max-width: 560px; }
+  .grid { display: grid; gap: 16px; }
+  .cards { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+  .card.rec { border-color: rgba(232,161,75,.55); }
+  .card.chosen { outline: 2px solid var(--ok); }
+  .card h3 { font: 400 17px/1.25 var(--display); }
+  .card .meta { font: 500 11px/1.4 var(--mono); color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase; }
+  .card p { color: var(--ink-2); }
+  .card .row { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .tag { font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 4px 7px; border-radius: 99px; }
+  .tag.rec { background: var(--accent); color: var(--accent-ink); }
+  .tag.rare { border: 1px solid var(--line); color: var(--ink-2); }
+  .btn { border: 1px solid var(--line); background: var(--panel-2); border-radius: 8px; padding: 8px 14px; font-weight: 500; }
+  .btn:hover { border-color: var(--ink-3); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(1.06); }
+  .btn.ghost { background: none; }
+  .btn.small { padding: 5px 10px; font-size: 13px; }
+  a.btn { color: var(--ink); text-decoration: none; display: inline-block; }
+  .rest { margin: 0 0 16px; padding: 10px 14px; border: 1px dashed rgba(232,161,75,.5); border-radius: 8px; color: var(--ink-2); max-width: 820px; font-size: 13px; }
+  .btn[disabled] { opacity: .45; cursor: default; }
+  .frame { position: relative; overflow: hidden; border-radius: 8px; background: #000; border: 1px solid var(--line); }
+  .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #fff; }
+  .frame .open { position: absolute; right: 8px; bottom: 8px; font: 500 11px/1 var(--mono); background: rgba(0,0,0,.65); color: var(--ink); padding: 6px 8px; border-radius: 6px; text-decoration: none; }
+  .cellpick { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+  .cellpick button { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 8px 12px; text-align: left; }
+  .cellpick button b { font: 600 13px/1 var(--mono); background: var(--ink); color: var(--bg); border-radius: 4px; padding: 2px 6px; margin-right: 8px; }
+  .cellpick button.sel { border-color: var(--accent); background: rgba(232,161,75,.1); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 1px solid var(--line); background: none; border-radius: 99px; padding: 6px 12px; font-size: 13px; color: var(--ink-2); }
+  .chip.on { border-color: var(--accent); color: var(--ink); background: rgba(232,161,75,.12); }
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 16px 0; }
+  .form { display: grid; gap: 16px; max-width: 720px; }
+  .field label { display: block; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+  .field input, .field textarea, .field select { width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .field input:focus, .field textarea:focus { border-color: var(--ink-3); outline: none; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .notebar { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); display: grid; gap: 10px; max-width: 820px; }
+  .notebar textarea { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-height: 64px; resize: vertical; }
+  .notebar .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 980px; }
+  .list { list-style: none; display: grid; gap: 8px; }
+  .list li { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; color: var(--ink-2); }
+  .shape { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 16px 0; max-width: 980px; }
+  .shape div { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .shape span { display: block; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  .stages { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
+  .stage { font: 500 12px/1 var(--mono); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); color: var(--ink-3); }
+  .stage.working { color: var(--warn); border-color: rgba(227,192,91,.5); }
+  .stage.done { color: var(--ok); border-color: rgba(127,191,138,.5); }
+  .stage.failed { color: var(--err); border-color: rgba(239,123,107,.5); }
+  .log { font: 12px/1.6 var(--mono); background: #090807; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; max-height: 360px; overflow: auto; max-width: 980px; }
+  .log div { color: var(--ink-2); } .log .warn { color: var(--warn); } .log .error { color: var(--err); } .log .ok { color: var(--ok); }
+  .log time { color: var(--ink-3); margin-right: 10px; }
+  .media { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); max-width: 1200px; }
+  .media video, .media img { width: 100%; border-radius: 8px; border: 1px solid var(--line); background: #000; display: block; }
+  .track { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+  .track audio { width: 100%; margin-top: 6px; }
+  .toast { position: fixed; right: 20px; bottom: 20px; background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 8px; max-width: 380px; transform: translateY(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility .25s; }
+  .toast.show { transform: none; opacity: 1; visibility: visible; }
+  .warnbox { border: 1px solid rgba(239,123,107,.45); background: rgba(239,123,107,.08); color: #f3b3a8; padding: 10px 14px; border-radius: 8px; margin: 12px 0; max-width: 980px; }
+  @media (max-width: 880px) { body { grid-template-columns: 1fr; grid-template-rows: 56px auto 1fr; } nav { border-right: 0; border-bottom: 1px solid var(--line); } nav ol { grid-auto-flow: column; overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } main { padding: 20px; } }
+</style>
+</head>
+<body>
+<header>
+  <svg class="kolam" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="#e8a14b" stroke-width="1.3"><path d="M12 3c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9z" opacity=".35"/><path d="M12 5.5c1.8 2 1.8 4.5 0 6.5-1.8-2-1.8-4.5 0-6.5zM12 12c1.8 2 1.8 4.5 0 6.5-1.8-2-1.8-4.5 0-6.5zM5.5 12c2-1.8 4.5-1.8 6.5 0-2 1.8-4.5 1.8-6.5 0zM12 12c2-1.8 4.5-1.8 6.5 0-2 1.8-4.5 1.8-6.5 0z"/></g><g fill="#e8a14b"><circle cx="12" cy="12" r="1"/><circle cx="7.5" cy="7.5" r=".9"/><circle cx="16.5" cy="7.5" r=".9"/><circle cx="7.5" cy="16.5" r=".9"/><circle cx="16.5" cy="16.5" r=".9"/></g></svg>
+  <div class="brand">Rasa Director <small>Console</small></div>
+  <div class="proj" id="proj"></div>
+  <div class="spacer"></div>
+  <div class="conn" id="conn"><i></i><span>offline</span></div>
+</header>
+<nav aria-label="Steps">
+  <ol id="steps"></ol>
+  <div class="navfoot">
+    <button class="btn ghost small" id="decideRest" title="Hand every remaining step to the agent">You decide the rest</button>
+    <span style="color:var(--ink-3);font-size:12px">You can also answer in chat. Either works.</span>
+  </div>
+</nav>
+<main id="main" tabindex="-1"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function () {
+  var TOKEN = new URLSearchParams(location.search).get("t") || "";
+  var STEPS = [
+    ["brief", "Brief"], ["concept", "Concept"], ["look", "Look"], ["motion", "Motion"], ["keyframes", "Keyframes"],
+    ["music", "Music"], ["plan", "Plan"], ["build", "Build"], ["render", "Render"]
+  ];
+  var S = { steps: {} }, viewing = null, followCurrent = true, local = {};
+  var Q = new URLSearchParams(location.search), PINNED = Q.get("step");
+
+  function h(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      var v = attrs[k];
+      if (v == null || v === false) continue;
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else if (k.slice(0, 2) === "on") n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v === true ? "" : v);
+    }
+    (kids || []).forEach(function (c) { if (c != null && c !== false) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function fsUrl(p) {
+    if (!p) return "";
+    if (/^https?:/.test(p)) return p;
+    var abs = p.charAt(0) === "/";
+    return (abs ? "/fs/abs" : "/fs/rel/") + p.split("/").map(encodeURIComponent).join("/").replace(/^\//, abs ? "/" : "");
+  }
+  function toast(msg) {
+    var t = document.getElementById("toast");
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove("show"); }, 3200);
+  }
+  function send(step, type, value, note) {
+    return fetch("/api/action", { method: "POST", headers: { "content-type": "application/json", "x-rasa-token": TOKEN }, body: JSON.stringify({ step: step, type: type, value: value, note: note || "" }) })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function () { toast("Sent to the agent. It picks this up and continues."); })
+      .catch(function (e) { toast("Could not send: " + e.message); });
+  }
+
+  // a fixed-size page (tasting 1920x1080, board 1600 wide) scaled to fit its container
+  var FRAMES = {};
+  function scaledFrame(src, w, hgt, maxH) {
+    // reuse the same frame node for the same page so loops don't restart on every click
+    var key = src + "|" + w + "|" + hgt + "|" + (maxH || "");
+    if (FRAMES[key]) { requestAnimationFrame(FRAMES[key]._fit); return FRAMES[key]; }
+    var box = h("div", { class: "frame" });
+    FRAMES[key] = box;
+    var ifr = h("iframe", { src: fsUrl(src), title: "preview", loading: "lazy", width: w, height: hgt });
+    box.appendChild(ifr);
+    box.appendChild(h("a", { class: "open", href: fsUrl(src), target: "_blank", rel: "noopener", text: "open full ↗" }));
+    function fit() {
+      var cw = box.clientWidth || 800;
+      var sc = cw / w;
+      var shown = maxH ? Math.min(hgt, maxH / sc) : hgt;
+      ifr.style.transform = "scale(" + sc + ")";
+      box.style.height = Math.round(shown * sc) + "px";
+      ifr.style.height = shown + "px";
+    }
+    box._fit = fit;
+    requestAnimationFrame(fit);
+    window.addEventListener("resize", fit);
+    return box;
+  }
+
+  function headNodes(step, label, d) {
+    var out = [];
+    if (S.decide_rest) out.push(h("div", { class: "rest", text: "You handed the remaining steps to the agent. It will still ask before the final render. You can still step in anywhere." }));
+    return out.concat(head(step, label, d));
+  }
+  function renderNav() {
+    var ol = document.getElementById("steps");
+    ol.innerHTML = "";
+    STEPS.forEach(function (s, i) {
+      var st = (S.steps[s[0]] || {}).status || "pending";
+      ol.appendChild(h("li", null, [h("button", { class: (viewing === s[0] ? "sel" : ""), "aria-current": viewing === s[0] ? "step" : null, onclick: function () { viewing = s[0]; followCurrent = false; render(); } }, [
+        h("span", { class: "n", text: String(i + 1).padStart(2, "0") }), h("span", { text: s[1] }), h("span", { class: "dot " + st, title: st })
+      ])]));
+    });
+    document.getElementById("proj").textContent = S.title && S.title !== "Rasa Director" ? "· " + S.title : "";
+  }
+
+  function head(step, label, d) {
+    var st = d.status || "pending";
+    var kids = [h("div", { class: "stephead" }, [h("h1", { text: label }), h("span", { class: "badge " + st, text: st === "awaiting" ? "your call" : st })])];
+    if (d.question) kids.push(h("p", { class: "question", text: d.question }));
+    if (d.context) kids.push(h("p", { class: "context", text: d.context }));
+    if (d.decision) kids.push(h("div", { class: "decision" }, [h("b", { text: "Decided: " }), d.decision]));
+    if (d.sent && st === "awaiting") kids.push(h("div", { class: "sent", text: "You sent: " + d.sent.type + (d.sent.value != null ? " → " + (typeof d.sent.value === "string" ? d.sent.value : JSON.stringify(d.sent.value)) : "") + (d.sent.note ? ' · "' + d.sent.note + '"' : "") + ". Waiting for the agent…" }));
+    return kids;
+  }
+  function noteBar(step, extra) {
+    var ta = h("textarea", { placeholder: "Tell the agent anything: a correction, a mix (“the framing of 2 with the hook of 4”), a question…", "aria-label": "Note to the agent" });
+    ta.value = local.note || "";
+    ta.addEventListener("input", function () { local.note = ta.value; });
+    return h("div", { class: "notebar" }, [ta, h("div", { class: "row" }, (extra || []).concat([
+      h("button", { class: "btn", onclick: function () { if (!ta.value.trim()) return toast("Write a note first."); send(step, "note", null, ta.value.trim()); ta.value = ""; } , text: "Send note" }),
+      h("button", { class: "btn ghost", onclick: function () { send(step, "decide", null, ta.value.trim()); }, text: "You decide this step" })
+    ]))]);
+  }
+  function empty(text) { return h("p", { class: "empty", text: text }); }
+  var uid = 0;
+  function field(label, input) {
+    var id = "f" + (++uid);
+    input.id = id;
+    return h("div", { class: "field" }, [h("label", { for: id, text: label }), input]);
+  }
+
+  var PANELS = {
+    brief: function (d) {
+      var f = d.fields || {};
+      var aspects = d.aspects || ["16:9", "9:16", "1:1", "4:5"];
+      // typed values live in `local` so clicking an aspect chip never wipes them
+      local.brief = local.brief || { content: f.content || "", sub: f.sub || "", destination: f.destination || "", length_s: f.length_s || "", aspect: f.aspect || aspects[0] };
+      var B = local.brief;
+      function inp(key, ph, extra) {
+        var n = h("input", Object.assign({ value: B[key] == null ? "" : String(B[key]), placeholder: ph }, extra || {}));
+        n.addEventListener("input", function () { B[key] = n.value; });
+        return n;
+      }
+      var chips = h("div", { class: "chips", role: "group", "aria-label": "Aspect" }, aspects.map(function (a) {
+        return h("button", { class: "chip" + (B.aspect === a ? " on" : ""), "aria-pressed": B.aspect === a ? "true" : "false", onclick: function () { B.aspect = a; document.getElementById("main")._sig = null; render(); }, text: a });
+      }));
+      return [h("div", { class: "form" }, [
+        field("Content (required)", inp("content", "The exact headline the piece shows")),
+        field("Secondary line", inp("sub", "Optional: tagline, URL")),
+        h("div", { class: "two" }, [field("Where it plays", inp("destination", "website, reels, youtube, x-feed…")), field("Length (seconds)", inp("length_s", "blank = from content", { inputmode: "decimal" }))]),
+        h("div", { class: "field" }, [h("label", { text: "Aspect" }), chips]),
+        h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () {
+          if (!String(B.content).trim()) return toast("Content is the one required input.");
+          send("brief", "submit", { content: String(B.content).trim(), sub: String(B.sub).trim(), destination: String(B.destination).trim(), aspect: B.aspect, length_s: String(B.length_s).trim() ? Number(B.length_s) : null });
+        }, text: "Send brief" })])
+      ])];
+    },
+    concept: function (d) {
+      if (!(d.options || []).length) return [empty("The agent will pitch five concepts here. Tell it what you're already picturing, if anything.")];
+      return [h("div", { class: "grid cards" }, d.options.map(function (o, i) {
+        var chosen = d.sent && d.sent.value === o.id;
+        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (chosen ? " chosen" : "") }, [
+          h("div", { class: "meta", text: "Pitch " + (i + 1) }),
+          h("h3", { text: o.title }),
+          o.world ? h("p", { text: o.world }) : null,
+          o.hook ? h("p", { text: "Opens: " + o.hook }) : null,
+          h("div", { class: "row" }, [
+            d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null,
+            o.rare ? h("span", { class: "tag rare", text: "off the beaten path" }) : null,
+            h("span", { style: "flex:1" }),
+            h("button", { class: "btn small primary", onclick: function () { send("concept", "choose", o.id); }, text: "Pick" })
+          ])
+        ]);
+      }))];
+    },
+    look: function (d) {
+      if (!(d.options || []).length) return [empty("Look presets appear here, each opened by eye.")];
+      return [h("div", { class: "grid cards" }, d.options.map(function (o) {
+        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
+          o.showcase ? scaledFrame(o.showcase, 1920, 1080) : null,
+          h("h3", { text: o.id }),
+          o.description ? h("p", { text: o.description.length > 220 ? o.description.slice(0, 217) + "…" : o.description }) : null,
+          h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("span", { style: "flex:1" }),
+            h("button", { class: "btn small primary", onclick: function () { send("look", "choose", o.id); }, text: "Use this look" })])
+        ]);
+      })), d.note_brand ? h("p", { class: "context", text: d.note_brand }) : null];
+    },
+    motion: function (d) {
+      if (!d.tasting) return [empty("The tasting menu appears here: your headline looping in several motion personalities, side by side.")];
+      var controls = h("div");
+      function drawControls() {
+        var cells = d.cells || [];
+        var recCell = cells.filter(function (c) { return c.id === d.recommended; })[0];
+        local.cell = local.cell || (recCell || cells[0] || {}).id;
+        local.adj = local.adj || [];
+        var kids = [];
+        kids.push(h("div", { class: "cellpick", role: "group", "aria-label": "Personalities" }, cells.map(function (c) {
+          var on = local.cell === c.id;
+          return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.cell = c.id; drawControls(); }, title: c.oneLiner || "" }, [h("b", { text: c.letter }), c.name + (d.recommended === c.id ? "  ★ recommended" : "")]);
+        })));
+        var cur = cells.filter(function (c) { return c.id === local.cell; })[0];
+        if (cur && cur.oneLiner) kids.push(h("p", { class: "context", text: cur.letter + " · " + cur.oneLiner }));
+        var adjs = d.adjectives || [];
+        // accept the object motion-md.mjs prints ({slower: "doc", ...}) as well as a list
+        if (!Array.isArray(adjs)) adjs = Object.keys(adjs).map(function (k) { return { id: k, doc: d.adjectives[k] }; });
+        if (adjs.length) kids.push(h("div", null, [h("div", { class: "field" }, [h("label", { text: "Adjust the selected one (optional, combine)" })]), h("div", { class: "chips", role: "group", "aria-label": "Adjustments" }, adjs.map(function (a) {
+          var id = a.id || a; var on = local.adj.indexOf(id) > -1;
+          return h("button", { class: "chip" + (on ? " on" : ""), "aria-pressed": on ? "true" : "false", title: a.doc || "", onclick: function () { on ? local.adj.splice(local.adj.indexOf(id), 1) : local.adj.push(id); drawControls(); }, text: id });
+        }))]));
+        kids.push(h("div", { class: "toolbar" }, [
+          h("button", { class: "btn primary", disabled: !cur, onclick: function () { if (local.adj.length) send("motion", "adjust", { id: local.cell, adjust: local.adj.slice() }); else send("motion", "choose", local.cell); }, text: local.adj.length ? "Preview " + (cur ? cur.letter : "") + " adjusted: " + local.adj.join(", ") : "Lock " + (cur ? cur.letter + " · " + cur.name : "") }),
+          h("button", { class: "btn", onclick: function () { send("motion", "more", { exclude: cells.map(function (c) { return c.id; }) }); }, text: "None of these. Show others" })
+        ]));
+        controls.innerHTML = "";
+        kids.forEach(function (k) { controls.appendChild(k); });
+      }
+      drawControls();
+      return [scaledFrame(d.tasting, 1920, 1080), controls];
+    },
+    keyframes: function (d) {
+      var kids = [];
+      if (!d.board) {
+        kids.push(h("div", { class: "toolbar" }, [
+          h("button", { class: "btn primary", onclick: function () { send("keyframes", "choose", "poses"); }, text: "Show me the key poses first" }),
+          h("button", { class: "btn", onclick: function () { send("keyframes", "choose", "skip"); }, text: "Go straight to the build" })
+        ]));
+        return kids;
+      }
+      if ((d.issues || []).length) kids.push(h("div", { class: "warnbox", text: d.issues.length + " problem(s) against the motion contract: " + d.issues.map(function (i) { return i.problem; }).join(" · ") }));
+      kids.push(scaledFrame(d.board, 1600, d.board_height || 1300, 1100));
+      kids.push(h("div", { class: "toolbar" }, [
+        h("button", { class: "btn primary", disabled: (d.issues || []).length > 0, onclick: function () { send("keyframes", "approve", null); }, text: "Approve these poses" }),
+        h("button", { class: "btn", onclick: function () { send("keyframes", "choose", "skip"); }, text: "Skip keyframes" })
+      ]));
+      kids.push(h("p", { class: "context", text: "Want changes? Write them below (“hold longer on the tagline”, “snap into 4”) and send a note." }));
+      return kids;
+    },
+    music: function (d) {
+      var opts = d.options || [];
+      var kids = [];
+      if (!opts.length) kids.push(empty(d.unavailable || "Music candidates appear here with players. Or keep it silent."));
+      kids.push(h("div", { class: "grid", style: "max-width:820px" }, opts.map(function (o) {
+        return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
+          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("div", { class: "meta", text: [o.mood, o.duration ? o.duration + "s" : "", o.source].filter(Boolean).join(" · ") })]),
+            h("button", { class: "btn small primary", onclick: function () { send("music", "choose", o.id); }, text: "Use this" })]),
+          o.file ? h("audio", { controls: true, preload: "none", src: fsUrl(o.file) }) : null
+        ]);
+      })));
+      var own = h("input", { placeholder: "Or a path to your own track, e.g. assets/theme.mp3", "aria-label": "Path to your own track" });
+      kids.push(h("div", { class: "toolbar" }, [h("button", { class: "btn", onclick: function () { send("music", "choose", "none"); }, text: "No music" }),
+        h("div", { class: "field", style: "flex:1;min-width:260px" }, [own]), h("button", { class: "btn", onclick: function () { if (own.value.trim()) send("music", "choose", { file: own.value.trim() }); }, text: "Use my track" })]));
+      return kids;
+    },
+    plan: function (d) {
+      var sh = d.shape || {};
+      var kids = [];
+      if (Object.keys(sh).length) kids.push(h("div", { class: "shape" }, Object.keys(sh).map(function (k) { return h("div", null, [h("span", { text: k }), String(sh[k])]); })));
+      kids.push(h("div", { class: "cols" }, [
+        h("div", null, [h("div", { class: "field" }, [h("label", { text: "You chose" })]), h("ul", { class: "list" }, (d.stated || []).map(function (x) { return h("li", { text: x }); }))]),
+        h("div", null, [h("div", { class: "field" }, [h("label", { text: "I decided (with receipts)" })]), h("ul", { class: "list" }, (d.agent || []).map(function (x) { return h("li", { text: x }); }))])
+      ]));
+      if (d.stated || d.agent) kids.push(h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () { send("plan", "approve", null); }, text: "Looks right. Build it" })]));
+      else kids.push(empty("The full plan (what you chose, what the agent decided and why) appears here before anything is built."));
+      return kids;
+    },
+    build: function (d) {
+      var order = ["handoff", "plan", "design", "build", "verify", "obey", "render-gate"];
+      var st = d.stages || {};
+      var kids = [h("div", { class: "stages" }, order.map(function (k) { return h("span", { class: "stage " + (st[k] || ""), text: k }); }))];
+      if (d.obey) kids.push(h("p", { class: "context", text: "Motion check: " + d.obey }));
+      var log = h("div", { class: "log", role: "log" }, (d.log || []).map(function (l) {
+        return h("div", { class: l.level || "" }, [h("time", { text: (l.t || "").slice(11, 19) }), l.msg]);
+      }));
+      kids.push(log);
+      setTimeout(function () { log.scrollTop = log.scrollHeight; }, 0);
+      if (!(d.log || []).length) kids.push(empty("Build progress streams here once the plan is approved."));
+      return kids;
+    },
+    render: function (d) {
+      var kids = [];
+      var media = [];
+      (d.videos || []).forEach(function (v) { media.push(h("div", null, [h("video", { src: fsUrl(v), controls: true, playsinline: true, preload: "metadata" }), h("div", { class: "meta", style: "margin-top:6px", text: v })])); });
+      (d.images || []).forEach(function (v) { media.push(h("a", { href: fsUrl(v), target: "_blank", rel: "noopener" }, [h("img", { src: fsUrl(v), alt: v, loading: "lazy" })])); });
+      if (media.length) kids.push(h("div", { class: "media" }, media));
+      else kids.push(empty("Proof snapshots, the preview and the final render appear here."));
+      kids.push(h("div", { class: "toolbar" }, [
+        d.studio ? h("a", { class: "btn", href: d.studio, target: "_blank", rel: "noopener", text: "Open the Studio preview ↗" }) : null,
+        h("button", { class: "btn", disabled: d.status === "done", onclick: function () { send("render", "choose", "preview"); }, text: "Preview first" }),
+        h("button", { class: "btn primary", disabled: d.status === "done", onclick: function () { send("render", "choose", "render"); }, text: d.status === "done" ? "Rendered" : "Render the final" })
+      ]));
+      return kids;
+    }
+  };
+
+  var seenUpdated = {};
+  function render() {
+    if (followCurrent && S.current) viewing = S.current;
+    viewing = viewing || "brief";
+    // the agent re-pushed this step: drop selections made against the old payload
+    var upd = (S.steps[viewing] || {}).updated;
+    if (upd && seenUpdated[viewing] && seenUpdated[viewing] !== upd) local = {};
+    seenUpdated[viewing] = upd;
+    renderNav();
+    var d = S.steps[viewing] || {};
+    var label = STEPS.filter(function (s) { return s[0] === viewing; })[0][1];
+    var main = document.getElementById("main");
+    var scroll = main.scrollTop;
+    // light update: same step, same payload (only "you sent" or other steps changed) →
+    // refresh the header only, so live previews (tasting, board, showcases) keep playing
+    var sig = viewing + "|" + (d.updated || "") + "|" + (d.status || "");
+    var headBox = document.getElementById("headBox");
+    if (main._sig === sig && headBox && viewing !== "build") {
+      headBox.innerHTML = "";
+      headNodes(viewing, label, d).forEach(function (n) { headBox.appendChild(n); });
+      return;
+    }
+    main._sig = sig;
+    main.innerHTML = "";
+    headBox = h("div", { id: "headBox" });
+    headNodes(viewing, label, d).forEach(function (n) { headBox.appendChild(n); });
+    main.appendChild(headBox);
+    (PANELS[viewing](d) || []).forEach(function (n) { if (n) main.appendChild(n); });
+    if (viewing !== "build") main.appendChild(noteBar(viewing));
+    main.scrollTop = scroll;
+  }
+
+  document.getElementById("decideRest").addEventListener("click", function () {
+    if (confirm("Hand every remaining step to the agent? It will still ask before the final render.")) send("*", "decide-rest", null);
+  });
+
+  var lastStep = null;
+  function onState(s) {
+    var prevCurrent = S.current;
+    S = s || { steps: {} };
+    // a new step from the agent pulls the view to it (unless the page was opened pinned to a step)
+    if (S.current !== prevCurrent && !PINNED) { followCurrent = true; local = {}; }
+    if (lastStep !== S.current) { lastStep = S.current; }
+    render();
+  }
+  function connect() {
+    var conn = document.getElementById("conn");
+    var es = new EventSource("/api/events");
+    es.addEventListener("state", function (e) { try { onState(JSON.parse(e.data)); } catch (_) {} });
+    es.onopen = function () { conn.classList.add("on"); conn.querySelector("span").textContent = "live"; };
+    es.onerror = function () { conn.classList.remove("on"); conn.querySelector("span").textContent = "reconnecting"; };
+  }
+  // ?snapshot=1&step=<id>: a static render for stills (no live stream, which would keep the page "loading")
+  if (PINNED) { viewing = PINNED; followCurrent = false; }
+  fetch("/api/state").then(function (r) { return r.json(); }).then(onState).catch(function () {});
+  if (!Q.get("snapshot")) connect();
+})();
+</script>
+</body>
+</html>

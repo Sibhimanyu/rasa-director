@@ -1,0 +1,13 @@
+{
+  "name": "rasa-director",
+  "description": "Creative direction for video made with Claude: pick how your motion graphic looks and moves, by eye, before HyperFrames builds it. A Director's Console for every choice, a binding motion.md, and a checker that the build obeys it.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sibhimanyu",
+    "url": "https://github.com/Sibhimanyu"
+  },
+  "homepage": "https://sibhimanyu.github.io/rasa-director/",
+  "repository": "https://github.com/Sibhimanyu/rasa-director",
+  "license": "MIT",
+  "keywords": ["motion-graphics", "animation", "hyperframes", "gsap", "video", "design", "skill"]
+}

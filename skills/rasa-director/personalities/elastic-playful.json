@@ -1,0 +1,57 @@
+{
+  "id": "elastic-playful",
+  "name": "Elastic Playful",
+  "oneLiner": "Letters pop and squash with springy overshoot. Toy-like, cheeky, alive.",
+  "feel": [
+    "playful",
+    "friendly",
+    "energetic"
+  ],
+  "median_likelihood": 0.14,
+  "tempo": {
+    "scale_ms": [
+      180,
+      300,
+      500,
+      800,
+      1200
+    ]
+  },
+  "easing": {
+    "enter": "back.out(1.8)",
+    "exit": "back.in(1.4)",
+    "move": "elastic.out(1,0.5)"
+  },
+  "stagger": {
+    "each_ms": 40
+  },
+  "holds": {
+    "min_ms": 600
+  },
+  "entrances": [
+    "char-pop"
+  ],
+  "exits": [
+    "char-shrink"
+  ],
+  "transitions": [
+    "squash-push"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "linear-entrance",
+    "blur-in",
+    "opacity-only-entrance"
+  ],
+  "demo": {
+    "split": "chars",
+    "enter": "char-pop",
+    "move": "squash",
+    "exit": "char-shrink",
+    "enter_ms": 500,
+    "move_ms": 800,
+    "exit_ms": 300,
+    "hold_ms": 600
+  },
+  "builder_notes": "Characters or elements scale up from 0 with a small rotation and overshoot (back.out). Emphasis moves squash-and-stretch (scaleX/scaleY opposite) with elastic settle. Exits shrink back with back.in. Keep it tight: short durations, small stagger."
+}

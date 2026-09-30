@@ -1,0 +1,57 @@
+{
+  "id": "liquid-morph",
+  "name": "Liquid Morph",
+  "oneLiner": "Letters pour up from a baseline and ripple like fluid. Smooth, organic, hypnotic.",
+  "feel": [
+    "fluid",
+    "organic",
+    "hypnotic"
+  ],
+  "median_likelihood": 0.06,
+  "tempo": {
+    "scale_ms": [
+      300,
+      500,
+      800,
+      1200,
+      1800
+    ]
+  },
+  "easing": {
+    "enter": "power4.inOut",
+    "exit": "power4.inOut",
+    "move": "sine.inOut"
+  },
+  "stagger": {
+    "each_ms": 30
+  },
+  "holds": {
+    "min_ms": 800
+  },
+  "entrances": [
+    "liquid-rise"
+  ],
+  "exits": [
+    "liquid-drain"
+  ],
+  "transitions": [
+    "ripple-wipe"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "linear-entrance",
+    "bounce",
+    "blur-in"
+  ],
+  "demo": {
+    "split": "chars",
+    "enter": "liquid-rise",
+    "move": "wave",
+    "exit": "liquid-drain",
+    "enter_ms": 1200,
+    "move_ms": 1800,
+    "exit_ms": 800,
+    "hold_ms": 800
+  },
+  "builder_notes": "Characters grow from the baseline (scaleY 0 -> 1, transform-origin bottom) with skew that relaxes to 0, staggered tightly so the line pours. Holds keep a slow sine wave travelling through the letters. Exits drain back into the baseline."
+}

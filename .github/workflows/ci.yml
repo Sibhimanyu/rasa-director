@@ -1,0 +1,21 @@
+name: selftest
+on:
+  push:
+    branches: [master]
+  pull_request:
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax
+        run: for f in skills/rasa-director/scripts/*.mjs skills/rasa-director/scripts/lib/*.mjs; do node --check "$f"; done
+      - name: Manifests
+        run: node -e 'for (const f of [".claude-plugin/plugin.json",".claude-plugin/marketplace.json"]) JSON.parse(require("fs").readFileSync(f,"utf8"))'
+      - name: Self-test (headless Chrome from the runner)
+        env:
+          RASA_DIRECTOR_CHROME: /usr/bin/google-chrome
+        run: node skills/rasa-director/scripts/selftest.mjs

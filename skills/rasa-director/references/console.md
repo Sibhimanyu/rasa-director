@@ -1,0 +1,69 @@
+# Director's Console
+
+`scripts/console.mjs` runs a local page with one panel per step. The agent pushes each step's payload into `<run>/session.json`; the user's clicks are appended to `<run>/actions.jsonl`; `wait` hands the next one to the agent. The page updates live (server-sent events), so pushes appear without a reload.
+
+## Security
+
+- Bound to 127.0.0.1 only; requests whose `Host` isn't `127.0.0.1:<port>` / `localhost:<port>` are refused (blocks DNS rebinding).
+- The URL carries a per-run token. Opening it sets an HttpOnly, SameSite=Strict session cookie; every other route (state, events, files) requires that cookie, and POSTs also require the token header.
+- Files are served only from the workspace root, this skill, and installed skills (`~/.claude/skills`, `~/.agents/skills`), by real path (symlinks can't escape). The session's own `console.json`, `actions.jsonl` and `consumed.json` are never served. `serve` refuses to use your home directory or `/` as the root.
+- Malformed requests (bad JSON, `null` bodies, unknown steps or types, bad ranges) get 4xx; the server doesn't crash on them.
+
+## Commands
+
+| Command | Does |
+|---|---|
+| `serve --run <dir> [--root <workspace>] [--port N] [--open]` | starts the server in the background (reuses a running one), prints `{url}`; `--open` opens the browser. `--root` defaults to the current directory: only files under it, this skill, and installed skills (`~/.claude/skills`, `~/.agents/skills`) are served. |
+| `push --run <dir> --step <id> --file <payload.json>` (or `--data '<json>'`) `[--status awaiting\|working\|done\|skipped] [--current] [--merge] [--title "..."]` | **replaces** that step's payload (clearing old options, issues and the "you sent" banner); `--merge` keeps the previous fields instead. `status` defaults to `awaiting` (`working` for build); an awaiting step becomes the current one and the page jumps to it. The page also drops any unsent selections made against the old payload. |
+| `log --run <dir> --message "..." [--level info\|ok\|warn\|error] [--stage <id> --stage-status working\|done\|failed]` | appends a build log line and sets a stage chip (stages: handoff, plan, design, build, verify, obey, render-gate). It moves the page to Build only while the current step is plan or build (never away from the render gate); `--stage render-gate --stage-status done` marks Build done. |
+| `wait --run <dir> [--step <id>] [--timeout <sec>]` | blocks until an unconsumed action arrives (for that step, or `*`), prints it, marks it consumed. Exit 2 on timeout; exit 3 (`console_down`) if the server died. Run it in the background, one at a time. |
+| `record --run <dir> --step <id> --type <type> [--value '<json>'] [--note "..."]` | logs an answer the user gave in chat (already consumed) so the session history is complete |
+| `state`, `url`, `stop` | print the session, reprint the URL (errors if the server is gone), stop the server |
+
+Paths in payloads are workspace-relative (or absolute). The page serves them at `/fs/rel/<path>` / `/fs/abs/<path>`.
+
+## Common payload fields (any step)
+
+| Field | Shown as |
+|---|---|
+| `question` | the step's question, large |
+| `context` | a line of context under it |
+| `recommended` | badge on the recommended option |
+| `decision` | green "Decided:" line (set with `status: done`) |
+| `status` | nav dot: awaiting (amber, pulsing ring) · working (spinner) · done (green) · skipped (grey) |
+
+Every panel except Build has a note box, "Send note" and "You decide this step". The nav has "You decide the rest".
+
+## Per-step payloads
+
+| Step | Fields |
+|---|---|
+| `brief` | `fields: {content, sub, destination, aspect, length_s}` (prefill), `aspects` (default 16:9, 9:16, 1:1, 4:5) |
+| `concept` | `options: [{id, title, world, hook, rare}]` |
+| `look` | `options: [{id, showcase, description}]` (showcase = the preset's `frame-showcase.html`, rendered live), `note_brand` |
+| `motion` | `tasting` (index.html from tasting.mjs), `cells` (tasting.json's `cells`: `{letter, id, name, oneLiner, parent?, adjust?}`), `adjectives` (the object `motion-md.mjs adjectives` prints, or a list of ids). The default selection is `recommended`. |
+| `keyframes` | none → "show poses / go straight to build" buttons; `board` (board.html) and `issues` (from board.json) → the live board with Approve (disabled while issues exist), `board_height` (optional, px) |
+| `music` | `options: [{id, title, mood, duration, file, source}]` (output of music.mjs), `unavailable` (message when none could be fetched) |
+| `plan` | `shape: {route, category, aspect, length, motion, keyframes, music}`, `stated: [..]`, `agent: [..]` |
+| `build` | written by `log`: `log: [{t, level, msg}]`, `stages: {id: status}`; optional `obey` summary line (push) |
+| `render` | `images: [..]` (snapshots, contact sheet), `videos: [..]` (renders), `studio` (Studio preview URL) |
+
+## Actions (what `wait` returns)
+
+`{"id", "ts", "step", "type", "value", "note", "source": "console"|"chat"}`
+
+| type | step | value |
+|---|---|---|
+| `submit` | brief | `{content, sub, destination, aspect, length_s}` |
+| `choose` | concept, look, motion | option id (a motion id with `+` is an adjusted variant: `parent+adj1+adj2`) |
+| `choose` | keyframes | `"poses"` or `"skip"` |
+| `choose` | music | track id, `"none"`, or `{file}` |
+| `choose` | render | `"preview"` or `"render"` |
+| `adjust` | motion | `{id, adjust: [adjectives]}` |
+| `more` | motion | `{exclude: [ids]}` |
+| `approve` | keyframes, plan | null |
+| `decide` | any | null: "you decide" for that step |
+| `decide-rest` | `*` | null: "you decide the rest" |
+| `note` | any | null; the text is in `note` |
+
+A `note` can come with any action type too (e.g. `choose` + "but a bit slower").

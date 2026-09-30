@@ -1,0 +1,59 @@
+{
+  "id": "cinematic-slow",
+  "name": "Cinematic Slow",
+  "oneLiner": "Out-of-focus to razor sharp, slow push-ins, long breathing holds. Trailer energy.",
+  "feel": [
+    "cinematic",
+    "dramatic",
+    "premium"
+  ],
+  "median_likelihood": 0.24,
+  "tempo": {
+    "scale_ms": [
+      400,
+      700,
+      1100,
+      1600,
+      2400
+    ]
+  },
+  "easing": {
+    "enter": "power2.out",
+    "exit": "power2.inOut",
+    "move": "sine.inOut"
+  },
+  "stagger": {
+    "each_ms": 160
+  },
+  "holds": {
+    "min_ms": 1400
+  },
+  "entrances": [
+    "blur-focus"
+  ],
+  "exits": [
+    "blur-out"
+  ],
+  "transitions": [
+    "slow-dissolve",
+    "push-in"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "bounce",
+    "overshoot",
+    "scale-pop",
+    "linear-entrance"
+  ],
+  "demo": {
+    "split": "words",
+    "enter": "blur-focus",
+    "move": "slow-push",
+    "exit": "blur-out",
+    "enter_ms": 1600,
+    "move_ms": 2400,
+    "exit_ms": 1100,
+    "hold_ms": 1400
+  },
+  "builder_notes": "Elements resolve from blur(16-24px) and scale 1.08 down to 1 while opacity rises, with slightly widened tracking settling in. The camera never stops: a slow scale push (1 -> 1.04) runs under the hold. Exits dissolve back into blur. Nothing snaps."
+}

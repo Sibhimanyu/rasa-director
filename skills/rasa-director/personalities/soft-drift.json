@@ -1,0 +1,58 @@
+{
+  "id": "soft-drift",
+  "name": "Soft Drift",
+  "oneLiner": "Tracking breathes open and closed, nothing hurries. Calm, airy, wellness-quiet.",
+  "feel": [
+    "calm",
+    "airy",
+    "gentle"
+  ],
+  "median_likelihood": 0.2,
+  "tempo": {
+    "scale_ms": [
+      500,
+      800,
+      1200,
+      1800,
+      2600
+    ]
+  },
+  "easing": {
+    "enter": "sine.out",
+    "exit": "sine.in",
+    "move": "sine.inOut"
+  },
+  "stagger": {
+    "each_ms": 70
+  },
+  "holds": {
+    "min_ms": 1500
+  },
+  "entrances": [
+    "drift-space"
+  ],
+  "exits": [
+    "drift-away"
+  ],
+  "transitions": [
+    "crossfade-slow"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "bounce",
+    "overshoot",
+    "scale-pop",
+    "linear-entrance"
+  ],
+  "demo": {
+    "split": "lines",
+    "enter": "drift-space",
+    "move": "breathe",
+    "exit": "drift-away",
+    "enter_ms": 1800,
+    "move_ms": 2600,
+    "exit_ms": 1200,
+    "hold_ms": 1500
+  },
+  "builder_notes": "Entrances settle letter-spacing from very wide to natural while opacity rises and a hair of rotation relaxes; no vertical travel. Holds breathe (scale 1 -> 1.015 and back). Exits let tracking drift open as it fades. Long, soft, never snappy."
+}

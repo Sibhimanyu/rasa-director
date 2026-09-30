@@ -1,0 +1,17 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "rasa-director",
+  "owner": {
+    "name": "Sibhimanyu",
+    "url": "https://github.com/Sibhimanyu"
+  },
+  "plugins": [
+    {
+      "name": "rasa-director",
+      "source": "./",
+      "description": "Creative direction for video made with Claude: pick how your motion graphic looks and moves, by eye, before HyperFrames builds it.",
+      "category": "design",
+      "tags": ["motion-graphics", "animation", "hyperframes", "video"]
+    }
+  ]
+}

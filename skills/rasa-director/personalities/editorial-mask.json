@@ -1,0 +1,60 @@
+{
+  "id": "editorial-mask",
+  "name": "Editorial Mask",
+  "oneLiner": "Lines wipe on like ink across paper, an accent rule sweeps under the key word. Magazine calm.",
+  "feel": [
+    "editorial",
+    "literary",
+    "considered"
+  ],
+  "median_likelihood": 0.12,
+  "tempo": {
+    "scale_ms": [
+      250,
+      450,
+      700,
+      1000,
+      1400
+    ]
+  },
+  "easing": {
+    "enter": "expo.out",
+    "exit": "power2.in",
+    "move": "expo.inOut"
+  },
+  "stagger": {
+    "each_ms": 120
+  },
+  "holds": {
+    "min_ms": 1000
+  },
+  "entrances": [
+    "mask-wipe"
+  ],
+  "exits": [
+    "mask-wipe-out"
+  ],
+  "transitions": [
+    "mask-push",
+    "hard-cut"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "fade-slide",
+    "bounce",
+    "overshoot",
+    "scale-pop",
+    "blur-in"
+  ],
+  "demo": {
+    "split": "lines",
+    "enter": "mask-wipe",
+    "move": "underline-sweep",
+    "exit": "mask-wipe-out",
+    "enter_ms": 1000,
+    "move_ms": 700,
+    "exit_ms": 450,
+    "hold_ms": 1000
+  },
+  "builder_notes": "Reveal with clip-path inset wipes (left to right) per line, never fades. Emphasis is a thin accent rule sweeping under the key word (scaleX 0 -> 1 from left). Exits wipe off in the same direction. Generous margins; motion is a page being set."
+}

@@ -1,0 +1,60 @@
+{
+  "id": "retro-terminal",
+  "name": "Retro Terminal",
+  "oneLiner": "Typed out character by character with a blinking cursor. Hacker-console nostalgia.",
+  "feel": [
+    "technical",
+    "nostalgic",
+    "nerdy"
+  ],
+  "median_likelihood": 0.08,
+  "tempo": {
+    "scale_ms": [
+      80,
+      150,
+      300,
+      500,
+      900
+    ]
+  },
+  "easing": {
+    "enter": "none",
+    "exit": "steps(4)",
+    "move": "steps(2)"
+  },
+  "stagger": {
+    "each_ms": 45
+  },
+  "holds": {
+    "min_ms": 900
+  },
+  "entrances": [
+    "typewriter"
+  ],
+  "exits": [
+    "backspace"
+  ],
+  "transitions": [
+    "hard-cut",
+    "scanline-wipe"
+  ],
+  "banned": [
+    "fade-up-slide",
+    "fade-slide",
+    "blur-in",
+    "bounce",
+    "overshoot",
+    "scale-pop"
+  ],
+  "demo": {
+    "split": "chars",
+    "enter": "typewriter",
+    "move": "cursor-blink",
+    "exit": "backspace",
+    "enter_ms": 900,
+    "move_ms": 500,
+    "exit_ms": 500,
+    "hold_ms": 900
+  },
+  "builder_notes": "Characters appear one at a time (zero-duration tl.set of visibility per character at a fixed interval, on the timeline, never on a .clip element) behind a block cursor. The cursor blinks on steps during holds. Exits backspace right to left. Monospace chrome, no smooth tweens on type at all."
+}
