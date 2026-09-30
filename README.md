@@ -109,7 +109,7 @@ Details: [SKILL.md](skills/rasa-director/SKILL.md) · [console](skills/rasa-dire
 ## Publishing notes (for the maintainer)
 
 - The repo is public. The install commands work as soon as `skills/`, `.claude-plugin/` and `install.sh` are pushed to `master`.
-- The website deploys from `docs/` via `.github/workflows/pages.yml`: in the repo settings set Pages → Source to **GitHub Actions**, then run the workflow once (Actions → pages → Run workflow); later pushes to `docs/` redeploy.
+- The website deploys from `docs/` via `.github/workflows/site.yml` (Pages source: GitHub Actions); every push to `docs/` redeploys, and it can be run by hand from Actions → site.
 - CI (`.github/workflows/ci.yml`) runs the self-test on every push.
 
 ## Known limits
