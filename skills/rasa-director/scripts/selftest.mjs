@@ -539,7 +539,7 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   const sx = J(node("sound.mjs", ["sfx-plan", "--scenes", path.join(d, "scenes.json"), "--events", path.join(d, "events.json")]));
   const why = (id) => (sx.skipped || []).find((s) => s.event === id)?.why || "";
   const inWin = (sx.cues || []).filter((q) => q.t >= 20 && q.t < 21).length;
-  ok("sfx-plan: no sound for a fade, no whoosh on an ordinary cut, stagger keeps first+last, <= 3 per second", /not a causal/.test(why("fade")) && /ordinary transition/.test(why("cut")) && /stagger/.test(why("l2")) && inWin <= 3 && (sx.cues || []).every((q) => q.start <= q.t), JSON.stringify(sx.skipped).slice(0, 400));
+  ok("sfx-plan: no sound for a fade, no whoosh on an ordinary cut, stagger keeps first+last, <= 3 per second, never ahead of the picture", /not a causal/.test(why("fade")) && /ordinary transition/.test(why("cut")) && /stagger/.test(why("l2")) && inWin <= 3 && (sx.cues || []).every((q) => q.start + (q.sync_point || 0) >= q.t - 0.001 && q.start + (q.sync_point || 0) <= q.t + 0.034), JSON.stringify(sx.skipped).slice(0, 400));
 }
 
 fs.rmSync(TMP, { recursive: true, force: true });
