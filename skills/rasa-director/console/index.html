@@ -51,7 +51,7 @@
   /* layout */
   .app { display: grid; grid-template-columns: 280px minmax(0, 1fr) 300px; gap: 22px; padding: 22px; max-width: 1640px; margin: 0 auto; align-items: start; }
   .rail { position: sticky; top: 76px; max-height: calc(100vh - 96px); overflow: auto; }
-  .rail h4 { margin: 0 0 12px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .rail h2 { margin: 0 0 12px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
   .feed { list-style: none; }
   .feed li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); animation: rise .35s ease-out; }
   .feed li:first-child { border-top: 0; }
@@ -129,7 +129,7 @@
   .choice.on { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
   .choice > img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--line); background: var(--panel-2); }
   .choice .body { padding: 14px 16px 16px; display: grid; gap: 6px; }
-  .choice h3 { font: 700 19px/1.15 var(--display); font-stretch: 92%; }
+  .choice h2 { font: 700 19px/1.15 var(--display); font-stretch: 92%; }
   .choice p { margin: 0; font-size: 14px; color: var(--ink-2); }
   .choice p.sub { color: var(--ink-3); font-size: 13px; }
   .choice p.clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -175,7 +175,7 @@
   .gal-search:focus { border-color: var(--accent); outline: none; }
   .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
   .choice.mini .body { padding: 9px 11px 11px; gap: 2px; }
-  .choice.mini h3 { font-size: 15px; }
+  .choice.mini h2 { font-size: 15px; }
   .choice.mini .meta { font-size: 10px; }
   .choice.mini .tick { width: 22px; height: 22px; font-size: 12px; top: 8px; right: 8px; }
   .gal-bar { position: sticky; bottom: 12px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
@@ -187,7 +187,7 @@
   .card { background: var(--panel); border: 1.5px solid var(--line); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 10px; position: relative; }
   .card.rec { border-color: var(--pick); box-shadow: 0 0 0 3px var(--pick-soft); }
   .card.chosen { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
-  .card h3 { font: 700 19px/1.2 var(--display); font-stretch: 92%; }
+  .card h2 { font: 700 19px/1.2 var(--display); font-stretch: 92%; }
   .card .meta, .meta { font: 500 11px/1.4 var(--mono); color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase; }
   .card p { color: var(--ink-2); }
   .card .row { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
@@ -255,7 +255,7 @@
   .inout input { width: 70px; }
   .timeline div.card-seg { background: var(--pick-soft); }
   .reel-preview { max-height: 420px; max-width: 100%; border-radius: 12px; background: #000; display: block; margin-bottom: 8px; }
-  h3.sub-h { font: 700 16px/1 var(--display); margin: 22px 0 6px; }
+  h2.sub-h { font: 700 16px/1 var(--display); margin: 22px 0 6px; }
   .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
   .swatch { display: flex; align-items: center; gap: 8px; font: 500 12px/1 var(--mono); color: var(--ink-2); }
   .swatch i { display: block; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); }
@@ -309,12 +309,12 @@
 </header>
 <div class="app">
   <aside class="rail left" aria-label="What Claude is doing">
-    <h4>What Claude is doing</h4>
+    <h2>What Claude is doing</h2>
     <ul class="feed" id="feed"></ul>
   </aside>
   <main id="main" tabindex="-1"></main>
   <aside class="rail right" aria-label="Your film">
-    <h4>Your film</h4>
+    <h2>Your film</h2>
     <div class="film" id="film"></div>
     <div class="tell">
       <textarea id="tell" placeholder="Tell Claude anything: a correction, a mix of two options, a question…" aria-label="Note to Claude"></textarea>
@@ -425,7 +425,7 @@
         (x.frames || []).length ? h("div", { class: "strip" }, x.frames.map(function (f, i) { return h("figure", null, [h("img", { src: fsUrl(f), alt: (x.beats || [])[i] || "Frame " + (i + 1), loading: "lazy" }), (x.beats || [])[i] ? h("figcaption", { text: x.beats[i] }) : null]); })) : null,
         h("div", { class: "body" }, [
           x.meta ? h("div", { class: "meta", text: x.meta }) : null,
-          h("h3", { text: x.title }),
+          h("h2", { text: x.title }),
           x.text ? h("p", { text: x.text }) : null,
           x.more ? h("p", { class: "sub", text: x.more }) : null,
           (x.terms || []).length ? h("div", { class: "terms" }, x.terms.map(function (t) { return h("span", { text: t }); })) : null,
@@ -494,8 +494,8 @@
         var c = h("div", { class: "choice" + (small ? " mini" : "") + (local.presetSel === p.id ? " on" : ""), role: "radio", tabindex: "0", "aria-checked": local.presetSel === p.id ? "true" : "false" }, [
           h("span", { class: "tick", "aria-hidden": "true", text: "✓" }),
           specimen(p, g, small),
-          h("div", { class: "body" }, small ? [h("h3", { text: p.name }), h("div", { class: "meta", text: (g.families.filter(function (f) { return f.id === p.family; })[0] || {}).name || p.family })] : [
-            badge ? h("span", { class: "pick inline", text: badge }) : null, h("h3", { text: p.name }), h("p", { class: "clamp", text: p.what }), why && why !== p.what ? h("p", { class: "sub", text: why }) : null,
+          h("div", { class: "body" }, small ? [h("h2", { text: p.name }), h("div", { class: "meta", text: (g.families.filter(function (f) { return f.id === p.family; })[0] || {}).name || p.family })] : [
+            badge ? h("span", { class: "pick inline", text: badge }) : null, h("h2", { text: p.name }), h("p", { class: "clamp", text: p.what }), why && why !== p.what ? h("p", { class: "sub", text: why }) : null,
             h("div", { class: "terms" }, (p.feels || []).slice(0, 3).map(function (t) { return h("span", { text: t }); }))
           ])
         ]);
@@ -637,7 +637,7 @@
         var groups = {};
         dims.forEach(function (x) { (groups[x.group] = groups[x.group] || []).push(x); });
         Object.keys(GROUPS).filter(function (g) { return groups[g]; }).forEach(function (g) {
-          holder.appendChild(h("h3", { class: "sub-h", text: GROUPS[g] }));
+          holder.appendChild(h("h2", { class: "sub-h", text: GROUPS[g] }));
           groups[g].forEach(function (x) {
             var sel = local.dsel[x.id], max = (x.pick && x.pick.max) || 1;
             var det = h("details", { class: "dim" + (sel.length || local.dagent[x.id] ? " set" : "") });
@@ -774,7 +774,7 @@
       return [h("div", { class: "grid cards" }, d.options.map(function (o) {
         return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
           o.showcase ? scaledFrame(o.showcase, 1920, 1080) : null,
-          h("h3", { text: o.id }),
+          h("h2", { text: o.id }),
           o.description ? h("p", { text: o.description.length > 220 ? o.description.slice(0, 217) + "…" : o.description }) : null,
           h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("span", { style: "flex:1" }),
             h("button", { class: "btn small primary", onclick: function () { send("look", "choose", o.id); }, text: "Use this look" })])
@@ -903,7 +903,7 @@
             h("td", null, [zone]), h("td", null, [sty]),
             h("td", null, [h("button", { class: "iconbtn", "aria-label": "Remove overlay " + (i + 1), onclick: function () { C.ov.splice(i, 1); draw(); }, text: "✕" })])]));
         });
-        holder.appendChild(h("h3", { class: "sub-h", text: "On top" }));
+        holder.appendChild(h("h2", { class: "sub-h", text: "On top" }));
         if (C.ov.length) holder.appendChild(h("table", { class: "scenes" }, [h("thead", null, [h("tr", null, ["#", "Overlay", "At (reel s) · for", "Zone", "Style", ""].map(function (x) { return h("th", { text: x }); }))]), obody]));
         var capOn = h("input", { type: "checkbox", "aria-label": "Captions from what's said" }); capOn.checked = C.cap.on !== false && !!C.cap.on; capOn.addEventListener("change", function () { C.cap.on = capOn.checked; });
         var capSty = h("select", { "aria-label": "Caption style" }); ["bold", "clean"].forEach(function (z) { capSty.appendChild(h("option", { value: z, text: z === "bold" ? "Bold, word by word" : "Clean, on a plate" })); }); capSty.value = C.cap.style || "bold"; capSty.addEventListener("change", function () { C.cap.style = capSty.value; });
