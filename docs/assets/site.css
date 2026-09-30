@@ -328,4 +328,6 @@ p { margin: 0 0 1em; }
 .lib-card b { display: block; font: 600 .98rem/1.25 var(--body); padding: 10px 12px 2px; }
 .lib-card small { display: block; font: 500 .7rem/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; opacity: .6; padding: 0 12px 12px; }
 .lib-card p { font-size: .86rem; line-height: 1.4; opacity: .75; margin: 0 12px 12px; padding: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.lib-more { margin: 28px auto 0; display: flex; width: fit-content; background: transparent; font: inherit; font-weight: 600; cursor: pointer; }
+.lib-more[hidden] { display: none; }
 @media (max-width: 700px) { .lib-controls { grid-template-columns: 1fr; } }

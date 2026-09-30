@@ -79,7 +79,10 @@
   var grid = document.getElementById("lib-grid");
   if (!grid || !window.RasaPresets) return;
   var words = document.getElementById("lib-words"), search = document.getElementById("lib-search"), famsEl = document.getElementById("lib-fams"), countEl = document.getElementById("lib-count");
-  var data = null, fam = "all", cards = [];
+  var data = null, fam = "all", cards = [], all = false;
+  // the unfiltered library opens on a few rows; search, a family or "Show all" reveal the rest
+  var preview = matchMedia("(max-width: 700px)").matches ? 6 : 12;
+  var more = document.getElementById("lib-more");
   document.head.insertAdjacentHTML("beforeend", "<style>" + RasaPresets.css + "</style>");
   function fit(c) { var st = c._spec.firstChild; if (st) st.style.transform = "scale(" + (c._spec.clientWidth / 1600) + ")"; }
   function paint(c) {
@@ -89,13 +92,14 @@
   }
   var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && !e.target._painted) paint(e.target); }); }, { rootMargin: "400px" });
   function apply() {
-    var q = (search.value || "").toLowerCase(), n = 0;
+    var q = (search.value || "").toLowerCase(), n = 0, capped = fam === "all" && !q && !all;
     cards.forEach(function (c) {
       var p = c._p, hay = [p.name, p.what, (p.aka || []).join(" "), (p.feels || []).join(" "), (p.use || []).join(" "), p.family].join(" ").toLowerCase();
-      var show = (fam === "all" || p.family === fam) && (!q || hay.indexOf(q) > -1);
+      var show = (fam === "all" || p.family === fam) && (!q || hay.indexOf(q) > -1) && (!capped || n < preview);
       c.style.display = show ? "" : "none"; if (show) n++;
     });
     countEl.textContent = n + " of " + data.presets.length + " styles";
+    more.hidden = !capped; more.textContent = "Show all " + data.presets.length + " styles";
     [].forEach.call(famsEl.children, function (b) { b.classList.toggle("on", b._fam === fam); });
   }
   fetch("assets/presets.json").then(function (r) { return r.json(); }).then(function (d) {
@@ -117,6 +121,7 @@
     apply();
     var t; words.addEventListener("input", function () { clearTimeout(t); t = setTimeout(function () { cards.forEach(function (c) { if (c._painted) paint(c); }); }, 250); });
     search.addEventListener("input", apply);
+    more.addEventListener("click", function () { all = true; apply(); });
     window.addEventListener("resize", function () { cards.forEach(fit); });
   }).catch(function () { countEl.textContent = "The style library could not load."; });
 })();
