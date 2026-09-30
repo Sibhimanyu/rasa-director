@@ -81,6 +81,22 @@ node scripts/direction.mjs compare     # the two-reference comparison template
 - A compact binding summary (style name, brief, every decision's Do instruction, about 4 KB) appended to `frame.md` and, with the motion contract, to every frame packet (`video.mjs inject`) and `DISPATCH.md`, because frame workers only read their packet and frame.md.
 - Reel cards and overlays: the same summary in each card brief (`reel.mjs briefs`).
 
+## Style presets (the library)
+
+`taxonomy/presets/<family>.json` (schema: `taxonomy/presets/SCHEMA.md`): hundreds of complete, named styles in twelve families (bold, soft, editorial, retro, future, handmade, dimensional, product, data, cinematic, playful, luxury). Each has a proper name and the names people also use (`aka`), what it looks like, what it feels like, where it fits, what it is often confused with, reference searches, a `stack` of taxonomy terms, and a `recipe` (palette, fonts, layout, radius, stroke, shadow, surface, texture, icons, motif, motion) that `console/presets.js` draws as a live specimen on the user's words.
+
+```bash
+node scripts/presets.mjs validate                 # terms, recipe vocabulary, contrast, no two styles that draw alike
+node scripts/presets.mjs list [--family retro] [--q glass]
+node scripts/presets.mjs suggest --decisions decisions.json [--brand DESIGN.md] [--count 6] [--recent ids]
+node scripts/presets.mjs gallery --out <dir> [--headline "…"] [--brand DESIGN.md] [--recommended a,b,c]
+node scripts/presets.mjs pick --id <id> --decisions decisions.json [--brand DESIGN.md]
+node scripts/presets.mjs stills --out <dir> [--family f]   # contact sheets for review
+```
+
+- **suggest** ranks against what's decided (term overlap, co-occurrence with the 35 combinations), brand fit (a dark brand suits dark styles; the brand's colors replace the style's), spread across families and visual styles, one unusual pick from far down the list, never a recent pick or the generic default (reported as `passed_over`).
+- **pick** merges the style's stack into `picks` (never over what the user picked themselves), writes its frame.md (colors, type, radius, shadow, the recipe as rules) and sets `look.frame`, so the Look step is already decided.
+
 ## Design directions (looks)
 
 `design.mjs looks` turns visual-style terms into complete looks: a palette by role (canvas, ink, accent, surface, support) from the style's signature colors, HyperFrames' 72 palettes (roles assigned automatically, light and dark grounds) or the color taxonomy; a type pairing from `taxonomy/looks/type-pairings.json` (46 Google Fonts / Fontshare pairings tagged with typography classes); radius, border, shadow and texture parsed from the style's own definition; and a board composition matching the style (poster, grid, stacked cards, HUD, full-bleed color field, split). Each look is a board with the user's words and a `frame.md` HyperFrames accepts. With a brand reference, looks keep the brand's colors and fonts and rotate the ground (the brand canvas, the accent as a color field, the surface) and the art direction.

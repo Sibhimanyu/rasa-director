@@ -166,6 +166,17 @@ if (url) {
     ok("live feed: scripts and Claude's actions show up, console plumbing doesn't", feed.includes("Rendering the preview") && feed.includes("Writing scene-03.html") && feed.includes("Motion rules written") && !feed.includes("Wait for the user"), JSON.stringify(feed.slice(-6)));
     fs.rmSync(path.join(TMP, ".rasa-director"), { recursive: true, force: true });
   }
+  // a question outside the steps goes on the page as its own card, and the answer comes back through wait
+  {
+    node("console.mjs", ["ask", "--run", run, "--question", "The capture is thin. Go on?", "--options", '[{"id":"a","label":"Send material"},{"id":"b","label":"Go with what is visible"}]', "--recommended", "b"]);
+    const st0 = JSON.parse(fs.readFileSync(path.join(run, "session.json"), "utf8"));
+    const posted = await fetch(`${u.origin}/api/action`, { method: "POST", headers: { "content-type": "application/json", "x-rasa-token": u.searchParams.get("t"), cookie }, body: JSON.stringify({ step: st0.ask.step, type: "answer", value: { ask: st0.ask.id, choice: "a", text: "https://example.com/notes" } }) }).then((r) => r.status).catch(() => 0);
+    const w2 = node("console.mjs", ["wait", "--run", run, "--timeout", "10"]);
+    let a2 = {};
+    try { a2 = JSON.parse(w2.stdout); } catch {}
+    const st1 = JSON.parse(fs.readFileSync(path.join(run, "session.json"), "utf8"));
+    ok("console ask: a question card, answered on the page, back through wait, flow unmoved", posted === 200 && a2.type === "answer" && a2.value.choice === "a" && st1.ask.answered && st1.current === st0.current, w2.stdout);
+  }
   // a console started by an older version is replaced, never reused (it would serve the old page)
   const cj = path.join(run, "console.json");
   const old = JSON.parse(fs.readFileSync(cj, "utf8"));
@@ -366,6 +377,32 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
     node("direction.mjs", ["pick-direction", "--directions", path.join(TMP, "dirs", "directions.json"), "--id", ds[0].id, "--decisions", path.join(TMP, "decd.json")]);
     const after = JSON.parse(fs.readFileSync(path.join(TMP, "decd.json"), "utf8"));
     ok("pick-direction merges the direction's stack and keeps the user's picks", [].concat(after.picks.format)[0] === "product-launch-film" && Object.keys(after.picks).length > 5 && after.direction_card.id === ds[0].id, JSON.stringify(after.picks));
+  }
+
+  // the style library: hundreds of complete styles that validate; suggestions are distinct; picking one writes a look
+  {
+    const v = node("presets.mjs", ["validate"]);
+    let vj = {};
+    try { vj = JSON.parse(v.stdout); } catch {}
+    ok("style library validates (terms, recipe vocabulary, contrast, no look-alikes) with 200+ styles", v.status === 0 && vj.presets >= 200 && vj.families >= 10, (vj.problems || []).slice(0, 5).join("; ") || v.stderr);
+    fs.writeFileSync(path.join(TMP, "decp.json"), JSON.stringify({ subject: "Tally", picks: { format: "product-launch-film" } }));
+    const sg = node("presets.mjs", ["suggest", "--decisions", path.join(TMP, "decp.json"), "--count", "3"]);
+    let sj = {};
+    try { sj = JSON.parse(sg.stdout); } catch {}
+    const ss = sj.suggestions || [];
+    ok("style suggestions: three from different families, one unusual", ss.length === 3 && new Set(ss.map((x) => x.family)).size === 3 && ss.some((x) => x.rare), sg.stdout.slice(0, 300));
+    if (ss[0]) {
+      const pk = node("presets.mjs", ["pick", "--id", ss[0].id, "--decisions", path.join(TMP, "decp.json"), "--out", path.join(TMP, "preset")]);
+      const dd = JSON.parse(fs.readFileSync(path.join(TMP, "decp.json"), "utf8"));
+      const lk = readLook(path.join(TMP, "preset", "frame.md"));
+      ok("picking a style merges its terms and writes a frame.md that reads back", pk.status === 0 && dd.style_preset.id === ss[0].id && dd.picks["visual-style"] && !(lk.defaulted || []).length, pk.stderr);
+    }
+    const docs = path.join(HERE, "..", "..", "..", "docs", "assets");
+    if (fs.existsSync(path.join(docs, "presets.js"))) {
+      const same = fs.readFileSync(path.join(docs, "presets.js"), "utf8") === fs.readFileSync(path.join(HERE, "..", "console", "presets.js"), "utf8");
+      const n = JSON.parse(fs.readFileSync(path.join(docs, "presets.json"), "utf8")).presets.length;
+      ok("the website's style library matches the skill's (run presets.mjs site --out docs/assets)", same && n === vj.presets, `renderer same: ${same}, site ${n} vs library ${vj.presets}`);
+    }
   }
 
   const page = fs.readFileSync(path.join(HERE, "..", "console", "index.html"), "utf8");

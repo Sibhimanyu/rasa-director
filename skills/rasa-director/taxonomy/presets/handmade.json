@@ -1,0 +1,345 @@
+{
+  "family": { "id": "handmade", "name": "Handmade & printed", "what": "Styles that show the hand or the press: doodles, pencil, marker, chalk, cut paper, collage, riso, screen print and stop-motion." },
+  "presets": [
+    {
+      "id": "doodle-notebook",
+      "name": "Doodle",
+      "aka": ["doodle style", "hand-drawn doodles", "notebook doodles", "scribble illustration"],
+      "what": "Wobbly hand-drawn outlines, offset doodle icons and squiggles on white cards, loose marker handwriting.",
+      "feels": ["friendly", "casual", "human"],
+      "use": ["app explainers", "onboarding", "creator and education brands", "social tips"],
+      "not": "Not neo-brutalism: no hard block shadows or heavy frames; the lines themselves wobble and wiggle.",
+      "search": ["doodle animation explainer", "hand drawn doodle motion graphics", "doodle UI animation"],
+      "stack": { "visual-style": ["doodle", "handmade"], "illustration": ["doodle", "hand-drawn"], "iconography": ["hand-drawn"], "stroke": ["hand-drawn", "rough"], "typography": ["handwritten"], "character": ["doodle-mascot"], "motion-language": ["handmade-imperfect"], "transitions": ["line-draw", "hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#fbfaf6", "ink": "#1b1b1f", "accent": "#ff6b4a", "accent2": "#4a9dff", "surface": "#ffffff", "muted": "#8a8a90" },
+        "fonts": { "display": "Gloria Hallelujah", "body": "Patrick Hand", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "cards", "radius": 22, "stroke": { "width": 4, "color": "ink", "style": "sketch" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "doodle", "motif": "squiggles", "motion": "spring"
+      }
+    },
+    {
+      "id": "sketchbook-pencil",
+      "name": "Sketchbook",
+      "aka": ["pencil sketch", "graphite sketch", "concept sketch", "designer's sketchbook"],
+      "what": "Graphite-grey pencil lines and notes on toothy off-white paper, thin sketchy frames, a single coloured-pencil accent.",
+      "feels": ["thoughtful", "creative", "intimate"],
+      "use": ["design and architecture stories", "founder origin films", "process reveals", "product concept to real"],
+      "not": "Not doodle: sketchbook is observational and tonal in pencil, not bold cartoon doodles.",
+      "search": ["sketchbook animation style", "pencil sketch motion graphics", "sketch to reality product reveal"],
+      "stack": { "visual-style": ["sketchbook", "handmade"], "illustration": ["sketch", "hand-drawn"], "texture": ["pencil", "paper-grain"], "stroke": ["thin", "hand-drawn"], "material": ["paper"], "typography": ["handwritten"], "motion-language": ["organic"], "transitions": ["line-draw", "dissolve"] },
+      "recipe": {
+        "palette": { "canvas": "#f2eee4", "ink": "#35353a", "accent": "#cfd6da", "accent2": "#c8553d", "surface": "#f8f5ee", "muted": "#8d8a82" },
+        "fonts": { "display": "Caveat", "body": "Kalam", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "editorial", "radius": 2, "stroke": { "width": 1, "color": "#6b6b70", "style": "sketch" },
+        "shadow": "none", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "line", "motif": "none", "motion": "fade"
+      }
+    },
+    {
+      "id": "marker-poster",
+      "name": "Ink & marker",
+      "aka": ["Sharpie style", "marker drawing", "felt-tip lettering", "bold ink"],
+      "what": "Fat black marker strokes and all-caps marker lettering on white, one red highlight, loose scribbled emphasis.",
+      "feels": ["urgent", "honest", "punchy"],
+      "use": ["manifesto films", "announcements", "activism and non-profits", "founder statements"],
+      "not": "Not brush lettering: the stroke is an even, round felt-tip line, not a tapered brush.",
+      "search": ["marker hand lettering animation", "sharpie style motion graphics", "ink marker kinetic type"],
+      "stack": { "visual-style": ["ink-marker", "handmade"], "illustration": ["ink", "scribble"], "stroke": ["marker", "heavy"], "texture": ["marker"], "typography": ["handwritten"], "color": ["black-and-white", "accent-color-system"], "motion-language": ["gestural"], "transitions": ["line-draw", "hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#111111", "accent": "#e63022", "accent2": "#111111", "surface": "#ffffff", "muted": "#6a6a6a" },
+        "fonts": { "display": "Permanent Marker", "body": "Covered By Your Grace", "displayWeight": 400, "case": "upper", "tracking": 0 },
+        "layout": "poster", "radius": 8, "stroke": { "width": 6, "color": "ink", "style": "sketch" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "doodle", "motif": "squiggles", "motion": "mask"
+      }
+    },
+    {
+      "id": "watercolor-flat",
+      "name": "Watercolour wash",
+      "aka": ["watercolor flat", "soft watercolour illustration", "painterly wash", "gouache flat"],
+      "what": "Soft bleeding watercolour blobs in pastel sage, peach and blue on cold-press paper, no outlines, gentle handwritten type.",
+      "feels": ["gentle", "warm", "calm"],
+      "use": ["wellness and health", "children's education", "weddings and gifting", "non-profit stories"],
+      "not": "Not pastel flat vector: the colour pools and bleeds with paper grain; edges are soft, not crisp.",
+      "search": ["watercolor motion graphics", "watercolour animation explainer", "soft painterly animation"],
+      "stack": { "visual-style": ["handmade", "warm-minimal"], "illustration": ["watercolor", "brush"], "texture": ["paint", "paper-grain"], "color": ["pastel", "analogous"], "stroke": ["no-outlines"], "shape": ["organic"], "motion-language": ["fluid"], "transitions": ["dissolve", "liquid"] },
+      "recipe": {
+        "palette": { "canvas": "#fbf7f0", "ink": "#2d3a3a", "accent": "#f2a488", "accent2": "#9cc3b5", "surface": "#fffdf8", "muted": "#8a9290" },
+        "fonts": { "display": "Kalam", "body": "Kalam", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "cards", "radius": 34, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "duotone", "motif": "blobs", "motion": "fade"
+      }
+    },
+    {
+      "id": "paper-cutout",
+      "name": "Paper cutout",
+      "aka": ["cut paper", "papercraft", "layered paper", "paper-cut illustration"],
+      "what": "Flat coloured paper shapes stacked in layers with small soft shadows between them, visible fibre, no outlines.",
+      "feels": ["crafted", "warm", "tactile"],
+      "use": ["brand films", "children's and education", "sustainability stories", "holiday campaigns"],
+      "not": "Not scrapbook collage: pieces are cleanly cut shapes in a tidy layout, no tape, photos or found scraps.",
+      "search": ["paper cut animation", "layered paper motion graphics", "papercraft explainer video"],
+      "stack": { "visual-style": ["paper-cutout", "handmade"], "illustration": ["paper-cut", "layered-2-5d"], "material": ["paper"], "depth": ["layered-2d"], "texture": ["fibers", "paper-grain"], "shadow": ["soft-diffuse"], "motion-language": ["stop-motion-like"], "transitions": ["slide", "fold"] },
+      "recipe": {
+        "palette": { "canvas": "#f4ecdf", "ink": "#2b2a33", "accent": "#e2703a", "accent2": "#4f9d8a", "surface": "#fffaf1", "muted": "#8a8176" },
+        "fonts": { "display": "Fredoka", "body": "Nunito", "displayWeight": 700, "case": "none", "tracking": -0.01 },
+        "layout": "bento", "radius": 30, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "filled", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "scrapbook-collage",
+      "name": "Scrapbook collage",
+      "aka": ["scrapbook", "journal collage", "washi-tape collage", "memory book"],
+      "what": "Tilted paper scraps held by washi tape, typewriter labels and stickers, pastel paper stock with fibre texture.",
+      "feels": ["personal", "nostalgic", "cosy"],
+      "use": ["recap and memory films", "lifestyle brands", "creator stories", "event highlights"],
+      "not": "Not punk zine: scrapbook is soft, pastel and affectionate; zines are black-and-white photocopy and loud.",
+      "search": ["scrapbook collage animation", "washi tape collage motion graphics", "journal style video"],
+      "stack": { "visual-style": ["scrapbook", "mixed-media-collage"], "composition": ["collage"], "illustration": ["collage", "photo-collage"], "material": ["paper"], "texture": ["paper-grain", "fibers"], "typography": ["slab-serif", "handwritten"], "motion-language": ["stop-motion-like"], "transitions": ["slide", "page-flip"] },
+      "recipe": {
+        "palette": { "canvas": "#efe7da", "ink": "#2e2a26", "accent": "#e9a3a3", "accent2": "#a9c6b9", "surface": "#fffdf7", "muted": "#8c8277" },
+        "fonts": { "display": "Special Elite", "body": "Reenie Beanie", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "collage", "radius": 2, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "doodle", "motif": "stickers", "motion": "step"
+      }
+    },
+    {
+      "id": "punk-zine",
+      "name": "Cut-and-paste zine",
+      "aka": ["punk zine", "DIY zine", "ransom-note collage", "xerox zine"],
+      "what": "Black-and-white photocopied scraps pasted crooked, ransom-note type, halftone dots and one hot-pink spot colour.",
+      "feels": ["rebellious", "raw", "loud"],
+      "use": ["music and gig promos", "streetwear", "activist campaigns", "counter-culture brands"],
+      "not": "Not scrapbook: harsh xerox contrast and aggression, not pastel keepsakes.",
+      "search": ["punk zine collage animation", "ransom note typography motion", "xerox collage video"],
+      "stack": { "visual-style": ["punk-zine", "photocopy-xerox"], "composition": ["collage"], "illustration": ["photo-collage", "collage"], "material": ["photocopy"], "texture": ["photocopy-noise", "halftone"], "color": ["black-and-white", "high-contrast"], "motion-language": ["chaotic"], "transitions": ["hard-cut", "flash"] },
+      "recipe": {
+        "palette": { "canvas": "#e9e6df", "ink": "#0d0d0d", "accent": "#ff2e88", "accent2": "#1a1a1a", "surface": "#ffffff", "muted": "#555555" },
+        "fonts": { "display": "Rubik Dirt", "body": "Courier Prime", "displayWeight": 400, "case": "upper", "tracking": 0 },
+        "layout": "collage", "radius": 0, "stroke": { "width": 3, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "ink", "surface": "flat", "texture": "halftone", "icons": "glyph", "motif": "none", "motion": "snap"
+      }
+    },
+    {
+      "id": "risograph",
+      "name": "Risograph",
+      "aka": ["riso print", "riso zine", "two-colour riso", "stencil duplicator print"],
+      "what": "Fluoro pink and blue inks overprinting on cream stock, slightly misregistered, grainy dot texture, chunky grotesk.",
+      "feels": ["indie", "warm", "artful"],
+      "use": ["cultural and arts brands", "indie publishers", "event promos", "studio reels"],
+      "not": "Not screen print: riso is grainy, translucent and slightly off-register, not dense opaque layers.",
+      "search": ["risograph animation", "riso print motion graphics", "risograph texture typography"],
+      "stack": { "visual-style": ["risograph", "print-editorial"], "material": ["risograph-ink"], "texture": ["risograph-texture", "print-grain"], "color": ["duotone", "fluorescent"], "typography": ["grotesk"], "composition": ["editorial-grid"], "motion-language": ["handmade-imperfect"], "transitions": ["wipe", "color-match"] },
+      "recipe": {
+        "palette": { "canvas": "#f5efe1", "ink": "#1d3a8a", "accent": "#ff48b0", "accent2": "#ffe800", "surface": "#fbf7ec", "muted": "#6c77a8" },
+        "fonts": { "display": "Space Grotesk", "body": "Space Grotesk", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "editorial", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "accent", "surface": "flat", "texture": "riso", "icons": "duotone", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "screen-print",
+      "name": "Screen print",
+      "aka": ["silkscreen", "gig poster", "serigraph", "rock poster print"],
+      "what": "Three flat opaque inks on kraft stock, heavy slab display type, halftone shading and bold sunburst rays.",
+      "feels": ["bold", "crafted", "loud"],
+      "use": ["concert and event promos", "craft beer and food", "sports teams", "merch drops"],
+      "not": "Not risograph: screen print is dense, opaque and poster-sized, not grainy translucent overprint.",
+      "search": ["screen print poster animation", "gig poster motion graphics", "silkscreen style title"],
+      "stack": { "visual-style": ["screen-print", "halftone"], "material": ["screen-print"], "texture": ["halftone", "distressed-edges"], "color": ["limited-palette", "warm-palette"], "typography": ["slab-serif", "condensed"], "composition": ["poster"], "motion-language": ["heavy"], "transitions": ["hard-cut", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#dcc49a", "ink": "#1c1a17", "accent": "#c8341f", "accent2": "#1f5f7a", "surface": "#efe0c2", "muted": "#6e5c40" },
+        "fonts": { "display": "Alfa Slab One", "body": "Oswald", "displayWeight": 400, "case": "upper", "tracking": 0.01 },
+        "layout": "poster", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "accent", "surface": "flat", "texture": "halftone", "icons": "filled", "motif": "rays", "motion": "snap"
+      }
+    },
+    {
+      "id": "linocut",
+      "name": "Linocut",
+      "aka": ["woodcut", "block print", "relief print", "carved print"],
+      "what": "Rough carved black shapes with gouged edges and one red ink on warm off-white, woodtype caps and uneven ink texture.",
+      "feels": ["earthy", "authentic", "strong"],
+      "use": ["food, farm and craft brands", "folk and heritage stories", "book and music releases"],
+      "not": "Not screen print: marks are carved and chiselled with rough edges, not flat halftone layers.",
+      "search": ["linocut animation", "woodcut style motion graphics", "block print illustration video"],
+      "stack": { "visual-style": ["handmade", "screen-print"], "illustration": ["ink", "textured-vector"], "texture": ["rough-edges", "print-grain"], "stroke": ["heavy", "rough"], "color": ["black-and-white", "limited-palette"], "typography": ["slab-serif"], "motion-language": ["stop-motion-like"], "transitions": ["hard-cut", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#efe6d5", "ink": "#16130f", "accent": "#b3261e", "accent2": "#16130f", "surface": "#f7f0e2", "muted": "#6b6254" },
+        "fonts": { "display": "Rye", "body": "Crimson Pro", "displayWeight": 400, "case": "upper", "tracking": 0.02 },
+        "layout": "cards", "radius": 0, "stroke": { "width": 7, "color": "ink", "style": "sketch" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "noise", "icons": "glyph", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "stop-motion-paper",
+      "name": "Stop-motion paper",
+      "aka": ["cut-out animation", "stop-motion cutout", "Terry Gilliam style", "paper puppets"],
+      "what": "Cardboard-cut cards that jitter in on twos with real drop shadows, hand-cut edges and visible frame-to-frame boil.",
+      "feels": ["charming", "handmade", "quirky"],
+      "use": ["brand shorts", "kids' products", "craft and food", "quirky explainers"],
+      "not": "Not paper cutout illustration: the difference is motion; pieces step and boil at 12 fps like real stop-motion.",
+      "search": ["stop motion paper cutout animation", "cut out stop motion explainer", "papercraft stop motion"],
+      "stack": { "visual-style": ["paper-cutout", "handmade"], "illustration": ["cutout-character", "paper-cut"], "production": ["stop-motion", "frame-by-frame"], "material": ["cardboard", "paper"], "shadow": ["floating"], "motion-language": ["stop-motion-like"], "transitions": ["hard-cut", "slide"] },
+      "recipe": {
+        "palette": { "canvas": "#e7dcc6", "ink": "#221d18", "accent": "#e4572e", "accent2": "#f3c13a", "surface": "#fbf4e4", "muted": "#7d705e" },
+        "fonts": { "display": "Chango", "body": "Patrick Hand", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "cards", "radius": 6, "stroke": { "width": 2, "color": "#8c7a60", "style": "sketch" },
+        "shadow": "float", "shadowColor": "ink", "surface": "paper", "texture": "grain", "icons": "filled", "motif": "stickers", "motion": "step"
+      }
+    },
+    {
+      "id": "chalkboard",
+      "name": "Chalkboard",
+      "aka": ["blackboard chalk", "classroom chalk", "chalk art", "chalk menu board"],
+      "what": "Dusty chalk-white lettering and hand-drawn charts on slate green, yellow and pink chalk accents, smudged texture.",
+      "feels": ["educational", "warm", "friendly"],
+      "use": ["education and courses", "data lessons", "cafe and food menus", "back-to-school"],
+      "not": "Not whiteboard animation: dark board, dusty chalk texture and pastel chalk colours, not clean marker on white.",
+      "search": ["chalkboard animation", "chalk drawing motion graphics", "blackboard explainer video"],
+      "stack": { "visual-style": ["handmade", "doodle"], "illustration": ["hand-drawn", "sketch"], "texture": ["chalk", "dust"], "stroke": ["hand-drawn", "rough"], "typography": ["handwritten"], "data-viz": ["bar-chart", "line-graph"], "motion-language": ["handmade-imperfect"], "transitions": ["line-draw", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#23352c", "ink": "#f2f0e6", "accent": "#f5d76e", "accent2": "#f0a6b8", "surface": "#2c4136", "muted": "#a9b8ad" },
+        "fonts": { "display": "Fredericka the Great", "body": "Cabin Sketch", "displayWeight": 400, "case": "none", "tracking": 0.01 },
+        "layout": "data", "radius": 6, "stroke": { "width": 3, "color": "ink", "style": "dashed" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "noise", "icons": "doodle", "motif": "none", "motion": "mask"
+      }
+    },
+    {
+      "id": "crayon-childlike",
+      "name": "Crayon childlike",
+      "aka": ["kid's drawing", "crayon drawing", "naive art", "fridge drawing"],
+      "what": "Waxy primary-colour crayon scribbles on white paper, lopsided stars, uneven kid lettering and thick wobbly outlines.",
+      "feels": ["innocent", "joyful", "sincere"],
+      "use": ["family and kids' products", "charity appeals", "education", "heartfelt brand spots"],
+      "not": "Not doodle: crayon is waxy, filled-in and naive, drawn like a child rather than a designer.",
+      "search": ["crayon drawing animation", "childlike drawing motion graphics", "kids drawing style ad"],
+      "stack": { "visual-style": ["childlike", "handmade"], "illustration": ["scribble", "hand-drawn"], "texture": ["crayon", "paper-grain"], "stroke": ["rough", "chunky"], "color": ["primary-colors"], "typography": ["handwritten"], "motion-language": ["cartoonish"], "transitions": ["hard-cut", "line-draw"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#1f2a6b", "accent": "#e8322b", "accent2": "#ffd21f", "surface": "#fffdf5", "muted": "#6a6f99" },
+        "fonts": { "display": "Short Stack", "body": "Schoolbell", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "bento", "radius": 14, "stroke": { "width": 6, "color": "accent", "style": "sketch" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "doodle", "motif": "stars", "motion": "bounce"
+      }
+    },
+    {
+      "id": "hand-lettered",
+      "name": "Hand-lettered script",
+      "aka": ["hand lettering", "brush script", "sign-painter script", "calligraphic lettering"],
+      "what": "One big flowing script headline with a swash underline on warm cream, deep burgundy ink, tiny spaced caps below.",
+      "feels": ["warm", "personal", "crafted"],
+      "use": ["food and drink brands", "weddings and gifting", "cafes and bakeries", "quote animations"],
+      "not": "Not marker: lettering is drawn with thick-thin contrast and swashes, not an even felt-tip line.",
+      "search": ["hand lettering animation", "script lettering motion graphics", "brush script write-on"],
+      "stack": { "visual-style": ["handmade", "warm-minimal"], "typography": ["handwritten", "display"], "stroke": ["variable-width", "animated-draw-on"], "composition": ["typography-led", "centered-hero"], "format": ["kinetic-typography", "quote-animation"], "color": ["warm-palette"], "motion-language": ["fluid"], "transitions": ["line-draw", "mask-reveal"] },
+      "recipe": {
+        "palette": { "canvas": "#f7efe2", "ink": "#5a1a2a", "accent": "#d98c3f", "accent2": "#5a1a2a", "surface": "#fff8ec", "muted": "#9a7a6a" },
+        "fonts": { "display": "Pacifico", "body": "Josefin Sans", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "poster", "radius": 20, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "paper", "icons": "none", "motif": "none", "motion": "type"
+      }
+    },
+    {
+      "id": "bullet-journal",
+      "name": "Bullet journal",
+      "aka": ["bujo", "dot-grid planner", "stationery aesthetic", "planner doodles"],
+      "what": "Dot-grid paper with neat handwritten boxes, dashed trackers, pastel highlighter tabs and tiny doodle icons.",
+      "feels": ["organised", "calm", "personal"],
+      "use": ["productivity apps", "habit and health trackers", "planning features", "study content"],
+      "not": "Not sketchbook: tidy dot-grid planning with highlighter colour, not loose pencil sketches.",
+      "search": ["bullet journal animation", "dot grid planner motion graphics", "stationery aesthetic explainer"],
+      "stack": { "visual-style": ["doodle", "warm-minimal"], "ui-treatment": ["hand-drawn-ui", "bento-ui"], "composition": ["modular-grid"], "iconography": ["hand-drawn"], "stroke": ["thin", "hand-drawn"], "color": ["pastel"], "typography": ["handwritten"], "motion-language": ["handmade-imperfect"], "transitions": ["line-draw", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#fcfaf5", "ink": "#2a2c33", "accent": "#ffb3a7", "accent2": "#b8e0d2", "surface": "#fffefb", "muted": "#8f8f96" },
+        "fonts": { "display": "Patrick Hand", "body": "Patrick Hand", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "bento", "radius": 4, "stroke": { "width": 2, "color": "ink", "style": "dashed" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "line", "motif": "none", "motion": "type"
+      }
+    },
+    {
+      "id": "letterpress",
+      "name": "Letterpress & typewriter",
+      "aka": ["letterpress print", "debossed type", "typewriter aesthetic", "old print shop"],
+      "what": "Typewriter and wood type pressed into thick cotton paper, debossed inset panels, a single red ink and hairline rules.",
+      "feels": ["authentic", "considered", "timeless"],
+      "use": ["writing and publishing tools", "heritage and craft brands", "documentary titles", "invitations"],
+      "not": "Not editorial print: the ink bites into the paper; depth is an impression, not a layout grid.",
+      "search": ["letterpress animation", "typewriter text motion graphics", "debossed paper type"],
+      "stack": { "visual-style": ["print-editorial", "handmade"], "material": ["paper"], "typography": ["slab-serif", "monospace"], "texture": ["paper-grain", "ink-bleed"], "shadow": ["inner"], "ui-interaction": ["typing"], "motion-language": ["mechanical"], "transitions": ["hard-cut", "fade"] },
+      "recipe": {
+        "palette": { "canvas": "#f1ebe0", "ink": "#23201c", "accent": "#b5352a", "accent2": "#3c4a5c", "surface": "#ece4d6", "muted": "#7f766a" },
+        "fonts": { "display": "Special Elite", "body": "Courier Prime", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "editorial", "radius": 2, "stroke": { "width": 1, "color": "#b9ae9c", "style": "solid" },
+        "shadow": "inset", "shadowColor": "ink", "surface": "paper", "texture": "grain", "icons": "glyph", "motif": "rules", "motion": "type"
+      }
+    },
+    {
+      "id": "sumi-ink-brush",
+      "name": "Ink brush (sumi-e)",
+      "aka": ["sumi-e", "Japanese ink wash", "brush calligraphy", "ink wash painting"],
+      "what": "Expressive black brush strokes on rice paper, lots of empty space, a small vermilion seal, dry-brush edges.",
+      "feels": ["calm", "poised", "expressive"],
+      "use": ["tea, wellness and craft", "martial arts and sport", "cultural campaigns", "meditative brand films"],
+      "not": "Not marker: strokes swell and taper and break into dry brush; emptiness matters as much as ink.",
+      "search": ["sumi-e ink brush animation", "japanese ink wash motion graphics", "brush stroke reveal"],
+      "stack": { "visual-style": ["handmade", "extreme-minimal"], "illustration": ["brush", "ink"], "texture": ["brush", "ink-bleed"], "stroke": ["variable-width", "ink"], "composition": ["negative-space", "asymmetric"], "color": ["black-and-white", "accent-color-system"], "motion-language": ["gestural"], "transitions": ["mask-reveal", "dissolve"] },
+      "recipe": {
+        "palette": { "canvas": "#f4f0e6", "ink": "#141414", "accent": "#c8321e", "accent2": "#555049", "surface": "#f8f5ee", "muted": "#8a8479" },
+        "fonts": { "display": "Kaushan Script", "body": "Shippori Mincho", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "poster", "radius": 48, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "glyph", "motif": "none", "motion": "drift"
+      }
+    },
+    {
+      "id": "felt-and-stitch",
+      "name": "Felt & stitch",
+      "aka": ["felt craft", "embroidered patch", "stitched fabric", "needlework style"],
+      "what": "Soft puffy felt patches with dashed running-stitch edges, woolly texture, warm crafty colours and rounded chunky type.",
+      "feels": ["cosy", "tactile", "wholesome"],
+      "use": ["kids' products", "home and knitwear brands", "holiday campaigns", "cosy app onboarding"],
+      "not": "Not claymorphism: the texture is fibrous fabric and the edges are stitched, not smooth plastic clay.",
+      "search": ["felt craft animation", "stitched patch motion graphics", "embroidery style animation"],
+      "stack": { "visual-style": ["handmade", "clay"], "material": ["felt", "fabric"], "stroke": ["offset-line"], "texture": ["fibers"], "shape": ["soft", "rounded"], "production": ["stop-motion"], "motion-language": ["stop-motion-like"], "transitions": ["scale", "slide"] },
+      "recipe": {
+        "palette": { "canvas": "#e9dcc9", "ink": "#3a2418", "accent": "#d9534f", "accent2": "#6aa06a", "surface": "#f6c96b", "muted": "#8a6d58" },
+        "fonts": { "display": "Sniglet", "body": "Nunito", "displayWeight": 800, "case": "none", "tracking": 0 },
+        "layout": "pills", "radius": 999, "stroke": { "width": 4, "color": "#7a4a22", "style": "dashed" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "clay", "texture": "noise", "icons": "filled", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "hand-drawn-wireframe",
+      "name": "Hand-drawn wireframe",
+      "aka": ["Balsamiq style", "sketchy UI", "napkin wireframe", "lo-fi mockup"],
+      "what": "Sketchy black-outlined app windows and buttons on graph paper, handwritten labels, grey fills and one blue highlight.",
+      "feels": ["exploratory", "honest", "approachable"],
+      "use": ["product roadmaps", "design process films", "early-stage pitches", "before-after reveals"],
+      "not": "Not a clean wireframe UI: lines wobble and labels are handwritten, like a marker sketch of an app.",
+      "search": ["hand drawn wireframe animation", "sketchy UI motion graphics", "balsamiq style explainer"],
+      "stack": { "visual-style": ["sketchbook", "doodle"], "ui-treatment": ["hand-drawn-ui", "wireframe-ui"], "illustration": ["sketch", "outline"], "stroke": ["hand-drawn", "medium"], "typography": ["handwritten"], "texture": ["pencil"], "motion-language": ["handmade-imperfect"], "transitions": ["line-draw", "ui-morph"] },
+      "recipe": {
+        "palette": { "canvas": "#f7f7f2", "ink": "#222222", "accent": "#3b7ddd", "accent2": "#d9d9d4", "surface": "#ffffff", "muted": "#8a8a8a" },
+        "fonts": { "display": "Architects Daughter", "body": "Architects Daughter", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "window", "radius": 6, "stroke": { "width": 3, "color": "ink", "style": "sketch" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "doodle", "motif": "none", "motion": "mask"
+      }
+    },
+    {
+      "id": "whiteboard-animation",
+      "name": "Whiteboard animation",
+      "aka": ["RSA Animate style", "draw-my-life", "scribe video", "whiteboard explainer"],
+      "what": "Black marker diagrams drawn live on a bright whiteboard, boxes and arrows linking ideas, one blue and one red marker.",
+      "feels": ["clear", "smart", "approachable"],
+      "use": ["concept explainers", "training and onboarding", "process diagrams", "thought-leadership talks"],
+      "not": "Not chalkboard: clean marker on white, drawn as you watch, focused on the logic of a diagram.",
+      "search": ["whiteboard animation explainer", "scribe video style", "hand drawn diagram animation"],
+      "stack": { "visual-style": ["doodle", "ink-marker"], "format": ["concept-explainer", "diagram-led-explainer"], "illustration": ["doodle", "technical-diagram"], "stroke": ["marker", "animated-draw-on"], "character": ["hand-only"], "composition": ["flowchart", "node-map"], "motion-language": ["gestural"], "transitions": ["line-draw", "camera-move"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#1a1a1a", "accent": "#2a6fdb", "accent2": "#e0453a", "surface": "#ffffff", "muted": "#7a7a7a" },
+        "fonts": { "display": "Kalam", "body": "Kalam", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "diagram", "radius": 12, "stroke": { "width": 4, "color": "ink", "style": "sketch" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "doodle", "motif": "none", "motion": "mask"
+      }
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+{
+  "family": { "id": "future", "name": "Futuristic & tech", "what": "Sci-fi interfaces, neon, holograms, blueprints and dark tech: styles that say the future, the machine or the lab." },
+  "presets": [
+    {
+      "id": "tactical-hud",
+      "name": "Tactical HUD",
+      "aka": ["military HUD", "night-vision overlay", "targeting HUD", "drone feed UI", "aviation HUD"],
+      "what": "Night-vision green reticles, range ladders and dashed bracket frames over near-black; blocky caps and numbers that snap between readings.",
+      "feels": ["tense", "precise", "operational"],
+      "use": ["defense and drone tech", "security and surveillance", "game trailers", "thriller openers"],
+      "not": "Not cinematic FUI: tactical HUDs are sparse, green and functional, built for a gunsight or drone feed, not a hero's glass screen.",
+      "search": ["tactical HUD overlay animation", "night vision drone feed motion graphics", "military targeting UI design"],
+      "stack": { "visual-style": ["sci-fi-hud", "technical-minimal"], "ui-treatment": ["fui", "in-context-ui"], "color": ["monochrome", "dark-ui"], "stroke": ["technical", "hairline"], "effects": ["noise", "glow"], "typography": ["condensed", "monospace"], "iconography": ["technical"], "motion-language": ["robotic"], "transitions": ["hard-cut", "flash"], "tone": ["serious", "technical"] },
+      "recipe": {
+        "palette": { "canvas": "#040b06", "ink": "#dcffd6", "accent": "#8cff66", "accent2": "#ff5c38", "surface": "#0a1a0e", "muted": "#6f9a66" },
+        "fonts": { "display": "Rajdhani", "body": "Rajdhani", "displayWeight": 700, "case": "upper", "tracking": 0.1 },
+        "layout": "hud", "radius": 0, "stroke": { "width": 1, "color": "accent", "style": "dashed" },
+        "shadow": "none", "shadowColor": "accent", "surface": "flat", "texture": "noise", "icons": "glyph", "motif": "grid", "motion": "snap"
+      }
+    },
+    {
+      "id": "cyberpunk-neon",
+      "name": "Cyberpunk neon",
+      "aka": ["cyberpunk", "Cyberpunk 2077 UI", "cyber-deck", "Night City", "netrunner UI"],
+      "what": "Acid-yellow window chrome and red hard offsets on violet-black, angular Orbitron caps, scanlines and glitching cyber-deck panels.",
+      "feels": ["rebellious", "electric", "gritty"],
+      "use": ["game and esports promos", "music drops", "crypto and fintech teasers", "streetwear launches"],
+      "not": "Not neo-noir neon: cyberpunk is acid yellow and red UI chrome, dense and aggressive, not moody pink glow in the rain.",
+      "search": ["cyberpunk UI motion graphics", "neon cyberpunk title animation", "Cyberpunk 2077 interface design"],
+      "stack": { "visual-style": ["cyberpunk"], "ui-treatment": ["stylized-ui", "windowed-ui"], "color": ["neon", "dark-ui"], "shape": ["angular", "sharp"], "effects": ["glow", "rgb-split", "noise"], "typography": ["display", "extended"], "motion-language": ["glitchy"], "transitions": ["glitch", "flash"], "tone": ["rebellious", "energetic"], "shadow": ["hard"] },
+      "recipe": {
+        "palette": { "canvas": "#0a0a14", "ink": "#f7f7ff", "accent": "#fcee0a", "accent2": "#ff003c", "surface": "#16162a", "muted": "#8a8aa8" },
+        "fonts": { "display": "Orbitron", "body": "Chakra Petch", "displayWeight": 900, "case": "upper", "tracking": 0.04 },
+        "layout": "window", "radius": 0, "stroke": { "width": 2, "color": "accent", "style": "solid" },
+        "shadow": "hard", "shadowColor": "accent2", "surface": "flat", "texture": "scanlines", "icons": "glyph", "motif": "grid", "motion": "glitch"
+      }
+    },
+    {
+      "id": "holographic-iridescent",
+      "name": "Holographic iridescent",
+      "aka": ["holo foil", "iridescent gradient", "pearlescent", "oil-slick", "hologram sticker"],
+      "what": "Pearly lavender, mint and pink shifting across soft tiles like holographic foil, with grain and slow shimmering drifts.",
+      "feels": ["dreamy", "futuristic", "fashionable"],
+      "use": ["beauty and fashion tech", "NFT and web3 drops", "music artwork loops", "Gen-Z app launches"],
+      "not": "Not AI aurora: aurora is dark with glowing blurred light; holographic is light, pearly and foil-like.",
+      "search": ["holographic iridescent motion design", "holo foil gradient animation", "iridescent 3D brand loop"],
+      "stack": { "visual-style": ["holographic", "gradient-heavy"], "ui-treatment": ["bento-ui", "abstracted-ui"], "color": ["iridescent", "pastel"], "material": ["holographic-foil"], "effects": ["grain", "refraction"], "typography": ["display", "extended"], "motion-language": ["fluid"], "transitions": ["color-match", "liquid"], "tone": ["futuristic", "youthful"] },
+      "recipe": {
+        "palette": { "canvas": "#eceaf7", "ink": "#1b1633", "accent": "#6fe3d6", "accent2": "#f4a6ff", "surface": "#ffffff", "muted": "#7a7396" },
+        "fonts": { "display": "Syne", "body": "Manrope", "displayWeight": 800, "case": "none", "tracking": -0.03 },
+        "layout": "bento", "radius": 32, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "accent2", "surface": "gradient", "texture": "grain", "icons": "duotone", "motif": "blobs", "motion": "drift"
+      }
+    },
+    {
+      "id": "blueprint-technical",
+      "name": "Blueprint technical",
+      "aka": ["blueprint", "cyanotype drawing", "engineering drawing", "technical schematic"],
+      "what": "White dashed linework and monospaced labels on cobalt blueprint grid, red-pencil markups; boxes, dimension lines and connectors draw themselves on.",
+      "feels": ["technical", "intelligent", "methodical"],
+      "use": ["technical explainers", "hardware and engineering", "architecture diagrams", "how-it-works films"],
+      "not": "Not wireframe UI: blueprint is an engineering drawing, blue ground and white line, not a grey app mockup.",
+      "search": ["blueprint animation motion graphics", "technical schematic explainer", "engineering drawing line animation"],
+      "stack": { "visual-style": ["technical-minimal"], "ui-treatment": ["blueprint-ui", "wireframe-ui"], "illustration": ["blueprint", "technical-diagram"], "stroke": ["technical", "animated-draw-on"], "color": ["monochrome", "cool-palette"], "typography": ["monospace"], "iconography": ["technical"], "motion-language": ["mechanical"], "transitions": ["line-draw", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#0f3d8c", "ink": "#f2f7ff", "accent": "#0a2a66", "accent2": "#d9412b", "surface": "#134aa6", "muted": "#9db8e6" },
+        "fonts": { "display": "IBM Plex Mono", "body": "IBM Plex Mono", "displayWeight": 600, "case": "upper", "tracking": 0.04 },
+        "layout": "diagram", "radius": 0, "stroke": { "width": 2, "color": "ink", "style": "dashed" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "line", "motif": "crosshair", "motion": "mask"
+      }
+    },
+    {
+      "id": "ar-overlay",
+      "name": "AR overlay",
+      "aka": ["augmented reality UI", "in-world labels", "tracked callouts", "camera-feed UI"],
+      "what": "Translucent white pill labels and thin reticles pinned onto a live camera view, tracking objects in space with soft springs.",
+      "feels": ["immediate", "useful", "futuristic"],
+      "use": ["AR and camera apps", "retail try-on and wayfinding", "smart glasses", "computer-vision products"],
+      "not": "Not a sci-fi HUD: AR overlays are light, minimal labels anchored to the real world, not a cinematic instrument panel.",
+      "search": ["AR overlay UI animation", "augmented reality labels motion graphics", "tracked callout camera UI"],
+      "stack": { "visual-style": ["futuristic-tech", "clean-minimal"], "ui-treatment": ["in-context-ui", "spatial-ui", "glassmorphic-ui"], "photo-video": ["tracked-graphics", "tracked-ui"], "depth": ["spatial-interface"], "shape": ["pill", "circular"], "material": ["frosted-glass"], "camera": ["handheld", "parallax-camera"], "motion-language": ["springy"], "transitions": ["scale", "blur"] },
+      "recipe": {
+        "palette": { "canvas": "#4d5a60", "ink": "#ffffff", "accent": "#ffffff", "accent2": "#ffd84a", "surface": "#6a787e", "muted": "#d6dde0" },
+        "fonts": { "display": "Outfit", "body": "Outfit", "displayWeight": 600, "case": "none", "tracking": -0.02 },
+        "layout": "pills", "radius": 999, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "glass", "texture": "noise", "icons": "line", "motif": "crosshair", "motion": "spring"
+      }
+    },
+    {
+      "id": "dark-dev-tool",
+      "name": "Dark dev-tool",
+      "aka": ["Linear style", "Vercel aesthetic", "developer dark mode", "technical monochrome"],
+      "what": "Near-black tiles with hairline borders, one indigo accent, tight grotesk type and a faint grid; restrained, exact, quietly premium.",
+      "feels": ["precise", "confident", "restrained"],
+      "use": ["developer tools", "API and infra launches", "changelog films", "B2B SaaS"],
+      "not": "Not terminal hacker: no green phosphor or console cosplay; this is a polished product UI in dark mode.",
+      "search": ["Linear style product video", "Vercel dark bento animation", "developer tool launch motion"],
+      "stack": { "visual-style": ["technical-minimal", "saas-minimal"], "ui-treatment": ["bento-ui", "simplified-ui"], "color": ["dark-ui", "accent-color-system"], "stroke": ["hairline"], "typography": ["neo-grotesk", "monospace"], "composition": ["bento-grid"], "motion-language": ["smooth"], "transitions": ["crossfade", "ui-morph"], "tone": ["technical", "premium"] },
+      "recipe": {
+        "palette": { "canvas": "#0a0a0b", "ink": "#ededef", "accent": "#5e6ad2", "accent2": "#3ecf8e", "surface": "#141416", "muted": "#8a8f98" },
+        "fonts": { "display": "Geist", "body": "Geist", "displayWeight": 600, "case": "none", "tracking": -0.04 },
+        "layout": "bento", "radius": 12, "stroke": { "width": 1, "color": "#2a2a2f", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "motif": "grid", "motion": "snap"
+      }
+    },
+    {
+      "id": "ai-aurora-gradient",
+      "name": "AI aurora gradient",
+      "aka": ["aurora UI", "AI glow", "gradient orb", "mesh glow", "Gemini gradient"],
+      "what": "Violet and cyan light blooms through a dark field behind a calm headline; grain, glowing edges and a slow breathing fade.",
+      "feels": ["intelligent", "ethereal", "optimistic"],
+      "use": ["AI product launches", "model and feature announcements", "landing heroes", "keynote openers"],
+      "not": "Not holographic: aurora is dark and luminous, soft blurred light, not a pearly foil surface.",
+      "search": ["AI aurora gradient animation", "glowing gradient orb motion", "AI product launch video gradient"],
+      "stack": { "visual-style": ["gradient-heavy", "futuristic-tech"], "ui-treatment": ["minimal-ui", "abstracted-ui"], "color": ["mesh-gradient", "dark-ui"], "effects": ["bloom", "glow", "grain"], "typography": ["geometric-sans"], "composition": ["centered-hero", "negative-space"], "motion-language": ["luxurious-slow"], "transitions": ["dissolve", "blur"], "tone": ["futuristic", "optimistic"] },
+      "recipe": {
+        "palette": { "canvas": "#07071a", "ink": "#f5f3ff", "accent": "#8b5cf6", "accent2": "#22d3ee", "surface": "#151432", "muted": "#a5a3c9" },
+        "fonts": { "display": "Sora", "body": "Sora", "displayWeight": 600, "case": "none", "tracking": -0.03 },
+        "layout": "poster", "radius": 28, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "gradient", "texture": "grain", "icons": "glyph", "motif": "blobs", "motion": "fade"
+      }
+    },
+    {
+      "id": "circuit-board",
+      "name": "Circuit board (PCB)",
+      "aka": ["PCB aesthetic", "electronic circuit", "motherboard style", "silicon traces"],
+      "what": "Gold traces and solder pads run across solder-mask green; square chips with copper outlines, stencil-mono labels, stepped signal pulses.",
+      "feels": ["technical", "engineered", "electric"],
+      "use": ["hardware and chip launches", "IoT products", "semiconductor explainers", "maker brands"],
+      "not": "Not blueprint: PCB is a physical board, green mask and gold copper, not a white-line drawing.",
+      "search": ["circuit board motion graphics", "PCB trace animation", "electronic circuit tech intro"],
+      "stack": { "visual-style": ["futuristic-tech", "abstract-geometric"], "ui-treatment": ["metaphorical-ui", "stylized-ui"], "illustration": ["schematic"], "shape": ["technical", "rectilinear"], "stroke": ["technical", "animated-draw-on"], "color": ["limited-palette", "dark-ui"], "typography": ["extended"], "motion-language": ["procedural"], "transitions": ["line-draw", "light-wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#06281c", "ink": "#e8fff0", "accent": "#d9b44a", "accent2": "#37e28f", "surface": "#0b3d2a", "muted": "#7fb59a" },
+        "fonts": { "display": "Oxanium", "body": "Oxanium", "displayWeight": 700, "case": "upper", "tracking": 0.06 },
+        "layout": "cards", "radius": 4, "stroke": { "width": 3, "color": "accent", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "filled", "motif": "circuit", "motion": "step"
+      }
+    },
+    {
+      "id": "orbital-space",
+      "name": "Orbital space",
+      "aka": ["space age", "aerospace", "NASA-punk", "mission graphics", "orbital mechanics"],
+      "what": "Deep-space black, elliptical orbit paths and a single signal-orange accent; wide extended caps and slow weightless drift.",
+      "feels": ["vast", "awe-inspiring", "serious"],
+      "use": ["space and aerospace", "deep-tech launches", "science explainers", "keynote openers"],
+      "not": "Not sci-fi HUD: fewer instruments, more void; the orbit and the scale carry it.",
+      "search": ["orbital space motion graphics", "aerospace launch title design", "space mission animation minimal"],
+      "stack": { "visual-style": ["futuristic-tech", "extreme-minimal"], "composition": ["orbit", "negative-space"], "color": ["dark-ui", "accent-color-system"], "typography": ["extended"], "effects": ["grain", "particles"], "camera": ["orbit", "pull-out"], "motion-language": ["weightless"], "transitions": ["zoom-through", "fade"], "tone": ["futuristic", "cinematic"] },
+      "recipe": {
+        "palette": { "canvas": "#03040b", "ink": "#f4f1e8", "accent": "#ff6b35", "accent2": "#7aa7ff", "surface": "#0f1220", "muted": "#8b8fa3" },
+        "fonts": { "display": "Exo 2", "body": "Exo 2", "displayWeight": 800, "case": "upper", "tracking": 0.1 },
+        "layout": "poster", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "line", "motif": "orbits", "motion": "drift"
+      }
+    },
+    {
+      "id": "glitch-digital",
+      "name": "Glitch digital",
+      "aka": ["glitch art", "datamosh", "RGB split", "corrupted UI", "error aesthetic"],
+      "what": "Black panels torn by cyan and magenta RGB-split offsets, pixel icons and digital noise; frames stutter, slice and jump.",
+      "feels": ["disruptive", "edgy", "raw"],
+      "use": ["music and club promos", "security and hacking stories", "teasers", "fashion drops"],
+      "not": "Not VHS retro: glitch is digital corruption (pixels, RGB offsets), not analog tape wobble.",
+      "search": ["glitch transition motion graphics", "RGB split glitch typography", "datamosh UI animation"],
+      "stack": { "visual-style": ["acid-graphics", "futuristic-tech"], "ui-treatment": ["deconstructed-ui", "floating-card-ui"], "color": ["black-and-white", "high-contrast"], "effects": ["glitch", "rgb-split", "noise"], "texture": ["glitch", "pixelation"], "typography": ["monospace", "distorted"], "motion-language": ["glitchy"], "transitions": ["glitch", "pixel-dissolve", "hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#000000", "ink": "#ffffff", "accent": "#00ffea", "accent2": "#ff00c8", "surface": "#111111", "muted": "#8a8a8a" },
+        "fonts": { "display": "Space Mono", "body": "Space Mono", "displayWeight": 700, "case": "upper", "tracking": 0 },
+        "layout": "cards", "radius": 0, "stroke": { "width": 2, "color": "ink", "style": "solid" },
+        "shadow": "layered", "shadowColor": "accent2", "surface": "flat", "texture": "noise", "icons": "pixel", "motif": "none", "motion": "glitch"
+      }
+    },
+    {
+      "id": "data-noir",
+      "name": "Data noir",
+      "aka": ["dark editorial data", "noir infographic", "black-and-red data", "investigative data"],
+      "what": "Black page, hard white type, thin rules and one blood-red accent; columns of figures and a stark headline wipe in.",
+      "feels": ["serious", "urgent", "investigative"],
+      "use": ["investigative explainers", "financial and risk reports", "security incident stories", "documentary graphics"],
+      "not": "Not dark dev-tool: no product UI; this is editorial journalism, rules and numbers, in the dark.",
+      "search": ["dark data journalism motion graphics", "noir infographic animation", "black red editorial data video"],
+      "stack": { "visual-style": ["editorial", "monochrome"], "ui-treatment": ["editorial-ui"], "color": ["black-and-white", "accent-color-system"], "composition": ["editorial-grid", "typography-led"], "typography": ["condensed", "monospace"], "data-viz": ["statistic", "number-counter"], "texture": ["film-grain"], "motion-language": ["precise"], "transitions": ["wipe", "hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#0b0b0c", "ink": "#f2f2f2", "accent": "#ff3b30", "accent2": "#8a8a8a", "surface": "#151516", "muted": "#8f8f8f" },
+        "fonts": { "display": "Barlow Condensed", "body": "IBM Plex Mono", "displayWeight": 800, "case": "upper", "tracking": -0.01 },
+        "layout": "editorial", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "rules", "motion": "mask"
+      }
+    },
+    {
+      "id": "code-editor-dark",
+      "name": "Code editor dark theme",
+      "aka": ["IDE aesthetic", "Dracula theme", "syntax-highlighted code", "dev-mode UI"],
+      "what": "A floating dark-theme code window with pink, green and violet syntax highlighting, ligature mono type and lines typing themselves out.",
+      "feels": ["nerdy", "crafted", "confident"],
+      "use": ["developer tools and APIs", "SDK and CLI launches", "coding tutorials", "hackathon promos"],
+      "not": "Not a retro green-screen terminal: it is a modern editor theme, colorful syntax on soft dark, no CRT nostalgia.",
+      "search": ["code typing animation dark theme", "syntax highlight motion graphics", "developer tool launch video code"],
+      "stack": { "visual-style": ["technical-minimal", "futuristic-tech"], "ui-treatment": ["terminal-ui", "windowed-ui"], "color": ["dark-ui", "high-saturation"], "typography": ["monospace"], "shadow": ["floating"], "ui-interaction": ["typing", "autocomplete"], "product-demo": ["recreated-interface"], "motion-language": ["linear"], "transitions": ["hard-cut", "zoom"] },
+      "recipe": {
+        "palette": { "canvas": "#15161e", "ink": "#f8f8f2", "accent": "#ff79c6", "accent2": "#50fa7b", "surface": "#282a36", "muted": "#8a8fb5" },
+        "fonts": { "display": "Fira Code", "body": "Fira Code", "displayWeight": 600, "case": "none", "tracking": -0.02 },
+        "layout": "terminal", "radius": 14, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "glyph", "motif": "none", "motion": "type"
+      }
+    },
+    {
+      "id": "mission-control",
+      "name": "Mission control",
+      "aka": ["telemetry dashboard", "ops center", "flight console", "control room UI"],
+      "what": "Graphite panels with recessed wells, amber telemetry numbers and cyan trend lines on a module grid; everything snaps to live values.",
+      "feels": ["serious", "in-control", "operational"],
+      "use": ["observability and ops tools", "logistics and fleet", "launch countdowns", "live-data explainers"],
+      "not": "Not sci-fi HUD: mission control is a working console (panels, numbers, charts), not cinematic linework.",
+      "search": ["mission control dashboard animation", "telemetry UI motion graphics", "control room interface design"],
+      "stack": { "visual-style": ["technical-minimal", "futuristic-tech"], "ui-treatment": ["dashboard-ui", "stylized-ui"], "data-viz": ["dashboard", "line-graph", "number-counter"], "color": ["dark-ui", "accent-color-system"], "typography": ["condensed", "monospace"], "shadow": ["inner"], "motion-language": ["mechanical"], "transitions": ["hard-cut", "push"] },
+      "recipe": {
+        "palette": { "canvas": "#11151a", "ink": "#e9edf2", "accent": "#ffb000", "accent2": "#3fd0ff", "surface": "#1a2028", "muted": "#7d8896" },
+        "fonts": { "display": "Barlow Condensed", "body": "Barlow", "displayWeight": 700, "case": "upper", "tracking": 0.04 },
+        "layout": "data", "radius": 4, "stroke": { "width": 2, "color": "#2e3845", "style": "solid" },
+        "shadow": "inset", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "filled", "motif": "grid", "motion": "snap"
+      }
+    },
+    {
+      "id": "biotech-clean",
+      "name": "Biotech clean",
+      "aka": ["lab clean", "medtech minimal", "life-science UI", "molecular clean"],
+      "what": "Clinical off-white, teal and aqua pill nodes linked like molecules, soft shadows and orbital rings; calm, sterile, trustworthy.",
+      "feels": ["trustworthy", "clinical", "hopeful"],
+      "use": ["biotech and pharma", "healthtech launches", "science explainers", "research reports"],
+      "not": "Not generic SaaS minimal: the molecular nodes, orbits and clinical teal make it read as the lab.",
+      "search": ["biotech motion graphics clean", "molecular animation minimal", "healthtech explainer video style"],
+      "stack": { "visual-style": ["clean-minimal", "futuristic-tech"], "ui-treatment": ["abstracted-ui", "minimal-ui"], "data-viz": ["node-network", "process-diagram"], "color": ["light-ui", "cool-palette"], "shape": ["pill", "circular"], "typography": ["geometric-sans"], "shadow": ["soft-diffuse"], "motion-language": ["smooth"], "transitions": ["crossfade", "shape-match"] },
+      "recipe": {
+        "palette": { "canvas": "#f3f8f7", "ink": "#0e2a2a", "accent": "#19b394", "accent2": "#7fd1e8", "surface": "#ffffff", "muted": "#6a8a88" },
+        "fonts": { "display": "Manrope", "body": "Manrope", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "diagram", "radius": 999, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "line", "motif": "orbits", "motion": "fade"
+      }
+    },
+    {
+      "id": "neon-wireframe-grid",
+      "name": "Neon wireframe grid",
+      "aka": ["Tron style", "light-cycle grid", "neon grid", "vector grid world"],
+      "what": "Glowing cyan outlines on a black grid world; pill controls lit like light-cycles with orange sparks of accent.",
+      "feels": ["kinetic", "electric", "gamey"],
+      "use": ["gaming and esports", "event openers", "tech launch teasers", "motion backgrounds"],
+      "not": "Not synthwave: no sunset, palm trees or chrome; just lit vectors on a black grid.",
+      "search": ["Tron grid motion graphics", "neon wireframe animation", "glowing grid tech intro"],
+      "stack": { "visual-style": ["futuristic-tech", "sci-fi-hud"], "ui-treatment": ["stylized-ui"], "color": ["neon", "dark-ui"], "stroke": ["medium", "uniform"], "effects": ["glow", "light-streaks", "trails"], "typography": ["extended"], "camera": ["track", "push-in"], "motion-language": ["inertial"], "transitions": ["light-wipe", "zoom-through"] },
+      "recipe": {
+        "palette": { "canvas": "#000814", "ink": "#e0fbff", "accent": "#00e5ff", "accent2": "#ff8a00", "surface": "#001a2c", "muted": "#5e8ca3" },
+        "fonts": { "display": "Tektur", "body": "Tektur", "displayWeight": 800, "case": "upper", "tracking": 0.06 },
+        "layout": "pills", "radius": 999, "stroke": { "width": 2, "color": "accent", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "neon", "texture": "none", "icons": "line", "motif": "grid", "motion": "slide"
+      }
+    },
+    {
+      "id": "industrial-mecha-ui",
+      "name": "Industrial mecha UI",
+      "aka": ["mecha interface", "Evangelion UI", "hazard-stripe UI", "industrial sci-fi"],
+      "what": "Warning-yellow blocks and hard offset shadows on gunmetal, condensed heavy caps, warning glyphs and stamped numerals that slam into place.",
+      "feels": ["heavy", "urgent", "mechanical"],
+      "use": ["game trailers", "robotics and industrial tech", "sports and hype edits", "anime-style openers"],
+      "not": "Not sci-fi HUD: this is heavy, blocky and industrial; no thin glowing lines.",
+      "search": ["Evangelion UI motion graphics", "mecha interface design animation", "hazard stripe HUD"],
+      "stack": { "visual-style": ["sci-fi-hud", "brutalism"], "ui-treatment": ["fui", "oversized-ui"], "color": ["high-contrast", "limited-palette"], "shape": ["angular", "rectilinear"], "typography": ["condensed", "display"], "shadow": ["hard"], "motion-language": ["heavy"], "transitions": ["hard-cut", "flash"], "tone": ["bold", "urgent"] },
+      "recipe": {
+        "palette": { "canvas": "#1a1a1a", "ink": "#f5f5f0", "accent": "#ffcc00", "accent2": "#ff4d00", "surface": "#262626", "muted": "#9a9a92" },
+        "fonts": { "display": "Big Shoulders Display", "body": "Barlow Condensed", "displayWeight": 900, "case": "upper", "tracking": 0.02 },
+        "layout": "hud", "radius": 0, "stroke": { "width": 3, "color": "accent", "style": "solid" },
+        "shadow": "hard", "shadowColor": "accent", "surface": "flat", "texture": "halftone", "icons": "glyph", "motif": "rules", "motion": "snap"
+      }
+    },
+    {
+      "id": "web3-crypto-dark",
+      "name": "Web3 crypto dark",
+      "aka": ["crypto UI", "DeFi aesthetic", "web3 neon", "wallet app style"],
+      "what": "A glowing phone wallet on ink-black, acid-lime accents on gradient cards, confident geometric type and quick springy counters.",
+      "feels": ["bold", "fast", "speculative"],
+      "use": ["crypto and fintech apps", "wallet launches", "trading features", "app-store promos"],
+      "not": "Not cyberpunk: cleaner, app-first and optimistic; neon is an accent on product UI, not an atmosphere.",
+      "search": ["crypto app promo animation", "web3 wallet UI motion", "dark fintech app video neon"],
+      "stack": { "visual-style": ["futuristic-tech", "gradient-heavy"], "ui-treatment": ["device-bound-ui", "stylized-ui"], "photo-video": ["device-mockup"], "color": ["dark-ui", "neon"], "typography": ["geometric-sans"], "effects": ["glow"], "data-viz": ["number-counter", "line-graph"], "motion-language": ["springy"], "transitions": ["scale", "ui-morph"] },
+      "recipe": {
+        "palette": { "canvas": "#0b0b14", "ink": "#f4f4fa", "accent": "#c6ff00", "accent2": "#7b61ff", "surface": "#1a1a2e", "muted": "#8888a8" },
+        "fonts": { "display": "Unbounded", "body": "Outfit", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "device", "radius": 22, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "gradient", "texture": "none", "icons": "filled", "motif": "none", "motion": "spring"
+      }
+    },
+    {
+      "id": "technical-minimalism",
+      "name": "Technical minimalism",
+      "aka": ["Teenage Engineering style", "industrial product UI", "Braun-tech", "instrument panel minimal"],
+      "what": "Warm grey panels with black outlines, one signal-orange accent, mono labels, crosshair registration marks and dot-matrix texture; tool-like and exact.",
+      "feels": ["exact", "playful-serious", "engineered"],
+      "use": ["hardware and audio gear", "design-led dev tools", "product explainers", "maker brands"],
+      "not": "Not Swiss minimal: it borrows instrument panels (labels, markings, knobs), not a typographic grid.",
+      "search": ["Teenage Engineering style animation", "industrial design UI motion", "technical minimal product video"],
+      "stack": { "visual-style": ["technical-minimal", "modernist"], "ui-treatment": ["stylized-ui", "isolated-component-ui"], "color": ["limited-palette", "light-ui"], "stroke": ["medium", "technical"], "typography": ["monospace", "grotesk"], "iconography": ["technical"], "shape": ["rectilinear", "circular"], "motion-language": ["mechanical"], "transitions": ["hard-cut", "slide"] },
+      "recipe": {
+        "palette": { "canvas": "#e6e5df", "ink": "#111111", "accent": "#ff5a1f", "accent2": "#1f6fff", "surface": "#f5f4ef", "muted": "#6e6d68" },
+        "fonts": { "display": "Space Grotesk", "body": "Space Mono", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "cards", "radius": 8, "stroke": { "width": 2, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "glyph", "motif": "crosshair", "motion": "snap"
+      }
+    },
+    {
+      "id": "neural-node-graph",
+      "name": "Neural node graph",
+      "aka": ["AI agent graph", "neural network visualization", "knowledge graph glow", "agent workflow"],
+      "what": "Frosted violet nodes connected by lines on deep indigo, soft glow and dot field; signals travel node to node.",
+      "feels": ["intelligent", "connected", "futuristic"],
+      "use": ["AI agent and workflow tools", "ML explainers", "data platforms", "integration stories"],
+      "not": "Not blueprint: dark and luminous with glass nodes, about intelligence and flow, not engineering drawings.",
+      "search": ["AI agent workflow animation", "neural network node motion graphics", "knowledge graph visualization video"],
+      "stack": { "visual-style": ["futuristic-tech", "glass"], "ui-treatment": ["abstracted-ui", "canvas-ui"], "data-viz": ["node-network", "flow-diagram"], "composition": ["node-map"], "color": ["dark-ui", "cool-palette"], "effects": ["glow", "particles"], "motion-language": ["fluid"], "transitions": ["line-draw", "camera-move"], "ui-interaction": ["agent-steps"] },
+      "recipe": {
+        "palette": { "canvas": "#0c0a1f", "ink": "#efeaff", "accent": "#a78bfa", "accent2": "#34d399", "surface": "#1d1840", "muted": "#9a93c2" },
+        "fonts": { "display": "Space Grotesk", "body": "Space Grotesk", "displayWeight": 600, "case": "none", "tracking": -0.03 },
+        "layout": "diagram", "radius": 20, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "glass", "texture": "dots", "icons": "duotone", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "solarpunk",
+      "name": "Solarpunk",
+      "aka": ["eco-futurism", "green tech optimism", "hopepunk", "regenerative future"],
+      "what": "Sunlit cream, leaf green and solar gold tiles with rounded corners, sun-ray motifs and grain; technology that grows rather than glows.",
+      "feels": ["hopeful", "warm", "natural"],
+      "use": ["climate and cleantech", "energy and agritech", "sustainability reports", "impact brand films"],
+      "not": "Not organic wellness: solarpunk keeps the tech (panels, data, systems) and frames it as an optimistic future.",
+      "search": ["solarpunk motion graphics", "climate tech brand animation", "eco futurism design video"],
+      "stack": { "visual-style": ["futuristic-tech", "organic-biomorphic"], "ui-treatment": ["bento-ui", "illustrative-ui"], "color": ["earth-tones", "warm-palette"], "shape": ["rounded", "organic"], "texture": ["film-grain"], "typography": ["geometric-sans"], "iconography": ["duotone"], "motion-language": ["organic"], "transitions": ["shape-match", "light-wipe"], "tone": ["optimistic", "futuristic"] },
+      "recipe": {
+        "palette": { "canvas": "#f4f0de", "ink": "#1f3a2b", "accent": "#3f9e4d", "accent2": "#f2b134", "surface": "#fffdf4", "muted": "#6f7d62" },
+        "fonts": { "display": "Figtree", "body": "Figtree", "displayWeight": 800, "case": "none", "tracking": -0.03 },
+        "layout": "bento", "radius": 28, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "accent", "surface": "flat", "texture": "grain", "icons": "duotone", "motif": "rays", "motion": "drift"
+      }
+    }
+  ]
+}

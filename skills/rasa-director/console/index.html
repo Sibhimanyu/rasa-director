@@ -84,6 +84,16 @@
   .context { color: var(--ink-2); max-width: 860px; margin-bottom: 16px; }
   .decision { margin: 12px 0 16px; padding: 12px 14px; border-left: 3px solid var(--ok); background: var(--ok-soft); border-radius: 0 10px 10px 0; color: var(--ink-2); max-width: 860px; }
   .decision b { color: var(--ink); font-weight: 600; }
+  .ask-card { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.10); }
+  .ask-options { display: grid; gap: 10px; margin: 6px 0 14px; }
+  .ask-opt { display: grid; grid-template-columns: 22px 1fr auto; gap: 14px; align-items: start; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer; background: var(--panel); }
+  .ask-opt:hover { border-color: var(--line-2); }
+  .ask-opt.on { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
+  .ask-opt .radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--line-2); margin-top: 2px; }
+  .ask-opt.on .radio { border: 6px solid var(--accent); }
+  .ask-opt b { display: block; font-size: 16px; } .ask-opt span { display: block; color: var(--ink-2); font-size: 14px; margin-top: 2px; }
+  .ask-opt em { font-style: normal; font: 600 11.5px/1 var(--sans); background: var(--pick); color: #2a1f00; padding: 6px 9px; border-radius: 999px; }
+  .ask-text textarea { min-height: 64px; }
   .decide-row { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; gap: 18px; flex-wrap: wrap; }
   .discuss { margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: var(--panel-2); }
   .thread { display: grid; gap: 8px; margin: 6px 0 12px; max-height: 320px; overflow: auto; }
@@ -122,6 +132,7 @@
   .choice h3 { font: 700 19px/1.15 var(--display); font-stretch: 92%; }
   .choice p { margin: 0; font-size: 14px; color: var(--ink-2); }
   .choice p.sub { color: var(--ink-3); font-size: 13px; }
+  .choice p.clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .choice .terms { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
   .choice .terms span { font: 400 11.5px/1 var(--mono); padding: 5px 7px; border-radius: 5px; background: var(--panel-2); color: var(--ink-2); }
   .choice .rare { font-size: 12.5px; color: var(--ink-3); }
@@ -151,6 +162,23 @@
   .dim-row { display: grid; grid-template-columns: 190px 1fr; gap: 12px; align-items: center; padding: 7px 0; }
   .dim-row > span { font-size: 14px; color: var(--ink-2); }
   .dim-row .chip.on { background: var(--ink); border-color: var(--ink); }
+
+  /* style gallery */
+  .spec { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+  .spec > .rp-stage { position: absolute; left: 0; top: 0; }
+  .brand-toggle { margin: -6px 0 14px; }
+  .gallery { display: none; margin-top: 26px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .gallery.open { display: block; }
+  .gal-head { display: grid; gap: 12px; margin-bottom: 14px; }
+  .gal-search { width: 100%; border: 1px solid var(--line-2); border-radius: 999px; padding: 11px 18px; font-size: 15px; background: var(--panel); }
+  .gal-search:focus { border-color: var(--accent); outline: none; }
+  .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  .choice.mini .body { padding: 9px 11px 11px; gap: 2px; }
+  .choice.mini h3 { font-size: 15px; }
+  .choice.mini .meta { font-size: 10px; }
+  .choice.mini .tick { width: 22px; height: 22px; font-size: 12px; top: 8px; right: 8px; }
+  .gal-bar { position: sticky; bottom: 12px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+  .gal-bar .btn.primary { background: #fff; color: var(--ink); border-color: #fff; }
 
   /* shared panel parts (the step panels below use these) */
   .grid { display: grid; gap: 14px; }
@@ -417,6 +445,107 @@
     var row = h("div", { class: "actions" }, [btn].concat((o.links || []).map(function (l) { return h("button", { class: "link", onclick: l.onclick, text: l.label }); }), [d.recommended ? h("span", { class: "hint", text: "Claude's pick is already selected" }) : null]));
     return [grid, row];
   }
+  // ---- style presets: hundreds of complete styles, drawn live by /presets.js on the user's words ----
+  function loadRenderer(cb) {
+    if (window.RasaPresets) return cb();
+    if (loadRenderer.q) return loadRenderer.q.push(cb);
+    loadRenderer.q = [cb];
+    var s = document.createElement("script"); s.src = "/presets.js";
+    s.onload = function () { document.head.insertAdjacentHTML("beforeend", "<style>" + window.RasaPresets.css + "</style>"); loadRenderer.q.forEach(function (f) { f(); }); };
+    document.head.appendChild(s);
+  }
+  var GALLERIES = {};
+  function loadGallery(file, cb) {
+    if (GALLERIES[file]) return cb(GALLERIES[file]);
+    fetch(fsUrl(file), { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (g) {
+      GALLERIES[file] = g;
+      window.RasaPresets.loadFonts(g.presets);
+      cb(g);
+    }).catch(function () { toast("Could not load the style gallery."); });
+  }
+  // one specimen, scaled to its box; hovering replays how the style moves
+  function specimen(p, g, lazy) {
+    var box = h("div", { class: "spec" });
+    function paint() {
+      if (box._done) return; box._done = true;
+      var tmp = document.createElement("div");
+      tmp.innerHTML = window.RasaPresets.render(p, { headline: g.headline, sub: g.sub, brand: local.inBrand === false ? null : g.brand });
+      var st = tmp.firstChild; box.appendChild(st);
+      var fit = function () { st.style.transform = "scale(" + (box.clientWidth / 1600) + ")"; };
+      fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box);
+      box.addEventListener("mouseenter", function () { st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); });
+    }
+    if (lazy && window.IntersectionObserver) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { paint(); io.disconnect(); } }); }, { rootMargin: "300px" }); io.observe(box); }
+    else requestAnimationFrame(paint);
+    return box;
+  }
+  function presetsPanel(d) {
+    var holder = h("div", null, [empty("Loading the styles…")]);
+    loadRenderer(function () { loadGallery(d.gallery, function (g) { holder.innerHTML = ""; draw(g); }); });
+    function draw(g) {
+      var byId = {}; g.presets.forEach(function (p) { byId[p.id] = p; });
+      var sugg = (d.suggestions || (g.recommended || []).map(function (id) { return { id: id }; })).filter(function (s) { return byId[s.id]; });
+      var rec = d.recommended || (sugg[0] || {}).id;
+      if (!local.presetSel || !byId[local.presetSel]) local.presetSel = rec;
+      var cards = [];
+      function select(id) { local.presetSel = id; cards.forEach(function (c) { var on = c._id === id; c.classList.toggle("on", on); c.setAttribute("aria-checked", on ? "true" : "false"); }); useBtn.textContent = "Use " + byId[id].name; barName.textContent = byId[id].name; }
+      function card(p, small, badge, why) {
+        var c = h("div", { class: "choice" + (small ? " mini" : "") + (local.presetSel === p.id ? " on" : ""), role: "radio", tabindex: "0", "aria-checked": local.presetSel === p.id ? "true" : "false" }, [
+          badge ? h("span", { class: "pick", text: badge }) : null, h("span", { class: "tick", "aria-hidden": "true", text: "✓" }),
+          specimen(p, g, small),
+          h("div", { class: "body" }, small ? [h("h3", { text: p.name }), h("div", { class: "meta", text: (g.families.filter(function (f) { return f.id === p.family; })[0] || {}).name || p.family })] : [
+            h("h3", { text: p.name }), h("p", { class: "clamp", text: p.what }), why && why !== p.what ? h("p", { class: "sub", text: why }) : null,
+            h("div", { class: "terms" }, (p.feels || []).slice(0, 3).map(function (t) { return h("span", { text: t }); }))
+          ])
+        ]);
+        c._id = p.id;
+        c.addEventListener("click", function () { select(p.id); });
+        c.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(p.id); } });
+        cards.push(c); return c;
+      }
+      if (g.brand) holder.appendChild(h("div", { class: "chips brand-toggle" }, [["In your brand", true], ["Their own colors", false]].map(function (x) {
+        var on = (local.inBrand !== false) === x[1];
+        return h("button", { class: "chip" + (on ? " on" : ""), "aria-pressed": on ? "true" : "false", onclick: function () { local.inBrand = x[1]; document.getElementById("main")._sig = null; render(true); }, text: x[0] });
+      })));
+      var top = h("div", { class: "choices" });
+      sugg.slice(0, 3).forEach(function (s, i) { top.appendChild(card(byId[s.id], false, i === 0 ? "Claude's pick" : s.rare ? "The unusual one" : null, s.why)); });
+      holder.appendChild(top);
+      var useBtn = h("button", { class: "btn primary big", onclick: function () { send("direction", "choose", local.presetSel); }, text: "Use " + (byId[local.presetSel] || {}).name });
+      var gal = h("div", { class: "gallery" + (local.galOpen ? " open" : "") });
+      holder.appendChild(h("div", { class: "actions" }, [useBtn,
+        h("button", { class: "link", onclick: function () { local.galOpen = !local.galOpen; gal.classList.toggle("open", local.galOpen); if (local.galOpen) { fillGallery(); gal.scrollIntoView({ behavior: "smooth", block: "start" }); } }, text: "Browse all " + g.presets.length + " styles" }),
+        d.dimensions ? h("button", { class: "link", onclick: function () { local.full = true; document.getElementById("main")._sig = null; render(); }, text: "Build one term by term" }) : null,
+        h("span", { class: "hint", text: "Hover a style to see how it moves" })]));
+      var barName = h("b", { text: (byId[local.presetSel] || {}).name || "" });
+      holder.appendChild(gal);
+      function fillGallery() {
+        if (gal._filled) return; gal._filled = true;
+        local.fam = local.fam || "all"; local.q = local.q || "";
+        var famRow = h("div", { class: "chips" }), grid = h("div", { class: "gal-grid" }), count = h("span", { class: "meta" });
+        var search = h("input", { class: "gal-search", placeholder: "Search styles: shadows, retro, luxury, glass, doodle…", "aria-label": "Search styles", value: local.q });
+        function apply() {
+          var q = local.q.toLowerCase(), n = 0;
+          [].forEach.call(grid.children, function (el) {
+            var p = byId[el._id], hay = [p.name, p.what, (p.aka || []).join(" "), (p.feels || []).join(" "), (p.use || []).join(" "), p.family].join(" ").toLowerCase();
+            var show = (local.fam === "all" || p.family === local.fam) && (!q || hay.indexOf(q) > -1);
+            el.style.display = show ? "" : "none"; if (show) n++;
+          });
+          count.textContent = n + " of " + g.presets.length + " styles";
+          [].forEach.call(famRow.children, function (b) { b.classList.toggle("on", b._fam === local.fam); });
+        }
+        [{ id: "all", name: "All" }].concat(g.families).forEach(function (f) { var b = h("button", { class: "chip", onclick: function () { local.fam = f.id; apply(); }, text: f.name }); b._fam = f.id; famRow.appendChild(b); });
+        search.addEventListener("input", function () { local.q = search.value; apply(); });
+        g.presets.forEach(function (p) { grid.appendChild(card(p, true)); });
+        gal.appendChild(h("div", { class: "gal-head" }, [h("div", { class: "eyebrow", text: "Every style" }), search, famRow, count]));
+        gal.appendChild(grid);
+        gal.appendChild(h("div", { class: "gal-bar" }, [h("span", null, ["Selected: ", barName]), h("button", { class: "btn primary", onclick: function () { send("direction", "choose", local.presetSel); }, text: "Use this style" })]));
+        apply();
+      }
+      if (Q.get("gallery")) { local.galOpen = true; gal.classList.add("open"); } // ?gallery=1 opens it (stills for the docs)
+      if (local.galOpen) fillGallery();
+    }
+    return [holder];
+  }
   var KEY_DIMS = ["ui-treatment", "illustration", "typography", "motion-language", "transitions", "pacing"];
 
   var PANELS = {
@@ -560,6 +689,9 @@
       return [holder];
     },
     direction: function (d) {
+      // style presets (the gallery) first; the older three-direction cards and the full form still render
+      if (d.gallery && !local.full) return presetsPanel(d);
+      if (d.gallery && local.full) return [h("div", { class: "actions" }, [h("button", { class: "link", onclick: function () { local.full = false; document.getElementById("main")._sig = null; render(); }, text: "Back to the styles" })])].concat(PANELS.directionForm(d));
       var dirs = d.directions || [];
       if (!dirs.length || local.full) {
         var form = PANELS.directionForm(d);
@@ -943,7 +1075,8 @@
   function ago(t) { var s = Math.max(0, (Date.now() - Date.parse(t)) / 1000); return s < 50 ? "just now" : s < 3600 ? Math.round(s / 60) + " min ago" : new Date(t).toTimeString().slice(0, 5); }
   function sentText(x) { return x.type === "decide" ? "Claude decides" : x.type === "note" ? "a note" : x.name || (typeof x.value === "string" ? x.value : x.type === "approve" ? "approved" : "sent"); }
   function isDone() { return (S.steps.render || {}).status === "done"; }
-  function waitingOnUser() { var d = S.steps[S.current] || {}; return d.status === "awaiting" && (!d.sent || d.sent.type === "note"); }
+  function asking() { return S.ask && !S.ask.answered ? S.ask : null; }
+  function waitingOnUser() { if (asking()) return true; var d = S.steps[S.current] || {}; return d.status === "awaiting" && (!d.sent || d.sent.type === "note"); }
 
   function renderTop() {
     document.getElementById("proj").textContent = S.title && S.title !== "Rasa Director" ? S.title : "";
@@ -956,6 +1089,7 @@
     var st = document.getElementById("status"), txt, kind;
     if (!online && !Q.get("snapshot")) { kind = "offline"; txt = "Reconnecting to Claude…"; }
     else if (done) { kind = "done"; txt = "Done: your video is ready"; }
+    else if (asking()) { kind = "waiting"; txt = "Waiting for you: a question from Claude"; }
     else if (waitingOnUser()) { kind = "waiting"; txt = "Waiting for you: " + labelOf(S.current).toLowerCase(); }
     else if (S.working) { kind = "working"; txt = S.working.msg; }
     else { kind = "working"; txt = "Claude is working…"; }
@@ -1049,6 +1183,39 @@
     return h("div", null, [open ? box : null, row]);
   }
 
+  // a question outside the steps (Claude asks with `console.mjs ask`): its own card, on top of whatever is happening
+  function askCard(A) {
+    local.askSel = local.askSel && local.askFor === A.id ? local.askSel : A.recommended || ((A.options || [])[0] || {}).id || null;
+    local.askFor = A.id;
+    var box = h("div", { class: "stage-card ask-card" });
+    box.appendChild(h("div", { class: "eyebrow", text: "Claude needs your call" }));
+    box.appendChild(h("div", { class: "stephead" }, [h("h1", { text: A.question })]));
+    if (A.context) box.appendChild(h("p", { class: "context", text: A.context }));
+    if ((A.options || []).length) {
+      var list = h("div", { class: "ask-options", role: "radiogroup", "aria-label": A.question });
+      A.options.forEach(function (o) {
+        var on = local.askSel === o.id;
+        var el = h("div", { class: "ask-opt" + (on ? " on" : ""), role: "radio", tabindex: "0", "aria-checked": on ? "true" : "false" }, [
+          h("i", { class: "radio" }), h("div", null, [h("b", { text: o.label }), o.detail ? h("span", { text: o.detail }) : null]), A.recommended === o.id ? h("em", { text: "Claude's pick" }) : null
+        ]);
+        function sel() { local.askSel = o.id; [].forEach.call(list.children, function (c) { c.classList.remove("on"); c.setAttribute("aria-checked", "false"); }); el.classList.add("on"); el.setAttribute("aria-checked", "true"); }
+        el.addEventListener("click", sel); el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sel(); } });
+        list.appendChild(el);
+      });
+      box.appendChild(list);
+    }
+    var ta = h("textarea", { rows: "3", placeholder: A.placeholder || "Or type your answer", "aria-label": "Your answer" });
+    ta.value = local.askText || ""; ta.addEventListener("input", function () { local.askText = ta.value; });
+    box.appendChild(h("div", { class: "composer ask-text" }, [ta]));
+    box.appendChild(h("div", { class: "actions" }, [h("button", { class: "btn primary big", onclick: function () {
+      var text = ta.value.trim();
+      if (!local.askSel && !text) return toast("Pick an option or type an answer.");
+      local.askText = "";
+      send(A.step || S.current || "brief", "answer", { ask: A.id, choice: text && !(A.options || []).length ? null : local.askSel, text: text }, text);
+    }, text: "Send answer" })]));
+    return box;
+  }
+
   var seenUpdated = {};
   function render(force) {
     renderTop(); renderFeed(); renderFilm();
@@ -1059,6 +1226,13 @@
     if (d.updated && seenUpdated[viewing] && seenUpdated[viewing] !== d.updated) local = {};
     seenUpdated[viewing] = d.updated;
     var main = document.getElementById("main");
+    var A = asking();
+    if (A) {
+      var asig = "ask|" + A.id;
+      if (!force && main._sig === asig) return;
+      main._sig = asig; main.innerHTML = ""; main.appendChild(askCard(A)); window.scrollTo({ top: 0 });
+      return;
+    }
     // Claude is between questions (you answered, or it's preparing the next one): show it working
     // a note is a conversation, not an answer: the options stay on screen while Claude replies in the thread
     var answered = d.sent && d.sent.type !== "note";

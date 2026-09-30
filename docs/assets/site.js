@@ -73,3 +73,50 @@
   initToggle();
   initCopy();
 })();
+
+// style library: assets/presets.json (every preset) drawn live by assets/presets.js
+(function () {
+  var grid = document.getElementById("lib-grid");
+  if (!grid || !window.RasaPresets) return;
+  var words = document.getElementById("lib-words"), search = document.getElementById("lib-search"), famsEl = document.getElementById("lib-fams"), countEl = document.getElementById("lib-count");
+  var data = null, fam = "all", cards = [];
+  document.head.insertAdjacentHTML("beforeend", "<style>" + RasaPresets.css + "</style>");
+  function fit(c) { var st = c._spec.firstChild; if (st) st.style.transform = "scale(" + (c._spec.clientWidth / 1600) + ")"; }
+  function paint(c) {
+    var tmp = document.createElement("div");
+    tmp.innerHTML = RasaPresets.render(c._p, { headline: words.value || "Tax season. Again.", sub: "Every receipt, booked in one tap." });
+    c._spec.innerHTML = ""; c._spec.appendChild(tmp.firstChild); fit(c); c._painted = true;
+  }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && !e.target._painted) paint(e.target); }); }, { rootMargin: "400px" });
+  function apply() {
+    var q = (search.value || "").toLowerCase(), n = 0;
+    cards.forEach(function (c) {
+      var p = c._p, hay = [p.name, p.what, (p.aka || []).join(" "), (p.feels || []).join(" "), (p.use || []).join(" "), p.family].join(" ").toLowerCase();
+      var show = (fam === "all" || p.family === fam) && (!q || hay.indexOf(q) > -1);
+      c.style.display = show ? "" : "none"; if (show) n++;
+    });
+    countEl.textContent = n + " of " + data.presets.length + " styles";
+    [].forEach.call(famsEl.children, function (b) { b.classList.toggle("on", b._fam === fam); });
+  }
+  fetch("assets/presets.json").then(function (r) { return r.json(); }).then(function (d) {
+    data = d;
+    RasaPresets.loadFonts(d.presets);
+    [{ id: "all", name: "All" }].concat(d.families).forEach(function (f) {
+      var b = document.createElement("button"); b.type = "button"; b.textContent = f.name; b._fam = f.id;
+      b.addEventListener("click", function () { fam = f.id; apply(); }); famsEl.appendChild(b);
+    });
+    d.presets.forEach(function (p) {
+      var c = document.createElement("div"); c.className = "lib-card"; c._p = p;
+      c._spec = document.createElement("div"); c._spec.className = "spec"; c.appendChild(c._spec);
+      var b = document.createElement("b"); b.textContent = p.name; c.appendChild(b);
+      var sm = document.createElement("small"); sm.textContent = (d.families.filter(function (f) { return f.id === p.family; })[0] || {}).name || p.family; c.appendChild(sm);
+      var pr = document.createElement("p"); pr.textContent = p.what; c.appendChild(pr);
+      c.addEventListener("mouseenter", function () { var st = c._spec.firstChild; if (!st) return; st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); });
+      grid.appendChild(c); cards.push(c); io.observe(c);
+    });
+    apply();
+    var t; words.addEventListener("input", function () { clearTimeout(t); t = setTimeout(function () { cards.forEach(function (c) { if (c._painted) paint(c); }); }, 250); });
+    search.addEventListener("input", apply);
+    window.addEventListener("resize", function () { cards.forEach(fit); });
+  }).catch(function () { countEl.textContent = "The style library could not load."; });
+})();

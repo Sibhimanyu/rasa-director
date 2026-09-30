@@ -1,0 +1,1919 @@
+{
+  "family": {
+    "id": "editorial",
+    "name": "Editorial & print",
+    "what": "Type-led styles borrowed from print: magazines, newspapers, books, posters, grids and the page."
+  },
+  "presets": [
+    {
+      "id": "tabloid-front-page",
+      "name": "Tabloid front page",
+      "aka": [
+        "red-top tabloid",
+        "tabloid headline",
+        "splash headline",
+        "screamer"
+      ],
+      "what": "A red masthead box, screaming condensed capitals, yellow flash callouts, boxed halftone photos and heavy black keylines.",
+      "feels": [
+        "loud",
+        "sensational",
+        "irreverent"
+      ],
+      "use": [
+        "announcements",
+        "social ads",
+        "parody and humour spots",
+        "launch hype"
+      ],
+      "not": "Not newspaper broadsheet: sensational rather than sober; red and yellow boxes, huge caps, almost no body text.",
+      "search": [
+        "tabloid headline animation",
+        "breaking news tabloid motion graphics",
+        "tabloid newspaper style video"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "halftone"
+        ],
+        "typography": [
+          "condensed",
+          "display"
+        ],
+        "composition": [
+          "modular-grid",
+          "typography-led"
+        ],
+        "color": [
+          "primary-colors",
+          "high-contrast"
+        ],
+        "texture": [
+          "halftone"
+        ],
+        "material": [
+          "newsprint"
+        ],
+        "stroke": [
+          "heavy"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "transitions": [
+          "hard-cut",
+          "flash"
+        ],
+        "tone": [
+          "bold",
+          "playful"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f7f5f0",
+          "ink": "#111111",
+          "accent": "#d7141a",
+          "accent2": "#ffd400",
+          "surface": "#ffffff",
+          "muted": "#6d6a64"
+        },
+        "fonts": {
+          "display": "Oswald",
+          "body": "Roboto Condensed",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": -0.01
+        },
+        "layout": "bento",
+        "radius": 0,
+        "stroke": {
+          "width": 3,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "halftone",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "snap"
+      }
+    },
+    {
+      "id": "magazine-serif",
+      "name": "Magazine serif editorial",
+      "aka": [
+        "print editorial",
+        "magazine layout",
+        "feature spread",
+        "editorial serif"
+      ],
+      "what": "A feature spread in motion: masthead rule, high-contrast display serif headline, two justified columns and a photo well on warm paper.",
+      "feels": [
+        "literate",
+        "considered",
+        "premium"
+      ],
+      "use": [
+        "brand films",
+        "manifesto films",
+        "publishing and media",
+        "long-read teasers"
+      ],
+      "not": "Not newspaper broadsheet: fewer columns, bigger serif, more air and one image carrying the page.",
+      "search": [
+        "magazine editorial motion design",
+        "editorial serif kinetic typography",
+        "animated magazine spread"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "editorial"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "serif-editorial"
+        ],
+        "composition": [
+          "editorial-grid",
+          "typography-led"
+        ],
+        "color": [
+          "limited-palette",
+          "warm-palette"
+        ],
+        "texture": [
+          "paper-grain"
+        ],
+        "material": [
+          "paper"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "mask-reveal",
+          "page-flip"
+        ],
+        "tone": [
+          "editorial",
+          "premium"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f6f1e7",
+          "ink": "#1a1714",
+          "accent": "#b23a2a",
+          "accent2": "#d8c8ad",
+          "surface": "#fffaf0",
+          "muted": "#8d8274"
+        },
+        "fonts": {
+          "display": "DM Serif Display",
+          "body": "Newsreader",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "paper",
+        "icons": "none",
+        "motif": "rules",
+        "motion": "mask"
+      }
+    },
+    {
+      "id": "fashion-editorial",
+      "name": "Fashion editorial",
+      "aka": [
+        "Didone fashion",
+        "Vogue style",
+        "high-fashion layout",
+        "luxury magazine"
+      ],
+      "what": "Towering uppercase Didone with hairline serifs, stark white page, a blush photo plate and wide-tracked captions; silence as luxury.",
+      "feels": [
+        "glamorous",
+        "cool",
+        "exacting"
+      ],
+      "use": [
+        "fashion and beauty launches",
+        "lookbooks",
+        "campaign films",
+        "retail teasers"
+      ],
+      "not": "Not fashion minimal: a full spread with a photo plate and captions, not a lone headline on white.",
+      "search": [
+        "fashion editorial motion graphics",
+        "didone typography animation",
+        "vogue style title animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "fashion-editorial",
+          "luxury"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "display"
+        ],
+        "composition": [
+          "editorial-grid",
+          "negative-space",
+          "asymmetric"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "photo-video": [
+          "masked-photography",
+          "photo-typography"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "pacing": [
+          "slow"
+        ],
+        "transitions": [
+          "crossfade",
+          "mask-reveal"
+        ],
+        "tone": [
+          "luxurious",
+          "editorial"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fbfaf8",
+          "ink": "#0d0d0d",
+          "accent": "#e8cfc4",
+          "accent2": "#b8a398",
+          "surface": "#ffffff",
+          "muted": "#9b9690"
+        },
+        "fonts": {
+          "display": "Bodoni Moda",
+          "body": "Jost",
+          "displayWeight": 500,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "newspaper-broadsheet",
+      "name": "Newspaper broadsheet",
+      "aka": [
+        "newsprint",
+        "front page",
+        "gazette style",
+        "headline press"
+      ],
+      "what": "Newsprint grey paper, bold condensed-serif headline, double-ruled borders, dense columns and a halftone photo; the press is running.",
+      "feels": [
+        "urgent",
+        "credible",
+        "historic"
+      ],
+      "use": [
+        "announcements",
+        "news-style ads",
+        "historical explainers",
+        "PR videos"
+      ],
+      "not": "Not magazine serif: denser, greyer, ruled into boxes, and the photo is a halftone.",
+      "search": [
+        "newspaper headline animation",
+        "front page motion graphics",
+        "newsprint halftone video"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "halftone"
+        ],
+        "typography": [
+          "serif-editorial",
+          "condensed"
+        ],
+        "composition": [
+          "editorial-grid",
+          "modular-grid"
+        ],
+        "color": [
+          "grayscale"
+        ],
+        "texture": [
+          "halftone",
+          "print-grain"
+        ],
+        "material": [
+          "newsprint"
+        ],
+        "stroke": [
+          "double-line"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "push",
+          "page-flip"
+        ],
+        "tone": [
+          "serious",
+          "urgent"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ebe6da",
+          "ink": "#1b1b1b",
+          "accent": "#5d5b56",
+          "accent2": "#a39e93",
+          "surface": "#f4f0e6",
+          "muted": "#6f6b63"
+        },
+        "fonts": {
+          "display": "Libre Caslon Text",
+          "body": "Source Serif 4",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 4,
+          "color": "ink",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "halftone",
+        "icons": "glyph",
+        "motif": "rules",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "standards-manual",
+      "name": "Graphic standards manual",
+      "aka": [
+        "corporate identity manual",
+        "Vignelli style",
+        "NASA manual style",
+        "brand guidelines book"
+      ],
+      "what": "A 1970s identity manual: neutral grotesk, strict grid lines, specimen cards, measured red and black, and spec labels in small caps.",
+      "feels": [
+        "systematic",
+        "authoritative",
+        "clean"
+      ],
+      "use": [
+        "brand identity reveals",
+        "design system launches",
+        "institutional films",
+        "logo reveals"
+      ],
+      "not": "Not Swiss poster style: the page is a rulebook, with specimens, grids and specs rather than a single expressive composition.",
+      "search": [
+        "graphic standards manual animation",
+        "nasa graphics standards manual style",
+        "brand guidelines motion design"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist",
+          "swiss-international"
+        ],
+        "era": [
+          "swiss",
+          "seventies"
+        ],
+        "typography": [
+          "neo-grotesk"
+        ],
+        "composition": [
+          "modular-grid",
+          "swiss-grid"
+        ],
+        "color": [
+          "limited-palette",
+          "light-ui"
+        ],
+        "shape": [
+          "rectilinear",
+          "grid-based"
+        ],
+        "format": [
+          "animated-identity",
+          "motion-identity-system"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "wipe",
+          "slide"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#efeeea",
+          "ink": "#121212",
+          "accent": "#e03c31",
+          "accent2": "#121212",
+          "surface": "#ffffff",
+          "muted": "#8a8984"
+        },
+        "fonts": {
+          "display": "IBM Plex Sans",
+          "body": "IBM Plex Sans",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "cards",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "grid",
+        "motion": "snap"
+      }
+    },
+    {
+      "id": "exhibition-wayfinding",
+      "name": "Exhibition & wayfinding",
+      "aka": [
+        "museum graphics",
+        "signage system",
+        "environmental graphics",
+        "gallery wayfinding"
+      ],
+      "what": "Museum signage in motion: dark gallery-green walls, rounded sign panels, clean neo-grotesk labels and arrow pictograms.",
+      "feels": [
+        "civic",
+        "calm",
+        "orienting"
+      ],
+      "use": [
+        "museum and exhibition films",
+        "event openers",
+        "venue guides",
+        "product walkthroughs"
+      ],
+      "not": "Not a UI: the panels are signs, read at distance, with pictograms instead of controls.",
+      "search": [
+        "museum exhibition graphics motion",
+        "wayfinding signage animation",
+        "exhibition identity motion design"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist",
+          "clean-minimal"
+        ],
+        "typography": [
+          "neo-grotesk"
+        ],
+        "iconography": [
+          "pictogram"
+        ],
+        "composition": [
+          "stacked-cards",
+          "negative-space"
+        ],
+        "color": [
+          "limited-palette",
+          "dark-ui"
+        ],
+        "shape": [
+          "pill",
+          "rounded"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "slide",
+          "wipe"
+        ],
+        "pacing": [
+          "pause-heavy"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#1f3a33",
+          "ink": "#f4f1e8",
+          "accent": "#e9b949",
+          "accent2": "#f4f1e8",
+          "surface": "#2c4c43",
+          "muted": "#9fb4ab"
+        },
+        "fonts": {
+          "display": "Schibsted Grotesk",
+          "body": "Schibsted Grotesk",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "pills",
+        "radius": 999,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "book-typography",
+      "name": "Classical book typography",
+      "aka": [
+        "literary",
+        "book design",
+        "Penguin classics",
+        "old-style serif"
+      ],
+      "what": "A clothbound classic: oxblood cover, centred old-style Garamond in cream, a gold fleuron, fine paper grain and unhurried fades.",
+      "feels": [
+        "literary",
+        "warm",
+        "patient"
+      ],
+      "use": [
+        "publishing and book trailers",
+        "storytelling brand films",
+        "heritage brands",
+        "quote animations"
+      ],
+      "not": "Not magazine serif: a single centred book-cover composition in old-style type, no columns or headline drama.",
+      "search": [
+        "book typography animation",
+        "literary title motion design",
+        "classic serif page animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "warm-minimal"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "composition": [
+          "centered-hero",
+          "symmetrical"
+        ],
+        "color": [
+          "warm-palette",
+          "limited-palette"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "paper-grain",
+          "fibers"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "page-flip",
+          "dissolve"
+        ],
+        "tone": [
+          "intellectual",
+          "calm"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#5a1f1c",
+          "ink": "#f3e8d2",
+          "accent": "#c9a45c",
+          "accent2": "#8f3a33",
+          "surface": "#6b2622",
+          "muted": "#c7a998"
+        },
+        "fonts": {
+          "display": "EB Garamond",
+          "body": "EB Garamond",
+          "displayWeight": 500,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "glyph",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "architectural-monograph",
+      "name": "Architectural monograph",
+      "aka": [
+        "architecture book",
+        "monograph layout",
+        "El Croquis style",
+        "concrete editorial"
+      ],
+      "what": "Concrete-grey pages, an oversized light-weight grotesk, plan crosshairs, captioned plates and captions set small; built like an architecture book.",
+      "feels": [
+        "austere",
+        "spatial",
+        "intellectual"
+      ],
+      "use": [
+        "architecture and real estate",
+        "furniture and interiors",
+        "design studios",
+        "hardware brand films"
+      ],
+      "not": "Not Swiss poster style: light weights, grey stone tones and photographic plates; quiet rather than assertive.",
+      "search": [
+        "architecture monograph layout animation",
+        "architectural editorial motion design",
+        "minimal architecture typography video"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "modernist"
+        ],
+        "typography": [
+          "grotesk"
+        ],
+        "composition": [
+          "editorial-grid",
+          "negative-space"
+        ],
+        "color": [
+          "grayscale",
+          "low-contrast"
+        ],
+        "photo-video": [
+          "masked-photography",
+          "ken-burns"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "camera": [
+          "pan"
+        ],
+        "transitions": [
+          "wipe",
+          "dissolve"
+        ],
+        "tone": [
+          "minimal",
+          "intellectual"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#d3d0ca",
+          "ink": "#151515",
+          "accent": "#8a857d",
+          "accent2": "#b5b0a7",
+          "surface": "#e2dfda",
+          "muted": "#5f5c57"
+        },
+        "fonts": {
+          "display": "Inter Tight",
+          "body": "Inter Tight",
+          "displayWeight": 300,
+          "case": "none",
+          "tracking": -0.05
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "crosshair",
+        "motion": "mask"
+      }
+    },
+    {
+      "id": "annual-report",
+      "name": "Annual report",
+      "aka": [
+        "corporate report",
+        "impact report",
+        "financial editorial",
+        "report design"
+      ],
+      "what": "Navy serif headlines, crisp sans figures, thin rules and one clean chart on bright paper; numbers presented as a story.",
+      "feels": [
+        "trustworthy",
+        "measured",
+        "clear"
+      ],
+      "use": [
+        "investor updates",
+        "impact and ESG reports",
+        "year-in-review films",
+        "fintech"
+      ],
+      "not": "Not a dashboard: one chart at a time, typeset like a printed page, no UI chrome.",
+      "search": [
+        "annual report motion graphics",
+        "animated annual report video",
+        "editorial data storytelling"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "clean-minimal"
+        ],
+        "typography": [
+          "serif-editorial",
+          "neutral-sans"
+        ],
+        "composition": [
+          "editorial-grid",
+          "typography-led"
+        ],
+        "data-viz": [
+          "line-graph",
+          "number-counter",
+          "statistic"
+        ],
+        "color": [
+          "limited-palette",
+          "cool-palette"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "line-draw",
+          "wipe"
+        ],
+        "tone": [
+          "trustworthy",
+          "professional"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f7f6f2",
+          "ink": "#14213d",
+          "accent": "#1f7a8c",
+          "accent2": "#e5a823",
+          "surface": "#ffffff",
+          "muted": "#7a8296"
+        },
+        "fonts": {
+          "display": "Source Serif 4",
+          "body": "IBM Plex Sans",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "data",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "rules",
+        "motion": "mask"
+      }
+    },
+    {
+      "id": "art-direction-moodboard",
+      "name": "Art-direction moodboard",
+      "aka": [
+        "mood board",
+        "inspiration board",
+        "creative direction board",
+        "lookbook board"
+      ],
+      "what": "Photos, swatches and a serif title card pinned edge to edge on a warm grey board, camel and olive tones, soft lifted shadows.",
+      "feels": [
+        "curated",
+        "tasteful",
+        "exploratory"
+      ],
+      "use": [
+        "creative pitches",
+        "brand direction reveals",
+        "fashion and interiors",
+        "agency reels"
+      ],
+      "not": "Not scrapbook or zine: tidy, curated and photographic, with muted tones, no doodles or photocopy grit.",
+      "search": [
+        "moodboard animation",
+        "creative direction board motion",
+        "fashion moodboard video"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "mixed-media-collage"
+        ],
+        "composition": [
+          "collage",
+          "layered-depth"
+        ],
+        "typography": [
+          "serif-editorial",
+          "neutral-sans"
+        ],
+        "photo-video": [
+          "photo-cutout",
+          "masked-photography"
+        ],
+        "color": [
+          "earth-tones",
+          "muted"
+        ],
+        "shadow": [
+          "floating"
+        ],
+        "motion-language": [
+          "floating"
+        ],
+        "camera": [
+          "top-down",
+          "parallax-camera"
+        ],
+        "transitions": [
+          "slide",
+          "crossfade"
+        ],
+        "tone": [
+          "editorial",
+          "premium"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e3ded5",
+          "ink": "#23201c",
+          "accent": "#a3866a",
+          "accent2": "#56604c",
+          "surface": "#faf7f1",
+          "muted": "#7d766b"
+        },
+        "fonts": {
+          "display": "Instrument Serif",
+          "body": "Inter",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "collage",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "type-specimen",
+      "name": "Type specimen",
+      "aka": [
+        "font specimen",
+        "foundry specimen",
+        "glyph showcase",
+        "specimen poster"
+      ],
+      "what": "One typeface on show against black: a giant headline, glyph marks, crosshair registration and metric callouts in a single hot orange.",
+      "feels": [
+        "crafted",
+        "nerdy",
+        "confident"
+      ],
+      "use": [
+        "font and brand identity launches",
+        "design tool promos",
+        "logo reveals",
+        "kinetic typography"
+      ],
+      "not": "Not kinetic typography in general: the letterforms themselves are the subject, measured and annotated.",
+      "search": [
+        "type specimen animation",
+        "font specimen motion design",
+        "typeface showcase video"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist",
+          "technical-minimal"
+        ],
+        "typography": [
+          "variable-font",
+          "display"
+        ],
+        "composition": [
+          "typography-led",
+          "centered-hero"
+        ],
+        "color": [
+          "high-contrast",
+          "accent-color-system"
+        ],
+        "stroke": [
+          "hairline",
+          "technical"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "morph",
+          "hard-cut"
+        ],
+        "format": [
+          "kinetic-typography",
+          "animated-identity"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#141414",
+          "ink": "#f2efe6",
+          "accent": "#ff5b2e",
+          "accent2": "#f2efe6",
+          "surface": "#1f1f1f",
+          "muted": "#8c8980"
+        },
+        "fonts": {
+          "display": "Fraunces",
+          "body": "IBM Plex Mono",
+          "displayWeight": 900,
+          "case": "none",
+          "tracking": -0.04
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "glyph",
+        "motif": "crosshair",
+        "motion": "type"
+      }
+    },
+    {
+      "id": "social-editorial-story",
+      "name": "Social-first editorial",
+      "aka": [
+        "magazine stories",
+        "vertical editorial",
+        "Instagram editorial",
+        "digital cover story"
+      ],
+      "what": "A magazine told in vertical stories: huge serif cover lines on a black phone, film-grain photo panels and one coral highlight.",
+      "feels": [
+        "stylish",
+        "immediate",
+        "media-savvy"
+      ],
+      "use": [
+        "social teasers",
+        "media and publishing",
+        "fashion and beauty",
+        "creator launches"
+      ],
+      "not": "Not scrollytelling: tap-through story frames with cover-line type, not a long read with charts.",
+      "search": [
+        "editorial instagram stories animation",
+        "vertical magazine story design",
+        "social editorial motion template"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "fashion-editorial"
+        ],
+        "format": [
+          "brand-social-content",
+          "short-form-promo"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "neutral-sans"
+        ],
+        "composition": [
+          "phone-composition",
+          "typography-led"
+        ],
+        "color": [
+          "dark-ui",
+          "accent-color-system"
+        ],
+        "photo-video": [
+          "footage-in-frames",
+          "photo-typography"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "transitions": [
+          "push",
+          "hard-cut"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#121110",
+          "ink": "#f5f1ea",
+          "accent": "#e25c3b",
+          "accent2": "#d8c7b0",
+          "surface": "#1e1c1a",
+          "muted": "#9c958a"
+        },
+        "fonts": {
+          "display": "Playfair Display",
+          "body": "Inter",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "device",
+        "radius": 12,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "editorial-ui",
+      "name": "Editorial UI",
+      "aka": [
+        "magazine interface",
+        "serif UI",
+        "print-inspired product design",
+        "editorial web"
+      ],
+      "what": "Product windows typeset like a magazine: serif headings, hairline borders, cream canvas, square corners and one deep green accent.",
+      "feels": [
+        "refined",
+        "calm",
+        "intelligent"
+      ],
+      "use": [
+        "writing and note apps",
+        "AI research tools",
+        "fintech",
+        "product launch films"
+      ],
+      "not": "Not SaaS minimal: serif type, visible rules and paper tones replace grey cards and blue buttons.",
+      "search": [
+        "editorial ui design animation",
+        "serif interface motion",
+        "magazine style app ui video"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "warm-minimal"
+        ],
+        "ui-treatment": [
+          "editorial-ui",
+          "windowed-ui"
+        ],
+        "typography": [
+          "serif-editorial",
+          "neutral-sans"
+        ],
+        "composition": [
+          "editorial-grid",
+          "ui-led"
+        ],
+        "color": [
+          "muted",
+          "light-ui"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "mask-reveal",
+          "ui-morph"
+        ],
+        "format": [
+          "product-launch-film",
+          "ui-showcase"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f3f0e8",
+          "ink": "#1c1b18",
+          "accent": "#2f5d50",
+          "accent2": "#c9b98f",
+          "surface": "#fbf9f3",
+          "muted": "#8b867a"
+        },
+        "fonts": {
+          "display": "Instrument Serif",
+          "body": "Inter",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "window",
+        "radius": 2,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "line",
+        "motif": "rules",
+        "motion": "mask"
+      }
+    },
+    {
+      "id": "scientific-journal",
+      "name": "Scientific journal",
+      "aka": [
+        "academic paper",
+        "research figure",
+        "Nature-style figure",
+        "white paper"
+      ],
+      "what": "Figure 1 of a paper: white page, serif captions, thin black boxes and arrows, numbered labels and one vermilion highlight.",
+      "feels": [
+        "rigorous",
+        "credible",
+        "intellectual"
+      ],
+      "use": [
+        "AI and research launches",
+        "technical explainers",
+        "biotech",
+        "white-paper videos"
+      ],
+      "not": "Not a whiteboard explainer: typeset and exact, like a printed figure, never hand-drawn.",
+      "search": [
+        "scientific figure animation",
+        "research paper explainer video",
+        "academic diagram motion design"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "editorial"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "illustration": [
+          "technical-diagram"
+        ],
+        "composition": [
+          "flowchart",
+          "negative-space"
+        ],
+        "data-viz": [
+          "flow-diagram",
+          "process-diagram"
+        ],
+        "color": [
+          "black-and-white",
+          "accent-color-system"
+        ],
+        "stroke": [
+          "thin",
+          "technical"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "line-draw",
+          "fade"
+        ],
+        "format": [
+          "technical-explainer"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fdfdfb",
+          "ink": "#151515",
+          "accent": "#e8553e",
+          "accent2": "#dfe3e6",
+          "surface": "#ffffff",
+          "muted": "#7c7c78"
+        },
+        "fonts": {
+          "display": "Source Serif 4",
+          "body": "Source Serif 4",
+          "displayWeight": 500,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "diagram",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "editorial-kinetic-type",
+      "name": "Editorial kinetic typography",
+      "aka": [
+        "big-type editorial",
+        "typographic statement",
+        "headline-led motion",
+        "type-only film"
+      ],
+      "what": "Huge tight serif headlines slam across a saturated vermilion field, word by word; black type, no images, pure hierarchy.",
+      "feels": [
+        "bold",
+        "articulate",
+        "urgent"
+      ],
+      "use": [
+        "manifesto films",
+        "quote and statement ads",
+        "brand campaigns",
+        "event openers"
+      ],
+      "not": "Not a type specimen: the words carry a message; the typeface is a voice, not the subject.",
+      "search": [
+        "editorial kinetic typography",
+        "serif kinetic type manifesto",
+        "big type motion design"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "extreme-minimal"
+        ],
+        "typography": [
+          "serif-editorial",
+          "display"
+        ],
+        "composition": [
+          "typography-led",
+          "full-bleed"
+        ],
+        "color": [
+          "color-blocking",
+          "high-contrast"
+        ],
+        "format": [
+          "kinetic-typography",
+          "manifesto-film"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "pacing": [
+          "beat-driven"
+        ],
+        "transitions": [
+          "push",
+          "hard-cut"
+        ],
+        "tone": [
+          "bold",
+          "editorial"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ff5a36",
+          "ink": "#140c08",
+          "accent": "#140c08",
+          "accent2": "#ffd9c8",
+          "surface": "#ff7a5c",
+          "muted": "#6a2a18"
+        },
+        "fonts": {
+          "display": "Instrument Serif",
+          "body": "Inter Tight",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.04
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "photo-essay",
+      "name": "Photo essay",
+      "aka": [
+        "photojournalism layout",
+        "reportage",
+        "picture story",
+        "documentary editorial"
+      ],
+      "what": "A large moody photograph dominates a dark spread, with a restrained sans headline, italic caption and film grain on charcoal.",
+      "feels": [
+        "honest",
+        "human",
+        "grounded"
+      ],
+      "use": [
+        "brand stories",
+        "nonprofit and impact films",
+        "travel and hospitality",
+        "case studies"
+      ],
+      "not": "Not documentary film: still photography composed on a page, captions typeset, no lower thirds.",
+      "search": [
+        "photo essay motion design",
+        "editorial photography animation",
+        "reportage layout video"
+      ],
+      "stack": {
+        "visual-style": [
+          "documentary",
+          "print-editorial"
+        ],
+        "typography": [
+          "humanist-sans",
+          "serif-editorial"
+        ],
+        "composition": [
+          "editorial-grid",
+          "asymmetric"
+        ],
+        "photo-video": [
+          "ken-burns",
+          "masked-photography"
+        ],
+        "color": [
+          "muted",
+          "dark-ui"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "camera": [
+          "push-in"
+        ],
+        "transitions": [
+          "crossfade",
+          "mask-reveal"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#1c1b19",
+          "ink": "#ece8df",
+          "accent": "#6b6456",
+          "accent2": "#a38f6e",
+          "surface": "#26241f",
+          "muted": "#9a948a"
+        },
+        "fonts": {
+          "display": "Hanken Grotesk",
+          "body": "Newsreader",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "acid-grotesk-editorial",
+      "name": "Contemporary grotesk editorial",
+      "aka": [
+        "design-magazine style",
+        "new grotesk editorial",
+        "studio portfolio look",
+        "acid lime editorial"
+      ],
+      "what": "Heavy uppercase grotesk in rounded modular tiles, pale grey page, black and one acid-lime tile; today's design-studio layout.",
+      "feels": [
+        "current",
+        "sharp",
+        "cool"
+      ],
+      "use": [
+        "agency and studio reels",
+        "creative-tool launches",
+        "event and conference promos",
+        "fashion-tech"
+      ],
+      "not": "Not Swiss International Style: rounded tiles, heavier uppercase type and a fashionable acid accent instead of red.",
+      "search": [
+        "contemporary editorial motion design",
+        "grotesk bento motion",
+        "design studio reel typography"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "swiss-international"
+        ],
+        "typography": [
+          "grotesk",
+          "extended"
+        ],
+        "composition": [
+          "bento-grid",
+          "modular-grid",
+          "typography-led"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "shape": [
+          "rounded",
+          "modular"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "transitions": [
+          "scale",
+          "push"
+        ],
+        "pacing": [
+          "fast"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e6e6e1",
+          "ink": "#0e0e0e",
+          "accent": "#c6f432",
+          "accent2": "#0e0e0e",
+          "surface": "#f7f7f4",
+          "muted": "#7e7e78"
+        },
+        "fonts": {
+          "display": "Inter Tight",
+          "body": "Inter Tight",
+          "displayWeight": 800,
+          "case": "upper",
+          "tracking": -0.03
+        },
+        "layout": "bento",
+        "radius": 28,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "pop"
+      }
+    },
+    {
+      "id": "illustrated-editorial",
+      "name": "Illustrated editorial",
+      "aka": [
+        "spot illustration",
+        "New Yorker style",
+        "conceptual editorial illustration",
+        "grainy vector editorial"
+      ],
+      "what": "A conceptual spot illustration in grainy flat colour, muted ochre and teal on off-white, crowned by a calm serif headline.",
+      "feels": [
+        "thoughtful",
+        "warm",
+        "clever"
+      ],
+      "use": [
+        "concept explainers",
+        "fintech and health",
+        "thought-leadership films",
+        "newsletter teasers"
+      ],
+      "not": "Not flat corporate illustration: textured, conceptual and restrained, drawn like a magazine commission.",
+      "search": [
+        "editorial illustration animation",
+        "grainy vector motion design",
+        "conceptual illustration explainer"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "warm-minimal"
+        ],
+        "illustration": [
+          "editorial",
+          "grainy-vector"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "composition": [
+          "centered-hero",
+          "illustration-led"
+        ],
+        "color": [
+          "muted",
+          "earth-tones"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "iconography": [
+          "duotone"
+        ],
+        "motion-language": [
+          "organic"
+        ],
+        "transitions": [
+          "shape-match",
+          "crossfade"
+        ],
+        "narrative": [
+          "statement-evidence-payoff"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f2ede3",
+          "ink": "#23201c",
+          "accent": "#d49a3a",
+          "accent2": "#2f6b6a",
+          "surface": "#faf6ee",
+          "muted": "#8a8173"
+        },
+        "fonts": {
+          "display": "Fraunces",
+          "body": "Karla",
+          "displayWeight": 500,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "duotone",
+        "motif": "blobs",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "deconstructed-editorial",
+      "name": "Deconstructed editorial",
+      "aka": [
+        "grunge typography",
+        "David Carson style",
+        "Ray Gun layout",
+        "anti-grid"
+      ],
+      "what": "The grid breaks: condensed type overlapping and jittering, torn noise, off-kilter callouts, dirty black and a sodium-yellow hit.",
+      "feels": [
+        "restless",
+        "experimental",
+        "loud"
+      ],
+      "use": [
+        "music videos",
+        "streetwear drops",
+        "festival promos",
+        "youth campaigns"
+      ],
+      "not": "Not Photocopy zine: no taped scraps; the typography itself is fractured and layered on screen.",
+      "search": [
+        "david carson typography animation",
+        "grunge typography motion",
+        "deconstructed type video"
+      ],
+      "stack": {
+        "visual-style": [
+          "grunge",
+          "brutalism"
+        ],
+        "era": [
+          "nineties"
+        ],
+        "typography": [
+          "condensed",
+          "distorted"
+        ],
+        "composition": [
+          "asymmetric",
+          "typography-led"
+        ],
+        "color": [
+          "high-contrast",
+          "limited-palette"
+        ],
+        "texture": [
+          "digital-noise",
+          "distressed-edges"
+        ],
+        "effects": [
+          "glitch",
+          "noise"
+        ],
+        "motion-language": [
+          "chaotic"
+        ],
+        "transitions": [
+          "glitch",
+          "hard-cut"
+        ],
+        "tone": [
+          "experimental",
+          "rebellious"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#1a1917",
+          "ink": "#ecebe4",
+          "accent": "#f5c400",
+          "accent2": "#8b8a83",
+          "surface": "#2a2926",
+          "muted": "#8b8a83"
+        },
+        "fonts": {
+          "display": "Big Shoulders Display",
+          "body": "Space Mono",
+          "displayWeight": 900,
+          "case": "upper",
+          "tracking": -0.02
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "glyph",
+        "motif": "none",
+        "motion": "glitch"
+      }
+    },
+    {
+      "id": "screenplay-page",
+      "name": "Screenplay page",
+      "aka": [
+        "script format",
+        "typescript",
+        "Courier page",
+        "shooting script"
+      ],
+      "what": "A shooting-script page: Courier Prime on cream bond, sluglines and dialogue typing out, red-pencil revisions and a soft page shadow.",
+      "feels": [
+        "personal",
+        "authentic",
+        "literary"
+      ],
+      "use": [
+        "film and TV promos",
+        "founder letters",
+        "storytelling brand films",
+        "dialogue-led teasers"
+      ],
+      "not": "Not letterpress or monospace brutalism: script formatting on a lifted paper page, typed live, no deboss and no hard borders.",
+      "search": [
+        "screenplay text animation",
+        "script page typewriter motion",
+        "courier screenplay title design"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "warm-minimal"
+        ],
+        "typography": [
+          "monospace"
+        ],
+        "composition": [
+          "typography-led",
+          "centered-hero"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "paper-grain",
+          "ink-bleed"
+        ],
+        "ui-interaction": [
+          "typing"
+        ],
+        "color": [
+          "warm-palette",
+          "limited-palette"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "hard-cut",
+          "fade"
+        ],
+        "tone": [
+          "human",
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e6dfd0",
+          "ink": "#1f1c18",
+          "accent": "#c0392b",
+          "accent2": "#8a7f6a",
+          "surface": "#fbf8f0",
+          "muted": "#857b6c"
+        },
+        "fonts": {
+          "display": "Courier Prime",
+          "body": "Courier Prime",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "terminal",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "paper",
+        "icons": "none",
+        "motif": "none",
+        "motion": "type"
+      }
+    }
+  ]
+}

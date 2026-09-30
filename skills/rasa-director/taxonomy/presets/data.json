@@ -1,0 +1,286 @@
+{
+  "family": {"id": "data", "name": "Data & explainers", "what": "Information made visible: charts, maps, diagrams and drawn explanations, each with its own voice."},
+  "presets": [
+    {
+      "id": "flat-infographic",
+      "name": "Flat infographic",
+      "aka": ["flat vector infographic", "icon explainer", "2D infographic"],
+      "what": "Bright flat colour tiles, bold filled pictograms, big numbers and simple bars; no gradients, no shadows, pure shape.",
+      "feels": ["clear", "friendly", "upbeat"],
+      "use": ["social explainers", "report highlights", "onboarding facts"],
+      "not": "Not data journalism: promotional and icon-led, not sourced charts with editorial type.",
+      "search": ["flat infographic animation", "2d vector infographic motion", "animated statistics icons"],
+      "stack": {"visual-style": ["corporate-flat"], "illustration": ["flat-vector", "pictogram"], "iconography": ["filled"], "data-viz": ["statistic", "bar-chart", "pie-donut"], "depth": ["pure-flat-2d"], "color": ["limited-palette"], "format": ["animated-infographic"], "motion-language": ["playful"], "transitions": ["scale", "shape-match"]},
+      "recipe": {
+        "palette": {"canvas": "#fff8ec", "ink": "#1d2a3a", "accent": "#ef476f", "accent2": "#06d6a0", "surface": "#ffd166", "muted": "#5c6b7a"},
+        "fonts": {"display": "Poppins", "body": "Poppins", "displayWeight": 800, "case": "none", "tracking": -0.02},
+        "layout": "bento", "radius": 12, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "pop"
+      }
+    },
+    {
+      "id": "data-journalism",
+      "name": "Data journalism",
+      "aka": ["FT style", "NYT Upshot look", "The Pudding", "newsroom graphics"],
+      "what": "Salmon newsprint, serif headline, one precise line chart with sourced annotations, thin rules and a restrained two-colour series.",
+      "feels": ["authoritative", "considered", "rigorous"],
+      "use": ["news explainers", "research reports", "policy and economics stories"],
+      "not": "Not a dashboard: one argued chart with a headline and a source line, not a panel of metrics.",
+      "search": ["financial times chart animation", "data journalism motion graphics", "nyt style animated chart"],
+      "stack": {"visual-style": ["print-editorial"], "data-viz": ["line-graph", "statistic"], "typography": ["serif-editorial"], "composition": ["editorial-grid"], "color": ["limited-palette", "muted"], "format": ["data-visualization", "news-graphics"], "narrative": ["statement-evidence-payoff"], "tone": ["editorial", "trustworthy"], "motion-language": ["precise"], "transitions": ["line-draw", "wipe"]},
+      "recipe": {
+        "palette": {"canvas": "#fff1e5", "ink": "#33302e", "accent": "#0f5499", "accent2": "#990f3d", "surface": "#fff9f5", "muted": "#807973"},
+        "fonts": {"display": "Source Serif 4", "body": "Source Sans 3", "displayWeight": 600, "case": "none", "tracking": -0.02},
+        "layout": "data", "radius": 0, "stroke": {"width": 1, "color": "#ccc1b7", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "rules", "motion": "mask"
+      }
+    },
+    {
+      "id": "dark-ops-dashboard",
+      "name": "Dark ops dashboard",
+      "aka": ["NOC dashboard", "dark analytics", "control room"],
+      "what": "Dense dark tiles edged in neon, big live numbers, status dots and mono labels; a wall of real-time metrics.",
+      "feels": ["vigilant", "technical", "live"],
+      "use": ["observability and security", "trading and ops", "live event stats"],
+      "not": "Not dashboard showcase: dense, dark and operational, built for monitoring rather than marketing.",
+      "search": ["dark dashboard animation", "noc screen motion graphics", "real time metrics ui"],
+      "stack": {"visual-style": ["technical-minimal", "futuristic-tech"], "ui-treatment": ["dashboard-ui", "bento-ui"], "data-viz": ["dashboard", "number-counter", "status-indicator"], "color": ["dark-ui", "neon"], "shadow": ["glow"], "format": ["dashboard-animation"], "motion-language": ["mechanical"], "transitions": ["hard-cut", "flash"]},
+      "recipe": {
+        "palette": {"canvas": "#070b14", "ink": "#e6edf7", "accent": "#00e0a4", "accent2": "#7c5cff", "surface": "#0f1626", "muted": "#6b7a90"},
+        "fonts": {"display": "Space Grotesk", "body": "JetBrains Mono", "displayWeight": 700, "case": "none", "tracking": -0.03},
+        "layout": "bento", "radius": 10, "stroke": {"width": 1, "color": "#1e2a40", "style": "solid"},
+        "shadow": "glow", "shadowColor": "accent", "surface": "neon", "texture": "grid", "icons": "line", "motif": "none", "motion": "snap"
+      }
+    },
+    {
+      "id": "map-explainer",
+      "name": "Map explainer",
+      "aka": ["animated map", "geo explainer", "route map"],
+      "what": "Pale land on a dot-matrix field, bold red markers and crosshairs pinning places, routes drawing on between them.",
+      "feels": ["grounded", "clear", "journalistic"],
+      "use": ["logistics and travel", "news and geopolitics", "store and network rollouts"],
+      "search": ["animated map explainer", "route map motion graphics", "dot matrix map animation"],
+      "stack": {"visual-style": ["editorial"], "data-viz": ["map"], "format": ["map-animation"], "camera": ["top-down", "zoom"], "composition": ["full-bleed"], "motion-function": ["show-location"], "typography": ["condensed"], "motion-language": ["smooth"], "transitions": ["zoom", "line-draw"]},
+      "recipe": {
+        "palette": {"canvas": "#e8ede4", "ink": "#1c2a24", "accent": "#e4572e", "accent2": "#2e86ab", "surface": "#f6f8f3", "muted": "#6c7a70"},
+        "fonts": {"display": "Barlow Condensed", "body": "Barlow", "displayWeight": 700, "case": "upper", "tracking": 0.01},
+        "layout": "poster", "radius": 4, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "filled", "motif": "orbits", "motion": "slide"
+      }
+    },
+    {
+      "id": "systems-diagram",
+      "name": "Systems diagram",
+      "aka": ["architecture diagram", "technical explainer", "box-and-arrow"],
+      "what": "Crisp labelled boxes and orthogonal arrows on white, monospace headings, one highlighted path pulsing through the system.",
+      "feels": ["logical", "rigorous", "clear"],
+      "use": ["architecture explainers", "security and infra stories", "how-it-works segments"],
+      "not": "Not node canvas: an explanatory figure with a fixed path, not an editable product canvas.",
+      "search": ["system architecture diagram animation", "technical explainer motion", "box and arrow diagram animated"],
+      "stack": {"visual-style": ["technical-minimal"], "illustration": ["technical-diagram"], "data-viz": ["flow-diagram", "process-diagram"], "format": ["technical-explainer", "diagram-led-explainer"], "composition": ["flowchart"], "typography": ["monospace"], "motion-language": ["mechanical"], "transitions": ["line-draw", "graphic-match"]},
+      "recipe": {
+        "palette": {"canvas": "#f8fafc", "ink": "#111827", "accent": "#f97316", "accent2": "#38bdf8", "surface": "#ffffff", "muted": "#6b7280"},
+        "fonts": {"display": "IBM Plex Mono", "body": "IBM Plex Sans", "displayWeight": 600, "case": "none", "tracking": -0.02},
+        "layout": "diagram", "radius": 6, "stroke": {"width": 2, "color": "ink", "style": "solid"},
+        "shadow": "hard", "shadowColor": "#d1d5db", "surface": "flat", "texture": "grid", "icons": "line", "motif": "none", "motion": "mask"
+      }
+    },
+    {
+      "id": "blueprint-schematic",
+      "name": "Blueprint schematic",
+      "aka": ["blueprint explainer", "engineering drawing", "cyanotype technical"],
+      "what": "White hairlines and dimension rings on Prussian-blue grid paper, stencil-mono labels, parts measured and annotated as they draw on.",
+      "feels": ["engineered", "meticulous", "classic"],
+      "use": ["hardware and engineering", "architecture", "how-it's-made explainers"],
+      "search": ["blueprint animation explainer", "engineering drawing motion graphics", "technical blueprint reveal"],
+      "stack": {"visual-style": ["technical-minimal"], "illustration": ["blueprint", "schematic"], "ui-treatment": ["blueprint-ui"], "stroke": ["hairline", "technical"], "color": ["monochrome"], "composition": ["negative-space"], "motion-language": ["precise"], "transitions": ["line-draw", "wipe"]},
+      "recipe": {
+        "palette": {"canvas": "#123f7a", "ink": "#f1f6ff", "accent": "#ffffff", "accent2": "#9cc3ff", "surface": "#1a4d8f", "muted": "#9db4d6"},
+        "fonts": {"display": "Space Mono", "body": "Space Mono", "displayWeight": 700, "case": "upper", "tracking": 0.04},
+        "layout": "hud", "radius": 0, "stroke": {"width": 1, "color": "#9cc3ff", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "line", "motif": "crosshair", "motion": "mask"
+      }
+    },
+    {
+      "id": "whiteboard-explainer",
+      "name": "Whiteboard explainer",
+      "aka": ["whiteboard animation", "sketch explainer", "VideoScribe style"],
+      "what": "Black and red marker lines drawing onto a white board, hand-lettered labels, wobbly boxes and doodle icons appearing stroke by stroke.",
+      "feels": ["approachable", "smart", "human"],
+      "use": ["training and onboarding", "concept explainers", "sales stories"],
+      "not": "Not chalk talk: bright white board with crisp marker, not dusty chalk on dark slate.",
+      "search": ["whiteboard animation explainer", "hand drawn marker explainer", "sketch diagram animation"],
+      "stack": {"visual-style": ["doodle", "sketchbook"], "illustration": ["hand-drawn", "doodle"], "stroke": ["marker", "animated-draw-on"], "typography": ["handwritten"], "texture": ["marker"], "format": ["concept-explainer"], "motion-language": ["handmade-imperfect"], "transitions": ["line-draw", "wipe"]},
+      "recipe": {
+        "palette": {"canvas": "#fbfbf8", "ink": "#1b1b1b", "accent": "#d62828", "accent2": "#1d6fd6", "surface": "#ffffff", "muted": "#6d6d6d"},
+        "fonts": {"display": "Caveat", "body": "Kalam", "displayWeight": 700, "case": "none", "tracking": 0},
+        "layout": "diagram", "radius": 14, "stroke": {"width": 4, "color": "ink", "style": "sketch"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "doodle", "motif": "none", "motion": "mask"
+      }
+    },
+    {
+      "id": "timeline-explainer",
+      "name": "Timeline explainer",
+      "aka": ["history timeline", "roadmap animation", "milestone sequence"],
+      "what": "Milestone rows marching down a rail, green year dots, bold serif dates, each step sliding in as the story moves forward.",
+      "feels": ["orderly", "narrative", "assured"],
+      "use": ["company histories", "product roadmaps", "anniversary films"],
+      "search": ["timeline animation", "history milestones motion graphics", "roadmap explainer animated"],
+      "stack": {"visual-style": ["editorial"], "data-viz": ["timeline"], "composition": ["timeline"], "format": ["timeline"], "narrative": ["timeline"], "motion-function": ["show-progress"], "typography": ["serif-editorial"], "motion-language": ["rhythmic"], "transitions": ["push", "slide"]},
+      "recipe": {
+        "palette": {"canvas": "#f2efe6", "ink": "#1f1d1a", "accent": "#2f6f4e", "accent2": "#e0a526", "surface": "#ffffff", "muted": "#7a756b"},
+        "fonts": {"display": "Fraunces", "body": "Work Sans", "displayWeight": 700, "case": "none", "tracking": -0.02},
+        "layout": "pills", "radius": 999, "stroke": {"width": 2, "color": "ink", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "paper", "icons": "line", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "network-graph",
+      "name": "Network graph",
+      "aka": ["knowledge graph", "node-link diagram", "constellation graph"],
+      "what": "Glowing pill nodes linked by fine lines on deep navy, orbit rings around clusters, links lighting up as relationships emerge.",
+      "feels": ["connected", "intelligent", "vast"],
+      "use": ["AI and data platforms", "social and supply networks", "research stories"],
+      "search": ["network graph animation", "knowledge graph motion graphics", "node link visualization"],
+      "stack": {"visual-style": ["technical-minimal", "generative"], "data-viz": ["node-network", "knowledge-graph"], "composition": ["node-map", "orbit"], "format": ["network-visualization"], "shadow": ["glow"], "color": ["dark-ui", "cool-palette"], "motion-language": ["organic"], "transitions": ["zoom-through", "particle"]},
+      "recipe": {
+        "palette": {"canvas": "#0a0e27", "ink": "#e8ecff", "accent": "#7aa2ff", "accent2": "#ff8fd8", "surface": "#151a3d", "muted": "#7c84b0"},
+        "fonts": {"display": "Sora", "body": "Inter", "displayWeight": 600, "case": "none", "tracking": -0.02},
+        "layout": "diagram", "radius": 999, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "glow", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "none", "motif": "orbits", "motion": "drift"
+      }
+    },
+    {
+      "id": "academic-explainer",
+      "name": "Academic explainer",
+      "aka": ["scientific paper style", "journal figure", "lecture explainer"],
+      "what": "Cream page, classic serif set in two columns, a muted-teal figure plate, thin rules and footnote-sized captions.",
+      "feels": ["intellectual", "credible", "unhurried"],
+      "use": ["research summaries", "university and science comms", "grant and paper explainers"],
+      "not": "Not data journalism: bookish and figure-led, no newsroom headline energy.",
+      "search": ["scientific explainer animation", "academic paper motion graphics", "research summary video"],
+      "stack": {"visual-style": ["editorial"], "typography": ["serif-editorial"], "composition": ["editorial-grid"], "format": ["educational-motion", "concept-explainer"], "color": ["muted"], "tone": ["intellectual", "serious"], "texture": ["paper-grain"], "motion-language": ["smooth"], "transitions": ["crossfade", "page-flip"]},
+      "recipe": {
+        "palette": {"canvas": "#f7f3ea", "ink": "#222222", "accent": "#2d6a73", "accent2": "#b5523b", "surface": "#efe8d8", "muted": "#6f6a60"},
+        "fonts": {"display": "Crimson Pro", "body": "Crimson Pro", "displayWeight": 600, "case": "none", "tracking": -0.01},
+        "layout": "editorial", "radius": 0, "stroke": {"width": 1, "color": "ink", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "none", "motif": "rules", "motion": "fade"
+      }
+    },
+    {
+      "id": "isometric-process",
+      "name": "Isometric process",
+      "aka": ["isometric explainer", "extruded infographic", "3D-ish flow"],
+      "what": "Mint and coral blocks extruded with long flat diagonal shadows, a filled icon per step, a tidy stepwise process read left to right.",
+      "feels": ["organized", "friendly", "systematic"],
+      "use": ["process explainers", "B2B how-it-works", "onboarding flows"],
+      "search": ["isometric process animation", "isometric infographic explainer", "extruded flat design motion"],
+      "stack": {"visual-style": ["isometric", "corporate-flat"], "illustration": ["isometric", "flat-vector"], "depth": ["isometric"], "camera": ["isometric"], "data-viz": ["process-diagram"], "format": ["process-explainer"], "shadow": ["long"], "motion-language": ["precise"], "transitions": ["slide", "camera-move"]},
+      "recipe": {
+        "palette": {"canvas": "#e3f3ec", "ink": "#15302a", "accent": "#2f9e8f", "accent2": "#ff8a5b", "surface": "#ffffff", "muted": "#5d7a72"},
+        "fonts": {"display": "Lexend", "body": "Lexend", "displayWeight": 700, "case": "none", "tracking": -0.02},
+        "layout": "cards", "radius": 14, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "long", "shadowColor": "#8cc7b4", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "pop"
+      }
+    },
+    {
+      "id": "chalk-talk",
+      "name": "Chalk talk",
+      "aka": ["chalkboard explainer", "blackboard animation", "lecture chalk"],
+      "what": "Dusty chalk lines and hand-lettering on green-black slate, sketchy boxes and doodled arrows, smudged grain everywhere.",
+      "feels": ["warm", "teacherly", "nostalgic"],
+      "use": ["education", "lectures and courses", "math and science explainers"],
+      "search": ["chalkboard animation explainer", "chalk talk motion graphics", "blackboard drawing animation"],
+      "stack": {"visual-style": ["sketchbook", "handmade"], "illustration": ["sketch", "doodle"], "texture": ["chalk"], "typography": ["handwritten"], "stroke": ["rough"], "format": ["educational-motion"], "motion-language": ["handmade-imperfect"], "transitions": ["line-draw", "dissolve"]},
+      "recipe": {
+        "palette": {"canvas": "#1f332a", "ink": "#f0eee4", "accent": "#f6d365", "accent2": "#8fd3f4", "surface": "#2a4236", "muted": "#a9b5a8"},
+        "fonts": {"display": "Cabin Sketch", "body": "Patrick Hand", "displayWeight": 700, "case": "none", "tracking": 0},
+        "layout": "cards", "radius": 10, "stroke": {"width": 3, "color": "ink", "style": "sketch"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "noise", "icons": "doodle", "motif": "squiggles", "motion": "step"
+      }
+    },
+    {
+      "id": "annotated-screenshot",
+      "name": "Annotated screenshot",
+      "aka": ["callout explainer", "screenshot walkthrough", "markup explainer"],
+      "what": "A real screen framed in a window, bold red outlines, arrows and numbered callouts pointing at what matters, zooming into details.",
+      "feels": ["helpful", "direct", "clear"],
+      "use": ["tutorials", "release notes", "support and how-to videos"],
+      "not": "Not browser-framed UI: the markup is the point; red outlines and callouts sit on top of the product.",
+      "search": ["annotated screenshot animation", "callout tutorial video", "screenshot markup explainer"],
+      "stack": {"visual-style": ["clean-minimal"], "ui-treatment": ["production-faithful-ui", "windowed-ui"], "product-demo": ["callout-annotation", "zoomed-detail"], "photo-video": ["floating-screenshot"], "format": ["tutorial"], "motion-function": ["direct-attention", "emphasize"], "motion-language": ["snappy"], "transitions": ["zoom", "mask-reveal"]},
+      "recipe": {
+        "palette": {"canvas": "#dfe3e8", "ink": "#111418", "accent": "#ff3b30", "accent2": "#ffcc00", "surface": "#ffffff", "muted": "#5b6472"},
+        "fonts": {"display": "Schibsted Grotesk", "body": "Inter", "displayWeight": 800, "case": "none", "tracking": -0.02},
+        "layout": "window", "radius": 8, "stroke": {"width": 5, "color": "accent", "style": "solid"},
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "pop"
+      }
+    },
+    {
+      "id": "metric-count-up",
+      "name": "Metric count-up",
+      "aka": ["stat reveal", "number ticker", "big number"],
+      "what": "One enormous condensed number ticking up beside a rising line, black on white, a single punchy orange for the delta.",
+      "feels": ["decisive", "impressive", "punchy"],
+      "use": ["milestone announcements", "investor and earnings clips", "social stat cards"],
+      "search": ["number count up animation", "big stat motion graphic", "kpi ticker animation"],
+      "stack": {"visual-style": ["swiss-international"], "data-viz": ["number-counter", "statistic", "area-chart"], "typography": ["grotesk", "condensed"], "format": ["statistics-animation"], "composition": ["typography-led"], "motion-function": ["show-data-change"], "motion-language": ["snappy"], "transitions": ["hard-cut", "scale"]},
+      "recipe": {
+        "palette": {"canvas": "#ffffff", "ink": "#0b0b0b", "accent": "#ff3d00", "accent2": "#111111", "surface": "#f2f2f2", "muted": "#6b6b6b"},
+        "fonts": {"display": "Anton", "body": "Inter", "displayWeight": 400, "case": "upper", "tracking": -0.01},
+        "layout": "data", "radius": 0, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "snap"
+      }
+    },
+    {
+      "id": "financial-terminal",
+      "name": "Financial terminal",
+      "aka": ["Bloomberg terminal look", "ticker terminal", "market data screen"],
+      "what": "Amber and green monospace figures on black, dense tables and ticker lines, faint scanlines, zero decoration.",
+      "feels": ["serious", "dense", "expert"],
+      "use": ["markets and trading", "finance news", "crypto and data products"],
+      "not": "Not terminal product demo: dense amber market data, not a sparse modern CLI.",
+      "search": ["bloomberg terminal style animation", "stock ticker motion graphics", "financial data terminal"],
+      "stack": {"visual-style": ["monochrome", "retro-futurism"], "ui-treatment": ["terminal-ui", "dashboard-ui"], "data-viz": ["table", "line-graph", "number-counter"], "typography": ["monospace"], "color": ["dark-ui", "high-contrast"], "texture": ["crt-scanlines"], "format": ["news-graphics", "data-visualization"], "motion-language": ["mechanical"], "transitions": ["hard-cut"]},
+      "recipe": {
+        "palette": {"canvas": "#000000", "ink": "#ffb000", "accent": "#33ff99", "accent2": "#ff4d4d", "surface": "#140f02", "muted": "#a07000"},
+        "fonts": {"display": "IBM Plex Mono", "body": "IBM Plex Mono", "displayWeight": 600, "case": "upper", "tracking": 0.02},
+        "layout": "terminal", "radius": 0, "stroke": {"width": 2, "color": "#6b4a00", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "crt", "icons": "glyph", "motif": "none", "motion": "snap"
+      }
+    },
+    {
+      "id": "explainer-collage",
+      "name": "Explainer collage",
+      "aka": ["Vox style", "paper-cut explainer", "mixed-media explainer"],
+      "what": "Torn paper, halftone photos and yellow highlighter blocks taped over charts: newsroom collage that argues a point.",
+      "feels": ["curious", "energetic", "journalistic"],
+      "use": ["video essays", "news explainers", "YouTube documentaries"],
+      "not": "Not deconstructed UI: it collages print, photos and charts, not interface pieces.",
+      "search": ["vox style explainer animation", "paper collage explainer", "mixed media motion graphics news"],
+      "stack": {"visual-style": ["mixed-media-collage", "halftone"], "illustration": ["photo-collage", "collage"], "material": ["paper"], "texture": ["halftone", "paper-grain"], "composition": ["collage"], "format": ["concept-explainer", "news-graphics"], "motion-language": ["stop-motion-like"], "transitions": ["object-wipe", "hard-cut"]},
+      "recipe": {
+        "palette": {"canvas": "#efe9dc", "ink": "#161616", "accent": "#ffd500", "accent2": "#e8402b", "surface": "#ffffff", "muted": "#6f6a60"},
+        "fonts": {"display": "Archivo", "body": "Libre Franklin", "displayWeight": 900, "case": "upper", "tracking": -0.02},
+        "layout": "collage", "radius": 2, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "halftone", "icons": "duotone", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "scrollytelling-story",
+      "name": "Scrollytelling story",
+      "aka": ["vertical data story", "Instagram explainer", "mobile data narrative"],
+      "what": "A vertical phone story on midnight navy: cream display-serif headline, one chart card per scroll step, a single hot-magenta highlight.",
+      "feels": ["intimate", "engaging", "modern"],
+      "use": ["social explainers", "vertical data stories", "newsletter promos"],
+      "search": ["scrollytelling animation", "vertical data story video", "instagram explainer carousel motion"],
+      "stack": {"visual-style": ["editorial"], "ui-treatment": ["device-bound-ui"], "data-viz": ["bar-chart", "statistic", "comparison-cards"], "format": ["animated-infographic", "brand-social-content"], "ui-interaction": ["scroll"], "composition": ["phone-composition", "stacked-cards"], "narrative": ["progressive-reveal"], "motion-language": ["fluid"], "transitions": ["push", "slide"]},
+      "recipe": {
+        "palette": {"canvas": "#14142b", "ink": "#f6f1e7", "accent": "#ff3d9a", "accent2": "#4f8bff", "surface": "#23234a", "muted": "#9a98b8"},
+        "fonts": {"display": "DM Serif Display", "body": "DM Sans", "displayWeight": 400, "case": "none", "tracking": -0.01},
+        "layout": "device", "radius": 16, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "mask"
+      }
+    }
+  ]
+}

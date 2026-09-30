@@ -308,3 +308,24 @@ p { margin: 0 0 1em; }
   .dims, .acts, .routes, .loop { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* style library: every preset drawn live by assets/presets.js */
+.lib { margin-top: 40px; }
+.lib-controls { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(260px, 1.4fr); gap: 14px; }
+.lib-try { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 6px 8px 6px 18px; }
+.lib-try span { font: 500 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .7; white-space: nowrap; }
+.lib-try input, .lib-search { flex: 1; min-width: 0; background: transparent; border: 0; color: inherit; font: 500 1rem/1.2 var(--body); padding: 8px 6px; outline: none; }
+.lib-search { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 12px 20px; }
+.lib-try:focus-within, .lib-search:focus { border-color: #eeb219; }
+.lib-fams { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 6px; }
+.lib-fams button { background: transparent; color: inherit; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 14px; font: 500 .9rem/1 var(--body); cursor: pointer; }
+.lib-fams button.on { background: #eeb219; color: #1a1300; border-color: #eeb219; }
+.lib-count { font: 500 .78rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .65; margin: 10px 0 16px; }
+.lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.lib-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; overflow: hidden; }
+.lib-card .spec { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+.lib-card .spec > .rp-stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.lib-card b { display: block; font: 600 .98rem/1.25 var(--body); padding: 10px 12px 2px; }
+.lib-card small { display: block; font: 500 .7rem/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; opacity: .6; padding: 0 12px 12px; }
+.lib-card p { font-size: .86rem; line-height: 1.4; opacity: .75; margin: 0 12px 12px; padding: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+@media (max-width: 700px) { .lib-controls { grid-template-columns: 1fr; } }

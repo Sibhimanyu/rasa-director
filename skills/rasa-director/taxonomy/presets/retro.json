@@ -1,0 +1,379 @@
+{
+  "family": { "id": "retro", "name": "Retro & eras", "what": "Styles borrowed from a specific decade or old machine: classic operating systems, CRTs, chrome, neon grids, deco gold and groovy type." },
+  "presets": [
+    {
+      "id": "windows-95",
+      "name": "Windows 95",
+      "aka": ["classic Windows UI", "Win95 aesthetic", "retro OS", "beveled grey UI"],
+      "what": "Grey beveled windows with navy title bars and square _ □ × buttons on a teal desktop, pixel type and chunky pixel icons.",
+      "feels": ["nostalgic", "playful", "nerdy"],
+      "use": ["dev-tool launches", "retro product teasers", "meme-literate social ads", "changelog films"],
+      "not": "Not vaporwave: the OS here is played straight, no pink gradients, busts or irony.",
+      "search": ["windows 95 UI animation", "retro OS motion graphics", "win95 aesthetic explainer"],
+      "stack": { "visual-style": ["web-1"], "era": ["retro-os", "early-desktop"], "ui-treatment": ["retro-ui", "windowed-ui"], "iconography": ["system"], "typography": ["pixel"], "stroke": ["medium"], "shadow": ["inner"], "motion-language": ["choppy-stepped"], "transitions": ["hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#008c8c", "ink": "#000000", "accent": "#000080", "accent2": "#808080", "surface": "#c0c0c0", "muted": "#404040" },
+        "fonts": { "display": "Pixelify Sans", "body": "Pixelify Sans", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "window", "radius": 0, "stroke": { "width": 3, "color": "ink", "style": "solid" },
+        "shadow": "inset", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "pixel", "motif": "none", "motion": "snap"
+      }
+    },
+    {
+      "id": "classic-mac-1-bit",
+      "name": "Classic Mac 1-bit",
+      "aka": ["System 1 Mac", "1984 Macintosh", "black-and-white GUI", "MacPaint style"],
+      "what": "Pure black-and-white 1-bit desktop: dithered grey pattern, square windows with hard black drop shadows, bitmap type.",
+      "feels": ["nostalgic", "crafty", "honest"],
+      "use": ["indie software launches", "writing and creative tools", "retro brand stings"],
+      "not": "Not Windows 95: no colour and no bevels; every pixel is black or white and depth is a hard drop shadow.",
+      "search": ["classic macintosh 1 bit animation", "system 1 mac UI motion", "1-bit dithered interface"],
+      "stack": { "visual-style": ["pixel-art", "monochrome"], "era": ["early-desktop", "retro-os"], "ui-treatment": ["retro-ui", "windowed-ui"], "color": ["black-and-white"], "texture": ["pixelation"], "typography": ["pixel"], "shadow": ["hard"], "motion-language": ["choppy-stepped"], "transitions": ["hard-cut", "pixel-dissolve"] },
+      "recipe": {
+        "palette": { "canvas": "#e6e6e6", "ink": "#000000", "accent": "#ffffff", "accent2": "#000000", "surface": "#ffffff", "muted": "#555555" },
+        "fonts": { "display": "Silkscreen", "body": "Pixelify Sans", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "window", "radius": 6, "stroke": { "width": 3, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "pixel", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "windows-xp-luna",
+      "name": "Windows XP Luna",
+      "aka": ["Windows XP", "Luna theme", "Bliss era", "2000s desktop"],
+      "what": "Glossy royal-blue title bars and rounded window tops over a Bliss-sky gradient, cheerful green accents and soft drop shadows.",
+      "feels": ["friendly", "nostalgic", "optimistic"],
+      "use": ["millennial-nostalgia ads", "consumer app teasers", "meme-driven social"],
+      "not": "Not Windows 95: XP is colourful, glossy and rounded where 95 is grey and square.",
+      "search": ["windows xp UI animation", "luna theme motion graphic", "2000s desktop nostalgia video"],
+      "stack": { "visual-style": ["web-2", "y2k"], "era": ["y2k", "retro-os"], "ui-treatment": ["retro-ui", "windowed-ui"], "color": ["high-saturation", "gradient"], "iconography": ["skeuomorphic"], "shadow": ["floating"], "motion-language": ["smooth"], "transitions": ["fade", "scale"] },
+      "recipe": {
+        "palette": { "canvas": "#bfe0fb", "ink": "#0b2a5b", "accent": "#1f5fd6", "accent2": "#3fae2a", "surface": "#ece9d8", "muted": "#5b6b80" },
+        "fonts": { "display": "Nunito Sans", "body": "Nunito Sans", "displayWeight": 800, "case": "none", "tracking": -0.01 },
+        "layout": "window", "radius": 10, "stroke": { "width": 3, "color": "accent", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "gradient", "texture": "none", "icons": "duotone", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "mac-aqua",
+      "name": "Mac OS X Aqua",
+      "aka": ["Aqua UI", "gel buttons", "lickable UI", "early OS X"],
+      "what": "Glossy blue gel pill buttons with wet highlights on pale pinstripe grey, lozenge controls and soft shadows.",
+      "feels": ["glossy", "optimistic", "polished"],
+      "use": ["app launches with a nostalgic wink", "Apple-adjacent tools", "Y2K-era brand refreshes"],
+      "not": "Not Y2K chrome: Aqua is translucent blue gel and pinstripes, not silver metal and sparkles.",
+      "search": ["mac os x aqua animation", "gel button UI motion", "aqua interface 2001"],
+      "stack": { "visual-style": ["web-2", "gel"], "era": ["y2k", "skeuomorphism"], "ui-treatment": ["retro-ui", "skeuomorphic-ui"], "material": ["gel", "glossy-product"], "shape": ["pill"], "shadow": ["soft-diffuse"], "motion-language": ["smooth"], "transitions": ["scale", "fade"] },
+      "recipe": {
+        "palette": { "canvas": "#eef0f3", "ink": "#10223f", "accent": "#2f8cff", "accent2": "#9ecbff", "surface": "#dbe8f7", "muted": "#6a7688" },
+        "fonts": { "display": "Istok Web", "body": "Istok Web", "displayWeight": 700, "case": "none", "tracking": -0.01 },
+        "layout": "pills", "radius": 999, "stroke": { "width": 2, "color": "#7ea6d8", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "gradient", "texture": "scanlines", "icons": "emoji3d", "motif": "none", "motion": "spring"
+      }
+    },
+    {
+      "id": "y2k-chrome",
+      "name": "Y2K chrome",
+      "aka": ["Y2K aesthetic", "millennium chrome", "cyber Y2K", "chrome bubble"],
+      "what": "Liquid-silver chrome cards and wide techno type on icy blue, pink and cyan highlights, four-point sparkles everywhere.",
+      "feels": ["shiny", "futuristic", "nostalgic"],
+      "use": ["fashion and beauty drops", "music releases", "Gen-Z social campaigns"],
+      "not": "Not Frutiger Aero: Y2K is metallic and techno; Aero is glassy, sky-blue and nature-clean.",
+      "search": ["y2k chrome motion graphics", "y2k aesthetic animation", "chrome sparkle typography"],
+      "stack": { "visual-style": ["y2k", "chrome"], "era": ["y2k"], "material": ["chrome"], "typography": ["extended", "chrome"], "color": ["iridescent", "cool-palette"], "iconography": ["glyph"], "motion-language": ["springy"], "transitions": ["flash", "light-wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#dfe7f2", "ink": "#0b1633", "accent": "#ff4fc8", "accent2": "#35d6ff", "surface": "#c8d2df", "muted": "#58678a" },
+        "fonts": { "display": "Syncopate", "body": "Michroma", "displayWeight": 700, "case": "upper", "tracking": 0.04 },
+        "layout": "cards", "radius": 28, "stroke": { "width": 2, "color": "#ffffff", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "metal", "texture": "none", "icons": "glyph", "motif": "stars", "motion": "spring"
+      }
+    },
+    {
+      "id": "frutiger-aero",
+      "name": "Frutiger Aero",
+      "aka": ["Aero", "Vista era", "Windows 7 glass", "eco-tech glossy"],
+      "what": "Glossy translucent glass tiles over sky blue and grass green, bubbles and light blooms, clean humanist sans.",
+      "feels": ["fresh", "optimistic", "clean"],
+      "use": ["wellness and eco brands", "nostalgic tech ads", "calm product teasers"],
+      "not": "Not modern glassmorphism: Aero is saturated sky-and-grass, glossy highlights and bubbles, not muted frosted panels.",
+      "search": ["frutiger aero aesthetic animation", "windows vista glass motion", "aero bubbles glossy UI"],
+      "stack": { "visual-style": ["glass", "web-2"], "era": ["glassmorphism", "y2k"], "ui-treatment": ["glassmorphic-ui", "bento-ui"], "material": ["glass", "water"], "color": ["cool-palette", "gradient"], "typography": ["humanist-sans"], "motion-language": ["floating"], "transitions": ["dissolve", "blur"] },
+      "recipe": {
+        "palette": { "canvas": "#cfeeff", "ink": "#0a2d4d", "accent": "#1fb4ff", "accent2": "#6fd23a", "surface": "#ffffff", "muted": "#4f7390" },
+        "fonts": { "display": "Hind", "body": "Hind", "displayWeight": 600, "case": "none", "tracking": -0.01 },
+        "layout": "bento", "radius": 22, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "glass", "texture": "none", "icons": "duotone", "motif": "blobs", "motion": "drift"
+      }
+    },
+    {
+      "id": "vaporwave",
+      "name": "Vaporwave",
+      "aka": ["A E S T H E T I C", "vapor", "mallsoft", "Windows-95 pastel irony"],
+      "what": "Pastel pink-to-cyan collage of old OS windows and cut-out scraps, wide-spaced serif caps, scanlines and a perspective grid.",
+      "feels": ["dreamy", "ironic", "nostalgic"],
+      "use": ["music visuals", "streetwear drops", "internet-culture brands", "lo-fi loops"],
+      "not": "Not synthwave: vaporwave is pastel, ironic and collaged; synthwave is dark, neon and sincere.",
+      "search": ["vaporwave aesthetic animation", "vaporwave collage motion", "aesthetic pastel grid video"],
+      "stack": { "visual-style": ["vaporwave", "mixed-media-collage"], "era": ["vaporwave", "nineties"], "composition": ["collage"], "color": ["pastel", "gradient"], "texture": ["crt-scanlines"], "typography": ["serif-editorial"], "motion-language": ["floating"], "transitions": ["glitch", "dissolve"] },
+      "recipe": {
+        "palette": { "canvas": "#ffc6e8", "ink": "#2a0f4d", "accent": "#7ee8fa", "accent2": "#b99cff", "surface": "#fff1fa", "muted": "#7a5a99" },
+        "fonts": { "display": "DM Serif Display", "body": "Space Mono", "displayWeight": 400, "case": "upper", "tracking": 0.2 },
+        "layout": "collage", "radius": 0, "stroke": { "width": 3, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "#ff71ce", "surface": "gradient", "texture": "scanlines", "icons": "pixel", "motif": "grid", "motion": "drift"
+      }
+    },
+    {
+      "id": "synthwave",
+      "name": "Synthwave",
+      "aka": ["outrun", "retrowave", "80s neon", "Miami vice neon"],
+      "what": "Hot-pink and cyan neon tube type glowing over a dark purple night, a perspective laser grid and sunset rays.",
+      "feels": ["dramatic", "nostalgic", "energetic"],
+      "use": ["music and event openers", "gaming trailers", "night-life and drinks brands"],
+      "not": "Not cyberpunk: synthwave is 80s sunset nostalgia; cyberpunk is gritty, dystopian and data-heavy.",
+      "search": ["synthwave animation", "outrun neon grid motion graphics", "retrowave title sequence"],
+      "stack": { "visual-style": ["synthwave", "retro-futurism"], "era": ["eighties"], "color": ["neon", "dark-ui"], "effects": ["glow", "bloom"], "typography": ["outlined"], "shadow": ["glow"], "motion-language": ["cinematic"], "transitions": ["light-wipe", "zoom-through"] },
+      "recipe": {
+        "palette": { "canvas": "#140630", "ink": "#ffe8fb", "accent": "#ff2a8a", "accent2": "#1fe5ff", "surface": "#24104f", "muted": "#a67bd9" },
+        "fonts": { "display": "Monoton", "body": "Audiowide", "displayWeight": 400, "case": "upper", "tracking": 0.06 },
+        "layout": "poster", "radius": 0, "stroke": { "width": 2, "color": "accent", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "neon", "texture": "none", "icons": "line", "motif": "grid", "motion": "slide"
+      }
+    },
+    {
+      "id": "seventies-groovy",
+      "name": "70s groovy",
+      "aka": ["groovy retro", "70s psychedelic type", "disco era", "hippie retro"],
+      "what": "Fat swashy bubble type in orange, mustard and brown on warm cream, sunburst rays and a soft film grain.",
+      "feels": ["warm", "funky", "joyful"],
+      "use": ["food and drink brands", "festival promos", "lifestyle and retail campaigns"],
+      "not": "Not 60s mid-century: groovy is fat, curvy and warm-brown; mid-century is geometric, atomic and flat.",
+      "search": ["70s groovy typography animation", "retro groovy motion graphics", "seventies sunburst title"],
+      "stack": { "visual-style": ["psychedelic"], "era": ["seventies"], "color": ["warm-palette", "earth-tones"], "typography": ["display", "inflated"], "texture": ["film-grain"], "shape": ["organic"], "motion-language": ["bouncy"], "transitions": ["wipe", "shape-match"] },
+      "recipe": {
+        "palette": { "canvas": "#f6e7c8", "ink": "#3b1f0e", "accent": "#e8641b", "accent2": "#f2b632", "surface": "#fff4de", "muted": "#8a5a36" },
+        "fonts": { "display": "Shrikhand", "body": "Chivo", "displayWeight": 400, "case": "none", "tracking": -0.01 },
+        "layout": "poster", "radius": 36, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "long", "shadowColor": "accent", "surface": "flat", "texture": "grain", "icons": "filled", "motif": "rays", "motion": "bounce"
+      }
+    },
+    {
+      "id": "mid-century-modern",
+      "name": "Mid-century modern",
+      "aka": ["60s modern", "atomic age", "Saul Bass era", "MCM"],
+      "what": "Flat teal, mustard and tomato shapes in a loose editorial grid, atomic starbursts, geometric sans and printed grain.",
+      "feels": ["crafted", "optimistic", "tasteful"],
+      "use": ["brand films", "title sequences", "architecture and furniture", "travel"],
+      "not": "Not 70s groovy: mid-century is flat, angular and restrained, with atomic stars instead of fat curves.",
+      "search": ["mid century modern animation", "atomic age motion graphics", "saul bass style title sequence"],
+      "stack": { "visual-style": ["mid-century", "modernist"], "era": ["mid-century-modern"], "illustration": ["geometric-vector", "grainy-vector"], "color": ["limited-palette", "earth-tones"], "typography": ["geometric-sans"], "texture": ["print-grain"], "motion-language": ["mechanical"], "transitions": ["wipe", "graphic-match"] },
+      "recipe": {
+        "palette": { "canvas": "#efe6d2", "ink": "#1e2a2a", "accent": "#d8572a", "accent2": "#2f8c85", "surface": "#f7f0e0", "muted": "#7d7560" },
+        "fonts": { "display": "Josefin Sans", "body": "Josefin Sans", "displayWeight": 700, "case": "upper", "tracking": 0.04 },
+        "layout": "editorial", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "filled", "motif": "stars", "motion": "mask"
+      }
+    },
+    {
+      "id": "art-deco",
+      "name": "Art deco",
+      "aka": ["deco", "Gatsby style", "1920s glamour", "streamline deco"],
+      "what": "Gold double rules and sunburst fans on deep green-black, symmetrical centred layout, tall geometric display caps.",
+      "feels": ["glamorous", "elegant", "celebratory"],
+      "use": ["galas and events", "premium spirits", "hotel and hospitality", "anniversary films"],
+      "not": "Not luxury minimal: deco is ornamental, symmetrical and gold-lined, not quiet whitespace.",
+      "search": ["art deco motion graphics", "gatsby title sequence", "art deco gold animation"],
+      "stack": { "visual-style": ["art-deco", "luxury"], "era": ["art-deco"], "composition": ["symmetrical", "centered-hero"], "stroke": ["double-line"], "material": ["metal"], "typography": ["display", "condensed"], "motion-language": ["luxurious-slow"], "transitions": ["mask-reveal", "line-draw"] },
+      "recipe": {
+        "palette": { "canvas": "#0f1d1b", "ink": "#f3e3bd", "accent": "#c9a24a", "accent2": "#2e6b5e", "surface": "#162a27", "muted": "#a8966a" },
+        "fonts": { "display": "Limelight", "body": "Poiret One", "displayWeight": 400, "case": "upper", "tracking": 0.12 },
+        "layout": "poster", "radius": 0, "stroke": { "width": 6, "color": "accent", "style": "double" },
+        "shadow": "none", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "glyph", "motif": "rays", "motion": "mask"
+      }
+    },
+    {
+      "id": "eight-bit-pixel",
+      "name": "8-bit pixel art",
+      "aka": ["NES style", "chiptune aesthetic", "retro game", "pixel game UI"],
+      "what": "Chunky pixel icons, blocky arcade type and hard square shadows on a flat sky-blue, tiled like a game menu.",
+      "feels": ["playful", "nostalgic", "gamey"],
+      "use": ["game launches", "gamified product features", "kids' and edtech", "achievement moments"],
+      "not": "Not Game Boy: 8-bit is full NES colour; Game Boy is four shades of green.",
+      "search": ["8-bit pixel art animation", "retro game UI motion graphics", "NES style explainer"],
+      "stack": { "visual-style": ["pixel-art"], "era": ["eighties"], "illustration": ["pixel-art"], "typography": ["pixel"], "texture": ["pixelation"], "color": ["primary-colors"], "production": ["frame-by-frame"], "motion-language": ["choppy-stepped"], "transitions": ["pixel-dissolve", "hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#5c94fc", "ink": "#000000", "accent": "#e45c10", "accent2": "#fcbc3c", "surface": "#ffffff", "muted": "#2a3a6a" },
+        "fonts": { "display": "Press Start 2P", "body": "Press Start 2P", "displayWeight": 400, "case": "upper", "tracking": 0 },
+        "layout": "bento", "radius": 0, "stroke": { "width": 5, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "pixel", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "game-boy-dmg",
+      "name": "Game Boy green",
+      "aka": ["DMG palette", "4-shade green", "handheld pixel", "pea-soup LCD"],
+      "what": "Four shades of pea-soup green only, a handheld screen frame, pixel type and an LCD dot grid.",
+      "feels": ["nostalgic", "cosy", "lo-fi"],
+      "use": ["mobile game teasers", "indie app launches", "retro merch drops"],
+      "not": "Not 8-bit pixel art: strictly four greens, like the original LCD, no full colour.",
+      "search": ["game boy palette animation", "dmg green pixel motion", "gameboy style UI"],
+      "stack": { "visual-style": ["pixel-art", "monochrome"], "era": ["nineties"], "ui-treatment": ["retro-ui", "device-bound-ui"], "color": ["limited-palette", "monochrome"], "typography": ["pixel"], "texture": ["pixelation"], "motion-language": ["choppy-stepped"], "transitions": ["hard-cut", "pixel-dissolve"] },
+      "recipe": {
+        "palette": { "canvas": "#9bbc0f", "ink": "#0f380f", "accent": "#306230", "accent2": "#8bac0f", "surface": "#c4d86a", "muted": "#306230" },
+        "fonts": { "display": "Silkscreen", "body": "VT323", "displayWeight": 700, "case": "upper", "tracking": 0.02 },
+        "layout": "device", "radius": 0, "stroke": { "width": 4, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "pixel", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "green-screen-terminal",
+      "name": "Green-screen CRT terminal",
+      "aka": ["phosphor terminal", "hacker green", "VT100", "matrix terminal"],
+      "what": "Glowing phosphor-green monospace on black, curved-tube vignette, scanlines, a blinking block cursor typing line by line.",
+      "feels": ["technical", "mysterious", "nostalgic"],
+      "use": ["developer tools and APIs", "security products", "hacker-themed teasers", "AI agent demos"],
+      "not": "Not a modern terminal UI: the whole frame is the old tube, with glow, curvature and scanlines.",
+      "search": ["green crt terminal animation", "phosphor terminal typing motion", "retro hacker screen"],
+      "stack": { "visual-style": ["monochrome", "technical-minimal"], "era": ["early-desktop"], "ui-treatment": ["terminal-ui", "retro-ui"], "typography": ["monospace"], "texture": ["crt-scanlines"], "effects": ["glow", "scanlines"], "ui-interaction": ["typing", "streaming-text"], "motion-language": ["mechanical"], "transitions": ["hard-cut", "flash"] },
+      "recipe": {
+        "palette": { "canvas": "#030b04", "ink": "#39ff6a", "accent": "#39ff6a", "accent2": "#1a8f3a", "surface": "#061a0a", "muted": "#1f9c45" },
+        "fonts": { "display": "VT323", "body": "VT323", "displayWeight": 400, "case": "upper", "tracking": 0.02 },
+        "layout": "terminal", "radius": 18, "stroke": { "width": 2, "color": "accent", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "neon", "texture": "crt", "icons": "none", "motif": "none", "motion": "type"
+      }
+    },
+    {
+      "id": "dos-text-mode",
+      "name": "DOS text mode",
+      "aka": ["BIOS blue screen", "Norton Commander", "MS-DOS UI", "ANSI text mode"],
+      "what": "White and yellow monospace on electric DOS blue, boxy text-mode panels with double-line borders, square and flat.",
+      "feels": ["utilitarian", "nerdy", "retro"],
+      "use": ["dev tools", "infrastructure and ops", "retro tech explainers", "installer-style onboarding"],
+      "not": "Not the green CRT: text mode is flat, blue and panel-based with no glow or tube curvature.",
+      "search": ["ms dos text mode animation", "bios blue screen UI motion", "norton commander aesthetic"],
+      "stack": { "visual-style": ["technical-minimal", "web-1"], "era": ["early-desktop", "eighties"], "ui-treatment": ["terminal-ui", "retro-ui"], "typography": ["monospace"], "stroke": ["double-line"], "color": ["limited-palette", "high-contrast"], "motion-language": ["robotic"], "transitions": ["hard-cut", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#0000aa", "ink": "#ffffff", "accent": "#ffff55", "accent2": "#55ffff", "surface": "#0000aa", "muted": "#aaaaaa" },
+        "fonts": { "display": "IBM Plex Mono", "body": "IBM Plex Mono", "displayWeight": 700, "case": "upper", "tracking": 0 },
+        "layout": "terminal", "radius": 0, "stroke": { "width": 6, "color": "#aaaaaa", "style": "double" },
+        "shadow": "hard", "shadowColor": "#000000", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "snap"
+      }
+    },
+    {
+      "id": "teletext",
+      "name": "Teletext",
+      "aka": ["Ceefax", "videotex", "mosaic graphics", "TV text pages"],
+      "what": "Eight flat broadcast colours on black, blocky mosaic charts and bars, pixel headline bands, no curves anywhere.",
+      "feels": ["informative", "quirky", "retro"],
+      "use": ["news and data recaps", "sports scores", "retro stats films", "election-style results"],
+      "not": "Not 8-bit game art: teletext is a flat information page in eight fixed colours, not sprites.",
+      "search": ["teletext style animation", "ceefax graphics motion", "teletext data visualisation"],
+      "stack": { "visual-style": ["pixel-art", "technical-minimal"], "era": ["eighties"], "data-viz": ["bar-chart", "statistic"], "color": ["primary-colors", "dark-ui"], "typography": ["pixel"], "texture": ["pixelation"], "motion-language": ["choppy-stepped"], "transitions": ["hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#000000", "ink": "#ffffff", "accent": "#00ffff", "accent2": "#ff00ff", "surface": "#0000ff", "muted": "#ffff00" },
+        "fonts": { "display": "Silkscreen", "body": "Silkscreen", "displayWeight": 400, "case": "upper", "tracking": 0.02 },
+        "layout": "data", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "pixel", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "vhs-camcorder",
+      "name": "VHS camcorder",
+      "aka": ["VHS aesthetic", "90s home video", "tape OSD", "analog glitch"],
+      "what": "On-screen-display readouts like PLAY and a timestamp over dim tape footage, tracking scanlines, RGB split and glitch jumps.",
+      "feels": ["raw", "nostalgic", "intimate"],
+      "use": ["music videos", "recap and behind-the-scenes films", "fashion", "horror teasers"],
+      "not": "Not film grain cinema: this is consumer tape, with OSD text, colour bleed and tracking errors.",
+      "search": ["vhs camcorder overlay animation", "vhs glitch motion graphics", "90s home video effect"],
+      "stack": { "visual-style": ["documentary", "grunge"], "era": ["nineties", "eighties"], "texture": ["vhs", "crt-scanlines"], "effects": ["vhs", "rgb-split"], "typography": ["monospace", "pixel"], "photo-video": ["full-bleed-footage"], "motion-language": ["glitchy"], "transitions": ["glitch", "hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#14171c", "ink": "#f4f4f0", "accent": "#5cf2ff", "accent2": "#ff4fa0", "surface": "#1f242b", "muted": "#9aa3ad" },
+        "fonts": { "display": "VT323", "body": "VT323", "displayWeight": 400, "case": "upper", "tracking": 0.04 },
+        "layout": "hud", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "scanlines", "icons": "line", "motif": "crosshair", "motion": "glitch"
+      }
+    },
+    {
+      "id": "early-iphone-skeuomorphism",
+      "name": "Early iPhone skeuomorphism",
+      "aka": ["iOS 6 style", "skeuomorphic UI", "rich UI", "linen and leather"],
+      "what": "Glossy app icons and brushed-metal bars in a phone, linen-textured backgrounds, embossed type and soft realistic shadows.",
+      "feels": ["tactile", "nostalgic", "rich"],
+      "use": ["app anniversary films", "nostalgic app-store promos", "hardware and audio tools"],
+      "not": "Not neumorphism: this imitates real materials (metal, linen, glass), not soft extruded plastic.",
+      "search": ["ios 6 skeuomorphic animation", "skeuomorphic app UI motion", "early iphone interface"],
+      "stack": { "visual-style": ["metallic", "web-2"], "era": ["skeuomorphism"], "ui-treatment": ["skeuomorphic-ui", "device-bound-ui"], "iconography": ["skeuomorphic"], "material": ["brushed-metal", "fabric"], "shadow": ["realistic"], "motion-language": ["smooth"], "transitions": ["page-flip", "slide"] },
+      "recipe": {
+        "palette": { "canvas": "#d6d1c7", "ink": "#1d2126", "accent": "#3a7bd5", "accent2": "#c2553a", "surface": "#eceae4", "muted": "#6b6860" },
+        "fonts": { "display": "Arimo", "body": "Arimo", "displayWeight": 700, "case": "none", "tracking": -0.01 },
+        "layout": "device", "radius": 16, "stroke": { "width": 1, "color": "#8c8a84", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "metal", "texture": "noise", "icons": "emoji3d", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "nineties-rave-flyer",
+      "name": "90s rave flyer",
+      "aka": ["acid house flyer", "rave graphics", "90s club flyer", "acid smiley"],
+      "what": "Acid yellow, magenta and cyan on black, shaded 3D display type, halftone dots and stacked colour offsets in dense tiles.",
+      "feels": ["loud", "euphoric", "underground"],
+      "use": ["club and festival promos", "music drops", "streetwear", "energy drinks"],
+      "not": "Not synthwave: rave flyers are fluoro, dense and xeroxed, not smooth neon sunsets.",
+      "search": ["90s rave flyer animation", "acid house graphics motion", "rave poster typography"],
+      "stack": { "visual-style": ["acid-graphics", "psychedelic"], "era": ["nineties"], "color": ["fluorescent", "high-contrast"], "typography": ["display", "dimensional"], "texture": ["halftone"], "shadow": ["layered"], "motion-language": ["beat-synchronized"], "transitions": ["flash", "glitch"] },
+      "recipe": {
+        "palette": { "canvas": "#0a0a0a", "ink": "#eaff00", "accent": "#ff00a8", "accent2": "#00e5ff", "surface": "#1a1a1a", "muted": "#b7c400" },
+        "fonts": { "display": "Bungee Shade", "body": "Bungee", "displayWeight": 400, "case": "upper", "tracking": 0 },
+        "layout": "bento", "radius": 0, "stroke": { "width": 3, "color": "ink", "style": "solid" },
+        "shadow": "layered", "shadowColor": "accent2", "surface": "flat", "texture": "halftone", "icons": "filled", "motif": "confetti", "motion": "snap"
+      }
+    },
+    {
+      "id": "swiss-seventies-airline",
+      "name": "70s airline modernism",
+      "aka": ["Pan Am style", "jet-age corporate", "Swiss 70s airline", "route-map modernism"],
+      "what": "Crisp grotesk on cream, bold red and navy stripes, route-map nodes and connectors, orderly Swiss-grid information design.",
+      "feels": ["confident", "orderly", "optimistic"],
+      "use": ["travel and logistics", "process explainers", "corporate brand films", "fintech"],
+      "not": "Not modern Swiss minimal: warm cream paper, livery stripes and jet-age optimism, not white SaaS.",
+      "search": ["70s airline graphics animation", "pan am style motion design", "retro route map animation"],
+      "stack": { "visual-style": ["swiss-international", "modernist"], "era": ["swiss", "seventies"], "composition": ["swiss-grid", "flowchart"], "data-viz": ["flow-diagram", "map"], "typography": ["grotesk"], "color": ["limited-palette"], "motion-language": ["precise"], "transitions": ["line-draw", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#f3ecdc", "ink": "#14213d", "accent": "#d62828", "accent2": "#1d4e89", "surface": "#fffaf0", "muted": "#6e6a5e" },
+        "fonts": { "display": "Archivo", "body": "Archivo", "displayWeight": 800, "case": "none", "tracking": -0.03 },
+        "layout": "diagram", "radius": 4, "stroke": { "width": 3, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "motif": "rules", "motion": "slide"
+      }
+    },
+    {
+      "id": "web-1-homepage",
+      "name": "Web 1.0 homepage",
+      "aka": ["GeoCities", "90s personal homepage", "under construction web", "old internet"],
+      "what": "Times headings and bright yellow text on a starry navy tile, beveled table borders, hit-counter energy and pixel GIF icons.",
+      "feels": ["naive", "funny", "nostalgic"],
+      "use": ["meme-literate brand content", "internet-culture films", "retro landing-page teasers"],
+      "not": "Not vaporwave: Web 1.0 is sincere amateur HTML, not a pastel ironic collage.",
+      "search": ["geocities aesthetic animation", "web 1.0 motion graphics", "90s homepage style video"],
+      "stack": { "visual-style": ["web-1"], "era": ["web-1", "nineties"], "ui-treatment": ["retro-ui", "browser-framed-ui"], "stroke": ["double-line"], "typography": ["serif-editorial"], "color": ["high-saturation", "dark-ui"], "motion-language": ["choppy-stepped"], "transitions": ["hard-cut", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#0b0b3b", "ink": "#ffff66", "accent": "#33ff33", "accent2": "#ff66ff", "surface": "#000080", "muted": "#9ad0ff" },
+        "fonts": { "display": "Tinos", "body": "Tinos", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "editorial", "radius": 0, "stroke": { "width": 5, "color": "#c0c0c0", "style": "double" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "pixel", "motif": "stars", "motion": "step"
+      }
+    },
+    {
+      "id": "space-age-retro-futurism",
+      "name": "Space-age retro-futurism",
+      "aka": ["atompunk", "Googie", "Jetsons style", "50s tomorrowland"],
+      "what": "Rounded cream cards orbited by elliptical atom rings, boomerang-orange and teal, bouncy rounded display type.",
+      "feels": ["optimistic", "whimsical", "retro"],
+      "use": ["future-of-X explainers", "space and science brands", "toy and family products"],
+      "not": "Not synthwave: this is the 1950s imagining tomorrow, cream daylight and atoms, not 80s neon night.",
+      "search": ["atomic age retro futurism animation", "googie style motion graphics", "jetsons style explainer"],
+      "stack": { "visual-style": ["retro-futurism", "mid-century"], "era": ["mid-century-modern"], "composition": ["orbit", "floating-cards"], "shape": ["rounded", "circular"], "color": ["warm-palette", "complementary"], "typography": ["display", "rounded"], "motion-language": ["floating"], "transitions": ["scale", "morph"] },
+      "recipe": {
+        "palette": { "canvas": "#f3e7cf", "ink": "#1c2b3a", "accent": "#e8553b", "accent2": "#2a9d8f", "surface": "#fff7e8", "muted": "#7c7462" },
+        "fonts": { "display": "Righteous", "body": "Quicksand", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "cards", "radius": 40, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "filled", "motif": "orbits", "motion": "drift"
+      }
+    }
+  ]
+}

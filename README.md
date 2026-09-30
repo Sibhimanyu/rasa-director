@@ -23,26 +23,23 @@ Your picks compile into **`DIRECTION.md`**: a style name ("Swiss / International
 
 You say `/rasa-director make a 45s launch film for tally.app`. Rasa Director opens a **Director's Console** in your browser. It always shows what Claude is doing (a live status and activity feed), asks one question at a time with Claude's pick already selected (one click moves on), and collects every decision in "Your film", where any of them can be changed. Each decision is shown on your own content:
 
-| Step | You see | You decide |
-|---|---|---|
-| 1 Brief | a form | what the video is, the key line, where it plays, length, voiceover or not |
-| 2 Brand | your DESIGN.md read back as a board (if the project has one) | use your brand as the look, on a new layout, or not at all |
-| 3 Route | the HyperFrames workflows that fit | launch film, explainer, PR video, music video, footage reel, captions, overlay recut, custom |
-| 4 Direction | every dimension as terms with definitions, and a live style formula | pick per dimension, or "Claude decides"; share references and Claude analyzes them into terms |
-| 5 Story | five pitches, at least two a model wouldn't usually produce | the idea and its arc |
-| 6 Scenes | the whole film as an editable scene table and timeline | every scene's text, voiceover, length, transition, intensity |
-| 7 Look | **design directions**: complete looks (palette by role, type pairing, shape, stroke, shadow, texture, composition) on your words; brand-locked if you have a brand | the look |
-| 8 Motion | swatches of your lines in candidate **motion languages** (precise, snappy, elastic, cinematic, stop-motion-like…) | the motion language and its contract |
-| 9 Style frames | the key frames **Claude designs** in the chosen direction | approve, or say what to change, before anything moves |
-| 10 Transitions | your scenes handing off through every transition | how scenes hand off |
-| 11 Voice | your hook line in three voices | the narrator, or none |
-| 12 Music | tracks with players | a bed, your own track, or silence |
-| 13 Storyboard | the timeline, then every scene sketched in your look | approve |
-| 14 Build & render | live build progress, proof snapshots, the final video | "preview first", "render" |
+**You're asked only what is yours to judge:**
+
+| You decide | You see |
+|---|---|
+| **Brief** | a form: what the video is, the key line, where it plays, length, voiceover or not |
+| **Brand** | your DESIGN.md read back as a board (when the project has one) |
+| **Style** | three styles from a library of **hundreds of named motion-graphics styles** (soft neo-brutalism, claymorphism, Swiss grid, Y2K chrome, blueprint HUD, risograph zine…), each drawn live on your words, and a searchable gallery of all of them |
+| **Story** | three pitches, each shown as three sketch frames in your style, two of them unusual |
+| **Voice** and **Music** | your hook line in a few voices; tracks to audition, or your own (when there's sound) |
+| **Style frames** | the key frames Claude designs, to approve before anything moves |
+| **Render** | proof snapshots, then "preview first" or "render" |
+
+**Claude decides the craft** the way a senior motion designer would, following a written playbook (`references/craft.md`): the HyperFrames workflow, scenes and pacing, the motion language your style implies, transitions (cuts, match cuts and one signature move), key poses and the plan. Each call shows up in "Your film" with its reason, and you can change any of them by discussing it with Claude in the console.
 
 **Footage reels** add **Footage** (every clip in your folder with a contact sheet and a word-level transcript) and **Cut** (the edit as an editable list: clips with in and out points, cards between them, overlays on top, captions). Claude drafts the cut from your direction, then designs and animates every card and overlay itself from a brief per card.
 
-Any step can be handed back with **"you decide"**, or everything after it with **"you decide the rest"**, with a one-line receipt for every choice Claude makes.
+Any question can be handed back with **"you decide"**, or everything after it with **"you decide the rest"**, with a one-line reason for every choice Claude makes.
 
 **Claude does the animating.** Rasa's boards and swatches exist only so you can choose by eye. Claude designs the style frames, the scenes and the reel cards from `DIRECTION.md`, `frame.md` and `motion.md`, through the matching [HyperFrames](https://hyperframes.heygen.com) workflow (`product-launch-video`, `faceless-explainer`, `pr-to-video`, `general-video`, `music-to-video`, `talking-head-recut`, `embedded-captions`, `motion-graphics`), and every built scene is checked in headless Chrome against the motion contract before the render question.
 

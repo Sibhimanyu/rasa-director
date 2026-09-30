@@ -31,6 +31,7 @@
 |---|---|
 | `serve --run <dir> [--root <workspace>] [--port N] [--open]` | starts the server in the background (reuses a running one only if this same copy and version started it; a console from an older version is stopped and replaced, so an update always shows the new page), prints `{url}`; `--open` opens the browser. `--root` defaults to the current directory: only files under it, this skill, and installed skills (`~/.claude/skills`, `~/.agents/skills`) are served. |
 | `push --run <dir> --step <id> --file <payload.json>` (or `--data '<json>'`) `[--status awaiting\|working\|done\|skipped] [--current] [--merge] [--title "..."]` | **replaces** that step's payload (clearing old options, issues and the "you sent" banner); `--merge` keeps the previous fields instead. `status` defaults to `awaiting` (`working` for build); an awaiting step becomes the current one and the page jumps to it. The page also drops any unsent selections made against the old payload. |
+| `ask --run <dir> --question "..." [--context "..."] [--options '[{"id","label","detail"}]'] [--recommended <id>] [--placeholder "..."] [--step <id>]` | any question that isn't a step: shown as its own card on top of the page (options with Claude's pick selected, plus a free-text box), without moving the flow; the status line says Claude is waiting. The answer arrives through `wait` as `{type: "answer", value: {ask, choice, text}}`. |
 | `reply --run <dir> --step <id> --message "..."` | Claude's answer in that step's discussion thread (under the step on the page); clears the "Claude is replying" state. The thread survives re-pushes of the step. |
 | `activity --run <dir> --message "..." [--level info\|ok\|warn] [--done]` | what Claude is doing now, between questions ("Capturing tally.app", "Drawing style frame 2 of 3"): a feed entry and the status line. `--done` records it without showing Claude as working. |
 | `log --run <dir> --message "..." [--level info\|ok\|warn\|error] [--stage <id> --stage-status working\|done\|failed]` | appends a build log line and sets a stage chip (stages: handoff, plan, design, build, verify, obey, render-gate). It moves the page to Build only while the current step is plan or build (never away from the render gate); `--stage render-gate --stage-status done` marks Build done. |
@@ -101,6 +102,7 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 | `approve` | storyboard, styleframes, keyframes, plan | null |
 | `decide` | any | null: "you decide" for that step |
 | `decide-rest` | `*` | null: "you decide the rest" |
+| `answer` | the step an `ask` was raised on | `{ask: id, choice: option id or null, text}` (the free text is also in `note`) |
 | `note` | any | null; the text is in `note`. It's also added to that step's discussion thread; answer with `reply`. |
 
 A `note` can come with any action type too (e.g. `choose` + "but a bit slower").

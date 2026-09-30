@@ -8,6 +8,8 @@
 //   node console.mjs serve --run <run dir> [--root <workspace>] [--port 0] [--open]   (detaches; prints the URL)
 //   node console.mjs push  --run <dir> --step <id> (--data '<json>' | --file f.json) [--status awaiting|working|done|skipped] [--current]
 //   node console.mjs activity --run <dir> --message "Reading your DESIGN.md" [--level info|ok|warn]   (what Claude is doing now)
+//   node console.mjs ask   --run <dir> --question "..." [--context "..."] [--options '[{"id","label","detail"}]'] [--recommended <id>] [--placeholder "..."]
+//        (any question outside the steps: missing material, a thin capture, an ambiguity; shown on the page, answered there)
 //   node console.mjs reply --run <dir> --step <id> --message "..."   (Claude answers the user in that step's discussion)
 //   node console.mjs log   --run <dir> --message "..." [--level info|ok|warn|error] [--stage <id>] [--stage-status working|done|failed]
 //   node console.mjs wait  --run <dir> [--step <id>] [--timeout <sec, default 3000>]   -> prints the next action JSON (exit 2 on timeout)
@@ -144,7 +146,7 @@ function ensureServer() {
 }
 
 // ---------------------------------------------------------------------------
-if (["push", "log", "activity", "reply"].includes(cmd)) ensureServer();
+if (["push", "log", "activity", "reply", "ask"].includes(cmd)) ensureServer();
 if (cmd === "push") {
   if (!args.step || !STEPS.includes(args.step)) die(`--step must be one of ${STEPS.join(", ")}`);
   const s = session();
@@ -186,6 +188,20 @@ if (cmd === "push") {
   if (!s.current || ["plan", "build"].includes(s.current)) s.current = "build";
   saveSession(s);
   console.log(JSON.stringify({ ok: true }));
+} else if (cmd === "ask") {
+  // a question that isn't one of the steps: it goes on the page as its own card, without moving the flow
+  if (!args.question) die("--question is required");
+  let options = [];
+  if (args.options) {
+    try { options = JSON.parse(String(args.options)); } catch (e) { die(`--options is not valid JSON: ${e.message}`); }
+    if (!Array.isArray(options)) die("--options must be a JSON list of {id, label, detail}");
+  }
+  const s = session();
+  const id = crypto.randomBytes(4).toString("hex");
+  s.ask = { id, step: args.step && STEPS.includes(args.step) ? args.step : s.current || "brief", question: String(args.question), context: args.context ? String(args.context) : "", options: options.map((o, i) => ({ id: String(o.id || i + 1), label: String(o.label || o.id || ""), detail: o.detail ? String(o.detail) : "" })), recommended: args.recommended ? String(args.recommended) : null, placeholder: args.placeholder ? String(args.placeholder) : "Or type your answer, paste text, or a link", t: now() };
+  activity(s, `Claude needs your call: ${s.ask.question}`, "ask", null);
+  saveSession(s);
+  console.log(JSON.stringify({ ok: true, ask: id, step: s.ask.step }));
 } else if (cmd === "reply") {
   // Claude's answer in a step's discussion thread, shown on the page under that step
   if (!args.step || !STEPS.includes(args.step)) die(`--step must be one of ${STEPS.join(", ")}`);
@@ -356,6 +372,8 @@ function serve() {
       return send(200, fs.readFileSync(UI, "utf8"), "text/html; charset=utf-8", { "set-cookie": `${COOKIE}=${token}; HttpOnly; SameSite=Strict; Path=/` });
     }
     if (!hasCookie(req)) return send(403, { error: "open the console URL first" });
+    // the style-preset renderer (the gallery draws hundreds of styles in the page)
+    if (u.pathname === "/presets.js") return send(200, fs.readFileSync(path.join(SKILL_DIR, "console", "presets.js"), "utf8"), "text/javascript");
 
     if (u.pathname === "/api/state") return send(200, session());
     if (u.pathname === "/api/events") {
@@ -391,6 +409,15 @@ function serve() {
         const s = session();
         if (step === "*") s.decide_rest = { ts: action.ts };
         else if (Object.prototype.hasOwnProperty.call(s.steps, step)) s.steps[step].sent = { type: action.type, value: action.value, note: action.note, ts: action.ts };
+        // an answer to an `ask` card: record it on the question and clear it from the page
+        if (action.type === "answer" && s.ask && !s.ask.answered) {
+          const v = action.value || {};
+          const opt = (s.ask.options || []).find((o) => o.id === v.choice);
+          s.ask.answered = { choice: v.choice || null, label: opt ? opt.label : null, text: v.text || "", t: action.ts };
+          activity(s, `You answered: ${opt ? opt.label : ""}${opt && v.text ? " · " : ""}${v.text ? "“" + String(v.text).slice(0, 120) + "”" : ""}`, "you", "Claude is reading your answer…");
+          saveSession(s);
+          return send(200, { ok: true, action });
+        }
         const nm = nameOf(s, step, action.value);
         const verb = { choose: "picked", submit: "sent", approve: "approved", adjust: "adjusted", more: "asked for more of" }[action.type] || action.type;
         const said = action.type === "decide-rest" ? "Claude decides the rest" : action.type === "decide" ? `Claude decides ${LABELS[step] || step}` : action.type === "note" ? `Note: "${action.note}"` : `${verb} ${LABELS[step] || step}${nm ? ": " + nm : ""}`;

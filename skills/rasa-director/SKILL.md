@@ -28,12 +28,12 @@ Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print 
 
 ## Hard rules
 
-1. **One path, every step skippable.** Walk the steps in order. At every step the user may pick, say **"you decide"** (this step) or **"you decide the rest"** (every remaining step). Never ask who should do what; never split the flow into modes.
+1. **Ask about taste; decide the craft.** The user is asked only what is theirs to judge: **the brief, their brand (when there is one), the style, the story, the voice and music (when there's sound), the style frames, and the final render.** Everything else is craft, and Claude decides it without a question, following `references/craft.md`: the workflow (route), scenes and pacing, motion (from the chosen style), transitions, key poses, the storyboard and the plan. Each craft decision is pushed to the console `--status done` with a one-line reason, so it shows in "Your film" and the user can change it by discussing it. At every question the user may pick, say **"you decide"** (this step) or **"you decide the rest"**. Never split the flow into modes.
 2. **Intent in the request counts.** Anything the request already settles is not asked again ("you decide the look" skips Look only; a pasted script answers the script; "no voiceover" skips Voice). Each such answer gets a line in the plan's receipts.
 3. **Only the source is required:** what the video is about (a product URL, a topic, a script, a PR, a music track, footage). Everything else can be decided.
-4. **Show, don't ask.** Decisions are made on rendered previews of the user's own video (design directions on their words, motion-language swatches of their lines, style frames of their video, their scenes in the transitions menu, their hook line in the voice samples). Every question and its options go to the **Director's Console**, always. Chat only points to it in one line; never list the options in chat and never ask through an in-chat question or multiple-choice tool (such as AskUserQuestion). If the user types an answer in chat anyway, accept it.
+4. **Show, don't ask.** Decisions are made on rendered previews of the user's own video (design directions on their words, motion-language swatches of their lines, style frames of their video, their scenes in the transitions menu, their hook line in the voice samples). Every question and its options go to the **Director's Console**, always. Chat only points to it in one line; never list the options in chat and never ask through an in-chat question or multiple-choice tool (such as AskUserQuestion). If the user types an answer in chat anyway, accept it. **This includes every question that isn't a step** (a thin or failed capture, missing material, an ambiguity, "should I…?"): ask it with `node $SKILL_DIR/scripts/console.mjs ask --run "$RUN" --question "…" --context "…" --options '[{"id":"a","label":"…","detail":"…"},…]' --recommended <id>`, then `wait`; the answer comes back as `{type: "answer", value: {choice, text}}`. Never ask it only in chat, and never re-open an earlier step to ask it (that sends the user back to step 1).
 5. **"You decide" never means the default.** Story and Motion skips sample wide with a tail constraint; Look skips rotate; the rest use sensible defaults. Every agent decision gets a one-line receipt: what was picked and the obvious option passed over.
-6. **One question per step**, recommended option first. "Go" or silence accepts the recommendation.
+6. **One question at a time**, recommended option first. "Go" or silence accepts the recommendation. If a question would need expertise to answer (which transition, which ease, which scene length), it isn't a question: decide it.
 7. **Render is never skipped by "you decide".** The workflow's own "preview first, or render?" gate always runs.
 8. **Claude designs and animates; HyperFrames renders.** Every frame, card, overlay and style frame of the real video is designed by Claude from `DIRECTION.md`, `frame.md` and `motion.md`, through the matching HyperFrames workflow (or, for reels, from the card briefs). Rasa's own previews (design boards, motion swatches, the transitions menu) exist only to choose by eye; they are never the product.
 9. **Proper terms.** Every option shown and every decision recorded uses the taxonomy's terms (`taxonomy/dimensions/*.json`, `node $SKILL_DIR/scripts/taxonomy.mjs show <dimension>`); prompts to builders are compiled from those entries, never from vague adjectives.
@@ -64,10 +64,9 @@ bash "$SKILL_DIR/scripts/setup.sh" --open
 
 Then show the step map once:
 
-> Here's how we'll direct this, each step decided by eye (or ear) in the console at <URL>. Say **"you decide"** on any step, or **"you decide the rest"**.
-> 1 Brief · 2 Brand · 3 Route · 4 Direction · 5 Story · 6 Scenes · 7 Look · 8 Motion · 9 Style frames · 10 Transitions · 11 Voice · 12 Music · 13 Storyboard · 14 Build & render
->
-> (A footage reel runs: Brief · Brand · Route · Footage · Direction · Story · Look · Motion · Style frames · Cut · Music · Plan · Build & render.)
+> Everything happens in the console at <URL>. I'll ask you a few things by eye (or ear): the brief, your style, the story, the voice and music, and the key frames before I animate. I decide the craft (scenes, pacing, motion, transitions) and show you each call, so you can change anything. Say **"you decide"** on any question, or **"you decide the rest"**.
+
+(Internally the steps still run in order: 1 Brief · 2 Brand · 3 Route · 4 Direction · 5 Story · 6 Scenes · 7 Look · 8 Motion · 9 Style frames · 10 Transitions · 11 Voice · 12 Music · 13 Storyboard · 14 Build & render; a footage reel runs Brief · Brand · Route · Footage · Direction · Story · Look · Motion · Style frames · Cut · Music · Plan · Build & render. Route, Scenes, Look, Motion, Transitions, Storyboard and Plan are Claude's, pushed `done`.)
 
 ## The Director's Console
 
@@ -113,7 +112,7 @@ Pick the HyperFrames workflow that builds this video, using HyperFrames' own rou
 | one short unnarrated motion unit (a title, sting, stat hit, under ~10 s) | `motion-graphics` → **Single motion units** below |
 | a video for a talk, keynote or pitch (an opener, a segment played during it, a loop behind the speaker); the deck or notes are the source | `general-video` (a product being launched on stage: `product-launch-video`). Never `slideshow`: Rasa doesn't make decks |
 
-Push `route` with 2–3 plausible options (`id`, `label`, `why`), the best one recommended. Record it (`memory.mjs record --step route --value <route> --mode confirmed|auto`), then set up the project and intake:
+**Claude decides the route** (it's craft): push `route` `--status done` with `decision: "<workflow>: <why, in plain words>"`. Only when two routes are genuinely both right for different films (a product demo vs a brand film for the same URL), ask with `console.mjs ask`. Record it (`memory.mjs record --step route --value <route> --mode confirmed|auto`), then set up the project and intake:
 
 ```bash
 node $SKILL_DIR/scripts/video.mjs init --route <route> --project <kebab-name> --aspect <aspect>
@@ -131,6 +130,20 @@ node $SKILL_DIR/scripts/video.mjs init --route <route> --project <kebab-name> --
 
 The heart of Rasa. Every dimension of the taxonomy is a decision the user can make or hand to Claude:
 
+**Ask with the style library.** `taxonomy/presets/` holds hundreds of complete, named motion-graphics styles (soft neo-brutalism, claymorphism, Swiss grid, Y2K chrome, blueprint FUI, risograph zine…), each a stack of taxonomy terms plus a recipe the console draws live on the user's own words:
+
+```bash
+node $SKILL_DIR/scripts/presets.mjs suggest --decisions "$RUN/decisions.json" [--brand <DESIGN.md>] --count 6 --recent <ids from memory.mjs recent --step style --n 6>
+node $SKILL_DIR/scripts/presets.mjs gallery --out "$RUN/styles" --headline "<the key line>" --sub "<a real second line>" [--brand <DESIGN.md>] --recommended <id1>,<id2>,<id3>
+node $SKILL_DIR/scripts/presets.mjs pick --id <id> --decisions "$RUN/decisions.json" [--brand <DESIGN.md>]
+```
+
+- Write what the request settles into `$RUN/decisions.json` first, then `suggest`. **Be the art director, not the ranking:** read the suggestions (and `presets.mjs list --q …` for anything the brief evokes), choose three that each could make this film great and are clearly different from each other: the best fit, a strong alternative, and one unusual pick the user would not have thought of. Never the generic default (`passed_over`), never one of the user's recent styles. For each, write one line of why it suits *this* video.
+- Push `direction` with `question: "Pick a style"`, `gallery: "$RUN/styles/presets.json"`, `suggestions: [{id, why, rare}]` (your three, in order), `recommended` (the first) and `dimensions` (menu.json's list, for "Build one term by term"). The page shows your three drawn on their words (in their brand when there is one), "Browse all N styles" (search, family filters, hover to see how each moves) and a discussion thread.
+- Answers: `choose <preset id>` → `presets.mjs pick`: it merges the style's terms into decisions.json and writes its frame.md as the look (Step 7 then doesn't ask). A `note` ("like the second but darker", "something more corporate") → answer with `reply`, then re-run `suggest`/`list` and re-push new suggestions. A full-form `submit {picks, decided_by, notes}` → write them into decisions.json. Record: `memory.mjs record --step style --value <preset id> --mode confirmed|auto`.
+
+The older three-direction cards (whole style combinations with rendered boards) remain available:
+
 ```bash
 node $SKILL_DIR/scripts/direction.mjs directions --decisions "$RUN/decisions.json" --out "$RUN/directions" \
   --headline "<the key line>" --sub "<a real second line>" [--brand <DESIGN.md> --mode <m>] [--aspect <aspect>]   # three complete directions, with boards
@@ -140,7 +153,7 @@ node $SKILL_DIR/scripts/direction.mjs suggest --dimension visual-style --decisio
 node $SKILL_DIR/scripts/direction.mjs compile --decisions "$RUN/decisions.json" --out "$RUN/direction"
 ```
 
-- **Ask with three complete directions, never with the dimension form.** Write what the request already settles into `$RUN/decisions.json` first ("a playful explainer with doodles" settles format, tone and illustration), then run `directions`: whole style combinations that fit those picks, no two with the same visual style, one of them unusual, never one built on the generic default (it is returned as `passed_over`, your receipt), each with a name, a one-line why, its defining terms and a board image in the user's words (in the brand with `--brand`). Push `direction` with `question: "Pick a direction"`, `directions`, `recommended` (the file's) and `dimensions` (menu.json's list, for Fine-tune). Answers: `choose <id>` → `pick-direction` merges that direction's picks and sets the look from its board (Step 7 then doesn't ask); `submit {direction, picks, decided_by}` (Fine-tune) → `pick-direction`, then write those picks over it; `more {exclude}` → run `directions` again with `--exclude <those ids>` and re-push; a full-form `submit {picks, decided_by, notes}` (the user opened every dimension) → write them into decisions.json (format: `references/direction.md`).
+- **Three-direction cards (alternative to the library).** Write what the request already settles into `$RUN/decisions.json` first ("a playful explainer with doodles" settles format, tone and illustration), then run `directions`: whole style combinations that fit those picks, no two with the same visual style, one of them unusual, never one built on the generic default (it is returned as `passed_over`, your receipt), each with a name, a one-line why, its defining terms and a board image in the user's words (in the brand with `--brand`). Push `direction` with `question: "Pick a direction"`, `directions`, `recommended` (the file's) and `dimensions` (menu.json's list, for Fine-tune). Answers: `choose <id>` → `pick-direction` merges that direction's picks and sets the look from its board (Step 7 then doesn't ask); `submit {direction, picks, decided_by}` (Fine-tune) → `pick-direction`, then write those picks over it; `more {exclude}` → run `directions` again with `--exclude <those ids>` and re-push; a full-form `submit {picks, decided_by, notes}` (the user opened every dimension) → write them into decisions.json (format: `references/direction.md`).
 - For every dimension still open (or marked "Claude decides") that matters for this piece (always: format, visual style, typography, color, motion language, transitions, pacing; for product pieces also UI treatment; for explainers illustration), run `suggest` and pick from its candidates: they fit the picks so far (35 known style combinations), the generic default is excluded (it is returned as `passed_over`, your receipt), and `--recent` keeps it rotating; record `decided_by: agent` and a receipt naming the obvious option passed over.
 - **References.** If the user shares screenshots, GIFs or videos of work they like, analyze each with `direction.mjs analyze` (every category: STYLE, EVIDENCE, CONFIDENCE, CLOSE ALTERNATIVES, then a style formula) by looking at it, and turn the result into picks. Two references → `direction.mjs compare`, and name the three or four decisions that make them feel different.
 - `compile` writes `DIRECTION.md` (the style name, the style formula as a stack, a one-paragraph brief, and for every decision its definition, a precise **Do** instruction and what it is **not**) and `direction.json`. Show the style name and formula in chat. Motion language picked here becomes `motion.md` in Step 8; the look terms (visual style, color, typography, shape, stroke, shadow, texture) drive Step 7.
@@ -153,7 +166,7 @@ Unless the request states a concept: ask what they're already picturing, then pi
 
 Write `$RUN/scenes.json` (format: `references/video.md`): per scene the title, on-screen text, what we see, voiceover line, duration, `type`/`persuasion`/`beat` (launch films), optional `blueprint` (only ids that exist in `hyperframes-animation/blueprints/`), `intensity` (low/medium/high), and `transition_in` (default from Step 10). Plan to the brief's length; every scene has one job.
 
-Push `scenes` with `{"scenes": [...], "target_s": <length>, "transition_default": "...", "narrated": true|false}`. The panel is an editable table with a timeline strip: the user edits text, voiceover, length, transition and intensity, reorders, adds, removes, then **approves** (`submit` with the full list: write it back into scenes.json). Then:
+**Claude writes and times the scenes** (craft: pacing, lengths, reading time and structure from `references/craft.md`); don't ask for approval. Push `scenes` `--status done` with the payload `{"scenes": [...], "target_s": <length>, "transition_default": "...", "narrated": true|false}` and `decision: "<n> scenes · <length> s · <the arc in a few words>"`; the table stays viewable from "Your film" and a `note` or edit there changes it (a `submit` with the full list: write it back into scenes.json). The user approves the film at the style frames, not scene by scene. Then:
 
 ```bash
 node $SKILL_DIR/scripts/scenes.mjs --scenes "$RUN/scenes.json" --route <route> --out "$RUN/plan" [--mode autonomous]
@@ -163,7 +176,7 @@ It writes `STORYBOARD.md` (+ `SCRIPT.md` when narrated) in the workflow's exact 
 
 ## Step 7: Look
 
-**Usually already decided: don't ask twice.** A direction picked from the cards comes with its look (`pick-direction` sets `look.frame` from the card's board and prints `look`): push `look` `--status done` with `decision: "From your direction: <look name>"` and go on. Show looks only when the user asks for variations ("show me other looks", a `note`), when the direction came from the full dimension form, or when `pick-direction` printed `look: null`; then the looks are variations of the chosen visual style (they honor its picks):
+**Usually already decided: don't ask twice.** A style picked from the library comes with its look (`presets.mjs pick` sets `look.frame`), and so does a direction picked from the cards (`pick-direction` sets `look.frame` from the card's board and prints `look`): push `look` `--status done` with `decision: "From your direction: <look name>"` and go on. Show looks only when the user asks for variations ("show me other looks", a `note`), when the direction came from the full dimension form, or when `pick-direction` printed `look: null`; then the looks are variations of the chosen visual style (they honor its picks):
 
 ```bash
 node $SKILL_DIR/scripts/design.mjs looks --decisions "$RUN/decisions.json" --out "$RUN/looks" --count 6 --aspect <aspect> \
@@ -175,7 +188,9 @@ Design directions, not color presets: each look is a visual style from the taxon
 
 ## Step 8: Motion (one motion language for the whole film)
 
-The motion language is a taxonomy term (`motion-language`: smooth, snappy, elastic, springy, precise, mechanical, luxurious/slow, cinematic, fluid, organic, stop-motion-like, glitchy, beat-synchronized…); each term carries a binding contract (eases, duration scale, stagger, hold, banned patterns). If Direction settled it, confirm it here by eye (alone, or next to 1–3 `suggest` alternatives); otherwise offer 4–6 candidates (`direction.mjs suggest --dimension motion-language --count 5`):
+The motion language is a taxonomy term (`motion-language`: smooth, snappy, elastic, springy, precise, mechanical, luxurious/slow, cinematic, fluid, organic, stop-motion-like, glitchy, beat-synchronized…); each term carries a binding contract (eases, duration scale, stagger, hold, banned patterns).
+
+**Usually Claude's call:** the chosen style already carries its motion language (its `stack["motion-language"]`). Lock it with `motion-md.mjs write` (below) and push `motion` `--status done` with `decision: "<term>: <what it feels like, one line>"`; no question. Show the swatches only when the user asks to compare ("show me other ways it could move", a `note`), when no style set it, or when the brief is about motion itself (a kinetic-type or motion-identity piece). Then offer 4–6 candidates (`direction.mjs suggest --dimension motion-language --count 5`):
 
 ```bash
 node $SKILL_DIR/scripts/tasting.mjs --scenes "<hook on-screen>::<sub> || <a middle scene> || <the close>" \
@@ -201,11 +216,13 @@ Before anything moves, design **2–3 style frames**: stills of the video's key 
 
 ## Step 10: Transitions
 
+**Claude decides the transitions; never ask the user to pick one.** Follow `references/craft.md` (Transitions): a hard cut as the baseline, match cuts and shared-element moves where scenes share a shape, one signature transition that belongs to the style at the two or three structural hinges, durations from the motion language, nothing `motion.md` bans. Set `transition_default` and per-scene `transition_in` in scenes.json, re-run `scenes.mjs`, and push `transitions` `--status done` with `decision: "<baseline> · <signature> at <where> (<why>)"`. Record it (`memory.mjs record --step transitions --value "<baseline>" --mode auto`). The menu below exists only for a user who asks to see the options:
+
 ```bash
 node $SKILL_DIR/scripts/transition-menu.mjs --from "<scene 1 on-screen>" --to "<scene 2 on-screen>" --frame "$RUN/looks/<letter>/frame.md" (or --preset <p>) --aspect <aspect> --out "$RUN/transitions" --stills
 ```
 
-It plays the user's first two scenes handing off through every transition the workflow can inject (hard cut plus the registry's types, run from the workflow's own templates). Push `transitions` with `menu`, `cells` (transitions.json's `cells`) and `recommended` (blur-crossfade when scene backgrounds differ, crossfade when they match; zoom-through at section changes). The `choose` value is the exact `transition_in` string. Record it (`memory.mjs record --step transitions --value "<value>" --mode confirmed|auto`) and set it as `transition_default` in scenes.json and re-run `scenes.mjs` (per-scene overrides live in the Scenes table). `music-to-video` uses hard cuts only; footage routes skip this step.
+It plays the user's first two scenes handing off through every transition the workflow can inject. Only on request: push `transitions` with `menu`, `cells` and `recommended` (your pick); the `choose` value is the exact `transition_in` string. `music-to-video` uses hard cuts only; footage routes skip this step.
 
 ## Step 11: Voice (narrated videos)
 
@@ -226,7 +243,7 @@ Moods come from the story and the motion's feel. Push `music` (players; `unavail
 ## Step 13: Storyboard and plan
 
 1. Push `storyboard` with `timeline` (the contents of `$RUN/plan/timeline.json`) and `--status done`, so the user sees the whole film's timing, transitions, narration and music on one strip (it reopens for approval when the workflow draws its sketch sheet in Step 14).
-2. Push `plan` with `shape` (route, length, scenes, look, motion, transitions, voice, music), `stated` (what the user chose) and `agent` (what you decided, each with its receipt). Continue on `approve`; fold in any `note` and re-push.
+2. Push `plan` `--status done` with `shape` (route, length, scenes, look, motion, transitions, voice, music), `stated` (what the user chose), `agent` (what you decided, each with its reason) and `decision: "Ready to build"`: the user already approved the film at the style frames, so don't stop here. A `note` on it still changes the plan.
 3. Write `$RUN/video-decisions.json` (format: `references/video.md`; `confirmed` lists only answers the user actually gave; `direction` = `$RUN/direction`; `look` = `{frame: <look's frame.md>, name}` (a picked design direction, brand-locked or not; it wins if `design_md` is also set) or `{design_md, mode}` (the brand's own frame.md) or `{preset}`; `brand`/`brand_mode` when there is one) and hand off:
 
 ```bash
@@ -242,7 +259,7 @@ Read `~/.claude/skills/<route>/SKILL.md` and follow it on `videos/<name>` (insta
 
 1. **Adopt the plan.** Don't regenerate STORYBOARD.md/SCRIPT.md or re-run `build-frame.mjs`; the plan gate is satisfied. Continue with the audio step and the visual-design step.
 2. **Voice:** pass `--voice <id>` (and `--provider heygen` for product-launch-video) to the audio step.
-3. **Sketch pass → console.** When the workflow draws `storyboard.html` (collaborative runs), push `storyboard` again with `sheet: "videos/<name>/storyboard.html"` plus the timeline, and relay the user's `approve` / `note` to the workflow's layout gate.
+3. **Sketch pass.** When the workflow draws `storyboard.html`, check it yourself against the approved style frames and `references/craft.md`, and satisfy the workflow's layout gate; push `storyboard` `--status done` with `sheet` so the user can look. Ask only if the sketch departs from the approved frames.
 4. **After `frame-packets.mjs`:** `node $SKILL_DIR/scripts/video.mjs inject --project-dir videos/<name>` (the motion contract and the art direction go into every packet), then dispatch the frame workers with `DISPATCH.md` appended to each, plus the approved style frames as visual references.
 5. **After `audio.mjs fetch-sfx`, before `assemble-index`** (when a music track was chosen): `node $SKILL_DIR/scripts/video.mjs audio-lock --project-dir videos/<name> --music videos/<name>/assets/music-bed.<ext>`.
 6. **Stream progress:** `console.mjs log --run "$RUN" --stage <plan|design|build|verify|obey|render-gate> --stage-status working|done|failed --message "<one line>"` at each workflow step.
@@ -301,6 +318,7 @@ Show the current plan (BRIEF.md, STORYBOARD.md, frame.md, motion.md) as pre-fill
 | Need | Read |
 |---|---|
 | the taxonomy, decisions.json, DIRECTION.md, suggest/analyze/compare, design directions (looks) | `references/direction.md` |
+| the craft Claude decides without asking: transitions, pacing, structure, type in motion, composition, camera, sound, endings, AI-video tells to avoid | `references/craft.md` |
 | a project's DESIGN.md as the look: shapes read, roles, fonts, frame.md conversion | `references/brand.md` |
 | per-route integration: what Rasa pre-writes, hook points, scenes.json and video-decisions.json formats, footage routes | `references/video.md` |
 | footage reels: footage.json, reel.json, how cards/overlays/captions/music are built | `references/reel.md` |

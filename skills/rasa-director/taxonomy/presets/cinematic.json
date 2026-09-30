@@ -1,0 +1,1569 @@
+{
+  "family": {
+    "id": "cinematic",
+    "name": "Cinematic & atmospheric",
+    "what": "Styles borrowed from film and broadcast: title sequences, trailers, documentary, grain, light and mood."
+  },
+  "presets": [
+    {
+      "id": "main-title-sequence",
+      "name": "Main title sequence",
+      "aka": [
+        "opening titles",
+        "film credits",
+        "prestige TV titles",
+        "title card"
+      ],
+      "what": "Widely tracked uppercase serif credits fading on near-black, warm gold hairlines, heavy film grain and long, patient holds.",
+      "feels": [
+        "cinematic",
+        "expectant",
+        "prestigious"
+      ],
+      "use": [
+        "opening titles",
+        "brand film openers",
+        "event openers",
+        "trailers"
+      ],
+      "not": "Not a trailer: slow fades and quiet holds instead of slams, and the type stays small and spaced.",
+      "search": [
+        "film opening title sequence",
+        "prestige tv title design",
+        "cinematic title card animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "extreme-minimal"
+        ],
+        "format": [
+          "title-sequence",
+          "opening-titles"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "color": [
+          "dark-ui",
+          "limited-palette"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "pacing": [
+          "slow"
+        ],
+        "transitions": [
+          "fade",
+          "dissolve"
+        ],
+        "tone": [
+          "cinematic",
+          "mysterious"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0b0b0c",
+          "ink": "#efe9dc",
+          "accent": "#c9a86a",
+          "accent2": "#6b5a3a",
+          "surface": "#161517",
+          "muted": "#8c867a"
+        },
+        "fonts": {
+          "display": "Cormorant Garamond",
+          "body": "Cormorant Garamond",
+          "displayWeight": 500,
+          "case": "upper",
+          "tracking": 0.18
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "film-noir",
+      "name": "Film noir",
+      "aka": [
+        "noir",
+        "black-and-white thriller",
+        "venetian-blind shadows",
+        "hard-boiled"
+      ],
+      "what": "Stark black and white, venetian-blind light striping the frame, a heavy italic-free serif title and deep, smoky shadow.",
+      "feels": [
+        "mysterious",
+        "tense",
+        "dramatic"
+      ],
+      "use": [
+        "teasers",
+        "mystery and true-crime",
+        "fashion and fragrance",
+        "security products"
+      ],
+      "not": "Not neo-noir: no neon or colour at all; drama comes from light and shadow alone.",
+      "search": [
+        "film noir motion graphics",
+        "noir title sequence",
+        "venetian blind shadow animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "monochrome"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "color": [
+          "black-and-white",
+          "high-contrast"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "effects": [
+          "shadows",
+          "smoke",
+          "grain"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "cinematic"
+        ],
+        "camera": [
+          "push-in"
+        ],
+        "transitions": [
+          "luma-matte",
+          "fade"
+        ],
+        "tone": [
+          "mysterious",
+          "dramatic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0d0d0d",
+          "ink": "#f2f2f2",
+          "accent": "#bdbdbd",
+          "accent2": "#5c5c5c",
+          "surface": "#1c1c1c",
+          "muted": "#8a8a8a"
+        },
+        "fonts": {
+          "display": "Playfair Display",
+          "body": "Old Standard TT",
+          "displayWeight": 900,
+          "case": "upper",
+          "tracking": 0.04
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "scanlines",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask"
+      }
+    },
+    {
+      "id": "blockbuster-trailer",
+      "name": "Blockbuster trailer",
+      "aka": [
+        "movie trailer titles",
+        "trailer cards",
+        "teal and orange",
+        "epic trailer type"
+      ],
+      "what": "Tall condensed uppercase slamming onto teal-black, orange light rays behind, lens noise; each card hits on a boom and cuts.",
+      "feels": [
+        "epic",
+        "urgent",
+        "massive"
+      ],
+      "use": [
+        "trailers and teasers",
+        "launch countdowns",
+        "game and film promos",
+        "event hype reels"
+      ],
+      "not": "Not a title sequence: loud, fast and percussive, built on hits and risers rather than holds.",
+      "search": [
+        "movie trailer title animation",
+        "epic trailer text cards",
+        "teal orange trailer typography"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "futuristic-tech"
+        ],
+        "format": [
+          "trailer",
+          "teaser"
+        ],
+        "typography": [
+          "condensed",
+          "display"
+        ],
+        "color": [
+          "complementary",
+          "dark-ui"
+        ],
+        "effects": [
+          "light-streaks",
+          "bloom",
+          "noise"
+        ],
+        "composition": [
+          "centered-hero",
+          "typography-led"
+        ],
+        "motion-language": [
+          "heavy"
+        ],
+        "pacing": [
+          "staccato"
+        ],
+        "transitions": [
+          "flash",
+          "hard-cut"
+        ],
+        "sound": [
+          "impacts",
+          "risers"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#06141b",
+          "ink": "#f4f1ea",
+          "accent": "#ff8a3d",
+          "accent2": "#1f6f78",
+          "surface": "#0e232c",
+          "muted": "#7fa1a8"
+        },
+        "fonts": {
+          "display": "Bebas Neue",
+          "body": "Barlow Condensed",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.06
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "filled",
+        "motif": "rays",
+        "motion": "snap"
+      }
+    },
+    {
+      "id": "vintage-film-titles",
+      "name": "Vintage film titles",
+      "aka": [
+        "golden-age titles",
+        "classic Hollywood credits",
+        "sepia title card",
+        "old movie titles"
+      ],
+      "what": "Ornate display serif inside double-ruled frames on sepia, cream lettering, flickering grain and slow dissolves like a 1940s picture.",
+      "feels": [
+        "nostalgic",
+        "romantic",
+        "grand"
+      ],
+      "use": [
+        "heritage brands",
+        "anniversary films",
+        "period storytelling",
+        "event openers"
+      ],
+      "not": "Not Art Deco: the frame is a simple double rule and the mood is sepia film, not geometric gold.",
+      "search": [
+        "vintage film title card animation",
+        "old hollywood title sequence",
+        "sepia film credits motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "art-deco"
+        ],
+        "typography": [
+          "display",
+          "high-contrast-serif"
+        ],
+        "composition": [
+          "centered-hero",
+          "symmetrical"
+        ],
+        "color": [
+          "warm-palette",
+          "monochrome"
+        ],
+        "texture": [
+          "film-grain",
+          "scratches"
+        ],
+        "effects": [
+          "dust",
+          "grain"
+        ],
+        "stroke": [
+          "double-line"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "dissolve",
+          "fade"
+        ],
+        "tone": [
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#231710",
+          "ink": "#f0dcae",
+          "accent": "#b3702d",
+          "accent2": "#5e4128",
+          "surface": "#2f2016",
+          "muted": "#a88c63"
+        },
+        "fonts": {
+          "display": "Abril Fatface",
+          "body": "Libre Caslon Text",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.01
+        },
+        "layout": "cards",
+        "radius": 0,
+        "stroke": {
+          "width": 4,
+          "color": "ink",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "glyph",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "documentary-graphics",
+      "name": "Documentary graphics",
+      "aka": [
+        "doc lower thirds",
+        "Netflix documentary style",
+        "factual graphics",
+        "investigative doc"
+      ],
+      "what": "Understated sans captions and figures over graded dark footage, one archival-yellow accent, a slow line chart and gentle grain.",
+      "feels": [
+        "credible",
+        "serious",
+        "human"
+      ],
+      "use": [
+        "brand documentaries",
+        "impact reports",
+        "investigative explainers",
+        "case-study films"
+      ],
+      "not": "Not a news package: no banners or tickers; graphics are sparse and let the footage lead.",
+      "search": [
+        "documentary motion graphics",
+        "netflix documentary graphics style",
+        "documentary lower third design"
+      ],
+      "stack": {
+        "visual-style": [
+          "documentary",
+          "cinematic"
+        ],
+        "typography": [
+          "neo-grotesk"
+        ],
+        "photo-video": [
+          "documentary-footage",
+          "ken-burns"
+        ],
+        "data-viz": [
+          "line-graph",
+          "statistic"
+        ],
+        "composition": [
+          "full-bleed",
+          "negative-space"
+        ],
+        "color": [
+          "muted",
+          "dark-ui"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "pacing": [
+          "voiceover-synchronized"
+        ],
+        "transitions": [
+          "crossfade",
+          "line-draw"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#161816",
+          "ink": "#eeeae1",
+          "accent": "#e2b33c",
+          "accent2": "#6e7a70",
+          "surface": "#1f2320",
+          "muted": "#8f948d"
+        },
+        "fonts": {
+          "display": "IBM Plex Sans",
+          "body": "IBM Plex Sans",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "data",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "line",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "archival-documentary",
+      "name": "Archival documentary",
+      "aka": [
+        "Ken Burns effect",
+        "historical documentary",
+        "archive collage",
+        "old photo montage"
+      ],
+      "what": "Sepia photographs and clippings laid on aged paper, slow pans and push-ins, typewriter captions and faded brick-red annotation.",
+      "feels": [
+        "historic",
+        "intimate",
+        "reflective"
+      ],
+      "use": [
+        "company history films",
+        "anniversaries",
+        "museum and heritage",
+        "biographical stories"
+      ],
+      "not": "Not scrapbook: the scraps are real archival records moved with slow camera, not decorative craft.",
+      "search": [
+        "ken burns effect archive documentary",
+        "historical photo montage animation",
+        "archival documentary motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "documentary",
+          "mixed-media-collage"
+        ],
+        "illustration": [
+          "photo-collage"
+        ],
+        "photo-video": [
+          "ken-burns",
+          "photo-cutout"
+        ],
+        "composition": [
+          "collage",
+          "layered-depth"
+        ],
+        "color": [
+          "earth-tones",
+          "muted"
+        ],
+        "texture": [
+          "paper-grain",
+          "dust"
+        ],
+        "material": [
+          "paper"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "camera": [
+          "push-in",
+          "pan"
+        ],
+        "transitions": [
+          "dissolve",
+          "camera-move"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e6dcc6",
+          "ink": "#2b2219",
+          "accent": "#a4472f",
+          "accent2": "#b9a27a",
+          "surface": "#f3ead6",
+          "muted": "#7f6f58"
+        },
+        "fonts": {
+          "display": "Libre Caslon Text",
+          "body": "Courier Prime",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "collage",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "paper",
+        "icons": "none",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "photographic-duotone",
+      "name": "Cinematic duotone",
+      "aka": [
+        "photo duotone",
+        "two-tone grade",
+        "duotone photography",
+        "gradient-map photos"
+      ],
+      "what": "Photography gradient-mapped to deep indigo and ember orange, washed panels, bright cream type and soft film grain.",
+      "feels": [
+        "moody",
+        "bold",
+        "atmospheric"
+      ],
+      "use": [
+        "music and events",
+        "brand campaigns",
+        "album and artist promos",
+        "social teasers"
+      ],
+      "not": "Not risograph: a smooth photographic gradient map in two colours, not overprinted spot inks.",
+      "search": [
+        "duotone photo animation",
+        "cinematic duotone motion graphics",
+        "gradient map photography video"
+      ],
+      "stack": {
+        "visual-style": [
+          "duotone",
+          "cinematic"
+        ],
+        "color": [
+          "duotone",
+          "gradient"
+        ],
+        "photo-video": [
+          "masked-photography",
+          "parallax-photography"
+        ],
+        "composition": [
+          "floating-cards",
+          "layered-depth"
+        ],
+        "typography": [
+          "grotesk"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "camera": [
+          "dolly"
+        ],
+        "transitions": [
+          "color-match",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#1b1540",
+          "ink": "#fbe9d6",
+          "accent": "#ff6b3d",
+          "accent2": "#6a3fd1",
+          "surface": "#2a2160",
+          "muted": "#b2a3d6"
+        },
+        "fonts": {
+          "display": "Schibsted Grotesk",
+          "body": "Schibsted Grotesk",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "cards",
+        "radius": 4,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "gradient",
+        "texture": "grain",
+        "icons": "duotone",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "minimal-arthouse",
+      "name": "Minimal arthouse",
+      "aka": [
+        "A24 style",
+        "indie film titles",
+        "arthouse minimal",
+        "festival film look"
+      ],
+      "what": "A centred lowercase title in a quiet sans on a bone-coloured still, wide empty margins, soft grain and long, patient dissolves.",
+      "feels": [
+        "intimate",
+        "understated",
+        "poetic"
+      ],
+      "use": [
+        "brand films",
+        "fashion and lifestyle",
+        "film festival promos",
+        "manifesto films"
+      ],
+      "not": "Not fashion editorial: small lowercase sans and muted stills, no Didone glamour.",
+      "search": [
+        "a24 style title design",
+        "arthouse film titles animation",
+        "minimal indie film typography"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "warm-minimal"
+        ],
+        "typography": [
+          "neutral-sans"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "color": [
+          "muted",
+          "low-contrast"
+        ],
+        "photo-video": [
+          "full-bleed-footage"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "pacing": [
+          "meditative"
+        ],
+        "transitions": [
+          "dissolve",
+          "hard-cut"
+        ],
+        "tone": [
+          "calm",
+          "cinematic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ebe5da",
+          "ink": "#2a2724",
+          "accent": "#b98b82",
+          "accent2": "#7d8a7a",
+          "surface": "#f4efe6",
+          "muted": "#8e877c"
+        },
+        "fonts": {
+          "display": "Hanken Grotesk",
+          "body": "Hanken Grotesk",
+          "displayWeight": 400,
+          "case": "lower",
+          "tracking": -0.01
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "sports-broadcast",
+      "name": "Sports broadcast",
+      "aka": [
+        "sports graphics package",
+        "matchday graphics",
+        "scorebug style",
+        "ESPN look"
+      ],
+      "what": "Heavy condensed uppercase on stadium navy, stat tiles slamming in, taxi-yellow and red hits, hard shadows and hyper-fast wipes.",
+      "feels": [
+        "energetic",
+        "competitive",
+        "loud"
+      ],
+      "use": [
+        "sports graphics",
+        "fitness launches",
+        "esports and leagues",
+        "recap highlights"
+      ],
+      "not": "Not a news package: louder, italic-energy type and stat tiles; everything wipes on the beat.",
+      "search": [
+        "sports broadcast graphics package",
+        "matchday motion graphics",
+        "sports stats animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "brutalism"
+        ],
+        "format": [
+          "sports-graphics",
+          "broadcast-package"
+        ],
+        "typography": [
+          "condensed",
+          "display"
+        ],
+        "composition": [
+          "bento-grid",
+          "modular-grid"
+        ],
+        "data-viz": [
+          "statistic",
+          "number-counter",
+          "comparison-cards"
+        ],
+        "color": [
+          "high-saturation",
+          "high-contrast"
+        ],
+        "shape": [
+          "angular"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "pacing": [
+          "hyper-fast"
+        ],
+        "transitions": [
+          "wipe",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0a1a3a",
+          "ink": "#ffffff",
+          "accent": "#ffcc00",
+          "accent2": "#e4002b",
+          "surface": "#132a5c",
+          "muted": "#8ea0c6"
+        },
+        "fonts": {
+          "display": "Big Shoulders Display",
+          "body": "Barlow Condensed",
+          "displayWeight": 900,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "bento",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "hard",
+        "shadowColor": "accent2",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "snap"
+      }
+    },
+    {
+      "id": "news-package",
+      "name": "Broadcast news package",
+      "aka": [
+        "news graphics",
+        "breaking news",
+        "news lower thirds",
+        "24-hour news look"
+      ],
+      "what": "Deep navy studio gradients, breaking-news red bars, globe orbits, clean sans headlines and panels that slide in with authority.",
+      "feels": [
+        "authoritative",
+        "urgent",
+        "trustworthy"
+      ],
+      "use": [
+        "news graphics",
+        "announcements",
+        "PR videos",
+        "earnings and updates"
+      ],
+      "not": "Not documentary graphics: branded bars, tickers and gradients announce themselves; nothing is understated.",
+      "search": [
+        "news broadcast graphics package",
+        "breaking news motion graphics",
+        "news lower third animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "corporate-flat",
+          "cinematic"
+        ],
+        "format": [
+          "news-graphics",
+          "broadcast-package"
+        ],
+        "typography": [
+          "neutral-sans",
+          "condensed"
+        ],
+        "composition": [
+          "floating-cards",
+          "layered-depth"
+        ],
+        "color": [
+          "cool-palette",
+          "accent-color-system"
+        ],
+        "effects": [
+          "light-streaks",
+          "reflections"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "push",
+          "light-wipe"
+        ],
+        "tone": [
+          "serious",
+          "urgent"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0c1a2b",
+          "ink": "#ffffff",
+          "accent": "#d0021b",
+          "accent2": "#2d7fd3",
+          "surface": "#15314f",
+          "muted": "#9db1c7"
+        },
+        "fonts": {
+          "display": "Roboto Condensed",
+          "body": "Roboto",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "cards",
+        "radius": 2,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "metal",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "orbits",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "evidence-board",
+      "name": "True-crime evidence board",
+      "aka": [
+        "conspiracy board",
+        "detective wall",
+        "investigation board",
+        "red string board"
+      ],
+      "what": "Cork wall, cream index cards pinned and joined by dashed red string, typewriter labels, one suspect card flagged in yellow.",
+      "feels": [
+        "intriguing",
+        "investigative",
+        "suspenseful"
+      ],
+      "use": [
+        "true-crime and podcast promos",
+        "security and fraud products",
+        "mystery explainers",
+        "case studies"
+      ],
+      "not": "Not a flowchart explainer: a physical, messy detective wall with string and pins, not clean nodes.",
+      "search": [
+        "conspiracy board animation",
+        "detective evidence wall motion graphics",
+        "red string investigation video"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "mixed-media-collage"
+        ],
+        "composition": [
+          "node-map",
+          "collage"
+        ],
+        "data-viz": [
+          "node-network"
+        ],
+        "material": [
+          "paper",
+          "cardboard"
+        ],
+        "typography": [
+          "monospace"
+        ],
+        "stroke": [
+          "hand-drawn"
+        ],
+        "color": [
+          "earth-tones",
+          "accent-color-system"
+        ],
+        "motion-language": [
+          "cinematic"
+        ],
+        "camera": [
+          "push-in",
+          "rack-focus"
+        ],
+        "transitions": [
+          "line-draw",
+          "camera-move"
+        ],
+        "tone": [
+          "mysterious"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#a67c52",
+          "ink": "#1e1510",
+          "accent": "#c8302a",
+          "accent2": "#f0cf4a",
+          "surface": "#f4ecd8",
+          "muted": "#4f3b28"
+        },
+        "fonts": {
+          "display": "Special Elite",
+          "body": "Courier Prime",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "diagram",
+        "radius": 0,
+        "stroke": {
+          "width": 3,
+          "color": "accent",
+          "style": "dashed"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "noise",
+        "icons": "none",
+        "motif": "none",
+        "motion": "step"
+      }
+    },
+    {
+      "id": "dark-tech-launch",
+      "name": "Dark atmospheric tech launch",
+      "aka": [
+        "keynote reveal",
+        "Apple event style",
+        "black product reveal",
+        "dark launch film"
+      ],
+      "what": "Product floats out of pure black, rim-lit in a violet glow, glass panels and giant tight sans; slow push-ins and drifting light.",
+      "feels": [
+        "premium",
+        "futuristic",
+        "hushed"
+      ],
+      "use": [
+        "product launch films",
+        "hardware and AI reveals",
+        "keynote openers",
+        "app store promos"
+      ],
+      "not": "Not sci-fi HUD: no readouts or rings; just darkness, light and the product.",
+      "search": [
+        "dark product reveal animation",
+        "apple keynote style launch video",
+        "cinematic tech launch film"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "futuristic-tech"
+        ],
+        "format": [
+          "product-launch-film",
+          "feature-reveal"
+        ],
+        "typography": [
+          "neo-grotesk"
+        ],
+        "composition": [
+          "single-object-hero",
+          "negative-space"
+        ],
+        "photo-video": [
+          "cinematic-product-footage",
+          "device-mockup"
+        ],
+        "color": [
+          "dark-ui",
+          "gradient"
+        ],
+        "effects": [
+          "glow",
+          "bloom",
+          "depth-of-field"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "camera": [
+          "push-in",
+          "orbit"
+        ],
+        "transitions": [
+          "fade",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#050507",
+          "ink": "#f5f5f7",
+          "accent": "#7b61ff",
+          "accent2": "#2dd4ff",
+          "surface": "#141418",
+          "muted": "#86868b"
+        },
+        "fonts": {
+          "display": "Inter Tight",
+          "body": "Inter",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.04
+        },
+        "layout": "device",
+        "radius": 28,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "glass",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "techno-thriller",
+      "name": "Techno-thriller screen graphics",
+      "aka": [
+        "hacker film UI",
+        "Mr. Robot style",
+        "cyber-thriller terminal",
+        "screen graphics"
+      ],
+      "what": "A terminal in a dark room: cold white monospace typing, one alarm-red prompt, faint noise and cuts timed like a heist.",
+      "feels": [
+        "tense",
+        "clandestine",
+        "precise"
+      ],
+      "use": [
+        "security and devtools",
+        "cyber products",
+        "thriller teasers",
+        "AI agent demos"
+      ],
+      "not": "Not the green-screen hacker terminal: cold white type and a red alarm accent, no phosphor glow or CRT; shot like a film insert.",
+      "search": [
+        "hacker movie screen graphics",
+        "mr robot terminal animation",
+        "techno thriller ui motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "technical-minimal"
+        ],
+        "ui-treatment": [
+          "terminal-ui"
+        ],
+        "typography": [
+          "monospace"
+        ],
+        "ui-interaction": [
+          "typing",
+          "streaming-text"
+        ],
+        "color": [
+          "dark-ui",
+          "accent-color-system"
+        ],
+        "texture": [
+          "digital-noise"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "pacing": [
+          "staccato"
+        ],
+        "transitions": [
+          "hard-cut",
+          "glitch"
+        ],
+        "tone": [
+          "mysterious",
+          "technical"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#080a0b",
+          "ink": "#e4e8e6",
+          "accent": "#e5383b",
+          "accent2": "#3ddc84",
+          "surface": "#111617",
+          "muted": "#6f7a76"
+        },
+        "fonts": {
+          "display": "JetBrains Mono",
+          "body": "JetBrains Mono",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "terminal",
+        "radius": 6,
+        "stroke": {
+          "width": 1,
+          "color": "#26302e",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "type"
+      }
+    },
+    {
+      "id": "motorsport-telemetry",
+      "name": "Motorsport telemetry",
+      "aka": [
+        "F1 broadcast graphics",
+        "racing telemetry",
+        "speed HUD",
+        "timing tower"
+      ],
+      "what": "Race-broadcast overlays on carbon black: rev-dial rings, live timing readouts, italic-energy caps in racing red and teal.",
+      "feels": [
+        "fast",
+        "technical",
+        "thrilling"
+      ],
+      "use": [
+        "automotive and EV launches",
+        "sports graphics",
+        "performance products",
+        "recap highlights"
+      ],
+      "not": "Not a sci-fi HUD: grounded real-world telemetry (speed, laps, deltas) in broadcast colours, not fantasy interface.",
+      "search": [
+        "f1 broadcast graphics",
+        "motorsport telemetry motion graphics",
+        "racing hud animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "sci-fi-hud"
+        ],
+        "format": [
+          "sports-graphics",
+          "broadcast-package"
+        ],
+        "typography": [
+          "extended",
+          "condensed"
+        ],
+        "data-viz": [
+          "progress-ring",
+          "number-counter",
+          "ranking-list"
+        ],
+        "composition": [
+          "radial",
+          "layered-depth"
+        ],
+        "color": [
+          "dark-ui",
+          "high-contrast"
+        ],
+        "effects": [
+          "motion-blur",
+          "light-streaks"
+        ],
+        "motion-language": [
+          "inertial"
+        ],
+        "pacing": [
+          "fast"
+        ],
+        "transitions": [
+          "whip",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0e0e10",
+          "ink": "#ffffff",
+          "accent": "#e10600",
+          "accent2": "#00d2be",
+          "surface": "#1a1a1e",
+          "muted": "#8d8d95"
+        },
+        "fonts": {
+          "display": "Titillium Web",
+          "body": "Titillium Web",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "hud",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "symmetrical-pastel",
+      "name": "Symmetrical pastel",
+      "aka": [
+        "Wes Anderson style",
+        "storybook symmetry",
+        "pastel cinema",
+        "dollhouse framing"
+      ],
+      "what": "Dead-centred symmetrical framing, candy pink and mustard pastels, uppercase geometric sans, flat whip pans and a storybook stillness.",
+      "feels": [
+        "whimsical",
+        "precise",
+        "nostalgic"
+      ],
+      "use": [
+        "hospitality and travel",
+        "brand films",
+        "food and retail",
+        "chapter cards"
+      ],
+      "not": "Not kawaii pastel: adult, deadpan and rigorously symmetrical, with film grain rather than cute characters.",
+      "search": [
+        "wes anderson style motion graphics",
+        "symmetrical pastel title cards",
+        "wes anderson typography animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "mid-century"
+        ],
+        "composition": [
+          "symmetrical",
+          "centered-hero"
+        ],
+        "typography": [
+          "geometric-sans"
+        ],
+        "color": [
+          "pastel",
+          "warm-palette"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "camera": [
+          "whip-pan",
+          "locked"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "whip",
+          "hard-cut"
+        ],
+        "tone": [
+          "quirky",
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f2c4c0",
+          "ink": "#3b2320",
+          "accent": "#e1a93b",
+          "accent2": "#9c4f5a",
+          "surface": "#f8dcd6",
+          "muted": "#8f5d58"
+        },
+        "fonts": {
+          "display": "Jost",
+          "body": "Jost",
+          "displayWeight": 600,
+          "case": "upper",
+          "tracking": 0.12
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "step"
+      }
+    },
+    {
+      "id": "neo-noir-neon",
+      "name": "Neo-noir neon",
+      "aka": [
+        "Drive style",
+        "neon noir",
+        "night-city cinema",
+        "pink neon titles"
+      ],
+      "what": "Wet night-black, a hot-pink neon-lit plate, cyan rim light, tracked uppercase sans and slow, humming drifts.",
+      "feels": [
+        "moody",
+        "seductive",
+        "nocturnal"
+      ],
+      "use": [
+        "music videos",
+        "nightlife and fashion",
+        "game trailers",
+        "teasers"
+      ],
+      "not": "Not cyberpunk: no grids, kanji or glitch; contemporary night-city light, sparse and slow.",
+      "search": [
+        "neo noir neon title design",
+        "drive movie titles animation",
+        "neon noir motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "cyberpunk"
+        ],
+        "typography": [
+          "grotesk"
+        ],
+        "color": [
+          "neon",
+          "dark-ui"
+        ],
+        "composition": [
+          "asymmetric",
+          "negative-space"
+        ],
+        "effects": [
+          "glow",
+          "bloom",
+          "chromatic-aberration"
+        ],
+        "shadow": [
+          "glow"
+        ],
+        "motion-language": [
+          "floating"
+        ],
+        "pacing": [
+          "slow"
+        ],
+        "transitions": [
+          "light-wipe",
+          "crossfade"
+        ],
+        "tone": [
+          "mysterious",
+          "cinematic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0a0710",
+          "ink": "#f7eaf3",
+          "accent": "#ff2e97",
+          "accent2": "#22d3ee",
+          "surface": "#150f1f",
+          "muted": "#9a86a6"
+        },
+        "fonts": {
+          "display": "Archivo",
+          "body": "Archivo",
+          "displayWeight": 800,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "line",
+        "motif": "none",
+        "motion": "drift"
+      }
+    }
+  ]
+}

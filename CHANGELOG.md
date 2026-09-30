@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.0 (2026-09-30)
+
+- **A library of 236 named motion-graphics styles**: `taxonomy/presets/` holds complete styles in twelve families (bold, soft, editorial, retro, futuristic, handmade, 3D, product, data, cinematic, playful, luxury): soft neo-brutalism, claymorphism, Swiss grid, Windows 95, Y2K chrome, blueprint HUD, risograph, data journalism, keynote hero, black and gold and many more. Each has its proper name and the names people also use, what it looks like, what it feels like, where it fits, what it's confused with, reference searches, the taxonomy terms that define it, and a recipe `console/presets.js` draws live on the user's own words (and in their brand). `presets.mjs` validates the library (real terms, fixed recipe vocabulary, readable contrast, no two styles that draw alike), suggests, builds the gallery, and applies a pick (its terms and its frame.md).
+- **Style is the Direction step**: Claude suggests three styles for this video (the best fit, a strong alternative and one unusual pick, never a recent or generic one), drawn live; "Browse all 236 styles" opens a searchable gallery with family filters where hovering shows how each style moves. The website has the same live library.
+- **Claude decides the craft**: you're asked only what's yours to judge (brief, brand, style, story, voice and music, style frames, render). The workflow, scenes and pacing, motion (from the style), transitions, key poses and the plan are Claude's, guided by a new playbook, `references/craft.md` (when to cut or match-cut, one signature transition per film, scene lengths and reading time, type in motion, accent rationing, camera, sound, endings, AI-video tells to avoid). Each call shows in "Your film" with its reason and can be changed by discussing it.
+- **Any question goes on the page**: `console.mjs ask` shows a question that isn't a step (a thin capture, missing material) as its own card with options, Claude's pick and a free-text box, without sending the flow back to step 1.
+- Fonts in the style previews load one family at a time with exactly the weights used, so one font can't break the gallery.
+
 ## 0.8.0 (2026-09-30)
 
 - **Talk it through with Claude, on every step**: "Discuss this with Claude" under each question opens a thread; you write ("the second one, but warmer", "why this story?"), Claude answers right there (`console.mjs reply`) and redraws the options if you asked for a change. The options stay on screen while Claude replies.

@@ -1,0 +1,1650 @@
+{
+  "family": {
+    "id": "luxury",
+    "name": "Luxury & restrained",
+    "what": "Premium, quiet styles: refined serifs, metallic accents, deep or ivory grounds, wide spacing and slow, deliberate motion."
+  },
+  "presets": [
+    {
+      "id": "black-and-gold",
+      "name": "Black and gold",
+      "aka": [
+        "noir gold",
+        "gold on black",
+        "gala luxury",
+        "premium dark gold"
+      ],
+      "what": "Near-black panels hairlined and haloed in warm gold, engraved wide-tracked capitals, a gold ornament, film grain, slow fades.",
+      "feels": [
+        "opulent",
+        "formal",
+        "exclusive"
+      ],
+      "use": [
+        "award shows and galas",
+        "premium product teasers",
+        "whisky and spirits",
+        "VIP event openers"
+      ],
+      "not": "Not a film title sequence: gold frames and panels carry the brand, not just credits floating on black.",
+      "search": [
+        "black and gold title animation",
+        "luxury gold text reveal",
+        "gala opener motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "cinematic"
+        ],
+        "color": [
+          "dark-ui",
+          "limited-palette"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "extended"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "composition": [
+          "floating-cards",
+          "negative-space"
+        ],
+        "tone": [
+          "luxurious",
+          "premium",
+          "dramatic"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "fade",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0d0c0a",
+          "ink": "#f2e8d5",
+          "accent": "#c9a45c",
+          "accent2": "#8a6d3b",
+          "surface": "#1a1814",
+          "muted": "#8f8676"
+        },
+        "fonts": {
+          "display": "Cinzel",
+          "body": "Cormorant Garamond",
+          "displayWeight": 500,
+          "case": "upper",
+          "tracking": 0.14
+        },
+        "layout": "cards",
+        "radius": 2,
+        "stroke": {
+          "width": 1,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "glyph",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "maison-sans",
+      "name": "Maison sans",
+      "aka": [
+        "luxury blanding",
+        "fashion house wordmark",
+        "Futura fashion",
+        "logo-type luxury"
+      ],
+      "what": "A wide-tracked geometric sans wordmark in black on stark white, nothing else, snapping in with hard masked wipes like a runway card.",
+      "feels": [
+        "cool",
+        "modern",
+        "exclusive"
+      ],
+      "use": [
+        "fashion house campaigns",
+        "drop and collection announcements",
+        "beauty launches",
+        "logo stings"
+      ],
+      "not": "Not a Didone fashion editorial: the voice is a tracked geometric sans wordmark, the stripped 'blanded' look of modern luxury houses.",
+      "search": [
+        "luxury fashion logo animation minimal",
+        "fashion house wordmark reveal",
+        "minimal sans fashion motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "fashion-editorial",
+          "extreme-minimal"
+        ],
+        "color": [
+          "black-and-white",
+          "high-contrast"
+        ],
+        "typography": [
+          "geometric-sans",
+          "extended"
+        ],
+        "composition": [
+          "typography-led",
+          "negative-space"
+        ],
+        "tone": [
+          "premium",
+          "confident"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "mask-reveal",
+          "hard-cut"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ffffff",
+          "ink": "#0a0a0a",
+          "accent": "#0a0a0a",
+          "accent2": "#c8c8c8",
+          "surface": "#f2f2f2",
+          "muted": "#8a8a8a"
+        },
+        "fonts": {
+          "display": "Jost",
+          "body": "Jost",
+          "displayWeight": 500,
+          "case": "upper",
+          "tracking": 0.2
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask"
+      }
+    },
+    {
+      "id": "perfume-noir",
+      "name": "Perfume-ad noir",
+      "aka": [
+        "fragrance ad",
+        "parfum noir",
+        "dark beauty luxe",
+        "scent film"
+      ],
+      "what": "Aubergine darkness, a rose-gold glint, soft-lit italic serif and one slow drifting glow, like a fragrance commercial end card.",
+      "feels": [
+        "sensual",
+        "mysterious",
+        "intimate"
+      ],
+      "use": [
+        "fragrance and beauty ads",
+        "luxury end cards",
+        "holiday gifting campaigns",
+        "nightlife brands"
+      ],
+      "not": "Not black and gold: warmer and more sensual, lit by a rose glow and italics rather than engraved capitals and gold frames.",
+      "search": [
+        "perfume commercial end card",
+        "fragrance ad typography",
+        "dark luxury beauty motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "cinematic"
+        ],
+        "color": [
+          "dark-ui",
+          "warm-palette"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "effects": [
+          "glow",
+          "bloom"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "tone": [
+          "mysterious",
+          "luxurious"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "dissolve",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#140a10",
+          "ink": "#f6e9ee",
+          "accent": "#d8a0a0",
+          "accent2": "#6b2f45",
+          "surface": "#24121b",
+          "muted": "#9c8490"
+        },
+        "fonts": {
+          "display": "Playfair Display",
+          "body": "Cormorant Garamond",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.01
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "emoji3d",
+        "motif": "orbits",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "luxury-serif-minimal",
+      "name": "Luxury serif minimal",
+      "aka": [
+        "ivory serif",
+        "boutique minimal",
+        "understated serif",
+        "hairline luxury"
+      ],
+      "what": "A light Garamond line centred on ivory with one hairline icon, taupe accents, immense margins and unhurried fades.",
+      "feels": [
+        "refined",
+        "calm",
+        "assured"
+      ],
+      "use": [
+        "boutique hotels",
+        "skincare and wellness brands",
+        "private clinics",
+        "high-end real estate"
+      ],
+      "not": "Not warm minimalism: colder and more formal, hairlines instead of blocks, a classical Garamond rather than a soft serif.",
+      "search": [
+        "luxury serif minimal brand motion",
+        "elegant serif typography animation",
+        "boutique hotel brand film"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "clean-minimal"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "color": [
+          "muted",
+          "light-ui"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "shadow": [
+          "none"
+        ],
+        "tone": [
+          "premium",
+          "calm"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "fade",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f6f2ea",
+          "ink": "#1c1a17",
+          "accent": "#b3a488",
+          "accent2": "#d9cfbe",
+          "surface": "#fbf9f4",
+          "muted": "#8e877b"
+        },
+        "fonts": {
+          "display": "Cormorant Garamond",
+          "body": "Manrope",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "poster",
+        "radius": 2,
+        "stroke": {
+          "width": 1,
+          "color": "#cfc5b3",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "wabi-sabi-luxe",
+      "name": "Wabi-sabi luxe",
+      "aka": [
+        "Japandi luxury",
+        "Kinfolk minimal",
+        "imperfect luxury",
+        "plaster and ink"
+      ],
+      "what": "Plaster-coloured tiles on aged limewash, sumi-black Mincho type, one umber accent, raw grain and long, patient fades.",
+      "feels": [
+        "contemplative",
+        "refined",
+        "humble"
+      ],
+      "use": [
+        "ryokan and retreat hotels",
+        "tea, sake and ceramics",
+        "slow fashion",
+        "architecture and craft studios"
+      ],
+      "not": "Not quiet luxury: the restraint is Japanese and material, rough plaster and ink with asymmetry, not tonal beige status.",
+      "search": [
+        "wabi sabi motion graphics",
+        "japandi luxury brand film",
+        "minimal japanese typography animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "warm-minimal"
+        ],
+        "texture": [
+          "film-grain",
+          "paper-grain"
+        ],
+        "material": [
+          "ceramic",
+          "paper"
+        ],
+        "color": [
+          "earth-tones",
+          "muted"
+        ],
+        "composition": [
+          "asymmetric",
+          "negative-space"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "tone": [
+          "calm",
+          "premium"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "dissolve",
+          "fade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e2dbcf",
+          "ink": "#1d1a17",
+          "accent": "#6d5843",
+          "accent2": "#a99b86",
+          "surface": "#ebe5da",
+          "muted": "#857a6c"
+        },
+        "fonts": {
+          "display": "Shippori Mincho",
+          "body": "Zen Kaku Gothic New",
+          "displayWeight": 500,
+          "case": "none",
+          "tracking": 0.02
+        },
+        "layout": "bento",
+        "radius": 4,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "jewelry-macro",
+      "name": "Jewelry macro",
+      "aka": [
+        "diamond sparkle",
+        "fine jewellery film",
+        "platinum glint",
+        "gemstone macro"
+      ],
+      "what": "Polished platinum cards glinting on midnight navy, star-shaped sparkles, ice-blue glow, slow macro-like drift.",
+      "feels": [
+        "precious",
+        "brilliant",
+        "delicate"
+      ],
+      "use": [
+        "jewellery and watch ads",
+        "engagement and gifting campaigns",
+        "premium card launches",
+        "luxury product details"
+      ],
+      "not": "Not chrome Y2K: cool and restrained, polished metal with pinpoint sparkle, no rainbow reflections or bubbly type.",
+      "search": [
+        "jewelry commercial sparkle animation",
+        "diamond glint motion graphics",
+        "platinum luxury product reveal"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "metallic"
+        ],
+        "material": [
+          "metal",
+          "crystal"
+        ],
+        "effects": [
+          "light-streaks",
+          "glow"
+        ],
+        "camera": [
+          "macro",
+          "dolly"
+        ],
+        "color": [
+          "cool-palette",
+          "dark-ui"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "light-wipe",
+          "dissolve"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0b0f1a",
+          "ink": "#eef2f8",
+          "accent": "#cfe0ff",
+          "accent2": "#8aa3cc",
+          "surface": "#7d8698",
+          "muted": "#8791a6"
+        },
+        "fonts": {
+          "display": "Italiana",
+          "body": "Tenor Sans",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.12
+        },
+        "layout": "cards",
+        "radius": 6,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "metal",
+        "texture": "none",
+        "icons": "line",
+        "motif": "stars",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "architectural-minimal",
+      "name": "Architectural minimal",
+      "aka": [
+        "concrete minimal",
+        "brutalist-luxe",
+        "gallery architecture",
+        "Tadao Ando style"
+      ],
+      "what": "Concrete grey ground ruled by a faint construction grid, sharp-cornered planes, a slim grotesk and a single stone-coloured block.",
+      "feels": [
+        "rigorous",
+        "cool",
+        "monumental"
+      ],
+      "use": [
+        "architecture and interiors studios",
+        "real estate developments",
+        "furniture brands",
+        "design exhibitions"
+      ],
+      "not": "Not brutalism: no raw type or clashing colour; the grid, concrete and sharp planes are disciplined and quiet.",
+      "search": [
+        "architectural minimal motion graphics",
+        "concrete minimal brand film",
+        "architecture studio title animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist",
+          "extreme-minimal"
+        ],
+        "composition": [
+          "swiss-grid",
+          "asymmetric"
+        ],
+        "shape": [
+          "rectilinear",
+          "sharp"
+        ],
+        "typography": [
+          "grotesk"
+        ],
+        "color": [
+          "grayscale",
+          "muted"
+        ],
+        "material": [
+          "matte-product"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "slide",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#dedbd6",
+          "ink": "#1b1b1b",
+          "accent": "#8f857a",
+          "accent2": "#b9b2a8",
+          "surface": "#ebe8e3",
+          "muted": "#77736d"
+        },
+        "fonts": {
+          "display": "Inter Tight",
+          "body": "Inter Tight",
+          "displayWeight": 500,
+          "case": "none",
+          "tracking": -0.04
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "grid",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "quiet-luxury",
+      "name": "Quiet luxury",
+      "aka": [
+        "old money",
+        "stealth wealth",
+        "beige luxury",
+        "understated luxury"
+      ],
+      "what": "Camel, oat and cashmere-beige pills with whisper-soft shadows, no logos or gold, a restrained thin serif, barely-there motion.",
+      "feels": [
+        "understated",
+        "assured",
+        "soft"
+      ],
+      "use": [
+        "premium fashion basics",
+        "private banking apps",
+        "members' clubs",
+        "luxury home goods"
+      ],
+      "not": "Not warm minimalism: no terracotta or craft; it is tonal beige-on-beige that signals wealth by what it leaves out.",
+      "search": [
+        "quiet luxury brand motion",
+        "old money aesthetic video",
+        "beige luxury UI animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "warm-minimal"
+        ],
+        "color": [
+          "muted",
+          "low-contrast"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "shape": [
+          "pill"
+        ],
+        "ui-treatment": [
+          "minimal-ui",
+          "isolated-component-ui"
+        ],
+        "tone": [
+          "premium",
+          "calm"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "crossfade",
+          "blur"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e8dfd1",
+          "ink": "#2a2420",
+          "accent": "#a8906f",
+          "accent2": "#6f6152",
+          "surface": "#f2ebe0",
+          "muted": "#8c7f70"
+        },
+        "fonts": {
+          "display": "Italiana",
+          "body": "Manrope",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.02
+        },
+        "layout": "pills",
+        "radius": 999,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#6f5a40",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "champagne",
+      "name": "Champagne",
+      "aka": [
+        "champagne gold",
+        "blush gold",
+        "celebration luxe",
+        "sparkling ivory"
+      ],
+      "what": "Pale champagne ground, cards washed in ivory-to-gold gradient, a soft-lit phone, fine sparkles, elegant serif, gentle rising motion.",
+      "feels": [
+        "celebratory",
+        "elegant",
+        "light"
+      ],
+      "use": [
+        "weddings and events",
+        "premium app launches",
+        "hospitality and bookings",
+        "holiday campaigns"
+      ],
+      "not": "Not black and gold: light and bubbly, a pale gold gradient on ivory rather than gold on darkness.",
+      "search": [
+        "champagne gold motion graphics",
+        "elegant gold gradient app promo",
+        "wedding luxury animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "gradient-heavy"
+        ],
+        "color": [
+          "warm-palette",
+          "gradient"
+        ],
+        "ui-treatment": [
+          "device-bound-ui",
+          "floating-card-ui"
+        ],
+        "composition": [
+          "phone-composition"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "tone": [
+          "luxurious",
+          "optimistic"
+        ],
+        "motion-language": [
+          "floating"
+        ],
+        "transitions": [
+          "dissolve",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f5ecdc",
+          "ink": "#3a2e20",
+          "accent": "#d8b374",
+          "accent2": "#ecd9b4",
+          "surface": "#fff9ef",
+          "muted": "#9a8a72"
+        },
+        "fonts": {
+          "display": "DM Serif Display",
+          "body": "Figtree",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "device",
+        "radius": 22,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#8a6a3a",
+        "surface": "gradient",
+        "texture": "none",
+        "icons": "glyph",
+        "motif": "stars",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "editorial-couture",
+      "name": "Editorial couture",
+      "aka": [
+        "Vogue editorial",
+        "couture magazine",
+        "fashion editorial collage",
+        "haute editorial"
+      ],
+      "what": "Tilted oxblood and blush fashion-plate panels on off-white, an italic Didone headline, film grain, cuts timed like a lookbook.",
+      "feels": [
+        "daring",
+        "cultured",
+        "chic"
+      ],
+      "use": [
+        "fashion campaigns",
+        "magazine and publisher promos",
+        "designer collaborations",
+        "gallery openings"
+      ],
+      "not": "Not fashion minimal: layered and image-led, with overlapping panels and tape, rather than a single word on white.",
+      "search": [
+        "fashion editorial motion graphics",
+        "vogue style collage animation",
+        "couture magazine title sequence"
+      ],
+      "stack": {
+        "visual-style": [
+          "fashion-editorial",
+          "mixed-media-collage"
+        ],
+        "composition": [
+          "collage",
+          "asymmetric"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "photo-video": [
+          "masked-photography",
+          "photo-cutout"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "color": [
+          "limited-palette"
+        ],
+        "motion-language": [
+          "cinematic"
+        ],
+        "transitions": [
+          "hard-cut",
+          "mask-reveal"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f1ece5",
+          "ink": "#131111",
+          "accent": "#7a1f2b",
+          "accent2": "#e6c4bd",
+          "surface": "#fbf8f4",
+          "muted": "#8a817a"
+        },
+        "fonts": {
+          "display": "Playfair Display",
+          "body": "Tenor Sans",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "collage",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "step"
+      }
+    },
+    {
+      "id": "horology",
+      "name": "Horological precision",
+      "aka": [
+        "watch dial",
+        "chronograph UI",
+        "Swiss watch film",
+        "timepiece macro"
+      ],
+      "what": "Gold dial rings, indices and a sweeping hand on deep navy, engraved serif caps, tiny numerals, a mechanically smooth second-hand glide.",
+      "feels": [
+        "precise",
+        "heritage",
+        "masterful"
+      ],
+      "use": [
+        "watch and timepiece launches",
+        "precision engineering brands",
+        "countdowns",
+        "anniversary films"
+      ],
+      "not": "Not sci-fi HUD: the rings are a watch face in gold on navy, calm and classical, not a neon targeting overlay.",
+      "search": [
+        "luxury watch commercial motion graphics",
+        "chronograph dial animation",
+        "swiss watch title animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "technical-minimal"
+        ],
+        "composition": [
+          "radial",
+          "symmetrical"
+        ],
+        "camera": [
+          "macro",
+          "orbit"
+        ],
+        "material": [
+          "brushed-metal"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "color": [
+          "dark-ui",
+          "limited-palette"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "camera-move",
+          "dissolve"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0e1624",
+          "ink": "#ece4d2",
+          "accent": "#c8a867",
+          "accent2": "#e9d7a8",
+          "surface": "#162236",
+          "muted": "#8c93a0"
+        },
+        "fonts": {
+          "display": "Cormorant Garamond",
+          "body": "Tenor Sans",
+          "displayWeight": 500,
+          "case": "upper",
+          "tracking": 0.08
+        },
+        "layout": "hud",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "private-banking",
+      "name": "Private banking",
+      "aka": [
+        "wealth management",
+        "navy and gold finance",
+        "premium fintech",
+        "family office"
+      ],
+      "what": "Deep navy panels with a thin gold performance line, a large serif figure, measured grid, and soft shadows: trust rendered as calm.",
+      "feels": [
+        "trustworthy",
+        "discreet",
+        "authoritative"
+      ],
+      "use": [
+        "wealth and investment brands",
+        "premium credit cards",
+        "annual results",
+        "insurance and legal firms"
+      ],
+      "not": "Not a SaaS dashboard: sparse, serif-led and slow, with one metric and one line, not a crowded widget grid.",
+      "search": [
+        "private bank brand film",
+        "luxury finance data animation",
+        "navy gold financial motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "editorial"
+        ],
+        "data-viz": [
+          "line-graph",
+          "statistic"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "color": [
+          "dark-ui",
+          "limited-palette"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "tone": [
+          "trustworthy",
+          "premium",
+          "serious"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "line-draw",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0e1a2b",
+          "ink": "#eef0f3",
+          "accent": "#c9a55e",
+          "accent2": "#5c7394",
+          "surface": "#15253b",
+          "muted": "#8c98aa"
+        },
+        "fonts": {
+          "display": "Libre Caslon Display",
+          "body": "Figtree",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "data",
+        "radius": 4,
+        "stroke": {
+          "width": 1,
+          "color": "#2a3d58",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "stealth-tech-luxe",
+      "name": "Stealth tech luxe",
+      "aka": [
+        "premium hardware",
+        "anodised aluminium",
+        "Bang & Olufsen style",
+        "matte black tech"
+      ],
+      "what": "Matte graphite windows with hairline aluminium edges floating over black, wide-tracked light capitals, fine line icons, machined precision.",
+      "feels": [
+        "engineered",
+        "sleek",
+        "exclusive"
+      ],
+      "use": [
+        "audio and camera hardware",
+        "premium laptops and phones",
+        "EV interiors",
+        "design-led tech brands"
+      ],
+      "not": "Not a sci-fi interface: no neon or glow, just metal, graphite and restraint, like a product photograph set in motion.",
+      "search": [
+        "premium hardware product film motion",
+        "brushed aluminium UI animation",
+        "luxury tech product reveal"
+      ],
+      "stack": {
+        "visual-style": [
+          "metallic",
+          "technical-minimal"
+        ],
+        "material": [
+          "brushed-metal",
+          "matte-product"
+        ],
+        "ui-treatment": [
+          "windowed-ui",
+          "stylized-ui"
+        ],
+        "typography": [
+          "extended",
+          "neo-grotesk"
+        ],
+        "shadow": [
+          "floating"
+        ],
+        "color": [
+          "dark-ui",
+          "grayscale"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "slide",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0f1011",
+          "ink": "#ececec",
+          "accent": "#b4b8be",
+          "accent2": "#55595f",
+          "surface": "#232427",
+          "muted": "#8a8d92"
+        },
+        "fonts": {
+          "display": "Manrope",
+          "body": "Manrope",
+          "displayWeight": 300,
+          "case": "upper",
+          "tracking": 0.18
+        },
+        "layout": "window",
+        "radius": 8,
+        "stroke": {
+          "width": 1,
+          "color": "#6b6f75",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "marble-and-gold",
+      "name": "Marble and gold",
+      "aka": [
+        "marble luxe",
+        "Carrara and brass",
+        "hotel lobby luxe",
+        "stone and gilt"
+      ],
+      "what": "Veined white-marble ground, ivory tiles edged in thin brushed gold, a classical Roman serif and slow, polished reveals.",
+      "feels": [
+        "classical",
+        "polished",
+        "stately"
+      ],
+      "use": [
+        "hotels and residences",
+        "beauty and skincare",
+        "jewellery retail",
+        "luxury interiors"
+      ],
+      "not": "Not luxury serif minimal: the marble veining and gilt edges make it ornamental and material, not just typographic.",
+      "search": [
+        "marble and gold motion graphics",
+        "luxury marble background animation",
+        "gold frame marble reveal"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "metallic"
+        ],
+        "material": [
+          "ceramic",
+          "metal"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "typography": [
+          "serif-editorial",
+          "extended"
+        ],
+        "composition": [
+          "bento-grid",
+          "symmetrical"
+        ],
+        "color": [
+          "light-ui",
+          "warm-palette"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "light-wipe",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eeebe7",
+          "ink": "#221f1b",
+          "accent": "#b8914f",
+          "accent2": "#d8c7a4",
+          "surface": "#faf8f5",
+          "muted": "#8d867c"
+        },
+        "fonts": {
+          "display": "Marcellus",
+          "body": "Tenor Sans",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.08
+        },
+        "layout": "bento",
+        "radius": 2,
+        "stroke": {
+          "width": 2,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#6a5a44",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "glyph",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "velvet-noir",
+      "name": "Velvet jewel-tone",
+      "aka": [
+        "burgundy velvet",
+        "jewel tones",
+        "opera luxury",
+        "oxblood and gold"
+      ],
+      "what": "Deep burgundy velvet ground, a heavy Playfair headline in cream, a gold panel and fine column rules, like an opera programme.",
+      "feels": [
+        "rich",
+        "theatrical",
+        "intimate"
+      ],
+      "use": [
+        "theatre and opera seasons",
+        "wine and spirits",
+        "holiday luxury",
+        "private members' clubs"
+      ],
+      "not": "Not perfume noir: this is printed and structured, columns and rules in jewel tones, not a single glowing end card.",
+      "search": [
+        "burgundy luxury editorial motion",
+        "opera season trailer graphics",
+        "jewel tone luxury typography animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "print-editorial"
+        ],
+        "color": [
+          "warm-palette",
+          "limited-palette"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "serif-editorial"
+        ],
+        "material": [
+          "fabric"
+        ],
+        "composition": [
+          "editorial-grid"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "wipe",
+          "fade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#3a0f1d",
+          "ink": "#f5e6cf",
+          "accent": "#caa25f",
+          "accent2": "#6b1e33",
+          "surface": "#4a1627",
+          "muted": "#b99a8c"
+        },
+        "fonts": {
+          "display": "Playfair Display",
+          "body": "Cormorant Garamond",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask"
+      }
+    },
+    {
+      "id": "heritage-monogram",
+      "name": "Heritage monogram",
+      "aka": [
+        "trunk-maker luxury",
+        "monogram canvas",
+        "maison heritage",
+        "logo-pattern luxury"
+      ],
+      "what": "Tobacco-brown panels on a repeating monogram dot pattern, cream glyph emblems, stitched-leather edges, a stately serif.",
+      "feels": [
+        "storied",
+        "crafted",
+        "prestigious"
+      ],
+      "use": [
+        "leather goods and luggage",
+        "heritage fashion houses",
+        "anniversary films",
+        "premium packaging reveals"
+      ],
+      "not": "Not quiet luxury: loud about its lineage, with a repeating monogram, emblems and leather, rather than logo-free beige.",
+      "search": [
+        "luxury monogram pattern animation",
+        "heritage fashion house brand film",
+        "leather luxury motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury"
+        ],
+        "material": [
+          "fabric"
+        ],
+        "iconography": [
+          "custom-brand"
+        ],
+        "stroke": [
+          "offset-line"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "color": [
+          "earth-tones",
+          "warm-palette"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "card-flip",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#3b2a1e",
+          "ink": "#f1e3c8",
+          "accent": "#d9b27a",
+          "accent2": "#8a5a36",
+          "surface": "#4d3625",
+          "muted": "#b39d80"
+        },
+        "fonts": {
+          "display": "Libre Caslon Display",
+          "body": "Tenor Sans",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "cards",
+        "radius": 10,
+        "stroke": {
+          "width": 2,
+          "color": "accent",
+          "style": "dashed"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "dots",
+        "icons": "glyph",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "luxury-automotive",
+      "name": "Luxury automotive reveal",
+      "aka": [
+        "supercar reveal",
+        "EV launch film",
+        "spec-sheet luxe",
+        "grand tourer"
+      ],
+      "what": "Near-black stage, hairline spec callouts linking graphite nodes, one signal-red accent, extended caps and long, weighted glides.",
+      "feels": [
+        "powerful",
+        "engineered",
+        "exclusive"
+      ],
+      "use": [
+        "car and EV launches",
+        "performance product specs",
+        "motorsport sponsorship",
+        "premium mobility"
+      ],
+      "not": "Not stealth tech luxe: this is a spec reveal with a hot accent and connectors, about power and engineering, not a quiet object.",
+      "search": [
+        "luxury car reveal motion graphics",
+        "EV launch spec animation",
+        "automotive callout lines animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic",
+          "technical-minimal"
+        ],
+        "data-viz": [
+          "flow-diagram"
+        ],
+        "product-demo": [
+          "callout-annotation",
+          "exploded-interface-explanation"
+        ],
+        "typography": [
+          "extended"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "color": [
+          "dark-ui",
+          "accent-color-system"
+        ],
+        "motion-language": [
+          "inertial"
+        ],
+        "transitions": [
+          "light-wipe",
+          "line-draw"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#08090b",
+          "ink": "#eeeeee",
+          "accent": "#d7263d",
+          "accent2": "#3a3d42",
+          "surface": "#1b1d21",
+          "muted": "#8b8f96"
+        },
+        "fonts": {
+          "display": "Sora",
+          "body": "Sora",
+          "displayWeight": 300,
+          "case": "upper",
+          "tracking": 0.16
+        },
+        "layout": "diagram",
+        "radius": 2,
+        "stroke": {
+          "width": 1,
+          "color": "#4a4e55",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "satin-noir",
+      "name": "Satin noir",
+      "aka": [
+        "silk luxe",
+        "satin sheen",
+        "dark skincare luxe",
+        "liquid silk"
+      ],
+      "what": "Dark pewter pills with a satin gradient sheen, big soft drop shadows, pearl-white thin serif, slow silky slides.",
+      "feels": [
+        "silky",
+        "sensual",
+        "modern"
+      ],
+      "use": [
+        "premium skincare and haircare",
+        "luxury app UI",
+        "lingerie and sleepwear",
+        "high-end audio"
+      ],
+      "not": "Not dark neumorphism: the sheen is a directional satin gradient that floats, not a matte panel pushed out of the canvas.",
+      "search": [
+        "satin silk luxury motion graphics",
+        "dark premium skincare UI",
+        "silk sheen gradient animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "gradient-heavy"
+        ],
+        "material": [
+          "fabric",
+          "glossy-product"
+        ],
+        "shape": [
+          "pill"
+        ],
+        "shadow": [
+          "floating"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "color": [
+          "dark-ui",
+          "monochrome"
+        ],
+        "motion-language": [
+          "fluid"
+        ],
+        "transitions": [
+          "blur",
+          "slide"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#1a1a1e",
+          "ink": "#f4f0ea",
+          "accent": "#a7a2ad",
+          "accent2": "#d8cfc2",
+          "surface": "#2c2b31",
+          "muted": "#9a969e"
+        },
+        "fonts": {
+          "display": "Instrument Serif",
+          "body": "Manrope",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "pills",
+        "radius": 999,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "gradient",
+        "texture": "none",
+        "icons": "duotone",
+        "motif": "none",
+        "motion": "slide"
+      }
+    }
+  ]
+}

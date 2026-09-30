@@ -1,0 +1,345 @@
+{
+  "family": { "id": "dimensional", "name": "3D & materials", "what": "Depth you can almost touch: soft and glossy 3D, clay, chrome, glass, low poly, isometric and toy-like worlds, defined by their material." },
+  "presets": [
+    {
+      "id": "soft-3d",
+      "name": "Soft 3D",
+      "aka": ["soft 3D UI", "C4D pastel", "Blender soft render", "3D objects + 2D UI"],
+      "what": "Periwinkle and blush 3D orbs float beside rounded cards with big diffuse shadows and gradient-lit surfaces; springy, friendly, clean.",
+      "feels": ["friendly", "modern", "optimistic"],
+      "use": ["SaaS and fintech launches", "onboarding films", "landing heroes", "app-store promos"],
+      "not": "Not clay: soft 3D is smooth and clean-lit; claymorphism is inflated, matte and puffy with inner highlights.",
+      "search": ["soft 3D UI animation", "3D objects floating UI motion", "pastel Cinema 4D product explainer"],
+      "stack": { "visual-style": ["soft-3d", "saas-minimal"], "ui-treatment": ["floating-card-ui", "simplified-ui"], "depth": ["3d-objects-2d-ui"], "illustration": ["soft-forms-3d"], "iconography": ["3d"], "shadow": ["floating"], "color": ["pastel", "gradient"], "motion-language": ["springy"], "transitions": ["scale", "object-morph"] },
+      "recipe": {
+        "palette": { "canvas": "#eef0f8", "ink": "#1d2140", "accent": "#6c7bff", "accent2": "#ffa8c2", "surface": "#ffffff", "muted": "#7c80a0" },
+        "fonts": { "display": "Plus Jakarta Sans", "body": "Plus Jakarta Sans", "displayWeight": 800, "case": "none", "tracking": -0.035 },
+        "layout": "cards", "radius": 40, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "gradient", "texture": "none", "icons": "emoji3d", "motif": "blobs", "motion": "spring"
+      }
+    },
+    {
+      "id": "claymation-3d",
+      "name": "Claymation 3D",
+      "aka": ["plasticine 3D", "clay stop-motion", "Aardman look", "sculpted clay render", "clay 3D"],
+      "what": "Hand-squished plasticine shapes in tomato, cobalt and mustard with fingerprint grain, squiggly clay snakes and stepped stop-motion timing.",
+      "feels": ["handmade", "charming", "funny"],
+      "use": ["brand stories and mascots", "kids and family", "food and snacks", "quirky explainers"],
+      "not": "Not claymorphic UI: this is sculpted plasticine with fingerprints and stop-motion steps, not smooth puffy interface cards.",
+      "search": ["claymation 3D animation style", "plasticine stop motion motion graphics", "clay render brand animation"],
+      "stack": { "visual-style": ["clay", "handmade"], "illustration": ["clay-3d", "character"], "material": ["clay", "matte-product"], "character": ["clay-mascot"], "texture": ["film-grain"], "shape": ["organic", "irregular"], "color": ["primary-colors", "warm-palette"], "production": ["stop-motion", "3d-keyframe"], "motion-language": ["stop-motion-like"], "transitions": ["hard-cut", "object-morph"] },
+      "recipe": {
+        "palette": { "canvas": "#f2b33d", "ink": "#2a1a0e", "accent": "#e2462f", "accent2": "#3a6fd8", "surface": "#fbe7c6", "muted": "#6e4a1e" },
+        "fonts": { "display": "Baloo 2", "body": "Nunito", "displayWeight": 800, "case": "none", "tracking": -0.02 },
+        "layout": "cards", "radius": 28, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "clay", "texture": "noise", "icons": "filled", "motif": "squiggles", "motion": "step"
+      }
+    },
+    {
+      "id": "glossy-3d",
+      "name": "Glossy 3D",
+      "aka": ["candy 3D", "glossy plastic render", "shiny 3D", "bubblegum 3D"],
+      "what": "Wet-look candy-pink orbs with hard specular highlights and sparkles on blush, fat display type popping in with overshoot.",
+      "feels": ["juicy", "playful", "loud"],
+      "use": ["consumer app launches", "beauty and snacks", "social ads", "creator brands"],
+      "not": "Not soft 3D: glossy is high-gloss plastic with bright specular hits, not matte pastel forms.",
+      "search": ["glossy 3D motion design", "candy 3D render animation", "shiny plastic 3D brand loop"],
+      "stack": { "visual-style": ["glossy-3d"], "illustration": ["cartoon-3d"], "material": ["plastic", "glossy-product"], "iconography": ["3d"], "color": ["high-saturation", "pastel"], "effects": ["reflections", "bloom"], "typography": ["inflated", "display"], "motion-language": ["elastic"], "transitions": ["scale", "zoom"] },
+      "recipe": {
+        "palette": { "canvas": "#fde7f1", "ink": "#2a0a3a", "accent": "#ff3d9a", "accent2": "#ffc93d", "surface": "#ffffff", "muted": "#9a6a88" },
+        "fonts": { "display": "Unbounded", "body": "Outfit", "displayWeight": 900, "case": "none", "tracking": -0.04 },
+        "layout": "poster", "radius": 48, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "gradient", "texture": "none", "icons": "emoji3d", "motif": "stars", "motion": "pop"
+      }
+    },
+    {
+      "id": "chrome-liquid-metal",
+      "name": "Chrome liquid metal",
+      "aka": ["chrome", "liquid chrome", "Y2K chrome", "mercury", "polished metal"],
+      "what": "Mirror-chrome pills with banded highlights on cool silver-white, steel sparkles and wide caps; surfaces feel poured and molten.",
+      "feels": ["sleek", "futuristic", "flashy"],
+      "use": ["music and fashion drops", "tech hardware teasers", "brand idents", "event openers"],
+      "not": "Not Y2K chrome: no pink-cyan candy or retro techno; this is monochrome liquid metal, cool and molten.",
+      "search": ["liquid chrome 3D animation", "chrome type motion design", "Y2K chrome brand intro"],
+      "stack": { "visual-style": ["chrome", "metallic"], "material": ["chrome", "liquid"], "typography": ["chrome", "extended"], "shape": ["pill", "organic"], "effects": ["reflections", "bloom"], "color": ["monochrome", "high-contrast"], "motion-language": ["liquid"], "transitions": ["liquid", "morph"], "tone": ["futuristic", "bold"] },
+      "recipe": {
+        "palette": { "canvas": "#e6e9ed", "ink": "#0c0d10", "accent": "#3d4654", "accent2": "#8793a3", "surface": "#aeb5bf", "muted": "#4f5866" },
+        "fonts": { "display": "Syne", "body": "Manrope", "displayWeight": 800, "case": "upper", "tracking": 0.04 },
+        "layout": "pills", "radius": 999, "stroke": { "width": 1, "color": "#ffffff", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "metal", "texture": "none", "icons": "glyph", "motif": "stars", "motion": "spring"
+      }
+    },
+    {
+      "id": "glass-3d",
+      "name": "Glass 3D",
+      "aka": ["3D glass", "refractive glass", "frosted glass objects", "crystal render"],
+      "what": "Translucent frosted-glass cards refract cyan and pink light behind them on deep navy; thin bright edges, big float shadows.",
+      "feels": ["premium", "luminous", "futuristic"],
+      "use": ["fintech and crypto", "AI and platform launches", "premium hardware", "keynote openers"],
+      "not": "Not spatial UI: glass 3D is about the material (refraction, light) rather than windows placed in a room.",
+      "search": ["3D glass render motion design", "refractive glass animation", "frosted glass 3D brand video"],
+      "stack": { "visual-style": ["glass", "glossy-3d"], "ui-treatment": ["glassmorphic-ui", "floating-card-ui"], "material": ["glass", "frosted-glass"], "effects": ["refraction", "bloom", "depth-of-field"], "color": ["dark-ui", "gradient"], "depth": ["perspective-3d"], "motion-language": ["floating"], "transitions": ["blur", "camera-move"] },
+      "recipe": {
+        "palette": { "canvas": "#0a1020", "ink": "#f4f8ff", "accent": "#3fb8ff", "accent2": "#ff5ccf", "surface": "#1b2540", "muted": "#9aa6c4" },
+        "fonts": { "display": "Outfit", "body": "Outfit", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "cards", "radius": 32, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "glass", "texture": "none", "icons": "duotone", "motif": "orbits", "motion": "drift"
+      }
+    },
+    {
+      "id": "low-poly",
+      "name": "Low poly",
+      "aka": ["low-poly 3D", "faceted 3D", "polygon art", "flat-shaded 3D"],
+      "what": "Faceted flat-shaded panels in sunset orange, amber and plum, sharp corners, hard offset facets and angular caps.",
+      "feels": ["crafted", "geometric", "adventurous"],
+      "use": ["games and indie studios", "travel and outdoors", "education explainers", "motion backgrounds"],
+      "not": "Not isometric: low poly is about visible triangles and flat shading, not a fixed 30-degree grid.",
+      "search": ["low poly animation motion graphics", "faceted 3D landscape loop", "low poly logo reveal"],
+      "stack": { "visual-style": ["low-poly", "abstract-geometric"], "illustration": ["low-poly-3d", "geometric-vector"], "shape": ["angular", "geometric"], "depth": ["pseudo-3d"], "color": ["warm-palette", "analogous"], "shadow": ["hard"], "typography": ["extended"], "motion-language": ["choppy-stepped"], "transitions": ["fragmentation", "shape-match"] },
+      "recipe": {
+        "palette": { "canvas": "#2b1e4a", "ink": "#fff4e6", "accent": "#ff7849", "accent2": "#ffc53d", "surface": "#46307a", "muted": "#b6a3d8" },
+        "fonts": { "display": "Chakra Petch", "body": "Chakra Petch", "displayWeight": 700, "case": "upper", "tracking": 0.02 },
+        "layout": "cards", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "#140a26", "surface": "gradient", "texture": "none", "icons": "filled", "motif": "rays", "motion": "step"
+      }
+    },
+    {
+      "id": "isometric-3d",
+      "name": "Isometric 3D",
+      "aka": ["isometric illustration", "iso scene", "axonometric", "isometric tech"],
+      "what": "Clean isometric blocks on a pale blue grid, long pale extrusion shadows, blue duotone icons, connectors sliding blocks into place.",
+      "feels": ["organized", "clear", "systematic"],
+      "use": ["platform and infra explainers", "how-it-works films", "cloud and data stories", "B2B SaaS"],
+      "not": "Not full 3D: isometric keeps a fixed orthographic angle with no perspective or camera moves.",
+      "search": ["isometric animation explainer", "isometric 3D tech illustration motion", "isometric infographic video"],
+      "stack": { "visual-style": ["isometric", "corporate-flat"], "illustration": ["isometric", "axonometric"], "depth": ["isometric"], "camera": ["isometric", "orthographic"], "composition": ["isometric-scene"], "iconography": ["duotone"], "color": ["cool-palette", "light-ui"], "motion-language": ["precise"], "transitions": ["slide", "push"] },
+      "recipe": {
+        "palette": { "canvas": "#eaf3ff", "ink": "#10233f", "accent": "#2f80ed", "accent2": "#56ccf2", "surface": "#ffffff", "muted": "#6f86a6" },
+        "fonts": { "display": "Lexend", "body": "Lexend", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "diagram", "radius": 12, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "long", "shadowColor": "#b9cde6", "surface": "flat", "texture": "none", "icons": "duotone", "motif": "grid", "motion": "slide"
+      }
+    },
+    {
+      "id": "tilt-shift-diorama",
+      "name": "Tilt-shift diorama",
+      "aka": ["miniature world", "3D diorama", "tiny planet scene", "miniature faking"],
+      "what": "A tiny mint-green world of little rounded blocks, soft sunlit shadows and grain, like a model village shot with tilt-shift.",
+      "feels": ["charming", "curious", "tidy"],
+      "use": ["cities, travel and mobility", "logistics and marketplaces", "explainers of systems", "brand worlds"],
+      "not": "Not isometric: dioramas use perspective and shallow focus to feel like a real miniature, not a flat 30-degree grid.",
+      "search": ["tilt shift diorama 3D animation", "miniature world motion design", "3D diorama explainer"],
+      "stack": { "visual-style": ["soft-3d", "toy-3d"], "illustration": ["soft-forms-3d", "isometric"], "composition": ["isometric-scene", "multi-object-choreography"], "effects": ["depth-of-field", "ambient-shadows"], "camera": ["top-down", "macro"], "color": ["pastel", "analogous"], "material": ["matte-product", "plastic"], "motion-language": ["organic"], "transitions": ["camera-move", "zoom-through"] },
+      "recipe": {
+        "palette": { "canvas": "#bfe6cc", "ink": "#16302a", "accent": "#ff7a59", "accent2": "#ffd166", "surface": "#ffffff", "muted": "#4f7a6a" },
+        "fonts": { "display": "Lexend", "body": "Lexend", "displayWeight": 800, "case": "none", "tracking": -0.04 },
+        "layout": "collage", "radius": 20, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "emoji3d", "motif": "none", "motion": "drift"
+      }
+    },
+    {
+      "id": "concrete-brutalist-3d",
+      "name": "Concrete brutalist 3D",
+      "aka": ["concrete render", "brutalist architecture 3D", "raw concrete", "monolith render"],
+      "what": "Raw grey concrete slabs and monoliths with heavy float shadows, pitted noise texture, one safety-orange accent and huge tight type.",
+      "feels": ["monumental", "serious", "architectural"],
+      "use": ["architecture and real estate", "fashion and streetwear", "art and exhibitions", "infrastructure brands"],
+      "not": "Not web brutalism: this is the material (poured concrete in 3D light), not raw HTML layouts.",
+      "search": ["concrete brutalist 3D animation", "monolith render motion design", "brutalist architecture motion graphics"],
+      "stack": { "visual-style": ["brutalism", "photoreal-cgi"], "material": ["matte-product"], "depth": ["perspective-3d"], "shape": ["rectilinear", "geometric"], "color": ["grayscale", "accent-color-system"], "texture": ["digital-noise"], "shadow": ["floating"], "typography": ["grotesk", "condensed"], "motion-language": ["heavy"], "transitions": ["push", "camera-move"] },
+      "recipe": {
+        "palette": { "canvas": "#c9c6bf", "ink": "#121212", "accent": "#8f8b83", "accent2": "#ff4d1a", "surface": "#dedbd4", "muted": "#5f5c57" },
+        "fonts": { "display": "Archivo", "body": "Archivo", "displayWeight": 900, "case": "upper", "tracking": -0.04 },
+        "layout": "editorial", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "noise", "icons": "none", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "surreal-3d",
+      "name": "Surreal 3D",
+      "aka": ["dreamy 3D", "surreal render", "pastel dreamscape", "3D dreamworld"],
+      "what": "Pastel peach dreamscape with arched forms, long soft shadows and slow orbiting objects; impossible, calm, cinematic.",
+      "feels": ["dreamy", "curious", "calm"],
+      "use": ["brand films", "art and fashion", "music visuals", "wellness and lifestyle"],
+      "not": "Not soft 3D product UI: surreal 3D is a scene, impossible architecture and objects, not floating interface cards.",
+      "search": ["surreal 3D animation pastel", "dreamscape 3D render loop", "surreal architecture motion design"],
+      "stack": { "visual-style": ["surreal-3d"], "illustration": ["surreal-3d", "soft-forms-3d"], "depth": ["full-3d-environment"], "composition": ["single-object-hero", "negative-space"], "color": ["pastel", "warm-palette"], "shadow": ["long"], "camera": ["orbit", "dolly"], "motion-language": ["luxurious-slow"], "transitions": ["dissolve", "camera-move"] },
+      "recipe": {
+        "palette": { "canvas": "#f3cdb8", "ink": "#2b1320", "accent": "#6a4bd6", "accent2": "#ff8a3d", "surface": "#fbe3d6", "muted": "#8a5f60" },
+        "fonts": { "display": "Bricolage Grotesque", "body": "Bricolage Grotesque", "displayWeight": 700, "case": "none", "tracking": -0.04 },
+        "layout": "poster", "radius": 48, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "long", "shadowColor": "#dca78e", "surface": "gradient", "texture": "grain", "icons": "filled", "motif": "orbits", "motion": "drift"
+      }
+    },
+    {
+      "id": "photoreal-product-cgi",
+      "name": "Photoreal product CGI",
+      "aka": ["product CGI", "Apple-style product film", "hero render", "packshot CGI"],
+      "what": "The product alone on black under studio light, deep float shadow, tight grotesk type, one blue accent, nothing decorative.",
+      "feels": ["premium", "precise", "confident"],
+      "use": ["hardware launches", "premium consumer products", "app-store heroes", "keynote reveals"],
+      "not": "Not glossy 3D: photoreal aims for physical truth (real materials, studio light), not a stylized cartoon sheen.",
+      "search": ["photoreal product CGI animation", "Apple style product reveal", "cinematic product render film"],
+      "stack": { "visual-style": ["photoreal-cgi", "luxury"], "illustration": ["photoreal-3d"], "material": ["glossy-product", "brushed-metal"], "composition": ["single-object-hero", "negative-space"], "photo-video": ["device-mockup", "cinematic-product-footage"], "camera": ["macro", "orbit"], "effects": ["reflections", "depth-of-field"], "motion-language": ["cinematic"], "transitions": ["fade", "match-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#0a0a0a", "ink": "#f5f5f7", "accent": "#2997ff", "accent2": "#a1a1a6", "surface": "#1d1d1f", "muted": "#86868b" },
+        "fonts": { "display": "Inter Tight", "body": "Inter Tight", "displayWeight": 600, "case": "none", "tracking": -0.045 },
+        "layout": "device", "radius": 24, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "fade"
+      }
+    },
+    {
+      "id": "paper-cut-shadowbox",
+      "name": "Paper-cut shadow box",
+      "aka": ["layered paper-cut", "shadow box art", "papercraft diorama", "cut-paper depth", "2.5D paper layers"],
+      "what": "Deep navy and ember cut-paper layers stacked in a shadow box, each casting a dark offset shadow; fibre texture and parallax planes.",
+      "feels": ["crafted", "storybook", "atmospheric"],
+      "use": ["brand stories", "nonprofits and heritage", "holiday campaigns", "narrative explainers"],
+      "not": "Not soft paper layers: shadow box is deep, dark and dramatic with many stacked planes, not pastel sheets taped down.",
+      "search": ["paper cut shadow box animation", "layered paper 2.5D parallax", "papercraft diorama motion"],
+      "stack": { "visual-style": ["paper-cutout", "handmade"], "illustration": ["paper-cut", "layered-2-5d"], "depth": ["layered-2d"], "material": ["paper", "cardboard"], "shadow": ["layered"], "texture": ["paper-grain", "fibers"], "camera": ["parallax-camera", "push-in"], "motion-language": ["stop-motion-like"], "transitions": ["parallax", "foreground-wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#1c3654", "ink": "#fdf6ec", "accent": "#f2a541", "accent2": "#e4572e", "surface": "#2a4f78", "muted": "#a9bcd2" },
+        "fonts": { "display": "Bricolage Grotesque", "body": "Manrope", "displayWeight": 800, "case": "none", "tracking": -0.03 },
+        "layout": "bento", "radius": 24, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "layered", "shadowColor": "#0d1d30", "surface": "paper", "texture": "paper", "icons": "filled", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "gummy-gel",
+      "name": "Gummy gel",
+      "aka": ["jelly 3D", "gel UI", "translucent candy", "gummy bear material"],
+      "what": "A phone full of translucent jelly-pink tiles glowing from within over bubblegum blobs; wet highlights, wobbly springs, squishy and edible.",
+      "feels": ["squishy", "sweet", "playful"],
+      "use": ["snack and beauty brands", "kids products", "social promos", "sticker-style app ads"],
+      "not": "Not glass: gel is soft, colored and wobbly with inner glow, not rigid clear refraction.",
+      "search": ["gummy jelly 3D animation", "gel material motion design", "translucent jelly UI"],
+      "stack": { "visual-style": ["gel", "glossy-3d"], "material": ["gel", "jelly"], "shape": ["pill", "blob"], "color": ["pastel", "high-saturation"], "effects": ["refraction", "soft-body-simulation"], "typography": ["rounded", "inflated"], "motion-language": ["elastic"], "transitions": ["liquid", "morph"], "ui-treatment": ["device-bound-ui", "stylized-ui"] },
+      "recipe": {
+        "palette": { "canvas": "#fff0f6", "ink": "#3a0d2a", "accent": "#ff4fa3", "accent2": "#43e0c2", "surface": "#ffc2dc", "muted": "#9a5a7a" },
+        "fonts": { "display": "Fredoka", "body": "Nunito", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "device", "radius": 30, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "glass", "texture": "none", "icons": "emoji3d", "motif": "blobs", "motion": "spring"
+      }
+    },
+    {
+      "id": "liquid-3d",
+      "name": "Liquid 3D",
+      "aka": ["fluid simulation", "liquid render", "splash 3D", "gooey liquid"],
+      "what": "Glossy fluid blobs pour and merge on electric cobalt, bright specular orbs, white type riding the flow with elastic springs.",
+      "feels": ["fluid", "fresh", "energetic"],
+      "use": ["beverage and beauty", "fintech and payments (flow)", "brand idents", "motion backgrounds"],
+      "not": "Not chrome liquid metal: this is colored fluid (water, paint, syrup), translucent and saturated, not a silver mirror.",
+      "search": ["liquid 3D simulation motion design", "fluid render brand animation", "gooey liquid logo reveal"],
+      "stack": { "visual-style": ["liquid", "glossy-3d"], "material": ["liquid", "water"], "effects": ["liquid-simulation", "reflections"], "shape": ["blob", "organic"], "color": ["high-saturation", "cool-palette"], "typography": ["geometric-sans"], "production": ["physics-simulation"], "motion-language": ["liquid"], "transitions": ["liquid", "morph"] },
+      "recipe": {
+        "palette": { "canvas": "#1234e6", "ink": "#ffffff", "accent": "#8ff5ff", "accent2": "#ff9de6", "surface": "#2a4dff", "muted": "#b8c6ff" },
+        "fonts": { "display": "Outfit", "body": "Outfit", "displayWeight": 800, "case": "none", "tracking": -0.04 },
+        "layout": "poster", "radius": 48, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "gradient", "texture": "none", "icons": "emoji3d", "motif": "blobs", "motion": "spring"
+      }
+    },
+    {
+      "id": "voxel-3d",
+      "name": "Voxel 3D",
+      "aka": ["voxel art", "MagicaVoxel style", "blocky 3D", "Minecraft style", "cube world"],
+      "what": "Chunky cube-built tiles in grass green and wood brown under a sky blue, hard block shadows, pixel icons, stop-motion steps.",
+      "feels": ["playful", "nostalgic", "buildable"],
+      "use": ["games and gaming creators", "kids and edtech", "web3 worlds", "maker brands"],
+      "not": "Not pixel art: voxels are true 3D cubes with depth and shading, not flat 2D pixels.",
+      "search": ["voxel animation motion graphics", "MagicaVoxel scene animation", "blocky 3D world loop"],
+      "stack": { "visual-style": ["toy-3d", "pixel-art"], "illustration": ["pixel-art", "cartoon-3d"], "depth": ["orthographic-3d"], "shape": ["modular", "grid-based"], "color": ["high-saturation", "earth-tones"], "typography": ["pixel"], "iconography": ["geometric"], "motion-language": ["choppy-stepped"], "transitions": ["pixel-dissolve", "hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#8ccbff", "ink": "#0e1c2a", "accent": "#4fae34", "accent2": "#b07a4a", "surface": "#ffffff", "muted": "#3a5f80" },
+        "fonts": { "display": "Silkscreen", "body": "Rubik", "displayWeight": 700, "case": "upper", "tracking": 0 },
+        "layout": "bento", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "#2f5f8a", "surface": "flat", "texture": "none", "icons": "pixel", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "wireframe-mesh-3d",
+      "name": "3D wireframe mesh",
+      "aka": ["wireframe render", "mesh view", "polygon wireframe", "viewport look"],
+      "what": "Thin dashed mesh-green lines on black, unfilled nodes and topology like a 3D viewport; objects build edge by edge.",
+      "feels": ["analytical", "raw", "technical"],
+      "use": ["3D and CAD software", "engineering and simulation", "game dev tools", "technical teasers"],
+      "not": "Not neon grid: no glow or light-cycle drama; it is the honest viewport mesh before shading.",
+      "search": ["3D wireframe animation", "mesh wireframe motion graphics", "viewport wireframe render reveal"],
+      "stack": { "visual-style": ["technical-minimal", "abstract-geometric"], "ui-treatment": ["wireframe-ui"], "illustration": ["technical-diagram", "outline"], "stroke": ["hairline", "animated-draw-on"], "depth": ["perspective-3d"], "color": ["monochrome", "dark-ui"], "typography": ["monospace"], "motion-language": ["procedural"], "transitions": ["line-draw", "fragmentation"] },
+      "recipe": {
+        "palette": { "canvas": "#0a0a0a", "ink": "#e8e8e8", "accent": "#39ff88", "accent2": "#ff9d3a", "surface": "#0a0a0a", "muted": "#7a7a7a" },
+        "fonts": { "display": "Martian Mono", "body": "Martian Mono", "displayWeight": 600, "case": "none", "tracking": -0.03 },
+        "layout": "diagram", "radius": 0, "stroke": { "width": 1, "color": "accent", "style": "dashed" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "motif": "grid", "motion": "mask"
+      }
+    },
+    {
+      "id": "point-cloud-3d",
+      "name": "Point-cloud 3D",
+      "aka": ["LiDAR scan look", "particle sculpture", "3D scan visualization", "dot-matrix 3D"],
+      "what": "Forms built from thousands of glowing points on black: star-field dots, a dotted 3D scatter and numbers resolving out of the particles.",
+      "feels": ["scientific", "vast", "precise"],
+      "use": ["mapping and autonomy (LiDAR)", "data and AI platforms", "science explainers", "generative brand loops"],
+      "not": "Not a wireframe mesh: point clouds have no edges, only points; shapes read by density.",
+      "search": ["point cloud animation", "LiDAR scan motion graphics", "particle 3D data visualization"],
+      "stack": { "visual-style": ["particle-based", "generative"], "illustration": ["photoreal-3d"], "data-viz": ["scatter-plot", "number-counter"], "effects": ["particles", "glow", "depth-of-field"], "color": ["dark-ui", "cool-palette"], "depth": ["perspective-3d"], "camera": ["orbit", "dolly"], "production": ["particle-simulation", "procedural"], "motion-language": ["generative"], "transitions": ["particle", "noise-dissolve"] },
+      "recipe": {
+        "palette": { "canvas": "#04050a", "ink": "#eef2ff", "accent": "#7df9ff", "accent2": "#ff6ad5", "surface": "#0c1020", "muted": "#7e88a8" },
+        "fonts": { "display": "Space Grotesk", "body": "IBM Plex Mono", "displayWeight": 500, "case": "none", "tracking": -0.02 },
+        "layout": "data", "radius": 0, "stroke": { "width": 1, "color": "#1f2a44", "style": "solid" },
+        "shadow": "glow", "shadowColor": "accent", "surface": "flat", "texture": "dots", "icons": "none", "motif": "stars", "motion": "fade"
+      }
+    },
+    {
+      "id": "toon-shaded-3d",
+      "name": "Toon-shaded 3D",
+      "aka": ["cel-shaded 3D", "toon shader", "anime 3D", "Borderlands style", "Spider-Verse look"],
+      "what": "3D forms flattened into two-tone cel shading with thick ink outlines, sky-blue ground, sharp shadow blocks in a darker hue.",
+      "feels": ["punchy", "animated", "comic"],
+      "use": ["game trailers", "youth brands", "animated explainers", "social promos"],
+      "not": "Not neo-brutalism: the shadow is a darker shade of the object (cel shading), not a black offset block.",
+      "search": ["cel shaded 3D animation", "toon shader motion design", "anime 3D style explainer"],
+      "stack": { "visual-style": ["comic-book", "toy-3d"], "illustration": ["cartoon-3d", "thick-outline"], "stroke": ["heavy", "ink"], "depth": ["3d-objects-2d-ui"], "shadow": ["hard"], "color": ["high-saturation", "complementary"], "iconography": ["filled"], "motion-language": ["cartoonish"], "transitions": ["whip", "flash"] },
+      "recipe": {
+        "palette": { "canvas": "#7fd3ff", "ink": "#101020", "accent": "#ff5a5f", "accent2": "#ffd23f", "surface": "#ffffff", "muted": "#2f5f80" },
+        "fonts": { "display": "Rubik", "body": "Rubik", "displayWeight": 800, "case": "none", "tracking": -0.02 },
+        "layout": "cards", "radius": 24, "stroke": { "width": 5, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "#2a74b8", "surface": "flat", "texture": "halftone", "icons": "filled", "motif": "rays", "motion": "pop"
+      }
+    },
+    {
+      "id": "exploded-view-3d",
+      "name": "Exploded view 3D",
+      "aka": ["exploded axonometric", "exploded product view", "teardown view", "exploded interface"],
+      "what": "Product parts separated along axes on warm white, float shadows under each layer, crisp labels and leader lines.",
+      "feels": ["engineered", "revealing", "clear"],
+      "use": ["hardware and product explainers", "feature breakdowns", "architecture of a platform", "launch films"],
+      "not": "Not isometric: exploded views pull one object apart to show structure, usually with perspective and float.",
+      "search": ["exploded view animation product", "exploded axonometric motion", "exploded UI layers animation"],
+      "stack": { "visual-style": ["photoreal-cgi", "technical-minimal"], "ui-treatment": ["exploded-ui", "perspective-tilted-ui"], "illustration": ["axonometric"], "depth": ["perspective-3d"], "product-demo": ["exploded-interface-explanation", "callout-annotation"], "shadow": ["floating"], "camera": ["orbit", "arc"], "motion-language": ["precise"], "transitions": ["split", "camera-move"] },
+      "recipe": {
+        "palette": { "canvas": "#f5f3ee", "ink": "#1a1a1a", "accent": "#ff6a13", "accent2": "#9aa4b0", "surface": "#ffffff", "muted": "#7a7870" },
+        "fonts": { "display": "Archivo", "body": "Archivo", "displayWeight": 800, "case": "none", "tracking": -0.03 },
+        "layout": "diagram", "radius": 14, "stroke": { "width": 1, "color": "#d6d2c8", "style": "solid" },
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "motif": "crosshair", "motion": "slide"
+      }
+    },
+    {
+      "id": "prism-crystal",
+      "name": "Prism crystal",
+      "aka": ["crystal render", "prismatic glass", "dispersion", "faceted crystal", "rainbow refraction"],
+      "what": "Sharp faceted panels on ink-violet split light into offset pink and cyan edges; hairline white rims and chromatic dispersion shimmer.",
+      "feels": ["brilliant", "precise", "premium"],
+      "use": ["AI and platform launches", "fintech and crypto", "music and fashion drops", "brand idents"],
+      "not": "Not glass 3D: prism is faceted and sharp, splitting light into color; glass 3D is smooth, frosted and soft.",
+      "search": ["prism crystal 3D animation", "chromatic dispersion motion design", "faceted crystal logo reveal"],
+      "stack": { "visual-style": ["glass", "abstract-geometric"], "material": ["crystal", "glass"], "effects": ["refraction", "chromatic-aberration", "light-streaks"], "shape": ["sharp", "angular"], "color": ["dark-ui", "iridescent"], "shadow": ["layered"], "typography": ["extended"], "motion-language": ["precise"], "transitions": ["light-wipe", "flash"] },
+      "recipe": {
+        "palette": { "canvas": "#0b0a14", "ink": "#f7f5ff", "accent": "#ff4d8d", "accent2": "#3ee0ff", "surface": "#1a1830", "muted": "#9a96b8" },
+        "fonts": { "display": "Unbounded", "body": "Manrope", "displayWeight": 600, "case": "upper", "tracking": 0.02 },
+        "layout": "bento", "radius": 0, "stroke": { "width": 1, "color": "#ffffff", "style": "solid" },
+        "shadow": "layered", "shadowColor": "accent2", "surface": "gradient", "texture": "none", "icons": "line", "motif": "rays", "motion": "mask"
+      }
+    }
+  ]
+}

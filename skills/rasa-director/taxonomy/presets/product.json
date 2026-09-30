@@ -1,0 +1,392 @@
+{
+  "family": {"id": "product", "name": "Product & UI", "what": "Refined product-led styles: the interface is the hero, shown with a clear point of view on device, depth and light."},
+  "presets": [
+    {
+      "id": "keynote-hero",
+      "name": "Keynote hero",
+      "aka": ["Apple keynote style", "dark stage product reveal", "hero device shot"],
+      "what": "One oversized device floats on a pure-black stage under soft light, huge tight white headline, a single blue accent, nothing else.",
+      "feels": ["premium", "confident", "cinematic"],
+      "use": ["hardware and app launches", "keynote segments", "landing-page hero loops"],
+      "not": "Not dark gradient SaaS: no glow or colour wash; the product sits alone on true black, lit like a physical object.",
+      "search": ["apple keynote product reveal animation", "dark stage device hero motion", "iphone reveal style frame"],
+      "stack": {"visual-style": ["clean-minimal", "cinematic"], "ui-treatment": ["device-bound-ui", "production-faithful-ui"], "product-demo": ["looping-hero-demo", "zoomed-detail"], "composition": ["single-object-hero", "negative-space"], "typography": ["neo-grotesk"], "color": ["dark-ui", "accent-color-system"], "shadow": ["floating"], "camera": ["push-in", "orbit"], "motion-language": ["luxurious-slow"], "transitions": ["fade", "zoom"]},
+      "recipe": {
+        "palette": {"canvas": "#000000", "ink": "#f5f5f7", "accent": "#2997ff", "accent2": "#bf5af2", "surface": "#1d1d1f", "muted": "#86868b"},
+        "fonts": {"display": "Inter Tight", "body": "Inter", "displayWeight": 700, "case": "none", "tracking": -0.045},
+        "layout": "device", "radius": 28, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "fade"
+      }
+    },
+    {
+      "id": "dark-gradient-saas",
+      "name": "Dark gradient SaaS",
+      "aka": ["Linear style", "Linear-core", "dark mode SaaS hero"],
+      "what": "Near-black canvas, app windows lit by a violet gradient glow, hairline borders, tight grey-white type, fine noise.",
+      "feels": ["focused", "engineered", "premium"],
+      "use": ["developer tools", "B2B SaaS launches", "changelog films"],
+      "not": "Not keynote hero: the light comes from gradient glows and hairlines inside the UI, not a spotlit object.",
+      "search": ["linear app style animation", "dark gradient saas hero motion", "linear launch video"],
+      "stack": {"visual-style": ["technical-minimal", "gradient-heavy"], "ui-treatment": ["stylized-ui", "windowed-ui"], "product-demo": ["feature-isolation", "zoomed-detail"], "color": ["dark-ui", "gradient"], "shadow": ["glow"], "effects": ["glow", "grain"], "typography": ["neo-grotesk"], "motion-language": ["precise"], "transitions": ["mask-reveal", "blur"]},
+      "recipe": {
+        "palette": {"canvas": "#08090a", "ink": "#f7f8f8", "accent": "#5e6ad2", "accent2": "#8b5cf6", "surface": "#15161a", "muted": "#8a8f98"},
+        "fonts": {"display": "Inter", "body": "Inter", "displayWeight": 600, "case": "none", "tracking": -0.035},
+        "layout": "window", "radius": 12, "stroke": {"width": 1, "color": "#2a2c33", "style": "solid"},
+        "shadow": "glow", "shadowColor": "accent", "surface": "flat", "texture": "noise", "icons": "line", "motif": "none", "motion": "mask"
+      }
+    },
+    {
+      "id": "light-editorial-saas",
+      "name": "Light editorial SaaS",
+      "aka": ["Stripe style", "editorial fintech", "Stripe Press look"],
+      "what": "Crisp white page, deep navy type set like a magazine with rules and columns, one saturated gradient block, generous whitespace.",
+      "feels": ["intelligent", "trustworthy", "crafted"],
+      "use": ["payments and infrastructure", "annual letters", "product pages as film"],
+      "not": "Not calm productivity: sharp, grid-led and gradient-accented, not warm paper and slow serif calm.",
+      "search": ["stripe website animation style", "editorial saas motion design", "stripe gradient hero"],
+      "stack": {"visual-style": ["editorial", "clean-minimal"], "ui-treatment": ["editorial-ui", "simplified-ui"], "composition": ["editorial-grid", "asymmetric"], "typography": ["neo-grotesk"], "color": ["light-ui", "mesh-gradient"], "motion-language": ["smooth"], "transitions": ["mask-reveal", "slide"]},
+      "recipe": {
+        "palette": {"canvas": "#ffffff", "ink": "#0a2540", "accent": "#635bff", "accent2": "#00d4ff", "surface": "#f6f9fc", "muted": "#425466"},
+        "fonts": {"display": "Plus Jakarta Sans", "body": "Inter", "displayWeight": 700, "case": "none", "tracking": -0.03},
+        "layout": "editorial", "radius": 8, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "gradient", "texture": "none", "icons": "line", "motif": "rules", "motion": "slide"
+      }
+    },
+    {
+      "id": "bento-showcase",
+      "name": "Bento showcase",
+      "aka": ["bento grid", "Apple bento", "feature grid reveal"],
+      "what": "Features packed into a tight grid of rounded white tiles on light grey, each tile one stat, icon or screenshot, revealed in sequence.",
+      "feels": ["organized", "premium", "scannable"],
+      "use": ["feature roundups", "launch recaps", "landing-page heroes"],
+      "not": "Not dashboard showcase: tiles are curated feature moments, not live metrics.",
+      "search": ["bento grid animation", "apple bento feature reveal", "bento ui motion design"],
+      "stack": {"visual-style": ["clean-minimal"], "ui-treatment": ["bento-ui", "floating-card-ui"], "composition": ["bento-grid", "modular-grid"], "data-viz": ["statistic"], "shape": ["rounded"], "color": ["light-ui", "accent-color-system"], "product-demo": ["feature-montage"], "motion-language": ["snappy"], "transitions": ["scale", "ui-morph"]},
+      "recipe": {
+        "palette": {"canvas": "#f5f5f7", "ink": "#1d1d1f", "accent": "#0071e3", "accent2": "#ff9f0a", "surface": "#ffffff", "muted": "#6e6e73"},
+        "fonts": {"display": "Inter Tight", "body": "Inter", "displayWeight": 700, "case": "none", "tracking": -0.04},
+        "layout": "bento", "radius": 28, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "pop"
+      }
+    },
+    {
+      "id": "floating-card-ui",
+      "name": "Floating-card UI",
+      "aka": ["deviceless UI", "UI fragments", "card stack"],
+      "what": "The interface broken into independent white cards hovering over a pale tinted field, deep soft drop shadows, cards drifting at different depths.",
+      "feels": ["light", "modern", "airy"],
+      "use": ["feature reveals", "onboarding", "app landing films"],
+      "not": "Not bento: cards float freely at depth with parallax, not locked into a grid.",
+      "search": ["floating ui cards animation", "deviceless ui motion", "ui fragments parallax"],
+      "stack": {"visual-style": ["clean-minimal"], "ui-treatment": ["floating-card-ui", "deviceless-ui"], "composition": ["floating-cards", "layered-depth"], "depth": ["parallax"], "shadow": ["floating"], "camera": ["parallax-camera"], "motion-language": ["floating"], "transitions": ["parallax", "slide"]},
+      "recipe": {
+        "palette": {"canvas": "#eef2ff", "ink": "#1e1b4b", "accent": "#6366f1", "accent2": "#f472b6", "surface": "#ffffff", "muted": "#6b7280"},
+        "fonts": {"display": "Manrope", "body": "Manrope", "displayWeight": 800, "case": "none", "tracking": -0.035},
+        "layout": "cards", "radius": 22, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "duotone", "motif": "none", "motion": "drift"
+      }
+    },
+    {
+      "id": "exploded-ui",
+      "name": "Exploded UI",
+      "aka": ["exploded view interface", "layered UI breakdown", "z-stack explode"],
+      "what": "One app window separates into stacked offset layers, each edged in a bright accent, revealing its structure like an exploded technical view.",
+      "feels": ["clever", "technical", "revealing"],
+      "use": ["architecture explainers", "design-system films", "how-it's-built moments"],
+      "not": "Not deconstructed UI: layers stay aligned on one axis; nothing is scattered.",
+      "search": ["exploded ui layers animation", "interface exploded view motion", "ui layer breakdown 3d"],
+      "stack": {"visual-style": ["technical-minimal"], "ui-treatment": ["exploded-ui", "windowed-ui"], "product-demo": ["exploded-interface-explanation"], "depth": ["layered-2d"], "composition": ["layered-depth"], "shadow": ["layered"], "camera": ["orbit"], "motion-language": ["mechanical"], "transitions": ["scale", "ui-morph"]},
+      "recipe": {
+        "palette": {"canvas": "#f4f4f0", "ink": "#111111", "accent": "#ff5a1f", "accent2": "#2f6bff", "surface": "#ffffff", "muted": "#6f6f6a"},
+        "fonts": {"display": "Space Grotesk", "body": "Inter", "displayWeight": 700, "case": "none", "tracking": -0.03},
+        "layout": "window", "radius": 6, "stroke": {"width": 2, "color": "ink", "style": "solid"},
+        "shadow": "layered", "shadowColor": "accent2", "surface": "flat", "texture": "grid", "icons": "line", "motif": "none", "motion": "snap"
+      }
+    },
+    {
+      "id": "oversized-ui",
+      "name": "Oversized UI",
+      "aka": ["giant UI", "macro UI", "big button graphics"],
+      "what": "A single toggle, cursor or button blown up to poster scale on a saturated field, filling the frame like a graphic shape.",
+      "feels": ["bold", "witty", "punchy"],
+      "use": ["social ads", "feature teasers", "launch stings"],
+      "not": "Not component spec close-up: scale is the joke here; the control becomes a poster graphic, not a measured detail.",
+      "search": ["oversized ui animation", "giant button motion graphic", "big ui elements social ad"],
+      "stack": {"visual-style": ["playful-tech"], "ui-treatment": ["oversized-ui", "isolated-component-ui"], "composition": ["poster", "single-object-hero"], "typography": ["display"], "color": ["color-blocking", "high-saturation"], "shape": ["pill"], "ui-interaction": ["toggle", "click"], "motion-language": ["bouncy"], "transitions": ["zoom", "shape-match"]},
+      "recipe": {
+        "palette": {"canvas": "#2b4bff", "ink": "#ffffff", "accent": "#d6ff3d", "accent2": "#ff6bd6", "surface": "#0f1f8a", "muted": "#c7d0ff"},
+        "fonts": {"display": "Archivo", "body": "Archivo", "displayWeight": 900, "case": "none", "tracking": -0.05},
+        "layout": "pills", "radius": 999, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "hard", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "bounce"
+      }
+    },
+    {
+      "id": "command-palette-ui",
+      "name": "Command-palette UI",
+      "aka": ["⌘K UI", "Raycast style", "spotlight search"],
+      "what": "A single floating search bar on a dim canvas, keystrokes typing in, results snapping into place beside key-cap glyphs.",
+      "feels": ["fast", "expert", "keyboard-first"],
+      "use": ["productivity tools", "developer tools", "AI assistants"],
+      "search": ["command palette animation", "raycast style launch video", "cmd k ui motion"],
+      "stack": {"visual-style": ["technical-minimal"], "ui-treatment": ["command-palette-ui", "isolated-component-ui"], "ui-interaction": ["command-palette", "keyboard-input", "keystroke-overlay", "search", "autocomplete"], "product-demo": ["hands-free-demo"], "typography": ["neo-grotesk", "monospace"], "color": ["dark-ui"], "motion-language": ["snappy"], "transitions": ["hard-cut", "scale"]},
+      "recipe": {
+        "palette": {"canvas": "#0b0b0d", "ink": "#ececef", "accent": "#ff6363", "accent2": "#f5a524", "surface": "#1c1c21", "muted": "#7a7a85"},
+        "fonts": {"display": "Inter", "body": "Inter", "displayWeight": 600, "case": "none", "tracking": -0.02},
+        "layout": "pills", "radius": 16, "stroke": {"width": 1, "color": "#34343c", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "glyph", "motif": "none", "motion": "type"
+      }
+    },
+    {
+      "id": "dashboard-showcase",
+      "name": "Dashboard showcase",
+      "aka": ["analytics hero", "KPI dashboard reveal", "reporting UI"],
+      "what": "A clean light analytics view: one hero line chart in a white panel, a big KPI number, faint grid, calm blue-and-green series.",
+      "feels": ["credible", "clear", "data-driven"],
+      "use": ["analytics products", "investor updates", "reporting feature reveals"],
+      "not": "Not dark ops dashboard: bright product-marketing polish with one hero chart, not a dense wall of metrics.",
+      "search": ["saas dashboard animation", "analytics ui motion", "kpi dashboard reveal"],
+      "stack": {"visual-style": ["clean-minimal"], "ui-treatment": ["dashboard-ui", "simplified-ui"], "data-viz": ["line-graph", "number-counter", "dashboard"], "composition": ["ui-led"], "color": ["light-ui", "cool-palette"], "motion-function": ["show-data-change"], "motion-language": ["smooth"], "transitions": ["line-draw", "crossfade"]},
+      "recipe": {
+        "palette": {"canvas": "#f7f9fb", "ink": "#0f172a", "accent": "#2563eb", "accent2": "#10b981", "surface": "#ffffff", "muted": "#64748b"},
+        "fonts": {"display": "Figtree", "body": "Figtree", "displayWeight": 700, "case": "none", "tracking": -0.03},
+        "layout": "data", "radius": 14, "stroke": {"width": 1, "color": "#e2e8f0", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "line", "motif": "none", "motion": "mask"
+      }
+    },
+    {
+      "id": "app-store-promo",
+      "name": "App Store promo",
+      "aka": ["device-bound mobile", "phone mockup promo", "app preview video"],
+      "what": "A phone floats on a warm peach field, glossy 3D icons and rating stickers pop around it, each screen springing into place.",
+      "feels": ["friendly", "upbeat", "consumer"],
+      "use": ["App Store previews", "consumer app launches", "social ads"],
+      "not": "Not calm productivity: loud, sticker-happy and springy where that one is quiet and slow.",
+      "search": ["app store preview video style", "phone mockup promo animation", "mobile app promo motion"],
+      "stack": {"visual-style": ["playful-tech", "soft-3d"], "ui-treatment": ["device-bound-ui", "simplified-ui"], "photo-video": ["device-mockup"], "composition": ["phone-composition"], "iconography": ["3d"], "ui-interaction": ["swipe", "toast"], "format": ["app-store-promo"], "motion-language": ["springy"], "transitions": ["slide", "scale"]},
+      "recipe": {
+        "palette": {"canvas": "#ffe9dc", "ink": "#2a1a14", "accent": "#ff6b4a", "accent2": "#8b5cf6", "surface": "#ffffff", "muted": "#8a6b5f"},
+        "fonts": {"display": "Outfit", "body": "Outfit", "displayWeight": 800, "case": "none", "tracking": -0.03},
+        "layout": "device", "radius": 24, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "soft", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "emoji3d", "motif": "stickers", "motion": "spring"
+      }
+    },
+    {
+      "id": "browser-framed-ui",
+      "name": "Browser-framed UI",
+      "aka": ["browser mockup", "web app in chrome", "website walkthrough"],
+      "what": "The product shown inside tidy browser windows with traffic-light chrome on a dotted neutral backdrop, cursor-led, soft realistic shadows.",
+      "feels": ["clear", "honest", "practical"],
+      "use": ["web app demos", "tutorials", "website tours"],
+      "search": ["browser mockup animation", "web app walkthrough video", "cursor driven product demo"],
+      "stack": {"visual-style": ["clean-minimal"], "ui-treatment": ["browser-framed-ui", "production-faithful-ui"], "composition": ["browser-window"], "product-demo": ["cursor-driven-demo", "guided-walkthrough", "callout-annotation"], "ui-interaction": ["cursor", "click", "scroll"], "camera": ["push-in"], "motion-language": ["smooth"], "transitions": ["push", "zoom"]},
+      "recipe": {
+        "palette": {"canvas": "#e9ebee", "ink": "#18181b", "accent": "#0ea5e9", "accent2": "#f43f5e", "surface": "#ffffff", "muted": "#71717a"},
+        "fonts": {"display": "Instrument Sans", "body": "Instrument Sans", "displayWeight": 700, "case": "none", "tracking": -0.02},
+        "layout": "window", "radius": 10, "stroke": {"width": 1, "color": "#d4d4d8", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "line", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "component-spec",
+      "name": "Component spec close-up",
+      "aka": ["isolated-component UI", "design-system reel", "component macro"],
+      "what": "One button, toggle or input magnified on a dark dot grid with crosshair registration marks, hairline outlines, measured motion.",
+      "feels": ["precise", "crafted", "calm"],
+      "use": ["design-system launches", "component library reels", "micro-interaction showcases"],
+      "not": "Not oversized UI: a measured close-up with spec marks, not a poster-scale gag.",
+      "search": ["ui component animation showcase", "design system motion reel", "micro interaction close up"],
+      "stack": {"visual-style": ["technical-minimal"], "ui-treatment": ["isolated-component-ui", "micro-ui"], "ui-interaction": ["toggle", "hover", "click", "focus"], "camera": ["macro"], "composition": ["negative-space"], "stroke": ["hairline"], "motion-language": ["precise"], "transitions": ["match-cut", "ui-morph"]},
+      "recipe": {
+        "palette": {"canvas": "#111113", "ink": "#f2f2f3", "accent": "#a3e635", "accent2": "#38bdf8", "surface": "#1b1b1f", "muted": "#8b8b93"},
+        "fonts": {"display": "Geist", "body": "Geist", "displayWeight": 600, "case": "none", "tracking": -0.03},
+        "layout": "cards", "radius": 12, "stroke": {"width": 1, "color": "#3a3a40", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "line", "motif": "crosshair", "motion": "spring"
+      }
+    },
+    {
+      "id": "fintech-trust",
+      "name": "Fintech trust",
+      "aka": ["neobank style", "Mercury style", "premium banking UI"],
+      "what": "Brushed-metal card surfaces over warm stone, deep navy serif headlines, one money-green accent; calm, weighty, nothing flashy.",
+      "feels": ["trustworthy", "premium", "calm"],
+      "use": ["banking and payments", "wealth apps", "B2B finance launches"],
+      "not": "Not luxury: it still shows real balances and cards; restraint serves trust, not status.",
+      "search": ["fintech app animation", "neobank card reveal motion", "premium banking ui video"],
+      "stack": {"visual-style": ["clean-minimal", "metallic"], "ui-treatment": ["floating-card-ui", "simplified-ui"], "material": ["brushed-metal"], "data-viz": ["number-counter", "progress-bar"], "typography": ["serif-editorial", "neo-grotesk"], "color": ["muted", "limited-palette"], "tone": ["trustworthy", "premium"], "motion-language": ["luxurious-slow"], "transitions": ["crossfade", "card-flip"]},
+      "recipe": {
+        "palette": {"canvas": "#f3f1ec", "ink": "#10213a", "accent": "#0f7b5f", "accent2": "#c8a45c", "surface": "#d9dde3", "muted": "#5d6675"},
+        "fonts": {"display": "Newsreader", "body": "Inter", "displayWeight": 500, "case": "none", "tracking": -0.02},
+        "layout": "cards", "radius": 18, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "float", "shadowColor": "ink", "surface": "metal", "texture": "grain", "icons": "line", "motif": "none", "motion": "fade"
+      }
+    },
+    {
+      "id": "terminal-product",
+      "name": "Terminal product demo",
+      "aka": ["CLI demo", "Vercel style", "Warp style dev tool"],
+      "what": "Pure-black stage, one crisp terminal window with a hairline border, monospace commands typing in, a single mint success glow.",
+      "feels": ["technical", "fast", "honest"],
+      "use": ["CLI and SDK launches", "developer platforms", "infra changelogs"],
+      "not": "Not financial terminal: sparse, modern and glowing, not a dense amber data screen.",
+      "search": ["terminal cli demo animation", "vercel style launch video", "developer tool typing animation"],
+      "stack": {"visual-style": ["technical-minimal"], "ui-treatment": ["terminal-ui", "windowed-ui"], "ui-interaction": ["typing", "keyboard-input", "success", "streaming-text"], "product-demo": ["input-output"], "typography": ["monospace", "neo-grotesk"], "color": ["dark-ui", "monochrome"], "motion-language": ["precise"], "transitions": ["hard-cut", "mask-reveal"]},
+      "recipe": {
+        "palette": {"canvas": "#000000", "ink": "#ededed", "accent": "#50e3c2", "accent2": "#7928ca", "surface": "#0a0a0a", "muted": "#8f8f8f"},
+        "fonts": {"display": "Geist", "body": "Geist Mono", "displayWeight": 700, "case": "none", "tracking": -0.04},
+        "layout": "terminal", "radius": 12, "stroke": {"width": 1, "color": "#333333", "style": "solid"},
+        "shadow": "glow", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "type"
+      }
+    },
+    {
+      "id": "developer-docs",
+      "name": "Developer docs",
+      "aka": ["docs-style explainer", "API reference look", "GitHub docs"],
+      "what": "A light documentation page: white canvas, grey code blocks with hairline borders, blue links, monospace snippets, tidy and literal.",
+      "feels": ["clear", "helpful", "literal"],
+      "use": ["API tutorials", "SDK quickstarts", "integration guides"],
+      "not": "Not terminal product demo: bright and instructional; it teaches the code rather than shows off the tool.",
+      "search": ["api documentation explainer video", "developer tutorial animation", "code snippet explainer motion"],
+      "stack": {"visual-style": ["technical-minimal"], "ui-treatment": ["terminal-ui", "simplified-ui"], "format": ["tutorial", "technical-explainer"], "typography": ["grotesk", "monospace"], "color": ["light-ui"], "ui-interaction": ["typing", "api-request", "response"], "motion-language": ["linear"], "transitions": ["crossfade", "slide"]},
+      "recipe": {
+        "palette": {"canvas": "#ffffff", "ink": "#1f2328", "accent": "#0969da", "accent2": "#bf3989", "surface": "#f6f8fa", "muted": "#656d76"},
+        "fonts": {"display": "IBM Plex Sans", "body": "IBM Plex Sans", "displayWeight": 600, "case": "none", "tracking": -0.015},
+        "layout": "terminal", "radius": 6, "stroke": {"width": 1, "color": "#d0d7de", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "line", "motif": "rules", "motion": "snap"
+      }
+    },
+    {
+      "id": "ai-chat-product",
+      "name": "AI chat product",
+      "aka": ["chatbot UI demo", "assistant interface", "prompt-to-answer"],
+      "what": "Prompt bars and answer bubbles on a warm off-white page, text streaming in, a violet-to-cyan sparkle marking the AI.",
+      "feels": ["helpful", "smart", "approachable"],
+      "use": ["AI assistant launches", "copilot features", "agent demos"],
+      "search": ["ai chat interface animation", "chatbot product demo video", "streaming text ui motion"],
+      "stack": {"visual-style": ["clean-minimal", "gradient-heavy"], "ui-treatment": ["chat-ui", "simplified-ui"], "ui-interaction": ["typing", "streaming-text", "ai-generation", "agent-steps"], "product-demo": ["input-output"], "color": ["light-ui", "gradient"], "motion-language": ["fluid"], "transitions": ["crossfade", "ui-morph"]},
+      "recipe": {
+        "palette": {"canvas": "#faf9f6", "ink": "#1a1a19", "accent": "#7c5cff", "accent2": "#22d3ee", "surface": "#ffffff", "muted": "#8a877f"},
+        "fonts": {"display": "Onest", "body": "Onest", "displayWeight": 600, "case": "none", "tracking": -0.02},
+        "layout": "pills", "radius": 999, "stroke": {"width": 1, "color": "#e6e3dc", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "gradient", "texture": "none", "icons": "duotone", "motif": "stars", "motion": "type"
+      }
+    },
+    {
+      "id": "calm-productivity",
+      "name": "Calm productivity",
+      "aka": ["Things style", "warm minimal app", "quiet software"],
+      "what": "A phone app on warm paper, serif headline, soft neutral rows, one gentle ochre accent, slow unhurried dissolves.",
+      "feels": ["calm", "thoughtful", "human"],
+      "use": ["to-do and notes apps", "wellbeing products", "focus tools"],
+      "search": ["calm app promo animation", "warm minimal ui motion", "productivity app video serif"],
+      "stack": {"visual-style": ["warm-minimal"], "ui-treatment": ["device-bound-ui", "minimal-ui"], "typography": ["serif-editorial"], "color": ["muted", "warm-palette"], "texture": ["paper-grain"], "ui-interaction": ["checkbox", "drag"], "pacing": ["meditative"], "motion-language": ["luxurious-slow"], "transitions": ["dissolve", "crossfade"]},
+      "recipe": {
+        "palette": {"canvas": "#f4f0e8", "ink": "#2b2925", "accent": "#c98a2b", "accent2": "#7d9a82", "surface": "#fbf9f4", "muted": "#8b857a"},
+        "fonts": {"display": "Newsreader", "body": "Inter", "displayWeight": 500, "case": "none", "tracking": -0.02},
+        "layout": "device", "radius": 20, "stroke": {"width": 1, "color": "#e3ddd1", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "line", "motif": "none", "motion": "fade"
+      }
+    },
+    {
+      "id": "widget-first-ui",
+      "name": "Widget-first UI",
+      "aka": ["iOS widgets", "home-screen widgets", "glanceable UI"],
+      "what": "Chunky rounded widgets on a dark home-screen field: vivid colour tiles, big glanceable numbers, glossy 3D icons springing in.",
+      "feels": ["glanceable", "cheerful", "native"],
+      "use": ["mobile feature launches", "widget announcements", "wearable apps"],
+      "not": "Not bento showcase: dark, native and toy-bright; tiles are live widgets, not marketing panels.",
+      "search": ["ios widget animation", "home screen widgets motion", "widget ui promo"],
+      "stack": {"visual-style": ["playful-tech"], "ui-treatment": ["widget-ui", "bento-ui"], "composition": ["modular-grid"], "data-viz": ["statistic", "progress-ring"], "shape": ["rounded"], "color": ["dark-ui", "high-saturation"], "iconography": ["3d"], "motion-language": ["springy"], "transitions": ["scale", "card-flip"]},
+      "recipe": {
+        "palette": {"canvas": "#111114", "ink": "#f5f5f7", "accent": "#ff9f0a", "accent2": "#30d158", "surface": "#232329", "muted": "#98989f"},
+        "fonts": {"display": "Sora", "body": "DM Sans", "displayWeight": 700, "case": "none", "tracking": -0.03},
+        "layout": "bento", "radius": 44, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "emoji3d", "motif": "none", "motion": "spring"
+      }
+    },
+    {
+      "id": "automotive-hmi",
+      "name": "Automotive HMI",
+      "aka": ["in-car UI", "instrument cluster", "hardware interface"],
+      "what": "A charcoal cockpit screen with thin cyan gauges and rings, condensed uppercase readouts, restrained glow: shipping hardware, not sci-fi.",
+      "feels": ["engineered", "calm", "precise"],
+      "use": ["EV and mobility", "smart hardware", "industrial IoT"],
+      "not": "Not sci-fi HUD: fewer brackets, no noise or glitch; every gauge reads like a real product.",
+      "search": ["car infotainment ui animation", "instrument cluster motion design", "ev dashboard hmi"],
+      "stack": {"visual-style": ["futuristic-tech", "technical-minimal"], "ui-treatment": ["fui", "full-screen-ui", "dashboard-ui"], "data-viz": ["progress-ring", "status-indicator"], "typography": ["condensed"], "color": ["dark-ui", "cool-palette"], "shadow": ["glow"], "motion-language": ["inertial"], "transitions": ["light-wipe", "blur"]},
+      "recipe": {
+        "palette": {"canvas": "#0c0f12", "ink": "#e6f1f5", "accent": "#35d0ff", "accent2": "#ff7a45", "surface": "#161b21", "muted": "#6b7a86"},
+        "fonts": {"display": "Barlow Semi Condensed", "body": "Barlow", "displayWeight": 600, "case": "upper", "tracking": 0.06},
+        "layout": "hud", "radius": 8, "stroke": {"width": 1, "color": "accent", "style": "solid"},
+        "shadow": "glow", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "line", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "node-canvas",
+      "name": "Node canvas",
+      "aka": ["workflow builder", "automation canvas", "n8n / Zapier style"],
+      "what": "Rounded nodes wired by dashed connectors on a dotted infinite canvas, data pulses travelling link to link.",
+      "feels": ["logical", "empowering", "playful"],
+      "use": ["automation tools", "AI agent builders", "integration platforms"],
+      "not": "Not systems diagram: it is the product's own editable canvas, with cursors and drag, not an explanatory figure.",
+      "search": ["workflow builder animation", "node based ui motion", "automation canvas demo"],
+      "stack": {"visual-style": ["playful-tech"], "ui-treatment": ["canvas-ui", "abstracted-ui"], "product-demo": ["workflow-visualization"], "composition": ["node-map", "infinite-canvas"], "data-viz": ["flow-diagram"], "ui-interaction": ["drag", "drop", "multiplayer-cursors"], "motion-language": ["fluid"], "transitions": ["infinite-canvas", "line-draw"]},
+      "recipe": {
+        "palette": {"canvas": "#f6f6f8", "ink": "#16161d", "accent": "#ff4f8b", "accent2": "#4f7bff", "surface": "#ffffff", "muted": "#7b7b88"},
+        "fonts": {"display": "Hanken Grotesk", "body": "Hanken Grotesk", "displayWeight": 800, "case": "none", "tracking": -0.03},
+        "layout": "diagram", "radius": 16, "stroke": {"width": 2, "color": "ink", "style": "dashed"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "dots", "icons": "filled", "motif": "none", "motion": "pop"
+      }
+    },
+    {
+      "id": "deconstructed-ui",
+      "name": "Deconstructed UI",
+      "aka": ["UI collage", "scattered interface", "pieces flying apart"],
+      "what": "A familiar screen broken into its buttons, cards and labels, scattered at angles with tape and hard shadows, then snapping back together.",
+      "feels": ["playful", "inventive", "energetic"],
+      "use": ["brand-forward launches", "design tools", "social teasers"],
+      "not": "Not exploded UI: pieces scatter freely and rotate; there is no single stacking axis.",
+      "search": ["deconstructed ui animation", "ui pieces collage motion", "interface breaking apart"],
+      "stack": {"visual-style": ["playful-tech", "mixed-media-collage"], "ui-treatment": ["deconstructed-ui", "stylized-ui"], "composition": ["collage", "multi-object-choreography"], "product-demo": ["ui-to-abstract"], "shadow": ["hard"], "motion-language": ["playful"], "transitions": ["fragmentation", "object-morph"]},
+      "recipe": {
+        "palette": {"canvas": "#ffe45c", "ink": "#141414", "accent": "#ff4d8d", "accent2": "#3d7bff", "surface": "#ffffff", "muted": "#5e5516"},
+        "fonts": {"display": "Bricolage Grotesque", "body": "Bricolage Grotesque", "displayWeight": 800, "case": "none", "tracking": -0.035},
+        "layout": "collage", "radius": 14, "stroke": {"width": 3, "color": "ink", "style": "solid"},
+        "shadow": "hard", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "step"
+      }
+    },
+    {
+      "id": "spatial-glass-ui",
+      "name": "Spatial glass UI",
+      "aka": ["visionOS style", "spatial computing UI", "floating glass panels"],
+      "what": "Frosted translucent panels hover over a deep blurred colour field, soft light edges, gentle parallax depth.",
+      "feels": ["immersive", "weightless", "futuristic"],
+      "use": ["XR and spatial apps", "OS-level features", "premium product teasers"],
+      "not": "Not floating-card UI: panels are see-through glass in dark space, not opaque white cards on a pale field.",
+      "search": ["visionos ui animation", "spatial glass panels motion", "glassmorphism product video"],
+      "stack": {"visual-style": ["glass"], "ui-treatment": ["spatial-ui", "glassmorphic-ui"], "material": ["frosted-glass"], "depth": ["spatial-interface"], "composition": ["layered-depth", "floating-cards"], "camera": ["parallax-camera", "dolly"], "motion-language": ["weightless"], "transitions": ["blur", "parallax"]},
+      "recipe": {
+        "palette": {"canvas": "#0e1020", "ink": "#f4f5ff", "accent": "#5b8cff", "accent2": "#ff6fb5", "surface": "#262a44", "muted": "#a3a8c7"},
+        "fonts": {"display": "DM Sans", "body": "DM Sans", "displayWeight": 600, "case": "none", "tracking": -0.03},
+        "layout": "cards", "radius": 32, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "soft", "shadowColor": "ink", "surface": "glass", "texture": "none", "icons": "line", "motif": "none", "motion": "slide"
+      }
+    },
+    {
+      "id": "wireframe-ui",
+      "name": "Wireframe UI",
+      "aka": ["lo-fi wireframe", "skeleton UI", "grey-box mockup"],
+      "what": "Grey boxes, dashed outlines and placeholder bars on a faint grid: the product sketched as structure before pixels.",
+      "feels": ["honest", "in-progress", "structural"],
+      "use": ["roadmap and beta films", "design process stories", "before/after reveals"],
+      "not": "Not blueprint schematic: neutral greys and UI placeholders, not white-on-blue technical drawing.",
+      "search": ["wireframe to ui animation", "lo-fi wireframe motion", "skeleton ui reveal"],
+      "stack": {"visual-style": ["technical-minimal"], "ui-treatment": ["wireframe-ui", "skeleton-ui"], "stroke": ["thin"], "color": ["grayscale"], "composition": ["modular-grid"], "product-demo": ["abstract-to-ui"], "motion-language": ["linear"], "transitions": ["line-draw", "ui-morph"]},
+      "recipe": {
+        "palette": {"canvas": "#f3f4f6", "ink": "#1f2937", "accent": "#6b7280", "accent2": "#3b82f6", "surface": "#ffffff", "muted": "#9ca3af"},
+        "fonts": {"display": "Roboto Mono", "body": "Inter", "displayWeight": 600, "case": "none", "tracking": -0.03},
+        "layout": "bento", "radius": 6, "stroke": {"width": 3, "color": "#6b7280", "style": "dashed"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grid", "icons": "line", "motif": "none", "motion": "mask"
+      }
+    }
+  ]
+}

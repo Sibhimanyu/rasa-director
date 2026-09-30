@@ -142,14 +142,14 @@ detail removed.
   <section class="section" id="flow">
     <div class="wrap">
       <p class="eyebrow">How it runs</p>
-      <h2 class="mega">Fourteen decisions, each made by eye.</h2>
-      <p class="lede narrow">A local page, the Director's Console, opens in your browser. It always shows what Claude is doing, live, and asks one question at a time with Claude's pick already selected, so one click moves on. Every decision collects in "Your film", where any of them can be changed. Hand any step over with "you decide", or everything after it with "Claude decides the rest".</p>
+      <h2 class="mega">You judge the taste. Claude handles the craft.</h2>
+      <p class="lede narrow">A local page, the Director's Console, opens in your browser. It shows what Claude is doing, live, and asks only what is yours to judge, one thing at a time, with Claude's pick already selected. The craft (scenes, pacing, motion, transitions) Claude decides the way a senior motion designer would, and shows you each call in "Your film", where anything can be changed by talking it through.</p>
 
       <ol class="acts">
-        <li><h3>Decide</h3><ol><li><b>Brief</b> what the video is, where it plays, how long, voiceover or not</li><li><b>Brand</b> your DESIGN.md, read back as a board</li><li><b>Route</b> the HyperFrames workflow that builds it</li><li><b>Direction</b> the stack of decisions, in proper terms</li></ol></li>
-        <li><h3>Write</h3><ol><li><b>Story</b> five pitches, two a model would rarely produce</li><li><b>Scenes</b> the whole film as an editable table: text, voiceover, length, transition, intensity</li></ol></li>
-        <li><h3>See</h3><ol><li><b>Look</b> design directions on your words</li><li><b>Motion</b> the motion language, on swatches of your lines</li><li><b>Style frames</b> the key frames, drawn by Claude</li><li><b>Transitions</b> your scenes handing off, every way</li><li><b>Voice</b> your hook line in three voices</li><li><b>Music</b> tracks to audition, or your own</li></ol></li>
-        <li><h3>Build</h3><ol><li><b>Storyboard</b> the timeline and a sketch of every scene</li><li><b>Build &amp; render</b> Claude animates, the checker verifies, you render</li></ol></li>
+        <li><h3>You decide</h3><ol><li><b>Brief</b> what the video is, where it plays, how long, voiceover or not</li><li><b>Brand</b> your DESIGN.md, read back as a board (when you have one)</li><li><b>Style</b> from hundreds of named styles, three picked for you</li><li><b>Story</b> three pitches, each shown as three sketch frames</li></ol></li>
+        <li><h3>You hear and see</h3><ol><li><b>Voice</b> your hook line in a few voices</li><li><b>Music</b> tracks to audition, or your own</li><li><b>Style frames</b> the key frames, drawn by Claude, approved before anything moves</li></ol></li>
+        <li><h3>Claude decides</h3><ol><li><b>Workflow</b> which HyperFrames route builds it</li><li><b>Scenes and pacing</b> structure, lengths, reading time</li><li><b>Motion</b> the motion language your style implies</li><li><b>Transitions</b> cuts, match cuts and one signature move</li></ol></li>
+        <li><h3>Build</h3><ol><li><b>Build</b> Claude animates every scene, the checker verifies it</li><li><b>Render</b> you preview, then render</li></ol></li>
       </ol>
 
       <div class="shots">
@@ -193,17 +193,23 @@ detail removed.
   </section>
 
   <!-- design directions -->
-  <section class="section dark">
+  <section class="section dark" id="styles">
     <div class="wrap">
-      <p class="eyebrow">The look</p>
-      <h2 class="mega">Design directions, not color presets.</h2>
+      <p class="eyebrow">The style library</p>
+      <h2 class="mega">Hundreds of styles. Pick one by eye.</h2>
       <div class="two lead-row">
-        <p class="lede">Each look is a visual style made concrete: a palette by role, a type pairing, radius, stroke, shadow, texture and a composition that suits the style, shown on your own headline.</p>
-        <p>Palettes come from the style's signature colors, 72 HyperFrames palettes and the color taxonomy; type from 46 pairings tagged by class. Each look ships with a frame.md. With your brand, every look keeps your colors and fonts and changes the rest, down to which of your colors is the ground.</p>
+        <p class="lede">Every style is a complete look with a proper name: soft neo-brutalism, claymorphism, Swiss grid, Y2K chrome, blueprint HUD, risograph zine and many more. Each is drawn live on your own words, and Claude picks the three that suit your video best, one of them unusual.</p>
+        <p>Each style carries the motion-design terms that define it (UI treatment, visual style, illustration, stroke, shadow, material, texture, motion language, transitions), so picking one writes a real art-direction brief. With your DESIGN.md, every style is shown in your colors and type. Hover a card to see how it moves.</p>
       </div>
-      <div class="shots two-up">
-        <figure class="showcase"><img src="img/looks.jpg" width="1600" height="900" loading="lazy" alt="Six design directions on the same headline: Swiss, sci-fi HUD, web 1.0, luxury, soft pastel, neo-brutalism" /><figcaption><b>Free directions.</b> One per style family, rotating away from your recent picks.</figcaption></figure>
-        <figure class="showcase"><img src="img/looks-brand.jpg" width="1600" height="900" loading="lazy" alt="Six design directions in one brand's colors and fonts" /><figcaption><b>Brand-locked directions.</b> Same colors and typefaces; different art direction.</figcaption></figure>
+      <div class="lib" id="lib">
+        <div class="lib-controls">
+          <label class="lib-try"><span>Your words</span><input id="lib-words" type="text" value="Tax season. Again." maxlength="40" autocomplete="off" spellcheck="false" /></label>
+          <input id="lib-search" class="lib-search" type="search" placeholder="Search: shadows, retro, glass, doodle, luxury…" aria-label="Search styles" />
+        </div>
+        <div class="lib-fams" id="lib-fams" role="group" aria-label="Families"></div>
+        <p class="lib-count" id="lib-count" aria-live="polite"></p>
+        <div class="lib-grid" id="lib-grid"></div>
+        <noscript><p>The library draws each style with JavaScript.</p></noscript>
       </div>
     </div>
   </section>
@@ -370,6 +376,7 @@ detail removed.
 <script src="assets/gsap.min.js"></script>
 <script src="assets/engine.js"></script>
 <script src="assets/film.js"></script>
+<script src="assets/presets.js"></script>
 <script src="assets/personalities.js"></script>
 <script src="assets/site.js"></script>
 </body>

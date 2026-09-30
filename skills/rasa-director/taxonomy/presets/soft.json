@@ -1,0 +1,1840 @@
+{
+  "family": {
+    "id": "soft",
+    "name": "Soft & tactile",
+    "what": "Rounded, touchable, calm styles: extruded and inflated surfaces, frosted glass, pastel and warm neutrals, slow gentle motion."
+  },
+  "presets": [
+    {
+      "id": "neumorphism",
+      "name": "Neumorphism",
+      "aka": [
+        "soft UI",
+        "neo-skeuomorphism",
+        "neumorphic UI",
+        "extruded UI"
+      ],
+      "what": "Controls extruded from a same-colour pale grey-blue canvas by a paired light and dark shadow; no outlines, one quiet accent.",
+      "feels": [
+        "calm",
+        "tactile",
+        "precise"
+      ],
+      "use": [
+        "smart-home and IoT app demos",
+        "fintech controls",
+        "music player UI showcases",
+        "settings and toggle micro-interactions"
+      ],
+      "not": "Not claymorphism: nothing is inflated or coloured; surfaces are the canvas itself, pushed up by light.",
+      "search": [
+        "neumorphism UI animation",
+        "soft UI toggle motion",
+        "neumorphic dashboard dribbble"
+      ],
+      "stack": {
+        "visual-style": [
+          "clean-minimal"
+        ],
+        "era": [
+          "neumorphism"
+        ],
+        "ui-treatment": [
+          "neo-skeuomorphic-ui",
+          "isolated-component-ui"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "shape": [
+          "rounded",
+          "pill"
+        ],
+        "color": [
+          "monochrome",
+          "low-contrast"
+        ],
+        "iconography": [
+          "line"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "crossfade",
+          "scale"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e3e8ef",
+          "ink": "#2b3447",
+          "accent": "#5b6cff",
+          "accent2": "#9aa6ff",
+          "surface": "#e3e8ef",
+          "muted": "#7d879a"
+        },
+        "fonts": {
+          "display": "Plus Jakarta Sans",
+          "body": "Plus Jakarta Sans",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "pills",
+        "radius": 999,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "neu",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "dark-neumorphism",
+      "name": "Dark neumorphism",
+      "aka": [
+        "dark soft UI",
+        "night neumorphic",
+        "charcoal soft UI"
+      ],
+      "what": "Charcoal soft UI: panels and keys pushed out of a graphite canvas by faint rim light, with one mint accent glowing through.",
+      "feels": [
+        "moody",
+        "tactile",
+        "premium"
+      ],
+      "use": [
+        "audio and hardware companion apps",
+        "smart-home night modes",
+        "fitness trackers",
+        "car infotainment concepts"
+      ],
+      "not": "Not dark glassmorphism: nothing is translucent; the panels are solid graphite shaped only by highlight and shade.",
+      "search": [
+        "dark neumorphism app animation",
+        "dark soft UI motion",
+        "charcoal neumorphic player"
+      ],
+      "stack": {
+        "visual-style": [
+          "clean-minimal"
+        ],
+        "era": [
+          "neumorphism"
+        ],
+        "ui-treatment": [
+          "neo-skeuomorphic-ui",
+          "device-bound-ui"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "color": [
+          "dark-ui",
+          "accent-color-system"
+        ],
+        "composition": [
+          "phone-composition"
+        ],
+        "iconography": [
+          "line"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "crossfade",
+          "ui-morph"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#2a2e35",
+          "ink": "#e8ebf0",
+          "accent": "#5ee6b8",
+          "accent2": "#3a4049",
+          "surface": "#2a2e35",
+          "muted": "#8a919c"
+        },
+        "fonts": {
+          "display": "Manrope",
+          "body": "Manrope",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "device",
+        "radius": 24,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "neu",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "pressed-soft-ui",
+      "name": "Pressed soft UI",
+      "aka": [
+        "inset neumorphism",
+        "debossed UI",
+        "engraved soft UI",
+        "carved panels"
+      ],
+      "what": "Warm stone panels carved into the canvas with inner shadows, charts sitting in debossed wells, a single terracotta data line.",
+      "feels": [
+        "grounded",
+        "tactile",
+        "quiet"
+      ],
+      "use": [
+        "wellness and finance dashboards",
+        "data summaries",
+        "product stat reveals",
+        "hardware control panels"
+      ],
+      "not": "Not neumorphism's extruded look: here everything is pressed in, like a stamped tray, not raised.",
+      "search": [
+        "inset neumorphism dashboard",
+        "debossed UI animation",
+        "pressed soft UI chart"
+      ],
+      "stack": {
+        "visual-style": [
+          "warm-minimal"
+        ],
+        "era": [
+          "neumorphism"
+        ],
+        "ui-treatment": [
+          "neo-skeuomorphic-ui",
+          "dashboard-ui"
+        ],
+        "shadow": [
+          "inner"
+        ],
+        "data-viz": [
+          "line-graph",
+          "statistic"
+        ],
+        "color": [
+          "earth-tones",
+          "low-contrast"
+        ],
+        "material": [
+          "matte-product"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "mask-reveal",
+          "line-draw"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e8e1d6",
+          "ink": "#33291f",
+          "accent": "#c46a45",
+          "accent2": "#9fae8f",
+          "surface": "#e2d9cc",
+          "muted": "#8f8373"
+        },
+        "fonts": {
+          "display": "Outfit",
+          "body": "Outfit",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "data",
+        "radius": 32,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "inset",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "material-you",
+      "name": "Material You",
+      "aka": [
+        "Material 3",
+        "M3 expressive",
+        "tonal UI",
+        "dynamic color UI"
+      ],
+      "what": "Tonal lavender and rose containers with big 28px corners, no shadows, filled icons, a wallpaper-derived palette and springy shape morphs.",
+      "feels": [
+        "friendly",
+        "personal",
+        "modern"
+      ],
+      "use": [
+        "Android app launches",
+        "Google-ecosystem feature reveals",
+        "widgets and settings demos",
+        "consumer productivity apps"
+      ],
+      "not": "Not claymorphism: surfaces are flat tonal fills with no highlights or drop shadows; the softness is colour and corner radius.",
+      "search": [
+        "material you animation",
+        "material 3 expressive motion",
+        "android dynamic color UI promo"
+      ],
+      "stack": {
+        "visual-style": [
+          "clean-minimal",
+          "playful-tech"
+        ],
+        "era": [
+          "material-design"
+        ],
+        "ui-treatment": [
+          "material-ui",
+          "floating-card-ui"
+        ],
+        "shape": [
+          "rounded",
+          "pill"
+        ],
+        "color": [
+          "pastel",
+          "brand-palette"
+        ],
+        "iconography": [
+          "filled"
+        ],
+        "shadow": [
+          "none"
+        ],
+        "motion-language": [
+          "springy"
+        ],
+        "transitions": [
+          "ui-morph",
+          "shape-match"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fef7ff",
+          "ink": "#1d1b20",
+          "accent": "#6750a4",
+          "accent2": "#f2b8c6",
+          "surface": "#e8def8",
+          "muted": "#79747e"
+        },
+        "fonts": {
+          "display": "Roboto Flex",
+          "body": "Roboto Flex",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "cards",
+        "radius": 28,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "spring"
+      }
+    },
+    {
+      "id": "marshmallow-3d",
+      "name": "Marshmallow 3D flat",
+      "aka": [
+        "squishy UI",
+        "puffy bento",
+        "soft-serve 3D",
+        "pillow tiles"
+      ],
+      "what": "Pillowy peach, mint and cream tiles with soft inner highlights in a bento grid, glossy bead icons, rounded chunky type.",
+      "feels": [
+        "cosy",
+        "sweet",
+        "playful"
+      ],
+      "use": [
+        "food and delivery apps",
+        "feature roundups",
+        "social teasers",
+        "habit and journaling apps"
+      ],
+      "not": "Not claymorphism's floating cards: tiles sit snug in a grid like pillows, with barely any drop shadow.",
+      "search": [
+        "puffy 3D bento UI",
+        "squishy UI animation",
+        "soft 3D pastel tiles motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "soft-3d",
+          "kawaii"
+        ],
+        "ui-treatment": [
+          "bento-ui",
+          "claymorphic-ui"
+        ],
+        "composition": [
+          "bento-grid"
+        ],
+        "shape": [
+          "inflated",
+          "soft"
+        ],
+        "typography": [
+          "rounded"
+        ],
+        "color": [
+          "pastel",
+          "warm-palette"
+        ],
+        "material": [
+          "foam"
+        ],
+        "iconography": [
+          "3d"
+        ],
+        "motion-language": [
+          "bouncy"
+        ],
+        "transitions": [
+          "scale",
+          "morph"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fff3ea",
+          "ink": "#3d2a22",
+          "accent": "#ffb08a",
+          "accent2": "#b6e3cf",
+          "surface": "#fffaf5",
+          "muted": "#a08878"
+        },
+        "fonts": {
+          "display": "Fredoka",
+          "body": "Nunito",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "bento",
+        "radius": 44,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#c98a6a",
+        "surface": "clay",
+        "texture": "none",
+        "icons": "emoji3d",
+        "motif": "none",
+        "motion": "bounce"
+      }
+    },
+    {
+      "id": "pastel-minimal",
+      "name": "Pastel minimal",
+      "aka": [
+        "soft pastel minimalism",
+        "sorbet minimal",
+        "baby pastel"
+      ],
+      "what": "One centred line of type on a milk-white field, a two-tone blush and powder-blue icon, tiny sparkles, lots of air.",
+      "feels": [
+        "gentle",
+        "light",
+        "optimistic"
+      ],
+      "use": [
+        "beauty and self-care brands",
+        "announcements",
+        "app store promos",
+        "quote cards"
+      ],
+      "not": "Not kawaii: no faces or mascots; the softness is colour and space, not character.",
+      "search": [
+        "pastel minimal motion graphics",
+        "soft pastel typography animation",
+        "sorbet palette brand video"
+      ],
+      "stack": {
+        "visual-style": [
+          "clean-minimal"
+        ],
+        "color": [
+          "pastel",
+          "light-ui"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "typography": [
+          "geometric-sans"
+        ],
+        "iconography": [
+          "duotone"
+        ],
+        "tone": [
+          "soft",
+          "calm",
+          "optimistic"
+        ],
+        "motion-language": [
+          "floating"
+        ],
+        "transitions": [
+          "fade",
+          "blur"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fcf8f3",
+          "ink": "#3a3348",
+          "accent": "#f5b3c4",
+          "accent2": "#aed4f0",
+          "surface": "#ffffff",
+          "muted": "#9d95a8"
+        },
+        "fonts": {
+          "display": "Quicksand",
+          "body": "Quicksand",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "poster",
+        "radius": 28,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "duotone",
+        "motif": "stars",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "warm-minimalism",
+      "name": "Warm minimalism",
+      "aka": [
+        "japandi",
+        "earthy minimal",
+        "organic modern",
+        "terracotta minimal"
+      ],
+      "what": "Oat and linen neutrals, a soft serif headline, a terracotta block, fine grain, generous margins and slow sliding reveals.",
+      "feels": [
+        "warm",
+        "honest",
+        "unhurried"
+      ],
+      "use": [
+        "lifestyle and home brands",
+        "hospitality",
+        "craft food and coffee",
+        "architecture studios"
+      ],
+      "not": "Not quiet luxury: warmer and more human, with a friendly soft serif and earth colour, not a status signal.",
+      "search": [
+        "warm minimalism brand motion",
+        "japandi motion graphics",
+        "earthy minimal typography video"
+      ],
+      "stack": {
+        "visual-style": [
+          "warm-minimal"
+        ],
+        "color": [
+          "earth-tones",
+          "warm-palette"
+        ],
+        "typography": [
+          "serif-editorial",
+          "humanist-sans"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "composition": [
+          "editorial-grid",
+          "negative-space"
+        ],
+        "tone": [
+          "calm",
+          "human"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "slide",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#efe6da",
+          "ink": "#2f2721",
+          "accent": "#c4704a",
+          "accent2": "#d8b898",
+          "surface": "#f7f1e8",
+          "muted": "#8e8173"
+        },
+        "fonts": {
+          "display": "Fraunces",
+          "body": "Manrope",
+          "displayWeight": 500,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "editorial",
+        "radius": 4,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "light-glassmorphism",
+      "name": "Glassmorphism (light)",
+      "aka": [
+        "frosted glass UI",
+        "glass cards",
+        "glassmorphic UI"
+      ],
+      "what": "Milky translucent cards blurring pastel blue and pink colour blooms behind them, thin white edges, soft shadows.",
+      "feels": [
+        "airy",
+        "modern",
+        "clean"
+      ],
+      "use": [
+        "SaaS feature reveals",
+        "fintech and crypto dashboards",
+        "landing page heroes",
+        "weather and health widgets"
+      ],
+      "not": "Not liquid glass: flat frosted panes with a white edge, no refraction, bending or specular rim.",
+      "search": [
+        "glassmorphism UI animation",
+        "frosted glass cards motion",
+        "glassmorphism dashboard promo"
+      ],
+      "stack": {
+        "visual-style": [
+          "glass",
+          "gradient-heavy"
+        ],
+        "era": [
+          "glassmorphism"
+        ],
+        "ui-treatment": [
+          "glassmorphic-ui",
+          "floating-card-ui"
+        ],
+        "material": [
+          "frosted-glass"
+        ],
+        "color": [
+          "pastel",
+          "gradient"
+        ],
+        "composition": [
+          "floating-cards",
+          "layered-depth"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "motion-language": [
+          "floating"
+        ],
+        "transitions": [
+          "blur",
+          "parallax"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eef1fa",
+          "ink": "#1d2342",
+          "accent": "#8ab4ff",
+          "accent2": "#ffb3d6",
+          "surface": "#ffffff",
+          "muted": "#6f7896"
+        },
+        "fonts": {
+          "display": "Sora",
+          "body": "Sora",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "cards",
+        "radius": 32,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#5a6aa0",
+        "surface": "glass",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "fluent-acrylic",
+      "name": "Fluent acrylic",
+      "aka": [
+        "Windows 11 Mica",
+        "Fluent Design",
+        "acrylic material",
+        "noise glass windows"
+      ],
+      "what": "Grainy acrylic desktop windows over cool mint and lavender light, crisp rounded window chrome, soft layered depth like Windows 11.",
+      "feels": [
+        "crisp",
+        "calm",
+        "contemporary"
+      ],
+      "use": [
+        "desktop app launches",
+        "OS-style product tours",
+        "productivity tools",
+        "developer tools with a gentle tone"
+      ],
+      "not": "Not glassmorphism cards: the frost is noisy and matte like acrylic, and it lives in desktop windows with real chrome, not floating cards.",
+      "search": [
+        "fluent design acrylic animation",
+        "windows 11 mica UI motion",
+        "acrylic window product tour"
+      ],
+      "stack": {
+        "visual-style": [
+          "glass",
+          "clean-minimal"
+        ],
+        "ui-treatment": [
+          "glassmorphic-ui",
+          "windowed-ui"
+        ],
+        "material": [
+          "frosted-glass"
+        ],
+        "texture": [
+          "digital-noise"
+        ],
+        "composition": [
+          "desktop-workspace",
+          "layered-depth"
+        ],
+        "color": [
+          "cool-palette"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "scale",
+          "blur"
+        ],
+        "era": [
+          "modern-saas"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#dfe7ea",
+          "ink": "#1b2a30",
+          "accent": "#8fe0cc",
+          "accent2": "#b9a8ff",
+          "surface": "#ffffff",
+          "muted": "#61747b"
+        },
+        "fonts": {
+          "display": "Figtree",
+          "body": "Figtree",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "window",
+        "radius": 18,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "glass",
+        "texture": "noise",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "matte-ceramic",
+      "name": "Matte ceramic",
+      "aka": [
+        "soft-touch ceramic",
+        "stoneware UI",
+        "matte clay objects",
+        "bisque"
+      ],
+      "what": "Bone and sage stoneware pills with a soft glazed highlight and short shadow, solid kiln-coloured icons, calm unfussy type.",
+      "feels": [
+        "grounded",
+        "crafted",
+        "serene"
+      ],
+      "use": [
+        "homeware and kitchen brands",
+        "skincare with natural positioning",
+        "smart-home controls",
+        "wellness hardware"
+      ],
+      "not": "Not claymorphism: muted, earthy and heavy like fired stoneware, not candy-coloured and bouncy.",
+      "search": [
+        "matte ceramic 3D motion",
+        "stoneware UI design animation",
+        "soft ceramic product render motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "soft-3d",
+          "warm-minimal"
+        ],
+        "material": [
+          "ceramic",
+          "matte-product"
+        ],
+        "shape": [
+          "pill",
+          "soft"
+        ],
+        "color": [
+          "earth-tones",
+          "muted"
+        ],
+        "iconography": [
+          "filled"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "ui-treatment": [
+          "neo-skeuomorphic-ui",
+          "isolated-component-ui"
+        ],
+        "motion-language": [
+          "heavy"
+        ],
+        "transitions": [
+          "scale",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e6e1d8",
+          "ink": "#2a2823",
+          "accent": "#8ea08a",
+          "accent2": "#c98f6b",
+          "surface": "#f3efe7",
+          "muted": "#827c71"
+        },
+        "fonts": {
+          "display": "Manrope",
+          "body": "Manrope",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "pills",
+        "radius": 999,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#6a5e4c",
+        "surface": "clay",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "dreamy-soft-focus",
+      "name": "Dreamy soft focus",
+      "aka": [
+        "ethereal pastel",
+        "soft haze",
+        "dreamcore light",
+        "hazy glow"
+      ],
+      "what": "A hazy lilac-to-peach field with grain, a glowing pearl orb, a light italic serif and slow blurred dissolves, like a half-remembered morning.",
+      "feels": [
+        "ethereal",
+        "tender",
+        "nostalgic"
+      ],
+      "use": [
+        "music and album teasers",
+        "beauty and fragrance-lite brands",
+        "poetry and quote films",
+        "sleep and relaxation apps"
+      ],
+      "not": "Not pastel minimal: the air is hazy, grainy and glowing, with a serif voice and blur transitions, not crisp and white.",
+      "search": [
+        "dreamy soft focus motion graphics",
+        "ethereal pastel typography video",
+        "hazy glow title animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "gradient-heavy",
+          "cinematic"
+        ],
+        "color": [
+          "pastel",
+          "low-contrast"
+        ],
+        "effects": [
+          "bloom",
+          "grain"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "tone": [
+          "soft",
+          "nostalgic",
+          "calm"
+        ],
+        "motion-language": [
+          "weightless"
+        ],
+        "transitions": [
+          "blur",
+          "dissolve"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f1e6f1",
+          "ink": "#3a2c46",
+          "accent": "#cbb4e6",
+          "accent2": "#f5c6b4",
+          "surface": "#fbf5fa",
+          "muted": "#8f7f9c"
+        },
+        "fonts": {
+          "display": "Instrument Serif",
+          "body": "Figtree",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "poster",
+        "radius": 40,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "emoji3d",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "organic-biomorphic",
+      "name": "Organic biomorphic",
+      "aka": [
+        "blob shapes",
+        "fluid organic",
+        "biomorphic abstraction",
+        "pebble forms"
+      ],
+      "what": "Soft sage and apricot pebble blobs drifting behind centred type, solid leaf-shaped icons, no straight edges anywhere.",
+      "feels": [
+        "natural",
+        "calm",
+        "alive"
+      ],
+      "use": [
+        "sustainability and wellness brands",
+        "plant-based food",
+        "healthcare explainers",
+        "motion backgrounds"
+      ],
+      "not": "Not liquid chrome: the blobs are matte, muted and slow, like stones and leaves, not reflective fluids.",
+      "search": [
+        "organic blob motion graphics",
+        "biomorphic shapes animation",
+        "fluid blob brand video"
+      ],
+      "stack": {
+        "visual-style": [
+          "organic-biomorphic"
+        ],
+        "shape": [
+          "organic",
+          "blob"
+        ],
+        "color": [
+          "earth-tones",
+          "muted"
+        ],
+        "composition": [
+          "centered-hero",
+          "negative-space"
+        ],
+        "illustration": [
+          "flat-vector"
+        ],
+        "iconography": [
+          "filled"
+        ],
+        "motion-language": [
+          "organic"
+        ],
+        "transitions": [
+          "morph",
+          "shape-match"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f1efe5",
+          "ink": "#23311f",
+          "accent": "#9dbf8b",
+          "accent2": "#eab48e",
+          "surface": "#fbfaf4",
+          "muted": "#7b8672"
+        },
+        "fonts": {
+          "display": "Young Serif",
+          "body": "Outfit",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "poster",
+        "radius": 48,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "blobs",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "calm-wellness",
+      "name": "Calm wellness",
+      "aka": [
+        "meditation app style",
+        "mindful UI",
+        "breathwork aesthetic",
+        "spa minimal"
+      ],
+      "what": "A sage phone app with floating soft cards, faint breathing orbit rings, thin line icons and slow, weightless easing.",
+      "feels": [
+        "serene",
+        "reassuring",
+        "slow"
+      ],
+      "use": [
+        "meditation and sleep apps",
+        "mental health services",
+        "health insurance explainers",
+        "spa and retreat brands"
+      ],
+      "not": "Not pastel minimal: greener, quieter and built around a slow breath rhythm and app UI, not a single type moment.",
+      "search": [
+        "meditation app promo animation",
+        "calm wellness motion design",
+        "mindfulness app UI video"
+      ],
+      "stack": {
+        "visual-style": [
+          "warm-minimal",
+          "organic-biomorphic"
+        ],
+        "ui-treatment": [
+          "device-bound-ui",
+          "minimal-ui"
+        ],
+        "composition": [
+          "phone-composition",
+          "orbit"
+        ],
+        "color": [
+          "muted",
+          "light-ui"
+        ],
+        "iconography": [
+          "rounded"
+        ],
+        "shadow": [
+          "floating"
+        ],
+        "tone": [
+          "calm",
+          "soft",
+          "trustworthy"
+        ],
+        "motion-language": [
+          "weightless"
+        ],
+        "transitions": [
+          "fade",
+          "dissolve"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e9eee6",
+          "ink": "#28352e",
+          "accent": "#8fb59c",
+          "accent2": "#f0d5bf",
+          "surface": "#fbfcf9",
+          "muted": "#7c8a80"
+        },
+        "fonts": {
+          "display": "Figtree",
+          "body": "Figtree",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "device",
+        "radius": 36,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "orbits",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "vellum-layers",
+      "name": "Vellum layers",
+      "aka": [
+        "tracing paper",
+        "translucent paper",
+        "frosted paper collage",
+        "glassine"
+      ],
+      "what": "Translucent vellum sheets overlapping at slight angles over peach and blue shapes, fibre texture, tape tabs, gentle paper slides.",
+      "feels": [
+        "delicate",
+        "crafted",
+        "airy"
+      ],
+      "use": [
+        "stationery and wedding brands",
+        "architecture concept films",
+        "gentle explainers",
+        "portfolio reels"
+      ],
+      "not": "Not layered cardstock: the sheets are see-through, so colours glow softly through them instead of stacking opaquely.",
+      "search": [
+        "vellum paper animation",
+        "translucent paper layers motion",
+        "tracing paper collage design"
+      ],
+      "stack": {
+        "visual-style": [
+          "paper-cutout",
+          "glass"
+        ],
+        "material": [
+          "paper",
+          "frosted-glass"
+        ],
+        "texture": [
+          "paper-grain",
+          "fibers"
+        ],
+        "composition": [
+          "collage",
+          "layered-depth"
+        ],
+        "color": [
+          "pastel",
+          "low-contrast"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "motion-language": [
+          "floating"
+        ],
+        "transitions": [
+          "slide",
+          "page-flip"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f3efe8",
+          "ink": "#2f2b27",
+          "accent": "#f3b39a",
+          "accent2": "#a9c6e6",
+          "surface": "#ffffff",
+          "muted": "#948a7f"
+        },
+        "fonts": {
+          "display": "DM Serif Display",
+          "body": "DM Sans",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "collage",
+        "radius": 6,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#7a6a5a",
+        "surface": "glass",
+        "texture": "paper",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "slide"
+      }
+    },
+    {
+      "id": "grainy-pastel-gradient",
+      "name": "Grainy pastel gradient",
+      "aka": [
+        "noise gradient",
+        "grainy mesh gradient",
+        "gradient grain",
+        "soft mesh"
+      ],
+      "what": "Cards washed in a lavender-to-peach gradient over grainy colour blooms, soft glow, a wide rounded sans, colour doing the talking.",
+      "feels": [
+        "dreamy",
+        "modern",
+        "optimistic"
+      ],
+      "use": [
+        "AI product launches",
+        "brand refreshes",
+        "event openers",
+        "music and podcast art"
+      ],
+      "not": "Not glassmorphism: the cards are opaque gradient fills with grain, not see-through frosted panes.",
+      "search": [
+        "aurora gradient motion graphics",
+        "grainy mesh gradient animation",
+        "soft gradient UI promo"
+      ],
+      "stack": {
+        "visual-style": [
+          "gradient-heavy"
+        ],
+        "color": [
+          "mesh-gradient",
+          "pastel"
+        ],
+        "texture": [
+          "film-grain"
+        ],
+        "ui-treatment": [
+          "floating-card-ui",
+          "abstracted-ui"
+        ],
+        "shadow": [
+          "glow"
+        ],
+        "composition": [
+          "floating-cards"
+        ],
+        "motion-language": [
+          "fluid"
+        ],
+        "transitions": [
+          "color-match",
+          "blur"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f4efff",
+          "ink": "#2a1f4a",
+          "accent": "#b79cff",
+          "accent2": "#ffc2a8",
+          "surface": "#fdf8ff",
+          "muted": "#8a7fae"
+        },
+        "fonts": {
+          "display": "Urbanist",
+          "body": "Urbanist",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "bento",
+        "radius": 30,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "gradient",
+        "texture": "grain",
+        "icons": "duotone",
+        "motif": "blobs",
+        "motion": "fade"
+      }
+    },
+    {
+      "id": "calm-biometric-rings",
+      "name": "Calm biometric rings",
+      "aka": [
+        "wellness tracker UI",
+        "ring metrics",
+        "sleep score UI",
+        "readiness rings"
+      ],
+      "what": "Soft sage progress rings and small readouts framed on a misty ground, rounded numerals, gentle sweeps like a sleep-tracker morning report.",
+      "feels": [
+        "reassuring",
+        "precise",
+        "calm"
+      ],
+      "use": [
+        "wearables and health trackers",
+        "sleep and recovery apps",
+        "health insurance",
+        "wellness data stories"
+      ],
+      "not": "Not a sci-fi HUD: pale, rounded and slow, rings are progress not targeting, with no neon, glitch or scanlines.",
+      "search": [
+        "sleep tracker UI animation",
+        "health ring progress motion",
+        "wellness wearable app promo"
+      ],
+      "stack": {
+        "visual-style": [
+          "clean-minimal",
+          "organic-biomorphic"
+        ],
+        "data-viz": [
+          "progress-ring",
+          "statistic"
+        ],
+        "composition": [
+          "radial",
+          "negative-space"
+        ],
+        "color": [
+          "muted",
+          "light-ui"
+        ],
+        "typography": [
+          "rounded"
+        ],
+        "tone": [
+          "calm",
+          "trustworthy"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "line-draw",
+          "fade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eef2ee",
+          "ink": "#233029",
+          "accent": "#7fa593",
+          "accent2": "#e5a98a",
+          "surface": "#ffffff",
+          "muted": "#7b877f"
+        },
+        "fonts": {
+          "display": "Varela Round",
+          "body": "Nunito",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "hud",
+        "radius": 24,
+        "stroke": {
+          "width": 1,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "drift"
+      }
+    },
+    {
+      "id": "cozy-pastel-terminal",
+      "name": "Cozy pastel terminal",
+      "aka": [
+        "Catppuccin style",
+        "soft dev tool",
+        "pastel code editor",
+        "cozy CLI"
+      ],
+      "what": "A rounded latte-toned terminal window with lavender and sage syntax colours, soft shadow, rounded mono type, typed line by line.",
+      "feels": [
+        "cosy",
+        "friendly",
+        "nerdy"
+      ],
+      "use": [
+        "developer tool launches",
+        "CLI demos",
+        "open-source release videos",
+        "API walkthroughs"
+      ],
+      "not": "Not a hacker terminal: light, pastel and rounded, with no green-on-black, scanlines or glitch.",
+      "search": [
+        "catppuccin terminal animation",
+        "pastel terminal CLI demo video",
+        "soft developer tool motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "playful-tech",
+          "clean-minimal"
+        ],
+        "ui-treatment": [
+          "terminal-ui",
+          "windowed-ui"
+        ],
+        "typography": [
+          "monospace",
+          "rounded"
+        ],
+        "color": [
+          "pastel",
+          "light-ui"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "ui-interaction": [
+          "typing",
+          "streaming-text"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "slide",
+          "crossfade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#dce0e8",
+          "ink": "#4c4f69",
+          "accent": "#8839ef",
+          "accent2": "#40a02b",
+          "surface": "#eff1f5",
+          "muted": "#8c8fa1"
+        },
+        "fonts": {
+          "display": "Lexend",
+          "body": "Lexend",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "terminal",
+        "radius": 22,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#4c4f69",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "type"
+      }
+    },
+    {
+      "id": "pastel-flow-diagram",
+      "name": "Soft flow diagram",
+      "aka": [
+        "friendly flowchart",
+        "pastel diagram",
+        "soft whiteboard",
+        "rounded node diagram"
+      ],
+      "what": "Rounded pastel nodes on a faint dot grid joined by soft dashed connectors, light shadows, duotone icons, gentle step-by-step pops.",
+      "feels": [
+        "clear",
+        "approachable",
+        "orderly"
+      ],
+      "use": [
+        "process explainers",
+        "onboarding flows",
+        "workflow automation demos",
+        "internal training"
+      ],
+      "not": "Not a blueprint or technical schematic: nodes are soft pastel lozenges with friendly type, not hairline technical drawing.",
+      "search": [
+        "pastel flowchart animation",
+        "soft diagram explainer motion",
+        "rounded node diagram animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "saas-minimal",
+          "playful-tech"
+        ],
+        "composition": [
+          "flowchart",
+          "node-map"
+        ],
+        "data-viz": [
+          "flow-diagram",
+          "process-diagram"
+        ],
+        "shape": [
+          "rounded"
+        ],
+        "stroke": [
+          "medium"
+        ],
+        "color": [
+          "pastel"
+        ],
+        "motion-language": [
+          "springy"
+        ],
+        "transitions": [
+          "line-draw",
+          "scale"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f6f5fd",
+          "ink": "#2b2945",
+          "accent": "#b7a6ff",
+          "accent2": "#ffd6a5",
+          "surface": "#ffffff",
+          "muted": "#8583a3"
+        },
+        "fonts": {
+          "display": "M PLUS Rounded 1c",
+          "body": "M PLUS Rounded 1c",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "diagram",
+        "radius": 30,
+        "stroke": {
+          "width": 2,
+          "color": "#cfc8f0",
+          "style": "dashed"
+        },
+        "shadow": "soft",
+        "shadowColor": "#6b5fb0",
+        "surface": "flat",
+        "texture": "dots",
+        "icons": "duotone",
+        "motif": "none",
+        "motion": "pop"
+      }
+    },
+    {
+      "id": "liquid-glass",
+      "name": "Liquid glass",
+      "aka": [
+        "iOS 26 glass",
+        "Apple liquid glass",
+        "refractive glass UI",
+        "lensing glass"
+      ],
+      "what": "Clear lens-like glass controls on a vivid coral-to-cobalt wallpaper, bright rim light and glow, surfaces that ripple and morph.",
+      "feels": [
+        "fluid",
+        "premium",
+        "alive"
+      ],
+      "use": [
+        "mobile app launches",
+        "OS-style feature reveals",
+        "consumer hardware promos",
+        "widget showcases"
+      ],
+      "not": "Not flat glassmorphism: the glass bends and lenses what is behind it, glints at the edge and morphs between shapes.",
+      "search": [
+        "liquid glass UI animation",
+        "apple liquid glass motion",
+        "refractive glass interface video"
+      ],
+      "stack": {
+        "visual-style": [
+          "glass",
+          "liquid"
+        ],
+        "ui-treatment": [
+          "glassmorphic-ui",
+          "device-bound-ui"
+        ],
+        "material": [
+          "liquid-glass"
+        ],
+        "effects": [
+          "refraction",
+          "glow"
+        ],
+        "composition": [
+          "phone-composition",
+          "layered-depth"
+        ],
+        "color": [
+          "high-saturation",
+          "gradient"
+        ],
+        "motion-language": [
+          "fluid"
+        ],
+        "transitions": [
+          "ui-morph",
+          "liquid"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fff1ea",
+          "ink": "#1a1633",
+          "accent": "#ff7a59",
+          "accent2": "#3d6bff",
+          "surface": "#ffffff",
+          "muted": "#6e6784"
+        },
+        "fonts": {
+          "display": "Inter Tight",
+          "body": "Inter Tight",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "device",
+        "radius": 30,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "glow",
+        "shadowColor": "accent",
+        "surface": "glass",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "spring"
+      }
+    },
+    {
+      "id": "nordic-soft",
+      "name": "Nordic soft",
+      "aka": [
+        "hygge",
+        "Scandi minimal",
+        "Scandinavian design",
+        "fog and oat"
+      ],
+      "what": "Flat fog-blue, oat and moss tiles in a calm grid, no shadows, thin line icons, a friendly sans, tidy slides.",
+      "feels": [
+        "cosy",
+        "honest",
+        "tidy"
+      ],
+      "use": [
+        "furniture and interiors",
+        "public services",
+        "banking apps",
+        "family and parenting brands"
+      ],
+      "not": "Not warm minimalism: cooler and flatter, a tidy grid of muted tiles and a sans voice rather than serif and terracotta.",
+      "search": [
+        "scandinavian minimal motion graphics",
+        "hygge brand animation",
+        "nordic design UI video"
+      ],
+      "stack": {
+        "visual-style": [
+          "clean-minimal",
+          "warm-minimal"
+        ],
+        "composition": [
+          "bento-grid",
+          "modular-grid"
+        ],
+        "color": [
+          "muted",
+          "cool-palette"
+        ],
+        "typography": [
+          "rounded",
+          "humanist-sans"
+        ],
+        "iconography": [
+          "line"
+        ],
+        "shadow": [
+          "none"
+        ],
+        "tone": [
+          "calm",
+          "friendly"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "slide",
+          "push"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eef0ec",
+          "ink": "#23282b",
+          "accent": "#9fb4c4",
+          "accent2": "#b9c29f",
+          "surface": "#e3ddd1",
+          "muted": "#7c8386"
+        },
+        "fonts": {
+          "display": "Nunito Sans",
+          "body": "Nunito Sans",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "bento",
+        "radius": 20,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide"
+      }
+    }
+  ]
+}
