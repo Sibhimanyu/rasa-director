@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 (2026-09-30)
+
+- **Works without Node installed**: setup is now one command, `bash scripts/setup.sh --open`, which needs only bash and curl. It finds Node ≥ 20 on the PATH or where nvm, fnm, Volta, asdf or Homebrew put it (Claude Code's shell often misses these); if there is none, it downloads a private copy of Node LTS from nodejs.org into `~/.rasa-director/node`, verified against the official checksum, with no sudo and nothing changed system-wide. Then it checks for updates, checks HyperFrames and the browser, makes the run folder and starts the console, printing a `PROBLEM:` line with the fix for anything that fails instead of stopping silently. When Node isn't on the PATH it prints a `PATH_PREFIX` that Claude puts in front of every later command. The one-line installer no longer stops when Node is missing. `RASA_DIRECTOR_NO_NODE_DOWNLOAD=1` turns the download off.
+
 ## 0.4.2 (2026-09-30)
 
 - **Update check**: a run starts with `update.mjs check`, which compares this copy with the latest release (at most once a day, a 2-second limit, silent offline) and, when there's a newer one, says so in one line with what's new. Say "update" and `update.mjs apply` updates it the way it was installed (Claude Code plugin, one-line installer, git clone or skills CLI). `RASA_DIRECTOR_AUTO_UPDATE=1` updates without asking; `RASA_DIRECTOR_NO_UPDATE_CHECK=1` turns it off. The skill now carries its version in `VERSION`. Versions before 0.4.2 have no check; update them once by hand (README, "Updating").

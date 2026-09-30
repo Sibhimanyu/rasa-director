@@ -44,17 +44,18 @@ Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print 
 # SKILL_DIR = the base directory Claude Code printed when this skill loaded; this finds it otherwise
 SKILL_DIR=$(for d in ~/.claude/skills/rasa-director ~/.agents/skills/rasa-director .claude/skills/rasa-director; do [ -f "$d/SKILL.md" ] && (cd "$d" && pwd -P) && break; done)
 [ -n "$SKILL_DIR" ] || SKILL_DIR=$(dirname "$(find ~/.claude/plugins/cache -path '*rasa-director*/skills/rasa-director/SKILL.md' 2>/dev/null | sort -V | tail -1)")
-RUN=".rasa-director/$(date +%Y%m%d-%H%M%S)"; mkdir -p "$RUN"; echo "SKILL_DIR=$SKILL_DIR RUN=$RUN"
-grep -qx '.rasa-director/' .gitignore 2>/dev/null || printf '\n.rasa-director/\n' >> .gitignore
-node $SKILL_DIR/scripts/update.mjs check
-npx --yes hyperframes --version && npx --yes hyperframes browser ensure >/dev/null && echo READY
-node $SKILL_DIR/scripts/console.mjs serve --run "$RUN" --open
+bash "$SKILL_DIR/scripts/setup.sh" --open
 ```
+
+`setup.sh` needs only bash and curl. It finds Node ≥ 20 (the PATH, then nvm, fnm, Volta, asdf, Homebrew; if there is none it downloads a private, checksum-verified copy of Node LTS into `~/.rasa-director/node`; nothing system-wide changes), checks for updates, checks HyperFrames and the browser, makes the run folder, adds `.rasa-director/` to `.gitignore` and starts the Director's Console. It prints `SKILL_DIR=`, `RUN=`, `NODE=`, `UPDATE=`, `HYPERFRAMES=`, `BROWSER=`, `CONSOLE=` and ends with `READY` or `FAILED`; every `PROBLEM:` line says what broke and the fix. Tell the user each problem in plain words and fix what you can before going on.
+
+**`PATH_PREFIX=` means Node isn't on the shell's PATH.** Put that prefix, literally, in front of every later command that runs `node` or `npx` (e.g. `PATH="/Users/me/.rasa-director/node/bin:$PATH" node …/direction.mjs …`), including the HyperFrames workflow's own commands.
 
 **Shell variables do not survive between tool calls.** Note the literal `SKILL_DIR` and `RUN` values and write them literally in every later command (below they appear as `$SKILL_DIR` / `$RUN`). Run everything from the workspace root.
 
-- The last command starts the Director's Console and opens it in the browser; give the user its URL in your first message. The console is where every question is asked, for every run; there is no chat-only mode. If the user can't find the page, run `serve --run "$RUN" --open` again (it reuses the running console and reopens the tab).
-- **Updates.** `update.mjs check` compares this copy with the latest release (at most once a day; silent offline; it never blocks the run). `behind: true` → one line before the step map, never a question: its `message`, the `whats_new` highlights, and "say **update** any time". When the user says update, run `node $SKILL_DIR/scripts/update.mjs apply` (it updates the way this copy was installed: plugin, installer, git clone or skills CLI). `auto_updated: true` (the user set `RASA_DIRECTOR_AUTO_UPDATE=1`) → say so in one line. After an update, re-read `$SKILL_DIR/SKILL.md` before continuing unless `restart: true` (a plugin: the new version loads in the next Claude Code session). Never update while a build or render is running.
+- Setup starts the Director's Console and opens it in the browser; give the user its URL in your first message. The console is where every question is asked, for every run; there is no chat-only mode. If the user can't find the page, run `serve --run "$RUN" --open` again (it reuses the running console and reopens the tab).
+- **Updates.** Setup's `UPDATE=` line (`update.mjs check`) compares this copy with the latest release (at most once a day; silent offline; it never blocks the run). `behind: true` → one line before the step map, never a question: its `message`, the `whats_new` highlights, and "say **update** any time". When the user says update, run `node $SKILL_DIR/scripts/update.mjs apply` (it updates the way this copy was installed: plugin, installer, git clone or skills CLI). `auto_updated: true` (the user set `RASA_DIRECTOR_AUTO_UPDATE=1`) → say so in one line. After an update, re-read `$SKILL_DIR/SKILL.md` before continuing unless `restart: true` (a plugin: the new version loads in the next Claude Code session). Never update while a build or render is running.
+- `FAILED` with no Node → setup could not download one (offline, or `RASA_DIRECTOR_NO_NODE_DOWNLOAD=1`): tell the user to install Node ≥ 20 from https://nodejs.org and run setup again; stop.
 - No HyperFrames CLI → tell the user to install it (`npm i -g hyperframes`, or use `npx`); stop. Workflows install on demand with `npx hyperframes skills update <workflow>`.
 - `browser ensure` fails → previews still open as HTML but there are no stills and the motion check can't run; say so, never claim a check passed.
 - The user wants to change a video that already exists in `videos/` → **Revise** below.

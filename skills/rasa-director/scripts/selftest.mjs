@@ -315,7 +315,7 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   ok("console page script parses (every panel)", parses && /direction: function/.test(page) && /brand: function/.test(page) && /styleframes: function/.test(page));
 }
 
-// 10. updates: the skill's VERSION matches the plugin manifest; a newer release is reported with how
+// 10. setup and updates: setup.sh finds Node or says how to get it; the skill's VERSION matches the plugin manifest; a newer release is reported with how
 //     to update; offline or disabled the check is silent and never fails the run
 {
   const ver = fs.readFileSync(path.join(HERE, "..", "VERSION"), "utf8").trim();
@@ -330,6 +330,15 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   const off = u(["check", "--force"]);
   ok("update check: offline is silent and exits 0", off.status === 0 && j(off).checked === "offline" && j(off).behind === false, off.stderr);
   ok("update check: RASA_DIRECTOR_NO_UPDATE_CHECK=1 skips it", j(u(["check"], { RASA_DIRECTOR_NO_UPDATE_CHECK: "1" })).checked === "skipped");
+  // setup.sh finds Node off the PATH, and fails with a fix (not silently) when there is none
+  const sh = (extra) => spawnSync("bash", [path.join(HERE, "setup.sh"), "--node-only"], { encoding: "utf8", env: { ...env, PATH: "/usr/bin:/bin", ...extra }, cwd: TMP, timeout: 30000 });
+  const nh = path.join(TMP, "nodehome");
+  fs.mkdirSync(path.join(nh, "node", "bin"), { recursive: true });
+  fs.symlinkSync(process.execPath, path.join(nh, "node", "bin", "node"));
+  const found = sh({ RASA_DIRECTOR_HOME: nh });
+  ok("setup finds Node off the PATH and prints the PATH prefix", found.status === 0 && found.stdout.includes(`NODE=${path.join(nh, "node", "bin", "node")}`) && /PATH_PREFIX=/.test(found.stdout) && /READY/.test(found.stdout), found.stdout + found.stderr);
+  const none = sh({ RASA_DIRECTOR_HOME: path.join(TMP, "nonode"), RASA_DIRECTOR_SKIP_NODE_SEARCH: "1", RASA_DIRECTOR_NO_NODE_DOWNLOAD: "1" });
+  ok("setup without Node says how to fix it and fails", none.status === 1 && /PROBLEM: Node >= 20 is required/.test(none.stderr) && /FAILED/.test(none.stdout), none.stdout + none.stderr);
 }
 
 fs.rmSync(TMP, { recursive: true, force: true });

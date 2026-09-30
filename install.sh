@@ -29,10 +29,6 @@ if [ "${1:-}" = "--uninstall" ]; then
   exit 0
 fi
 
-# requirements
-if ! command -v node >/dev/null 2>&1; then warn "Node.js >= 20 is required (https://nodejs.org)"; exit 1; fi
-NODE_MAJOR=$(node -p 'process.versions.node.split(".")[0]')
-if [ "$NODE_MAJOR" -lt 20 ]; then warn "Node.js >= 20 is required (found $(node -v))"; exit 1; fi
 
 mkdir -p "$HOME_DIR"
 if [ -n "${RASA_DIRECTOR_LOCAL:-}" ]; then
@@ -63,6 +59,9 @@ for t in "${TARGETS[@]}"; do
   if [ "${RASA_DIRECTOR_COPY:-0}" = "1" ]; then cp -R "$SKILL" "$t/rasa-director"; else ln -s "$SKILL" "$t/rasa-director"; fi
   say "installed → $t/rasa-director"
 done
+
+# Node >= 20: found wherever it's installed, or a private copy fetched into ~/.rasa-director/node
+bash "$SKILL/scripts/setup.sh" --node-only || warn "Node.js >= 20 is required (https://nodejs.org); Rasa Director will try again when it runs"
 
 # HyperFrames builds what Rasa Director directs
 if ! [ -f "$HOME/.claude/skills/hyperframes/SKILL.md" ] && ! [ -f "$HOME/.agents/skills/hyperframes/SKILL.md" ]; then
