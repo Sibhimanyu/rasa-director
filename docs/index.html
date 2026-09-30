@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rasa Director: direct your whole video, by eye, before Claude builds it</title>
-<meta name="description" content="A Claude Code skill for entire videos: launch films, explainers, PR videos, music videos, reels cut from your raw footage, captions and motion graphics. Decide the story, scenes, look, motion, transitions, voice and music by eye, then HyperFrames builds exactly that, checked before render." />
+<title>Rasa Director: direct the whole video in motion-design terms. Claude animates it.</title>
+<meta name="description" content="A Claude Code skill for entire videos. Decide every creative choice in the terms motion designers use (30 dimensions, 881 terms) or bring your DESIGN.md; Claude designs and animates every frame to that direction through HyperFrames, and it is checked before render." />
 <meta name="theme-color" content="#1a2160" />
 <meta property="og:title" content="Rasa Director" />
-<meta property="og:description" content="Direct your whole video by eye (story, scenes, look, motion, transitions, voice, music) before Claude builds it." />
-<meta property="og:image" content="img/tasting-enterMid.png" />
+<meta property="og:description" content="Direct the whole video in motion-design terms, or bring your DESIGN.md. Claude designs and animates it." />
+<meta property="og:image" content="img/looks.jpg" />
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,587 +24,345 @@
   <symbol id="i-plus" viewBox="0 0 18 18"><path d="M9 2v14M2 9h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
   <symbol id="i-gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-play" viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor"/></symbol>
 </svg>
 
-<header class="hero pulli">
+<header class="hero">
   <nav class="nav wrap" aria-label="Primary">
-    <a class="brand" href="#top" id="top"><svg aria-hidden="true"><use href="#i-mark"/></svg>Rasa Director</a>
+    <a class="brand" href="#main"><svg aria-hidden="true"><use href="#i-mark"/></svg>Rasa Director</a>
     <div class="nav-links">
-      <a class="hide-s" href="#how">How it works</a>
-      <a class="hide-s" href="#personalities">Personalities</a>
+      <a class="hide-s" href="#stack">Direction</a>
+      <a class="hide-s" href="#flow">How it runs</a>
+      <a class="hide-s" href="#brand">Your brand</a>
+      <a class="hide-s" href="#claude">Claude animates</a>
+      <a class="hide-s" href="#reels">Reels</a>
       <a href="#install">Install</a>
-      <a class="hide-s" href="https://github.com/Sibhimanyu/rasa-director">GitHub</a>
-      <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false">
-        <svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="8" y="2" width="3" height="10" rx="1" fill="currentColor"/></svg>
-        <svg class="i-play" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-play"/></svg>
-        <span class="lbl">Pause motion</span>
-      </button>
+      <a href="https://github.com/Sibhimanyu/rasa-director">GitHub</a>
+      <button class="motion-toggle" type="button" aria-pressed="false" data-motion-toggle>Pause motion</button>
     </div>
   </nav>
 
-  <div class="wrap">
-    <div class="hero-head">
-      <h1>
-        <span class="line" data-reveal>Direct your whole</span>
-        <span class="line" data-reveal style="--d:90ms">video, <em>by eye,</em></span>
-        <span class="line" data-reveal style="--d:180ms">before Claude builds it.</span>
-      </h1>
-      <div class="hero-side">
-        <p><strong>Rasa Director</strong> is a Claude Code skill for entire videos: launch films, explainers, PR videos, music videos, reels cut from a folder of your own footage, and motion graphics. It shows your own scenes told, styled, moved, cut and scored several ways, you point at what feels right, and every scene is built exactly like that.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#install">Install the skill <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="https://github.com/Sibhimanyu/rasa-director"><svg aria-hidden="true"><use href="#i-gh"/></svg> GitHub</a>
-        </div>
+  <div class="wrap hero-head">
+    <h1>Direct the whole video.<br /><em>Claude animates it.</em></h1>
+    <div class="hero-side">
+      <p><strong>Rasa Director</strong> is a Claude Code skill for entire videos: launch films, explainers, PR videos, music videos, reels cut from your own footage, motion graphics. You make every creative decision in the terms motion designers use, or hand any of them to Claude. Bring your DESIGN.md and it becomes the look. Then Claude designs and animates every frame to that direction, through HyperFrames, and every scene is checked before you render.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#install">Install the skill <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="https://github.com/Sibhimanyu/rasa-director"><svg aria-hidden="true"><use href="#i-gh"/></svg> GitHub</a>
       </div>
     </div>
-
-    <section class="menu" aria-label="Live tasting menu">
-      <div class="menu-bar">
-        <div class="try">
-          <label for="try-input">Your opening title</label>
-          <input id="try-input" type="text" value="Rasa Director" maxlength="36" autocomplete="off" spellcheck="false" />
-        </div>
-        <span class="menu-note">One four-scene film, six motion personalities, looping live</span>
-      </div>
-      <div class="grid-menu">
-        <figure class="tile">
-          <div class="md-cell g-rice" data-try data-film data-content="Rasa Director" data-personality="editorial-mask" aria-hidden="true"></div>
-          <figcaption><span class="letter">A</span><span class="name">Editorial Mask</span><span class="eases mono">expo.out · power2.in</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="md-cell g-tur" data-try data-film data-content="Rasa Director" data-personality="elastic-playful" aria-hidden="true"></div>
-          <figcaption><span class="letter">B</span><span class="name">Elastic Playful</span><span class="eases mono">back.out(1.8) · back.in(1.4)</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="md-cell g-ink" data-try data-film data-content="Rasa Director" data-personality="cinematic-slow" aria-hidden="true"></div>
-          <figcaption><span class="letter">C</span><span class="name">Cinematic Slow</span><span class="eases mono">power2.out · power2.inOut</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="md-cell g-leaf" data-try data-film data-content="Rasa Director" data-personality="liquid-morph" aria-hidden="true"></div>
-          <figcaption><span class="letter">D</span><span class="name">Liquid Morph</span><span class="eases mono">power4.inOut · sine.inOut</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="md-cell g-silk" data-try data-film data-content="Rasa Director" data-personality="kinetic-punch" aria-hidden="true"></div>
-          <figcaption><span class="letter">E</span><span class="name">Kinetic Punch</span><span class="eases mono">power4.out · power4.in</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="md-cell g-amber" data-try data-film data-content="Rasa Director" data-personality="retro-terminal" aria-hidden="true"></div>
-          <figcaption><span class="letter">F</span><span class="name">Retro Terminal</span><span class="eases mono">none · steps(4)</span></figcaption>
-        </figure>
-      </div>
-    </section>
   </div>
+
+  <section class="wrap swatches" aria-label="Motion-language swatches">
+    <div class="swatch-bar">
+      <label for="try-input">Your opening title</label>
+      <input id="try-input" type="text" value="Rasa Director" maxlength="36" autocomplete="off" spellcheck="false" />
+      <span class="swatch-note">One four-scene film, six motion languages. Swatches to choose by eye; the real film is Claude's.</span>
+    </div>
+    <div class="swatch-grid">
+      <figure class="tile"><div class="md-cell g-rice" data-try data-film data-content="Rasa Director" data-personality="swiss-precise" aria-hidden="true"></div><figcaption><b>Precise</b><span class="mono">expo.out · 200–1000 ms · no overshoot</span></figcaption></figure>
+      <figure class="tile"><div class="md-cell g-tur" data-try data-film data-content="Rasa Director" data-personality="elastic-playful" aria-hidden="true"></div><figcaption><b>Elastic</b><span class="mono">back.out · overshoot allowed</span></figcaption></figure>
+      <figure class="tile"><div class="md-cell g-ink" data-try data-film data-content="Rasa Director" data-personality="cinematic-slow" aria-hidden="true"></div><figcaption><b>Cinematic</b><span class="mono">power2 · 400–2400 ms · long holds</span></figcaption></figure>
+      <figure class="tile"><div class="md-cell g-leaf" data-try data-film data-content="Rasa Director" data-personality="liquid-morph" aria-hidden="true"></div><figcaption><b>Liquid</b><span class="mono">power4.inOut · continuous</span></figcaption></figure>
+      <figure class="tile"><div class="md-cell g-silk" data-try data-film data-content="Rasa Director" data-personality="kinetic-punch" aria-hidden="true"></div><figcaption><b>Snappy</b><span class="mono">power4.out · 120–800 ms</span></figcaption></figure>
+      <figure class="tile"><div class="md-cell g-amber" data-try data-film data-content="Rasa Director" data-personality="brutalist-step" aria-hidden="true"></div><figcaption><b>Choppy / stepped</b><span class="mono">steps(4) · no interpolation</span></figcaption></figure>
+    </div>
+  </section>
 </header>
 
 <main id="main">
 
-  <!-- ============ the meaning of rasa ============ -->
-  <section class="meaning section" aria-labelledby="rasa-h">
-    <div class="wrap">
-      <div class="meaning-grid">
-        <div>
-          <p class="word" lang="ta" data-reveal="center" id="rasa-h">ரசனை</p>
-          <div class="word-gloss"><b>rasanai</b><span class="mono">/ˈrʌ.sə.nai/ · noun · Tamil ரசனை, from Sanskrit रस <i>rasa</i></span></div>
-        </div>
-        <div class="entry">
-          <ol>
-            <li><span>Taste; the eye (and ear) for what feels right. <i>“Avarukku nalla rasanai”</i>: they have good taste.</span></li>
-            <li><span>From <i>rasa</i>, in Indian aesthetics the feeling a work leaves in the person experiencing it. Not what is shown, but what is tasted. Rasanai is the taste to choose it.</span></li>
-          </ol>
-          <p class="pull">A video keeps its rasa in how it moves, cuts and sounds. Two films can wear the same colours and the same font and still taste nothing alike. Rasa Director brings the rasanai.</p>
-        </div>
-      </div>
-
-      <div class="kolam">
-        <svg id="kolam-svg" viewBox="0 0 720 300" role="img" aria-label="An expo.out easing curve drawn across a grid of dots, a bead travelling along it"></svg>
-        <div>
-          <p>Every morning across Tamil Nadu, a <strong>kolam</strong> is drawn at the threshold: one line of rice flour, looping around a grid of dots called <em>pulli</em>.</p>
-          <p>An easing curve is drawn the same way, across a grid of time. Rasa Director lets you choose the line.</p>
-        </div>
+  <!-- the problem -->
+  <section class="section problem">
+    <div class="wrap two">
+      <h2>Every AI video looks the same because nobody made the decisions.</h2>
+      <div>
+        <p class="lede">Ask for a launch video and you get the obvious story, a default look, and every line fading up and sliding into place on the same ease. Not because the model can't do better, but because nothing told it what to do instead.</p>
+        <p>Motion studios don't start with "make it pop". They decide the format, how the product appears, the visual style, the type, the color, the depth, how things move, how scenes hand off and the pacing, and they lock it in style frames before anyone animates. Rasa Director gives you that process and makes Claude follow it.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ the problem ============ -->
-  <section class="problem section" aria-labelledby="problem-h">
+  <!-- the stack -->
+  <section class="section dark" id="stack">
     <div class="wrap">
-      <div class="section-head">
-        <h2 id="problem-h">Every AI video moves the same.</h2>
-        <div>
-          <p>Three different videos, three different looks, one motion. Flip the switch to see what each could have said.</p>
-          <div class="switch" data-switch role="group" aria-label="Motion" style="margin-top:20px">
-            <button type="button" data-val="default" aria-pressed="true">The default</button>
-            <button type="button" data-val="rasa" aria-pressed="false">With Rasa Director</button>
-          </div>
-        </div>
+      <p class="eyebrow">The vocabulary</p>
+      <h2 class="mega">A style is a stack of decisions.</h2>
+      <div class="two lead-row">
+        <p class="lede">Two pieces can both be "2D UI animation" and look nothing alike. Rasa holds the vocabulary of motion design as data: <b>30 dimensions and 881 terms</b>, each with a definition, what it looks like, how it moves, where it's used, what it's confused with, and the precise instruction Claude follows.</p>
+        <p>You decide any dimension, or mark it "Claude decides". Claude's picks come from 35 known style combinations that fit what you've already chosen, never the generic default, and each comes with a receipt: what it picked, and the obvious option it passed over.</p>
       </div>
 
-      <div class="same">
-        <figure class="tile">
-          <div class="md-cell g-ink" data-mode="default" data-group="same" data-alt="editorial-mask" data-content="Tax season. Again." aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption><span>A launch film</span><span class="sw-cap" data-sw-cap data-def="fade-up-slide" data-rasa="Editorial Mask">fade-up-slide</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="md-cell g-leaf" data-mode="default" data-group="same" data-alt="kinetic-punch" data-content="40% | faster builds" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption><span>An explainer</span><span class="sw-cap" data-sw-cap data-def="fade-up-slide" data-rasa="Kinetic Punch">fade-up-slide</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="md-cell g-silk" data-mode="default" data-group="same" data-alt="luxe-minimal" data-content="Autumn menu, now open" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption><span>A reel</span><span class="sw-cap" data-sw-cap data-def="fade-up-slide" data-rasa="Luxe Minimal">fade-up-slide</span></figcaption>
-        </figure>
-      </div>
-      <div class="default-code">
-        <code>from({ y: 150, opacity: 0, ease: "power4.out" })</code>
-        <span>The default entrance in HyperFrames' motion-graphics workflow; its video workflows reach for the same fade-up. Every scene gets it unless someone decides otherwise.</span>
+      <div class="dims">
+        <div><h3>Format &amp; tone</h3><p>Format (66) · Tone (29)</p><small>product launch film · feature reveal · logo sting · concept explainer · kinetic typography · title sequence · reel / short-form edit · confident · premium · playful</small></div>
+        <div><h3>What's on screen</h3><p>UI treatment (44) · Product demo (28) · UI interaction (51) · Data viz (23) · Photo &amp; video (21) · Illustration (40) · Character (17)</p><small>simplified UI · exploded UI · bento UI · terminal UI · cursor-driven demo · input → output · number counter · flat vector · doodle mascot</small></div>
+        <div><h3>Look</h3><p>Visual style (77) · Era (22) · Color (28) · Typography (24) · Composition (34) · Shape · Stroke · Shadow · Material · Texture · Depth · Iconography</p><small>Swiss / International · neo-brutalism · risograph · soft 3D · Y2K · grotesk · high-contrast serif · duotone · hard offset shadow · film grain · 2.5D</small></div>
+        <div><h3>Motion</h3><p>Motion language (32) · Motion function (24) · Transitions (44) · Camera (24) · Effects (34) · Production (25)</p><small>precise · springy · cinematic · stop-motion-like · UI morph · match cut · mask reveal · push-in · parallax · motion blur</small></div>
+        <div><h3>Story &amp; sound</h3><p>Narrative (24) · Pacing (18) · Sound (15)</p><small>problem → solution · statement → evidence → payoff · demo loop · feature montage · beat-driven · voiceover-synchronized · music-led</small></div>
       </div>
 
-      <div class="problem-foot">
-        <p>HyperFrames lets you pick a look by eye. Nothing let you direct the rest.</p>
-        <p>The story, the scenes, how they move, how they cut, the voice and the music: most people can't describe these in words, so they never get asked, and every build falls back to the obvious story and the same fade-up-slide on the same power-out ease. Rasa Director adds the missing decisions, and makes each one by eye or ear.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ how it works ============ -->
-  <section class="how section" id="how" aria-labelledby="how-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="how-h">Every decision, made by eye.</h2>
-        <p class="lede">Rasa Director walks you from brief to render through eleven decisions: brief, route, story, scenes, look, motion, transitions, voice, music, storyboard, build. Every one is shown on your own video, in the Director's Console: a local page that opens beside your terminal, where every click goes straight back to Claude.</p>
-      </div>
-
-      <div class="decide">
-        <h3>“You decide” never means the default.</h3>
-        <div>
-          <p>Hand any step back with “you decide”, or everything after it with “you decide the rest”. Claude samples the unusual options instead of the safe one, rotates away from your recent picks, and leaves a receipt: what it chose, and the obvious option it passed over.</p>
-          <p>Only your content is required. Anything your request already says counts as that step's answer.</p>
-        </div>
-      </div>
-
-      <div class="how-grid">
-        <ol class="steps">
-          <li class="step">
-            <span class="step-n">1</span>
-            <div>
-              <h3><button type="button">Brief &amp; route</button></h3>
-              <p>What the video is (a product URL, a topic, a script, a PR, a track, footage), where it plays, how long, voiceover or not. Then which HyperFrames workflow builds it: launch film, explainer, PR video, music video, footage reel, captions, overlay recut or custom.</p>
-              <p class="yd"><b>you decide</b> 16:9, the length from your content, the route from what the video is.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step-n">2</span>
-            <div>
-              <h3><button type="button">Story &amp; scenes</button></h3>
-              <p>Five story pitches, at least two a model would rarely produce. Then the whole film as an editable scene table: on-screen text, voiceover line, length, transition and intensity for every scene. For a footage reel: every clip in your folder with its contact sheet and transcript, then the cut as an editable list (in and out points, cards between clips, overlays and captions on top) with a draft to watch.</p>
-              <p class="yd"><b>you decide</b> Samples the tail, then writes the scene list to your length.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step-n">3</span>
-            <div>
-              <h3><button type="button">Look</button></h3>
-              <p>HyperFrames frame presets, chosen on their showcases. Or bring your own brand spec.</p>
-              <p class="yd"><b>you decide</b> Rotates away from the looks you used last.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step-n">4</span>
-            <div>
-              <h3><button type="button">Motion</button></h3>
-              <p>The tasting menu: three of your scenes playing in order, in six personalities side by side, at your real aspect, in your look. One grammar for the whole film. Point at one, or adjust it: “C, but calmer.”</p>
-              <p class="yd"><b>you decide</b> Tail-weighted, never one of your last three.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step-n">5</span>
-            <div>
-              <h3><button type="button">Transitions &amp; voice</button></h3>
-              <p>Your first two scenes handing off through every transition, looping. Then your hook line spoken in three voices, or no narration at all.</p>
-              <p class="yd"><b>you decide</b> The handoff that fits your look, and a voice that fits the story.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step-n">6</span>
-            <div>
-              <h3><button type="button">Music</button></h3>
-              <p>A few music options with players, auditioned in the console, or your own track, or none. The exact track you pick is locked into the final mix.</p>
-              <p class="yd"><b>you decide</b> One is picked for you, with its receipt.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step-n">7</span>
-            <div>
-              <h3><button type="button">Build &amp; render</button></h3>
-              <p>The storyboard: the timeline, then every scene sketched in your look. A receipts summary of what you chose and what was decided for you. Then HyperFrames builds every scene with motion.md binding each one, the result is checked, and you render.</p>
-              <p class="yd"><b>never skipped</b> The “preview first, or render?” question always runs.</p>
-            </div>
-          </li>
-        </ol>
-
-        <div class="console-wrap">
-          <div class="console" id="console">
-            <div class="console-top">
-              <span class="t"><svg aria-hidden="true"><use href="#i-mark"/></svg>Director's Console</span>
-              <span class="u">localhost · tally-launch</span>
-            </div>
-            <div class="rail" role="tablist" aria-label="Console steps">
-              <button role="tab" id="tab-1" aria-controls="p-1" type="button"><span>1</span>Brief</button>
-              <button role="tab" id="tab-2" aria-controls="p-2" type="button"><span>2</span>Scenes</button>
-              <button role="tab" id="tab-3" aria-controls="p-3" type="button"><span>3</span>Look</button>
-              <button role="tab" id="tab-4" aria-controls="p-4" type="button"><span>4</span>Motion</button>
-              <button role="tab" id="tab-5" aria-controls="p-5" type="button"><span>5</span>Transitions</button>
-              <button role="tab" id="tab-6" aria-controls="p-6" type="button"><span>6</span>Music</button>
-              <button role="tab" id="tab-7" aria-controls="p-7" type="button"><span>7</span>Build</button>
-            </div>
-            <div class="panels">
-              <div class="panel" data-panel id="p-1" role="tabpanel" aria-labelledby="tab-1">
-                <h4>What's the video?</h4>
-                <div class="field"><span class="l">Source</span><div class="in caret">https://tally.app</div></div>
-                <div class="field"><span class="l">Key line (optional)</span><div class="in">Receipts to books in one tap</div></div>
-                <div class="two">
-                  <div class="field"><span class="l">Where it plays</span><div class="chips"><span class="chip on">Website 16:9</span><span class="chip">Feed 1:1</span><span class="chip">Reels 9:16</span></div></div>
-                  <div class="field"><span class="l">Length</span><div class="chips"><span class="chip">30 s</span><span class="chip on">45 s</span><span class="chip">60 s</span></div></div>
-                </div>
-                <div class="field"><span class="l">Built by</span><div class="chips"><span class="chip on">Launch film</span><span class="chip">Explainer</span><span class="chip">Custom</span></div></div>
-              </div>
-              <div class="panel" data-panel id="p-2" role="tabpanel" aria-labelledby="tab-2">
-                <h4>The film, scene by scene</h4>
-                <div class="concepts">
-                  <div class="concept"><b>1</b><div><strong>Shoebox · 4 s</strong><span>“Tax season. Again.” · VO: Every spring, the shoebox wins.</span></div></div>
-                  <div class="concept on"><b>2</b><div><strong>One tap · 5 s</strong><span>“Snap. Sorted.” · push-slide in · high intensity</span></div></div>
-                  <div class="concept"><b>3</b><div><strong>The books · 6 s</strong><span>“Your year, already done.” · blur-crossfade</span></div></div>
-                  <div class="concept"><b>4</b><div><strong>Close · 4 s</strong><span>“tally.app” · zoom-through · low intensity</span></div></div>
-                </div>
-              </div>
-              <div class="panel" data-panel id="p-3" role="tabpanel" aria-labelledby="tab-3">
-                <h4>Pick a look</h4>
-                <p class="hint">HyperFrames frame presets, opened on their showcases.</p>
-                <div class="looks">
-                  <div class="look look-forest"><div class="sw"><b>Aa</b><i><s style="background:#efe6cf"></s><s style="background:#c9a44c"></s></i></div><span>editorial-forest</span></div>
-                  <div class="look look-cobalt on"><div class="sw"><b>Aa</b><i><s style="background:#f4f4f0"></s><s style="background:#eeb219"></s></i></div><span>cobalt-grid</span></div>
-                  <div class="look look-yellow"><div class="sw"><b>Aa</b><i><s style="background:#111"></s><s style="background:#fff"></s></i></div><span>biennale-yellow</span></div>
-                </div>
-              </div>
-              <div class="panel" data-panel id="p-4" role="tabpanel" aria-labelledby="tab-4">
-                <h4>Tasting menu · scenes 1, 2 and 9</h4>
-                <div class="mini-menu">
-                  <figure><div class="md-cell g-cobalt" data-content="Tax season. Again." data-personality="swiss-precise" aria-hidden="true"><div class="md-block" data-content="Tax season. Again."></div><div class="md-block" data-content="Snap. Sorted."></div><div class="md-block" data-content="tally.app"></div></div><figcaption><b>A</b>Swiss Precise</figcaption></figure>
-                  <figure><div class="md-cell g-cobalt" data-content="Tax season. Again." data-personality="soft-drift" aria-hidden="true"><div class="md-block" data-content="Tax season. Again."></div><div class="md-block" data-content="Snap. Sorted."></div><div class="md-block" data-content="tally.app"></div></div><figcaption><b>B</b>Soft Drift</figcaption></figure>
-                  <figure class="on"><div class="md-cell g-cobalt" data-content="Tax season. Again." data-personality="editorial-mask" aria-hidden="true"><div class="md-block" data-content="Tax season. Again."></div><div class="md-block" data-content="Snap. Sorted."></div><div class="md-block" data-content="tally.app"></div></div><figcaption><b>C</b>Editorial Mask</figcaption></figure>
-                  <figure><div class="md-cell g-cobalt" data-content="Tax season. Again." data-personality="elastic-playful" aria-hidden="true"><div class="md-block" data-content="Tax season. Again."></div><div class="md-block" data-content="Snap. Sorted."></div><div class="md-block" data-content="tally.app"></div></div><figcaption><b>D</b>Elastic Playful</figcaption></figure>
-                  <figure><div class="md-cell g-cobalt" data-content="Tax season. Again." data-personality="liquid-morph" aria-hidden="true"><div class="md-block" data-content="Tax season. Again."></div><div class="md-block" data-content="Snap. Sorted."></div><div class="md-block" data-content="tally.app"></div></div><figcaption><b>E</b>Liquid Morph</figcaption></figure>
-                  <figure><div class="md-cell g-cobalt" data-content="Tax season. Again." data-personality="brutalist-step" aria-hidden="true"><div class="md-block" data-content="Tax season. Again."></div><div class="md-block" data-content="Snap. Sorted."></div><div class="md-block" data-content="tally.app"></div></div><figcaption><b>F</b>Brutalist Step</figcaption></figure>
-                </div>
-              </div>
-              <div class="panel" data-panel id="p-5" role="tabpanel" aria-labelledby="tab-5">
-                <h4>Transitions &amp; voice</h4>
-                <div class="field"><span class="l">Between scenes</span><div class="chips"><span class="chip">cut</span><span class="chip">crossfade</span><span class="chip on">blur-crossfade</span><span class="chip">push-slide</span><span class="chip">zoom-through</span><span class="chip">squeeze</span></div></div>
-                <div class="tracks">
-                  <div class="track" data-seed="5"><button class="play" type="button" aria-pressed="false" aria-label="Play Maya voice sample"><svg aria-hidden="true"><use href="#i-play"/></svg></button><div><strong>Maya</strong><small>warm · “Every spring, the shoebox wins.”</small></div><div class="wave"></div></div>
-                  <div class="track" data-seed="17"><button class="play" type="button" aria-pressed="false" aria-label="Play Arjun voice sample"><svg aria-hidden="true"><use href="#i-play"/></svg></button><div><strong>Arjun</strong><small>measured · same line</small></div><div class="wave"></div></div>
-                </div>
-              </div>
-              <div class="panel" data-panel id="p-6" role="tabpanel" aria-labelledby="tab-6">
-                <h4>Music</h4>
-                <div class="tracks">
-                  <div class="track" data-seed="3"><button class="play" type="button" aria-pressed="false" aria-label="Play Felt piano preview"><svg aria-hidden="true"><use href="#i-play"/></svg></button><div><strong>Felt piano</strong><small>84 bpm · warm, unhurried</small></div><div class="wave"></div></div>
-                  <div class="track" data-seed="11"><button class="play" type="button" aria-pressed="false" aria-label="Play Tabla and sub preview"><svg aria-hidden="true"><use href="#i-play"/></svg></button><div><strong>Tabla &amp; sub</strong><small>96 bpm · percussive, low</small></div><div class="wave"></div></div>
-                  <div class="track" data-seed="27"><button class="play" type="button" aria-pressed="false" aria-label="Play Brass pulse preview"><svg aria-hidden="true"><use href="#i-play"/></svg></button><div><strong>Brass pulse</strong><small>120 bpm · bright, launch-y</small></div><div class="wave"></div></div>
-                </div>
-              </div>
-              <div class="panel" data-panel id="p-7" role="tabpanel" aria-labelledby="tab-7">
-                <div class="build-grid">
-                  <div class="receipts">
-                    <h5>you chose</h5>
-                    <ul>
-                      <li><em>tally.app</em> launch film · 16:9 · 45 s · 9 scenes</li>
-                      <li>Story <em>The Shoebox Wins</em> · look <em>cobalt-grid</em></li>
-                      <li>Motion <em>Editorial Mask</em> · voice <em>Maya</em></li>
-                    </ul>
-                    <h5>I decided</h5>
-                    <ul>
-                      <li>Transitions: blur-crossfade<small>passed over crossfade: the scenes change background</small></li>
-                      <li>Music: <em>Felt piano</em><small>passed over Brass pulse, the usual launch bed</small></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <ul class="checks">
-                      <li>lint <span>pass</span></li>
-                      <li>check <span>pass</span></li>
-                      <li>snapshots <span>pass</span></li>
-                      <li>obey motion.md <span>clean</span></li>
-                    </ul>
-                    <div class="md-cell g-cobalt" data-content="Tax season. Again." data-personality="editorial-mask" aria-hidden="true"><div class="md-block"></div></div>
-                    <div class="bar"><i></i></div>
-                    <span class="mono" style="color:#a2a5c0">renders/tally-launch.mp4</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="console-foot">
-              <span class="status" aria-live="polite"></span>
-              <span class="acts">
-                <button class="cbtn" type="button" data-act="yd">You decide</button>
-                <button class="cbtn pri" type="button" data-act="pri">Continue</button>
-              </span>
-            </div>
-          </div>
-          <p class="console-note">An illustration of the Director's Console. Sample content; buttons are live.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ personalities ============ -->
-  <section class="gallery section pulli" id="personalities" aria-labelledby="gal-h" style="--dot: rgba(242,241,236,0.1)">
-    <div class="wrap">
-      <h2 id="gal-h" class="mega" data-reveal>Ten ways to move.</h2>
-      <div class="section-head section-head--under">
-        <span></span>
-        <p>Each personality is a complete motion grammar: its own eases, a scale of allowed durations, a stagger, a minimum hold, and a list of banned moves. Ordered by how likely a model is to produce it unprompted, most to least. A film gets one grammar; its scenes differ only in intensity.</p>
-      </div>
-      <div class="shelf">
-        <figure class="spec">
-          <div class="md-cell g-ink" data-content="Tax season. Again." data-personality="cinematic-slow" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Cinematic Slow</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.24</b> likely</span>
-            <p class="one">Out-of-focus to razor sharp, slow push-ins, long breathing holds. Trailer energy.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="power2.out" role="img" aria-label="Entrance ease curve: power2.out"></svg>
-              <dl><dt>enter</dt><dd>power2.out</dd><dt>exit</dt><dd>power2.inOut</dd><dt>move</dt><dd>sine.inOut</dd><dt>scale</dt><dd>400–2400 ms · stagger 160 · hold 1400</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-white" data-content="Ship it | in an afternoon" data-personality="swiss-precise" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Swiss Precise</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.22</b> likely</span>
-            <p class="one">Type snaps into a grid from behind masks. Fast in, long confident holds, no decoration.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="expo.out" role="img" aria-label="Entrance ease curve: expo.out"></svg>
-              <dl><dt>enter</dt><dd>expo.out</dd><dt>exit</dt><dd>expo.in</dd><dt>move</dt><dd>expo.inOut</dd><dt>scale</dt><dd>200–1000 ms · stagger 80 · hold 900</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-mist" data-content="Tax season. Again." data-personality="soft-drift" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Soft Drift</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.20</b> likely</span>
-            <p class="one">Tracking breathes open and closed, nothing hurries. Calm, airy, wellness-quiet.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="sine.out" role="img" aria-label="Entrance ease curve: sine.out"></svg>
-              <dl><dt>enter</dt><dd>sine.out</dd><dt>exit</dt><dd>sine.in</dd><dt>move</dt><dd>sine.inOut</dd><dt>scale</dt><dd>500–2600 ms · stagger 70 · hold 1500</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-tur" data-content="Tax season. Again." data-personality="kinetic-punch" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Kinetic Punch</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.17</b> likely</span>
-            <p class="one">Words slam in oversized and hit the frame. Short, percussive, beat-driven.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="power4.out" role="img" aria-label="Entrance ease curve: power4.out"></svg>
-              <dl><dt>enter</dt><dd>power4.out</dd><dt>exit</dt><dd>power4.in</dd><dt>move</dt><dd>expo.out</dd><dt>scale</dt><dd>120–800 ms · stagger 90 · hold 450</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-silk" data-content="Tax season. Again." data-personality="elastic-playful" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Elastic Playful</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.14</b> likely</span>
-            <p class="one">Letters pop and squash with springy overshoot. Toy-like, cheeky, alive.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="back.out(1.8)" role="img" aria-label="Entrance ease curve: back.out(1.8)"></svg>
-              <dl><dt>enter</dt><dd>back.out(1.8)</dd><dt>exit</dt><dd>back.in(1.4)</dd><dt>move</dt><dd>elastic.out(1,0.5)</dd><dt>scale</dt><dd>180–1200 ms · stagger 40 · hold 600</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-rice" data-content="Tax season. Again." data-personality="editorial-mask" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Editorial Mask</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.12</b> likely</span>
-            <p class="one">Lines wipe on like ink across paper, an accent rule sweeps under the key word. Magazine calm.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="expo.out" role="img" aria-label="Entrance ease curve: expo.out"></svg>
-              <dl><dt>enter</dt><dd>expo.out</dd><dt>exit</dt><dd>power2.in</dd><dt>move</dt><dd>expo.inOut</dd><dt>scale</dt><dd>250–1400 ms · stagger 120 · hold 1000</dd></dl></div>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="tail-rule"><h3 data-reveal>The tail</h3><p>What a model rarely reaches for on its own. Every tasting menu includes two of these, and “you decide” leans this way.</p></div>
-      <div class="shelf tail">
-        <figure class="spec">
-          <div class="md-cell g-deep" data-content="Tax season. Again." data-personality="luxe-minimal" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Luxe Minimal</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.10</b> likely</span>
-            <p class="one">A slow reveal opens from the centre, a hairline draws, then stillness. Expensive restraint.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="circ.out" role="img" aria-label="Entrance ease curve: circ.out"></svg>
-              <dl><dt>enter</dt><dd>circ.out</dd><dt>exit</dt><dd>circ.in</dd><dt>move</dt><dd>power1.inOut</dd><dt>scale</dt><dd>600–2800 ms · stagger 200 · hold 1800</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-amber" data-content="Tax season. Again." data-personality="retro-terminal" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Retro Terminal</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.08</b> likely</span>
-            <p class="one">Typed out character by character with a blinking cursor. Hacker-console nostalgia.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="none" role="img" aria-label="Entrance ease curve: none"></svg>
-              <dl><dt>enter</dt><dd>none</dd><dt>exit</dt><dd>steps(4)</dd><dt>move</dt><dd>steps(2)</dd><dt>scale</dt><dd>80–900 ms · stagger 45 · hold 900</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-leaf" data-content="Tax season. Again." data-personality="liquid-morph" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Liquid Morph</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.06</b> likely</span>
-            <p class="one">Letters pour up from a baseline and ripple like fluid. Smooth, organic, hypnotic.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="power4.inOut" role="img" aria-label="Entrance ease curve: power4.inOut"></svg>
-              <dl><dt>enter</dt><dd>power4.inOut</dd><dt>exit</dt><dd>power4.inOut</dd><dt>move</dt><dd>sine.inOut</dd><dt>scale</dt><dd>300–1800 ms · stagger 30 · hold 800</dd></dl></div>
-          </figcaption>
-        </figure>
-        <figure class="spec">
-          <div class="md-cell g-white" data-content="Tax season. Again." data-personality="brutalist-step" aria-hidden="true"><div class="md-block"></div></div>
-          <figcaption>
-            <span class="name">Brutalist Step</span><span class="like" title="How likely a model is to produce this unprompted (a directional guess)"><b>0.05</b> likely</span>
-            <p class="one">No easing at all. Hard cuts, stepped jumps, jitter. Raw and loud.</p>
-            <div class="data"><svg class="ease-plot" data-ease-plot="steps(4)" role="img" aria-label="Entrance ease curve: steps(4)"></svg>
-              <dl><dt>enter</dt><dd>steps(4)</dd><dt>exit</dt><dd>steps(3)</dd><dt>move</dt><dd>steps(6)</dd><dt>scale</dt><dd>100–600 ms · stagger 60 · hold 500</dd></dl></div>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ guarantee ============ -->
-  <section class="guarantee section" aria-labelledby="g-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="g-h">What you picked is what gets built.</h2>
-        <p class="lede">Your choices don't dissolve into a prompt. The plan is written in the workflow's own files, the motion into a binding contract handed to every scene's builder, and every scene is checked in a real browser before you're asked to render.</p>
-      </div>
-      <div class="g-grid">
+      <div class="two stack-demo">
         <div class="file">
-          <div class="file-top"><span>videos/tally-launch/motion.md</span><span>excerpt</span></div>
-<pre><code><span class="c">---</span>
-<span class="k">personality:</span> <span class="s">"editorial-mask"</span>
-<span class="k">tempo:</span> {<span class="s">"scale_ms"</span>:[250,450,700,1000,1400]}
-<span class="k">easing:</span> {<span class="s">"enter"</span>:<span class="s">"expo.out"</span>,<span class="s">"exit"</span>:<span class="s">"power2.in"</span>,<span class="s">"move"</span>:<span class="s">"expo.inOut"</span>}
-<span class="k">stagger:</span> {<span class="s">"each_ms"</span>:120}
-<span class="k">holds:</span> {<span class="s">"min_ms"</span>:1000}
-<span class="k">banned:</span> [<span class="b">"fade-up-slide"</span>,<span class="b">"fade-slide"</span>,<span class="b">"bounce"</span>,
-         <span class="b">"overshoot"</span>,<span class="b">"scale-pop"</span>,<span class="b">"blur-in"</span>]
-<span class="k">runtime:</span> <span class="s">"gsap"</span>
-<span class="k">decided_by:</span> <span class="s">"confirmed"</span>
-<span class="c">---</span>
-<span class="c"># Motion doctrine: Editorial Mask</span>
-Lines wipe on like ink across paper, an accent
-rule sweeps under the key word. Magazine calm.</code></pre>
-        </div>
-        <ul class="g-points">
-          <li><h3><code>motion.md</code></h3><p>Your motion, as rules: the eases, the durations allowed, the stagger, how long things hold, and which moves are banned. It's written into frame.md, into every scene's work packet and into the dispatch, so every HyperFrames worker that builds or repairs a scene carries it. Scenes vary only by intensity: shorter or longer values from the same scale, the same eases.</p></li>
-          <li><h3>The checker</h3><p>Headless Chrome loads every built scene, walks every GSAP tween, samples its real start and end values, and compares each one to motion.md. It runs before the render question, never after.</p></li>
-          <li><h3>Repairs</h3><p>Violations go back to HyperFrames' own repair step, at most twice. Anything left is shown to you to fix or waive, one by one. A check that couldn't run is reported as that, never as a pass.</p></li>
-          <li><h3>Honest previews</h3><p>Every personality's own tasting animation, across three scenes, passes the checker against its own motion.md with zero errors and zero warnings. The preview you pick from follows the rules the build must follow.</p></li>
-        </ul>
-      </div>
-      <div class="obey file">
-        <div class="file-top"><span>node obey.mjs --project videos/tally-launch</span><span class="tag">checker output</span></div>
-<pre><code><span class="err">obey: violations</span> — 2 tweens (0 exempt) in 1 file(s); 2 error(s), 0 warning(s), 0 waived
-  <span class="err">[ERROR]</span> ease-outside-set compositions/frames/01-shoebox.html h1.headline:0 "Tax season. Again." @0.20s 800ms ease=power4.out
-      ease power4.out is not one of motion.md's eases (expo.out, power2.in, expo.inOut)
-      <span class="c">fix: use ease: "expo.out"</span>
-  <span class="err">[ERROR]</span> banned:fade-up-slide compositions/frames/01-shoebox.html h1.headline:0 "Tax season. Again." @0.20s 800ms ease=power4.out
-      matches the banned pattern "fade-up-slide"
-      <span class="c">fix: replace with one of motion.md's entrances (mask-wipe) using its eases</span>
+          <div class="file-top"><span>DIRECTION.md</span><span class="tag">compiled from your picks</span></div>
+<pre><code><span class="c"># Direction:</span> Swiss / International Typographic Style,
+  simplified-UI product launch film, precise motion
 
-<span class="c"># after the repair pass</span>
-<span class="ok">obey: clean</span> — 8 tweens (0 exempt) in 1 file(s); 0 error(s), 0 warning(s), 0 waived</code></pre>
+<span class="k">Style formula</span>
+Format / purpose: Product Launch Film
+        ↓
+Emotional / brand tone: Confident + Friendly
+        ↓
+UI treatment: Simplified UI
+        ↓
+Visual style: Swiss / International Typographic Style
+        ↓
+Typography: Grotesk
+        ↓
+Motion language: Precise
+
+<span class="k">### UI treatment — Simplified UI</span>
+<b>Simplified UI.</b> The real interface with non-essential
+detail removed.
+- <span class="k">Do:</span> keep its true layout and hierarchy; remove
+  secondary controls, dense data and placeholder text…
+- <span class="k">Not to be confused with:</span> Abstracted UI keeps only
+  the one control that matters…</code></pre>
+        </div>
+        <div class="formulas">
+          <figure class="formula-card"><figcaption>Energetic neo-brutalist 2D interface animation</figcaption><ol><li>neo-brutalist UI</li><li>heavy stroke · hard offset shadow</li><li>high contrast · color blocking</li><li>snappy motion</li><li>hard cuts · push · fast pacing</li></ol></figure>
+          <figure class="formula-card"><figcaption>Luxury minimal reveal</figcaption><ol><li>high-contrast serif</li><li>dark UI · limited palette</li><li>negative space · single-object hero</li><li>luxurious / slow motion</li><li>dissolve · light wipe</li></ol></figure>
+          <figure class="formula-card"><figcaption>Technical monochrome developer-tool animation</figcaption><ol><li>terminal UI · monospace</li><li>black and white</li><li>technical diagram</li><li>precise · linear motion</li><li>hard cut · wipe</li></ol></figure>
+        </div>
       </div>
-      <p class="console-note">Real checker output, from a test scene built with the generic default entrance.</p>
+      <p class="note">The compiled brief goes to every builder: into <code>frame.md</code>, into every scene's work packet with the motion contract, and into every reel card's brief. Share a screenshot or a video you like and Claude analyzes it into these terms, category by category, with its evidence and confidence.</p>
     </div>
   </section>
 
-  <!-- ============ install ============ -->
-  <section class="install section" id="install" aria-labelledby="i-h">
+  <!-- the flow -->
+  <section class="section" id="flow">
     <div class="wrap">
-      <h2 id="i-h" class="mega" data-reveal>Install</h2>
-      <p class="lede install-lede">Three ways in. Pick whichever fits how you run Claude Code.</p>
-      <ol class="ways">
-        <li class="way">
-          <h3>Claude Code plugin<small>From inside Claude Code.</small></h3>
-          <div class="cmds">
-            <div class="cmd"><code><span class="p">&gt; </span>/plugin marketplace add Sibhimanyu/rasa-director</code><button class="copy" type="button" aria-label="Copy command" data-copy="/plugin marketplace add Sibhimanyu/rasa-director"><svg aria-hidden="true"><use href="#i-copy"/></svg><span class="lbl">Copy</span></button></div>
-            <div class="cmd"><code><span class="p">&gt; </span>/plugin install rasa-director@rasa-director</code><button class="copy" type="button" aria-label="Copy command" data-copy="/plugin install rasa-director@rasa-director"><svg aria-hidden="true"><use href="#i-copy"/></svg><span class="lbl">Copy</span></button></div>
-          </div>
-        </li>
-        <li class="way">
-          <h3>skills CLI<small>From your terminal.</small></h3>
-          <div class="cmds">
-            <div class="cmd"><code><span class="p">$ </span>npx skills add Sibhimanyu/rasa-director</code><button class="copy" type="button" aria-label="Copy command" data-copy="npx skills add Sibhimanyu/rasa-director"><svg aria-hidden="true"><use href="#i-copy"/></svg><span class="lbl">Copy</span></button></div>
-          </div>
-        </li>
-        <li class="way">
-          <h3>One-line installer<small>Clones and links the skill for you.</small></h3>
-          <div class="cmds">
-            <div class="cmd"><code><span class="p">$ </span>curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasa-director/master/install.sh | bash</code><button class="copy" type="button" aria-label="Copy command" data-copy="curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasa-director/master/install.sh | bash"><svg aria-hidden="true"><use href="#i-copy"/></svg><span class="lbl">Copy</span></button></div>
-          </div>
-        </li>
+      <p class="eyebrow">How it runs</p>
+      <h2 class="mega">Fourteen decisions, each made by eye.</h2>
+      <p class="lede narrow">A local page, the Director's Console, opens beside your terminal. Every option, preview, plan and render shows up there, and every click goes straight back to Claude. Answer in the console or in chat. Hand any step over with "you decide", or everything after it with "you decide the rest".</p>
+
+      <ol class="acts">
+        <li><h3>Decide</h3><ol><li><b>Brief</b> what the video is, where it plays, how long, voiceover or not</li><li><b>Brand</b> your DESIGN.md, read back as a board</li><li><b>Route</b> the HyperFrames workflow that builds it</li><li><b>Direction</b> the stack of decisions, in proper terms</li></ol></li>
+        <li><h3>Write</h3><ol><li><b>Story</b> five pitches, two a model would rarely produce</li><li><b>Scenes</b> the whole film as an editable table: text, voiceover, length, transition, intensity</li></ol></li>
+        <li><h3>See</h3><ol><li><b>Look</b> design directions on your words</li><li><b>Motion</b> the motion language, on swatches of your lines</li><li><b>Style frames</b> the key frames, drawn by Claude</li><li><b>Transitions</b> your scenes handing off, every way</li><li><b>Voice</b> your hook line in three voices</li><li><b>Music</b> tracks to audition, or your own</li></ol></li>
+        <li><h3>Build</h3><ol><li><b>Storyboard</b> the timeline and a sketch of every scene</li><li><b>Build &amp; render</b> Claude animates, the checker verifies, you render</li></ol></li>
       </ol>
 
-      <div class="use">
-        <h3>Then ask for a piece.</h3>
-        <div class="cmds">
-          <div class="cmd"><code><span class="p">&gt; </span>/rasa-director make a 45s launch film for https://tally.app</code><button class="copy" type="button" aria-label="Copy command" data-copy='/rasa-director make a 45s launch film for https://tally.app'><svg aria-hidden="true"><use href="#i-copy"/></svg><span class="lbl">Copy</span></button></div>
-          <ul class="reqs" aria-label="Requirements">
-            <li>Claude Code</li>
-            <li>Node ≥ 20</li>
-            <li>HyperFrames skills: <code>npx hyperframes skills update</code></li>
-          </ul>
-        </div>
+      <div class="shots">
+        <figure class="showcase wide"><img src="img/console-direction.jpg" width="1440" height="1100" loading="lazy" alt="The Direction step: every dimension as a group of terms, with the style formula building up as you pick" /><figcaption><b>Direction.</b> Pick per dimension, or mark it "Claude decides". The style formula builds as you go.</figcaption></figure>
+        <figure class="showcase"><img src="img/console-look.jpg" width="1440" height="1000" loading="lazy" alt="The Look step: six design directions in the project's brand" /><figcaption><b>Look.</b> Design directions on your own words; here, six in the project's brand.</figcaption></figure>
+        <figure class="showcase"><img src="img/console-motion.jpg" width="1440" height="1000" loading="lazy" alt="The Motion step: the user's lines in six motion languages, side by side" /><figcaption><b>Motion.</b> Your lines in candidate motion languages, each with its contract.</figcaption></figure>
       </div>
     </div>
   </section>
 
-  <!-- ============ faq ============ -->
-  <section class="faq section" aria-labelledby="faq-h">
-    <div class="wrap faq-grid">
-      <h2 id="faq-h">Questions</h2>
+  <!-- the meaning -->
+  <section class="section meaning">
+    <div class="wrap two meaning-grid">
+      <div class="word-col"><p class="word" lang="ta">ரசனை</p><p class="gloss"><b>rasanai</b> <span class="mono">/ˈrʌ.sə.nai/ · Tamil ரசனை, from Sanskrit रस <i>rasa</i></span></p></div>
       <div>
-        <details>
-          <summary>Does it replace HyperFrames?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-          <div class="a"><p>No. Rasa Director decides; HyperFrames builds, previews and renders. It hands the matching HyperFrames workflow an approved plan (<code>BRIEF.md</code>, the storyboard and script in its own format, <code>frame.md</code>, <code>motion.md</code>, the music) and checks every scene that comes back.</p></div>
-        </details>
-        <details>
-          <summary>What does “you decide” actually do?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-          <div class="a"><p>It hands that step to Claude, and it never means the generic default. Story and motion are sampled wide with a pull toward the unusual; look rotates away from your recent picks; the scene list is written to your length. Each decision comes with a one-line receipt: what was picked, and the obvious option passed over.</p></div>
-        </details>
-        <details>
-          <summary>Can I skip everything?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-          <div class="a"><p>Yes. Say “you decide the rest” at any step. Your content is the only thing you have to give. The one question that always runs is “preview first, or render?”</p></div>
-        </details>
-        <details>
-          <summary>Does it work offline?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-          <div class="a"><p>Previews and the checker use a vendored copy of GSAP, so they run offline. Fonts come from Google Fonts and fall back to system fonts without a network. Site capture, voice samples, music and narration need the network, and HyperFrames loads GSAP and fonts from it when it builds and renders.</p></div>
-        </details>
-        <details>
-          <summary>What kinds of video?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-          <div class="a"><p>Launch films, explainers, PR videos, brand reels and custom multi-scene pieces, music and lyric videos, reels and edits cut from your own footage, captions for talking-head footage and overlay cards, and short motion graphics like titles and stings. Previews are text-only: scenes are tasted with their words; product shots, logos and data enter at build. For a reel, point it at a folder of raw clips: it examines every clip (contact sheet, sound, a word-level transcript), proposes a cut, and you trim it in the console, with cards between clips and titles, lower thirds and captions on top.</p></div>
-        </details>
-        <details>
-          <summary>What's the license?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-          <div class="a"><p>MIT. The vendored GSAP stays under its own GSAP Standard License.</p></div>
-        </details>
+        <ol class="defs"><li>Taste; the eye (and ear) for what feels right. <i>“Avarukku nalla rasanai”</i>: they have good taste.</li><li>From <i>rasa</i>: in Indian aesthetics, the feeling a work leaves in the person experiencing it. Not what is shown, but what is tasted.</li></ol>
+        <p class="pull">A video keeps its rasa in how it looks, moves, cuts and sounds. Rasa Director is the rasanai: the taste to choose it, on purpose.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- brand -->
+  <section class="section" id="brand">
+    <div class="wrap">
+      <p class="eyebrow">Your brand</p>
+      <h2 class="mega">Bring your DESIGN.md.</h2>
+      <div class="two">
+        <div>
+          <p class="lede">If your project already has a brand reference, it becomes the look. Its colors and typefaces are used exactly; the directions vary the art direction around them.</p>
+          <ul class="ticks">
+            <li>Reads the common shapes: design.md spec frontmatter with <code>oklch()</code> colors and nested typography, impeccable and gstack files, Stitch-style prose, CSS custom properties, token tables with or without <code>#</code>.</li>
+            <li>Gives every color a role (canvas, ink, accent, surface, muted, status) from its name and comment, then contrast. A saturated "text accent" never becomes the ink; status colors never become the accent.</li>
+            <li>Finds the fonts, skips "banned" ones, maps platform fonts the renderer doesn't have (SF Pro → Inter, SF Mono → JetBrains Mono, Calibri → Carlito) and says so.</li>
+            <li>Writes a frame.md HyperFrames accepts, checks it with HyperFrames' own parser, and stages every font file into the project.</li>
+          </ul>
+          <p><a class="link" href="examples/DESIGN.md">See an example DESIGN.md</a></p>
+        </div>
+        <figure class="showcase"><img src="img/console-brand.jpg" width="1440" height="1000" loading="lazy" alt="The Brand step: the project's DESIGN.md read back as a board with colors by role and fonts" /><figcaption><b>The Brand step.</b> Use it as the look, use it across new design directions, or leave it out for this video.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- design directions -->
+  <section class="section dark">
+    <div class="wrap">
+      <p class="eyebrow">The look</p>
+      <h2 class="mega">Design directions, not color presets.</h2>
+      <div class="two lead-row">
+        <p class="lede">Each look is a visual style made concrete: a palette by role, a type pairing, radius, stroke, shadow, texture and a composition that suits the style, shown on your own headline.</p>
+        <p>Palettes come from the style's signature colors, 72 HyperFrames palettes and the color taxonomy; type from 46 pairings tagged by class. Each look ships with a frame.md. With your brand, every look keeps your colors and fonts and changes the rest, down to which of your colors is the ground.</p>
+      </div>
+      <div class="shots two-up">
+        <figure class="showcase"><img src="img/looks.jpg" width="1600" height="900" loading="lazy" alt="Six design directions on the same headline: Swiss, sci-fi HUD, web 1.0, luxury, soft pastel, neo-brutalism" /><figcaption><b>Free directions.</b> One per style family, rotating away from your recent picks.</figcaption></figure>
+        <figure class="showcase"><img src="img/looks-brand.jpg" width="1600" height="900" loading="lazy" alt="Six design directions in one brand's colors and fonts" /><figcaption><b>Brand-locked directions.</b> Same colors and typefaces; different art direction.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- motion languages -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">The motion</p>
+      <h2 class="mega">A motion language, with a contract.</h2>
+      <div class="two lead-row">
+        <p class="lede">"If these graphics were alive, what laws would they follow?" Each of the 32 motion languages is a term with a binding contract: its eases, the durations allowed, the stagger, the minimum hold, and the moves it bans. The one you choose becomes <code>motion.md</code>.</p>
+        <p>Every language's swatch passes the same checker the real build must pass, so what you see is what's enforced. One language governs the whole film; scenes differ only in intensity.</p>
+      </div>
+      <div class="langs">
+        <div><b>Precise</b><span class="mono">expo.out / expo.in · 200–1000 ms · stagger 80 · hold 900</span><small>Exact, grid-locked destinations, zero overshoot.</small></div>
+        <div><b>Springy</b><span class="mono">back.out(1.7) / power3.in · 180–1100 ms · stagger 40</span><small>A damped spring: fast attack, one overshoot, quick settle.</small></div>
+        <div><b>Cinematic</b><span class="mono">power2.out / power2.inOut · 400–2400 ms · hold 1400</span><small>Slow push-ins and breathing holds.</small></div>
+        <div><b>Snappy</b><span class="mono">power4.out / power3.in · 120–720 ms · stagger 50</span><small>Steep initial velocity, very short settle.</small></div>
+        <div><b>Luxurious / slow</b><span class="mono">circ.out / circ.in · 600–2800 ms · hold 1800</span><small>Restraint as the signal of value.</small></div>
+        <div><b>Stop-motion-like</b><span class="mono">steps(6) / steps(4) · 12 fps · hold 750</span><small>Held poses on twos, like physical stop-motion.</small></div>
+      </div>
+      <figure class="showcase"><img src="img/swatches.jpg" width="1600" height="900" loading="lazy" alt="The user's lines in six motion languages, side by side, in the chosen look" /><figcaption><b>Swatches of your lines</b>, in your look, for choosing by eye. Then the language's contract governs every scene Claude builds.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- claude animates -->
+  <section class="section dark" id="claude">
+    <div class="wrap">
+      <p class="eyebrow">Who animates</p>
+      <h2 class="mega">Claude designs and animates every frame.</h2>
+      <div class="two lead-row">
+        <p class="lede">Rasa never ships canned animation. Its boards and swatches exist so you can choose. The frames, the scenes and the cards are Claude's, drawn fresh from your direction.</p>
+        <p>Before anything moves, Claude designs the key frames as stills for you to approve, the way studios lock art direction before animation. Then it builds every scene through the matching HyperFrames workflow, from <code>DIRECTION.md</code>, <code>frame.md</code> and <code>motion.md</code>.</p>
+      </div>
+      <div class="shots two-up">
+        <figure class="showcase"><img src="img/styleframe-hook.jpg" width="1600" height="900" loading="lazy" alt="A style frame Claude designed: Tax season. Again. on a Swiss grid, receipts piled on the right" /><figcaption><b>Style frame: the hook.</b> Swiss grid, grotesk, the brand's paper and ink.</figcaption></figure>
+        <figure class="showcase"><img src="img/styleframe-product.jpg" width="1600" height="900" loading="lazy" alt="A style frame: simplified product UI with March books balanced and a single mint accent" /><figcaption><b>Style frame: the product.</b> Simplified UI, one mint accent for the balanced state.</figcaption></figure>
+      </div>
+      <ol class="loop">
+        <li><b>Direction</b><span>DIRECTION.md and motion.md, compiled from your decisions</span></li>
+        <li><b>Style frames</b><span>Claude draws the key frames; you approve</span></li>
+        <li><b>Build</b><span>Every scene worker reads the direction and the contract in its packet</span></li>
+        <li><b>Cards</b><span>For reels, a brief per card; Claude writes each one</span></li>
+        <li><b>Check</b><span>Every scene and card is verified against the contract</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- every kind of video -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Every kind of video</p>
+      <h2 class="mega">Whole films, not single titles.</h2>
+      <p class="lede narrow">Rasa hands the approved plan to the HyperFrames workflow that fits, pre-writing what it reads (the brief, the storyboard and script in its exact format, frame.md, the music), so it asks nothing and re-decides nothing.</p>
+      <div class="routes">
+        <div><b>Launch film</b><span class="mono">product-launch-video</span><p>From a product URL: capture, story, scenes, voice, music.</p></div>
+        <div><b>Explainer</b><span class="mono">faceless-explainer</span><p>A topic, article or how-to, told with invented visuals.</p></div>
+        <div><b>PR video</b><span class="mono">pr-to-video</span><p>A pull request as a changelog film, code excerpts and all.</p></div>
+        <div><b>Custom piece</b><span class="mono">general-video</span><p>Brand reels, montages, anything multi-scene.</p></div>
+        <div><b>Music video</b><span class="mono">music-to-video</span><p>Cut to a track's beat grid; lyric videos.</p></div>
+        <div><b>Footage reel</b><span class="mono">reel</span><p>A folder of your clips, cut together with cards and captions.</p></div>
+        <div><b>Captions &amp; overlays</b><span class="mono">embedded-captions · talking-head-recut</span><p>A talking-head clip, captioned or recut with designed cards.</p></div>
+        <div><b>Motion graphics</b><span class="mono">motion-graphics</span><p>A title, sting, stat hit or lower third.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- reels -->
+  <section class="section dark" id="reels">
+    <div class="wrap">
+      <p class="eyebrow">Footage</p>
+      <h2 class="mega">Point it at a folder of clips.</h2>
+      <div class="two lead-row">
+        <p class="lede">Rasa examines every clip (length, orientation, frame rate, sound, a contact sheet, shot changes, silences and a word-level transcript), then Claude drafts the cut from your direction, cutting on word boundaries.</p>
+        <p>You edit it as a list: in and out points, order, cards between clips, overlays on top, captions from what's said, a music bed that ducks under speech. Claude designs and animates every card and overlay from a brief; the build conforms your footage, lints, checks and renders.</p>
+      </div>
+      <div class="shots two-up">
+        <figure class="showcase"><img src="img/console-footage.jpg" width="1180" height="330" loading="lazy" alt="The Footage step: each clip with its contact sheet, length, format and sound" /><figcaption><b>Footage.</b> Every clip, with what's in it and what's said.</figcaption></figure>
+        <figure class="showcase"><img src="img/console-cut.jpg" width="1180" height="1000" loading="lazy" alt="The Cut step: clips with in and out points, cards between them, overlays and captions" /><figcaption><b>Cut.</b> The edit as a list you can change, with a draft to watch.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- guarantee -->
+  <section class="section">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow">The check</p>
+        <h2>What you picked is what gets built.</h2>
+        <p class="lede">Your choices don't dissolve into a vague prompt. Every tween in every scene and card is walked in a real browser and compared with the contract before you're asked to render.</p>
+        <ul class="ticks">
+          <li><b>Durations</b> on the language's scale, <b>eases</b> from its set, written explicitly, never the GSAP default.</li>
+          <li><b>Banned moves</b> caught in every form, including the generic fade-up-slide.</li>
+          <li><b>Holds</b> long enough to read; <b>GSAP only</b>, seekable, deterministic.</li>
+          <li>Violations go back to the builder, at most twice; anything left is yours to fix or waive. A check that couldn't run is never reported as a pass.</li>
+        </ul>
+      </div>
+      <div class="file">
+        <div class="file-top"><span>node obey.mjs --project videos/tally-launch</span><span class="tag">real checker output</span></div>
+<pre><code><span class="err">obey: violations</span> — 2 tweens (0 exempt) in 1 file(s); 2 error(s)
+  <span class="err">[ERROR]</span> ease-outside-set compositions/frames/01-shoebox.html
+      h1.headline "Tax season. Again." @0.20s 800ms ease=power4.out
+      ease power4.out is not one of motion.md's eases
+      <span class="c">fix: use ease: "expo.out"</span>
+  <span class="err">[ERROR]</span> banned:fade-up-slide compositions/frames/01-shoebox.html
+      h1.headline "Tax season. Again." @0.20s 800ms ease=power4.out
+      <span class="c">fix: replace with one of motion.md's entrances</span>
+
+<span class="c"># after the repair pass</span>
+<span class="ok">obey: clean</span> — 8 tweens (0 exempt) in 1 file(s); 0 error(s)</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- install -->
+  <section class="section dark" id="install">
+    <div class="wrap">
+      <h2 class="mega">Install</h2>
+      <p class="lede narrow">Needs Claude Code, Node.js 20 or newer, the HyperFrames skills (<code>npx hyperframes skills update</code>), and FFmpeg for footage reels.</p>
+      <div class="install">
+        <div><h3>Claude Code plugin</h3><p>From inside Claude Code.</p>
+          <div class="cmd"><code><span class="p">&gt; </span>/plugin marketplace add Sibhimanyu/rasa-director</code><button class="copy" type="button" data-copy="/plugin marketplace add Sibhimanyu/rasa-director" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+          <div class="cmd"><code><span class="p">&gt; </span>/plugin install rasa-director@rasa-director</code><button class="copy" type="button" data-copy="/plugin install rasa-director@rasa-director" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div></div>
+        <div><h3>skills CLI</h3><p>From your terminal.</p>
+          <div class="cmd"><code><span class="p">$ </span>npx skills add Sibhimanyu/rasa-director</code><button class="copy" type="button" data-copy="npx skills add Sibhimanyu/rasa-director" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div></div>
+        <div><h3>One-line installer</h3><p>Clones and links the skill.</p>
+          <div class="cmd"><code><span class="p">$ </span>curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasa-director/master/install.sh | bash</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasa-director/master/install.sh | bash" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div></div>
+      </div>
+      <h3 class="try-h">Then try</h3>
+      <div class="examples">
+        <div class="cmd"><code><span class="p">&gt; </span>/rasa-director make a 45s launch film for https://tally.app</code><button class="copy" type="button" data-copy="/rasa-director make a 45s launch film for https://tally.app" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+        <div class="cmd"><code><span class="p">&gt; </span>/rasa-director a product film using our DESIGN.md, like these references: ref1.png ref2.png</code><button class="copy" type="button" data-copy="/rasa-director a product film using our DESIGN.md, like these references: ref1.png ref2.png" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+        <div class="cmd"><code><span class="p">&gt; </span>/rasa-director cut ~/Footage/lisbon into a 30s reel with a title card and captions</code><button class="copy" type="button" data-copy="/rasa-director cut ~/Footage/lisbon into a 30s reel with a title card and captions" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+      </div>
+      <p class="note">Check the install with <code>node ~/.claude/skills/rasa-director/scripts/selftest.mjs</code> (52 checks, no network needed).</p>
+    </div>
+  </section>
+
+  <!-- faq -->
+  <section class="section faq">
+    <div class="wrap two">
+      <h2>Questions</h2>
+      <div>
+        <details><summary>Who actually animates the video?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Claude. Rasa Director gives you the decisions and the vocabulary; its boards and swatches are only for choosing by eye. Claude designs the style frames, the scenes and the reel cards from your direction, HyperFrames renders them, and a checker confirms the motion follows the contract you chose.</p></div></details>
+        <details><summary>Do I need to know motion-design terms?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>No. Every term comes with a plain definition, what it looks like and what it's used for, and anything you skip, Claude decides. The terms are what make the result precise: "simplified UI, grotesk, precise motion, UI-morph transitions" builds something very different from "make it modern".</p></div></details>
+        <details><summary>Can it use my brand?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Put your DESIGN.md (or design.md) in the project. Rasa reads it, shows you what it understood as a brand board, and uses your colors and fonts exactly, either as the look or across new design directions.</p></div></details>
+        <details><summary>What does “you decide” actually do?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>It hands that decision to Claude, and it never means the generic default: candidates come from known style combinations that fit your other choices, the generic option is excluded, recent picks rotate out, and every choice comes with a receipt naming the obvious option passed over.</p></div></details>
+        <details><summary>Can I skip everything?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Say “you decide the rest” at any step; only the source (what the video is about) is required. The one question that always runs is “preview first, or render?”</p></div></details>
+        <details><summary>Does anything leave my machine?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>The console runs on 127.0.0.1 with a per-session token and serves files only from your workspace. Site capture, voice samples, music and fonts go through HyperFrames' tools, Google Fonts or Fontshare; nothing else leaves your machine.</p></div></details>
+        <details><summary>What's the license?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>MIT. The vendored GSAP stays under its own GSAP Standard License.</p></div></details>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="foot pulli">
-  <div class="wrap">
-    <div class="foot-grid">
-      <p class="foot-big" aria-label="Rasa Director">Rasa<br /><span>Director</span></p>
-      <figure class="foot-taste">
-        <div class="md-cell g-deep" data-cycle data-content="Rasa Director" data-personality="luxe-minimal" aria-hidden="true"><div class="md-block"></div></div>
-        <figcaption><span>One more taste</span><span class="mono"><b data-cycle-name>Luxe Minimal</b></span></figcaption>
-      </figure>
-    </div>
-    <div class="foot-row">
-      <p>Built on <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a> and Claude Code.</p>
-      <ul class="foot-links">
-        <li><a href="#how">How it works</a></li>
-        <li><a href="#personalities">Personalities</a></li>
-        <li><a href="#install">Install</a></li>
-        <li><a href="https://github.com/Sibhimanyu/rasa-director">GitHub</a></li>
-      </ul>
-      <p>MIT · GSAP under its own license</p>
-    </div>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <p class="foot-big" aria-label="Rasa Director">Rasa<br /><span>Director</span></p>
+    <p>Built on <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a> and Claude Code.<br />MIT · GSAP under its own license.</p>
+    <ul class="foot-links"><li><a href="#stack">Direction</a></li><li><a href="#brand">Your brand</a></li><li><a href="#reels">Reels</a></li><li><a href="#install">Install</a></li><li><a href="https://github.com/Sibhimanyu/rasa-director">GitHub</a></li></ul>
   </div>
 </footer>
 

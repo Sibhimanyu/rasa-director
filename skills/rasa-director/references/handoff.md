@@ -2,7 +2,7 @@
 
 ## decisions.json
 
-Written by the agent at Step 7b in the run's scratch dir, consumed by `scripts/handoff.mjs`.
+Written by the agent at the Plan step of a single motion unit (SKILL.md "Single motion units") in the run's scratch dir, consumed by `scripts/handoff.mjs`.
 
 ```json
 {
@@ -45,8 +45,9 @@ Written by the agent at Step 7b in the run's scratch dir, consumed by `scripts/h
 | `length_s` | no | seconds. If missing: the sum of the approved keyframe shots, else 6. |
 | `language`, `audience` | no | BRIEF fields; language defaults to `en` |
 | `concept` | no | `{title, text}` → BRIEF `## Intent` and DISPATCH |
-| `look` | no | `{ "preset": "<frame-preset id>" }` or `{ "frame": "<path to frame.md / design spec>" }` |
-| `keyframes` | no | path to the approved keyframes.json, or null when Step 5 was skipped |
+| `look` | no | `{ "preset": "<frame-preset id>" }`, `{ "frame": "<a design direction's frame.md / your spec>" }` or `{ "design_md": "DESIGN.md", "mode": "dark" }` (the project's brand); fonts are staged for frame and design_md |
+| `direction` | no | a compiled direction folder (`direction.mjs compile --out`): installs DIRECTION.md, its summary goes into frame.md and DISPATCH.md |
+| `keyframes` | no | path to the approved keyframes.json, or null when the Key poses step was skipped |
 | `assets` | no | strings are notes; `{path, role}` objects are files copied into `videos/<project>/assets/` |
 | `music` | no | `{path, title}`: the chosen music bed (from music.mjs or the user's own file). Copied as `assets/music-<name>` (never overwriting a user file), and for motion-graphics placed by handoff in the host root as `<audio id="music-bed">` for the full length with a short fade in/out; DISPATCH.md tells the build not to add another. Other routes are told to place it as one full-length clip. |
 | `confirmed` | no | which preference-backed answers the user actually confirmed: `destination`, `aspect`, `language`, `look`. Only those are recorded as HyperFrames preferences. |

@@ -1,0 +1,842 @@
+{
+  "id": "illustration",
+  "name": "Illustration style",
+  "group": "subject",
+  "controls": "How drawn or modelled imagery (figures, objects, scenes, diagrams) is rendered, independent of the overall visual style.",
+  "question": "What kind of illustration, if any, should appear?",
+  "pick": {
+    "min": 0,
+    "max": 2
+  },
+  "notes": "Illustration style is independent of visual style: a clean-minimal film can carry a doodle mascot, a brutalist type system can carry flat vector illustration. Common, deliberate combinations: minimal UI + doodle mascot (precise product screens with a hand-drawn character or annotations that add warmth without cluttering the UI); brutalist typography + vector illustration (raw type system, polished flat-vector imagery; the contrast reads as intentional); photography + hand-drawn markings (real photos annotated with marker circles, arrows and scribbles, the classic editorial or social-explainer device); 3D object + flat 2D UI (a rendered product or 3D icon beside flat interface panels; keep lighting direction consistent and let the 3D element carry the hero moment). When combining two illustration styles, pick one dominant and one accent, and keep stroke weight, palette and light direction shared. Many terms overlap: 'hand-drawn' is an umbrella over doodle, scribble, sketch, ink and brush; 'isometric' is one kind of 'axonometric'; 'flat vector' is the default modern vector idiom and 'geometric vector' is its construction-strict subset. 3D styles in an HTML/SVG build are approximated with gradients, inner/outer shadows and layered SVG, rendered with Three.js/WebGL, or supplied as pre-rendered assets; photoreal 3D always needs pre-rendered assets.",
+  "families": [
+    {
+      "id": "vector",
+      "name": "Vector"
+    },
+    {
+      "id": "line",
+      "name": "Line-led"
+    },
+    {
+      "id": "hand-drawn",
+      "name": "Hand-drawn & painterly"
+    },
+    {
+      "id": "conceptual",
+      "name": "Editorial & conceptual"
+    },
+    {
+      "id": "character",
+      "name": "Character & sticker"
+    },
+    {
+      "id": "informational",
+      "name": "Informational & technical"
+    },
+    {
+      "id": "projection",
+      "name": "Projection & layered"
+    },
+    {
+      "id": "collage",
+      "name": "Collage & cutout"
+    },
+    {
+      "id": "dimensional",
+      "name": "3D & pixel"
+    },
+    {
+      "id": "none",
+      "name": "None"
+    }
+  ],
+  "options": [
+    {
+      "id": "none",
+      "term": "None (No Illustration)",
+      "family": "none",
+      "what": "No drawn or modelled imagery: the piece relies on typography, UI, photography, footage or abstract graphics.",
+      "looks": "Type, product UI, photos or abstract shapes only.",
+      "motion": "Motion carries the interest through type, UI choreography, camera and transitions.",
+      "use": "Typography-led films, UI-only product demos, photographic brand films.",
+      "conveys": "Directness, focus on the product or message.",
+      "vs": "Abstract geometric graphics are not illustration in this sense; they belong to visual style and shape language.",
+      "search": [
+        "typography only motion design",
+        "UI only product video"
+      ],
+      "prompt": "Use no illustration: no drawn figures, objects, scenes, icons-as-illustration or 3D renders; carry every scene with typography, product UI, photography or abstract shape systems only."
+    },
+    {
+      "id": "flat-vector",
+      "term": "Flat Vector",
+      "aka": [
+        "flat illustration"
+      ],
+      "family": "vector",
+      "what": "Vector imagery built from solid fills with no gradients, textures or lighting, the default idiom of digital-product illustration.",
+      "looks": "Solid color shapes, no outlines or thin uniform outlines, simplified forms, limited palette, occasional flat shadow shapes.",
+      "motion": "Shape-based 2D animation: scaling, position tweens, path morphs, rigged limbs, clean loops.",
+      "use": "Explainers, onboarding, empty states, marketing sites, app promos.",
+      "conveys": "Clarity, friendliness, modern simplicity.",
+      "vs": "Geometric vector constructs everything from strict primitives (circles, arcs, grid); flat vector allows freeform shapes. Textured vector adds grain or brush texture to flat fills.",
+      "search": [
+        "flat vector animation",
+        "flat illustration motion",
+        "flat explainer animation"
+      ],
+      "prompt": "Illustrate in flat vector: SVG shapes with solid fills only (no gradients, textures or blur), 4-6 colors from the brand palette, shadows as flat darker shapes, no outlines (or a uniform 2px outline if the brand needs it); simplify forms to their silhouette; animate by tweening shape transforms and morphing paths with power2.inOut 400-600 ms."
+    },
+    {
+      "id": "geometric-vector",
+      "term": "Geometric Vector",
+      "aka": [
+        "constructed illustration",
+        "geometric illustration"
+      ],
+      "family": "vector",
+      "what": "Vector illustration constructed strictly from geometric primitives (circles, arcs, rectangles, quarter-rounds) on a grid.",
+      "looks": "Forms made of circles, half-circles, squares and arcs; consistent radii; grid-aligned; flat color; highly systematic.",
+      "motion": "Primitives rotating, sliding and assembling into figures; arcs sweeping; modular transforms.",
+      "use": "Brand systems, logo-adjacent illustration, tech and finance brands, icon-led explainers.",
+      "conveys": "Precision, order, systematic brand thinking.",
+      "vs": "Flat vector allows freeform organic shapes; geometric vector restricts itself to constructed primitives. Abstract geometric (visual style) is non-representational; geometric vector depicts subjects.",
+      "search": [
+        "geometric vector illustration",
+        "geometric shape illustration animation",
+        "constructed illustration"
+      ],
+      "prompt": "Illustrate in geometric vector: build every subject from circles, half- and quarter-circles, rectangles and arcs on an 8px grid with a consistent radius set; flat fills in 3-5 colors, no outlines, no freeform curves; animate primitives rotating (90° steps), sliding and sweeping arcs (stroke-dashoffset) to assemble figures, power3.out 400 ms, stagger 40 ms."
+    },
+    {
+      "id": "textured-vector",
+      "term": "Textured Vector",
+      "aka": [
+        "brush-textured vector"
+      ],
+      "family": "vector",
+      "what": "Flat vector shapes enriched with brush, stipple or print textures for warmth and depth.",
+      "looks": "Flat shapes with stippled shading, dry-brush edges, halftone or crayon texture inside fills, limited palette.",
+      "motion": "Same as flat vector, with textures kept stable (or lightly boiling) so they don't swim.",
+      "use": "Editorial explainers, lifestyle and food brands, publishing, warmer SaaS.",
+      "conveys": "Warmth, craft, sophistication.",
+      "vs": "Grainy vector uses a uniform noise grain; textured vector uses varied brush and stipple textures for shading.",
+      "search": [
+        "textured vector illustration",
+        "textured vector animation",
+        "brush texture illustration motion"
+      ],
+      "prompt": "Illustrate in textured vector: flat vector shapes with texture inside fills (stipple or dry-brush shading applied via SVG masks or pattern overlays at 15-30% opacity), slightly rough edges on shadows; limited 4-5 color palette; lock textures to the shapes so they move with them (no swimming); animate with shape transforms and optional 12 fps texture boil."
+    },
+    {
+      "id": "grainy-vector",
+      "term": "Grainy Vector",
+      "aka": [
+        "noise gradient illustration",
+        "grain illustration"
+      ],
+      "family": "vector",
+      "what": "Vector illustration shaded with fine noise grain and soft grain gradients instead of flat color.",
+      "looks": "Smooth shapes with speckled noise shading, grainy gradients from light to dark, pastel or saturated palettes, soft light.",
+      "motion": "Smooth shape animation; grain optionally re-randomised per frame for a filmic shimmer.",
+      "use": "Tech and wellness brands, editorial headers, app promos, Dribbble-era product illustration.",
+      "conveys": "Soft depth, modern warmth.",
+      "vs": "Textured vector uses brush and stipple textures; grainy vector uses uniform noise grain.",
+      "search": [
+        "grainy illustration",
+        "grain gradient vector",
+        "noise texture illustration animation"
+      ],
+      "prompt": "Illustrate in grainy vector: smooth vector shapes shaded with noise-grain gradients (a gradient fill masked by SVG feTurbulence noise, grain size 1-2px, 20-40% density) from light top-left to darker bottom-right; saturated or pastel palette; no outlines; animate with smooth shape transforms and keep grain static or re-seed it every 2 frames for shimmer."
+    },
+    {
+      "id": "outline",
+      "term": "Outline Illustration",
+      "aka": [
+        "line illustration",
+        "line art"
+      ],
+      "family": "line",
+      "what": "Illustration defined by outlines rather than fills, with line weight that may vary.",
+      "looks": "Stroked contours, few or no fills, occasional spot-color fills, line weight 1-3px, clean or slightly organic lines.",
+      "motion": "Line draw-ons (stroke-dashoffset), lines morphing, fills appearing after lines.",
+      "use": "Explainers, UI empty states, documentation, elegant brand illustration.",
+      "conveys": "Lightness, clarity, elegance.",
+      "vs": "Monoline uses one constant stroke weight with round terminals; outline illustration can vary weight. Thick-outline uses heavy contours around filled shapes.",
+      "search": [
+        "line illustration animation",
+        "outline illustration motion",
+        "line art animation"
+      ],
+      "prompt": "Illustrate with outline line art: subjects drawn as SVG strokes (1.5-2.5px, color #111 or brand ink) with at most one spot-color fill per subject; lines may taper at ends; no gradients or shadows; animate lines drawing on with stroke-dashoffset (400-700 ms, power1.inOut) before any fill fades or wipes in."
+    },
+    {
+      "id": "monoline",
+      "term": "Monoline",
+      "aka": [
+        "single-weight line"
+      ],
+      "family": "line",
+      "what": "Line illustration with one constant stroke weight throughout, usually with round caps and joins.",
+      "looks": "Uniform 2-3px strokes, round terminals, geometric or smooth curves, one or two colors, often icon-like simplicity.",
+      "motion": "Continuous line draws, path morphs between monoline drawings, a single line tracing a whole scene.",
+      "use": "Tech brands, iconographic explainers, UI illustration, data stories.",
+      "conveys": "Consistency, precision, friendliness.",
+      "vs": "Outline illustration may vary line weight; monoline never does. Thick-outline is heavier and wraps filled shapes.",
+      "search": [
+        "monoline illustration",
+        "monoline animation",
+        "single line illustration motion"
+      ],
+      "prompt": "Illustrate in monoline: every stroke the same weight (2.5px at 1080p), round caps and round joins, one ink color plus at most one accent; no fills or only flat accent fills; animate with continuous stroke-dashoffset draws, and morph between drawings by interpolating paths with equal point counts."
+    },
+    {
+      "id": "thick-outline",
+      "term": "Thick-Outline Illustration",
+      "aka": [
+        "bold outline",
+        "cartoon outline"
+      ],
+      "family": "line",
+      "what": "Filled shapes wrapped in heavy, usually black, outlines for a bold, graphic, sticker-like read.",
+      "looks": "3-6px black contours around flat fills, bold simplified shapes, bright colors, strong silhouette.",
+      "motion": "Snappy pops, squash and stretch, wobbles; outlines stay consistent as shapes move.",
+      "use": "Playful brands, neo-brutalist UI, social content, games.",
+      "conveys": "Boldness, fun, graphic confidence.",
+      "vs": "Outline illustration is line-only and lighter; thick-outline pairs heavy lines with filled shapes. Neo-brutalism (visual style) often uses it.",
+      "search": [
+        "bold outline illustration",
+        "thick line illustration animation",
+        "cartoon outline animation"
+      ],
+      "prompt": "Illustrate with thick outlines: flat-filled shapes wrapped in 4-5px solid #111 strokes (stroke-linejoin round, vector-effect: non-scaling-stroke so weight stays constant while scaling); bright flat fills; simplified bold silhouettes; animate with snappy pops (back.out(1.8) 300 ms) and squash-and-stretch while keeping outline weight constant."
+    },
+    {
+      "id": "hand-drawn",
+      "term": "Hand-Drawn",
+      "aka": [
+        "hand-drawn illustration"
+      ],
+      "family": "hand-drawn",
+      "what": "Umbrella for illustration that visibly comes from a human hand: irregular lines, pressure variation and imperfection.",
+      "looks": "Wobbly or varying lines, uneven fills, visible tool marks, informal composition.",
+      "motion": "Frame-by-frame or boiling lines, strokes drawing on, low frame rates.",
+      "use": "Friendly brands, education, storytelling, editorial.",
+      "conveys": "Humanity, warmth, authenticity.",
+      "vs": "Umbrella term: doodle, scribble, sketch, ink and brush are more specific. Choose one of those when the tool and intent matter.",
+      "search": [
+        "hand drawn animation",
+        "hand drawn illustration motion",
+        "hand drawn explainer"
+      ],
+      "prompt": "Illustrate hand-drawn: irregular SVG paths with slight wobble and 1-4px width variation, uneven flat fills that don't perfectly meet the lines, one or two ink colors; animate with line boil (2-3 alternate path versions swapped every 2-3 frames) and strokes drawing on at 12 fps."
+    },
+    {
+      "id": "doodle",
+      "term": "Doodle",
+      "family": "hand-drawn",
+      "what": "Small, casual, cute pen drawings (arrows, stars, faces, squiggles) made quickly but deliberately.",
+      "looks": "Monoline marker strokes, wobbly simple shapes, small scale, one color, often over photos or UI.",
+      "motion": "Draw-ons, wiggle boils, doodles bouncing into place.",
+      "use": "Annotations, social explainers, mascots over minimal UI, education.",
+      "conveys": "Friendliness, informality, fun.",
+      "vs": "Scribble is fast, rough and chaotic (energy or erasure); sketch is exploratory construction with guide lines; doodle is small, legible and cute.",
+      "search": [
+        "doodle animation",
+        "doodle illustration motion",
+        "doodle annotations video"
+      ],
+      "prompt": "Illustrate with doodles: small hand-drawn marker drawings (arrows, stars, circles, tiny faces) as 2.5-3.5px round-cap wobbly SVG strokes in one color; place them as accents around type, UI or photos; animate draw-ons with stroke-dashoffset (250-450 ms) and a gentle 8 fps wiggle boil."
+    },
+    {
+      "id": "scribble",
+      "term": "Scribble",
+      "aka": [
+        "scribble illustration",
+        "scribbled lines"
+      ],
+      "family": "hand-drawn",
+      "what": "Fast, loose, chaotic scrawled lines used for energy, emphasis, shading or crossing out.",
+      "looks": "Dense tangled strokes, zig-zag fills, energetic loops, rough cross-outs, often one bold color.",
+      "motion": "Rapid, jittery drawing, frantic boil at 12-15 fps, scribbles filling shapes or erasing content.",
+      "use": "Youth brands, music, emphasis in social content, before/after 'crossing out' moments.",
+      "conveys": "Energy, urgency, rawness, emotion.",
+      "vs": "Doodle is tidy and cute; sketch is deliberate construction; scribble is fast and chaotic by intent.",
+      "search": [
+        "scribble animation",
+        "scribble illustration style",
+        "scribble fill animation"
+      ],
+      "prompt": "Illustrate with scribbles: dense, fast zig-zag and looping strokes (2-4px, one bold color) used to fill shapes, emphasise words or cross content out; lines overlapping and exceeding shape boundaries; animate by drawing scribbles quickly (150-300 ms) with jittery 12-15 fps boil."
+    },
+    {
+      "id": "sketch",
+      "term": "Sketch",
+      "aka": [
+        "pencil sketch",
+        "sketch illustration"
+      ],
+      "family": "hand-drawn",
+      "what": "Exploratory drawing with construction lines, loose contours and hatching, in pencil or light pen.",
+      "looks": "Graphite-gray varying lines, multiple searching strokes, visible guidelines, hatching, paper texture.",
+      "motion": "Construction-to-final builds, pencil boils, erasing and redrawing.",
+      "use": "Design-process stories, product ideation, architecture, education.",
+      "conveys": "Thinking, craft, work in progress.",
+      "vs": "Doodle is cute and finished; scribble is chaotic; sketch shows construction and process. Blueprint is precise and technical.",
+      "search": [
+        "pencil sketch animation",
+        "sketch illustration motion",
+        "sketch to final animation"
+      ],
+      "prompt": "Illustrate as a pencil sketch: graphite-gray strokes (#555 at 50-90% opacity) with multiple searching lines, visible construction guides at 25% opacity, cross-hatched shading, on off-white paper texture; animate construction lines first, then confident contours, then hatching, at 10-12 fps with slight boil."
+    },
+    {
+      "id": "ink",
+      "term": "Ink Illustration",
+      "aka": [
+        "pen and ink"
+      ],
+      "family": "hand-drawn",
+      "what": "Illustration in pen or nib ink: crisp black lines, hatching and stippling, high contrast.",
+      "looks": "Black ink lines with nib pressure variation, cross-hatching, stipple shading, white paper, occasional spot color.",
+      "motion": "Strokes inking on with pressure, hatching filling progressively, stipple dots appearing.",
+      "use": "Editorial, heritage and food brands, literary and documentary content.",
+      "conveys": "Craft, tradition, intelligence.",
+      "vs": "Brush illustration uses brush strokes with broad tapers and wet edges; ink illustration is pen-based with fine hatching.",
+      "search": [
+        "pen and ink illustration animation",
+        "ink drawing motion",
+        "cross hatching animation"
+      ],
+      "prompt": "Illustrate in pen and ink: crisp black lines (0.75-2.5px with pressure variation), tone built from cross-hatching and stippling, white or cream paper, optional single spot color; animate contours inking on, then hatching layers in sequence (stagger 30 ms), stipple dots appearing randomly but seeded."
+    },
+    {
+      "id": "brush",
+      "term": "Brush Illustration",
+      "aka": [
+        "brush pen",
+        "sumi brush"
+      ],
+      "family": "hand-drawn",
+      "what": "Illustration made with brush strokes: dramatic tapers, wet and dry edges, expressive gestures.",
+      "looks": "Thick-to-thin tapered strokes, dry-brush breaks, ink pooling, expressive gestures, black or limited colors.",
+      "motion": "Strokes painting on with speed-dependent width, splatters, dry-brush reveals.",
+      "use": "Sports, martial and cultural themes, food, expressive brand moments.",
+      "conveys": "Energy, gesture, artistry.",
+      "vs": "Ink illustration is fine-pen hatching; watercolor is translucent washes; brush is gestural stroke-led.",
+      "search": [
+        "brush stroke animation",
+        "brush illustration motion",
+        "ink brush reveal"
+      ],
+      "prompt": "Illustrate with brush strokes: tapered filled SVG stroke shapes (thick 12-24px to thin 1px) with dry-brush breaks (noise mask) and ink pooling at stroke ends; black or 1-2 colors; animate strokes painting on via a mask moving along the stroke (250-500 ms, power2.out) with occasional splatter dots."
+    },
+    {
+      "id": "watercolor",
+      "term": "Watercolor",
+      "family": "hand-drawn",
+      "what": "Painted illustration in transparent washes with blooms, soft edges, pigment granulation and paper texture.",
+      "looks": "Translucent layered washes, pigment pooling at edges, blooms, granulation, white paper showing through, soft palettes.",
+      "motion": "Washes spreading and bleeding in, color blooming, soft crossfades; hard to animate frame-by-frame, so usually layered stills.",
+      "use": "Wellness, travel, weddings and lifestyle, children's content, nonprofit.",
+      "conveys": "Softness, emotion, artistry, calm.",
+      "vs": "Grainy vector is digital and hard-edged; watercolor is painterly with soft bleeding edges.",
+      "search": [
+        "watercolor animation",
+        "watercolor reveal motion",
+        "watercolor illustration motion"
+      ],
+      "prompt": "Illustrate in watercolor: use painted watercolor texture assets or approximate with layered semi-transparent shapes (30-60% opacity, multiply blend), edges darkened slightly, soft displacement (feTurbulence + feDisplacementMap scale 6-10) and paper texture; soft palette; animate washes bleeding in via expanding blurred masks (800-1200 ms, sine.out) rather than hard moves."
+    },
+    {
+      "id": "editorial",
+      "term": "Editorial Illustration",
+      "family": "conceptual",
+      "what": "Illustration commissioned to accompany and interpret a story, typically with a strong authorial style and a visual idea.",
+      "looks": "Distinct artist-driven style, limited palette, strong composition, visual metaphor, often textured or painterly.",
+      "motion": "Subtle animated illustrations (loops, cinemagraph-like motion), metaphor unfolding, camera moves across scenes.",
+      "use": "Articles, reports, brand storytelling, thought leadership, explainer covers.",
+      "conveys": "Thoughtfulness, voice, sophistication.",
+      "vs": "Conceptual illustration is defined by the idea (visual metaphor); editorial is defined by context (accompanying a story) and often uses conceptual thinking.",
+      "search": [
+        "editorial illustration animation",
+        "animated editorial illustration",
+        "editorial gif illustration"
+      ],
+      "refs": [
+        "The New Yorker covers",
+        "The New York Times opinion illustration"
+      ],
+      "prompt": "Illustrate editorially: one strong visual idea per scene that interprets the message; limited 3-4 color palette with a textured or painterly finish; bold composition with a clear focal point; animate as subtle loops (one or two elements moving, 3-6 s seamless) or a slow camera move across the illustration."
+    },
+    {
+      "id": "conceptual",
+      "term": "Conceptual Illustration",
+      "aka": [
+        "visual metaphor"
+      ],
+      "family": "conceptual",
+      "what": "Illustration that communicates an abstract idea through visual metaphor, juxtaposition or symbolic transformation.",
+      "looks": "Simple, symbolic compositions; objects combined or transformed (a lightbulb that is a brain); negative-space tricks; restrained palettes.",
+      "motion": "Metaphor reveals: one object morphing into another, reveals of hidden meaning, visual puns resolved over time.",
+      "use": "Explainers of abstract topics (security, AI, finance), thought leadership, campaigns.",
+      "conveys": "Intelligence, clarity of idea, wit.",
+      "vs": "Editorial describes context; conceptual describes method. Iconographic illustration is literal symbols; conceptual combines them into ideas.",
+      "search": [
+        "conceptual illustration animation",
+        "visual metaphor motion design",
+        "conceptual explainer animation"
+      ],
+      "prompt": "Illustrate conceptually: express each abstract idea as a single visual metaphor (combine or transform two familiar objects, or use negative space to reveal a second meaning); keep compositions sparse with 2-3 elements and a 3-color palette; animate the metaphor resolving: morph object A into object B (path morph 600-900 ms) or reveal the hidden meaning with a mask or camera move."
+    },
+    {
+      "id": "cartoon",
+      "term": "Cartoon",
+      "family": "character",
+      "what": "Exaggerated, simplified drawing with rubbery proportions, expressive faces and comic timing.",
+      "looks": "Rounded exaggerated forms, big eyes and expressions, outlines, flat or cel colors, rubber-hose limbs in retro variants.",
+      "motion": "Classic animation principles: squash and stretch, anticipation, smears, exaggerated reactions, bouncy timing.",
+      "use": "Entertainment, kids content, humorous explainers, social ads.",
+      "conveys": "Humour, fun, energy.",
+      "vs": "Character illustration is the broader discipline (can be serious); cartoon is exaggerated and comedic. Anime uses cel shading and different proportions.",
+      "search": [
+        "cartoon animation style",
+        "2D cartoon motion",
+        "rubber hose animation"
+      ],
+      "prompt": "Illustrate in cartoon style: exaggerated rounded forms, big expressive eyes, 2-3px outlines, flat colors with optional one-tone cel shadow; animate with strong principles: anticipation (100 ms), squash and stretch (scale 0.8/1.2 on impacts), smear frames on fast moves, exaggerated reactions and bouncy timing (back.out, elastic.out)."
+    },
+    {
+      "id": "character",
+      "term": "Character Illustration",
+      "family": "character",
+      "what": "Illustration centred on people or creatures with consistent design, personality and pose, used to carry narrative.",
+      "looks": "Designed characters with consistent proportions, clothing and palette; expressive posing; environment secondary.",
+      "motion": "Rigged or frame-by-frame acting: walks, gestures, expressions, lip sync, interactions with objects and UI.",
+      "use": "Explainers, brand stories, onboarding, customer-story films.",
+      "conveys": "Relatability, empathy, human context.",
+      "vs": "Mascot illustration is one recurring brand character; character illustration can be any cast. Cartoon is one exaggerated stylistic register of it.",
+      "search": [
+        "character animation explainer",
+        "character illustration motion",
+        "2D character animation"
+      ],
+      "prompt": "Illustrate with designed characters: a consistent cast (fixed proportions, 3-4 skin/clothing colors each, same line treatment) acting out the story; environments simplified behind them; animate with rigged limbs (transform-origin at joints), readable gestures, blinks every 2-4 s, anticipation and follow-through; keep characters on-model in every scene."
+    },
+    {
+      "id": "mascot",
+      "term": "Mascot Illustration",
+      "family": "character",
+      "what": "A single recurring brand character designed for recognisability and emotional connection across contexts.",
+      "looks": "Simple memorable silhouette, brand colors, expressive face, few details so it works at any size, defined pose set.",
+      "motion": "Personality-driven: reactions, celebrations, idle loops, pointing and guiding, emotional beats.",
+      "use": "Consumer apps, onboarding, social, gamification, brand campaigns.",
+      "conveys": "Personality, memorability, warmth.",
+      "vs": "Character illustration covers any cast; mascot is a single ownable brand figure. Kawaii and sticker are styles a mascot may use.",
+      "search": [
+        "mascot animation",
+        "brand mascot illustration motion",
+        "app mascot animation"
+      ],
+      "refs": [
+        "Duolingo (Duo)",
+        "Mailchimp (Freddie)",
+        "GitHub (Octocat)"
+      ],
+      "prompt": "Illustrate the brand mascot: keep the silhouette simple and on-model (same proportions, colors and features every time), expressive face with large readable features; give it a defined pose set (idle, point, celebrate, think); animate personality: 2-3 s idle loop, reactions to each beat with anticipation and squash-and-stretch, pointing at UI elements that matter."
+    },
+    {
+      "id": "sticker",
+      "term": "Sticker Illustration",
+      "family": "character",
+      "what": "Illustrations designed as die-cut stickers: bold simple subjects with a white keyline border and slight shadow.",
+      "looks": "Thick white border around the silhouette, bold flat or glossy subject, small drop shadow, playful angle.",
+      "motion": "Slap-on pops, peel-offs, wobbles, sticker-bomb stacking.",
+      "use": "Social, messaging, youth brands, merch, creator content.",
+      "conveys": "Playfulness, collectibility, expression.",
+      "vs": "Sticker style (visual style) is the whole art direction; sticker illustration is the individual image treatment.",
+      "search": [
+        "sticker illustration",
+        "sticker animation",
+        "die cut sticker motion"
+      ],
+      "prompt": "Illustrate as stickers: bold simple subjects with a 6-10px white die-cut keyline following the silhouette, a small drop shadow (0 3px 6px rgba(0,0,0,0.25)), placed at ±5-15°; animate slap-ons from scale 1.3 to 1 with back.out(2.5) 250 ms and a small rotation settle."
+    },
+    {
+      "id": "cutout-character",
+      "term": "Cutout Character",
+      "aka": [
+        "cut-out animation",
+        "puppet animation"
+      ],
+      "family": "collage",
+      "what": "Characters built from separate flat pieces (paper or digital) hinged at joints and animated like puppets.",
+      "looks": "Visible separate body parts, flat textures (paper, photo or vector), hinged joints, simple layered construction.",
+      "motion": "Puppet-like rotations at joints, stepped timing, parts swapping for expressions and mouth shapes.",
+      "use": "Explainers, comedic content, collage-style campaigns, kids content.",
+      "conveys": "Charm, humour, handmade wit.",
+      "vs": "Paper cut is about layered scenes; cutout character is about jointed figures. Character illustration is usually smoothly rigged.",
+      "search": [
+        "cutout character animation",
+        "cut out animation style",
+        "paper puppet animation"
+      ],
+      "refs": [
+        "South Park",
+        "Terry Gilliam (Monty Python)"
+      ],
+      "prompt": "Illustrate cutout characters: build figures from separate flat pieces (head, torso, upper/lower limbs) with visible edges, textured as paper or photo cutouts; set transform-origin at each joint; animate as puppets with rotations at joints on 12 fps steps(), swapping mouth and eye pieces for expressions."
+    },
+    {
+      "id": "iconographic",
+      "term": "Iconographic Illustration",
+      "aka": [
+        "icon-style illustration"
+      ],
+      "family": "informational",
+      "what": "Illustration built from icon-like, symbolic elements with consistent grid, stroke and simplification, scaled up into scenes.",
+      "looks": "Consistent stroke or fill style, simplified symbols, grid-based construction, limited palette, modular composition.",
+      "motion": "Icons popping in sequence, modular assembly, morphs between icons, connecting lines drawing.",
+      "use": "Feature explainers, infographics, SaaS marketing, process diagrams.",
+      "conveys": "Clarity, efficiency, systematic thinking.",
+      "vs": "Pictograms are universal wayfinding-grade symbols with maximal reduction; iconographic illustration composes icon-like elements into richer scenes.",
+      "search": [
+        "icon illustration animation",
+        "iconographic explainer",
+        "icon animation motion"
+      ],
+      "prompt": "Illustrate iconographically: construct subjects as icon-grade symbols on a 24px grid with a consistent 2px stroke (or consistent solid fills), 2px corner radii, 2-3 colors; compose icons into modular scenes; animate icons popping in sequence (back.out(1.5) 250 ms, stagger 60 ms), connecting lines drawing between them, morphs between related icons."
+    },
+    {
+      "id": "pictogram",
+      "term": "Pictogram",
+      "family": "informational",
+      "what": "Maximally reduced, universal symbols of people and objects designed to be understood without language.",
+      "looks": "Solid single-color figures, geometric construction, no detail beyond the essential silhouette, strict consistency.",
+      "motion": "Pictograms moving through simple actions, swapping poses, forming systems and counts.",
+      "use": "Wayfinding, safety and instructions, data (isotype counts), event systems.",
+      "conveys": "Universality, clarity, public-information authority.",
+      "vs": "Iconographic illustration is richer and brand-flavoured; pictograms are universal and minimal.",
+      "search": [
+        "pictogram animation",
+        "isotype animation",
+        "Olympic pictograms"
+      ],
+      "refs": [
+        "Otl Aicher (Munich 1972 Olympics pictograms)",
+        "Otto Neurath / Gerd Arntz (Isotype)"
+      ],
+      "prompt": "Illustrate with pictograms: solid single-color silhouettes built from geometric primitives (circle head, rounded-rect limbs at fixed widths), no facial or clothing detail, strictly consistent proportions; for quantities use Isotype repetition (one figure = one unit); animate pose swaps with 2-3 key poses and staggered count-ups of repeated figures."
+    },
+    {
+      "id": "technical-diagram",
+      "term": "Technical Diagram",
+      "aka": [
+        "technical illustration"
+      ],
+      "family": "informational",
+      "what": "Accurate explanatory drawings of how something works: labelled parts, callouts, cutaways and exploded views.",
+      "looks": "Precise line work, callout leaders with labels, cutaways, exploded views, dimension lines, restrained palette with one highlight.",
+      "motion": "Exploded views separating, callouts drawing out, cutaways revealing internals, flows traced through the system.",
+      "use": "Hardware, engineering, developer and infrastructure explainers, product features.",
+      "conveys": "Expertise, transparency, precision.",
+      "vs": "Schematic is symbolic and abstract (circuit, flow); technical diagram is representational. Blueprint is a specific white-on-blue drawing convention.",
+      "search": [
+        "technical illustration animation",
+        "exploded view animation",
+        "technical diagram motion graphics"
+      ],
+      "prompt": "Illustrate as technical diagrams: precise 1-1.5px line work of the real object, parts labelled with leader lines ending in small dots and 11-13px labels, cutaway and exploded views; neutral palette with one highlight color on the part being discussed; animate exploded views separating along axes (power2.inOut 800 ms), leaders drawing out then labels fading in, flows traced along paths."
+    },
+    {
+      "id": "schematic",
+      "term": "Schematic",
+      "aka": [
+        "schematic diagram",
+        "system diagram"
+      ],
+      "family": "informational",
+      "what": "Abstract symbolic diagram of a system's components and connections (nodes, edges, flows), not its physical appearance.",
+      "looks": "Boxes and nodes, orthogonal connectors, arrows, standard symbols, grid alignment, monospace labels, minimal color coding.",
+      "motion": "Data packets flowing along connectors, nodes lighting up in sequence, connections drawing, system states changing.",
+      "use": "Architecture explainers, APIs, infrastructure, AI pipelines, process flows.",
+      "conveys": "System understanding, logic, technical credibility.",
+      "vs": "Technical diagram depicts the physical object; schematic depicts logical relationships. Blueprint is a drawing convention that can contain either.",
+      "search": [
+        "system diagram animation",
+        "architecture diagram motion",
+        "data flow animation"
+      ],
+      "prompt": "Illustrate as a schematic: nodes as rounded rectangles on a grid with monospace labels, orthogonal 1.5px connectors with arrowheads, a small legend of 2-3 status colors; animate connectors drawing on, nodes activating in sequence (border and fill change, 200 ms), and small dots traveling along connectors (motion path, linear) to show data flow."
+    },
+    {
+      "id": "blueprint",
+      "term": "Blueprint",
+      "family": "informational",
+      "what": "Technical drawing in the cyanotype convention: white lines on blue with grid, dimensions and annotations.",
+      "looks": "Prussian-blue ground, white or pale-cyan fine lines, grid, dimension lines, title block, handwritten-style or stencil annotations.",
+      "motion": "Lines drafting on, dimensions appearing, blueprint transforming into the real product.",
+      "use": "Engineering and architecture stories, product origins, 'how it's built' moments.",
+      "conveys": "Engineering rigour, planning, craft.",
+      "vs": "Technical diagram is any explanatory drawing; blueprint is specifically the white-on-blue convention.",
+      "search": [
+        "blueprint animation",
+        "blueprint to product transition",
+        "technical blueprint motion graphics"
+      ],
+      "prompt": "Illustrate as a blueprint: background #1F4E8C with a 20px grid at 12% white; drawings in 1px white/pale cyan (#DDEEFF) lines with dimension lines, arrows and small stencil-style annotations; a title block in the corner; animate lines drafting on in construction order (stroke-dashoffset, 300-500 ms each, stagger 80 ms), dimensions appearing after, optional crossfade into the real product."
+    },
+    {
+      "id": "isometric",
+      "term": "Isometric Illustration",
+      "family": "projection",
+      "what": "Illustration in isometric projection: three axes 120° apart, no perspective, equal foreshortening, 30° grid.",
+      "looks": "Objects on a 30° grid, three shaded faces, miniature worlds, tile-based layouts, clean flat or soft-gradient colors.",
+      "motion": "Blocks rising, items sliding along iso axes, small machines looping, tiles assembling.",
+      "use": "Platform and infrastructure explainers, data flows, games, city scenes.",
+      "conveys": "Systematic clarity, a world you can survey.",
+      "vs": "Axonometric is the umbrella for parallel projections; isometric is the equal-angle case. 2.5D layered uses stacked planes with perspective.",
+      "search": [
+        "isometric illustration animation",
+        "isometric explainer",
+        "isometric motion design"
+      ],
+      "prompt": "Illustrate in isometric projection: draw everything on a 30°/150° isometric grid with no vanishing points; shade each object's top/left/right faces light/mid/dark from one hue; flat or subtle gradient fills; animate objects rising from the grid (back.out(1.2) 400 ms, stagger 40 ms), sliding only along iso axes, with small looping mechanisms."
+    },
+    {
+      "id": "axonometric",
+      "term": "Axonometric Illustration",
+      "aka": [
+        "dimetric",
+        "trimetric",
+        "parallel projection"
+      ],
+      "family": "projection",
+      "what": "Parallel-projection drawing (no vanishing points) in which the axes may be foreshortened unequally: includes isometric, dimetric and trimetric.",
+      "looks": "Parallel lines stay parallel; tilted plan views (e.g. 45°/45° plan oblique), architectural cutaways, exploded axonometrics.",
+      "motion": "Floors lifting to reveal interiors, exploded assemblies, rotation between plan and axonometric views.",
+      "use": "Architecture, spatial products, office and venue explainers, hardware assembly.",
+      "conveys": "Spatial clarity, architectural precision.",
+      "vs": "Isometric is the special case with equal angles (120°); axonometric includes dimetric/trimetric and plan-oblique views often preferred in architecture.",
+      "search": [
+        "axonometric illustration",
+        "exploded axonometric animation",
+        "axonometric architecture diagram"
+      ],
+      "prompt": "Illustrate in axonometric projection: use a parallel projection with no vanishing points (e.g. plan oblique: plan rotated 45° with verticals kept vertical, or a dimetric 15°/45° setup); keep parallel lines parallel; architectural line weights (1.5px outlines, 0.75px details); animate floors or components lifting apart vertically (exploded axonometric, power2.inOut 800 ms) and rotating between plan and axonometric via CSS 3D transforms."
+    },
+    {
+      "id": "layered-2-5d",
+      "term": "2.5D Layered Illustration",
+      "aka": [
+        "2.5D",
+        "parallax illustration"
+      ],
+      "family": "projection",
+      "what": "Flat 2D artwork separated into depth layers and moved with a perspective camera to create parallax depth.",
+      "looks": "Flat illustrated planes (foreground, midground, background) with atmospheric fading, depth of field between layers.",
+      "motion": "Camera push-ins and pans with parallax, layers drifting at different rates, rack focus between planes.",
+      "use": "Storytelling explainers, title sequences, brand films, animated editorial.",
+      "conveys": "Depth, immersion, cinematic storytelling with 2D craft.",
+      "vs": "Isometric has no perspective and no parallax camera; 2.5D keeps flat art but moves a perspective camera through layers.",
+      "search": [
+        "2.5D parallax animation",
+        "2.5D illustration motion",
+        "parallax layered illustration"
+      ],
+      "prompt": "Illustrate in 2.5D layers: split each scene into 3-5 flat planes (foreground, midground, subject, background, sky), positioned in CSS 3D space (translateZ) inside a perspective container (perspective 1200px) or offset in 2D with depth-scaled speeds; fade and desaturate distant layers; blur foreground/background slightly for depth of field; animate a slow camera push or pan (sine.inOut 3-5 s) so layers parallax."
+    },
+    {
+      "id": "collage",
+      "term": "Collage",
+      "family": "collage",
+      "what": "Illustration composed from assembled fragments: cut shapes, textures, drawn elements and found materials.",
+      "looks": "Mixed fragments with visible edges, contrasting textures and scales, layered overlaps, shadows between pieces.",
+      "motion": "Pieces sliding, rotating and swapping; stop-motion stutter; parallax between layers.",
+      "use": "Editorial, culture brands, campaigns, music, creative explainers.",
+      "conveys": "Creativity, layered meaning, handmade sophistication.",
+      "vs": "Photo collage uses photographic fragments specifically; mixed-media collage (visual style) is the whole art direction.",
+      "search": [
+        "collage animation",
+        "collage illustration motion",
+        "cutout collage animation"
+      ],
+      "prompt": "Illustrate as collage: assemble each subject from 4-8 fragments (cut paper shapes, textures, drawn marks, type scraps) with visible edges and small drop shadows between layers; contrasting scales and textures; animate fragments sliding and rotating into place (power2.out 400 ms, stagger 60 ms) with optional 12 fps stutter."
+    },
+    {
+      "id": "photo-collage",
+      "term": "Photo Collage",
+      "aka": [
+        "photomontage"
+      ],
+      "family": "collage",
+      "what": "Illustration built from cut-out photographs combined into new, often surreal, compositions.",
+      "looks": "Cut-out photo subjects with hard or torn edges, black-and-white or duotone treatments, scale juxtapositions, graphic shapes behind.",
+      "motion": "Cut-outs sliding and scaling, heads and objects swapping, parallax between photo layers, stop-motion.",
+      "use": "Editorial, campaigns, music, political and cultural content.",
+      "conveys": "Wit, surprise, commentary.",
+      "vs": "Collage may use any fragments; photo collage is photographic. Constructivist photomontage is its historical ancestor.",
+      "search": [
+        "photo collage animation",
+        "photomontage motion graphics",
+        "cutout photo animation"
+      ],
+      "prompt": "Illustrate with photo collage: cut-out photographic elements (clean masks or torn edges with 3-6px white border) treated in black-and-white or duotone, combined at surprising scales over flat color shapes; animate cut-outs sliding and scaling into place (power3.out 500 ms), swaps between elements, parallax across 3 layers."
+    },
+    {
+      "id": "paper-cut",
+      "term": "Paper Cut",
+      "aka": [
+        "papercut",
+        "layered paper"
+      ],
+      "family": "collage",
+      "what": "Illustration that looks cut from layered paper: stacked sheets with crisp edges and small shadows showing depth.",
+      "looks": "Stacked flat colored layers, paper fibre texture, soft contact shadows between layers, simple silhouettes, tonal steps.",
+      "motion": "Layer parallax, layers sliding in from depth, pop-up hinges, gentle float.",
+      "use": "Seasonal campaigns, kids and eco brands, storytelling explainers.",
+      "conveys": "Craft, warmth, depth, charm.",
+      "vs": "Cutout character is about jointed figures; paper cut is about layered scenes. Paper cutout (visual style) is the full art direction.",
+      "search": [
+        "paper cut illustration animation",
+        "layered paper animation",
+        "papercut style motion"
+      ],
+      "prompt": "Illustrate as layered paper cut: build scenes from 4-7 stacked flat layers stepping in tone, each with subtle paper fibre texture and a soft contact shadow on the layer below (0 2px 6px rgba(0,0,0,0.25)); simple silhouettes; animate layers sliding in from depth with parallax (power2.out 600 ms, stagger 80 ms)."
+    },
+    {
+      "id": "pixel-art",
+      "term": "Pixel Art",
+      "family": "dimensional",
+      "what": "Raster illustration built pixel by pixel at low resolution with restricted palettes.",
+      "looks": "Visible square pixels, 8-32 color palettes, dithering, no anti-aliasing, sprites and tiles.",
+      "motion": "Sprite cycles at 6-12 fps, integer movement, stepped transitions.",
+      "use": "Games, developer brands, nostalgia, playful accents.",
+      "conveys": "Nostalgia, play, indie charm.",
+      "vs": "Low-poly 3D is faceted geometry; pixel art is 2D raster. Pixel art as visual style covers the whole frame; here only the illustrations are pixel art.",
+      "search": [
+        "pixel art animation",
+        "pixel sprite animation",
+        "pixel art illustration"
+      ],
+      "prompt": "Illustrate in pixel art: sprites drawn on a low-resolution grid (16-64px tall) and scaled with integer multiples and image-rendering: pixelated; 16-color palette, dithering for shading, no anti-aliasing; animate sprite frames at 8-12 fps with steps() and move in whole-pixel increments."
+    },
+    {
+      "id": "clay-3d",
+      "term": "3D Clay",
+      "aka": [
+        "clay render"
+      ],
+      "family": "dimensional",
+      "what": "3D illustrated objects and characters that look modelled from clay: soft lumps, fingerprints and matte color.",
+      "looks": "Chunky rounded forms, fingerprint texture, matte saturated colors, soft shadows.",
+      "motion": "Stop-motion stepping, squash and stretch, morphs.",
+      "use": "Playful explainers, 3D icons, kids and food brands.",
+      "conveys": "Handmade warmth, playfulness.",
+      "vs": "3D soft forms are smooth and flawless; 3D clay shows handmade imperfection.",
+      "search": [
+        "3D clay illustration",
+        "clay render animation",
+        "claymation 3D icons"
+      ],
+      "prompt": "Illustrate as 3D clay: use pre-rendered clay-style assets or WebGL; in pure SVG/CSS approximate with rounded shapes, radial-gradient shading, a subtle fingerprint noise texture (feTurbulence lighting at low opacity) and soft contact shadows; animate at 12 fps with squash and stretch and slight surface boil."
+    },
+    {
+      "id": "cartoon-3d",
+      "term": "3D Cartoon",
+      "aka": [
+        "stylised 3D character"
+      ],
+      "family": "dimensional",
+      "what": "Stylised 3D characters and objects with cartoon proportions and appealing shapes, in the tradition of feature animation.",
+      "looks": "Big heads and eyes, appealing silhouettes, subsurface-lit skin, saturated palettes, soft studio lighting.",
+      "motion": "Full 3D character animation: acting, anticipation, overshoot, follow-through, expressive faces.",
+      "use": "Mascots, entertainment, kids brands, consumer campaigns.",
+      "conveys": "Appeal, warmth, humour, polish.",
+      "vs": "3D soft forms are abstract objects; 3D cartoon is character-led. Toy-like 3D emphasises molded plastic materials.",
+      "search": [
+        "3D cartoon character animation",
+        "stylized 3D character",
+        "Pixar style 3D"
+      ],
+      "prompt": "Illustrate in 3D cartoon style: use pre-rendered or WebGL stylised 3D characters with appealing exaggerated proportions (large head and eyes), soft studio lighting and saturated colors; if assets are unavailable, fall back to 2D cartoon with radial-gradient shading; animate with full character principles (anticipation, overshoot, follow-through, expressive faces)."
+    },
+    {
+      "id": "soft-forms-3d",
+      "term": "3D Soft Forms",
+      "aka": [
+        "soft 3D objects",
+        "3D shapes"
+      ],
+      "family": "dimensional",
+      "what": "Abstract or object 3D illustration with rounded bevelled forms, matte pastel materials and diffuse light.",
+      "looks": "Rounded primitives (pills, tori, blobs), matte or satin pastel materials, ambient occlusion, soft shadows, clean backgrounds.",
+      "motion": "Floating, gentle bounces, slow rotations, soft springs.",
+      "use": "3D icons, feature highlights, app promos, abstract brand compositions.",
+      "conveys": "Calm, approachable, tactile modernity.",
+      "vs": "3D clay has handmade imperfection; low-poly 3D is faceted; soft forms are smooth and flawless.",
+      "search": [
+        "3D soft shapes animation",
+        "pastel 3D shapes",
+        "3D icons soft render"
+      ],
+      "prompt": "Illustrate with 3D soft forms: rounded pills, tori, spheres and blobs in matte pastels; in CSS/SVG fake volume with radial gradients (highlight upper-left, shade lower-right), inner shadows and large diffuse drop shadows; or use Three.js MeshStandardMaterial roughness 0.6-0.8 with soft lighting; animate floating (y ±8px, sine.inOut 3 s), soft spring settles and slow rotations."
+    },
+    {
+      "id": "low-poly-3d",
+      "term": "Low-Poly 3D",
+      "family": "dimensional",
+      "what": "3D illustration built from visible flat-shaded polygons.",
+      "looks": "Faceted meshes, flat shading per face, crisp silhouettes, limited palettes.",
+      "motion": "Orbiting cameras, facets assembling or shattering, slow rotations.",
+      "use": "Games, environmental scenes, data and network themes.",
+      "conveys": "Stylised structure, digital craft.",
+      "vs": "Pixel art is 2D raster; 3D soft forms are smooth. Low-poly is achievable in SVG as faceted polygons.",
+      "search": [
+        "low poly 3D animation",
+        "low poly illustration",
+        "low poly landscape animation"
+      ],
+      "prompt": "Illustrate in low-poly 3D: faceted triangle meshes with flat shading per face (SVG polygons or Three.js flatShading), each facet a step of a 4-6 color ramp lit from upper-left; no textures; animate slow rotations and facets assembling (power3.out 800 ms, stagger 10 ms)."
+    },
+    {
+      "id": "photoreal-3d",
+      "term": "Photorealistic 3D",
+      "family": "dimensional",
+      "what": "3D illustration rendered with physically accurate materials and light, indistinguishable from photography.",
+      "looks": "Real materials, accurate reflections and shadows, depth of field, macro detail.",
+      "motion": "Camera glides, exploded views, physical assembly.",
+      "use": "Product visualisation, hardware, automotive.",
+      "conveys": "Precision, desirability, realism.",
+      "vs": "Glossy 3D and 3D soft forms are stylised; photorealistic 3D cannot be produced in CSS/SVG and needs pre-rendered assets.",
+      "search": [
+        "photorealistic 3D product animation",
+        "product CGI render",
+        "photoreal 3D render"
+      ],
+      "prompt": "Use photorealistic 3D renders supplied as pre-rendered stills or video (never fake photorealism in CSS); composite them with clean shadows on seamless backgrounds; animate with camera-like moves (3-6% push-ins, parallax between separated render layers, power2.inOut 1200 ms+)."
+    },
+    {
+      "id": "surreal-3d",
+      "term": "Surreal 3D",
+      "family": "dimensional",
+      "what": "3D illustration that breaks physical logic: impossible objects, unexpected materials, dreamlike scenes.",
+      "looks": "Pristine renders, pastel or monochrome sets, impossible geometry, floating objects.",
+      "motion": "Oddly-satisfying seamless loops, soft transformations.",
+      "use": "Campaign key visuals, social loops, brand films.",
+      "conveys": "Wonder, curiosity, artistic ambition.",
+      "vs": "Conceptual illustration makes a point through metaphor; surreal 3D prioritises dreamlike sensation.",
+      "search": [
+        "surreal 3D illustration",
+        "surreal 3D animation loop",
+        "dreamlike 3D render"
+      ],
+      "refs": [
+        "Six N. Five",
+        "Andreas Wannerstedt"
+      ],
+      "prompt": "Illustrate with surreal 3D: pre-rendered or WebGL scenes with one impossible idea each (floating objects, wrong materials, impossible architecture) in a restricted pastel or monochrome palette with soft precise light; animate as seamless 4-8 s loops with slow sine.inOut transformations."
+    }
+  ]
+}

@@ -1,0 +1,534 @@
+{
+  "id": "era",
+  "name": "Era / design-movement influence",
+  "group": "look",
+  "controls": "Which historical design movement or period the piece borrows from, and how much: the source of the references, not the finished look.",
+  "question": "Should the piece borrow from a design era or movement?",
+  "pick": {
+    "min": 0,
+    "max": 2
+  },
+  "notes": "Era names the historical source; visual style names the finished look. A Swiss-style film today is not a 1960s poster: it borrows grid, grotesk and asymmetry and modernises resolution, motion and color. Contemporary motion design reuses the past in three modes. Quotation: a faithful, recognisable citation used knowingly (a real Windows 95 dialog, a Saul Bass cut-paper title); strong and nostalgic but can date fast. Pastiche: surface features copied without the underlying logic (neon grid + chrome type slapped on anything); fast and legible, often generic. Reinterpretation: the movement's principles applied with contemporary tools and restraint (Bauhaus primary geometry driving a modern data-viz system); the most durable. Prompts should say which traits to borrow and which to modernise. Decade labels (70s, 80s, 90s) are informal umbrellas that cover several movements; name the specific movement where possible. Several entries (Bauhaus, Swiss, Constructivism, Memphis, Pop Art, Y2K, Web 1.0, vaporwave, neo-brutalism) also exist as visual styles: choose them here when the historical reference matters, there when only the look matters. Swiss Style and International Typographic Style are the same movement and share one entry.",
+  "families": [
+    {
+      "id": "early-modern",
+      "name": "Early modernism (1910s-1930s)"
+    },
+    {
+      "id": "mid-century",
+      "name": "Mid-century & pop (1945-1970)"
+    },
+    {
+      "id": "decades",
+      "name": "Late-century decades (1970s-1990s)"
+    },
+    {
+      "id": "digital",
+      "name": "Digital & internet eras"
+    },
+    {
+      "id": "interface",
+      "name": "Interface design movements (2007-now)"
+    }
+  ],
+  "options": [
+    {
+      "id": "bauhaus",
+      "term": "Bauhaus",
+      "family": "early-modern",
+      "what": "The German design school (1919-1933) that unified art, craft and industry through primary geometry, primary color and functional typography.",
+      "looks": "Circle, square, triangle; red, yellow, blue with black; geometric sans and universal lowercase; asymmetric balance; photography and type integrated.",
+      "motion": "Contemporary reuse: shapes as actors constructing compositions, mechanical rhythms, modular builds.",
+      "use": "Design-literate brands, art institutions, geometric identity systems, educational explainers.",
+      "conveys": "Foundational rigour, creativity, design heritage.",
+      "vs": "Era Bauhaus is the historical reference; the visual style 'Bauhaus' is the finished look. Constructivism is its more diagonal, political Soviet contemporary.",
+      "search": [
+        "Bauhaus poster design",
+        "Herbert Bayer typography",
+        "Bauhaus inspired motion"
+      ],
+      "refs": [
+        "Herbert Bayer",
+        "László Moholy-Nagy",
+        "Josef Albers"
+      ],
+      "prompt": "Borrow from Bauhaus: primary geometry (circle, square, triangle), primary palette with black, geometric sans and lowercase headlines, asymmetric balance, and form-follows-function restraint. Modernise: tune the primaries to screen-friendly values (e.g. #E63946, #F4C430, #1D4E89), use a contemporary geometric sans, add smooth eased motion and responsive spacing; avoid faux-aged paper unless quotation is intended."
+    },
+    {
+      "id": "swiss",
+      "term": "Swiss / International Typographic Style",
+      "aka": [
+        "Swiss Style",
+        "International Typographic Style"
+      ],
+      "family": "mid-century",
+      "what": "1950s-60s Swiss movement of objective, grid-based design with grotesk typography, asymmetric layouts and photography over illustration.",
+      "looks": "Akzidenz-Grotesk / Helvetica / Univers, modular grids, flush-left ragged-right, large type as image, flat color, objective photography.",
+      "motion": "Contemporary reuse: grid-locked kinetic typography, scale-driven hierarchy changes, hard cuts.",
+      "use": "Kinetic type, conference and cultural identities, editorial product films, data stories.",
+      "conveys": "Objectivity, clarity, intelligence.",
+      "vs": "Same movement under two names (Swiss Style is the colloquial one). Modern SaaS design inherits its grids and grotesks without its poster scale and rigor.",
+      "search": [
+        "Swiss style poster",
+        "Josef Müller-Brockmann grid",
+        "International Typographic Style animation"
+      ],
+      "refs": [
+        "Josef Müller-Brockmann",
+        "Armin Hofmann",
+        "Emil Ruder",
+        "Wim Crouwel"
+      ],
+      "prompt": "Borrow from the Swiss / International Typographic Style: a strict modular grid, grotesk typography (Helvetica / Akzidenz / Neue Haas class), flush-left ragged-right setting, asymmetric composition, type used at poster scale as the image, and flat limited color. Modernise: use a contemporary grotesk cut with better screen hinting, allow motion to reveal the grid (blocks sliding on column lines, typographic scale jumps), and add screen-native contrast; keep ornament at zero."
+    },
+    {
+      "id": "constructivism",
+      "term": "Constructivism",
+      "family": "early-modern",
+      "what": "Soviet avant-garde movement (c. 1915-1930s) of dynamic diagonals, photomontage, bold sans type and red-and-black propaganda graphics.",
+      "looks": "Diagonal compositions, red/black/cream, heavy condensed sans, photomontage, wedges and circles.",
+      "motion": "Contemporary reuse: aggressive diagonal moves, slams, rotating wedges, rapid cuts.",
+      "use": "Manifesto films, activism, bold launches, sports and event promos.",
+      "conveys": "Urgency, revolution, collective energy.",
+      "vs": "Bauhaus is orthogonal and balanced; Constructivism is diagonal and tense. The visual-style entry is the finished look; this is the historical source.",
+      "search": [
+        "Russian constructivism poster",
+        "El Lissitzky design",
+        "constructivist motion graphics"
+      ],
+      "refs": [
+        "El Lissitzky",
+        "Alexander Rodchenko",
+        "Stenberg brothers"
+      ],
+      "prompt": "Borrow from Constructivism: steep diagonal axes, red/black/off-white palette, heavy condensed sans in uppercase as structural bars, photomontage cutouts and wedges. Modernise: use crisp vector edges and contemporary condensed faces, keep photography high-resolution and graded, turn diagonals into motion paths, and drop propaganda symbolism unless the brief calls for it."
+    },
+    {
+      "id": "art-deco",
+      "term": "Art Deco",
+      "family": "early-modern",
+      "what": "1920s-30s decorative modernism: symmetry, sunbursts, stepped forms, gold and black, luxurious geometric display type.",
+      "looks": "Symmetrical fans and chevrons, thin parallel lines, gold on black or emerald, geometric high-contrast display type.",
+      "motion": "Contemporary reuse: symmetrical unfolding, line draws from the center, gold shimmer.",
+      "use": "Luxury, hospitality, spirits, galas, period entertainment.",
+      "conveys": "Glamour, celebration, heritage opulence.",
+      "vs": "Contemporary luxury is minimal and quiet; Art Deco is ornamental and symmetrical.",
+      "search": [
+        "art deco poster design",
+        "art deco typography",
+        "art deco motion graphics"
+      ],
+      "refs": [
+        "A.M. Cassandre",
+        "Chrysler Building"
+      ],
+      "prompt": "Borrow from Art Deco: strict symmetry, sunburst/fan/chevron motifs in thin parallel lines, gold on black or deep emerald, geometric high-contrast display type in uppercase. Modernise: reduce ornament density by half, use crisp vector line work at screen weights (1-2px), pair the display face with a clean sans for secondary text, and animate lines drawing symmetrically."
+    },
+    {
+      "id": "mid-century-modern",
+      "term": "Mid-Century Modern",
+      "family": "mid-century",
+      "what": "Post-war (c. 1945-1969) graphic and product design: simplified geometric illustration, cut-paper shapes, jazzy composition and warm muted color.",
+      "looks": "Mustard, teal, burnt orange, olive; cut-paper silhouettes; dry-brush textures; hand-cut lettering; atomic starbursts.",
+      "motion": "Contemporary reuse: limited animation, cut-paper shapes sliding, syncopated jazz-like timing.",
+      "use": "Title sequences, heritage and hospitality brands, travel, retro explainers.",
+      "conveys": "Wit, optimism, sophistication.",
+      "vs": "Retro-futurism is the space-age sub-strand focused on imagined futures; mid-century modern is the wider period.",
+      "search": [
+        "mid-century modern illustration",
+        "Saul Bass title sequence",
+        "UPA animation style"
+      ],
+      "refs": [
+        "Saul Bass",
+        "Paul Rand",
+        "Charley Harper",
+        "UPA"
+      ],
+      "prompt": "Borrow from mid-century modern: warm muted palette, cut-paper shapes with slightly irregular edges, dry-brush or print texture, stylised silhouettes, hand-cut lettering and syncopated rhythm. Modernise: keep textures subtle (under 6% opacity), clean up registration unless quotation is intended, pair with a contemporary sans for information, and use smoother camera moves between limited-animation holds."
+    },
+    {
+      "id": "pop-art",
+      "term": "Pop Art",
+      "family": "mid-century",
+      "what": "1950s-60s movement that turned mass culture, advertising and comics into art: Ben-Day dots, repetition, flat bold color.",
+      "looks": "Ben-Day dots, thick outlines, repeated images in color variants, comic lettering, consumer products.",
+      "motion": "Contemporary reuse: zoom punches, color-variant grids on beat, speech bubble pops.",
+      "use": "Consumer and food brands, fashion, social campaigns.",
+      "conveys": "Boldness, irony, fun.",
+      "vs": "Comic-book style is narrative; Pop Art is iconic repetition. The visual-style entry is the finished look.",
+      "search": [
+        "pop art design",
+        "Warhol repetition",
+        "Lichtenstein Ben-Day dots"
+      ],
+      "refs": [
+        "Andy Warhol",
+        "Roy Lichtenstein",
+        "Richard Hamilton"
+      ],
+      "prompt": "Borrow from Pop Art: repetition of a single icon in color variants, Ben-Day dot fills, thick black outlines and flat saturated primaries, mass-culture subjects. Modernise: use the brand's own product or UI as the icon, keep dots crisp and scalable (SVG patterns), tune colors to the brand palette and time grid color swaps to music."
+    },
+    {
+      "id": "seventies",
+      "term": "1970s",
+      "aka": [
+        "70s",
+        "seventies"
+      ],
+      "family": "decades",
+      "what": "1970s graphic culture: warm earthy palettes, rounded bold display type, stripes and rainbow bands, supergraphics and soft photography.",
+      "looks": "Brown, orange, mustard, avocado; rounded heavy display faces (Cooper Black, ITC Avant Garde, Windsor class); rainbow stripe bands; supergraphics; soft grainy photography.",
+      "motion": "Contemporary reuse: stripe bands sweeping, groovy easing, wavy type distortions, warm film grain.",
+      "use": "Food and beverage, lifestyle, music, fashion revivals.",
+      "conveys": "Warmth, groove, relaxed nostalgia.",
+      "vs": "Psychedelic belongs to the late 1960s and is more hallucinatory; 70s design is warmer and rounder. The decade label covers several strands (supergraphics, disco, corporate modernism).",
+      "search": [
+        "70s graphic design",
+        "70s typography stripes",
+        "retro 70s motion graphics"
+      ],
+      "refs": [
+        "Cooper Black-era advertising"
+      ],
+      "prompt": "Borrow from 1970s design: warm earthy palette (#8B4513 brown, #E07B39 orange, #E1A730 mustard, #6B7F3A avocado, #F3E3C3 cream), rounded heavy display type, parallel rainbow stripe bands and supergraphics, soft grainy photography. Modernise: tighten spacing and hierarchy, keep grain subtle, use stripes as motion paths and transitions, pair display type with a clean contemporary sans for information."
+    },
+    {
+      "id": "eighties",
+      "term": "1980s",
+      "aka": [
+        "80s",
+        "eighties"
+      ],
+      "family": "decades",
+      "what": "1980s visual culture: neon and chrome, Memphis patterns, early computer graphics, laser grids, airbrush and bold sportswear color.",
+      "looks": "Neon magenta and cyan, chrome logos, laser grids, airbrushed sunsets, Memphis squiggles, early vector and raster computer graphics.",
+      "motion": "Contemporary reuse: chrome flares, grid scrolls, VHS wobble, video-toaster wipes.",
+      "use": "Music, gaming, entertainment, nostalgia campaigns.",
+      "conveys": "Excess, energy, pop nostalgia.",
+      "vs": "Synthwave is the contemporary nostalgic reinterpretation of 80s neon; Memphis is the specific design movement of the decade.",
+      "search": [
+        "80s graphic design",
+        "80s chrome logo",
+        "80s retro motion graphics"
+      ],
+      "refs": [
+        "Stranger Things title sequence (Imaginary Forces)",
+        "MTV idents (1980s)"
+      ],
+      "prompt": "Borrow from 1980s design: neon magenta/cyan on dark, chrome logotypes with horizon reflections, laser perspective grids, airbrushed gradients, Memphis accents. Modernise: use restraint (one or two 80s signifiers per frame), crisp high-resolution rendering, contemporary type for secondary text, and keep VHS artefacts subtle unless quotation is intended."
+    },
+    {
+      "id": "nineties",
+      "term": "1990s",
+      "aka": [
+        "90s",
+        "nineties"
+      ],
+      "family": "decades",
+      "what": "1990s visual culture: grunge and deconstructed typography, early web, rave flyers, bold cartoon graphics and early 3D.",
+      "looks": "Distressed and layered type, photocopy textures, rave flyer chrome and acid colors, loud cartoon graphics, early CGI, bevelled web buttons.",
+      "motion": "Contemporary reuse: jittery type, flash frames, low-fps loops, early-3D spins, camcorder aesthetics.",
+      "use": "Streetwear, music, youth brands, nostalgia content.",
+      "conveys": "Rebellion, irreverence, analog-to-digital nostalgia.",
+      "vs": "Grunge (visual style) is one 90s strand; Y2K covers the late-90s-to-2000s chrome optimism; Web 1.0 is the internet strand.",
+      "search": [
+        "90s graphic design",
+        "90s typography grunge",
+        "90s rave flyer design"
+      ],
+      "refs": [
+        "David Carson (Ray Gun)",
+        "The Designers Republic"
+      ],
+      "prompt": "Borrow from 1990s design: deconstructed layered typography, photocopy and scan textures, rave-flyer acid color and chrome, early-3D objects. Modernise: keep legibility on at least one type layer, render textures at high resolution, use contemporary grotesks for information, and restrict distortion to transitions and hero moments."
+    },
+    {
+      "id": "y2k",
+      "term": "Y2K",
+      "family": "digital",
+      "what": "Late-1990s to early-2000s digital optimism: chrome, translucent candy plastics, blobs, techno type and early 3D.",
+      "looks": "Chrome, iridescence, translucent blue/lime plastics, bubbles, techno fonts, lens flares.",
+      "motion": "Contemporary reuse: glossy spins, chrome morphs, sparkle twinkles.",
+      "use": "Fashion, beauty, music, Gen Z campaigns.",
+      "conveys": "Techno-optimism, pop glamour, nostalgia.",
+      "vs": "Web 2.0 is the later mid-2000s glossy-UI period; the visual-style entry is the finished look.",
+      "search": [
+        "Y2K aesthetic",
+        "Y2K design chrome",
+        "Y2K graphics"
+      ],
+      "refs": [
+        "iMac G3",
+        "Windows Media Player skins",
+        "Nokia 3310-era phones"
+      ],
+      "prompt": "Borrow from Y2K: chrome and liquid metal, translucent candy plastics, iridescent pastels, blobby forms and techno display type. Modernise: render chrome with clean high-resolution gradients, use Y2K elements as accents against a clean contemporary layout, and keep information type in a modern sans."
+    },
+    {
+      "id": "web-1",
+      "term": "Web 1.0",
+      "family": "digital",
+      "what": "The 1990s web: default HTML, tiled backgrounds, animated GIFs, marquees, hit counters and table layouts.",
+      "looks": "Times New Roman, blue links, gray bevels, tiled patterns, rainbow dividers, GIFs.",
+      "motion": "Contemporary reuse: GIF loops at low fps, marquees, blinking text.",
+      "use": "Nostalgia campaigns, internet-culture humour, anniversaries.",
+      "conveys": "Early-internet sincerity, humour.",
+      "vs": "Brutalism reuses default styling as a serious stance; Web 1.0 quotation is nostalgic and maximal.",
+      "search": [
+        "web 1.0 design",
+        "GeoCities website",
+        "90s internet aesthetic"
+      ],
+      "refs": [
+        "GeoCities",
+        "Space Jam website (1996)"
+      ],
+      "prompt": "Borrow from Web 1.0: default HTML typography, blue underlined links, gray bevelled buttons, tiled backgrounds, marquees, GIF-like loops and hit counters. Modernise: render at high resolution with crisp pixels (image-rendering: pixelated for scaled GIFs), keep the content structure readable and use Web 1.0 elements as framing devices rather than the whole frame."
+    },
+    {
+      "id": "early-desktop",
+      "term": "Early Desktop Computing",
+      "aka": [
+        "early GUI",
+        "classic Mac / early PC"
+      ],
+      "family": "digital",
+      "what": "The look of 1980s-early-90s personal computing: 1-bit and low-color screens, bitmap fonts, command lines, windows with simple chrome, dithering.",
+      "looks": "Black-and-white or green/amber phosphor screens, bitmap fonts (Chicago, Geneva, system fonts), dithered images, simple rectangular windows, pixel cursors and icons.",
+      "motion": "Contemporary reuse: text typing on at a cursor, windows popping open instantly, pixel dissolves, CRT flicker.",
+      "use": "Developer tools, retro-computing nostalgia, AI and tech origin stories.",
+      "conveys": "Origin, hacker culture, ingenuity.",
+      "vs": "Retro OS focuses on later full-color OS chrome (Windows 95, Mac OS 9); early desktop is 1-bit and terminal-era. Pixel art is a broader game-sprite culture.",
+      "search": [
+        "classic Macintosh interface",
+        "1-bit design",
+        "terminal green screen aesthetic"
+      ],
+      "refs": [
+        "Susan Kare (original Macintosh icons)",
+        "Apple Macintosh (1984)"
+      ],
+      "prompt": "Borrow from early desktop computing: 1-bit black-and-white or phosphor green/amber screens, bitmap system fonts, dithered imagery, simple rectangular windows with striped title bars, pixel cursors and icons. Modernise: render crisp at high resolution with integer scaling, use a single contemporary accent color for emphasis, and keep text typing-on (steps()) readable at video speed."
+    },
+    {
+      "id": "retro-os",
+      "term": "Retro Operating Systems",
+      "aka": [
+        "Windows 95 aesthetic",
+        "Mac OS 9 aesthetic",
+        "retro UI"
+      ],
+      "family": "digital",
+      "what": "Direct quotation of mid-1990s to early-2000s OS interfaces: Windows 95/98/XP, Mac OS 8/9, bevelled windows, dialog boxes, start menus.",
+      "looks": "Gray #C0C0C0 bevelled windows, navy gradient title bars, dialog boxes and alert icons, pixel icons, taskbars, Luna-blue XP chrome or Platinum Mac chrome.",
+      "motion": "Contemporary reuse: windows cascading open, error dialogs multiplying, drag-and-drop, loading bars, cursor-driven narratives.",
+      "use": "Internet-culture campaigns, tech nostalgia, humour, developer and creator tools.",
+      "conveys": "Nostalgia, humour, relatability.",
+      "vs": "Vaporwave collages retro OS elements ironically; retro OS quotation is literal and functional. Skeuomorphism imitates real-world materials, not OS chrome.",
+      "search": [
+        "Windows 95 aesthetic design",
+        "retro OS UI animation",
+        "Mac OS 9 interface"
+      ],
+      "refs": [
+        "Windows 95",
+        "Mac OS 9 (Platinum)",
+        "Windows XP (Luna)"
+      ],
+      "prompt": "Borrow from retro operating systems: gray bevelled windows (2px outset/inset borders), navy-to-blue gradient title bars, dialog boxes with alert icons, pixel icons and a taskbar or menu bar. Modernise: rebuild the chrome as crisp CSS at high resolution rather than screenshots, use the metaphor to frame the real product or message, and keep the pacing contemporary (windows opening in 150-250 ms)."
+    },
+    {
+      "id": "vaporwave",
+      "term": "Vaporwave",
+      "family": "digital",
+      "what": "Early-2010s internet art movement recycling 80s-90s consumer and computer imagery with pastel irony.",
+      "looks": "Pastel pink/teal gradients, Greek busts, palms, grid floors, retro OS windows, Japanese text, VHS artefacts.",
+      "motion": "Contemporary reuse: slow loops, VHS wobble, drifting windows.",
+      "use": "Music, internet-culture brands, ironic campaigns.",
+      "conveys": "Irony, melancholic nostalgia.",
+      "vs": "Synthwave is sincere 80s neon; vaporwave is ironic collage. The visual-style entry is the finished look.",
+      "search": [
+        "vaporwave aesthetic",
+        "vaporwave art",
+        "vaporwave design"
+      ],
+      "refs": [
+        "Macintosh Plus, 'Floral Shoppe' (2011)"
+      ],
+      "prompt": "Borrow from vaporwave: pastel pink/teal/lavender gradients, marble busts, grid floors, retro OS windows, Japanese full-width text and VHS softness. Modernise: keep irony intentional and on-brand, use fewer collage elements per frame (3-4), render crisply with VHS artefacts only as a light overlay."
+    },
+    {
+      "id": "memphis",
+      "term": "Memphis",
+      "family": "decades",
+      "what": "1981-1987 Milan design collective's postmodern style: clashing colors, squiggles, terrazzo, playful geometry.",
+      "looks": "Squiggles, confetti, triangles, grids, pink/yellow/turquoise/black.",
+      "motion": "Contemporary reuse: rhythmic pops, wiggling squiggles, scrolling patterns.",
+      "use": "Youth brands, events, playful promos.",
+      "conveys": "Irreverence, fun.",
+      "vs": "Corporate flat borrowed Memphis confetti in a softened form; the visual-style entry is the finished look.",
+      "search": [
+        "Memphis Group design",
+        "Memphis pattern",
+        "Ettore Sottsass"
+      ],
+      "refs": [
+        "Memphis Group",
+        "Ettore Sottsass",
+        "Nathalie Du Pasquier"
+      ],
+      "prompt": "Borrow from Memphis: clashing pink/yellow/turquoise/black, squiggles, zigzags, confetti and terrazzo patterns, black outlines and offset shapes. Modernise: tune colors to the brand, keep patterns in backgrounds and transitions so information stays legible, and use crisp vector shapes with rhythmic motion synced to music."
+    },
+    {
+      "id": "flat-design",
+      "term": "Flat Design",
+      "family": "interface",
+      "what": "Early-2010s UI movement that removed skeuomorphic texture and depth in favour of flat color, simple icons and clean type.",
+      "looks": "Solid flat colors, no gradients or shadows, simple line or solid icons, bold sans type, long shadows (a short-lived trend), bright palettes.",
+      "motion": "Contemporary reuse: simple slides and scale pops, flat icon morphs, color-block transitions.",
+      "use": "Explainers, app promos, infographics.",
+      "conveys": "Clarity, simplicity, digital-native modernity.",
+      "vs": "Corporate flat is the later illustration genre; Material Design reintroduced shadow-based depth to flat design.",
+      "search": [
+        "flat design animation",
+        "flat UI design 2013",
+        "flat icon animation"
+      ],
+      "refs": [
+        "Windows Phone Metro design language",
+        "iOS 7 (2013)"
+      ],
+      "prompt": "Borrow from flat design: solid flat colors, no textures, clear sans typography and simple icons. Modernise: add a restrained elevation cue where hierarchy needs it (a 1px border or subtle shadow), use a contemporary tuned palette instead of stock bright primaries, avoid long shadows unless quotation is intended."
+    },
+    {
+      "id": "skeuomorphism",
+      "term": "Skeuomorphism",
+      "family": "interface",
+      "what": "Interfaces that imitate real-world materials and objects: leather, wood, paper, metal knobs, stitched edges and realistic shadows.",
+      "looks": "Leather and linen textures, stitched borders, embossed buttons, realistic knobs and dials, torn paper edges, glossy reflections.",
+      "motion": "Contemporary reuse: physical behaviors (knobs rotating, pages curling, switches clicking), realistic inertia.",
+      "use": "Tactile product stories, audio and hardware apps, nostalgia pieces.",
+      "conveys": "Familiarity, tactility, craft.",
+      "vs": "Neumorphism is a minimal extruded-plastic descendant; Web 2.0 is glossy abstraction rather than material imitation.",
+      "search": [
+        "skeuomorphic design",
+        "skeuomorphism UI",
+        "iOS 6 skeuomorphic"
+      ],
+      "refs": [
+        "iOS 1-6 (Notes, Game Center)",
+        "Mac OS X-era apps"
+      ],
+      "prompt": "Borrow from skeuomorphism: real-world material textures, embossed controls, realistic shadows and physical metaphors (knobs, switches, paper). Modernise: keep material detail high-resolution but restrained (one hero material per screen), use contemporary type and layout, and let physics-based motion (inertia, click-snaps) carry the tactility."
+    },
+    {
+      "id": "material-design",
+      "term": "Material Design",
+      "family": "interface",
+      "what": "Google's 2014 design language: flat surfaces as layered 'paper' with elevation shadows, bold color, grid-based layout and meaningful motion.",
+      "looks": "Elevated cards with elevation-mapped shadows, floating action buttons, bold primary/accent colors, Roboto, 8dp grid, ripple effects; later versions (Material You) add dynamic color and larger radii.",
+      "motion": "Contemporary reuse: container transforms, ripples from touch points, shared-axis transitions, standard easing curves.",
+      "use": "Android app promos, product demos, UI explainers.",
+      "conveys": "Systematic, friendly, platform-native.",
+      "vs": "Flat design has no elevation; Material adds consistent shadow-based depth and motion principles.",
+      "search": [
+        "Material Design motion",
+        "Material container transform",
+        "Material You animation"
+      ],
+      "refs": [
+        "Google Material Design (2014)",
+        "Material You (2021)"
+      ],
+      "prompt": "Borrow from Material Design: layered surfaces with elevation-mapped shadows, an 8px grid, bold primary and accent colors, ripples from touch points and container-transform transitions. Modernise: use Material 3 conventions (tonal palettes, larger 16-28px radii, dynamic color) unless the 2014 look is being quoted, and use its standard emphasized easing (cubic-bezier(0.2, 0, 0, 1))."
+    },
+    {
+      "id": "neumorphism",
+      "term": "Neumorphism",
+      "aka": [
+        "neomorphism",
+        "soft UI"
+      ],
+      "family": "interface",
+      "what": "Circa-2020 UI trend where elements appear extruded from or pressed into the same-colored background using paired light and dark soft shadows.",
+      "looks": "Monochromatic pale backgrounds, elements the same color as the background, dual soft shadows (light top-left, dark bottom-right), inset pressed states, low contrast.",
+      "motion": "Contemporary reuse: buttons pressing in (outer to inset shadow), soft toggles, gentle state transitions.",
+      "use": "Hardware-control UI, smart home, calm app promos.",
+      "conveys": "Softness, tactility, calm.",
+      "vs": "Skeuomorphism imitates varied real materials; neumorphism uses one soft plastic material. Known accessibility issues due to low contrast.",
+      "search": [
+        "neumorphism UI",
+        "soft UI design",
+        "neumorphic button animation"
+      ],
+      "prompt": "Borrow from neumorphism: same-color extruded elements on a pale monochrome ground with paired shadows (e.g. -8px -8px 16px #FFFFFF, 8px 8px 16px rgba(163,177,198,0.6)) and inset pressed states. Modernise: raise contrast for text and key controls (WCAG-minded), use one accent color for active states, and limit the effect to hero controls."
+    },
+    {
+      "id": "glassmorphism",
+      "term": "Glassmorphism",
+      "family": "interface",
+      "what": "Circa-2020-21 UI trend of frosted translucent cards over vivid color blobs, using background blur and thin light borders.",
+      "looks": "Semi-transparent white cards, backdrop blur, 1px white borders at low opacity, vivid gradient blobs behind, soft shadows.",
+      "motion": "Contemporary reuse: cards sliding over moving color blobs, parallax between layers, blur shifts.",
+      "use": "Fintech cards, dashboards, OS and app promos.",
+      "conveys": "Lightness, depth, modernity.",
+      "vs": "Glass (visual style) covers 3D glass and refraction; glassmorphism is the specific frosted-card UI trend. Apple's Liquid Glass (2025) is a later refractive evolution.",
+      "search": [
+        "glassmorphism UI",
+        "frosted glass card design",
+        "glassmorphism animation"
+      ],
+      "refs": [
+        "Apple macOS Big Sur (2020)",
+        "Windows 11 Mica / Acrylic"
+      ],
+      "prompt": "Borrow from glassmorphism: translucent cards (rgba(255,255,255,0.12-0.2)) with backdrop-filter blur(20-30px), 1px rgba(255,255,255,0.3) borders and vivid gradient blobs behind. Modernise: ensure text contrast with a darker tint or stronger blur, add edge highlights and slight refraction in the style of Liquid Glass if a current feel is wanted, and animate background blobs so the glass reads."
+    },
+    {
+      "id": "neo-brutalism",
+      "term": "Neo-Brutalism",
+      "family": "interface",
+      "what": "Early-2020s UI movement: flat saturated colors, thick black borders, hard offset shadows and raw-but-friendly layouts.",
+      "looks": "3px black borders, hard offset shadows, bright flat fills, bold grotesk type.",
+      "motion": "Contemporary reuse: press-into-shadow clicks, snappy pops.",
+      "use": "Consumer and creator tools, startup promos.",
+      "conveys": "Playful confidence, indie energy.",
+      "vs": "Web brutalism (c. 2014-2017) is rawer and default-styled; the visual-style entry is the finished look.",
+      "search": [
+        "neubrutalism UI",
+        "neo-brutalism web design",
+        "neo brutalist animation"
+      ],
+      "refs": [
+        "Gumroad (2021)"
+      ],
+      "prompt": "Borrow from neo-brutalism: thick black borders, hard zero-blur offset shadows, saturated flat fills and bold grotesk type. Modernise or refine: tune colors to the brand, keep radii consistent, and use press and pop motion sparingly so it reads as confident rather than noisy."
+    },
+    {
+      "id": "modern-saas",
+      "term": "Modern SaaS Design",
+      "aka": [
+        "2020s SaaS aesthetic"
+      ],
+      "family": "interface",
+      "what": "The dominant 2020s software-brand language: dark mode, grotesk type, bento grids, glow gradients, hairline borders and product UI as hero.",
+      "looks": "Near-black canvases, Inter / Geist class type, hairline borders, radial glows, bento grids, pill badges.",
+      "motion": "Contemporary reuse: blur-to-sharp reveals, staggered panels, glowing border sweeps, cursor demos.",
+      "use": "SaaS launches, landing pages, feature films.",
+      "conveys": "Category-grade polish, speed, modernity.",
+      "vs": "This is the current era rather than a revival; the startup/SaaS minimalism visual style is its finished look. Referencing it deliberately risks looking generic.",
+      "search": [
+        "modern SaaS landing page design",
+        "Linear style design",
+        "SaaS product video"
+      ],
+      "refs": [
+        "Linear",
+        "Vercel",
+        "Stripe"
+      ],
+      "prompt": "Borrow from modern SaaS design: dark canvas, tight grotesk headlines, hairline borders, bento grids and soft radial glows behind product UI. Differentiate: introduce one ownable brand element (a unique color, typeface or motion signature) so it does not read as template, and avoid stacking every trope (glow + bento + gradient border) in one frame."
+    }
+  ]
+}

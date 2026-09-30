@@ -10,7 +10,11 @@
 // 6. the console serves, accepts a token-authenticated action, and wait returns it
 // 7. entire videos: multi-scene tasting obeys, scenes.mjs writes a parseable plan and rejects
 //    bad input, the contract upsert is idempotent, inject + audio-lock work, the transitions menu renders
-// 8. footage reels: scan reads rotation and sound, build conforms segments, sizes cards, times the cut, obeys
+// 8. footage reels: scan reads rotation and sound, build conforms segments, sizes cards, times the cut, obeys;
+//    Claude-authored cards are mounted and checked, missing ones refused
+// 9. direction: the taxonomy validates, every motion-language swatch obeys its own contract, DESIGN.md shapes
+//    are read into roles and fonts and converted to a frame.md that reads back, the direction compiles and
+//    rejects unknown terms, design directions are distinct and brand-locked on request, the console page parses
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -208,7 +212,7 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   fs.mkdirSync(proj, { recursive: true });
   fs.writeFileSync(path.join(proj, "hyperframes.json"), "{}\n");
   node("motion-md.mjs", ["write", "--personality", "editorial-mask", "--out", path.join(TMP, "rrun", "motion.md")]);
-  fs.writeFileSync(path.join(TMP, "rrun", "reel.json"), JSON.stringify({ title: "t", aspect: "9:16", fps: 30, footage_dir: raw, motion: path.join(TMP, "rrun", "motion.md"), timeline: [{ type: "card", text: "Opening", duration: 5 }, { type: "clip", clip: "a.mp4", in: 0.5, out: 3.5, transition_in: "cut" }, { type: "clip", clip: "b rot.mp4", in: 0, out: 3, transition_in: "wipe" }], overlays: [{ text: "Name", sub: "Role", start: 6, duration: 3 }] }));
+  fs.writeFileSync(path.join(TMP, "rrun", "reel.json"), JSON.stringify({ title: "t", aspect: "9:16", fps: 30, footage_dir: raw, motion: path.join(TMP, "rrun", "motion.md"), cards_by: "swatch", timeline: [{ type: "card", text: "Opening", duration: 5 }, { type: "clip", clip: "a.mp4", in: 0.5, out: 3.5, transition_in: "cut" }, { type: "clip", clip: "b rot.mp4", in: 0, out: 3, transition_in: "wipe" }], overlays: [{ text: "Name", sub: "Role", start: 6, duration: 3 }] }));
   const bd = node("reel.mjs", ["build", "--reel", path.join(TMP, "rrun", "reel.json"), "--project-dir", proj, "--no-lint"]);
   let bj = {};
   try {
@@ -224,7 +228,92 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   fs.writeFileSync(path.join(TMP, "rrun", "bad.json"), JSON.stringify({ footage_dir: raw, timeline: [{ type: "clip", clip: "a.mp4", in: 3, out: 9 }, { type: "clip", clip: "missing.mov" }] }));
   const bad3 = node("reel.mjs", ["build", "--reel", path.join(TMP, "rrun", "bad.json"), "--project-dir", path.join(TMP, "videos", "bad"), "--no-lint"]);
   ok("reel build lists every problem before touching anything", bad3.status === 1 && /past the clip's end/.test(bad3.stderr) && /missing\.mov/.test(bad3.stderr) && !fs.existsSync(path.join(TMP, "videos", "bad")), bad3.stderr);
+  // Claude-authored card: refused while missing, mounted and obey-checked once written
+  const proj2 = path.join(TMP, "videos", "reel2");
+  fs.mkdirSync(proj2, { recursive: true });
+  fs.writeFileSync(path.join(proj2, "hyperframes.json"), "{}\n");
+  fs.writeFileSync(path.join(TMP, "rrun", "reel2.json"), JSON.stringify({ title: "t2", aspect: "9:16", fps: 30, footage_dir: raw, motion: path.join(TMP, "rrun", "motion.md"), timeline: [{ type: "card", text: "Hello", duration: 3 }, { type: "clip", clip: "a.mp4", in: 0, out: 2 }] }));
+  const miss = node("reel.mjs", ["build", "--reel", path.join(TMP, "rrun", "reel2.json"), "--project-dir", proj2, "--no-lint"]);
+  const br = node("reel.mjs", ["briefs", "--reel", path.join(TMP, "rrun", "reel2.json"), "--project-dir", proj2]);
+  const brief = path.join(proj2, "compositions", "cards", "card-01.brief.md");
+  ok("reel refuses a missing Claude card and writes its brief", miss.status === 1 && /card-01/.test(miss.stderr) && br.status === 0 && fs.existsSync(brief) && /Motion contract/.test(fs.readFileSync(brief, "utf8")), miss.stderr + br.stderr);
+  fs.writeFileSync(path.join(proj2, "compositions", "cards", "card-01.html"), `<!doctype html><html><head><meta charset="UTF-8"></head><body><template><style>#root{position:absolute;inset:0;width:1080px;height:1920px;background:#f4f1ea}#root h1{position:absolute;left:120px;top:800px;font:700 120px/1 Inter,sans-serif;color:#111}</style><div id="root" data-composition-id="card-01" data-width="1080" data-height="1920"><h1>Hello</h1></div><script>(function(){var r=document.querySelector('[data-composition-id="card-01"]');var tl=gsap.timeline({paused:true});tl.fromTo(r.querySelector("h1"),{clipPath:"inset(0% 0% 100% 0%)"},{clipPath:"inset(0% 0% 0% 0%)",duration:0.7,ease:"expo.out"},0.2);window.__timelines=window.__timelines||{};window.__timelines["card-01"]=tl;})();</script></template></body></html>`);
+  const bd2 = node("reel.mjs", ["build", "--reel", path.join(TMP, "rrun", "reel2.json"), "--project-dir", proj2, "--no-lint"]);
+  let bj2 = {};
+  try {
+    bj2 = JSON.parse(bd2.stdout);
+  } catch {}
+  ok("reel mounts Claude's card and obey checks it", bd2.status === 0 && bj2.checks && bj2.checks.obey.status === "clean" && /compositions\/cards\/card-01\.html/.test(fs.readFileSync(path.join(proj2, "index.html"), "utf8")), bd2.stderr || JSON.stringify(bj2.checks));
 } else console.log("skip  footage reels (no ffmpeg)");
+
+// 9
+{
+  const tv = node("taxonomy.mjs", ["validate"]);
+  let tj = {};
+  try {
+    tj = JSON.parse(tv.stdout);
+  } catch {}
+  ok("taxonomy validates (30 dimensions, 800+ terms, combinations resolve)", tv.status === 0 && tj.dimensions >= 30 && tj.options >= 800 && tj.combinations >= 30, (tj.problems || []).slice(0, 5).join("; ") || tv.stderr);
+  const langs = JSON.parse(fs.readFileSync(path.join(HERE, "..", "taxonomy", "dimensions", "motion-language.json"), "utf8")).options.map((o) => o.id);
+  const bad = [];
+  for (const id of quick ? langs.slice(0, 4) : langs) {
+    const d = path.join(TMP, "lang", id);
+    const t = node("tasting.mjs", ["--scenes", "Tax season. Again.::the shoebox wins || One tap. Done.", "--personalities", `lang-${id},lang-${id}`, "--out", d]);
+    node("motion-md.mjs", ["write", "--language", id, "--out", path.join(d, "motion.md")]);
+    const o = node("obey.mjs", ["--project", d]);
+    if (t.status !== 0 || o.status !== 0 || !/0 error\(s\), 0 warning\(s\)/.test(o.stdout)) bad.push(`${id}: ${(t.stderr || o.stdout.split("\n")[0]).slice(0, 120)}`);
+  }
+  ok(`every motion-language swatch obeys its own contract (${quick ? 4 : langs.length})`, !bad.length, bad.join(" | "));
+
+  const { readDesignMd, toFrameMd } = await import(path.join(HERE, "lib", "design-md.mjs"));
+  const { readLook } = await import(path.join(HERE, "lib", "common.mjs"));
+  const fx = path.join(TMP, "brands");
+  fs.mkdirSync(fx, { recursive: true });
+  fs.writeFileSync(path.join(fx, "spec.md"), `---\nname: Kinpaku\ncolors:\n  # anchors\n  gold: "oklch(84% 0.19 80.46)"   # primary accent\n\n  lacquer: "oklch(7% 0.006 95)"   # page ground\n  champagne: "oklch(91% 0 0)"     # headlines\n  success: "#22C55E"\ntypography:\n  display:\n    fontFamily: Alumni Sans\n    fontWeight: 600\n  body:\n    fontFamily: Albert Sans\n  mono:\n    fontFamily: SFMono-Regular\nrounded:\n  md: 6px\n---\n\n## Overview\n\nGold on lacquer.\n\n## Do and Do Not\n\n### Do\n- Use gold once per frame.\n\n### Do Not\n- Never use pure white.\n`);
+  fs.writeFileSync(path.join(fx, "stitch.md"), `# Design System: Calm\n\n## 2. Color Palette & Roles\n- **Canvas White** (#F9FAFB) — Primary background surface\n- **Charcoal Ink** (#18181B) — Primary text\n- **Emerald Signal** (#10B981) — accent for growth\n\n## 3. Typography Rules\n- **Display:** \`Geist\`, \`Satoshi\` — tight tracking. \`Inter\` is BANNED for premium contexts\n- **Body:** Same family at weight 400\n\n### Banned Fonts\n- \`Inter\` — banned\n`);
+  fs.writeFileSync(path.join(fx, "table.md"), `# Deck\n\n## Color\n\n| Token | Hex | Meaning |\n|---|---|---|\n| \`INK\` | \`1A1A1A\` | the answer |\n| \`INK_SOFT\` | \`333333\` | support |\n| \`CARD_TINT\` | \`F5F5F5\` | containment |\n| \`WHITE\` | \`FFFFFF\` | Background |\n\n## Typography\n\n- **Headlines:** Cambria bold\n- **Body:** Calibri\n`);
+  const A = readDesignMd(path.join(fx, "spec.md")), B = readDesignMd(path.join(fx, "stitch.md")), C = readDesignMd(path.join(fx, "table.md"));
+  ok("DESIGN.md spec: oklch colors, comment roles, nested fonts, platform-font mapping, rules", A.roles.accent === A.colors.find((c) => c.name === "gold").hex && A.roles.canvas === A.colors.find((c) => c.name === "lacquer").hex && A.fonts.display.family === "Alumni Sans" && A.fonts.mono.family === "JetBrains Mono" && A.radii.md === 6 && A.dos.length === 1 && A.donts.length === 1 && !A.roles.status.includes(A.roles.accent) === true, JSON.stringify({ roles: A.role_names, fonts: A.fonts }));
+  ok("DESIGN.md prose: roles from descriptions, banned fonts skipped, 'same family' body", B.roles.canvas === "#f9fafb" && B.roles.ink === "#18181b" && B.roles.accent === "#10b981" && B.fonts.display.family === "Geist" && B.fonts.body.family === "Geist", JSON.stringify({ roles: B.roles, fonts: B.fonts }));
+  ok("DESIGN.md table: bare hex, monochrome accent, deck fonts mapped", C.roles.canvas === "#ffffff" && C.roles.ink === "#1a1a1a" && C.roles.accent === "#333333" && C.fonts.display.family === "Caladea" && C.fonts.body.family === "Carlito", JSON.stringify({ roles: C.roles, fonts: C.fonts }));
+  fs.writeFileSync(path.join(fx, "frame.md"), toFrameMd(A));
+  const L = readLook(path.join(fx, "frame.md"));
+  ok("brand frame.md reads back (canvas, ink, accent, display face)", L.bg === A.roles.canvas && L.ink === A.roles.ink && L.accent === A.roles.accent && L.font === "Alumni Sans", JSON.stringify(L));
+
+  fs.writeFileSync(path.join(TMP, "dec.json"), JSON.stringify({ subject: "Tally", picks: { format: "product-launch-film", "ui-treatment": ["simplified-ui"], "ui-treatment:radius": "medium", "visual-style": "swiss-international", "motion-language": "precise" }, decided_by: { "visual-style": "agent" } }));
+  const dc = node("direction.mjs", ["compile", "--decisions", path.join(TMP, "dec.json"), "--out", path.join(TMP, "direction")]);
+  const dmd = fs.existsSync(path.join(TMP, "direction", "DIRECTION.md")) ? fs.readFileSync(path.join(TMP, "direction", "DIRECTION.md"), "utf8") : "";
+  ok("direction compiles: style name, formula, Do and Not lines, receipts", dc.status === 0 && /^# Direction: Swiss \/ International Typographic Style, simplified-UI product launch film, precise motion/m.test(dmd) && /\*\*Do:\*\*/.test(dmd) && /Not to be confused with/.test(dmd) && /decided by Claude/.test(dmd), dc.stderr || dmd.slice(0, 200));
+  fs.writeFileSync(path.join(TMP, "dec-bad.json"), JSON.stringify({ picks: { "visual-style": "swiss-internationale", colour: "neon" } }));
+  const dbad = node("direction.mjs", ["compile", "--decisions", path.join(TMP, "dec-bad.json"), "--out", path.join(TMP, "direction-bad")]);
+  ok("direction rejects unknown terms with the closest valid ones", dbad.status === 1 && /swiss-international/.test(dbad.stderr) && /color/.test(dbad.stderr), dbad.stderr);
+
+  const lk = node("design.mjs", ["looks", "--decisions", path.join(TMP, "dec0.json").replace("dec0", "dec"), "--out", path.join(TMP, "looks"), "--count", "6"]);
+  let lj = {};
+  try {
+    lj = JSON.parse(fs.readFileSync(path.join(TMP, "looks", "looks.json"), "utf8"));
+  } catch {}
+  const styles = new Set((lj.looks || []).map((x) => x.visual_style.id + "|" + x.type.pairing + "|" + x.palette.canvas));
+  const allRead = (lj.looks || []).every((x) => !(readLook(path.join(TMP, "looks", x.id, "frame.md")).defaulted || []).length);
+  ok("design directions: 6 distinct looks, each with a frame.md that reads back", lk.status === 0 && (lj.looks || []).length === 6 && styles.size === 6 && allRead, lk.stderr || [...styles].join(" ; "));
+  fs.writeFileSync(path.join(TMP, "dec0.json"), JSON.stringify({ picks: {} }));
+  const lb = node("design.mjs", ["looks", "--decisions", path.join(TMP, "dec0.json"), "--out", path.join(TMP, "looks-brand"), "--count", "4", "--brand", path.join(fx, "stitch.md")]);
+  let lbj = {};
+  try {
+    lbj = JSON.parse(fs.readFileSync(path.join(TMP, "looks-brand", "looks.json"), "utf8"));
+  } catch {}
+  const brandColors = new Set([B.roles.canvas, B.roles.ink, B.roles.accent, B.roles.surface].filter(Boolean));
+  ok("brand-locked looks keep the brand's colors and fonts", lb.status === 0 && (lbj.looks || []).length === 4 && lbj.looks.every((x) => brandColors.has(x.palette.canvas) && x.type.display.family === "Geist"), lb.stderr || JSON.stringify((lbj.looks || []).map((x) => x.palette.canvas)));
+
+  const page = fs.readFileSync(path.join(HERE, "..", "console", "index.html"), "utf8");
+  let parses = true;
+  try {
+    new Function(page.match(/<script>([\s\S]*)<\/script>\s*<\/body>/)[1]);
+  } catch {
+    parses = false;
+  }
+  ok("console page script parses (every panel)", parses && /direction: function/.test(page) && /brand: function/.test(page) && /styleframes: function/.test(page));
+}
 
 fs.rmSync(TMP, { recursive: true, force: true });
 console.log(failed ? `\n${failed} check(s) failed` : "\nall checks passed");

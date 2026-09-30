@@ -7,6 +7,8 @@
 //
 //   node reel.mjs scan  --footage <dir> --run <run dir> [--no-transcribe] [--lang en] [--model small.en]
 //        -> <run>/footage/footage.json (+ contact sheets, posters, word transcripts)
+//   node reel.mjs briefs --reel <reel.json> --project-dir videos/<name>
+//        -> compositions/cards/<id>.brief.md for every card/overlay Claude draws (the default; "by": "swatch" = quick engine draft)
 //   node reel.mjs build --reel <reel.json> --project-dir videos/<name> [--render] [--quality draft|looks|delivery] [--force] [--no-lint] [--render-anyway]
 //        -> index.html + compositions/reel-*.html + assets/footage/*, lint, obey, (render)
 import fs from "node:fs";
@@ -16,6 +18,9 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { parseArgs, die, readJSON, writeFile, normalizeAspect, esc, gsapInline, chromeDumpDom, readLook, readFrontmatterDoc, SKILL_DIR } from "./lib/common.mjs";
 import { resolvePreset } from "./lib/hyperframes.mjs";
+import { stageFonts } from "./lib/fonts.mjs";
+import { installLook, installDirection, upsertMarked, DIRECTION_MARK } from "./lib/install.mjs";
+import { contractText } from "./lib/contract.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const args = parseArgs();
@@ -210,50 +215,72 @@ const cellCss = (look) => `
   #root .md-subline { font-weight: 500; letter-spacing: 0.02em; line-height: 1.3; color: color-mix(in srgb, var(--md-ink) 78%, var(--md-bg)); }
   #root .md-rule + .md-subline { margin-top: 0.35em; }`;
 
-// ---- fonts: every family needs a local .woff2 + @font-face (HyperFrames renders in a
-// clean Chrome). Auto-resolved families need nothing; else the preset's own files, else
-// Google Fonts (latin subset) downloaded into assets/fonts/, else Inter with a warning.
-const HF_AUTO_FONTS = ["inter", "montserrat", "outfit", "nunito", "oswald", "league gothic", "archivo black", "space mono", "ibm plex mono", "jetbrains mono", "eb garamond", "playfair display", "source code pro", "noto sans jp", "roboto", "open sans", "lato", "poppins"];
-async function stageFont(family, weights, dir, presetDir, warnings) {
-  if (HF_AUTO_FONTS.includes(family.toLowerCase())) return { family, css: "" };
-  const fontDir = path.join(dir, "assets", "fonts");
-  const compact = family.replace(/\s+/g, "");
-  const faces = [];
-  for (const w of weights) {
-    const name = `${compact}-${w}.woff2`;
-    const dest = path.join(fontDir, name);
-    if (!fs.existsSync(dest) && presetDir) {
-      const cand = path.join(presetDir, "fonts", name);
-      if (fs.existsSync(cand)) {
-        fs.mkdirSync(fontDir, { recursive: true });
-        fs.copyFileSync(cand, dest);
-      }
-    }
-    if (fs.existsSync(dest)) faces.push({ w, rel: `assets/fonts/${name}` });
-  }
-  const missing = weights.filter((w) => !faces.some((f) => f.w === w));
-  if (missing.length) {
-    try {
-      const url = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family).replace(/%20/g, "+")}:wght@${missing.join(";")}&display=swap`;
-      const css = await (await fetch(url, { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36" } })).text();
-      for (const block of css.split("}")) {
-        if (!/\/\* latin \*\//.test(block) && /\/\* [a-z-]+ \*\//.test(block)) continue;
-        const wm = block.match(/font-weight:\s*(\d+)/), um = block.match(/url\((https:[^)]+\.woff2)\)/);
-        if (!wm || !um || faces.some((f) => f.w === Number(wm[1]))) continue;
-        const name = `${compact}-${wm[1]}.woff2`;
-        const buf = Buffer.from(await (await fetch(um[1])).arrayBuffer());
-        if (buf.length < 1000) continue;
-        fs.mkdirSync(fontDir, { recursive: true });
-        fs.writeFileSync(path.join(fontDir, name), buf);
-        faces.push({ w: Number(wm[1]), rel: `assets/fonts/${name}` });
-      }
-    } catch {}
-  }
-  if (!faces.length) {
-    warnings.push(`font "${family}" could not be staged (no preset file, Google Fonts unreachable); using Inter`);
-    return { family: "Inter", css: "" };
-  }
-  return { family, css: faces.map((f) => `@font-face { font-family: "${family}"; src: url("${f.rel}") format("woff2"); font-weight: ${f.w}; font-style: normal; font-display: block; }`).join("\n  ") };
+// the brief Claude designs one card or overlay from (reel.mjs briefs)
+function cardBrief(a, { W, H, look, fontCss, M, direction, reelTitle }) {
+  const r = a.rect;
+  const overlay = a.kind === "overlay";
+  const text = [].concat(a.it.text || []);
+  const place = overlay
+    ? `An overlay on top of footage. Transparent background everywhere; the content lives inside the ${a.it.zone || "lower-third"} zone: x ${r.x}px, y ${r.y}px, ${r.w}×${r.h}px${a.it.style === "clear" ? " (no plate: legible over any footage, e.g. a soft text shadow)" : " (on a plate in the look's surface or canvas color)"}.`
+    : "A full-frame card between clips: it owns the whole frame and its background (the look's canvas, or an art-directed ground from the direction).";
+  return `# ${overlay ? "Overlay" : "Card"} brief: ${a.id}${reelTitle ? ` (${reelTitle})` : ""}
+
+Design and animate this yourself, from the art direction and the motion contract below. Write \`compositions/cards/${a.id}.html\`: a HyperFrames sub-composition, ${W}×${H}, on screen for ${a.duration}s.
+
+## What it says
+
+${text.map((t, k) => `- Beat ${k + 1}: ${JSON.stringify(t)}`).join("\n")}${a.it.sub ? `\n- Second line: ${JSON.stringify(a.it.sub)}` : ""}
+
+## Where it sits
+
+${place}
+
+## HyperFrames rules (the build refuses a file that breaks them)
+
+- Everything inside \`<template>\`: styles, markup and scripts. The root is \`<div id="root" data-composition-id="${a.id}" data-width="${W}" data-height="${H}">\`; style it with \`#root\` (position: absolute; inset: 0).
+- One paused timeline, registered as \`window.__timelines["${a.id}"]\`, at most ${a.duration}s long (the slot holds its last frame if shorter). Build it synchronously; \`gsap\` is global.
+- Entrances with \`fromTo\` (the host re-seeks the card). No \`Math.random\`, \`Date\`, timers, CSS \`@keyframes\` or autoplay: every frame must come from the timeline.
+- Fonts: copy these rules into the card's \`<style>\` (files are staged in assets/fonts/):
+
+\`\`\`css
+${fontCss || "/* the look's families are resolved by HyperFrames itself */"}
+\`\`\`
+
+## Look (frame.md tokens)
+
+- canvas \`${look.bg}\`, ink \`${look.ink}\`, accent \`${look.accent}\`; display face ${look.font} ${look.fontWeight}. Full tokens: frame.md in the project root.
+
+${direction ? direction.section : "## Art direction\n\nNo direction was compiled; follow the look and the motion contract."}
+${M ? contractText(M, { W, H, video: true }) : ""}
+## Scaffold
+
+\`\`\`html
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  /* @font-face rules from above */
+  #root { position: absolute; inset: 0; width: ${W}px; height: ${H}px; overflow: hidden; }
+</style>
+<div id="root" data-composition-id="${a.id}" data-width="${W}" data-height="${H}">
+  <!-- your design -->
+</div>
+<script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  // your choreography, following the motion contract
+  window.__timelines = window.__timelines || {};
+  window.__timelines["${a.id}"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>
+\`\`\`
+
+After writing it, run \`reel.mjs build\`: obey.mjs checks this file against motion.md with everything else.
+`;
 }
 
 // a card or overlay as a HyperFrames sub-composition, drawn by the tasting engine
@@ -402,11 +429,19 @@ async function build() {
   if (!items.length) problems.push("timeline is empty");
   const clipsUsed = items.filter((it) => (it.type || "clip") === "clip");
   if (!clipsUsed.length) problems.push("the timeline has no footage clips (use the video routes for an all-graphics piece)");
-  const needsMotion = items.some((it) => it.type === "card" && !it.src) || overlays.length || items.some((it) => it.transition_in && !/^(cut|auto)$/.test(it.transition_in));
+  // who draws each card / overlay: Claude (default: authored from the brief `reel.mjs briefs` writes),
+  // "swatch" (Rasa's quick preview engine, for drafts), or a ready composition file (src)
+  const cardsBy = R.cards_by || "claude";
+  const authorOf = (x) => (x.src ? "src" : x.by || cardsBy);
+  const needsMotion = items.some((it) => it.type === "card") || overlays.length || items.some((it) => it.transition_in && !/^(cut|auto)$/.test(it.transition_in));
   const motionPath = R.motion ? resolveIn(R.motion, base, ws) : null;
   if (needsMotion && (!motionPath || !fs.existsSync(motionPath))) problems.push(`motion.md not found (${R.motion || "reel.motion is missing"}): cards, overlays and transitions are drawn in the chosen motion`);
   const lookPath = R.look && R.look.frame ? resolveIn(R.look.frame, base, ws) : R.look && R.look.preset ? resolvePreset(R.look.preset) : null;
-  const look = readLook(lookPath);
+  const designMd = R.look && R.look.design_md ? resolveIn(R.look.design_md, base, ws) : null;
+  if (lookPath && !fs.existsSync(lookPath)) problems.push(`look frame not found: ${R.look.frame}`);
+  if (designMd && !fs.existsSync(designMd)) problems.push(`brand reference not found: ${R.look.design_md}`);
+  const directionSrc = R.direction ? resolveIn(R.direction, base, ws) : null;
+  if (directionSrc && !fs.existsSync(directionSrc)) problems.push(`direction not found: ${R.direction} (compile it with direction.mjs compile)`);
   const musicSrc = R.music && R.music.path ? resolveIn(R.music.path, base, ws) : null;
   if (musicSrc && !fs.existsSync(musicSrc)) problems.push(`music not found: ${R.music.path}`);
 
@@ -442,13 +477,19 @@ async function build() {
         }
         it._srcFile = s;
         if (!(Number(it.duration) > 0)) problems.push(`${where}: a src card needs a duration`);
-      } else if (!it.text || (Array.isArray(it.text) && !it.text.length)) problems.push(`${where}: a card needs text (or src: a composition file)`);
+      } else {
+        if (!it.text || (Array.isArray(it.text) && !it.text.length)) problems.push(`${where}: a card needs text (or src: a composition file)`);
+        if (!["claude", "swatch"].includes(authorOf(it))) problems.push(`${where}: by must be "claude" or "swatch"`);
+        if (authorOf(it) === "claude" && !(Number(it.duration) > 0)) problems.push(`${where}: a card needs a duration`);
+      }
     } else problems.push(`${where}: type must be clip or card`);
   });
   overlays.forEach((o, i) => {
     if (!o.text) problems.push(`overlays[${i}]: text is required`);
     if (!(Number(o.start) >= 0)) problems.push(`overlays[${i}]: start (seconds on the reel's timeline) is required`);
     if (o.zone && !["top", "center", "lower-third"].includes(o.zone)) problems.push(`overlays[${i}]: zone must be top, center or lower-third`);
+    if (!["claude", "swatch"].includes(authorOf(o))) problems.push(`overlays[${i}]: by must be "claude" or "swatch"`);
+    if (authorOf(o) === "claude" && !(Number(o.duration) > 0)) problems.push(`overlays[${i}]: an overlay needs a duration`);
   });
   if (problems.length) die(`reel.json has ${problems.length} problem(s):\n- ${problems.join("\n- ")}`);
 
@@ -456,7 +497,9 @@ async function build() {
   const dir = path.resolve(String(args["project-dir"]));
   if (dir === ws) die("never build into the workspace root; use videos/<name>");
   const idx = path.join(dir, "index.html");
-  if (fs.existsSync(idx) && !fs.readFileSync(idx, "utf8").includes(MARK) && !args.force) die(`${path.relative(ws, idx)} was not written by the reel editor; re-run with --force to replace it`);
+  // protect an index.html someone wrote; HyperFrames' starter file from our own init is fine
+  const ownInit = fs.existsSync(path.join(dir, ".hyperframes", "reel", "created"));
+  if (cmd !== "briefs" && fs.existsSync(idx) && !fs.readFileSync(idx, "utf8").includes(MARK) && !ownInit && !args.force) die(`${path.relative(ws, idx)} was not written by the reel editor; re-run with --force to replace it`);
   if (!fs.existsSync(path.join(dir, "hyperframes.json"))) {
     fs.mkdirSync(path.dirname(dir), { recursive: true });
     const res = { "1920x1080": "landscape", "1080x1920": "portrait", "1080x1080": "square" }[`${W}x${H}`];
@@ -466,14 +509,56 @@ async function build() {
     } catch (e) {
       if (!fs.existsSync(path.join(dir, "hyperframes.json"))) die(`hyperframes init failed:\n${e.stderr || e.message}`);
     }
+    writeFile(path.join(dir, ".hyperframes", "reel", "created"), new Date().toISOString() + "\n");
   }
   const tmpDir = path.join(dir, ".hyperframes", "reel");
   fs.mkdirSync(tmpDir, { recursive: true });
   const { p, M } = motionPath ? personalityFor(motionPath, tmpDir) : { p: null, M: null };
   const fontWarnings = [];
-  const staged0 = await stageFont(look.font, [...new Set([400, 500, 600, 700, 800, Number(look.fontWeight) || 700])].sort(), dir, lookPath && R.look.preset ? path.dirname(lookPath) : null, fontWarnings);
-  look.font = staged0.family;
-  const fontCss = staged0.css;
+  // the look lands in the project's frame.md (fonts staged, @font-face section) so Claude's cards read the same tokens
+  let fontCss = "";
+  if (designMd || lookPath) {
+    const r = await installLook(dir, designMd ? { designMd, mode: R.look.mode } : { frame: lookPath, presetDir: R.look.preset && !R.look.frame ? path.dirname(lookPath) : null });
+    fontWarnings.push(...r.notes.filter((n) => !/^frame\.md converted/.test(n)));
+    fontCss = r.fontCss || "";
+  }
+  const look = readLook(fs.existsSync(path.join(dir, "frame.md")) ? path.join(dir, "frame.md") : null);
+  if (!designMd && !lookPath) {
+    const staged0 = await stageFonts([{ family: look.font, weights: [400, 500, 600, 700, 800] }], dir);
+    fontWarnings.push(...staged0.warnings);
+    look.font = staged0.families[look.font] || look.font;
+    fontCss = staged0.css;
+  }
+  let dirInstalled = null;
+  if (directionSrc) {
+    dirInstalled = installDirection(dir, directionSrc);
+    if (fs.existsSync(path.join(dir, "frame.md"))) fs.writeFileSync(path.join(dir, "frame.md"), upsertMarked(fs.readFileSync(path.join(dir, "frame.md"), "utf8"), DIRECTION_MARK, dirInstalled.section));
+  }
+  const Mfields = motionPath ? readFrontmatterDoc(fs.readFileSync(motionPath, "utf8")).fields : null;
+  // ---- Claude-authored cards and overlays: the files Claude writes from the briefs
+  const cardDir = path.join(dir, "compositions", "cards");
+  const authored = [];
+  items.forEach((it, i) => { if (it.type === "card" && authorOf(it) === "claude") authored.push({ kind: "card", i, it, id: `card-${String(i + 1).padStart(2, "0")}`, rect: { x: 0, y: 0, w: W, h: H }, duration: Number(it.duration) }); });
+  overlays.forEach((o, i) => { if (authorOf(o) === "claude") authored.push({ kind: "overlay", i, it: o, id: `overlay-${String(i + 1).padStart(2, "0")}`, rect: zoneRect(o.zone || "lower-third", W, H), duration: Number(o.duration) }); });
+  if (args["briefs-only"] || cmd === "briefs") {
+    fs.mkdirSync(cardDir, { recursive: true });
+    const written = authored.map((a) => {
+      const f = path.join(cardDir, `${a.id}.brief.md`);
+      writeFile(f, cardBrief(a, { W, H, look, fontCss, M: Mfields, direction: dirInstalled, reelTitle: R.title }));
+      return { id: a.id, kind: a.kind, brief: path.relative(ws, f), write: path.relative(ws, path.join(cardDir, `${a.id}.html`)), done: fs.existsSync(path.join(cardDir, `${a.id}.html`)) };
+    });
+    console.log(JSON.stringify({ ok: true, project_dir: path.relative(ws, dir), briefs: written, next: written.some((w) => !w.done) ? "Author each card: read its brief, write the file it names (a HyperFrames sub-composition), then run reel.mjs build." : "All cards are authored: run reel.mjs build." }, null, 2));
+    return;
+  }
+  const missing = [];
+  for (const a of authored) {
+    const f = path.join(cardDir, `${a.id}.html`);
+    if (!fs.existsSync(f)) { missing.push(`${a.id} (${a.kind}${a.it.text ? ` "${[].concat(a.it.text).join(" / ").slice(0, 30)}"` : ""})`); continue; }
+    const t = fs.readFileSync(f, "utf8");
+    if (!/<template[\s>]/i.test(t) || !t.includes(`data-composition-id="${a.id}"`) || !t.includes(`__timelines["${a.id}"]`) && !t.includes(`__timelines['${a.id}']`)) missing.push(`${a.id}: the file must be a sub-composition (inside <template>) with root data-composition-id="${a.id}" and window.__timelines["${a.id}"]`);
+    a.src = `compositions/cards/${a.id}.html`;
+  }
+  if (missing.length) die(`${missing.length} card(s)/overlay(s) are Claude's to draw and are missing or malformed:\n- ${missing.join("\n- ")}\nRun: node reel.mjs briefs --reel ${path.relative(ws, reelPath)} --project-dir ${path.relative(ws, dir)} and author each brief's file (or set "by": "swatch" for a quick draft).`);
   // GSAP as a local file (lint rejects the library inline: it contains Math.random/Date.now)
   fs.mkdirSync(path.join(dir, "assets", "vendor"), { recursive: true });
   fs.copyFileSync(path.join(SKILL_DIR, "scripts", "vendor", "gsap.min.js"), path.join(dir, "assets", "vendor", "gsap.min.js"));
@@ -528,12 +613,12 @@ async function build() {
   for (const f of fs.readdirSync(compDir)) if (/^reel-/.test(f)) fs.rmSync(path.join(compDir, f));
   const engineItems = [];
   items.forEach((it, i) => {
-    if (it.type === "card" && !it.src) {
+    if (it.type === "card" && authorOf(it) === "swatch") {
       const texts = Array.isArray(it.text) ? it.text : [it.text];
       engineItems.push({ kind: "card", i, it, rect: { x: 0, y: 0, w: W, h: H }, blocks: texts.map((t, j) => ({ text: t, sub: j === texts.length - 1 ? it.sub || "" : "" })) });
     }
   });
-  overlays.forEach((o, i) => engineItems.push({ kind: "overlay", i, it: o, rect: zoneRect(o.zone || "lower-third", W, H), blocks: [{ text: o.text, sub: o.sub || "" }] }));
+  overlays.forEach((o, i) => { if (authorOf(o) === "swatch") engineItems.push({ kind: "overlay", i, it: o, rect: zoneRect(o.zone || "lower-third", W, H), blocks: [{ text: o.text, sub: o.sub || "" }] }); });
   if (engineItems.length) {
     const minHold = p.holds.min_ms;
     engineItems.forEach((e) => (e.p = p));
@@ -587,16 +672,20 @@ async function build() {
       t = r3(start + dur);
     } else {
       const e = engineItems.find((x) => x.kind === "card" && x.i === i);
+      const a = authored.find((x) => x.kind === "card" && x.i === i);
       const dur = e ? e.dur : r3(Number(it.duration));
-      segs.push({ kind: "card", i, it, e, start: r3(t), dur, z: z++ });
+      segs.push({ kind: "card", i, it, e, a, start: r3(t), dur, z: z++ });
       t = r3(t + dur);
     }
   });
   const total = r3(t);
-  const overlaySegs = engineItems.filter((e) => e.kind === "overlay").map((e) => {
-    const start = r3(Number(e.it.start));
-    if (start >= total) warnings.push(`overlay ${e.i + 1} starts at ${start}s, after the reel ends (${total}s); dropped`);
-    return { e, start, dur: r3(Math.min(e.dur, total - start)) };
+  const overlaySegs = [
+    ...engineItems.filter((e) => e.kind === "overlay").map((e) => ({ e, it: e.it, i: e.i, dur0: e.dur })),
+    ...authored.filter((a) => a.kind === "overlay").map((a) => ({ a, it: a.it, i: a.i, dur0: a.duration, id: a.id, src: a.src })),
+  ].sort((x, y) => x.i - y.i).map((o) => {
+    const start = r3(Number(o.it.start));
+    if (start >= total) warnings.push(`overlay ${o.i + 1} starts at ${start}s, after the reel ends (${total}s); dropped`);
+    return { ...o, start, dur: r3(Math.min(o.dur0, total - start)) };
   }).filter((o) => o.dur > 0.2);
 
   // ---- captions: transcript words remapped through the cuts
@@ -626,7 +715,7 @@ async function build() {
     groups = groupWords(words.sort((x, y) => x.start - y.start), { maxWords: tall ? 3 : 5, maxChars: tall ? 18 : 34 });
     groups.forEach((g) => (g.out = Math.min(g.out, total)));
     groups = groups.filter((g) => g.out - g.in > 0.1);
-    for (const o of overlaySegs) if ((o.e.it.zone || "lower-third") === "lower-third" && H / W > 1.2 && groups.some((g) => g.in < o.start + o.dur && g.out > o.start)) warnings.push(`overlay ${o.e.i + 1} sits just above the captions while they run; check the frame`);
+    for (const o of overlaySegs) if ((o.it.zone || "lower-third") === "lower-third" && H / W > 1.2 && groups.some((g) => g.in < o.start + o.dur && g.out > o.start)) warnings.push(`overlay ${o.i + 1} sits just above the captions while they run; check the frame`);
   }
 
   // ---- write compositions
@@ -636,7 +725,10 @@ async function build() {
     wrote.push(rel);
   };
   for (const s of segs.filter((x) => x.kind === "card")) {
-    if (s.e) {
+    if (s.a) {
+      s.id = s.a.id;
+      s.src = s.a.src; // Claude's own composition, mounted in place
+    } else if (s.e) {
       s.id = `reel-card-${String(s.i + 1).padStart(2, "0")}`;
       put(`compositions/${s.id}.html`, engineComp({ id: s.id, W, H, look, p: s.e.p, blocks: s.e.blocks, rect: s.e.rect, background: look.bg, plate: undefined, fontCss }));
     } else {
@@ -648,6 +740,7 @@ async function build() {
     }
   }
   overlaySegs.forEach((o, k) => {
+    if (o.a) return; // Claude's own composition, mounted in place
     o.id = `reel-overlay-${String(k + 1).padStart(2, "0")}`;
     const style = o.e.it.style || "plate";
     put(`compositions/${o.id}.html`, engineComp({ id: o.id, W, H, look, p: o.e.p, blocks: o.e.blocks, rect: o.e.rect, background: null, plate: style === "plate" ? look.bg : null, fontCss }));
@@ -681,7 +774,7 @@ async function build() {
       media.push(`<div id="slot-${s.id}" class="slot" style="z-index:${s.z}" data-composition-id="${s.id}" data-composition-src="${s.src || `compositions/${s.id}.html`}" data-start="${s.start}" data-duration="${s.dur}" data-track-index="2" data-width="${W}" data-height="${H}"></div>`);
     }
   }
-  overlaySegs.forEach((o) => media.push(`<div id="slot-${o.id}" class="slot" style="z-index:500" data-composition-id="${o.id}" data-composition-src="compositions/${o.id}.html" data-start="${o.start}" data-duration="${o.dur}" data-track-index="3" data-width="${W}" data-height="${H}"></div>`));
+  overlaySegs.forEach((o) => media.push(`<div id="slot-${o.id}" class="slot" style="z-index:500" data-composition-id="${o.id}" data-composition-src="${o.src || `compositions/${o.id}.html`}" data-start="${o.start}" data-duration="${o.dur}" data-track-index="3" data-width="${W}" data-height="${H}"></div>`));
   if (groups.length) media.push(`<div id="slot-reel-captions" class="slot" style="z-index:600" data-composition-id="reel-captions" data-composition-src="compositions/reel-captions.html" data-start="0" data-duration="${total}" data-track-index="4" data-width="${W}" data-height="${H}"></div>`);
   if (musicRel) {
     const full = R.music.volume === undefined ? 0.8 : Number(R.music.volume);
@@ -738,8 +831,8 @@ ${MARK}
     fps: FPS,
     total_s: total,
     motion: M ? (M.personality === "custom" ? `${M.parent}+${(M.adjustments || []).join("+")}` : M.personality) : null,
-    items: segs.map((s) => (s.kind === "clip" ? { n: s.i + 1, kind: "clip", label: s.it.label || path.basename(s.it._src), clip: s.it.clip, in: s.it._in, out: s.it._out, start: s.start, duration: s.dur, transition_in: s.tr, audio: s.audio, poster: null } : { n: s.i + 1, kind: "card", label: s.e ? [].concat(s.it.text).join(" / ") : s.id, start: s.start, duration: s.dur, transition_in: "cut" })),
-    overlays: overlaySegs.map((o) => ({ text: o.e.it.text, zone: o.e.it.zone || "lower-third", start: o.start, duration: o.dur })),
+    items: segs.map((s) => (s.kind === "clip" ? { n: s.i + 1, kind: "clip", label: s.it.label || path.basename(s.it._src), clip: s.it.clip, in: s.it._in, out: s.it._out, start: s.start, duration: s.dur, transition_in: s.tr, audio: s.audio, poster: null } : { n: s.i + 1, kind: "card", label: s.e || s.a ? [].concat(s.it.text).join(" / ") : s.id, by: s.a ? "claude" : s.e ? "swatch" : "src", start: s.start, duration: s.dur, transition_in: "cut" })),
+    overlays: overlaySegs.map((o) => ({ text: o.it.text, zone: o.it.zone || "lower-third", start: o.start, duration: o.dur, by: o.a ? "claude" : "swatch" })),
     captions: groups.length ? { groups: groups.length, style: cap.style || "bold" } : null,
     music: musicRel,
     warnings,
@@ -777,5 +870,5 @@ ${MARK}
 }
 
 if (cmd === "scan") scan();
-else if (cmd === "build") await build();
+else if (cmd === "build" || cmd === "briefs") await build();
 else die("usage: reel.mjs scan --footage <dir> --run <run> | build --reel <reel.json> --project-dir <dir> [--render]");

@@ -20,6 +20,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { parseArgs, die, readJSON, writeFile, normalizeAspect, readFrontmatterDoc } from "./lib/common.mjs";
 import { resolvePreset, findSkill } from "./lib/hyperframes.mjs";
+import { installLook, installDirection, upsertMarked, DIRECTION_MARK } from "./lib/install.mjs";
 
 const args = parseArgs();
 if (!args.decisions) die("--decisions required");
@@ -37,6 +38,8 @@ const resolveIn = (p) => {
 };
 for (const k of ["motion", "keyframes"]) if (D[k]) D[k] = resolveIn(D[k]);
 if (D.look && D.look.frame) D.look.frame = resolveIn(D.look.frame);
+if (D.look && D.look.design_md) D.look.design_md = resolveIn(D.look.design_md);
+if (D.direction) D.direction = resolveIn(D.direction);
 const ROUTES = ["motion-graphics", "general-video", "product-launch-video", "faceless-explainer", "music-to-video", "pr-to-video"];
 
 for (const k of ["project", "content", "message", "motion"]) if (!D[k]) die(`decisions.json is missing "${k}"`);
@@ -95,9 +98,14 @@ const run = (cmd, argv, opts = {}) => {
 // ---- 0. resolve and check every input BEFORE init (a bad path must not leave a half-made project)
 let stylePreset = null;
 let frameSrc = null;
+// the brand reference or a design direction wins over a preset when both are given
+if (D.look && (D.look.design_md || D.look.frame)) delete D.look.preset;
 if (D.look && D.look.preset) {
   stylePreset = D.look.preset;
   frameSrc = resolvePreset(D.look.preset);
+} else if (D.look && D.look.design_md) {
+  frameSrc = D.look.design_md;
+  if (!fs.existsSync(frameSrc)) die(`brand reference not found: ${frameSrc}`);
 } else if (D.look && D.look.frame) {
   frameSrc = D.look.frame;
   if (!fs.existsSync(frameSrc)) die(`frame spec not found: ${frameSrc}`);
@@ -180,7 +188,22 @@ const put = (rel, content) => {
   writes.push(rel);
   if (!args["dry-run"]) writeFile(path.join(dir, rel), content);
 };
-if (frameSrc) put("frame.md", fs.readFileSync(frameSrc, "utf8"));
+const lookNotes = [];
+if (frameSrc && D.look && (D.look.design_md || D.look.frame) && !args["dry-run"]) {
+  // a design direction's frame.md or the project's own DESIGN.md: fonts staged, @font-face section added
+  const r = await installLook(dir, D.look.design_md ? { designMd: frameSrc, mode: D.look.mode } : { frame: frameSrc });
+  writes.push("frame.md");
+  lookNotes.push(...r.notes);
+} else if (frameSrc) put("frame.md", fs.readFileSync(frameSrc, "utf8"));
+let dirInstalled = null;
+if (D.direction) {
+  if (!fs.existsSync(D.direction)) die(`direction not found: ${D.direction} (compile it with direction.mjs compile)`);
+  if (!args["dry-run"]) {
+    dirInstalled = installDirection(dir, D.direction);
+    writes.push("DIRECTION.md", "direction.json");
+    if (fs.existsSync(path.join(dir, "frame.md"))) fs.writeFileSync(path.join(dir, "frame.md"), upsertMarked(fs.readFileSync(path.join(dir, "frame.md"), "utf8"), DIRECTION_MARK, dirInstalled.section));
+  }
+}
 const motionText = fs.readFileSync(D.motion, "utf8");
 const M = readFrontmatterDoc(motionText).fields;
 put("motion.md", motionText);
@@ -236,7 +259,7 @@ ${[
 ].filter(Boolean).join("\n")}
 
 ## Customizations
-
+${dirInstalled ? `\n- **Art direction is decided:** ${dirInstalled.direction.style_name}. DIRECTION.md is the full brief in proper motion-design terms; its binding summary is in frame.md and DISPATCH.md. Design from it.` : ""}
 - **motion.md at the project root is binding motion doctrine** (${motionLabel}). Every tween follows its duration scale, eases, stagger, holds and banned list. Build in GSAP only. Reused registry blocks are re-eased and re-timed to it.
 ${D.keyframes ? "- **keyframes.json holds approved key poses and timings.** The shot plan follows its poses, beats and segment eases; do not re-choreograph them.\n" : ""}${musicRel ? (route === "motion-graphics" ? `- **Music bed:** \`${musicRel}\` is already placed in the host root \`index.html\` as \`#music-bed\` (full length, short fade in and out). Do not add another audio element. Land the main beats near its downbeats where the motion contract allows.\n` : `- **Music bed:** \`${musicRel}\` plays under the whole piece: one \`<audio id="music-bed">\` clip at t=0 for the full length (hyperframes-core media rules), fading in and out. Land the main beats near its downbeats where the motion contract allows.\n`) : ""}- DISPATCH.md is appended to every design, build and repair subagent dispatch (subagents do not read this brief).
 - Rasa Director's obey check (\`node <rasa-director>/scripts/obey.mjs --project .\`) runs after verify and before the render question; after any obey repair, lint, check and snapshots run again.
@@ -315,7 +338,7 @@ ${D.category ? `- Category: \`${D.category}\`\n` : ""}- Look: \`frame.md\` at th
 - Concept: ${D.concept ? `${D.concept.title}. ${D.concept.text}` : "(none beyond the message)"}
 - Music: ${musicRel ? (route === "motion-graphics" ? `\`${musicRel}\` is already in the host root as \`#music-bed\` for the full ${lengthS}s. Do not add audio to compositions/index.html.` : `\`${musicRel}\` as one \`<audio id="music-bed">\` clip at t=0 for the full ${lengthS}s, fading in and out.`) : "none (silent piece)"}
 
-${overridesBlock}## Binding motion contract (from motion.md)
+${dirInstalled ? `${dirInstalled.section}\n` : ""}${overridesBlock}## Binding motion contract (from motion.md)
 
 - Personality: ${motionLabel}
 - Length: ${lengthS}s, ${W}x${H}. \`shot-plan.json\` uses \`duration_s: ${lengthS}\` and this canvas; the host root mounts the build for exactly this long.
@@ -380,7 +403,7 @@ if (mediaUse && !args["dry-run"]) {
 
 console.log(
   JSON.stringify(
-    { project: dir, route, mode: revise ? "revise" : "new", length_s: lengthS, length_source: lengthSource, host_root: hostWritten, wrote: writes, invalidated: moved, prefsRecorded, commands: log, next: `Enter /${route} (it adopts ${path.relative(ws, dir)}: Step 0 skips init because hyperframes.json exists; BRIEF.md exists so no brief questions). Append DISPATCH.md to every subagent dispatch.` },
+    { project: dir, route, mode: revise ? "revise" : "new", look_notes: lookNotes, direction: dirInstalled ? dirInstalled.direction.style_name : null, length_s: lengthS, length_source: lengthSource, host_root: hostWritten, wrote: writes, invalidated: moved, prefsRecorded, commands: log, next: `Enter /${route} (it adopts ${path.relative(ws, dir)}: Step 0 skips init because hyperframes.json exists; BRIEF.md exists so no brief questions). Append DISPATCH.md to every subagent dispatch.` },
     null,
     2
   )

@@ -1,7 +1,7 @@
 {
   "name": "rasa-director",
-  "description": "Creative direction for entire videos made with Claude: launch films, explainers, PR videos, music videos, reels cut from your raw footage, captions and motion graphics. Decide the story, scenes, look, motion, transitions, voice and music by eye in a Director's Console, then HyperFrames builds exactly that, checked before render.",
-  "version": "0.3.0",
+  "description": "Direct your whole video in the terms motion designers use (30 dimensions, about 880 terms) or bring your DESIGN.md; Claude designs and animates every frame to that direction through HyperFrames, checked before render. Launch films, explainers, PR videos, music videos, footage reels, motion graphics.",
+  "version": "0.4.0",
   "author": {
     "name": "Sibhimanyu",
     "url": "https://github.com/Sibhimanyu"
@@ -9,5 +9,5 @@
   "homepage": "https://sibhimanyu.github.io/rasa-director/",
   "repository": "https://github.com/Sibhimanyu/rasa-director",
   "license": "MIT",
-  "keywords": ["video", "video-editing", "reels", "launch-video", "explainer", "motion-graphics", "hyperframes", "gsap", "design", "skill"]
+  "keywords": ["video", "motion-design", "art-direction", "design-md", "video-editing", "reels", "launch-video", "explainer", "motion-graphics", "hyperframes", "gsap", "design", "skill"]
 }

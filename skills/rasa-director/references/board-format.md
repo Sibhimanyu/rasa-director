@@ -1,6 +1,6 @@
 # keyframes.json (keyframe board input)
 
-Written by the agent in Step 5, rendered and validated by `scripts/board.mjs`, and copied into the project by `handoff.mjs`. There the build treats it as binding (see "Build semantics").
+Written by the agent in the Key poses step of a single motion unit, rendered and validated by `scripts/board.mjs`, and copied into the project by `handoff.mjs`. There the build treats it as binding (see "Build semantics").
 
 ```json
 {

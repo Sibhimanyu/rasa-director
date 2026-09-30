@@ -70,19 +70,23 @@ Walks the folder (two levels deep; `.mp4 .mov .m4v .webm .mkv .avi .mts`) and wr
 - `aspect`: `9:16` (default), `16:9`, `1:1`, `4:5`. `fps`: 12–120 (default 30); every clip is conformed to it.
 - `footage_dir`: where `clip` names resolve (paths may also be relative to reel.json or the workspace, or absolute).
 - `footage`: the scan's footage.json; captions need it (they read each clip's transcript).
-- `look`: `{preset}` or `{frame}` (a frame.md-format spec). The look's display font is staged into `assets/fonts/` (from the preset's files, else Google Fonts); if that fails, Inter is used with a warning.
-- `motion`: required when there are engine cards, overlays or non-cut transitions.
+- `look`: `{preset}`, `{frame}` (a design direction's frame.md or your own spec) or `{design_md, mode}` (the project's brand). Installed as the project's frame.md; every family is staged into `assets/fonts/` (a preset's own files, else Google Fonts, else Fontshare); a family that can't be staged becomes Inter, with a warning.
+- `motion`: required when there are cards, overlays or non-cut transitions (Claude's cards follow its contract; obey checks them).
 - `transition_default`: for clips without their own `transition_in` (default `auto`).
 - `fit`: default framing for clips (see below).
 
 **Timeline items** play in order.
 - `clip`: `clip` (file), `in`/`out` (source seconds; `out` defaults to the clip's end), `label`, `mute`, `volume` (0–3.98, default 1), `rate` (0.25–4), `fit` (`cover`: fill and crop, aimed with `focus.x`/`focus.y` 0–1; `contain`: letterbox in the look's background; `blur`: the clip over a blurred copy of itself), `transition_in` (`auto` = the motion's own handoff: a clip-path wipe for mask/wipe/push personalities, a dissolve for crossfade ones, otherwise a cut; `cut`; `dissolve`; `wipe`), `captions: false` to leave a clip uncaptioned.
-- `card` (engine): `text` (a string, or an array of beats shown one after another), `sub` (second line on the last beat), `duration`. Drawn full-frame in the look's background with the motion personality; the hold is stretched so the card runs `duration`. A duration shorter than the motion allows (entrance + its minimum hold + exit) is raised to that minimum, with a warning.
+- `card`: `text` (a string, or an array of beats), `sub`, `duration`, and who draws it:
+  - `by: "claude"` (the default, or `"cards_by"` at the top level): Claude designs and animates it. `reel.mjs briefs` writes `compositions/cards/card-NN.brief.md` (text, size, duration, placement, the art direction, the motion contract, the fonts, HyperFrames' sub-composition rules and a scaffold); Claude writes `compositions/cards/card-NN.html`; `build` mounts it and refuses while it is missing or malformed (no `<template>`, wrong `data-composition-id`, no `window.__timelines["card-NN"]`).
+  - `by: "swatch"`: Rasa's preview engine draws it in the look's background and the motion language, its hold stretched to `duration` (raised to the motion's minimum with a warning). For quick drafts only.
 - `card` (`src`): a HyperFrames sub-composition file (everything inside `<template>`; for example `compositions/index.html` of a unit built with `/motion-graphics`), mounted for `duration` seconds. Its `data-composition-id` is kept. It must be built at the reel's size (checked) and in the reel's motion: `obey.mjs` checks it like every card, so a card made in another personality stops the render. It's copied into `compositions/`; asset files it references (images, fonts) must be copied into the reel project at the same relative paths.
 
 Transitions apply between two consecutive clips only (cards cut in and out; they animate themselves). A dissolve on a motion that bans opacity-only entrances becomes a wipe; a transition that can't fit the motion's duration scale becomes a cut (both warned). Transitions overlap the clips by one scale step near 0.5 s, so the reel is that much shorter than the sum of its items.
 
-**Overlays**: `text`, `sub`, `start` (seconds on the reel's timeline, see `reel.edl.json` for item start times), `duration` (raised to the motion's minimum like cards), `zone` (`lower-third` default, `top`, `center`), `style` (`plate`: on a panel in the look's background; `clear`: white text with a soft shadow).
+**Overlays**: `text`, `sub`, `start` (seconds on the reel's timeline, see `reel.edl.json` for item start times), `duration`, `zone` (`lower-third` default, `top`, `center`; each brief gives the exact rectangle), `style` (`plate`: on a panel in the look's surface or canvas; `clear`: legible over any footage), and `by` like cards (Claude by default: `compositions/cards/overlay-NN.html`, transparent everywhere outside its zone).
+
+**Look and direction**: `look` is `{preset}`, `{frame}` (a design direction's frame.md) or `{design_md, mode}` (the project's brand); it is installed as the project's `frame.md` with staged fonts. `direction` (a compiled direction folder) installs `DIRECTION.md` and puts its summary in frame.md and in every card brief.
 
 **Captions**: `on`, `style` (`bold`: uppercase, heavy, white with a dark stroke, the spoken word in the look's accent; `clean`: sentence case on a plate), `replace` (word → correction, matched case-insensitively without punctuation). Words come from each clip's transcript, mapped through the cut (in/out, rate, position); groups of up to 3 words (9:16) or 5 (wider), breaking at pauses ≥ 150 ms and sentence ends, one group on screen at a time, in the captions zone (just below the lower-third zone).
 
@@ -91,6 +95,7 @@ Transitions apply between two consecutive clips only (cards cut in and out; they
 ## build
 
 ```bash
+node reel.mjs briefs --reel <reel.json> --project-dir videos/<name>          # card/overlay briefs for Claude
 node reel.mjs build --reel <reel.json> --project-dir videos/<name> [--render] [--quality draft|looks|delivery] [--no-lint] [--render-anyway] [--force]
 ```
 

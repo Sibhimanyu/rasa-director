@@ -39,11 +39,14 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 | Step | Fields |
 |---|---|
 | `brief` | `fields: {content, sub, destination, aspect, length_s, narration}` (prefill; `narration` true/false), `aspects` (default 16:9, 9:16, 1:1, 4:5) |
+| `brand` | `brand` (brand.mjs `read` summary: roles, fonts, modes, warnings), `board` (brand-board.html), `unavailable` → brand board, swatches, mode chips, three choices |
 | `route` | `options: [{id, label, why}]` (HyperFrames workflow ids, or `reel`) |
+| `direction` | `dimensions` (direction.mjs `menu`), each with optional `picked` → every dimension as a collapsible group of term cards (term, definition, used-for) and facet chips, "Claude decides" per dimension, a note field, and a live style formula |
 | `footage` | `clips` (footage.json's clips from `reel.mjs scan`) → a card per clip: contact sheet, facts, transcript, include checkbox |
 | `concept` | `options: [{id, title, world, hook, rare}]` |
 | `scenes` | `scenes: [{title, on_screen, visual, voiceover, duration, transition_in, intensity, …}]` (scenes.json's list; extra fields pass through), `target_s`, `transition_default`, `narrated` → editable table + timeline strip |
-| `look` | `options: [{id, showcase, description}]` (showcase = the preset's `frame-showcase.html`, rendered live), `note_brand` |
+| `styleframes` | `images: [..]`, `captions: [..]` → the stills Claude designed, with Approve |
+| `look` | design directions: `page` (design.mjs looks index.html), `looks` (looks.json's looks), `recommended` → the board grid and letter pickers; or the older preset form `options: [{id, showcase, description}]`, `note_brand` |
 | `motion` | `tasting` (index.html from tasting.mjs), `cells` (tasting.json's `cells`: `{letter, id, name, oneLiner, parent?, adjust?}`), `adjectives` (the object `motion-md.mjs adjectives` prints, or a list of ids). The default selection is `recommended`. |
 | `reel` | `timeline`, `overlays`, `captions`, `clips: [{name, duration}]`, optional `edl` (reel.edl.json) and `video` (draft render) → the editable cut (references/reel.md) |
 | `transitions` | `menu` (index.html from transition-menu.mjs), `cells` (transitions.json's `cells`: `{letter, id, label, energy, duration_s}`), `recommended` |
@@ -64,17 +67,19 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 | `submit` | brief | `{content, sub, destination, aspect, length_s, narration}` |
 | `submit` | scenes | `{scenes: [...]}`: the full edited list, in order |
 | `submit` | footage | `{include: [clip ids]}` |
+| `submit` | direction | `{picks: {dimension: [term ids], "dim:facet": [id]}, decided_by: {dimension: "user"|"agent"}, notes: {dimension: text}}` |
+| `choose` | brand | `{use: "direct"|"remix"|"none", mode}` |
 | `submit` | reel | `{timeline, overlays, captions}`: the full edited cut |
 | `choose` | route | workflow id |
 | `choose` | transitions | the exact `transition_in` string (`cut`, `crossfade`, `push-slide LEFT`…) |
 | `choose` | voice | voice id or `"none"` |
-| `choose` | concept, look, motion | option id (a motion id with `+` is an adjusted variant: `parent+adj1+adj2`) |
+| `choose` | concept, look, motion | option id (a look letter; a motion cell id such as `lang-snappy`, or with `+` an adjusted variant: `lang-snappy+slower`) |
 | `choose` | keyframes | `"poses"` or `"skip"` |
 | `choose` | music | track id, `"none"`, or `{file}` |
 | `choose` | render | `"preview"` or `"render"` |
 | `adjust` | motion | `{id, adjust: [adjectives]}` |
-| `more` | motion | `{exclude: [ids]}` |
-| `approve` | storyboard, keyframes, plan | null |
+| `more` | motion, look | `{exclude: [ids]}` |
+| `approve` | storyboard, styleframes, keyframes, plan | null |
 | `decide` | any | null: "you decide" for that step |
 | `decide-rest` | `*` | null: "you decide the rest" |
 | `note` | any | null; the text is in `note` |

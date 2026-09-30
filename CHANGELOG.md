@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.4.0 (2026-09-30)
+
+**Direction in proper terms; Claude designs and animates.** Rasa Director no longer offers canned animations as the product: it gives the user the vocabulary of motion design, compiles their decisions into an art-direction brief, and Claude designs and animates every frame from it.
+
+- **The taxonomy**: 30 dimensions and about 880 terms (format, UI treatment, product-demo language, UI interaction, data viz, photo/video, illustration, character, iconography, visual style, era, color, typography, composition, shape, stroke, shadow, material, texture, depth, motion language, motion function, transitions, camera, effects, pacing, narrative, sound, production, tone), each with a definition, looks, motion, uses, what it conveys, what it's confused with, search terms and a precise prompt; 35 style combinations; a schema and validator (`taxonomy.mjs`).
+- **Direction** step and `direction.mjs`: pick per dimension or hand it to Claude (candidates coherent with the picks so far, never the generic default); reference analysis and comparison templates; `DIRECTION.md` with the style name, the style formula and a Do / not-to-be-confused-with instruction per decision. Its binding summary goes into frame.md, every frame packet, DISPATCH.md and every reel card brief.
+- **DESIGN.md**: `brand.mjs` reads a project's brand reference in the common shapes (design.md spec frontmatter with oklch colors, impeccable, gstack, Stitch-style prose, CSS custom properties, token tables), assigns color roles, maps platform fonts, converts it to a HyperFrames frame.md (verified with HyperFrames' parser) or build-frame tokens, and renders a brand board. A Brand step offers it first.
+- **Design directions**: `design.mjs looks` makes complete looks (visual style + palette by role + type pairing + shape, stroke, shadow, texture, composition) as boards with the user's words and a frame.md each; brand-locked when there is a DESIGN.md. Replaces choosing among frame presets.
+- **Motion languages**: the motion step chooses a motion-language term whose contract becomes motion.md (`motion-md.mjs --language`); the 10 personalities are now preview swatches. Every language's swatch passes the checker against its own contract.
+- **Style frames**: Claude designs the key frames as stills for approval before animation (`design.mjs stills`).
+- **Reel cards by Claude**: `reel.mjs briefs` writes a brief per card and overlay; Claude writes each as a HyperFrames sub-composition; `build` mounts and checks them (`by: "swatch"` keeps the quick engine draft).
+- Fonts are staged for every look (preset files, Google Fonts, Fontshare) with an `@font-face` section in frame.md; headless Chrome launches have a hard time limit.
+- Console: Brand, Direction and Style frames panels; the Look panel shows design-direction boards.
+- Website and README rewritten around the stack of decisions. Self-test: 52 checks.
+
 ## 0.3.0 (2026-09-30)
 
 **Footage reels.** Point Rasa at a folder of raw clips and it cuts them into a reel or edit, with motion-graphics cards between clips and titles, lower thirds and captions on top.

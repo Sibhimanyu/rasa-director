@@ -131,6 +131,26 @@
   .timeline div.card-seg { background: color-mix(in srgb, var(--accent) 22%, var(--panel-2)); }
   .reel-preview { max-height: 420px; max-width: 100%; border-radius: 10px; background: #000; display: block; margin-bottom: 8px; }
   h3.sub-h { font: 600 14px/1 var(--display, inherit); margin: 22px 0 4px; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+  .swatch { display: flex; align-items: center; gap: 8px; font: 500 12px/1 var(--mono); color: var(--ink-2); }
+  .swatch i { display: block; width: 34px; height: 34px; border-radius: 6px; border: 1px solid var(--line); }
+  .warn-line { color: #f0b35b; font-size: 13px; margin: 4px 0; }
+  .formula { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; max-width: 1200px; }
+  .formula ol { margin: 8px 0 0 18px; font: 500 13px/1.6 var(--mono); color: var(--ink); }
+  details.dim { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; max-width: 1200px; }
+  details.dim.set { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  details.dim > summary { cursor: pointer; padding: 12px 14px; display: flex; gap: 12px; align-items: baseline; list-style: none; }
+  details.dim > summary .meta { color: var(--ink-3); }
+  details.dim > *:not(summary) { margin-left: 14px; margin-right: 14px; }
+  .fam { font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 14px 14px 6px; }
+  .opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; margin-bottom: 8px; }
+  .opt { text-align: left; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 11px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+  .opt b { font-size: 13.5px; }
+  .opt span { font-size: 12px; color: var(--ink-2); line-height: 1.35; }
+  .opt small { font-size: 11px; color: var(--ink-3); line-height: 1.3; }
+  .opt.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
+  .grid.frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; max-width: 1200px; }
+  figure.sf { margin: 0; } figure.sf img { width: 100%; border-radius: 8px; display: block; background: #000; } figure.sf figcaption { font-size: 12.5px; color: var(--ink-2); margin-top: 6px; }
   table.scenes { width: 100%; max-width: 1200px; border-collapse: separate; border-spacing: 0 8px; }
   table.scenes th { text-align: left; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding: 0 6px; }
   table.scenes td { background: var(--panel); padding: 8px 6px; vertical-align: top; }
@@ -166,8 +186,8 @@
 (function () {
   var TOKEN = new URLSearchParams(location.search).get("t") || "";
   var STEPS = [
-    ["brief", "Brief"], ["route", "Route"], ["footage", "Footage"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
-    ["reel", "Cut"], ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
+    ["brief", "Brief"], ["brand", "Brand"], ["route", "Route"], ["footage", "Footage"], ["direction", "Direction"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
+    ["styleframes", "Style frames"], ["reel", "Cut"], ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
     ["plan", "Plan"], ["build", "Build"], ["render", "Render"]
   ];
   var S = { steps: {} }, viewing = null, followCurrent = true, local = {};
@@ -189,8 +209,11 @@
   function fsUrl(p) {
     if (!p) return "";
     if (/^https?:/.test(p)) return p;
+    // a query string (e.g. "tasting/index.html?phase=hold") passes through to the page
+    var q = "", qi = p.indexOf("?");
+    if (qi > -1) { q = p.slice(qi); p = p.slice(0, qi); }
     var abs = p.charAt(0) === "/";
-    return (abs ? "/fs/abs" : "/fs/rel/") + p.split("/").map(encodeURIComponent).join("/").replace(/^\//, abs ? "/" : "");
+    return (abs ? "/fs/abs" : "/fs/rel/") + p.split("/").map(encodeURIComponent).join("/").replace(/^\//, abs ? "/" : "") + q;
   }
   function toast(msg) {
     var t = document.getElementById("toast");
@@ -319,8 +342,137 @@
         ]);
       }))];
     },
+    brand: function (d) {
+      var b = d.brand;
+      if (!b) return [empty(d.unavailable || "If the project has a brand reference (DESIGN.md, design.md), it appears here: its colors by role, its type and its rules, ready to be the look.")];
+      local.bmode = local.bmode || (b.modes ? "dark" : null);
+      var roles = b.roles || {};
+      var chips = ["canvas", "ink", "accent", "surface", "muted"].filter(function (k) { return roles[k]; }).map(function (k) {
+        return h("div", { class: "swatch" }, [h("i", { style: "background:" + roles[k] }), h("span", { text: k + " " + roles[k] })]);
+      });
+      var f = b.fonts || {};
+      var kids = [
+        d.board ? scaledFrame(d.board, d.board_width || 1920, d.board_height || 1080, 540) : null,
+        h("div", { class: "swatches" }, chips),
+        h("p", { class: "context", text: [f.display && "Display: " + f.display.family, f.body && "Body: " + f.body.family, f.mono && "Mono: " + f.mono.family].filter(Boolean).join(" · ") + " · from " + (b.source || "DESIGN.md") })
+      ];
+      (b.warnings || []).forEach(function (w) { kids.push(h("p", { class: "warn-line", text: w })); });
+      if (b.modes) kids.push(h("div", { class: "field" }, [h("label", { text: "Your brand defines light and dark: which one leads this video?" }), h("div", { class: "chips", role: "group", "aria-label": "Mode" }, ["dark", "light"].map(function (m) {
+        return h("button", { class: "chip" + (local.bmode === m ? " on" : ""), "aria-pressed": local.bmode === m ? "true" : "false", onclick: function () { local.bmode = m; document.getElementById("main")._sig = null; render(); }, text: m });
+      }))]));
+      kids.push(h("div", { class: "toolbar" }, [
+        h("button", { class: "btn primary", onclick: function () { send("brand", "choose", { use: "direct", mode: local.bmode }); }, text: "Use my brand as the look" }),
+        h("button", { class: "btn", onclick: function () { send("brand", "choose", { use: "remix", mode: local.bmode }); }, text: "My brand, on a new layout" }),
+        h("button", { class: "btn ghost", onclick: function () { send("brand", "choose", { use: "none" }); }, text: "Don't use it for this video" })
+      ]));
+      return kids;
+    },
+    direction: function (d) {
+      var dims = d.dimensions || [];
+      if (!dims.length) return [empty("The creative direction appears here: every decision (format, UI treatment, visual style, typography, color, motion language, transitions, pacing…) in the terms motion designers use. Pick, or hand any of them to Claude.")];
+      local.dsel = local.dsel || {};
+      local.dagent = local.dagent || {};
+      local.dnotes = local.dnotes || {};
+      dims.forEach(function (x) { if (!local.dsel[x.id]) local.dsel[x.id] = (x.picked || []).slice(); (x.facets || []).forEach(function (f) { var k = x.id + ":" + f.id; if (!local.dsel[k]) local.dsel[k] = []; }); });
+      var holder = h("div");
+      var GROUPS = { format: "Format & tone", story: "Story, pacing & sound", subject: "What's on screen", look: "Look", motion: "Motion" };
+      function termOf(dimId, id) {
+        var parts = dimId.split(":"), x = dims.filter(function (q) { return q.id === parts[0]; })[0]; if (!x) return id;
+        var list = parts[1] ? ((x.facets || []).filter(function (f) { return f.id === parts[1]; })[0] || { options: [] }).options : x.options;
+        var o = list.filter(function (q) { return q.id === id; })[0]; return o ? o.term : id;
+      }
+      function formula() {
+        var rows = [];
+        dims.forEach(function (x) {
+          if (local.dagent[x.id]) rows.push(x.name + ": Claude decides");
+          else if ((local.dsel[x.id] || []).length) rows.push(x.name + ": " + local.dsel[x.id].map(function (id) { return termOf(x.id, id); }).join(" + "));
+        });
+        return rows;
+      }
+      function draw() {
+        holder.innerHTML = "";
+        var f = formula();
+        holder.appendChild(h("div", { class: "formula" }, [h("div", { class: "meta", text: "Style formula so far" }), f.length ? h("ol", null, f.map(function (r) { return h("li", { text: r }); })) : h("p", { class: "context", text: "Nothing picked yet. Every dimension is optional; anything you leave or hand over, Claude decides (never the generic default)." })]));
+        var groups = {};
+        dims.forEach(function (x) { (groups[x.group] = groups[x.group] || []).push(x); });
+        Object.keys(GROUPS).filter(function (g) { return groups[g]; }).forEach(function (g) {
+          holder.appendChild(h("h3", { class: "sub-h", text: GROUPS[g] }));
+          groups[g].forEach(function (x) {
+            var sel = local.dsel[x.id], max = (x.pick && x.pick.max) || 1;
+            var det = h("details", { class: "dim" + (sel.length || local.dagent[x.id] ? " set" : "") });
+            if (local.dopen === x.id) det.setAttribute("open", "");
+            det.addEventListener("toggle", function () { if (det.open) local.dopen = x.id; });
+            var sum = h("summary", null, [h("b", { text: x.name }), h("span", { class: "meta", text: local.dagent[x.id] ? "Claude decides" : sel.length ? sel.map(function (id) { return termOf(x.id, id); }).join(" + ") : "open" })]);
+            det.appendChild(sum);
+            det.appendChild(h("p", { class: "context", text: x.question + (max > 1 ? " (up to " + max + ")" : "") }));
+            var fams = (x.families && x.families.length) ? x.families : [{ id: null, name: "" }];
+            fams.forEach(function (fam) {
+              var opts = x.options.filter(function (o) { return !fam.id || o.family === fam.id; });
+              if (!opts.length) return;
+              if (fam.name) det.appendChild(h("div", { class: "fam", text: fam.name }));
+              det.appendChild(h("div", { class: "opts" }, opts.map(function (o) {
+                var on = sel.indexOf(o.id) > -1;
+                return h("button", { class: "opt" + (on ? " on" : ""), "aria-pressed": on ? "true" : "false", onclick: function () {
+                  local.dagent[x.id] = false;
+                  var k = sel.indexOf(o.id);
+                  if (k > -1) sel.splice(k, 1); else { if (sel.length >= max) sel.shift(); sel.push(o.id); }
+                  local.dopen = x.id; draw();
+                } }, [h("b", { text: o.term }), h("span", { text: o.what }), o.use ? h("small", { text: "Used for: " + o.use }) : null]);
+              })));
+            });
+            (x.facets || []).forEach(function (fc) {
+              var k = x.id + ":" + fc.id, fs = local.dsel[k];
+              det.appendChild(h("div", { class: "fam", text: fc.name }));
+              det.appendChild(h("div", { class: "chips" }, fc.options.map(function (o) {
+                var on = fs.indexOf(o.id) > -1;
+                return h("button", { class: "chip" + (on ? " on" : ""), title: o.what, onclick: function () { local.dsel[k] = on ? [] : [o.id]; local.dopen = x.id; draw(); }, text: o.term });
+              })));
+            });
+            var note = h("input", { placeholder: "A note on " + x.name.toLowerCase() + " (optional)", value: local.dnotes[x.id] || "" });
+            note.addEventListener("input", function () { local.dnotes[x.id] = note.value; });
+            det.appendChild(h("div", { class: "toolbar" }, [
+              h("button", { class: "btn small" + (local.dagent[x.id] ? " primary" : ""), onclick: function () { local.dagent[x.id] = !local.dagent[x.id]; if (local.dagent[x.id]) local.dsel[x.id] = []; local.dopen = x.id; draw(); }, text: local.dagent[x.id] ? "Claude decides ✓" : "Claude decides" }),
+              h("div", { class: "field", style: "flex:1;min-width:240px" }, [note])
+            ]));
+            holder.appendChild(det);
+          });
+        });
+        holder.appendChild(h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () {
+          var picks = {}, by = {};
+          Object.keys(local.dsel).forEach(function (k) { if (local.dsel[k].length) { picks[k] = local.dsel[k].slice(); by[k] = "user"; } });
+          Object.keys(local.dagent).forEach(function (k) { if (local.dagent[k]) by[k] = "agent"; });
+          var notes = {}; Object.keys(local.dnotes).forEach(function (k) { if (local.dnotes[k]) notes[k] = local.dnotes[k]; });
+          send("direction", "submit", { picks: picks, decided_by: by, notes: notes });
+        }, text: "Set this direction" })]));
+      }
+      draw();
+      return [holder];
+    },
     look: function (d) {
-      if (!(d.options || []).length) return [empty("Look presets appear here, each opened by eye.")];
+      // design directions: a board grid (design.mjs looks); older payloads with preset options still render as cards
+      if (d.page) {
+        var looks = d.looks || [];
+        local.look = local.look || d.recommended || (looks[0] || {}).id;
+        var controls = h("div");
+        function drawL() {
+          controls.innerHTML = "";
+          controls.appendChild(h("div", { class: "cellpick", role: "group", "aria-label": "Looks" }, looks.map(function (L) {
+            var on = local.look === L.id;
+            return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.look = L.id; drawL(); } }, [h("b", { text: L.id }), L.name + (d.recommended === L.id ? "  ★ recommended" : "")]);
+          })));
+          var cur = looks.filter(function (L) { return L.id === local.look; })[0];
+          var ty = cur && cur.type ? (typeof cur.type === "string" ? cur.type : (cur.type.display && cur.type.display.family) + " + " + (cur.type.body && cur.type.body.family)) : "";
+          if (cur) controls.appendChild(h("p", { class: "context", text: cur.id + " · " + ty + (cur.palette_source ? " · " + cur.palette_source : "") }));
+          controls.appendChild(h("div", { class: "toolbar" }, [
+            h("button", { class: "btn primary", disabled: !cur, onclick: function () { send("look", "choose", local.look); }, text: "Use look " + (local.look || "") }),
+            h("button", { class: "btn", onclick: function () { send("look", "more", { exclude: looks.map(function (L) { return L.id; }) }); }, text: "Show other looks" })
+          ]));
+          controls.appendChild(h("p", { class: "context", text: "Boards show each look's palette, type, shape and texture. Claude draws the real frames from the one you pick." }));
+        }
+        drawL();
+        return [scaledFrame(d.page, 1920, 1080), controls];
+      }
+      if (!(d.options || []).length) return [empty("Design directions appear here: complete looks (palette, type, shape, texture) shown on your own words.")];
       return [h("div", { class: "grid cards" }, d.options.map(function (o) {
         return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
           o.showcase ? scaledFrame(o.showcase, 1920, 1080) : null,
@@ -331,8 +483,15 @@
         ]);
       })), d.note_brand ? h("p", { class: "context", text: d.note_brand }) : null];
     },
+    styleframes: function (d) {
+      var imgs = d.images || [];
+      if (!imgs.length) return [empty("Style frames appear here: key frames of your video that Claude designs in the chosen direction, for you to approve before anything moves.")];
+      return [h("div", { class: "grid frames" }, imgs.map(function (src, i) {
+        return h("figure", { class: "sf" }, [h("img", { src: fsUrl(src), alt: "Style frame " + (i + 1), loading: "lazy" }), h("figcaption", { text: (d.captions && d.captions[i]) || "Frame " + (i + 1) })]);
+      })), h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () { send("styleframes", "approve", null); }, text: "These are right. Animate them" })])];
+    },
     motion: function (d) {
-      if (!d.tasting) return [empty("The tasting menu appears here: your headline looping in several motion personalities, side by side.")];
+      if (!d.tasting) return [empty("Motion-language swatches appear here: your lines in several motion languages, side by side, to choose by eye.")];
       var controls = h("div");
       function drawControls() {
         var cells = d.cells || [];

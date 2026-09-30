@@ -27,8 +27,9 @@ waivers: []
 
 | Key | Meaning |
 |---|---|
-| `personality` | library id, or `"custom"` when adjusted |
-| `parent`, `adjustments` | the library id and adjectives a custom personality came from |
+| `personality` | `lang-<term>` for a motion-language term (`taxonomy/dimensions/motion-language.json`, the usual case), a preview-swatch id from `personalities/`, or `"custom"` when adjusted |
+| `language` | the motion-language term (null for a swatch id) |
+| `parent`, `adjustments` | what a custom (adjusted) motion came from (`lang-<term>` or a swatch id) and the adjectives applied |
 | `tempo.scale_ms` | the allowed tween durations |
 | `easing` | the enter / exit / move eases (GSAP names; `steps(N)` and `none` allowed) |
 | `stagger.each_ms`, `holds.min_ms` | the stagger between units, and the minimum hold after an element has arrived |

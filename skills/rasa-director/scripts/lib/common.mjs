@@ -58,10 +58,16 @@ export function listPersonalities() {
 // custom variant emitted by motion-md.mjs for re-preview).
 export function getPersonality(id) {
   if (id.endsWith(".json") && fs.existsSync(id)) return readJSON(id);
+  // a motion-language term from the taxonomy: "lang-snappy" (or a bare term that is not a swatch id)
+  if (/^lang-/.test(id) || (!fs.existsSync(path.join(PERSONALITY_DIR, `${id}.json`)) && _langResolver && _langResolver.has(id))) return _langResolver.get(id.replace(/^lang-/, ""));
   const p = path.join(PERSONALITY_DIR, `${id}.json`);
   if (!fs.existsSync(p)) die(`unknown personality "${id}". Known: ${listPersonalities().map((x) => x.id).join(", ")}`);
   return readJSON(p);
 }
+
+// motion-language resolution is registered by lib/motion-lang.mjs (avoids an import cycle)
+let _langResolver = null;
+export function registerLanguageResolver(r) { _langResolver = r; }
 
 // --- motion.md frontmatter ----------------------------------------------------
 // Each top-level key sits on ONE line with a JSON value. That is valid YAML

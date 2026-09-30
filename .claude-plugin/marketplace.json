@@ -9,7 +9,7 @@
     {
       "name": "rasa-director",
       "source": "./",
-      "description": "Creative direction for entire videos made with Claude, including reels cut from your raw footage: decide the story, scenes, look, motion, transitions, voice and music by eye, then HyperFrames builds exactly that.",
+      "description": "Direct your whole video in motion-design terms or bring your DESIGN.md; Claude designs and animates it through HyperFrames.",
       "category": "design",
       "tags": ["video", "launch-video", "motion-graphics", "hyperframes"]
     }

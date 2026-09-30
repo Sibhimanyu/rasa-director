@@ -230,7 +230,7 @@
         moveDur = snap(moveDur / 2) * 2;
         break;
       case "cursor-blink":
-        if (d.cursor) tl.to(d.cursor, { opacity: 0, duration: snap(moveDur / 4), ease: E.move, yoyo: true, repeat: 3 }, tMove);
+        if (d.cursor) tl.to(d.cursor, { opacity: 0, duration: snap(moveDur / 4), ease: E.exit, yoyo: true, repeat: 3 }, tMove); // opacity 1->0 is checked as an exit
         moveDur = snap(moveDur / 4) * 4;
         break;
       case "hairline":

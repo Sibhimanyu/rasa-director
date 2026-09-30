@@ -6,14 +6,14 @@ Rasa decides everything creative; the HyperFrames workflow builds. The workflows
 
 | Route | Rasa steps used | Rasa pre-writes (`video.mjs write`) | Hook points during the build |
 |---|---|---|---|
-| `product-launch-video` | all 11 | BRIEF.md, frame.md (build-frame + contract), motion.md, STORYBOARD.md, SCRIPT.md, music bed, DISPATCH.md | audio `--voice <id> --provider heygen` · sketch pass → console · `inject` after `frame-packets.mjs` · DISPATCH to frame workers · `audio-lock` after `fetch-sfx` · `obey` after verify · render gate |
-| `faceless-explainer` | all 11 | same as above | same (audio `--voice <id>`) |
-| `pr-to-video` | all 11; Look fixed to `code-editorial` | same; frame.md is always built from `code-editorial` | project folder from `scripts/project-dir.mjs --pr <ref>`; run its `fetch-pr.mjs` / `ingest.mjs` before Story; code scenes need `source_excerpt`; then as above |
-| `general-video` | all 11 | same; frames go to `compositions/frames/NN-*.html` | as above |
-| `music-to-video` | Brief, Route, Story, Look, Motion, Music (the track, required), Plan; Scenes/Transitions/Voice skipped (the workflow plans cuts from the beat grid; hard cuts) | BRIEF.md, frame.md (verbatim preset copy: its gate requires it), motion.md, DISPATCH.md, `assets/bgm.mp3` (converted with ffmpeg if needed) | DISPATCH to every frame worker (the contract lives there and in motion.md, not frame.md) · `obey` after verify · render gate |
-| `talking-head-recut` | Brief, Route, Look (overlay card style), Motion (optional: described in the style fields), Music (optional), Plan | BRIEF.md with the style fields (`footage`) | the chosen motion's feel goes into the `footage` style fields (no DISPATCH or obey: the workflow owns its overlay code) · render gate |
-| `reel` (Rasa's reel editor) | Brief, Route, Footage, Story, Look, Motion, Cut, Music, Plan | nothing: `reel.mjs build` writes the whole project (references/reel.md) | lint + obey + render run inside `reel.mjs build`; render gate in the console |
-| `embedded-captions` | Brief, Route, Look (caption identity), Plan | BRIEF.md with the style fields (`footage`) | render gate |
+| `product-launch-video` | all 14 | BRIEF.md, frame.md (the look: build-frame from a preset, a design direction, or the converted DESIGN.md; fonts staged; + contract + direction), DIRECTION.md, motion.md, STORYBOARD.md, SCRIPT.md, music bed, DISPATCH.md | audio `--voice <id> --provider heygen` · sketch pass → console · `inject` after `frame-packets.mjs` · DISPATCH to frame workers · `audio-lock` after `fetch-sfx` · `obey` after verify · render gate |
+| `faceless-explainer` | all 14 | same as above | same (audio `--voice <id>`) |
+| `pr-to-video` | all 14; Look fixed to `code-editorial` | same; frame.md is always built from `code-editorial` | project folder from `scripts/project-dir.mjs --pr <ref>`; run its `fetch-pr.mjs` / `ingest.mjs` before Story; code scenes need `source_excerpt`; then as above |
+| `general-video` | all 14 | same; frames go to `compositions/frames/NN-*.html` | as above |
+| `music-to-video` | Brief, Brand, Route, Direction, Story, Look (a frame preset: required), Motion, Style frames, Music (the track, required), Plan; Scenes/Transitions/Voice skipped (the workflow plans cuts from the beat grid; hard cuts) | BRIEF.md, frame.md (verbatim preset copy: its gate requires it), motion.md, DISPATCH.md, `assets/bgm.mp3` (converted with ffmpeg if needed) | DISPATCH to every frame worker (the contract lives there and in motion.md, not frame.md) · `obey` after verify · render gate |
+| `talking-head-recut` | Brief, Brand, Route, Direction, Look (overlay card style), Motion (optional: described in the style fields), Music (optional), Plan | BRIEF.md with the style fields (`footage`) | the chosen motion's feel goes into the `footage` style fields (no DISPATCH or obey: the workflow owns its overlay code) · render gate |
+| `reel` (Rasa's reel editor) | Brief, Brand, Route, Footage, Direction, Story, Look, Motion, Style frames, Cut, Music, Plan | nothing: `reel.mjs build` writes the whole project (references/reel.md) | lint + obey + render run inside `reel.mjs build`; render gate in the console |
+| `embedded-captions` | Brief, Brand, Route, Direction, Look (caption identity), Plan | BRIEF.md with the style fields (`footage`) | render gate |
 | `motion-graphics` (single unit) | see SKILL.md "Single motion units" | `handoff.mjs` (references/handoff.md) | DISPATCH to every subagent · `obey` · render gate |
 
 `scenes.mjs` accepts the four story routes. `video.mjs init` runs `npx hyperframes init --skill=<route>` for every route except the footage routes, where it only creates the folder (their workflows set the project up from the footage).
@@ -73,20 +73,23 @@ Everything a frame worker must honour is written **inside** its `## Frame N — 
   "audience": "freelancers who dread tax season",
   "angle": "Before-After-Bridge",
   "concept": { "title": "The Shoebox Wins", "text": "Paper chaos gives way to one calm tap." },
-  "look": { "preset": "bold-poster" },
+  "look": { "frame": ".rasa-director/<ts>/looks/B/frame.md", "name": "Swiss / International Typographic Style" },
+  "direction": ".rasa-director/<ts>/direction",
+  "brand": "DESIGN.md",
   "motion": ".rasa-director/<ts>/motion.md",
   "storyboard_dir": ".rasa-director/<ts>/plan",
   "voice": { "id": "<heygen voice id>", "name": "Maya", "provider": "heygen" },
   "music": { "path": ".rasa-director/<ts>/music/warm-pulse.mp3", "title": "Warm Pulse" },
   "mode": "collaborative",
   "confirmed": { "aspect": true, "look": true, "voice": true, "destination": false, "language": false },
-  "receipts": { "stated": ["aspect 16:9 (from the request)"], "agent": ["Motion: editorial-mask over swiss-precise (the obvious pick)"] },
+  "receipts": { "stated": ["aspect 16:9 (from the request)"], "agent": ["Motion language: precise, passed over smooth (the generic default)"] },
   "footage": null,
   "assets": [{ "path": "assets/logo.svg", "role": "logo" }]
 }
 ```
 
-- `look`: `{ "preset": "<id>" }` or `{ "frame": "<path to a frame.md-format spec>" }` (the user's brand spec).
+- `look`: `{ "preset": "<id>" }`, `{ "frame": "<frame.md>", "name": "<look name>" }` (a design direction from `design.mjs looks`, or the user's own frame spec), `{ "design_md": "DESIGN.md", "mode": "dark" }` (the project's brand reference, converted; references/brand.md) or `{ "design_md": …, "preset": "<id>" }` (the brand remixed onto a preset's layout). Fonts are staged into `assets/fonts/` with an `@font-face` section in frame.md.
+- `direction`: a compiled direction folder (`direction.mjs compile --out`); installs `DIRECTION.md`, appends its binding summary to frame.md and DISPATCH.md, and `inject` adds it to every frame packet (references/direction.md).
 - `music`: `{ "path", "title" }` (exact track, locked with `audio-lock`), `{ "mood": "..." }`, or `"none"`.
 - `mode: "autonomous"` (after "you decide the rest") sets `storyboard: no`, so the workflow skips its sketch pass; otherwise the sketch pass and layout gate run and are relayed to the console.
 - `confirmed`: only answers the user actually gave; those are recorded into HyperFrames' own preference store (media-use `prefs.mjs`). Agent decisions are never recorded as preferences.
@@ -96,7 +99,7 @@ Everything a frame worker must honour is written **inside** its `## Frame N — 
 ## What `write` produces
 
 - **BRIEF.md**: canonical frontmatter (`workflow`, `flow: automation`, `storyboard`, `message`, `aspect`, `language`, `length`, `style_preset`, `voice`…), Intent, Assets, **Customizations** (design step done, plan approved, voice flag, `audio-lock` and `inject` instructions, the obey check), Notes with receipts.
-- **frame.md**: built by the workflow's `build-frame.mjs --preset <id> --hyperframes <dir>` (brand-remixed onto the capture), with the **motion contract** upserted at the end (idempotent; marker `<!-- rasa-director:motion-contract -->`). Not for music-to-video.
+- **frame.md**: from a preset, built by the workflow's `build-frame.mjs --preset <id> --hyperframes <dir>` (brand-remixed onto the capture or onto `look.design_md`); from a design direction or the brand's own DESIGN.md, written by `lib/install.mjs` with fonts staged and a "Font loading" section. Then the **motion contract** and the **art direction** are upserted at the end (idempotent; markers `<!-- rasa-director:motion-contract -->`, `<!-- rasa-director:direction -->`). music-to-video keeps its verbatim preset copy (the contract and direction go into DISPATCH.md).
 - **motion.md**, **STORYBOARD.md**, **SCRIPT.md** (narrated), the music bed, **DISPATCH.md** (the contract plus what's decided; appended to every frame worker and repair dispatch).
 
 ## Build-time commands

@@ -15,6 +15,8 @@ import { fileURLToPath } from "node:url";
 import { parseArgs, die, readJSON, writeFile, normalizeAspect, readFrontmatterDoc } from "./lib/common.mjs";
 import { resolvePreset, findSkill } from "./lib/hyperframes.mjs";
 import { contractText, upsertContract, motionLabel } from "./lib/contract.mjs";
+import { installLook, installDirection, directionSection, upsertMarked, DIRECTION_MARK } from "./lib/install.mjs";
+import { readDesignMd, toTokensJson } from "./lib/design-md.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const args = parseArgs();
@@ -81,23 +83,27 @@ if (cmd === "init") {
   const shots = fs.existsSync(path.join(cap, "screenshots")) ? fs.readdirSync(path.join(cap, "screenshots")).filter((f) => /\.(png|jpe?g|webp)$/i.test(f)).map((f) => path.join(cap, "screenshots", f)) : [];
   console.log(JSON.stringify({ ok: true, capture: cap, title: tokens.title || "", colors: (tokens.colors || []).length, fonts: tokens.fonts || [], screenshots: shots.slice(0, 8).map((s) => path.relative(process.cwd(), s)) }, null, 2));
 } else if (cmd === "write") {
-  write();
+  await write();
 } else if (cmd === "inject") {
   const dir = projectDir();
   const M = readFrontmatterDoc(fs.readFileSync(path.join(dir, "motion.md"), "utf8")).fields;
   const pk = path.join(dir, ".hyperframes", "frame-packets");
   if (!fs.existsSync(pk)) die(`no ${path.relative(process.cwd(), pk)}: run the workflow's frame-packets.mjs first`);
   const section = contractText(M, { video: true });
+  // the art direction travels with the contract when the project has one (direction.json from write)
+  const dj = path.join(dir, "direction.json");
+  const dirSection = fs.existsSync(dj) ? directionSection(readJSON(dj)) : null;
   const done = [];
   for (const f of fs.readdirSync(pk).filter((x) => x.endsWith(".md") && !x.startsWith("_"))) {
     const p = path.join(pk, f);
-    const next = upsertContract(fs.readFileSync(p, "utf8"), section);
-    if (Buffer.byteLength(next) > 48000) die(`${f} would exceed the workflow's 48,000-byte packet cap with the contract appended; trim that frame's block`);
+    let next = upsertContract(fs.readFileSync(p, "utf8"), section);
+    if (dirSection) next = upsertMarked(next, DIRECTION_MARK, dirSection);
+    if (Buffer.byteLength(next) > 48000) die(`${f} would exceed the workflow's 48,000-byte packet cap with the contract${dirSection ? " and direction" : ""} appended; trim that frame's block`);
     fs.writeFileSync(p, next);
     done.push(f);
   }
   if (!done.length) die("no frame packets found to inject");
-  console.log(JSON.stringify({ ok: true, injected: done }, null, 2));
+  console.log(JSON.stringify({ ok: true, injected: done, direction: !!dirSection }, null, 2));
 } else if (cmd === "audio-lock") {
   const dir = projectDir();
   if (!args.music) die("--music <file> required");
@@ -126,7 +132,7 @@ if (cmd === "init") {
   die("usage: video.mjs init|capture|write|inject|audio-lock ... (see the header)");
 }
 
-function write() {
+async function write() {
   const dir = projectDir();
   if (!args.decisions) die("--decisions <video-decisions.json> required");
   const decPath = path.resolve(String(args.decisions));
@@ -154,6 +160,12 @@ function write() {
   const frameSrc = D.look && D.look.frame && rel(D.look.frame);
   if (preset) resolvePreset(preset);
   if (frameSrc && !fs.existsSync(frameSrc)) die(`frame spec not found: ${D.look.frame}`);
+  // a picked design direction (look.frame) wins over the raw brand reference; the brand's don'ts still reach DIRECTION.md via decisions.brand
+  const designMd = D.look && D.look.design_md && !D.look.frame && rel(D.look.design_md);
+  if (route === "music-to-video" && D.look && (D.look.frame || D.look.design_md) && !preset) die("music-to-video needs a frame preset (its gate requires frame.md to be a verbatim preset copy): choose one with pick.mjs look");
+  if (designMd && !fs.existsSync(designMd)) die(`brand reference not found: ${D.look.design_md}`);
+  const directionSrc = D.direction && rel(D.direction);
+  if (directionSrc && !fs.existsSync(directionSrc)) die(`direction not found: ${D.direction} (compile it with direction.mjs compile)`);
   const musicSrc = D.music && D.music.path && rel(D.music.path);
   if (musicSrc && !fs.existsSync(musicSrc)) die(`music track not found: ${D.music.path}`);
   const lengthS = timeline ? timeline.total_s : Number(D.length_s) || null;
@@ -184,7 +196,12 @@ function write() {
   // ---- frame.md (the one file every frame worker reads) + the motion contract in it
   const workflowDir = findSkill(route);
   let stepTwo = "";
+  const lookNotes = [];
   if (!footage) {
+    if (preset && designMd && route !== "music-to-video") {
+      // the brand reference remixed onto a preset's layout: build-frame reads capture/extracted/tokens.json
+      writeFile(path.join(dir, "capture", "extracted", "tokens.json"), JSON.stringify(toTokensJson(readDesignMd(designMd, { mode: D.look.mode })), null, 2) + "\n");
+    }
     if (preset && route !== "music-to-video") {
       const bf = ["product-launch-video", "faceless-explainer", "pr-to-video"].map((r) => findSkill(r) && path.join(findSkill(r), "scripts", "build-frame.mjs")).find((p) => p && fs.existsSync(p));
       if (!bf) die("build-frame.mjs not found (install a HyperFrames launch/explainer workflow)");
@@ -198,9 +215,16 @@ function write() {
     } else if (preset && route === "music-to-video") {
       put("frame.md", fs.readFileSync(resolvePreset(preset), "utf8"));
       stepTwo = `The brand step's preset copy is done: frame.md is the \`${preset}\` preset.`;
+    } else if (designMd) {
+      const r = await installLook(dir, { designMd, mode: D.look.mode });
+      wrote.push("frame.md", "capture/extracted/tokens.json");
+      lookNotes.push(...r.notes);
+      stepTwo = `The design system is the project's own brand reference (${path.basename(designMd)}), converted to frame.md with its fonts staged in assets/fonts/ (see frame.md "Font loading"). Do not replace it with a preset and do not run build-frame.mjs.`;
     } else if (frameSrc) {
-      put("frame.md", fs.readFileSync(frameSrc, "utf8"));
-      stepTwo = "The design system is the user's own spec, copied to frame.md. Do not replace it with a preset.";
+      const r = await installLook(dir, { frame: frameSrc });
+      wrote.push("frame.md");
+      lookNotes.push(...r.notes);
+      stepTwo = `The design system is decided (${D.look.name || "the chosen design direction"}), written to frame.md with its fonts staged in assets/fonts/ (see frame.md "Font loading"). Do not replace it with a preset and do not run build-frame.mjs.`;
     }
     if (M && fs.existsSync(path.join(dir, "frame.md"))) {
       const contract = contractText(M, { lengthS, W, H, video: true, feel });
@@ -209,6 +233,13 @@ function write() {
       } else fs.writeFileSync(path.join(dir, "frame.md"), upsertContract(fs.readFileSync(path.join(dir, "frame.md"), "utf8"), contract));
     }
     if (motionSrc) put("motion.md", fs.readFileSync(motionSrc, "utf8"));
+  }
+  // ---- the art direction (DIRECTION.md) + its binding summary in frame.md
+  let dirInstalled = null;
+  if (directionSrc && !footage) {
+    dirInstalled = installDirection(dir, directionSrc);
+    wrote.push("DIRECTION.md", "direction.json");
+    if (route !== "music-to-video" && fs.existsSync(path.join(dir, "frame.md"))) fs.writeFileSync(path.join(dir, "frame.md"), upsertMarked(fs.readFileSync(path.join(dir, "frame.md"), "utf8"), DIRECTION_MARK, dirInstalled.section));
   }
 
   // ---- the approved plan
@@ -262,6 +293,7 @@ function write() {
     custom.push(`**Motion is decided:** ${motionLabel(M)}. Its contract is appended to frame.md (every frame worker reads it). After the workflow writes its frame packets, run \`node "${path.join(rasa, "video.mjs")}" inject --project-dir .\` so every packet carries it too, and append DISPATCH.md to every frame-worker dispatch.`);
     custom.push(`**Check:** after the workflow's verify step and before its render question, run \`node "${path.join(rasa, "obey.mjs")}" --project .\`; after any repair, re-run lint, check and snapshots, then obey.`);
   }
+  if (dirInstalled) custom.push(`**Art direction is decided:** ${dirInstalled.direction.style_name}. DIRECTION.md is the full brief (every decision in proper motion-design terms, with what to do and what it is not); its binding summary is in frame.md and goes into every frame packet with the motion contract (\`video.mjs inject\`). Design every frame from it; do not substitute the workflow's default visual-design lens where they differ.`);
   if (footage && D.footage) custom.push(`**Style (pre-approved, skip the style questions):** ${Object.entries(D.footage).map(([k, v]) => `${k}: ${v}`).join(" · ")}.`);
   const assets = [D.content ? `- Source: ${D.content}` : null, fs.existsSync(path.join(dir, "capture")) ? "- capture/ (site capture: tokens, text, screenshots, asset inventory)" : null, musicRel ? `- ${musicRel}: music bed${D.music.title ? `: ${D.music.title}` : ""}` : null, ...(D.assets || []).map((a) => `- ${typeof a === "string" ? a : `${a.path}${a.role ? `: ${a.role}` : ""}`}`)].filter(Boolean);
   const receipts = D.receipts || {};
@@ -274,7 +306,7 @@ function write() {
   if (!footage && M) {
     put(
       "DISPATCH.md",
-      `# Rasa Director dispatch addendum (entire video)\n\nAppend this whole file to every subagent the /${route} workflow dispatches to build or repair frames. The same contract is appended to frame.md and injected into every frame packet.\n\n## Decided before the build (do not re-decide)\n\n- Message: ${q(D.message)}\n- Plan: STORYBOARD.md (approved), ${fs.existsSync(path.join(dir, "SCRIPT.md")) ? "SCRIPT.md (locked narration)" : "no narration"}\n- Look: frame.md${preset ? ` (${preset})` : ""}\n- Music: ${musicRel || (D.music === "none" ? "none" : D.music && D.music.mood ? D.music.mood : "workflow default")}\n\n${contractText(M, { lengthS, W, H, video: true, feel })}\n## Check\n\n\`node "${path.join(rasa, "obey.mjs")}" --project "${dir}"\` must exit 0 before the render question (frame files are checked; the assembled index.html and captions are the workflow's own).\n`
+      `# Rasa Director dispatch addendum (entire video)\n\nAppend this whole file to every subagent the /${route} workflow dispatches to build or repair frames. The same contract is appended to frame.md and injected into every frame packet.\n\n## Decided before the build (do not re-decide)\n\n- Message: ${q(D.message)}\n- Plan: STORYBOARD.md (approved), ${fs.existsSync(path.join(dir, "SCRIPT.md")) ? "SCRIPT.md (locked narration)" : "no narration"}\n- Look: frame.md${preset ? ` (${preset})` : designMd ? ` (the project's brand reference, ${path.basename(designMd)})` : D.look && D.look.name ? ` (${D.look.name})` : ""}\n${dirInstalled ? `- Art direction: DIRECTION.md (${dirInstalled.direction.style_name})\n` : ""}- Music: ${musicRel || (D.music === "none" ? "none" : D.music && D.music.mood ? D.music.mood : "workflow default")}\n\n${contractText(M, { lengthS, W, H, video: true, feel })}${dirInstalled ? `\n${dirInstalled.section}` : ""}\n## Check\n\n\`node "${path.join(rasa, "obey.mjs")}" --project "${dir}"\` must exit 0 before the render question (frame files are checked; the assembled index.html and captions are the workflow's own).\n`
     );
   }
 
@@ -297,5 +329,5 @@ function write() {
     if (D.voice && D.voice.id && C.voice) rec("voice", D.voice.id);
   }
 
-  console.log(JSON.stringify({ ok: true, route, project_dir: dir, length_s: lengthS, wrote, moved_aside: moved, prefsRecorded, next: `Read ~/.claude/skills/${route}/SKILL.md and run it on ${path.relative(process.cwd(), dir) || "."}: BRIEF.md exists, so it asks nothing and adopts the plan. Follow BRIEF.md's Customizations at the named hook points.` }, null, 2));
+  console.log(JSON.stringify({ ok: true, route, project_dir: dir, length_s: lengthS, wrote, moved_aside: moved, prefsRecorded, look_notes: lookNotes, direction: dirInstalled ? dirInstalled.direction.style_name : null, next: `Read ~/.claude/skills/${route}/SKILL.md and run it on ${path.relative(process.cwd(), dir) || "."}: BRIEF.md exists, so it asks nothing and adopts the plan. Follow BRIEF.md's Customizations at the named hook points.` }, null, 2));
 }

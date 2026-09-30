@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Director's Console: the local HTML page where the user sees and controls every
-// Rasa Director step (brief, concept, look, motion, keyframes, music, plan, build,
-// render). The agent pushes each step's options into session.json; the user's
+// Rasa Director step (the full list is STEPS below: brief, brand, route, footage,
+// direction, story, scenes, look, motion, style frames, cut, …, build, render). The agent pushes each step's options into session.json; the user's
 // clicks land in actions.jsonl; the agent picks them up with `wait`.
 // Zero dependencies; binds 127.0.0.1 only; POSTs need the per-session token.
 //
@@ -31,7 +31,7 @@ const F = {
   consumed: path.join(RUN, "consumed.json"),
   console: path.join(RUN, "console.json"),
 };
-export const STEPS = ["brief", "route", "footage", "concept", "scenes", "look", "motion", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render"];
+export const STEPS = ["brief", "brand", "route", "footage", "direction", "concept", "scenes", "look", "motion", "styleframes", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render"];
 
 const readJSON = (p, d) => {
   try {

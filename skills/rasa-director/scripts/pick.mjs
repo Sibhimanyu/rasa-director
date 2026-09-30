@@ -19,6 +19,7 @@
 import { parseArgs, die, listPersonalities } from "./lib/common.mjs";
 import { listPresets } from "./lib/hyperframes.mjs";
 import { recent, recommend } from "./memory.mjs";
+import "./lib/motion-lang.mjs"; // motion-language terms ("lang-snappy") resolve like swatch ids
 
 const args = parseArgs();
 const kind = args._[0];

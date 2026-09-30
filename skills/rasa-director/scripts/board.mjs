@@ -19,6 +19,7 @@ import {
 } from "./lib/common.mjs";
 import { resolvePreset } from "./lib/hyperframes.mjs";
 import { classify, bannedHits } from "./lib/signatures.mjs";
+import "./lib/motion-lang.mjs"; // motion-language terms ("lang-snappy") resolve like swatch ids
 
 const args = parseArgs();
 if (!args.poses) die("--poses required (keyframes.json)");

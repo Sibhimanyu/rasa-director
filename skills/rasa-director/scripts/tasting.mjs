@@ -23,6 +23,7 @@ import {
   writeFile, SKILL_DIR, chromeScreenshot, chromeDumpDom, gsapInline,
 } from "./lib/common.mjs";
 import { resolvePreset } from "./lib/hyperframes.mjs";
+import "./lib/motion-lang.mjs"; // motion-language terms ("lang-snappy") resolve like swatch ids
 
 const args = parseArgs();
 // --scenes "Hook line::sub || Middle line || Closing line::url": several scenes per
@@ -39,7 +40,7 @@ if (!args.personalities) die("--personalities is required (comma-separated ids; 
 if (!args.out) die("--out is required (a directory)");
 
 const ids = String(args.personalities).split(",").map((s) => s.trim()).filter(Boolean);
-if (ids.length < 2 || ids.length > 6) die("pick 2-6 personalities for one tasting menu");
+if (ids.length < 1 || ids.length > 6) die("pick 1-6 motion languages / swatches for one tasting page");
 const personalities = ids.map(getPersonality);
 const framePath = args.frame || (args.preset ? resolvePreset(args.preset) : null);
 const look = readLook(framePath);

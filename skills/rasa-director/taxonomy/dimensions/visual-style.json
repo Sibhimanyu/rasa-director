@@ -1,0 +1,1925 @@
+{
+  "id": "visual-style",
+  "name": "Visual style / art direction",
+  "group": "look",
+  "controls": "The overall art direction of the finished frame: palette character, type classification, shape, stroke and shadow treatment, texture and layout rules, and the motion character that goes with them.",
+  "question": "What should the whole piece look like?",
+  "pick": {
+    "min": 1,
+    "max": 2
+  },
+  "notes": "Visual style is the finished look; era (a separate dimension) is the historical source it may borrow from, and illustration, material, texture and color are separate dimensions that refine it. Styles combine: a primary style plus one accent is common (SaaS minimalism + glass, editorial + risograph, playful tech + mascot-led); two strong styles fighting in one frame is rarely good. Many labels are informal industry shorthand with fuzzy edges (corporate flat, playful tech, futuristic tech, acid graphics); several names describe finishes (halftone, duotone, chrome) that can overlay other styles. The dimensional and material entries (soft 3D, clay, glossy 3D, glass, chrome, holographic, gel, inflatable) are achievable in HTML only as approximations with layered gradients, shadows, blend modes and SVG filters unless WebGL (Three.js) or pre-rendered assets are used; photoreal CGI always needs pre-rendered assets. Generative and particle styles must use seeded randomness and timeline-driven state so renders are deterministic.",
+  "families": [
+    {
+      "id": "minimal",
+      "name": "Minimal"
+    },
+    {
+      "id": "modernist",
+      "name": "Modernist & rational"
+    },
+    {
+      "id": "editorial",
+      "name": "Editorial & print"
+    },
+    {
+      "id": "raw",
+      "name": "Raw & rebellious"
+    },
+    {
+      "id": "tech",
+      "name": "Tech & futurist"
+    },
+    {
+      "id": "retro",
+      "name": "Retro & nostalgic"
+    },
+    {
+      "id": "handmade",
+      "name": "Handmade & tactile"
+    },
+    {
+      "id": "dimensional",
+      "name": "Dimensional & material"
+    },
+    {
+      "id": "abstract",
+      "name": "Abstract & generative"
+    },
+    {
+      "id": "tonal",
+      "name": "Tonal"
+    },
+    {
+      "id": "cinematic",
+      "name": "Cinematic & premium"
+    },
+    {
+      "id": "playful",
+      "name": "Playful & character"
+    }
+  ],
+  "options": [
+    {
+      "id": "clean-minimal",
+      "term": "Clean Minimalism",
+      "aka": [
+        "minimal",
+        "clean minimal"
+      ],
+      "family": "minimal",
+      "what": "Reduction to the essential elements on a calm, mostly neutral field, with order and whitespace doing the work.",
+      "looks": "Neutral grounds (white, off-white, near-black), one accent color, a neo-grotesk or geometric sans (Inter, SF Pro, Helvetica Now) in two or three weights, generous margins, few elements per frame, soft or no shadows, no texture.",
+      "motion": "Short, confident eases (power2/power3.out, 300-600 ms), one thing moving at a time, masked text reveals, gentle position and opacity shifts, long holds.",
+      "use": "Product launches, keynote-style reveals, app promos, brand statements.",
+      "conveys": "Clarity, confidence, quality; nothing to hide.",
+      "vs": "Extreme minimalism strips further (one element, one color, near-emptiness); startup/SaaS minimalism is clean minimalism plus product UI, gradients and dark-mode conventions.",
+      "search": [
+        "clean minimal motion design",
+        "minimal product animation",
+        "whitespace typography motion"
+      ],
+      "refs": [
+        "Apple keynote slides",
+        "Dieter Rams / Braun"
+      ],
+      "prompt": "Art-direct in clean minimalism: neutral background (#FFFFFF, #F5F5F7 or #0A0A0A), one saturated accent used on at most one element per frame; neo-grotesk sans (Inter / Helvetica Now class) in two weights; max 3 elements per frame with 8-12% safe margins; no textures, no gradients beyond a faint tonal shift, shadows only as soft 0-8px blurs at <10% opacity; align everything to a 12-column grid; animate one element at a time with power3.out 400-600 ms and hold each state at least 1.2 s."
+    },
+    {
+      "id": "extreme-minimal",
+      "term": "Extreme Minimalism",
+      "aka": [
+        "ultra-minimal",
+        "reductive minimalism"
+      ],
+      "family": "minimal",
+      "what": "Near-empty frames with a single element, a single color field and radical negative space; absence is the design.",
+      "looks": "One word, one shape or one product on a flat color field; tiny type (or one huge word); monochrome or single color; no decoration, no secondary information.",
+      "motion": "Very few, very deliberate moves: a slow scale, a single cut, a long hold; stillness carries weight; eases are long and soft (sine.inOut, expo.out over 800-1500 ms).",
+      "use": "Luxury teasers, manifesto films, title cards, art-directed brand spots.",
+      "conveys": "Confidence, restraint, premium silence; it assumes the viewer's attention.",
+      "vs": "Clean minimalism still arranges several elements on a grid; extreme minimalism allows one. Luxury style adds serif type and material richness; extreme minimal can be cold.",
+      "search": [
+        "extreme minimalism motion",
+        "negative space animation",
+        "single element title card"
+      ],
+      "prompt": "Art-direct in extreme minimalism: every frame holds exactly one element (one word, one shape or the product) on a flat single-color field; occupy under 15% of frame area or fill it completely with one oversized word; one typeface, one weight; no borders, shadows, icons, gradients or secondary copy; move one property per shot (scale 1.0 to 1.04 or a single position shift) over 1000-1500 ms with sine.inOut; hold 2-3 s; cut hard between states."
+    },
+    {
+      "id": "warm-minimal",
+      "term": "Warm Minimalism",
+      "aka": [
+        "soft minimalism",
+        "organic minimal"
+      ],
+      "family": "minimal",
+      "what": "Minimal composition softened with warm neutrals, rounded forms, natural textures and humanist type.",
+      "looks": "Cream, sand, clay, sage and terracotta; humanist sans or soft serif (GT Alpina, Recoleta, Söhne); large radii (16-32px); subtle paper grain; natural photography; soft diffused shadows.",
+      "motion": "Unhurried, rounded motion: sine and power1/2 eases, 500-900 ms, gentle float and drift, soft crossfades, slight organic overshoot avoided.",
+      "use": "Wellness, lifestyle, fintech that wants to feel human, DTC brands, onboarding films.",
+      "conveys": "Calm, care, approachability; minimal without being clinical.",
+      "vs": "Clean minimalism is neutral and cool; warm minimalism trades white for cream, sharp for rounded and adds grain.",
+      "search": [
+        "warm minimal branding motion",
+        "soft neutral palette animation",
+        "organic minimal design"
+      ],
+      "prompt": "Art-direct in warm minimalism: palette of warm neutrals (#F3EDE4 cream, #D9C7B0 sand, #C2704D terracotta, #8A9A7B sage, #2B2622 warm black); humanist sans or soft serif headlines; corner radii 20-32px; 2-4% monochrome paper grain overlay; soft diffused shadows (24-40px blur, 8% warm brown); no pure white or pure black; keep 3-4 elements per frame; animate with sine.inOut 600-900 ms, gentle 4-8px drifts on held elements."
+    },
+    {
+      "id": "technical-minimal",
+      "term": "Technical Minimalism",
+      "aka": [
+        "engineering minimal",
+        "developer aesthetic",
+        "terminal minimal"
+      ],
+      "family": "minimal",
+      "what": "Minimalism built from the vocabulary of engineering: monospace type, grids, hairlines, coordinates and data labels.",
+      "looks": "Dark or light-gray grounds, monospace (JetBrains Mono, Berkeley Mono, IBM Plex Mono) with a grotesk, 1px hairlines, visible grid or dot matrix, small caps labels, numeric annotations, one signal color (green, orange or electric blue).",
+      "motion": "Precise and mechanical: linear or steps() for counters and typing, power2.out for panels, snapping to grid, line-draw reveals, cursor blinks.",
+      "use": "Developer tools, APIs, infrastructure, AI and data products, spec reveals.",
+      "conveys": "Precision, competence, honesty; built by engineers for engineers.",
+      "vs": "Sci-fi HUD is fictional and ornamental; technical minimalism is sober and plausible. Swiss style shares the grid but uses grotesk type and poster scale.",
+      "search": [
+        "developer tool motion design",
+        "monospace minimal animation",
+        "technical grid UI motion"
+      ],
+      "refs": [
+        "Vercel",
+        "Teenage Engineering"
+      ],
+      "prompt": "Art-direct in technical minimalism: background #0B0B0C or #F2F2F0; monospace for labels and data (JetBrains Mono / IBM Plex Mono class, 11-14px, uppercase, +4% tracking) paired with a neo-grotesk for headlines; draw a faint 8px dot grid or 1px hairline grid at 6-10% opacity; all rules 1px; one signal color (e.g. #3DFF7A or #FF5F1F) for live values only; annotate elements with coordinates, indices or version numbers; no shadows, no radii above 4px; animate with steps() for type-on and counters, line draws via stroke-dashoffset, power2.out 250-400 ms for panels, snap to the grid."
+    },
+    {
+      "id": "saas-minimal",
+      "term": "Startup / SaaS Minimalism",
+      "aka": [
+        "SaaS aesthetic",
+        "Linear-style",
+        "tech startup look"
+      ],
+      "family": "minimal",
+      "what": "The contemporary software-brand look: dark or light minimal canvases, product UI as hero, subtle gradients and glows, tight grotesk type.",
+      "looks": "Near-black (#08090A) or white canvas, Inter / Geist / SF-class sans with tight negative tracking on headlines, bento grids, hairline borders at 8-12% white, radial glow gradients behind UI, 8-16px radii, small pill badges.",
+      "motion": "Smooth UI choreography: panels slide and scale 0.96 to 1, staggered 40-80 ms, blur-to-sharp reveals, cursor-led demos, glow sweeps across borders, expo/power3.out eases.",
+      "use": "SaaS launch films, feature announcements, changelog videos, landing heroes.",
+      "conveys": "Modern, fast, well-engineered; category-leading polish.",
+      "vs": "Clean minimalism is brand-neutral; SaaS minimalism is a recognisable genre with specific tropes (glow borders, bento, dark mode) that can read as generic if unbranded. Corporate flat uses illustration, SaaS minimal uses the UI itself.",
+      "search": [
+        "SaaS launch video",
+        "Linear style animation",
+        "dark mode product motion",
+        "bento grid animation"
+      ],
+      "refs": [
+        "Linear",
+        "Vercel",
+        "Stripe",
+        "Raycast"
+      ],
+      "prompt": "Art-direct in startup/SaaS minimalism: canvas #08090A (or #FFFFFF light variant); Inter / Geist class sans, headlines 600 weight with -2 to -3% tracking, body 400 at 60% opacity; product UI as the hero element in 12px-radius frames with 1px borders at rgba(255,255,255,0.08); one soft radial glow (brand hue, 20-30% opacity, 600-900px blur) behind the focal element; bento grid of 3-5 cards with 16px gutters; pill badges for labels; animate panels from scale 0.96 + 12px y + blur 8px to crisp with power3.out 500 ms, stagger 60 ms; sweep a gradient highlight along card borders once per shot."
+    },
+    {
+      "id": "corporate-flat",
+      "term": "Corporate Flat",
+      "aka": [
+        "corporate Memphis",
+        "Alegria style",
+        "flat corporate illustration",
+        "big tech flat"
+      ],
+      "family": "minimal",
+      "what": "Flat vector style with simplified, often faceless figures with exaggerated limbs, bright friendly colors and no shading, standardised across big-tech communications.",
+      "looks": "Flat fills, no outlines or uniform thin outlines, rounded geometric sans (Circular, Poppins class), pastel-plus-saturated palette (periwinkle, coral, mint, mustard), disproportionate figures with small heads and long limbs, floating abstract blobs and leaves.",
+      "motion": "Bouncy, friendly 2D: scale pops, squash and stretch on characters, looping idle cycles, elements sliding in on back.out, morphing blobs.",
+      "use": "Explainers, onboarding, HR/benefits videos, B2B marketing, help centres.",
+      "conveys": "Inclusive, friendly, approachable; at worst generic and interchangeable.",
+      "vs": "Flat design (era) is the 2012-era UI movement; corporate flat is the illustration genre that followed (c. 2017-2022). Playful tech is louder and more branded.",
+      "search": [
+        "corporate memphis animation",
+        "flat explainer animation",
+        "Alegria illustration style"
+      ],
+      "refs": [
+        "Facebook Alegria system (Buck, 2017)"
+      ],
+      "prompt": "Art-direct in corporate flat: flat SVG fills only, no gradients or textures; palette of periwinkle #7C83FD, coral #FF7A6B, mint #7DDAB9, mustard #FFC857 on white or #F6F4FF; rounded geometric sans (Poppins / Circular class) 500-700; figures with small heads, elongated limbs, simplified faces or none; decorative blobs and leaves floating behind; no shadows or one flat offset shadow; animate with back.out(1.4) pops 350 ms, squash-and-stretch on characters, looping 2-3 s idle cycles."
+    },
+    {
+      "id": "swiss-international",
+      "term": "Swiss / International Typographic Style",
+      "aka": [
+        "Swiss style",
+        "International Style",
+        "Swiss design"
+      ],
+      "family": "modernist",
+      "what": "Rational, grid-based graphic design built on asymmetric layouts, objective sans-serif typography and strict hierarchy, originating in 1950s Switzerland.",
+      "looks": "Akzidenz-Grotesk / Helvetica / Neue Haas Grotesk / Univers class grotesk, flush-left ragged-right, visible modular grid (often 12 columns), asymmetric layouts, large type as image, red/black/white or limited flat colors, objective photography, no ornament.",
+      "motion": "Grid-locked moves: blocks slide along column lines, type snaps to baselines, hard cuts and wipes, power4.out or expo.out, typographic scale changes as transitions.",
+      "use": "Kinetic typography, institutional and cultural brands, conference titles, data stories, editorial product films.",
+      "conveys": "Objectivity, order, intelligence, timelessness.",
+      "vs": "Modernist is the broader umbrella (includes Bauhaus, geometric, mid-century); Swiss is specifically grid + grotesk + asymmetric objectivity. Technical minimalism borrows the grid but uses monospace and UI scale.",
+      "search": [
+        "Swiss style kinetic typography",
+        "International Typographic Style motion",
+        "grid typography animation"
+      ],
+      "refs": [
+        "Josef Müller-Brockmann",
+        "Armin Hofmann",
+        "Massimo Vignelli (NYC Subway signage)"
+      ],
+      "prompt": "Art-direct in Swiss / International Typographic Style: Helvetica / Neue Haas Grotesk / Akzidenz class grotesk only, 2-3 weights; flush-left ragged-right, never centered; a 12-column modular grid with baseline grid, every element snapped to it; asymmetric compositions with one oversized headline (type at 20-40% of frame height); palette red #E30613, black #111111, white #FFFFFF (or one additional flat color); no shadows, gradients, radii or textures; animate blocks along grid lines with expo.out 500 ms, typographic scale jumps and hard cuts; keep generous empty columns."
+    },
+    {
+      "id": "modernist",
+      "term": "Modernist",
+      "aka": [
+        "mid-century modernist graphic design",
+        "modern design"
+      ],
+      "family": "modernist",
+      "what": "Functional, geometric, restrained design following 'form follows function': reduction, clear structure and universal forms.",
+      "looks": "Geometric sans (Futura, Avenir, Neue Haas class) or classic grotesk, simple primary shapes, limited palettes, strong figure-ground, symbolic marks, balanced asymmetry, flat color.",
+      "motion": "Economical, purposeful moves: shapes assemble into marks, geometric transforms (rotate 90°, scale, translate), measured eases (power2.inOut), no decoration.",
+      "use": "Identity animation, logo builds, institutional films, architecture and design brands.",
+      "conveys": "Rationality, permanence, trust, design literacy.",
+      "vs": "Swiss is a specific grid-and-grotesk branch of modernism; Bauhaus is the earlier, more primary-color and experimental root. Minimalism is about quantity (less); modernism is about function and structure.",
+      "search": [
+        "modernist logo animation",
+        "geometric modernist motion",
+        "Paul Rand style animation"
+      ],
+      "refs": [
+        "Paul Rand",
+        "Saul Bass",
+        "Otl Aicher (Munich 1972 Olympics)"
+      ],
+      "prompt": "Art-direct as modernist graphic design: geometric sans (Futura / Avenir class) or grotesk; build compositions from circles, squares and bars in 2-3 flat colors plus black and white; strong figure-ground and balanced asymmetry; no gradients, shadows or texture; every element has a function; animate with geometric transforms only (translate, rotate in 90° steps, scale) using power2.inOut 500-700 ms; let shapes assemble into a symbol or wordmark."
+    },
+    {
+      "id": "bauhaus",
+      "term": "Bauhaus",
+      "aka": [
+        "Bauhaus style"
+      ],
+      "family": "modernist",
+      "what": "Style derived from the 1919-1933 German school: primary colors, primary geometry (circle, square, triangle), bold structure and functional typography.",
+      "looks": "Red, yellow, blue with black and off-white; circles, squares, triangles, thick bars; geometric sans (Futura, Bauhaus-inspired display faces, universal lowercase); sans-serif set vertically and at right angles; strong asymmetry.",
+      "motion": "Shapes as actors: circles roll, squares tilt, bars slide and stack; rhythmic, mechanical, often with steps or snappy power3 eases; compositions constructing themselves.",
+      "use": "Brand explainers, art and design events, logo builds, playful geometric loops.",
+      "conveys": "Creativity with rigour, craft, foundational design thinking.",
+      "vs": "Constructivism uses diagonals, red/black and propaganda energy; Bauhaus is more balanced and primary-geometric. Memphis is the playful 1980s reaction with squiggles and clashing pastels.",
+      "search": [
+        "Bauhaus motion design",
+        "Bauhaus geometric animation",
+        "primary shapes animation"
+      ],
+      "refs": [
+        "Herbert Bayer",
+        "László Moholy-Nagy",
+        "Joost Schmidt"
+      ],
+      "prompt": "Art-direct in Bauhaus style: palette red #D7263D, yellow #F2C12E, blue #1B4F9C, black #141414 on off-white #EFE9DC; compose only with circles, squares, triangles and thick bars; geometric sans (Futura class), lowercase allowed, type rotated 90° where it strengthens structure; flat fills, no gradients, no shadows, optional 2% paper grain; asymmetric but balanced layouts; animate shapes as characters (roll circles, tilt squares, slide bars) with power3.out 400-600 ms and let the composition assemble itself."
+    },
+    {
+      "id": "constructivist",
+      "term": "Constructivism",
+      "aka": [
+        "Russian Constructivism",
+        "constructivist"
+      ],
+      "family": "modernist",
+      "what": "Style from 1920s Soviet avant-garde: dynamic diagonals, bold sans type, photomontage and geometric tension in red and black.",
+      "looks": "Red, black, off-white; steep diagonals (15-45°), heavy condensed sans, type as structural element, photomontage cutouts, circles and wedges, arrows, strong perspective.",
+      "motion": "Aggressive, directional: elements shoot along diagonals, slam into position (expo.out, 200-350 ms), rotating wedges, rapid cuts, type punching in.",
+      "use": "Manifesto videos, activism, bold launches, music, sports and event promos.",
+      "conveys": "Urgency, revolution, energy, collective force.",
+      "vs": "Bauhaus is balanced and orthogonal; constructivism is diagonal, tense and propagandistic. Brutalism is raw and anti-design; constructivism is highly composed.",
+      "search": [
+        "constructivist motion graphics",
+        "Russian constructivism animation",
+        "diagonal typography animation"
+      ],
+      "refs": [
+        "El Lissitzky ('Beat the Whites with the Red Wedge')",
+        "Alexander Rodchenko",
+        "Stenberg brothers film posters"
+      ],
+      "prompt": "Art-direct in constructivism: palette red #C8102E, black #111111, off-white #EDE6D6; tilt the layout on a 15-30° diagonal axis; heavy condensed sans (Druk / Knockout class) in uppercase as structural bars; combine with high-contrast black-and-white photo cutouts, wedges, circles and arrows; flat fills with slight print grain; animate elements shooting along the diagonal with expo.out 250-350 ms, slams with a 2-4 frame hold, rotating wedges, rapid hard cuts."
+    },
+    {
+      "id": "editorial",
+      "term": "Editorial",
+      "aka": [
+        "magazine style",
+        "editorial layout"
+      ],
+      "family": "editorial",
+      "what": "Magazine-inspired art direction built on the relationship between oversized typography, photography and structured page layouts.",
+      "looks": "Serif display (GT Super, Canela, Editorial New) with grotesk body, oversized headlines cropped by the frame, pull quotes, captions, folios and rules, generous margins, image/type overlap, restrained palettes.",
+      "motion": "Page-like choreography: lines of type reveal behind masks, images slide in on column grids, slow push-ins, crossfades, split-screen layouts reflowing, elegant power2/power3 eases.",
+      "use": "Brand films, product stories, reports, keynote narratives, thought leadership.",
+      "conveys": "Authority, intelligence, taste, considered storytelling.",
+      "vs": "Print-editorial adds physical print artefacts (paper, ink, registration); fashion editorial is more extreme in scale and imagery. Swiss is grid-rational without the serif and image-led storytelling.",
+      "search": [
+        "editorial motion design",
+        "magazine layout animation",
+        "editorial kinetic typography"
+      ],
+      "refs": [
+        "The New York Times Magazine",
+        "Bloomberg Businessweek (Richard Turley era)"
+      ],
+      "prompt": "Art-direct as editorial design: pair a high-contrast serif display (GT Super / Canela class) for headlines with a grotesk for captions and body; set headlines oversized (up to 30% of frame height), allowed to crop at the frame edge or overlap photography; include editorial furniture (section label, folio number, 1px rules, captions in 11-13px caps); 12-column layout with wide margins; restrained palette (off-white #F4F1EA, ink #161616, one accent); animate type line by line behind masks (power3.out 600 ms, 80 ms stagger), images slide on column lines, slow 3-5% push-ins on photos."
+    },
+    {
+      "id": "print-editorial",
+      "term": "Print-Editorial",
+      "aka": [
+        "print aesthetic",
+        "newsprint style"
+      ],
+      "family": "editorial",
+      "what": "Editorial layout rendered as physical print: paper stock, ink behavior, registration marks, crop marks and newspaper conventions.",
+      "looks": "Newsprint or uncoated paper textures, black ink with slight spread, serif body type in columns, crop and registration marks, rules, halftoned photos, misregistered spot color, folded-paper creases.",
+      "motion": "Physical media behaviors: pages turning, paper sliding, columns rolling like a press, stop-motion jitter, ink bleeding in, stamp slams.",
+      "use": "News, journalism brands, reports, retro-editorial campaigns, publishing launches.",
+      "conveys": "Credibility, tangibility, heritage, the authority of print.",
+      "vs": "Editorial is the layout language (can be pristine digital); print-editorial adds the material artefacts of printing.",
+      "search": [
+        "newspaper print motion design",
+        "print texture animation",
+        "newsprint editorial animation"
+      ],
+      "prompt": "Art-direct as print-editorial: uncoated off-white paper background (#EEE8DC) with visible fibre texture; text in a newspaper serif (Times / Tiempos / Publico class) in justified columns with 1px column rules; black-and-white halftone photographs (45° screen, 60-85 lpi look); one spot color with 1-3px misregistration; crop and registration marks at corners; slight ink spread on type (SVG feMorphology or 0.3px text-shadow); animate with page slides, paper shifts with 1-2px frame jitter at 12 fps, stamp-in slams."
+    },
+    {
+      "id": "fashion-editorial",
+      "term": "Fashion Editorial",
+      "aka": [
+        "fashion magazine style"
+      ],
+      "family": "editorial",
+      "what": "High-fashion magazine art direction: extreme type scale, dramatic photography, elegant serifs or condensed sans, tension between image and text.",
+      "looks": "Didone serifs (Didot, Bodoni class) or ultra-condensed sans, huge masthead-scale type overlapped by the model or product, black-and-white or rich color photography, sparse copy, full-bleed images, bold crops.",
+      "motion": "Cuts on beat, fast flashes between images, slow-motion hero moments, type slicing in with masks, scale snaps, strobe-like rhythm.",
+      "use": "Fashion, beauty, luxury launches, lookbooks, music campaigns.",
+      "conveys": "Desire, attitude, status, cultural relevance.",
+      "vs": "Luxury is quiet and restrained; fashion editorial is provocative and dynamic. Editorial is information-led; fashion editorial is image-led.",
+      "search": [
+        "fashion editorial motion graphics",
+        "fashion film typography",
+        "Didone type animation"
+      ],
+      "refs": [
+        "Vogue",
+        "Harper's Bazaar (Alexey Brodovitch)"
+      ],
+      "prompt": "Art-direct as fashion editorial: full-bleed high-contrast photography; Didone serif (Didot / Bodoni class) or ultra-condensed sans set at masthead scale (40-70% of frame width), placed behind the subject so the subject overlaps the type; black, white and one saturated accent; sparse copy (one word or a short line); bold off-center crops; no UI chrome, no rounded corners; animate with hard cuts on beat (every 250-500 ms), mask slices on type, occasional 4-8 frame photo flashes, slow 1.02-1.06 scale on hero images."
+    },
+    {
+      "id": "risograph",
+      "term": "Risograph",
+      "aka": [
+        "riso print",
+        "riso"
+      ],
+      "family": "editorial",
+      "what": "The look of Riso stencil duplicator printing: vivid soy-ink spot colors layered with overprint, grain and misregistration.",
+      "looks": "Fluorescent pink, blue, yellow, teal and federal blue; overlapping semi-transparent spot colors creating new hues (multiply); grainy, speckled fills; slight misregistration; coarse halftones; uncoated paper.",
+      "motion": "Low-fps, boiling motion (8-12 fps), layer-by-layer color build-up, misregistration jitter, slide-offsets between color plates.",
+      "use": "Indie brands, cultural events, zines, creative agencies, playful editorial.",
+      "conveys": "Indie, handmade, crafted, contemporary-analog.",
+      "vs": "Screen print uses flat, opaque ink and bolder shapes; halftone is only the dot pattern; risograph specifically combines translucent overprint, grain and fluorescent spot colors.",
+      "search": [
+        "risograph animation",
+        "riso print motion",
+        "riso grain texture animation"
+      ],
+      "prompt": "Art-direct as risograph print: 2-3 spot colors from the Riso palette (fluorescent pink #FF48B0, blue #0078BF, yellow #FFE800, teal #00838A) on off-white paper #F5F0E6; overlap color layers with mix-blend-mode: multiply to create overprint hues; fill shapes with speckled grain (SVG feTurbulence noise mask, 20-40% dropout) instead of flat color; offset each color plate by 1-4px misregistration; coarse halftone on photos; animate at 10-12 fps with slight per-frame plate jitter and build images plate by plate."
+    },
+    {
+      "id": "screen-print",
+      "term": "Screen Print",
+      "aka": [
+        "silkscreen",
+        "serigraph"
+      ],
+      "family": "editorial",
+      "what": "The look of silkscreen printing: flat, opaque ink layers, bold simplified shapes, limited colors and slight edge and registration imperfections.",
+      "looks": "3-5 flat opaque colors, bold posterised shapes, thick ink with slightly rough edges, visible layer stacking, occasional ink voids, poster-scale type.",
+      "motion": "Layer reveals as if each screen pass is printed, squeegee wipes, posterised photo animations, stepped timing.",
+      "use": "Gig posters, event promos, craft beer and apparel brands, activist campaigns.",
+      "conveys": "Bold, crafted, countercultural, poster energy.",
+      "vs": "Risograph is translucent and grainy with fluorescent inks; screen print is opaque and flat. Pop art often uses screen print as technique but adds Ben-Day dots and comic subjects.",
+      "search": [
+        "screen print animation",
+        "silkscreen poster motion",
+        "posterized animation"
+      ],
+      "refs": [
+        "Andy Warhol (Marilyn Diptych)",
+        "Shepard Fairey ('Hope' poster)"
+      ],
+      "prompt": "Art-direct as screen print: 3-5 flat opaque ink colors with no gradients; posterise photographs to 3-4 tonal levels; roughen shape edges slightly (SVG feDisplacementMap, scale 2-3); add occasional ink voids and 1-2px registration offsets; bold condensed poster type; paper stock background; animate by revealing one ink layer at a time with a squeegee-style horizontal wipe (power2.inOut 500 ms per pass), stepped timing between layers."
+    },
+    {
+      "id": "halftone",
+      "term": "Halftone",
+      "aka": [
+        "Ben-Day dots",
+        "dot screen"
+      ],
+      "family": "editorial",
+      "what": "Tone rendered as patterns of dots (or lines) of varying size, borrowed from offset printing and comics.",
+      "looks": "Visible dot screens (round, line or elliptical), often enlarged as a graphic motif; CMYK rosettes or single-color dots; high contrast; gradients built from dot size.",
+      "motion": "Dots growing and shrinking as tone changes, dot grids rippling, image resolving from coarse to fine screens, pattern scrolls.",
+      "use": "Retro and comic treatments, music visuals, editorial photo treatments, transitions.",
+      "conveys": "Print heritage, pop energy, graphic punch.",
+      "vs": "Halftone is a rendering technique usable in any style; risograph and screen print are whole printing looks that may include halftone; Ben-Day dots are uniform-size dots (comic color fill), true halftone varies dot size.",
+      "search": [
+        "halftone animation",
+        "halftone dot motion graphics",
+        "Ben-Day dots animation"
+      ],
+      "prompt": "Apply a halftone art direction: render photographs and gradients as round dot screens (SVG pattern or canvas, 6-14px cell, 45° angle) where dot radius encodes tone; one ink color on paper or CMYK-offset rosettes; use enlarged dots as a graphic motif on backgrounds; no smooth gradients anywhere; animate by scaling dot radius with the tone change, rippling dot grids (sine-based radius wave), and resolving images from 24px to 8px cells."
+    },
+    {
+      "id": "photocopy-xerox",
+      "term": "Photocopy / Xerox",
+      "aka": [
+        "xerox aesthetic",
+        "photocopy texture"
+      ],
+      "family": "editorial",
+      "what": "The degraded look of repeated photocopying: crushed black-and-white contrast, toner noise, streaks and generation loss.",
+      "looks": "Pure black and white, crushed shadows, toner speckle, horizontal streaks, gray scanner-bed edges, distorted type from copying, taped edges.",
+      "motion": "Scanner-bar sweeps, stuttering 6-12 fps loops, copy-of-a-copy degradation, jittery frame registration, flashes of white.",
+      "use": "Music, fashion, subculture brands, protest content, gritty title sequences.",
+      "conveys": "DIY rawness, underground authenticity, urgency.",
+      "vs": "Punk/zine is the whole layout culture (cut-and-paste, ransom type); photocopy is the texture and contrast treatment. Grunge adds dirt and distressed layers in color.",
+      "search": [
+        "photocopy texture animation",
+        "xerox aesthetic motion",
+        "photocopy effect motion graphics"
+      ],
+      "refs": [
+        "Raymond Pettibon (Black Flag flyers)"
+      ],
+      "prompt": "Apply a photocopy/xerox treatment: convert all imagery to pure black and white with crushed contrast (threshold at 45-55%); overlay toner speckle and 1-3 faint horizontal streaks; slight edge distortion on type (feDisplacementMap scale 1-2); gray scanner-lid border on some frames; animate at 8-12 fps with 1-2px per-frame registration jitter, a bright scanner-bar sweep as transition, and a 'generation loss' pass that increases contrast and noise per repeat."
+    },
+    {
+      "id": "brutalism",
+      "term": "Brutalism",
+      "aka": [
+        "web brutalism",
+        "brutalist design"
+      ],
+      "family": "raw",
+      "what": "Deliberately raw, anti-polish design that exposes structure: default fonts, system colors, harsh contrast and unrefined layouts.",
+      "looks": "System or default fonts (Times New Roman, Arial, Courier), raw HTML-like elements, harsh black/white with default blue links or clashing colors, hard edges, no radii, no shadows, dense or broken grids, visible borders, oversized or awkward type.",
+      "motion": "Abrupt, unsmoothed motion: hard cuts, linear or no easing, instant state changes, marquees, jumpy scrolling, elements snapping without transitions.",
+      "use": "Art, fashion, culture and music brands, portfolios, anti-corporate statements.",
+      "conveys": "Honesty, defiance, intellectual confidence, rejection of polish.",
+      "vs": "Neo-brutalism is the friendly, commercial descendant: bright flat colors, thick black borders, hard offset shadows, rounded sans. Brutalism is rawer and often monochrome with default styling.",
+      "search": [
+        "brutalist motion design",
+        "brutalist web design animation",
+        "raw typography motion"
+      ],
+      "refs": [
+        "brutalistwebsites.com (Pascal Deville)",
+        "Balenciaga web and social identity"
+      ],
+      "prompt": "Art-direct in brutalism: default and system typefaces only (Times New Roman, Arial, Courier New) at harsh sizes; black #000 on white #FFF with at most one raw system color (#0000EE link blue or #FF0000); no radii, no shadows, no gradients, visible 1-2px black borders on everything; dense, deliberately uneven layouts and exposed structure (labels, indices, raw lists); animate with instant state changes or linear 100-150 ms moves, hard cuts, marquee scrolls; never use soft eases."
+    },
+    {
+      "id": "neo-brutalism",
+      "term": "Neo-Brutalism",
+      "aka": [
+        "neubrutalism",
+        "neo-brutalist UI"
+      ],
+      "family": "raw",
+      "what": "Commercial, friendly take on brutalism: flat saturated colors, thick black outlines, hard offset shadows and bold type.",
+      "looks": "2-4px black borders, hard un-blurred offset drop shadows (4-8px down-right in solid black), saturated flat fills (lemon, lilac, mint, coral), bold grotesk or rounded sans, 0-12px radii, sticker-like cards, visible grid.",
+      "motion": "Snappy and tactile: cards pressing into their shadow on click, pops with slight overshoot, elements sliding in with hard stops, wobbles, stamping.",
+      "use": "Consumer apps, creator tools, startups targeting Gen Z, playful SaaS, social promos.",
+      "conveys": "Confident, playful, honest, indie-internet energy.",
+      "vs": "Brutalism is raw, default-styled and often austere; neo-brutalism is designed, colorful and approachable. Flat design has no borders or hard shadows.",
+      "search": [
+        "neo-brutalism UI animation",
+        "neubrutalism motion",
+        "hard shadow UI animation"
+      ],
+      "refs": [
+        "Gumroad (2021 redesign)"
+      ],
+      "prompt": "Art-direct in neo-brutalism: flat saturated fills (#FFE66D lemon, #C3B1E1 lilac, #A0E7C9 mint, #FF8A65 coral) on #FFFBEF cream; every card and button gets a 3px solid #000 border and a hard offset shadow (box-shadow: 6px 6px 0 #000, zero blur); radii 0-10px; bold grotesk (Space Grotesk / Archivo class) 700; visible alignment grid; animate presses by translating the element +6px,+6px while shrinking the shadow to 0 (80 ms), entrances with back.out(1.7) 300 ms and hard-stop slides."
+    },
+    {
+      "id": "grunge",
+      "term": "Grunge",
+      "aka": [
+        "grunge design",
+        "distressed"
+      ],
+      "family": "raw",
+      "what": "Dirty, distressed, layered design from 1990s alternative culture: scratched textures, torn edges, eroded and overlapping type.",
+      "looks": "Muddy desaturated palettes, rust and olive, film scratches, dust, torn paper, stains, distorted and overlapping type, handwritten scrawls, typewriter faces, low-contrast layering.",
+      "motion": "Unstable, twitchy: frame flicker, film jitter, overlapping double exposures, flash frames, type shaking, scratched film-burn transitions.",
+      "use": "Music, horror, extreme sports, streetwear, gritty title sequences.",
+      "conveys": "Angst, authenticity, rebellion, danger.",
+      "vs": "Punk/zine is cut-and-paste and photocopy-sharp; grunge is layered, muddy and eroded. Photocopy is a single black-and-white treatment.",
+      "search": [
+        "grunge motion graphics",
+        "distressed title sequence",
+        "Se7en title style"
+      ],
+      "refs": [
+        "David Carson (Ray Gun magazine)",
+        "Se7en title sequence (Kyle Cooper)"
+      ],
+      "prompt": "Art-direct in grunge: desaturated palette (olive #5B5A3C, rust #8C4A2F, bone #D8CFBF, dirty black #1A1814); overlay dust, scratches and stain textures at 20-40% opacity with multiply blend; erode type edges (feTurbulence + feDisplacementMap) and overlap lines of type; mix typewriter and handwritten scrawl; torn-paper masks for image edges; animate with 1-3px random jitter per frame at 12-15 fps, 2-frame flash cuts, double exposures and flicker (opacity 0.85-1 noise)."
+    },
+    {
+      "id": "punk-zine",
+      "term": "Punk / Zine",
+      "aka": [
+        "DIY zine",
+        "cut-and-paste punk"
+      ],
+      "family": "raw",
+      "what": "DIY self-publishing look of punk culture: cut-and-paste collage, ransom-note lettering, photocopied images and handwritten notes.",
+      "looks": "Black and white with one loud color (hot pink, safety yellow), ransom-note letters cut from magazines, tape, staples, marker handwriting, torn edges, skewed layouts, photocopied photos.",
+      "motion": "Stop-motion stutter (6-12 fps), pieces slapped on, letters appearing one cutout at a time, shaky camera, quick jump cuts.",
+      "use": "Music, activism, streetwear, youth brands, anti-establishment campaigns.",
+      "conveys": "Rebellion, urgency, DIY credibility.",
+      "vs": "Scrapbook is nostalgic and tidy; punk zine is aggressive and chaotic. Grunge is layered and muddy; zine is high-contrast cut-and-paste.",
+      "search": [
+        "punk zine animation",
+        "ransom note typography motion",
+        "cut and paste collage animation"
+      ],
+      "refs": [
+        "Jamie Reid (Sex Pistols 'God Save the Queen')"
+      ],
+      "prompt": "Art-direct in punk/zine style: black and white photocopied imagery plus one loud color (#FF2E88 or #FFE500); headlines as ransom-note letters, each a separate cutout with different font, size and rotation (±8°); tape strips, staples and marker scrawl; skewed layout with nothing aligned; hard black threshold on photos; animate at 8 fps with pieces slapped on (instant appear + 2-frame 3-5° wobble), letters one by one, shaky 2-4px frame offsets."
+    },
+    {
+      "id": "graffiti-street",
+      "term": "Graffiti / Street Art",
+      "aka": [
+        "street art style",
+        "graffiti style"
+      ],
+      "family": "raw",
+      "what": "Visual language of graffiti and urban art: spray paint, wildstyle and tag lettering, drips, stencils and wall surfaces.",
+      "looks": "Spray gradients with overspray, drips, bubble or wildstyle letters with outlines and 3D offsets, tags, stencil shapes, wheatpaste posters, brick and concrete textures, saturated colors.",
+      "motion": "Paint being sprayed on (stroke reveals with soft edges), drips running, stencil slap-ons, camera moving along a wall, frame-by-frame boiling.",
+      "use": "Streetwear, music, sports, urban culture brands, youth campaigns.",
+      "conveys": "Street credibility, energy, self-expression, rebellion.",
+      "vs": "Punk zine is paper-based collage; graffiti is wall-based paint. Doodle is casual pen; graffiti letters are stylised and bold.",
+      "search": [
+        "graffiti animation",
+        "spray paint reveal motion graphics",
+        "street art typography animation"
+      ],
+      "refs": [
+        "Keith Haring",
+        "Banksy (stencil work)"
+      ],
+      "prompt": "Art-direct as graffiti/street art: concrete or brick wall background texture; headlines in bubble or wildstyle letters with a 4-6px outline, a 3D block offset and highlight dashes; saturated spray colors with soft overspray edges (radial blur on stroke edges) and occasional drips; add stencil shapes and wheatpaste poster panels; animate strokes painting on (stroke-dashoffset with soft mask, 600-900 ms), drips extending downward with sine.in, stencil pieces appearing with a spray-burst mask."
+    },
+    {
+      "id": "acid-graphics",
+      "term": "Acid Graphics",
+      "aka": [
+        "acid design",
+        "new acid",
+        "rave graphics"
+      ],
+      "family": "raw",
+      "what": "Contemporary rave-inspired style: chrome and liquid type, warped grids, sharp tribal and techno shapes, acid colors on black.",
+      "looks": "Black grounds, acid green, silver, UV purple; distorted and stretched display type; warped wireframe grids; sharp spiky shapes; chrome blobs; tiny technical labels; dense layouts.",
+      "motion": "Warping and stretching type, grid distortions, strobing, fast kinetic loops synced to tempo, scale snaps.",
+      "use": "Music and club culture, fashion, streetwear, experimental brands.",
+      "conveys": "Subculture, intensity, techno-future edge.",
+      "vs": "Y2K is optimistic candy chrome; acid graphics are darker and sharper. Cyberpunk is narrative sci-fi; acid is typographic and abstract.",
+      "search": [
+        "acid graphics animation",
+        "acid design typography motion",
+        "rave poster motion design"
+      ],
+      "prompt": "Art-direct as acid graphics: black #000 ground with acid green #C6FF00, silver chrome gradients and UV purple #7A00FF; distorted display type (scaleX 0.5-2.5, skew, SVG warp) mixed with tiny monospace labels; warped wireframe grids; spiky tribal and techno vector shapes; chrome blobs; dense collage-like layouts; animate with type stretching and warping on the beat, grid distortions, 2-frame strobes and scale snaps at tempo."
+    },
+    {
+      "id": "playful-tech",
+      "term": "Playful Tech",
+      "aka": [
+        "friendly tech",
+        "consumer tech playful"
+      ],
+      "family": "tech",
+      "what": "Tech-brand art direction that is bright, rounded and characterful: bold colors, bouncy motion and personality applied to product UI.",
+      "looks": "Saturated brand colors, rounded sans (Nunito, DIN Round, custom rounded), 16-32px radii, chunky buttons, emoji and stickers, illustrated accents, soft or hard shadows, big friendly numerals.",
+      "motion": "Bouncy and elastic: overshoot pops, squash and stretch, wobbles, confetti, springy UI transitions (elastic.out or back.out), celebratory moments.",
+      "use": "Consumer apps, edtech, fintech for young audiences, gamified products, social features.",
+      "conveys": "Fun, approachable, energetic; the product is a friend.",
+      "vs": "Corporate flat is generic illustration-led; playful tech is brand-specific and UI-led. Kawaii is cuter and pastel; neo-brutalism adds black borders and hard shadows.",
+      "search": [
+        "playful app animation",
+        "bouncy UI motion",
+        "Duolingo style animation"
+      ],
+      "refs": [
+        "Duolingo",
+        "Headspace"
+      ],
+      "prompt": "Art-direct as playful tech: 2-3 saturated brand colors plus white on a bright or pale ground; rounded sans (Nunito / DIN Round class) 700-800 for headlines; radii 20-32px, chunky pill buttons with a 4px darker bottom edge; add small illustrated accents, emoji or stickers; big friendly numerals; animate with back.out(1.8) pops 300-400 ms, squash-and-stretch on landings (scaleY 0.9/scaleX 1.1 for 80 ms), elastic.out for toggles, and a confetti burst on success moments."
+    },
+    {
+      "id": "futuristic-tech",
+      "term": "Futuristic Tech",
+      "aka": [
+        "future tech",
+        "sleek tech",
+        "high-tech premium"
+      ],
+      "family": "tech",
+      "what": "Sleek, dark, premium technology aesthetic: deep blacks, luminous accents, fine lines, precise type and a sense of advanced capability.",
+      "looks": "Near-black grounds, luminous cyan, violet or white accents, thin wide-set sans (Eurostile, Aeonik, extended grotesk), fine 0.5-1px lines, light trails, grids receding in perspective, subtle glows, dark glass.",
+      "motion": "Smooth, precise, sometimes slow: light sweeps, scanning lines, particles assembling, objects rotating in space, long expo.inOut camera glides.",
+      "use": "AI, hardware, automotive, semiconductors, EVs, deep-tech keynote films.",
+      "conveys": "Innovation, power, precision, the future arriving.",
+      "vs": "Sci-fi HUD is diegetic interface graphics full of data; futuristic tech is a cleaner brand look. Cyberpunk is dystopian and neon-saturated; futuristic tech is clean and aspirational.",
+      "search": [
+        "futuristic tech motion design",
+        "AI product film",
+        "dark tech light sweep animation"
+      ],
+      "refs": [
+        "Nothing (dot-matrix brand system)"
+      ],
+      "prompt": "Art-direct as futuristic tech: canvas #05060A; luminous accent (cyan #4DE1FF or violet #8B5CF6) used as light, not fill: thin 1px strokes, glows (0 0 24px accent at 40%), light sweeps; extended or wide sans (Eurostile / Aeonik Extended class) with +6-10% tracking in uppercase for labels; perspective grid receding to a horizon at 8% opacity; dark translucent glass panels; animate with slow expo.inOut glides 1200-1800 ms, light sweeps crossing surfaces, particles assembling into forms."
+    },
+    {
+      "id": "sci-fi-hud",
+      "term": "Sci-Fi / HUD",
+      "aka": [
+        "FUI",
+        "fictional user interface",
+        "heads-up display"
+      ],
+      "family": "tech",
+      "what": "Fictional interfaces in the tradition of film HUDs: dense data overlays, radar rings, targeting reticles, telemetry and wireframes.",
+      "looks": "Monochrome cyan, amber or green on black; thin line work; concentric rings, reticles, brackets, tick marks, tiny monospaced numbers, waveform and radar widgets, wireframe models, scanlines.",
+      "motion": "Constant micro-activity: rings rotating at different speeds, numbers ticking, bracket locks, scan sweeps, boot-up sequences, flickers; linear and steps() timing.",
+      "use": "Game and film UI, cybersecurity, defence, automotive tech, hacker-themed promos.",
+      "conveys": "Advanced intelligence, surveillance, control, cinematic sci-fi.",
+      "vs": "Futuristic tech is clean brand art direction; HUD is diegetic interface overlays. Technical minimalism is plausible and sparse; HUD is dense and fictional.",
+      "search": [
+        "FUI animation",
+        "sci-fi HUD motion graphics",
+        "fictional user interface design"
+      ],
+      "refs": [
+        "Territory Studio (Blade Runner 2049, The Martian)",
+        "Jayse Hansen",
+        "Perception (Iron Man 2 interfaces)"
+      ],
+      "prompt": "Art-direct as a sci-fi HUD: black background; single monochrome palette (cyan #5CE1FF or amber #FFB000) at 3 opacity levels (100/60/25%); all graphics as 0.5-1.5px SVG strokes; concentric rings with tick marks, corner brackets, reticles, small monospace telemetry (10-12px, numbers ticking), radar sweeps and wireframe objects; faint scanlines; animate every widget constantly at different rates (rings rotating linear 8-20 s, counters steps(), bracket locks with 150 ms power4.out), boot-up sequences drawing lines on with stroke-dashoffset, occasional 2-frame flicker."
+    },
+    {
+      "id": "cyberpunk",
+      "term": "Cyberpunk",
+      "aka": [
+        "neon noir",
+        "cyberpunk aesthetic"
+      ],
+      "family": "tech",
+      "what": "Dystopian high-tech, low-life aesthetic: neon on darkness, rain-soaked cities, glitch, East Asian signage motifs and aggressive UI.",
+      "looks": "Deep black and navy with neon magenta, cyan and acid yellow; glowing signage; rain, fog and reflections; glitch artefacts, chromatic aberration; condensed and angular type; hazard stripes; dense layered interfaces.",
+      "motion": "Glitch cuts, RGB split jitters, flickering neon, datamosh, fast camera moves through cityscapes, scanline rolls.",
+      "use": "Games, music, esports, streetwear, security and crypto brands.",
+      "conveys": "Rebellion, edge, dystopia, raw technological power.",
+      "vs": "Vaporwave is pastel, ironic and nostalgic; cyberpunk is dark and aggressive. Synthwave is 80s sunset nostalgia; cyberpunk is dystopian present-future.",
+      "search": [
+        "cyberpunk motion graphics",
+        "neon glitch animation",
+        "cyberpunk UI design"
+      ],
+      "refs": [
+        "Blade Runner (1982)",
+        "Ghost in the Shell (1995)",
+        "Cyberpunk 2077"
+      ],
+      "prompt": "Art-direct as cyberpunk: background #07070F; neon accents magenta #FF2A6D, cyan #05D9E8, acid yellow #F9F002 as glowing strokes and text (text-shadow 0 0 8px and 0 0 24px in the same hue); angular condensed type (uppercase, italic or cut corners via clip-path); hazard stripes and dense layered UI panels with chamfered corners; chromatic aberration (offset red/cyan copies 2-4px); animate with glitch cuts (random 2-3 frame translateX slices), neon flicker (opacity steps 1/0.4/1), scanline rolls and fast 150-250 ms power4 moves."
+    },
+    {
+      "id": "retro-futurism",
+      "term": "Retro-Futurism",
+      "aka": [
+        "atomic age futurism",
+        "space-age design"
+      ],
+      "family": "retro",
+      "what": "The future as imagined in the past (1930s-1970s): streamlined chrome, atomic motifs, rockets, space-age curves and optimistic color.",
+      "looks": "Teal, orange, cream, mustard; boomerangs, starbursts, atoms, rockets, streamline curves and speed lines; rounded display faces and script logotypes; chrome trims; textured print finish.",
+      "motion": "Swooping arcs, orbiting atoms, starburst twinkles, rockets on arcs, limited-animation cycles, smooth sine movements.",
+      "use": "Entertainment, games, retro-themed brands, space and science storytelling.",
+      "conveys": "Optimism, wonder, playful nostalgia for tomorrow.",
+      "vs": "Synthwave is 1980s neon-grid nostalgia; retro-futurism is mid-century atomic optimism. Cyberpunk is dystopian.",
+      "search": [
+        "retro futurism animation",
+        "atomic age motion design",
+        "space age retro graphics"
+      ],
+      "refs": [
+        "Syd Mead",
+        "The Jetsons",
+        "Fallout series visual style"
+      ],
+      "prompt": "Art-direct as retro-futurism: palette teal #2A9D8F, orange #E76F51, mustard #E9C46A, cream #F4ECD8, deep navy #1D2A3A; motifs of starbursts, boomerangs, atoms, rockets and streamline speed lines; rounded display or script logotype with metallic chrome trim (linear-gradient highlight bands); subtle print grain; animate with swooping arcs along curved motion paths (sine.inOut 800 ms), orbiting elements on ellipses, starburst twinkles (scale 0.8-1.2 loop)."
+    },
+    {
+      "id": "synthwave",
+      "term": "Synthwave / Outrun",
+      "aka": [
+        "outrun",
+        "retrowave",
+        "80s neon"
+      ],
+      "family": "retro",
+      "what": "1980s nostalgia filtered through neon: sunset gradients, chrome type, perspective laser grids, palm trees and night drives.",
+      "looks": "Magenta-to-orange sunsets with horizontal slits, purple and cyan grids to a horizon, chrome and neon script type, VHS softness, stars, palm silhouettes, sports cars.",
+      "motion": "Endless grid scrolls toward the viewer, slow sun pulses, chrome glints sweeping across type, VHS tracking wobble.",
+      "use": "Music, gaming, retro campaigns, event promos.",
+      "conveys": "Nostalgia, cool, night energy, 80s pop culture.",
+      "vs": "Vaporwave is ironic, pastel and consumer-culture collage; synthwave is sincere neon-80s action. Retro-futurism is mid-century.",
+      "search": [
+        "synthwave animation",
+        "outrun grid animation",
+        "80s chrome text motion"
+      ],
+      "refs": [
+        "Drive (2011) title design",
+        "Kavinsky 'Outrun' artwork"
+      ],
+      "prompt": "Art-direct as synthwave/outrun: background gradient #0D0221 to #261447; a sun as a magenta-to-orange gradient circle (#FF3864 to #FFB347) sliced with horizontal gaps; a cyan/magenta perspective laser grid (CSS 3D rotateX 70-80° plane with repeating lines) scrolling toward camera; chrome display type (multi-stop linear-gradient with a horizon highlight line) and neon script; faint VHS softness (0.5px blur, scanlines); animate the grid scroll linearly on loop, chrome glint sweeps every 3-4 s, slow sun pulse."
+    },
+    {
+      "id": "y2k",
+      "term": "Y2K",
+      "aka": [
+        "Y2K aesthetic",
+        "millennium aesthetic",
+        "cyber Y2K"
+      ],
+      "family": "retro",
+      "what": "Late-1990s to early-2000s digital optimism: chrome and liquid metal, translucent candy plastics, blobby forms, lens flares and futuristic type.",
+      "looks": "Chrome and silver, iridescent pastels, translucent blue and lime plastics, bubbles and blobs, tribal and techno shapes, wide or rounded techno fonts, lens flares, sparkles, low-res 3D renders.",
+      "motion": "Glossy spins, chrome morphs, sparkle twinkles, bouncy bubble floats, zooming 3D logos, lens flare sweeps.",
+      "use": "Fashion, beauty, music, Gen Z campaigns, nostalgic tech.",
+      "conveys": "Playful techno-optimism, nostalgia, pop glamour.",
+      "vs": "Web 2.0 is mid-2000s glossy UI buttons; Y2K is earlier and more chrome-and-blob. Vaporwave recycles 80s-90s consumer imagery ironically.",
+      "search": [
+        "Y2K aesthetic animation",
+        "chrome Y2K motion graphics",
+        "Y2K typography"
+      ],
+      "refs": [
+        "iMac G3 (1998)",
+        "Windows Media Player skins"
+      ],
+      "prompt": "Art-direct as Y2K: chrome and liquid-metal surfaces (multi-stop gradients #FFFFFF/#9FA8B5/#3A4150 with sharp highlight bands), iridescent pastel accents (#B8F2E6, #FFC6FF, #C9F9FF), translucent candy-blue and lime plastic shapes (60% opacity with inner highlights); blobby rounded forms, sparkles and four-point stars; techno or rounded wide display type with chrome fill; animate with glossy Y-axis spins, blob morphs, sparkle twinkles (scale 0-1-0, 400 ms), floaty bubble bobs."
+    },
+    {
+      "id": "web-1",
+      "term": "Web 1.0",
+      "aka": [
+        "90s web",
+        "GeoCities aesthetic",
+        "early web"
+      ],
+      "family": "retro",
+      "what": "The look of 1990s personal websites: tiled backgrounds, default HTML, animated GIFs, under-construction signs and hit counters.",
+      "looks": "Times New Roman and Comic Sans, blue underlined links, gray bevelled buttons, tiled star or marble backgrounds, rainbow dividers, animated GIFs, marquees, visitor counters, tables with borders, 16-color palettes.",
+      "motion": "GIF loops at low frame rates, marquee scrolls, blinking text, spinning 3D logos, flaming dividers.",
+      "use": "Nostalgia campaigns, internet-culture content, humour, anniversary pieces.",
+      "conveys": "Nostalgia, humour, sincerity of the early internet.",
+      "vs": "Brutalism uses default styling intentionally and austerely; Web 1.0 is maximal and naive. Retro OS is operating-system chrome, not web pages.",
+      "search": [
+        "web 1.0 aesthetic",
+        "GeoCities animation",
+        "90s website nostalgia design"
+      ],
+      "refs": [
+        "Space Jam website (1996)",
+        "GeoCities"
+      ],
+      "prompt": "Art-direct as Web 1.0: tiled background pattern (stars or marble); Times New Roman, Comic Sans and Arial in default sizes; blue underlined links (#0000EE, visited #551A8B); gray bevelled buttons (2px outset borders); rainbow horizontal rules, 'under construction' signs, a hit counter; bordered tables for layout; 216 web-safe colors; animate as GIF-like loops at 8-10 fps (steps()), marquee text, blink (steps(1) opacity), spinning low-poly logos."
+    },
+    {
+      "id": "web-2",
+      "term": "Web 2.0",
+      "aka": [
+        "glossy web",
+        "2000s web design",
+        "aqua buttons"
+      ],
+      "family": "retro",
+      "what": "Mid-to-late-2000s interface style: glossy gel buttons, reflections, gradients, rounded badges and bright friendly colors.",
+      "looks": "Glossy buttons with top-half highlights, floor reflections, beveled gradients, 'beta' starburst badges, rounded corners, bright green/orange/blue, drop shadows, stripes, Lucida Grande / Myriad / Arial Rounded type.",
+      "motion": "Smooth slides and fades of the Flash era, bouncing badges, glowing hover states, reflective spins.",
+      "use": "Nostalgic tech campaigns, parody, product anniversaries.",
+      "conveys": "Early-social optimism, friendliness, nostalgic polish.",
+      "vs": "Skeuomorphism imitates real materials (leather, wood); Web 2.0 is glossy abstraction. Y2K is earlier chrome and blobs.",
+      "search": [
+        "web 2.0 design animation",
+        "glossy button aesthetic",
+        "2000s web nostalgia"
+      ],
+      "refs": [
+        "iOS 1-6 era interfaces",
+        "Mac OS X Aqua"
+      ],
+      "prompt": "Art-direct as Web 2.0: bright green #7AC943, orange #FF8C1A, blue #3399FF on white with subtle stripe patterns; glossy buttons with a vertical gradient and a white 40% highlight covering the top half, 8-12px radii, 1px darker border; mirrored floor reflections under hero objects (flipped copy, gradient mask to 0); starburst 'beta' badges; Lucida Grande / Myriad class type with soft text shadows; animate with smooth power2 slides, gentle bounce on badges, glow on hover."
+    },
+    {
+      "id": "vaporwave",
+      "term": "Vaporwave",
+      "aka": [
+        "vaporwave aesthetic",
+        "aesthetic (Ａｅｓｔｈｅｔｉｃ)"
+      ],
+      "family": "retro",
+      "what": "Ironic internet aesthetic recycling 1980s-90s consumer and computing imagery: pastel pinks and teals, Greek busts, early 3D, Japanese text and retro OS windows.",
+      "looks": "Pastel pink, teal and lavender gradients, marble busts, palm trees, grid floors, early-CGI objects, Windows 95 dialogs, Japanese katakana, full-width text, VHS artefacts, dolphins, sunsets.",
+      "motion": "Slow, dreamy, looping; VHS wobble, slow rotations of busts and objects, drifting windows, slowed-down pacing, chromatic smears.",
+      "use": "Music visuals, internet-culture brands, fashion, ironic campaigns.",
+      "conveys": "Nostalgia, irony, dreamlike melancholy, critique of consumerism.",
+      "vs": "Synthwave is sincere neon-80s; vaporwave is ironic and pastel. Retro OS style quotes interfaces directly without the collage irony.",
+      "search": [
+        "vaporwave animation",
+        "vaporwave aesthetic motion",
+        "vaporwave visuals loop"
+      ],
+      "refs": [
+        "Macintosh Plus, 'Floral Shoppe' (2011) cover"
+      ],
+      "prompt": "Art-direct as vaporwave: pastel gradient sky #FF71CE to #01CDFE to #B967FF; pink/teal perspective grid floor; collage of a marble bust, palm, early-3D objects and Windows 95 dialog boxes (gray #C0C0C0 bevels, navy title bars); full-width Latin and Japanese text; VHS softness and slight chroma offset; animate slowly (2-6 s loops): busts rotating linearly, windows drifting, VHS tracking wobble every few seconds, everything at 70% of normal speed."
+    },
+    {
+      "id": "memphis",
+      "term": "Memphis",
+      "aka": [
+        "Memphis design",
+        "Memphis Group style"
+      ],
+      "family": "retro",
+      "what": "1980s postmodern style from the Milan-based Memphis Group: clashing pastels and brights, squiggles, confetti patterns and playful geometric shapes.",
+      "looks": "Squiggles, zigzags, triangles, circles, confetti dots, terrazzo and grid patterns; clashing colors (pink, yellow, turquoise, black); black outlines; offset shapes; bold geometric type.",
+      "motion": "Bouncy, jaunty: shapes popping in rhythmically, squiggles wiggling, rotating triangles, patterns scrolling, playful overshoot.",
+      "use": "Youth brands, events, music, playful product promos, social content.",
+      "conveys": "Fun, irreverence, energy, 80s/90s pop nostalgia.",
+      "vs": "Bauhaus is primary and rational; Memphis is anti-rational and decorative. Corporate flat borrowed Memphis confetti but is softer.",
+      "search": [
+        "Memphis design animation",
+        "Memphis pattern motion graphics",
+        "80s geometric squiggle animation"
+      ],
+      "refs": [
+        "Ettore Sottsass",
+        "Nathalie Du Pasquier",
+        "Saved by the Bell opening titles"
+      ],
+      "prompt": "Art-direct in Memphis style: palette pink #FF6FB5, yellow #FFD23F, turquoise #3BCEAC, lilac #A78BFA, black #111; fill backgrounds with confetti, squiggle and grid patterns; foreground shapes (triangles, half-circles, zigzags, squiggle strokes 6-10px with round caps) with black outlines and offset solid shadows; bold geometric type; animate shapes popping in on the beat with back.out(2) 300 ms, squiggles wiggling (path morph or sine rotate ±6°), patterns scrolling linearly."
+    },
+    {
+      "id": "psychedelic",
+      "term": "Psychedelic",
+      "aka": [
+        "psychedelia",
+        "60s psychedelic"
+      ],
+      "family": "retro",
+      "what": "1960s counterculture style: swirling organic forms, vibrating complementary colors, melting hand-lettered type and optical patterns.",
+      "looks": "Saturated complementary pairs (orange/blue, magenta/green) that vibrate, melting and warping letterforms filling shapes, concentric ripples, paisleys, op-art moiré, liquid light shows.",
+      "motion": "Warping, breathing, morphing: continuous liquid distortion, kaleidoscopes, color cycling, pulsing concentric rings, slow melting type.",
+      "use": "Music festivals, album visuals, fashion, cannabis and beverage brands, experimental promos.",
+      "conveys": "Altered states, freedom, euphoria, counterculture.",
+      "vs": "Vaporwave is cool pastel irony; psychedelic is hot, organic and saturated. Liquid style is material; psychedelic is a whole art movement.",
+      "search": [
+        "psychedelic motion graphics",
+        "liquid psychedelic animation",
+        "60s poster typography animation"
+      ],
+      "refs": [
+        "Wes Wilson (Fillmore posters)",
+        "Victor Moscoso",
+        "Peter Max",
+        "Yellow Submarine (1968)"
+      ],
+      "prompt": "Art-direct as psychedelic: vibrating complementary pairs (#FF6B00 on #2E5BFF, #FF1F8E on #3CFF6B) at full saturation; hand-lettered or warped display type bent to fill organic shapes; concentric ripples, swirls, paisleys and moiré patterns; animate with continuous liquid distortion (SVG feTurbulence baseFrequency slowly animated feeding feDisplacementMap, scale 20-40), hue cycling, breathing scale (1-1.05 sine loop 3 s), slow melting morphs."
+    },
+    {
+      "id": "pop-art",
+      "term": "Pop Art",
+      "aka": [
+        "pop art style"
+      ],
+      "family": "retro",
+      "what": "1950s-60s art movement quoting mass culture and comics: bold flat colors, Ben-Day dots, thick outlines, repetition and consumer imagery.",
+      "looks": "Primary and hot colors, Ben-Day dots, thick black outlines, speech bubbles, repeated grids of the same image in different colorways, product imagery, bold sans or comic lettering.",
+      "motion": "Punchy: grids of color variants flashing, dots scaling, speech bubbles popping, zoom punches, repeated-image rhythm.",
+      "use": "Consumer brands, food and beverage, fashion, bold campaigns, social content.",
+      "conveys": "Bold, fun, ironic, mass-culture confidence.",
+      "vs": "Comic-book style is narrative (panels, action lines); pop art is gallery-style repetition and icon-making. Halftone is only the dot technique.",
+      "search": [
+        "pop art animation",
+        "Warhol style motion graphics",
+        "Lichtenstein style animation"
+      ],
+      "refs": [
+        "Roy Lichtenstein",
+        "Andy Warhol"
+      ],
+      "prompt": "Art-direct as pop art: flat primaries and hot colors (#FF1D25, #FFE600, #0096FF, #FF5EAA) with 4-6px black outlines; fill mid-tones with uniform Ben-Day dots (SVG pattern, 8-12px cells); repeat the hero image in a 2x2 or 3x3 grid with different color swaps (Warhol treatment); speech bubbles with bold comic lettering; animate with zoom punches (scale 1.15 to 1 in 200 ms expo.out), grid cells flashing through colorways on the beat, dot patterns pulsing."
+    },
+    {
+      "id": "comic-book",
+      "term": "Comic-Book Style",
+      "aka": [
+        "comic style",
+        "graphic novel style"
+      ],
+      "family": "retro",
+      "what": "Sequential-art language of comics: panels, gutters, inked line art, halftone shading, speech balloons, captions and onomatopoeia.",
+      "looks": "Panel grids with white gutters, heavy inks with varying line weight, flat or halftone color, speed lines, action bursts, onomatopoeia lettering (POW), caption boxes, dramatic angles.",
+      "motion": "Panel-to-panel camera moves, held poses at low frame rates (animation on twos/threes), impact frames, speed lines, balloons popping in, panels sliding.",
+      "use": "Storytelling explainers, games, entertainment, playful product stories.",
+      "conveys": "Action, narrative, drama, fun.",
+      "vs": "Pop art isolates one comic frame as art; comic-book style tells a sequence. Cartoon is animation-born and softer.",
+      "search": [
+        "comic book animation style",
+        "comic panel motion graphics",
+        "Spider-Verse style animation"
+      ],
+      "refs": [
+        "Spider-Man: Into the Spider-Verse (2018)"
+      ],
+      "prompt": "Art-direct as comic book: lay scenes out as panels on a page with 12-16px white gutters and 3px black borders; inked line art with tapered strokes (vary stroke width 1-5px); flat colors with halftone shading; speed lines, action bursts and onomatopoeia in bold italic comic lettering with outlines; caption boxes in yellow; animate on twos (12 fps via steps()), move the camera panel to panel (power3.inOut 700 ms), insert 2-frame impact flashes and pop balloons in with back.out(2)."
+    },
+    {
+      "id": "pixel-art",
+      "term": "Pixel Art",
+      "aka": [
+        "8-bit",
+        "16-bit",
+        "sprite art"
+      ],
+      "family": "retro",
+      "what": "Images built deliberately at low resolution with visible square pixels and restricted palettes, as in 8-bit and 16-bit games.",
+      "looks": "Hard-edged square pixels, limited palettes (4-32 colors), dithering for gradients, bitmap pixel fonts, sprites, tiles, no anti-aliasing.",
+      "motion": "Frame-by-frame sprite cycles at 6-12 fps, integer pixel movement, stepped transitions (pixel dissolves, iris wipes), screen shake.",
+      "use": "Games, developer and indie brands, nostalgia campaigns, playful loaders.",
+      "conveys": "Nostalgia, play, indie charm, gamer culture.",
+      "vs": "Low-poly is 3D faceted; pixel art is 2D raster. Web 1.0 includes GIFs but is broader chaotic web culture.",
+      "search": [
+        "pixel art animation",
+        "8-bit motion graphics",
+        "sprite animation loop"
+      ],
+      "refs": [
+        "eBoy",
+        "Nintendo NES / Super Nintendo games"
+      ],
+      "prompt": "Art-direct as pixel art: build all graphics on a low-resolution grid (e.g. 320x180 canvas scaled up with image-rendering: pixelated, or 8-16px CSS squares); restrict to a 16-color palette (e.g. PICO-8); use dithering instead of gradients; pixel bitmap font (Press Start 2P / Silkscreen class); no anti-aliasing, blur or rotation; animate at 8-12 fps with steps(), move in whole-pixel increments, use pixel dissolves or iris wipes and 2-4px screen shake on impacts."
+    },
+    {
+      "id": "mid-century",
+      "term": "Mid-Century Modern",
+      "aka": [
+        "mid-century illustration",
+        "50s-60s modern"
+      ],
+      "family": "retro",
+      "what": "Graphic style of the 1950s-60s: simplified geometric illustration, cut-paper shapes, textured flat color and jazzy, playful composition.",
+      "looks": "Muted warm palettes (mustard, teal, burnt orange, olive), angular and organic cut-paper shapes, dry-brush and print texture, hand-lettered or geometric type, stylised flat characters, off-register color.",
+      "motion": "Limited animation: held poses, shapes sliding like cut paper, jazzy syncopated rhythms, graphic silhouettes transforming.",
+      "use": "Title sequences, cultural and heritage brands, travel, hospitality, retro explainers.",
+      "conveys": "Sophistication, wit, optimism, craft.",
+      "vs": "Retro-futurism focuses on space-age futurity; mid-century is broader domestic and graphic. Modernist is the philosophy; mid-century is the period look.",
+      "search": [
+        "mid-century modern animation",
+        "Saul Bass style title sequence",
+        "UPA style animation"
+      ],
+      "refs": [
+        "Saul Bass (Anatomy of a Murder, Vertigo titles)",
+        "UPA studio",
+        "Catch Me If You Can titles (Kuntzel + Deygas)"
+      ],
+      "prompt": "Art-direct as mid-century modern: palette mustard #D4A017, teal #2F6F73, burnt orange #C4572A, olive #6B7A3A, cream #EFE6D2, black; build images from flat cut-paper shapes with slightly irregular edges and dry-brush or print texture; stylised angular silhouettes; hand-cut display lettering or geometric sans; slight off-register color offsets; animate with limited animation (held poses, shapes sliding and swapping), syncopated jazzy timing, silhouettes transforming into one another."
+    },
+    {
+      "id": "art-deco",
+      "term": "Art Deco",
+      "aka": [
+        "deco",
+        "Gatsby style"
+      ],
+      "family": "retro",
+      "what": "1920s-30s decorative modernism: symmetrical geometry, sunbursts, stepped forms, gold on black and elegant display type.",
+      "looks": "Gold, black, cream, emerald or navy; symmetrical fan, sunburst and chevron patterns; stepped ziggurat shapes; thin parallel lines; high-contrast geometric display faces (Broadway, Parisian, Poiret One class).",
+      "motion": "Symmetrical unfolding: fans opening, lines drawing in parallel, sunbursts rotating, gilded shimmer, elegant slow reveals.",
+      "use": "Luxury, hospitality, spirits, events, galas, period entertainment.",
+      "conveys": "Glamour, opulence, heritage, celebration.",
+      "vs": "Luxury (contemporary) is restrained minimal; Art Deco is ornate and symmetrical. Retro-futurism is atomic-age.",
+      "search": [
+        "art deco motion graphics",
+        "Gatsby style animation",
+        "art deco title design"
+      ],
+      "refs": [
+        "A.M. Cassandre posters",
+        "The Great Gatsby (2013) titles"
+      ],
+      "prompt": "Art-direct as Art Deco: black #0E0E0E or deep emerald #0F3D2E ground with gold (#C9A24B gradient to #F1D98A) line work; strictly symmetrical compositions; sunburst, fan, chevron and stepped ziggurat motifs made of thin parallel 1-2px lines; high-contrast geometric display face in uppercase with wide tracking; animate with symmetrical line draws from the center outward (stroke-dashoffset, power2.inOut 900 ms), fans opening, a slow gold shimmer gradient sweeping across."
+    },
+    {
+      "id": "scrapbook",
+      "term": "Scrapbook",
+      "aka": [
+        "scrapbook aesthetic",
+        "journal style"
+      ],
+      "family": "handmade",
+      "what": "Personal, collected-memory look: photos, tickets, notes and stickers taped and layered on paper pages.",
+      "looks": "Polaroid and instant-photo frames, washi tape, torn notebook paper, handwriting, doodled arrows, stickers, stamps, kraft paper, gentle rotations (±3-8°), warm tones.",
+      "motion": "Items placed by hand: drops with slight rotation settle, tape strips applied, pages flipping, stop-motion jitter, handwriting writing on.",
+      "use": "Personal stories, recaps, travel, community and creator content, lifestyle brands.",
+      "conveys": "Memory, warmth, intimacy, authenticity.",
+      "vs": "Punk zine is aggressive and chaotic; scrapbook is sentimental and tidy. Mixed-media collage is art-directed and conceptual; scrapbook is personal.",
+      "search": [
+        "scrapbook animation",
+        "scrapbook stop motion style",
+        "journal collage motion"
+      ],
+      "prompt": "Art-direct as a scrapbook: kraft or lined-notebook paper backgrounds; photos in white instant-photo frames with soft shadows (0 6px 16px rgba(0,0,0,0.18)); washi tape strips (semi-transparent patterned rectangles with torn ends) holding items; handwritten notes (marker script font) and doodled arrows; stickers and stamps; each item rotated ±3-8°; animate as hand placement: items drop from scale 1.1 with 4-6° extra rotation settling via power2.out 400 ms, tape applied with a quick wipe, 10-12 fps jitter optional."
+    },
+    {
+      "id": "mixed-media-collage",
+      "term": "Mixed-Media Collage",
+      "aka": [
+        "collage style",
+        "cut-out collage"
+      ],
+      "family": "handmade",
+      "what": "Art-directed combination of photography cutouts, textures, paint, type and graphic shapes in one layered composition.",
+      "looks": "Cutout photos with white or rough edges, halftoned and color-graded images, torn paper, paint strokes, scribbles, graphic shapes, type fragments, visible layering, contrasting scales.",
+      "motion": "Cutout animation: pieces sliding and rotating on flat layers, parallax between cutouts, stop-motion stutter, elements swapping, scale surprises.",
+      "use": "Brand campaigns, editorial explainers, music, culture and fashion content, social ads.",
+      "conveys": "Creativity, layered meaning, curiosity, handmade sophistication.",
+      "vs": "Scrapbook is personal memorabilia; collage is conceptual art direction. Photo collage (illustration) is the image technique; mixed-media collage is the full visual style.",
+      "search": [
+        "mixed media collage animation",
+        "collage motion design",
+        "cutout collage animation"
+      ],
+      "refs": [
+        "Terry Gilliam (Monty Python animations)"
+      ],
+      "prompt": "Art-direct as mixed-media collage: combine cutout photographs (with a 3-6px white or rough torn edge, halftoned or duotone-graded), torn paper shapes, paint strokes, marker scribbles and fragments of bold type; layer 4-8 elements with drop shadows (0 4px 10px rgba(0,0,0,0.25)) to show stacking; vary scale dramatically; paper-grain background; animate cutouts as flat layers sliding and rotating (power2.out 400-600 ms), with parallax between layers and optional 12 fps stop-motion stutter."
+    },
+    {
+      "id": "paper-cutout",
+      "term": "Paper Cutout",
+      "aka": [
+        "papercraft",
+        "cut paper",
+        "paper layers"
+      ],
+      "family": "handmade",
+      "what": "Scenes built from layered colored paper with cut edges, fibre texture and small shadows between layers.",
+      "looks": "Flat matte colors with paper fibre texture, crisp or slightly ragged cut edges, stacked layers with soft contact shadows, simple silhouettes, occasional folds and scores.",
+      "motion": "Layer parallax, pieces flipping and hinging like pop-up books, stop-motion stepping, folding and unfolding.",
+      "use": "Explainers, children's content, eco and craft brands, seasonal campaigns.",
+      "conveys": "Craft, warmth, tangibility, gentle charm.",
+      "vs": "Handmade is broader (clay, fabric, pencil); paper cutout is specifically cut paper. Paper cut illustration refers to the image; this is the whole art direction.",
+      "search": [
+        "paper cutout animation",
+        "papercraft motion design",
+        "layered paper stop motion"
+      ],
+      "refs": [
+        "Lotte Reiniger (silhouette films)",
+        "Henri Matisse cut-outs",
+        "South Park (original construction-paper look)"
+      ],
+      "prompt": "Art-direct as paper cutout: build everything from flat matte paper layers in 4-6 colors, each with subtle fibre texture (SVG noise at 5-8% opacity); crisp cut edges with 1px lighter edge highlight; soft contact shadows between layers (0 2px 6px rgba(0,0,0,0.25)); simple silhouettes, no gradients; animate with multi-layer parallax, hinge rotations as in pop-up books (rotateX from 90° to 0, power2.out 500 ms) and optional 12 fps stepping."
+    },
+    {
+      "id": "handmade",
+      "term": "Handmade / Craft",
+      "aka": [
+        "handcrafted",
+        "analog craft",
+        "tactile handmade"
+      ],
+      "family": "handmade",
+      "what": "Art direction that foregrounds human making: physical materials, imperfection and visible process (pencil, paint, fabric, clay, stamps).",
+      "looks": "Imperfect lines, visible brush and pencil marks, real material textures (paper, felt, wood), hand-lettering, uneven fills, warm natural palettes.",
+      "motion": "Boiling lines, stop-motion frame rates (8-12 fps), materials being made on screen, slight irregularity in timing.",
+      "use": "Artisan brands, food, nonprofit storytelling, kids content, human-centred tech.",
+      "conveys": "Humanity, authenticity, care, warmth.",
+      "vs": "Doodle is quick and casual pen marks; handmade is a craft-materials art direction. Clay is one handmade material.",
+      "search": [
+        "handmade animation style",
+        "tactile craft motion design",
+        "analog stop motion brand"
+      ],
+      "prompt": "Art-direct as handmade craft: textures of real materials (paper, gouache, pencil, fabric) on every surface; hand-lettered headlines with uneven baselines; imperfect edges (feDisplacementMap scale 2-4) and uneven fills; warm natural palette; animate with line boil (swap 2-3 slightly different stroke versions every 2-3 frames), 10-12 fps steps(), and show making on screen (strokes drawing, shapes being painted in)."
+    },
+    {
+      "id": "doodle",
+      "term": "Doodle",
+      "aka": [
+        "doodle style",
+        "hand-drawn doodles"
+      ],
+      "family": "handmade",
+      "what": "Casual, spontaneous pen drawings (arrows, stars, underlines, little figures) used as a loose, friendly layer.",
+      "looks": "Monoline marker or ballpoint strokes (2-4px), wobbly lines, arrows, circles, stars, squiggles, simple faces, often one color over photos or UI, handwritten notes.",
+      "motion": "Strokes drawing on, wiggling boil loops, doodles bouncing, underlines swooshing in.",
+      "use": "Social content, explainers, product annotations, education, creator brands.",
+      "conveys": "Friendly, informal, human, spontaneous.",
+      "vs": "Scribble is rougher, fast and chaotic; sketch is exploratory construction drawing; doodle is small, deliberate and cute.",
+      "search": [
+        "doodle animation",
+        "hand drawn doodle motion",
+        "doodle annotations animation"
+      ],
+      "prompt": "Art-direct with doodles: 2.5-3.5px round-cap monoline SVG strokes in one marker color (e.g. #111 or brand accent) with slight wobble (hand-drawn paths, not geometric primitives); arrows, circles, stars, underlines, squiggles and tiny faces annotating the main content; handwritten font for notes; no fills except occasional flat highlight; animate strokes drawing on via stroke-dashoffset (300-500 ms, power1.inOut) and loop a gentle line boil at 8 fps."
+    },
+    {
+      "id": "sketchbook",
+      "term": "Sketchbook",
+      "aka": [
+        "sketch style",
+        "pencil sketch aesthetic"
+      ],
+      "family": "handmade",
+      "what": "The look of a designer's or artist's sketchbook: pencil construction lines, notes, studies and paper texture.",
+      "looks": "Graphite gray lines of varying pressure, construction lines and guides left visible, hatching, margin notes, off-white paper, occasional marker accents, ring-bound or page edges.",
+      "motion": "Drawings building from construction lines to finished forms, pages turning, erasing and redrawing, pencil line boil.",
+      "use": "Design-process stories, architecture, product ideation, education, craft brands.",
+      "conveys": "Thinking, craftsmanship, origin, creative process.",
+      "vs": "Doodle is casual decoration; sketchbook shows process and construction. Blueprint is technical and precise.",
+      "search": [
+        "sketchbook animation",
+        "pencil sketch motion design",
+        "design process sketch animation"
+      ],
+      "prompt": "Art-direct as a sketchbook: off-white paper #F4F1E8 with grain; graphite-gray strokes (#4A4A4A at 60-90% opacity) with varying width (0.75-2px), visible construction lines and guides at 25% opacity, cross-hatching for shade; handwritten margin notes; one marker accent color; animate drawings building from light construction lines to confident final strokes (stroke-dashoffset in two passes), page turns between scenes, 10 fps pencil boil."
+    },
+    {
+      "id": "ink-marker",
+      "term": "Ink / Marker",
+      "aka": [
+        "ink drawing style",
+        "marker illustration style"
+      ],
+      "family": "handmade",
+      "what": "Bold hand-inked or marker-rendered art direction: confident black lines, brush or felt-tip strokes and flat marker fills.",
+      "looks": "Black ink lines with pressure variation, brush-pen tapers, marker fills with streaks and overlaps, limited colors (black plus 1-2 marker hues), white paper.",
+      "motion": "Strokes drawing with pressure (width changes), ink blots spreading, marker fills wiping in with streaks, boiling lines.",
+      "use": "Editorial explainers, food and craft brands, documentary graphics, personal essays.",
+      "conveys": "Confidence, expressiveness, authorship.",
+      "vs": "Sketchbook is pencil and process; ink/marker is finished bold line work. Doodle is small-scale casual.",
+      "search": [
+        "ink drawing animation",
+        "marker illustration motion",
+        "brush pen animation"
+      ],
+      "prompt": "Art-direct as ink/marker drawing: white paper ground; bold black lines with tapered ends and 1.5-6px width variation (variable-width SVG paths or filled stroke outlines); flat marker fills in 1-2 hues with visible streaks and darker overlaps (multiply blend); occasional ink blots; animate strokes on with direction and speed variation, fills wiping in along the stroke direction (300-400 ms), light line boil at 8 fps."
+    },
+    {
+      "id": "low-poly",
+      "term": "Low-Poly",
+      "aka": [
+        "low polygon",
+        "faceted 3D"
+      ],
+      "family": "dimensional",
+      "what": "3D (or pseudo-3D) forms built from visible flat-shaded triangles and facets.",
+      "looks": "Faceted triangle meshes, flat shading per face, gradient palettes across facets, crisp geometric silhouettes, simple lighting, no texture.",
+      "motion": "Faceted objects rotating, triangles assembling or shattering, vertices shifting, camera orbits.",
+      "use": "Games, data and network themes, tech explainers, environmental scenes.",
+      "conveys": "Structure, digital craft, stylised clarity.",
+      "vs": "Pixel art is 2D raster; low-poly is faceted 3D. Abstract geometric uses flat 2D shapes rather than meshes.",
+      "search": [
+        "low poly animation",
+        "low poly motion graphics",
+        "faceted geometric animation"
+      ],
+      "prompt": "Art-direct in low-poly: build forms from visible triangles (SVG polygons or a Three.js mesh with flatShading: true); each facet a flat color stepping through a 4-6 color gradient ramp to imply light from upper-left; crisp silhouettes, no textures, no outlines; animate with slow Y-axis rotations (linear 8-12 s), triangles assembling from scattered positions (power3.out 800 ms, stagger 10 ms) or shattering apart."
+    },
+    {
+      "id": "isometric",
+      "term": "Isometric",
+      "aka": [
+        "iso",
+        "isometric 3D"
+      ],
+      "family": "dimensional",
+      "what": "Pseudo-3D drawn in isometric projection (axes 120° apart, no perspective) so objects stay measurable and tile cleanly.",
+      "looks": "Objects on a 30° grid, three visible faces shaded light/mid/dark, no vanishing points, miniature-world scenes, clean flat colors or soft gradients.",
+      "motion": "Blocks rising from the grid, objects sliding along iso axes, tiles assembling, small looping machinery, camera pans without perspective change.",
+      "use": "Tech explainers, infrastructure and data flow, games, city and platform diagrams.",
+      "conveys": "System-level clarity, order, a miniature world you can understand.",
+      "vs": "Axonometric is the umbrella family (isometric, dimetric, trimetric); isometric uses equal 120° axes. 2.5D uses layered planes with perspective.",
+      "search": [
+        "isometric animation",
+        "isometric motion graphics",
+        "isometric explainer"
+      ],
+      "refs": [
+        "Monument Valley (ustwo games)",
+        "SimCity 2000"
+      ],
+      "prompt": "Art-direct in isometric projection: all geometry on a 30° isometric grid (CSS transform: rotateX(60deg) rotateZ(-45deg) or SVG drawn on iso axes); no perspective or vanishing points; each object shows three faces shaded top light / left mid / right dark from one hue; flat colors, optional soft ground shadow; animate blocks rising from the grid (translateY along the vertical axis, back.out(1.2) 400 ms, stagger 40 ms), items sliding along iso axes only."
+    },
+    {
+      "id": "soft-3d",
+      "term": "Soft 3D",
+      "aka": [
+        "soft render",
+        "pastel 3D",
+        "soft UI 3D"
+      ],
+      "family": "dimensional",
+      "what": "Friendly 3D look with rounded forms, matte materials, soft global lighting and pastel color.",
+      "looks": "Rounded, bevelled primitives, matte or satin surfaces, soft ambient occlusion and diffuse shadows, pastel palettes, clean studio backgrounds, no hard reflections.",
+      "motion": "Gentle floating, soft bounces with squash, slow rotations, elements spring-settling; smooth, weighted eases.",
+      "use": "Consumer app promos, fintech, onboarding, product feature highlights, 3D icons.",
+      "conveys": "Approachable, calm, modern, tactile friendliness.",
+      "vs": "Clay adds visible fingerprints and handmade imperfection; glossy 3D uses specular highlights and reflections; toy-like 3D emphasises plastic toy proportions.",
+      "search": [
+        "soft 3D animation",
+        "pastel 3D motion design",
+        "soft 3D icons animation"
+      ],
+      "prompt": "Art-direct in soft 3D: rounded, heavily bevelled forms in matte pastels (#FFD6E0, #C7E9FF, #D8F3DC, #FFF1C1) on a pale seamless background; in HTML approximate with radial-gradient fills (highlight upper-left, darker lower-right), inset shadows for form, and large diffuse drop shadows (0 30px 60px rgba(0,0,0,0.12)); or render with Three.js MeshStandardMaterial roughness 0.7; no specular glints or reflections; animate with gentle float loops (y ±8px, sine.inOut 3 s), soft spring settles and slow rotations."
+    },
+    {
+      "id": "clay",
+      "term": "Clay / Claymation",
+      "aka": [
+        "claymorphism",
+        "plasticine"
+      ],
+      "family": "dimensional",
+      "what": "Look of modelled plasticine: soft lumpy forms with fingerprints, matte surfaces and stop-motion charm.",
+      "looks": "Chunky rounded forms, visible fingerprints and tool marks, matte saturated colors, slight asymmetry, soft shadows, tabletop sets.",
+      "motion": "Stop-motion at 12 fps with slight surface boil, squash and stretch, morphing between shapes, handmade imperfection.",
+      "use": "Kids and family brands, food, playful explainers, social ads, characterful launches.",
+      "conveys": "Warmth, playfulness, handmade charm, nostalgia.",
+      "vs": "Soft 3D is smooth and digital; clay shows handmade surface imperfection and stop-motion timing. Claymorphism (UI trend) is a soft-3D card style, not true clay.",
+      "search": [
+        "claymation style animation",
+        "3D clay motion design",
+        "stop motion clay animation"
+      ],
+      "refs": [
+        "Aardman Animations (Wallace & Gromit)"
+      ],
+      "prompt": "Art-direct as clay: chunky rounded forms in matte saturated colors with slight asymmetry; add fingerprint and tool-mark texture (subtle noise normal map in WebGL, or a low-opacity feTurbulence lighting filter in SVG); soft tabletop shadows; animate at 12 fps (steps(1) per 83 ms) with slight per-frame surface boil, squash and stretch on impacts and morphs between shapes."
+    },
+    {
+      "id": "toy-3d",
+      "term": "Toy-Like 3D",
+      "aka": [
+        "toy aesthetic",
+        "vinyl toy 3D"
+      ],
+      "family": "dimensional",
+      "what": "3D rendering with toy proportions and materials: chunky rounded parts, glossy or satin plastic, bright colors and miniature scale.",
+      "looks": "Oversized heads and chunky limbs, rounded parts with seams, satin or glossy plastic, saturated primaries, tilt-shift miniature feel, clean studio lighting.",
+      "motion": "Snappy toy mechanics: springy hops, wind-up movements, parts snapping together, playful spins and bounces.",
+      "use": "Consumer apps, gaming, kids brands, mascots, playful product promos.",
+      "conveys": "Fun, collectible, joyful, approachable.",
+      "vs": "Soft 3D is matte and abstract; toy-like 3D implies molded plastic objects and characters. Glossy 3D can be serious and premium.",
+      "search": [
+        "toy 3D animation",
+        "vinyl toy style 3D",
+        "toy-like 3D render motion"
+      ],
+      "prompt": "Art-direct as toy-like 3D: chunky rounded forms with toy proportions and visible part seams; satin plastic surfaces in saturated primaries; one soft key light plus rim light; tilt-shift depth of field for miniature scale; in HTML approximate with radial-gradient shading and a white specular spot at 30% opacity, or Three.js MeshPhysicalMaterial (clearcoat 0.6, roughness 0.35); animate with springy hops (back.out(2) 300 ms), parts snapping together, wind-up spins."
+    },
+    {
+      "id": "glossy-3d",
+      "term": "Glossy 3D",
+      "aka": [
+        "glossy render",
+        "high-gloss 3D"
+      ],
+      "family": "dimensional",
+      "what": "3D objects with polished, reflective surfaces, strong specular highlights and saturated color.",
+      "looks": "High-gloss plastic or lacquer, sharp specular highlights, environment reflections, saturated gradients, dark or colored studio backdrops, crisp rim lights.",
+      "motion": "Slow hero rotations revealing highlights, light sweeps across surfaces, weighty camera orbits, objects assembling in space.",
+      "use": "Product visualisation, 3D icons, launch key visuals, app store and marketing assets.",
+      "conveys": "Premium, desirable, polished, contemporary.",
+      "vs": "Soft 3D is matte and diffuse; chrome is fully mirror-like metal; glass is transparent with refraction.",
+      "search": [
+        "glossy 3D animation",
+        "glossy 3D icons motion",
+        "product render light sweep"
+      ],
+      "prompt": "Art-direct in glossy 3D: high-gloss surfaces with a sharp white specular highlight and a secondary reflection band; saturated base colors graded dark-to-light across the form; rim light on the silhouette; dark or brand-colored seamless backdrop; in HTML approximate with layered gradients (base linear-gradient, a blurred white ellipse highlight, a thin reflection stripe) and a long soft shadow; with WebGL use MeshPhysicalMaterial clearcoat 1, roughness 0.1 and an HDRI environment; animate with slow hero rotations (sine.inOut 3-4 s) and a light sweep crossing the surface."
+    },
+    {
+      "id": "photoreal-cgi",
+      "term": "Photoreal CGI",
+      "aka": [
+        "photorealistic 3D",
+        "product CGI",
+        "hyperreal render"
+      ],
+      "family": "dimensional",
+      "what": "Physically based rendering indistinguishable from photography: accurate materials, lighting, depth of field and camera behavior.",
+      "looks": "True materials (anodised aluminium, glass, fabric), realistic studio lighting, depth of field, subtle imperfections, dark or seamless backgrounds, macro detail.",
+      "motion": "Cinematic camera: slow dollies, macro glides, orbiting reveals, exploded views, parts assembling with physical weight.",
+      "use": "Hardware launches, automotive, consumer electronics, luxury product films.",
+      "conveys": "Precision, quality, desirability, engineering excellence.",
+      "vs": "Glossy 3D is stylised; photoreal CGI is indistinguishable from photography. Not achievable natively in HTML: it requires pre-rendered footage or stills composited into the scene.",
+      "search": [
+        "photoreal product CGI",
+        "product animation 3D render",
+        "hardware launch film CGI"
+      ],
+      "refs": [
+        "Apple product films"
+      ],
+      "prompt": "Art-direct as photoreal CGI: use pre-rendered photoreal footage or stills of the product (do not attempt photorealism with CSS); composite them on a seamless dark (#0A0A0A) or soft gray studio background; keep graphics minimal and thin (1px hairlines, small grotesk labels) so the render carries the frame; animate the camera as a physical rig: slow push-ins of 3-6% over 3-5 s, orbit-like parallax between product layers, exploded-view offsets with power2.inOut 1200 ms."
+    },
+    {
+      "id": "surreal-3d",
+      "term": "Surreal 3D",
+      "aka": [
+        "dreamlike 3D",
+        "oddly satisfying 3D"
+      ],
+      "family": "dimensional",
+      "what": "3D scenes that break physical logic: impossible architecture, soft objects behaving like liquid, dreamlike juxtapositions in pristine renders.",
+      "looks": "Clean pastel or monochrome sets, impossible geometry, unexpected materials (soft stone, liquid metal), floating objects, precise lighting, minimal props.",
+      "motion": "Oddly-satisfying loops, objects squishing, slicing and transforming seamlessly, slow deliberate choreography, perfect loops.",
+      "use": "Brand films, art direction for campaigns, social loops, music visuals.",
+      "conveys": "Wonder, curiosity, delight, artistic ambition.",
+      "vs": "Photoreal CGI sells a real product; surreal 3D sells a feeling through impossibility. Abstract geometric is 2D and non-representational.",
+      "search": [
+        "surreal 3D animation",
+        "oddly satisfying 3D loop",
+        "surreal CGI brand film"
+      ],
+      "refs": [
+        "Six N. Five",
+        "Andreas Wannerstedt"
+      ],
+      "prompt": "Art-direct as surreal 3D: minimal sets in a restricted pastel or monochrome palette with precise soft lighting; one impossible idea per scene (floating objects, materials behaving wrongly, impossible architecture); render via WebGL or pre-rendered clips; in pure HTML approximate with layered gradient-shaded shapes and soft shadows; animate as perfect seamless loops (4-8 s) with slow, deliberate, physically eased moves (sine.inOut) and satisfying transformations."
+    },
+    {
+      "id": "glass",
+      "term": "Glass",
+      "aka": [
+        "glass 3D",
+        "frosted glass",
+        "liquid glass"
+      ],
+      "family": "dimensional",
+      "what": "Transparent or frosted glass material as the dominant look: refraction, blur, edge highlights and caustic light.",
+      "looks": "Translucent panels and objects, background blur, bright edge highlights, refraction distortion, colored light passing through, caustics, subtle tints.",
+      "motion": "Panels sliding over content with blur shifting underneath, light sweeping across edges, refractive wobble, objects rotating to catch light.",
+      "use": "OS and app launches, fintech cards, premium tech, abstract brand visuals.",
+      "conveys": "Clarity, lightness, premium modernity, depth.",
+      "vs": "Glassmorphism (era) is the specific 2020-21 UI trend of frosted cards over colorful blobs; glass as a visual style covers 3D glass objects and refraction too. Holographic adds rainbow iridescence.",
+      "search": [
+        "glass 3D animation",
+        "frosted glass motion design",
+        "liquid glass UI animation"
+      ],
+      "refs": [
+        "Apple Liquid Glass (2025)",
+        "Apple visionOS"
+      ],
+      "prompt": "Art-direct with glass: translucent panels (background rgba(255,255,255,0.08-0.15) with backdrop-filter: blur(20-40px) saturate(1.4)) over vivid colored content so the blur is visible; 1px inner edge highlight (inset 0 1px 0 rgba(255,255,255,0.5)) and a brighter top-left rim; subtle refraction via SVG feDisplacementMap on edges; optional caustic light spots; radii 20-32px; animate panels sliding over content (power3.out 600 ms) so background shifts under the blur, and sweep a specular highlight along edges."
+    },
+    {
+      "id": "chrome",
+      "term": "Chrome",
+      "aka": [
+        "liquid chrome",
+        "mirror metal"
+      ],
+      "family": "dimensional",
+      "what": "Mirror-finish metal surfaces reflecting an environment, with extreme contrast between highlights and dark reflections.",
+      "looks": "Silver with hard black-and-white reflection bands, horizon line reflections, sharp specular highlights, chrome type, liquid-metal blobs.",
+      "motion": "Reflections sliding across surfaces as objects rotate, liquid chrome morphs, glints and star sparkles.",
+      "use": "Music, fashion, Y2K revival, bold type treatments, tech hero moments.",
+      "conveys": "Futurism, glamour, edge, high value.",
+      "vs": "Metallic covers brushed and tinted metals with softer reflections; chrome is mirror-perfect. Y2K is an era style that heavily uses chrome.",
+      "search": [
+        "chrome text animation",
+        "liquid chrome motion",
+        "chrome 3D type"
+      ],
+      "prompt": "Art-direct with chrome: fill forms and type with multi-stop linear gradients mimicking a reflected horizon (#FFFFFF 0%, #C8CDD4 35%, #2B2F36 50%, #9AA3AD 62%, #FFFFFF 100%) plus a thin bright highlight line; sharp four-point star glints; dark background to maximise contrast; in WebGL use MeshStandardMaterial metalness 1 roughness 0.05 with an HDRI; animate by sliding the gradient position across forms (background-position, 1.5-3 s) to fake moving reflections, liquid morphs for blobs, glints on beats."
+    },
+    {
+      "id": "metallic",
+      "term": "Metallic",
+      "aka": [
+        "brushed metal",
+        "anodised metal",
+        "gold foil"
+      ],
+      "family": "dimensional",
+      "what": "Metal surfaces other than mirror chrome: brushed aluminium, anodised colors, gold, copper and foils with directional sheen.",
+      "looks": "Brushed grain, soft directional highlights, tinted metals (gold, rose gold, titanium, anodised blue), embossed and debossed edges, foil stamping.",
+      "motion": "Slow sheen sweeps, gentle tilts catching light, foil shimmer, precise mechanical movements.",
+      "use": "Luxury, hardware, finance cards, awards, premium packaging.",
+      "conveys": "Value, durability, craftsmanship, premium.",
+      "vs": "Chrome is a perfect mirror; metallic is softer and textured. Holographic adds rainbow diffraction.",
+      "search": [
+        "brushed metal animation",
+        "gold foil motion graphics",
+        "metallic sheen animation"
+      ],
+      "prompt": "Art-direct with metallic surfaces: brushed metal via a repeating-linear-gradient micro-stripe texture at 3-5% contrast over a tinted base (gold #C9A24B to #F3DD9B, titanium #8C9199 to #D3D6DA, anodised blue #2C4A7A to #6F8FBF); emboss edges with 1px light top and dark bottom inner shadows; animate a soft diagonal sheen band (30% white, 40° angle, 20% width) sweeping across in 1200-1800 ms, and slight 2-4° tilts (rotateX/Y) catching light."
+    },
+    {
+      "id": "holographic",
+      "term": "Holographic / Iridescent",
+      "aka": [
+        "iridescent",
+        "holo foil",
+        "rainbow foil"
+      ],
+      "family": "dimensional",
+      "what": "Surfaces showing shifting rainbow diffraction colors that change with angle, like holographic foil or oil on water.",
+      "looks": "Pastel-to-saturated rainbow gradients (pink, cyan, lime, violet), pearlescent sheen, foil texture, often combined with chrome or glass, soft glows.",
+      "motion": "Color shifts as objects tilt, gradient flows, shimmer sweeps, liquid iridescent morphs.",
+      "use": "Beauty, fashion, crypto and fintech cards, music, Gen Z brands.",
+      "conveys": "Magic, novelty, luxury-meets-play, futurism.",
+      "vs": "Chrome is neutral silver; holographic adds spectral color. Gradient-heavy is flat color transitions without the angle-dependent sheen.",
+      "search": [
+        "holographic animation",
+        "iridescent motion graphics",
+        "holo foil gradient animation"
+      ],
+      "prompt": "Art-direct with holographic/iridescent surfaces: conic-gradient or multi-stop linear gradient of #FFB3E6, #B3F0FF, #D4FFB3, #E0B3FF, #FFE6B3 blended with mix-blend-mode: color-dodge or screen over a pale pearl base (#EDEBF2); add fine foil noise at 4-6%; pair with chrome or glass edges; animate by rotating the gradient angle and shifting background-position as the object tilts (rotateX/Y ±8°), 2-4 s sine loops."
+    },
+    {
+      "id": "liquid",
+      "term": "Liquid",
+      "aka": [
+        "fluid",
+        "liquid motion",
+        "liquid shapes"
+      ],
+      "family": "dimensional",
+      "what": "Forms that behave and look like fluids: blobs, drips, splashes, metaballs and flowing surfaces.",
+      "looks": "Blobby organic shapes, metaball merges, drips, splashes, glossy or flat fills, smooth curves with no corners.",
+      "motion": "Continuous flowing morphs, blobs merging and splitting, drips, splashes, wave propagation; everything eases smoothly with no hard stops.",
+      "use": "Beverage, beauty, transitions, brand loops, music visuals.",
+      "conveys": "Fluidity, freshness, sensuality, seamlessness.",
+      "vs": "Organic/biomorphic describes shapes inspired by living forms, which can be static; liquid emphasises fluid behavior. Gel is thick, translucent and wobbly.",
+      "search": [
+        "liquid motion graphics",
+        "liquid transition animation",
+        "metaball animation"
+      ],
+      "prompt": "Art-direct with liquid forms: blobby shapes with no corners; merge and split them with a gooey metaball filter (SVG feGaussianBlur stdDeviation 10 + feColorMatrix alpha contrast 20 -10); glossy fills with a soft top highlight or flat fills in 2-3 colors; drips and splash shapes as SVG paths; animate with continuous path morphs (sine.inOut 1-2 s), blobs merging and separating, liquid wipes as transitions; avoid linear or snappy eases."
+    },
+    {
+      "id": "gel",
+      "term": "Gel / Jelly",
+      "aka": [
+        "jelly",
+        "gummy",
+        "translucent gel"
+      ],
+      "family": "dimensional",
+      "what": "Thick translucent materials like jelly, gummy or gel: inner glow, subsurface color and wobbly elastic motion.",
+      "looks": "Translucent saturated colors, glowing interiors, soft internal gradients, bright highlights, bubbles inside, rounded forms.",
+      "motion": "Wobble and jiggle: elastic squash on impact, damped oscillation, slow settling after movement.",
+      "use": "Consumer apps, candy and beauty, 3D icons, playful UI moments.",
+      "conveys": "Playful, juicy, tactile, delightful.",
+      "vs": "Glass is rigid and clear; gel is soft and wobbly. Web 2.0 gel buttons are a UI gloss style, not a jelly material.",
+      "search": [
+        "jelly 3D animation",
+        "gel material motion",
+        "gummy UI animation"
+      ],
+      "prompt": "Art-direct with gel/jelly material: translucent saturated fills (70-85% opacity) with a brighter inner radial gradient to fake subsurface glow; a sharp white specular highlight and a soft darker rim; tiny bubbles inside; rounded forms; animate with damped jiggles (elastic.out(1, 0.3) 800-1200 ms on scaleX/scaleY in opposition) after every move and squash on impact."
+    },
+    {
+      "id": "inflatable",
+      "term": "Inflatable",
+      "aka": [
+        "puffy 3D",
+        "balloon 3D",
+        "puffer"
+      ],
+      "family": "dimensional",
+      "what": "Forms that look inflated like balloons, pool toys or puffer jackets: swollen volumes, seams, glossy stretched surfaces.",
+      "looks": "Swollen rounded letters and objects, pinched seams, glossy highlights, soft shadows, saturated or pastel vinyl colors, chrome balloon variants.",
+      "motion": "Inflating and deflating, bouncing with air-like float, squishing on contact, gentle bobbing.",
+      "use": "Social campaigns, fashion, events, playful type treatments, product launches.",
+      "conveys": "Playful, bold, fun, lightweight.",
+      "vs": "Soft 3D is solid and matte; inflatable shows air-filled swelling and seams. Liquid flows; inflatable holds shape.",
+      "search": [
+        "inflatable 3D type animation",
+        "puffy balloon text motion",
+        "inflated 3D design"
+      ],
+      "prompt": "Art-direct as inflatable: swollen rounded forms and letters with pinched seams at edges; glossy vinyl surfaces with a broad white highlight and a darker underside; saturated or pastel colors; soft floor shadows; in HTML fake volume with layered radial gradients and inner shadows, or use WebGL; animate inflating from scale 0.6 with a squashy overshoot (elastic.out(1, 0.5) 900 ms), light float bobbing (y ±6px, 2.5 s) and squish on contact."
+    },
+    {
+      "id": "organic-biomorphic",
+      "term": "Organic / Biomorphic",
+      "aka": [
+        "biomorphic",
+        "organic shapes"
+      ],
+      "family": "abstract",
+      "what": "Forms inspired by living things (cells, pebbles, leaves, bodies): irregular curves, asymmetry and growth patterns.",
+      "looks": "Irregular rounded blobs, pebble and cell shapes, flowing curves, natural palettes or soft brights, grain, layered overlapping forms.",
+      "motion": "Breathing, growing, slow morphing, cell-like division, gentle drift; slow sine-based timing.",
+      "use": "Wellness, health, sustainability, biotech, calm brand loops.",
+      "conveys": "Life, growth, naturalness, calm.",
+      "vs": "Liquid emphasises fluid behavior; biomorphic emphasises life-like form. Abstract geometric is hard-edged and mathematical.",
+      "search": [
+        "organic shapes animation",
+        "biomorphic motion design",
+        "organic blob animation"
+      ],
+      "prompt": "Art-direct with organic/biomorphic forms: irregular rounded shapes with asymmetric curves (SVG paths, no perfect circles), overlapping at different scales; natural palette (moss, sand, clay, sky) or soft brights; subtle grain; animate with breathing scale (0.97-1.03, sine.inOut 3-5 s), slow path morphs, cell-like splitting and gentle drift; never use snappy eases."
+    },
+    {
+      "id": "abstract-geometric",
+      "term": "Abstract Geometric",
+      "aka": [
+        "geometric abstraction",
+        "geometric motion"
+      ],
+      "family": "abstract",
+      "what": "Non-representational compositions of pure geometric shapes, lines and patterns driven by rhythm and color.",
+      "looks": "Circles, squares, lines, arcs and grids in flat colors, strong contrast, repetition, modular patterns, clear figure-ground.",
+      "motion": "Shapes rotating, tiling, morphing into each other, modular patterns shifting in sequence, rhythmic synchronisation to music.",
+      "use": "Brand identities in motion, music visuals, transitions, event loops, logo builds.",
+      "conveys": "Order, rhythm, intelligence, graphic energy.",
+      "vs": "Bauhaus is a specific historical geometric vocabulary; abstract geometric is general. Generative uses code-driven variation.",
+      "search": [
+        "abstract geometric animation",
+        "geometric shape motion design",
+        "geometric loop animation"
+      ],
+      "refs": [
+        "Oskar Fischinger",
+        "Norman McLaren"
+      ],
+      "prompt": "Art-direct as abstract geometric motion: compose only with circles, squares, triangles, lines and arcs on a modular grid; 2-4 flat colors with strong contrast; no texture, no gradients; build rhythm through repetition; animate with rotations in 90° steps, shape-to-shape morphs, modular pattern shifts staggered across the grid (stagger from center, 30-60 ms), and synchronize hits to the beat with power4.out 200-400 ms."
+    },
+    {
+      "id": "generative",
+      "term": "Generative",
+      "aka": [
+        "generative art",
+        "creative coding",
+        "algorithmic design"
+      ],
+      "family": "abstract",
+      "what": "Visuals produced by rules and algorithms (noise fields, recursion, flocking, randomness with seeds) rather than drawn by hand.",
+      "looks": "Flow fields, noise textures, recursive subdivisions, line densities, dot distributions, emergent patterns; palettes often limited and carefully tuned.",
+      "motion": "Continuous evolution: noise-driven drift, growth algorithms, reactive systems, seeded variation; often data- or audio-reactive.",
+      "use": "Brand identity systems, data art, AI and tech brands, installations, event visuals.",
+      "conveys": "Intelligence, complexity, living systems, uniqueness.",
+      "vs": "Particle-based is one generative technique; abstract geometric is often hand-composed. Must be deterministic (seeded) for rendering.",
+      "search": [
+        "generative art animation",
+        "creative coding motion",
+        "flow field animation"
+      ],
+      "refs": [
+        "Casey Reas / Processing",
+        "Zach Lieberman",
+        "Tyler Hobbs (Fidenza)"
+      ],
+      "prompt": "Art-direct as generative: produce visuals with a seeded algorithm in canvas or SVG (flow field, Perlin/simplex noise, recursive subdivision or circle packing); use a fixed seed so renders are deterministic and drive state from timeline time, not Math.random or requestAnimationFrame; tune a limited palette of 3-5 colors on a dark or paper ground; thin 0.5-1.5px strokes or small dots at high density; animate by advancing the noise offset with time and revealing structure progressively."
+    },
+    {
+      "id": "particle-based",
+      "term": "Particle-Based",
+      "aka": [
+        "particles",
+        "particle systems"
+      ],
+      "family": "abstract",
+      "what": "Imagery built from thousands of small points that flow, swarm, assemble into forms and disperse.",
+      "looks": "Dense dot clouds, glowing points on dark grounds, trails, dust, sparks, forms emerging from and dissolving into particles.",
+      "motion": "Swarming, attraction and repulsion, particles assembling into a logo or product, dispersing on transitions, flowing along fields.",
+      "use": "Tech and AI brands, data themes, logo reveals, sci-fi, event openers.",
+      "conveys": "Complexity, energy, transformation, scale.",
+      "vs": "Generative covers any algorithmic look; particle-based is specifically point systems. Must be seeded for deterministic rendering.",
+      "search": [
+        "particle animation",
+        "particle logo reveal",
+        "particle system motion design"
+      ],
+      "refs": [
+        "Refik Anadol"
+      ],
+      "prompt": "Art-direct as particle-based: render 2,000-20,000 particles on canvas or WebGL with a seeded PRNG; 1-3px points with additive blending on a dark background (#05050A), in 1-2 hues plus white; motion driven by a noise field and target positions sampled from the logo or product silhouette; animate particles assembling into the form (power3.inOut 1500-2500 ms with per-particle delay), holding with slight jitter, then dispersing on transition; compute positions from timeline time for seekable renders."
+    },
+    {
+      "id": "gradient-heavy",
+      "term": "Gradient-Heavy",
+      "aka": [
+        "gradient mesh",
+        "aurora gradients",
+        "mesh gradient"
+      ],
+      "family": "abstract",
+      "what": "Art direction dominated by rich, smooth color gradients (mesh, aurora, radial glows) as the main visual material.",
+      "looks": "Multi-color mesh gradients, aurora glows, grainy gradients, blurred blobs of color, soft transitions, often with white or dark type on top.",
+      "motion": "Slowly flowing and morphing gradients, color shifts, glows pulsing, blobs drifting behind content.",
+      "use": "SaaS and fintech brands, AI products, backgrounds for type-led films, music.",
+      "conveys": "Energy, modernity, emotion, fluid possibility.",
+      "vs": "Holographic is angle-dependent iridescence on surfaces; gradient-heavy uses gradients as ambient fields. Duotone maps images to two colors.",
+      "search": [
+        "mesh gradient animation",
+        "aurora gradient motion",
+        "animated gradient background"
+      ],
+      "refs": [
+        "Stripe homepage gradient (2020)"
+      ],
+      "prompt": "Art-direct as gradient-heavy: build backgrounds from 3-5 large blurred color blobs (radial-gradients or divs with filter: blur(80-140px)) in harmonious hues, layered into a mesh-gradient feel; add 3-6% film grain on top to prevent banding; keep type crisp in white or near-black with high contrast; animate blobs drifting and morphing slowly (8-15 s sine loops, transforms only), hue shifts of 10-20° over the piece."
+    },
+    {
+      "id": "monochrome",
+      "term": "Monochrome",
+      "aka": [
+        "monotone",
+        "black and white",
+        "single-hue"
+      ],
+      "family": "tonal",
+      "what": "Everything rendered in one hue (or pure grayscale) at varying lightness, relying on value, form and type for hierarchy.",
+      "looks": "Black, white and grays, or tints and shades of one color; strong typographic hierarchy; contrast from value and scale; photography in black and white.",
+      "motion": "Motion carries emphasis that color cannot: scale, position, masking, light and shadow sweeps.",
+      "use": "Premium brands, developer tools, fashion, documentary, serious topics.",
+      "conveys": "Focus, seriousness, elegance, timelessness.",
+      "vs": "Duotone uses two colors; monochrome uses one hue. Extreme minimalism is about element count, not color.",
+      "search": [
+        "monochrome motion design",
+        "black and white motion graphics",
+        "monochromatic animation"
+      ],
+      "prompt": "Art-direct in monochrome: restrict the palette to a single hue at 5-7 lightness steps (or pure grayscale #000 to #FFF); black-and-white photography; build hierarchy only through value, scale, weight and space; no accent color; animate emphasis with scale, masked reveals and light sweeps (a white-to-transparent gradient moving across) using power3.out 500-700 ms."
+    },
+    {
+      "id": "duotone",
+      "term": "Duotone",
+      "aka": [
+        "two-tone",
+        "duotone photography"
+      ],
+      "family": "tonal",
+      "what": "Images and layouts mapped to two colors, typically shadows to one hue and highlights to another.",
+      "looks": "Photos remapped to two contrasting hues (e.g. navy and pink), flat two-color graphics, bold color identity, strong contrast.",
+      "motion": "Duotone photo sequences cutting on beat, color pairs swapping between scenes, gradient-map transitions.",
+      "use": "Music and streaming brands, event promos, campaigns, editorial social content.",
+      "conveys": "Bold, coherent, contemporary, energetic.",
+      "vs": "Monochrome uses one hue; duotone uses two. Risograph often creates duotones but adds grain and overprint.",
+      "search": [
+        "duotone animation",
+        "duotone photo motion graphics",
+        "Spotify duotone style"
+      ],
+      "refs": [
+        "Spotify campaign imagery (c. 2015-2016)"
+      ],
+      "prompt": "Art-direct in duotone: map every photograph to two colors (shadows to a dark hue like #1E1A5F, highlights to a bright hue like #FF4F8B) using an SVG feColorMatrix grayscale plus feComponentTransfer table, or CSS grayscale + mix-blend-mode layers; use the same two colors for all graphics and type; allow one pair per scene and swap pairs between scenes on the cut; animate with beat-cut photo sequences and color-pair swaps."
+    },
+    {
+      "id": "luxury",
+      "term": "Luxury",
+      "aka": [
+        "premium",
+        "high-end",
+        "quiet luxury"
+      ],
+      "family": "cinematic",
+      "what": "Restrained, expensive-feeling art direction: space, elegant serifs, rich dark or warm neutral palettes, fine materials and slow motion.",
+      "looks": "Black, deep green, oxblood or cream grounds; gold or champagne accents used sparingly; refined serif or thin wide sans with generous tracking; lots of negative space; macro product photography; fine rules.",
+      "motion": "Slow and weighted: long expo/sine eases (1-2 s), slow push-ins, gentle fades between sequences, light gliding over surfaces; never bouncy.",
+      "use": "Fashion, jewellery, watches, automotive, hospitality, premium tech and finance.",
+      "conveys": "Exclusivity, craft, heritage, calm confidence.",
+      "vs": "Fashion editorial is bold and provocative; luxury is quiet. Extreme minimalism can be cold; luxury adds material richness.",
+      "search": [
+        "luxury brand motion design",
+        "premium product film typography",
+        "luxury title animation"
+      ],
+      "refs": [
+        "Chanel",
+        "Cartier",
+        "Bottega Veneta"
+      ],
+      "prompt": "Art-direct as luxury: deep ground (#0B0B0B, #0F2A22 or cream #EFE8DC); one champagne/gold accent (#C8A96A) used on at most one element; refined high-contrast serif or thin wide sans in uppercase with +12-20% tracking, small sizes; 60%+ negative space; macro close-ups with shallow depth; fine 0.5px rules; animate slowly (expo.out or sine.inOut 1200-2000 ms), 2-4% push-ins, crossfades of 800 ms+, a soft light sweep across material; no bounce, no overshoot, no fast cuts."
+    },
+    {
+      "id": "documentary",
+      "term": "Documentary",
+      "aka": [
+        "doc style",
+        "journalistic graphics"
+      ],
+      "family": "cinematic",
+      "what": "Graphics serving real footage and facts: archival imagery, restrained lower thirds, maps, dates and evidence-style annotation.",
+      "looks": "Archival photos and footage, sober grotesk or serif type, lower thirds, date stamps, maps, document scans, highlighter marks, muted grades.",
+      "motion": "Ken Burns pans and zooms on stills, highlight reveals on documents, map route draws, understated type fades and wipes.",
+      "use": "Brand documentaries, case studies, founder stories, journalism, history explainers.",
+      "conveys": "Truth, credibility, gravitas, humanity.",
+      "vs": "Cinematic is about grade and drama; documentary is about evidence and restraint. Print-editorial borrows paper artefacts; documentary uses real archive.",
+      "search": [
+        "documentary motion graphics",
+        "archival photo animation",
+        "Ken Burns effect"
+      ],
+      "refs": [
+        "Ken Burns documentaries",
+        "Vox explainers"
+      ],
+      "prompt": "Art-direct as documentary: real footage and archival stills as the primary layer; sober typography (grotesk or serif, white with 60% black lower-third bar or no bar), date and location stamps in small caps; document scans with highlighter (#FFE45C multiply) and red circle annotations; muted, slightly desaturated grade; animate stills with slow Ken Burns moves (5-10% scale over 5-8 s, linear or sine.inOut), map routes drawing on, lower thirds wiping in over 400 ms."
+    },
+    {
+      "id": "cinematic",
+      "term": "Cinematic",
+      "aka": [
+        "filmic",
+        "cinematic look"
+      ],
+      "family": "cinematic",
+      "what": "Art direction borrowing the language of feature film: widescreen framing, dramatic lighting, color grading, depth and grain.",
+      "looks": "Letterboxed 2.39:1 framing, teal-orange or custom grades, deep shadows, volumetric light, shallow depth of field, film grain, title-sequence typography (spaced serif or wide sans).",
+      "motion": "Camera-driven: slow dollies, parallax depth, rack focus, anamorphic flares, long takes and precise cuts, slow reveals.",
+      "use": "Brand films, launch trailers, title sequences, game trailers, keynote openers.",
+      "conveys": "Epic scale, emotion, importance, prestige.",
+      "vs": "Documentary is evidential and restrained; cinematic is dramatised. Luxury shares slowness but is minimal rather than dramatic.",
+      "search": [
+        "cinematic title sequence",
+        "cinematic motion graphics",
+        "film title design"
+      ],
+      "refs": [
+        "Prologue Films",
+        "Elastic",
+        "Imaginary Forces"
+      ],
+      "prompt": "Art-direct as cinematic: letterbox to 2.39:1 with black bars; dark, graded palette (shadows toward teal #0F2A33, highlights warm #E8B27A) with crushed blacks; volumetric light and vignettes via radial gradients; 4-6% animated film grain; title typography as widely tracked serif or wide sans in small size, centered; animate with camera language: slow push-ins and parallax across 3-5 depth layers (sine.inOut 3-6 s), rack-focus via blur swaps, anamorphic horizontal flare sweeps, slow fades from black."
+    },
+    {
+      "id": "childlike",
+      "term": "Childlike / Naive",
+      "aka": [
+        "naive art",
+        "kid-drawn",
+        "crayon style"
+      ],
+      "family": "playful",
+      "what": "Deliberately naive drawing as if made by a child: crayon textures, wobbly shapes, bright primaries and unselfconscious composition.",
+      "looks": "Crayon, pencil crayon and marker textures, wobbly outlines, scribbled fills that go outside lines, bright primaries, simple stick figures, uneven hand lettering.",
+      "motion": "Jittery boil at low frame rates, bouncy naive walk cycles, objects wiggling, pieces appearing as if being drawn.",
+      "use": "Kids products, education, family brands, nonprofits, playful campaigns.",
+      "conveys": "Innocence, joy, honesty, playfulness.",
+      "vs": "Doodle is adult casual sketching; childlike imitates children's drawing skill level. Kawaii is polished cute, not naive.",
+      "search": [
+        "childlike drawing animation",
+        "crayon animation style",
+        "naive art motion"
+      ],
+      "prompt": "Art-direct as childlike/naive art: crayon and marker textures (grainy strokes via SVG turbulence masks), wobbly outlines, scribbled fills that overshoot edges, bright primaries on white paper; simple stick-figure characters; uneven hand lettering with inconsistent letter sizes; animate at 8 fps with line boil, bouncy naive movement and elements appearing as if drawn by hand."
+    },
+    {
+      "id": "kawaii",
+      "term": "Kawaii",
+      "aka": [
+        "cute style",
+        "Japanese cute"
+      ],
+      "family": "playful",
+      "what": "Japanese cute aesthetic: round characters with tiny faces, pastel palettes, sparkles and affectionate personality given to objects.",
+      "looks": "Pastel pinks, mint, lavender, baby blue; round shapes; objects with simple dot-eye faces and blush marks; sparkles, hearts, stars; rounded bubbly fonts; thin soft outlines.",
+      "motion": "Bouncy, squishy: hops, blinks, happy wiggles, sparkles twinkling, gentle floating hearts.",
+      "use": "Consumer apps, stickers, snacks and stationery, gaming, social content.",
+      "conveys": "Cuteness, comfort, delight, friendliness.",
+      "vs": "Childlike is naive drawing; kawaii is polished and design-controlled. Mascot-led centers one brand character; kawaii may personify everything.",
+      "search": [
+        "kawaii animation",
+        "cute character motion graphics",
+        "kawaii style design"
+      ],
+      "refs": [
+        "Sanrio (Hello Kitty)",
+        "San-X (Rilakkuma)"
+      ],
+      "prompt": "Art-direct as kawaii: pastel palette (#FFC8DD, #BDE0FE, #CDEAC0, #E2C2FF, #FFF1B5) with a soft brown or dark plum outline color at 2px; round, chubby shapes; give objects faces with two small dot eyes, a tiny mouth and pink blush ovals; sparkles, hearts and stars as accents; rounded bubbly font; animate with bouncy hops (back.out(2) 300 ms), blinks every 2-4 s, happy wiggles (rotate ±6° twice), sparkle twinkles."
+    },
+    {
+      "id": "mascot-led",
+      "term": "Mascot-Led",
+      "aka": [
+        "character-led",
+        "mascot brand style"
+      ],
+      "family": "playful",
+      "what": "Art direction built around a brand character who carries the story, reacts and guides the viewer.",
+      "looks": "A consistent brand character (2D or 3D) as the focal element, expressive poses, supporting UI or scenes in the brand palette, character-consistent line and shading.",
+      "motion": "Character animation: anticipation, squash and stretch, reactions, lip sync, idle loops, character interacting with UI elements.",
+      "use": "Consumer apps, onboarding, social campaigns, brand explainers, games.",
+      "conveys": "Personality, relatability, memorability, emotional connection.",
+      "vs": "Kawaii is an aesthetic that can apply to anything; mascot-led is a structural choice centered on one character in any style.",
+      "search": [
+        "mascot animation",
+        "brand mascot motion design",
+        "character-led explainer"
+      ],
+      "refs": [
+        "Duolingo (Duo)",
+        "Mailchimp (Freddie)",
+        "Headspace characters"
+      ],
+      "prompt": "Art-direct as mascot-led: the brand character is the focal element in every scene and is drawn consistently (same proportions, line weight and palette); build scenes and UI around it in the brand palette; give it expressive poses and reactions to each story beat; animate with full character principles: anticipation (80-120 ms), squash and stretch, follow-through, a 2-3 s idle loop when holding, and have it point to or interact with the UI elements that carry the message."
+    },
+    {
+      "id": "sticker",
+      "term": "Sticker Style",
+      "aka": [
+        "sticker aesthetic",
+        "die-cut stickers"
+      ],
+      "family": "playful",
+      "what": "Graphics treated as die-cut stickers: thick white borders, slight drop shadows, peel curls, applied at playful angles.",
+      "looks": "Illustrations, emoji, badges and photos with 4-10px white keylines, small drop shadows, peeling corners, glossy or vinyl sheen, rotated placements, sticker-bomb clusters.",
+      "motion": "Stickers slapping on with scale overshoot, peeling off, wobbling, sticker-bomb build-ups on the beat.",
+      "use": "Social content, youth brands, creator tools, event promos, messaging apps.",
+      "conveys": "Playful, expressive, collectible, informal.",
+      "vs": "Scrapbook is nostalgic and uses tape; sticker style is punchy die-cut vinyl. Sticker illustration (illustration dimension) is the image style; sticker style is the whole art direction.",
+      "search": [
+        "sticker animation",
+        "sticker style motion graphics",
+        "die cut sticker animation"
+      ],
+      "refs": [
+        "Apple Messages stickers",
+        "Telegram sticker packs"
+      ],
+      "prompt": "Art-direct in sticker style: every graphic element (illustration, emoji, badge, cutout photo) gets a 6-10px white die-cut keyline (SVG stroke or feMorphology dilate on alpha), a small drop shadow (0 3px 6px rgba(0,0,0,0.25)) and optional subtle vinyl sheen; place stickers at ±5-15° rotations, clustering into sticker-bomb layouts; animate slap-ons from scale 1.3 to 1 with back.out(2.5) 250 ms plus a tiny rotation settle, peel-offs by curling one corner (clip-path + gradient)."
+    },
+    {
+      "id": "anime-cel",
+      "term": "Anime / Cel-Shaded",
+      "aka": [
+        "anime style",
+        "cel shading",
+        "toon shading"
+      ],
+      "family": "playful",
+      "what": "Japanese animation look: clean ink lines, flat cel shading with hard shadow shapes, dramatic effects and expressive framing.",
+      "looks": "Clean uniform lines, flat colors with one or two hard-edged shadow tones, rim lights, speed lines, dramatic skies, sparkle and impact effects, bold title typography.",
+      "motion": "Limited animation on twos or threes, held dramatic poses, smear frames, speed-line backgrounds, impact frames, fast camera pans over stills.",
+      "use": "Games, entertainment, youth brands, music videos, character-led campaigns.",
+      "conveys": "Drama, emotion, energy, fandom culture.",
+      "vs": "Comic-book style uses halftone and panels; anime uses cel shading and cinematic animation timing. Cartoon (Western) is rounder and bouncier.",
+      "search": [
+        "anime style motion graphics",
+        "cel shaded animation",
+        "anime opening style"
+      ],
+      "refs": [
+        "Studio Ghibli",
+        "Studio Trigger"
+      ],
+      "prompt": "Art-direct as anime/cel-shaded: clean 1.5-2.5px uniform ink lines; flat base colors with one hard-edged shadow tone (20-30% darker, no gradients) and a rim light; dramatic gradient skies; speed-line and sparkle effects; bold title typography with outlines; animate on twos (12 fps via steps()), hold dramatic poses, use 1-2 smear frames on fast moves, speed-line backgrounds for action and fast pans across stills."
+    }
+  ]
+}

@@ -1,8 +1,8 @@
-# Motion personality library
+# Preview swatches (the former personality library)
 
-Ten personalities in `personalities/*.json`. Each is one motion grammar: eases, a duration scale, stagger, hold, a banned list, the demo choreography the tasting menu plays, and builder notes that become the prose in motion.md and DISPATCH.md.
+The user no longer chooses among these. The decision is a **motion-language term** (`taxonomy/dimensions/motion-language.json`), whose contract becomes motion.md; the real animation is Claude's. These ten calibrated sets in `personalities/*.json` remain as preview swatches: `lib/motion-lang.mjs` (`SWATCH_BASE`) borrows a swatch's demo choreography to preview a motion language on the user's lines, played with the language's own eases and timings. Each swatch still passes the checker against its own motion.md (self-test). The notes below describe the swatches as data.
 
-`median_likelihood` is a directional guess at how likely a model handed a generic brief would produce this motion unprompted. It is not calibrated. **≤ 0.10 counts as the tail.** The tasting menu (3–6 candidates) always includes two tail personalities (rotation is relaxed for the tail if recent picks used them up), and "you decide" leans toward lower values, never returning the remembered preference or a recent pick.
+`median_likelihood` is a directional guess at how likely a model handed a generic brief would produce this motion unprompted (not calibrated; ≤ 0.10 is the tail). `pick.mjs motion` still uses it when a swatch id is asked for directly.
 
 | id | feel tags | median | enter / exit / move | scale (ms) | stagger | hold | one-liner |
 |---|---|---:|---|---|---:|---:|---|
