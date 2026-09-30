@@ -17,10 +17,15 @@ import { resolvePreset, findSkill } from "./lib/hyperframes.mjs";
 import { contractText, upsertContract, motionLabel } from "./lib/contract.mjs";
 import { installLook, installDirection, directionSection, upsertMarked, DIRECTION_MARK } from "./lib/install.mjs";
 import { readDesignMd, toTokensJson } from "./lib/design-md.mjs";
+import { track } from "./lib/report.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const args = parseArgs();
 const cmd = args._[0];
+track(
+  { capture: args.url ? `Capturing ${String(args.url).replace(/^https?:\/\//, "")}: screenshots, copy and assets` : "Reading your brief", write: "Writing the plan into the project", inject: "Handing each scene its brief and motion rules", init: "Setting up the video project" }[cmd],
+  { capture: "Capture done", write: "Plan written: brief, storyboard, design system, motion rules", inject: "Every scene has its brief", init: "Project ready" }[cmd]
+);
 const STORY_ROUTES = ["product-launch-video", "faceless-explainer", "pr-to-video", "general-video"];
 const ALL_ROUTES = [...STORY_ROUTES, "music-to-video", "talking-head-recut", "embedded-captions"];
 const RESOLUTION = { "1920x1080": "landscape", "1080x1920": "portrait", "1080x1080": "square" };

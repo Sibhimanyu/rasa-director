@@ -21,10 +21,15 @@ import { resolvePreset } from "./lib/hyperframes.mjs";
 import { stageFonts } from "./lib/fonts.mjs";
 import { installLook, installDirection, upsertMarked, DIRECTION_MARK } from "./lib/install.mjs";
 import { contractText } from "./lib/contract.mjs";
+import { track } from "./lib/report.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const args = parseArgs();
 const cmd = args._[0];
+track(
+  { scan: "Scanning your clips: length, sound, shot changes, what's said", briefs: "Writing a brief for each card and overlay", build: "Building the cut: conforming clips, placing cards, overlays and captions" }[cmd],
+  { scan: "Clips scanned", briefs: "Card briefs written; Claude designs each card", build: "Cut built" }[cmd]
+);
 const VIDEO_EXT = /\.(mp4|mov|m4v|webm|mkv|avi|mts)$/i;
 const MARK = "<!-- rasa-director:reel -->";
 const run = (bin, argv, opts = {}) => execFileSync(bin, argv, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], maxBuffer: 64 * 1024 * 1024, ...opts });

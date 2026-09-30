@@ -14,7 +14,8 @@ description: >
   folder of clips to cut into a reel or edit, says
   "/rasa-director", "direct my video", "guide me through the style", "show me options first", "tasting
   menu", "storyboard first", or complains that AI video looks generic. Builds with HyperFrames
-  (/hyperframes and its workflows); does not replace them.
+  (/hyperframes and its workflows); does not replace them. Videos only: never slide decks or presentations (for a talk
+  it makes the video that plays in it, not the deck).
 ---
 
 # Rasa Director
@@ -36,7 +37,8 @@ Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print 
 7. **Render is never skipped by "you decide".** The workflow's own "preview first, or render?" gate always runs.
 8. **Claude designs and animates; HyperFrames renders.** Every frame, card, overlay and style frame of the real video is designed by Claude from `DIRECTION.md`, `frame.md` and `motion.md`, through the matching HyperFrames workflow (or, for reels, from the card briefs). Rasa's own previews (design boards, motion swatches, the transitions menu) exist only to choose by eye; they are never the product.
 9. **Proper terms.** Every option shown and every decision recorded uses the taxonomy's terms (`taxonomy/dimensions/*.json`, `node $SKILL_DIR/scripts/taxonomy.mjs show <dimension>`); prompts to builders are compiled from those entries, never from vague adjectives.
-10. **The project's brand wins.** If the workspace has a brand reference (`brand.mjs detect`: DESIGN.md, design.md, BRAND.md, docs/DESIGN.md), offer it first and use its colors and fonts exactly; directions then vary the art direction around it.
+10. **Videos only.** Rasa makes rendered videos (MP4), nothing else. Never offer, ask about or build a slide deck, presentation, pitch deck, speaker notes or a web page, and never route to HyperFrames' `slideshow` workflow. If the video is for a talk, keynote or pitch ("a 5-minute talk with my deck"), it is the video that plays in or around it (an opener, a walk-on, a segment during the talk, a loop behind the speaker), and the user's deck or script is source material to read, not something to make.
+11. **The project's brand wins.** If the workspace has a brand reference (`brand.mjs detect`: DESIGN.md, design.md, BRAND.md, docs/DESIGN.md), offer it first and use its colors and fonts exactly; directions then vary the art direction around it.
 
 ## Setup (once per run)
 
@@ -53,7 +55,7 @@ bash "$SKILL_DIR/scripts/setup.sh" --open
 
 **Shell variables do not survive between tool calls.** Note the literal `SKILL_DIR` and `RUN` values and write them literally in every later command (below they appear as `$SKILL_DIR` / `$RUN`). Run everything from the workspace root.
 
-- Setup starts the Director's Console and opens it in the browser; give the user its URL in your first message. The console is where every question is asked, for every run; there is no chat-only mode. If the user can't find the page, run `serve --run "$RUN" --open` again (it reuses the running console and reopens the tab).
+- Setup starts the Director's Console and opens it in the browser. Run setup again in the same video (a new session, after compaction) and it resumes the unfinished run and its console (`RESUMED=`); `--new` starts a fresh video. The console survives on its own: if it stops (sleep, a killed process), the next `push`, `activity`, `log` or `wait` restarts it on the same address and the open tab reconnects by itself; give the user its URL in your first message. The console is where every question is asked, for every run; there is no chat-only mode. If the user can't find the page, run `serve --run "$RUN" --open` again (it reuses the running console and reopens the tab).
 - **Updates happen by themselves.** Setup checks for a newer release every time the skill loads (a 10-minute cache; 2 seconds at most; silent offline) and installs it the way this copy was installed (plugin, installer, git clone on master, skills CLI), then starts over from the new copy. **If setup prints `UPDATED=`, re-read `SKILL.md` in the `SKILL_DIR` it printed last, before anything else, and follow that version from here on**; tell the user in one line ("Updated Rasa Director from 0.5.0 to 0.6.0: <the `whats_new` highlights>"). `behind: true` without an update (the user set `RASA_DIRECTOR_AUTO_UPDATE=0`, a git checkout on another branch, or the update failed: see `error`) → one line saying a newer version is out; "update" runs `node $SKILL_DIR/scripts/update.mjs apply`. Never update while a build or render is running.
 - `FAILED` with no Node → setup could not download one (offline, or `RASA_DIRECTOR_NO_NODE_DOWNLOAD=1`): tell the user to install Node ≥ 20 from https://nodejs.org and run setup again; stop.
 - No HyperFrames CLI → tell the user to install it (`npm i -g hyperframes`, or use `npx`); stop. Workflows install on demand with `npx hyperframes skills update <workflow>`.
@@ -75,8 +77,8 @@ A local page (`console.mjs`, 127.0.0.1 only, token + session cookie) with one pa
 
 1. **Push** the step's full payload (a push replaces the step): write it to a file, then `node $SKILL_DIR/scripts/console.mjs push --run "$RUN" --step <step> --file "$RUN/<step>.json"`. Paths inside payloads are workspace-relative.
 2. **Point to it in chat**, one line: what's waiting and your pick ("Next in the console: pick a direction. My pick is B, a Swiss grid launch film."). No option lists, no question tool.
-3. **Wait** with `run_in_background: true` so the user can also reply in chat: `node $SKILL_DIR/scripts/console.mjs wait --run "$RUN" --timeout 3000`. You're notified with one JSON action `{step, type, value, note}`. A chat answer → `console.mjs record --run "$RUN" --step <step> --type choose --value '<json>' --note "<their words>"`. Exit 2 = timeout (wait again); exit 3 = the console died (`serve` again, re-push). A late action for a settled step is a correction if it differs.
-   **Between questions, narrate the work to the console** so the user always sees what's happening: `node $SKILL_DIR/scripts/console.mjs activity --run "$RUN" --message "<what you're doing, in plain words>"` before each piece of work that takes more than a few seconds (capturing the site, composing directions, writing pitches, drawing style frames, building scene 3 of 9). One line each, the user's language, no file paths.
+3. **Wait** with `run_in_background: true` so the user can also reply in chat: `node $SKILL_DIR/scripts/console.mjs wait --run "$RUN" --timeout 3000`. You're notified with one JSON action `{step, type, value, note}`. A chat answer → `console.mjs record --run "$RUN" --step <step> --type choose --value '<json>' --note "<their words>"`. Exit 2 = timeout (wait again); exit 3 = the console could not be restarted by itself (`serve --open` again, then re-push the step). A late action for a settled step is a correction if it differs.
+   **Between questions, the console shows the work live.** Rasa's scripts report themselves ("Composing three directions", "Drawing direction 2 of 3", "Capturing tally.app") and, in the plugin, every command, write and edit you make appears too, from the description you give each command, so write those descriptions for the user. Narrate the rest yourself, the thinking between scripts: `node $SKILL_DIR/scripts/console.mjs activity --run "$RUN" --message "<what you're doing, in plain words>"` before each piece of work that takes more than a few seconds (capturing the site, composing directions, writing pitches, drawing style frames, building scene 3 of 9). One line each, the user's language, no file paths. Aim for something new in the feed at least every 30 seconds of work.
 4. **Act** on it (types: `submit`, `choose`, `adjust`, `more`, `approve`, `decide`, `decide-rest` on step `*`, `note`; see `references/console.md`).
 5. **Close** the step: `console.mjs push --run "$RUN" --step <step> --status done --data '{"decision":"<what + receipt>"}'` (or `--status skipped` for steps this route doesn't use), then push the next.
 
@@ -108,6 +110,7 @@ Pick the HyperFrames workflow that builds this video, using HyperFrames' own rou
 | existing talking-head / interview / podcast footage + designed overlay cards | `talking-head-recut` |
 | anything else: brand reel, montage, longer or custom multi-scene piece, footage remix | `general-video` |
 | one short unnarrated motion unit (a title, sting, stat hit, under ~10 s) | `motion-graphics` → **Single motion units** below |
+| a video for a talk, keynote or pitch (an opener, a segment played during it, a loop behind the speaker); the deck or notes are the source | `general-video` (a product being launched on stage: `product-launch-video`). Never `slideshow`: Rasa doesn't make decks |
 
 Push `route` with 2–3 plausible options (`id`, `label`, `why`), the best one recommended. Record it (`memory.mjs record --step route --value <route> --mode confirmed|auto`), then set up the project and intake:
 

@@ -3,6 +3,7 @@
 #
 #   bash setup.sh [--open]        find (or fetch) Node, update Rasa if a newer release is out, check HyperFrames and the
 #                                 browser, make the run folder, start the Director's Console
+#   bash setup.sh --new           the same, but always a fresh run (a new video) rather than resuming an unfinished one
 #   bash setup.sh --node-only     just make sure Node >= 20 is available (used by install.sh)
 #
 # Prints KEY=VALUE lines (SKILL_DIR, RUN, NODE, PATH_PREFIX, UPDATE, UPDATED, HYPERFRAMES, BROWSER, CONSOLE)
@@ -16,10 +17,11 @@ set -uo pipefail
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 HOME_DIR="${RASA_DIRECTOR_HOME:-$HOME/.rasa-director}"
 NODE_LINE="${RASA_DIRECTOR_NODE_LINE:-22}"
-OPEN=""; NODE_ONLY=""
+OPEN=""; NODE_ONLY=""; NEW=""
 for a in "$@"; do
   case "$a" in
     --open) OPEN="--open" ;;
+    --new) NEW=1 ;;
     --node-only) NODE_ONLY=1 ;;
   esac
 done
@@ -115,8 +117,19 @@ export PATH="$NODE_BIN:$PATH"
 [ -n "$NODE_ONLY" ] && { echo "READY"; exit 0; }
 
 echo "SKILL_DIR=$SKILL_DIR"
-RUN=".rasa-director/$(date +%Y%m%d-%H%M%S)"
-mkdir -p "$RUN" && echo "RUN=$RUN"
+# one console per video: setup running again mid-video (a new session, a compacted context) picks up the
+# unfinished run and its console instead of opening a second tab; --new starts a fresh video
+RUN=""
+if [ -z "$NEW" ] && [ -f .rasa-director/current ]; then
+  PREV=$(cat .rasa-director/current)
+  if [ -d "$PREV" ] && "$NODE" -e '
+    const fs = require("fs"), r = process.argv[1];
+    const s = JSON.parse(fs.readFileSync(r + "/session.json", "utf8"));
+    const fresh = Date.now() - Date.parse(s.updated) < 12 * 3600e3;
+    process.exit(fresh && !((s.steps.render || {}).status === "done") ? 0 : 1);' "$PREV" 2>/dev/null; then RUN="$PREV"; echo "RESUMED=$RUN"; fi
+fi
+[ -n "$RUN" ] || RUN=".rasa-director/$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$RUN" && echo "RUN=$RUN" && printf '%s\n' "$RUN" > .rasa-director/current
 grep -qx '.rasa-director/' .gitignore 2>/dev/null || printf '\n.rasa-director/\n' >> .gitignore
 
 # updates first: a newer release is installed the way this copy was installed, then setup starts over from
@@ -129,7 +142,7 @@ if printf '%s' "$UPD" | grep -q '"auto_updated": true'; then
   OLD_V=$(printf '%s' "$UPD" | sed -n 's/.*"current": "\([^"]*\)".*/\1/p')
   echo "UPDATED=$OLD_V -> $(cat "$NEW_DIR/VERSION" 2>/dev/null)"
   echo "NOTE: re-read $NEW_DIR/SKILL.md now; this run continues on the new version" >&2
-  rmdir "$RUN" 2>/dev/null
+  rmdir "$RUN" 2>/dev/null # empty only: a fresh run folder; a resumed one keeps its session
   RASA_DIRECTOR_JUST_UPDATED="$OLD_V" exec bash "$NEW_DIR/scripts/setup.sh" "$@"
 fi
 

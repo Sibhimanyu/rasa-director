@@ -23,9 +23,11 @@ import {
   writeFile, SKILL_DIR, chromeScreenshot, chromeDumpDom, gsapInline,
 } from "./lib/common.mjs";
 import { resolvePreset } from "./lib/hyperframes.mjs";
+import { track } from "./lib/report.mjs";
 import "./lib/motion-lang.mjs"; // motion-language terms ("lang-snappy") resolve like swatch ids
 
 const args = parseArgs();
+track("Rendering motion swatches of your own lines", "Motion swatches ready");
 // --scenes "Hook line::sub || Middle line || Closing line::url": several scenes per
 // cell, played in order, so each personality is judged across the video
 const scenes = args.scenes

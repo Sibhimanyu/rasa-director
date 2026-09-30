@@ -57,6 +57,7 @@
   .feed li:first-child { border-top: 0; }
   .feed li i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); margin-top: 6px; }
   .feed li.ok i { background: var(--ok); } .feed li.ask i { background: var(--accent); } .feed li.you i { background: var(--ink); } .feed li.warn i, .feed li.error i { background: var(--err); }
+  .feed li.tool { font-size: 12.5px; padding: 5px 0; color: var(--ink-3); } .feed li.tool i { width: 6px; height: 6px; margin-top: 6px; background: var(--line-2); }
   .feed li.active { color: var(--ink); } .feed li.active i { background: var(--pick); animation: pulse 1.1s ease-in-out infinite; }
   .feed li time { display: block; font: 400 11px/1.4 var(--mono); color: var(--ink-3); margin-top: 1px; }
   .film { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
@@ -93,6 +94,7 @@
   .working-card .now { display: flex; align-items: center; gap: 12px; font: 600 24px/1.2 var(--display); font-stretch: 92%; }
   .spinner { width: 22px; height: 22px; border-radius: 50%; border: 2.5px solid var(--line-2); border-top-color: var(--pick); animation: spin .8s linear infinite; flex: none; }
   .working-card .detail { color: var(--ink-2); margin-left: 34px; }
+  .working-card .clock { margin-left: 34px; font: 500 12.5px/1 var(--mono); color: var(--ink-3); }
   .working-card ol { list-style: none; margin-left: 34px; display: grid; gap: 6px; }
   .working-card ol li { font-size: 14px; color: var(--ink-2); }
   .working-card ol li::before { content: "✓"; color: var(--ok); margin-right: 8px; }
@@ -931,6 +933,7 @@
     else if (waitingOnUser()) { kind = "waiting"; txt = "Waiting for you: " + labelOf(S.current).toLowerCase(); }
     else if (S.working) { kind = "working"; txt = S.working.msg; }
     else { kind = "working"; txt = "Claude is working…"; }
+    if (kind === "working" && !workStart) workStart = Date.now(); else if (kind !== "working") workStart = null;
     st.className = "status " + kind;
     document.getElementById("statusText").textContent = txt;
     document.getElementById("bar").className = "bar" + (kind === "working" ? " on" : "");
@@ -973,11 +976,23 @@
     if (d.decision) kids.push(h("div", { class: "decision" }, [h("b", { text: "Decided: " }), d.decision]));
     return kids;
   }
+  // how long Claude has been at it, and how fresh the last sign of life is (ticks every second)
+  var workStart = null;
+  function fmt(sec) { sec = Math.max(0, Math.round(sec)); return sec < 60 ? sec + " s" : Math.floor(sec / 60) + " min " + (sec % 60) + " s"; }
+  function clockText() {
+    var last = (S.activity || [])[(S.activity || []).length - 1];
+    return "Working for " + fmt((Date.now() - (workStart || Date.now())) / 1000) + (last ? " · last update " + fmt((Date.now() - Date.parse(last.t)) / 1000) + " ago" : "");
+  }
+  setInterval(function () { var c = document.getElementById("clock"); if (c) c.textContent = clockText(); }, 1000);
   function workingCard(d, step) {
-    var recent = (S.activity || []).filter(function (a) { return a.level === "ok" || a.level === "info"; }).slice(-5);
+    // what's done so far (the thing in progress is the heading, not a tick)
+    var recent = (S.activity || []).filter(function (a) { return a.level === "ok" || a.level === "info" || a.level === "tool"; });
+    if (recent.length && S.working && recent[recent.length - 1].msg === S.working.msg) recent = recent.slice(0, -1);
+    recent = recent.slice(-6);
     return h("div", { class: "working-card" }, [
       h("div", { class: "now" }, [h("span", { class: "spinner" }), (S.working && S.working.msg) || "Claude is working…"]),
       h("p", { class: "detail", text: "You'll see the next question here the moment it's ready. You can leave this tab open." }),
+      h("p", { class: "clock", id: "clock", text: clockText() }),
       d && d.sent ? h("div", { class: "answer", text: "Your answer on " + labelOf(step).toLowerCase() + ": " + sentText(d.sent) + (d.sent.note ? " · “" + d.sent.note + "”" : "") }) : null,
       recent.length ? h("ol", null, recent.map(function (a) { return h("li", { text: a.msg }); })) : null
     ]);
@@ -1035,12 +1050,24 @@
     if (S.current !== prevCurrent && !PINNED) { followCurrent = true; local = {}; }
     render();
   }
+  // live updates: the stream, a heartbeat every 15 s, and a watchdog that reconnects when the stream goes quiet
+  // (laptop sleep, a stalled connection) or the console restarts; the console restarts on the same address
+  var es = null, lastSeen = Date.now();
+  function refresh() { return fetch("/api/state", { cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (s) { online = true; lastSeen = Date.now(); onState(s); }).catch(function () { online = false; renderTop(); }); }
   function connect() {
-    var es = new EventSource("/api/events");
-    es.addEventListener("state", function (e) { try { online = true; onState(JSON.parse(e.data)); } catch (_) {} });
-    es.onopen = function () { online = true; renderTop(); };
+    if (es) try { es.close(); } catch (_) {}
+    es = new EventSource("/api/events");
+    es.addEventListener("state", function (e) { lastSeen = Date.now(); try { online = true; onState(JSON.parse(e.data)); } catch (_) {} });
+    es.addEventListener("ping", function () { lastSeen = Date.now(); if (!online) { online = true; renderTop(); } });
+    es.onopen = function () { lastSeen = Date.now(); online = true; renderTop(); };
     es.onerror = function () { online = false; renderTop(); };
   }
+  setInterval(function () {
+    if (Q.get("snapshot")) return;
+    if (Date.now() - lastSeen > 40000) { lastSeen = Date.now(); connect(); refresh(); }
+  }, 5000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden && !Q.get("snapshot")) { refresh(); if (!online) connect(); } });
+  window.addEventListener("online", function () { if (!Q.get("snapshot")) { connect(); refresh(); } });
   // ?snapshot=1&step=<id>: a static render for stills (no live stream, which would keep the page "loading")
   if (PINNED) { viewing = PINNED; followCurrent = false; }
   fetch("/api/state").then(function (r) { return r.json(); }).then(function (s) { online = true; onState(s); }).catch(function () {});

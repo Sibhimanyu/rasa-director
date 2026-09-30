@@ -13,8 +13,10 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { parseArgs, die } from "./lib/common.mjs";
 import { findSkill } from "./lib/hyperframes.mjs";
+import { track } from "./lib/report.mjs";
 
 const args = parseArgs();
+track("Recording your first line in a few voices", "Voice samples ready");
 if (!args.run) die("--run required");
 if (!args.line) die('--line "<the hook line>" required (a real line from the script)');
 const count = Math.max(2, Math.min(4, Number(args.count || 3)));

@@ -40,6 +40,8 @@ const F = {
   actions: path.join(RUN, "actions.jsonl"),
   consumed: path.join(RUN, "consumed.json"),
   console: path.join(RUN, "console.json"),
+  // the console's address (port + token), kept across restarts so an open tab reconnects by itself; removed only by `stop`
+  address: path.join(RUN, "address.json"),
 };
 export const STEPS = ["brief", "brand", "route", "footage", "direction", "concept", "scenes", "look", "motion", "styleframes", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render"];
 
@@ -112,7 +114,36 @@ function appendAction(a) {
   return action;
 }
 
+// start the server in the background on a known address (same port and token as before when there was one)
+function spawnServer(root, addr) {
+  const a = [fileURLToPath(import.meta.url), "serve", "--foreground", "--run", RUN, "--root", root, "--port", String((addr && addr.port) || args.port || 0)];
+  if (addr && addr.token) a.push("--token", addr.token);
+  const child = spawn(process.execPath, a, { detached: true, stdio: "ignore" });
+  child.unref();
+  return child.pid;
+}
+function waitForServer(pid, ms = 8000) {
+  const t0 = Date.now();
+  while (Date.now() - t0 < ms) {
+    const c = readJSON(F.console, null);
+    if (c && c.pid === pid) return c;
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 150);
+  }
+  return null;
+}
+// the console went away (sleep, a killed process, a crash): bring it back on the same address, so the tab the
+// user has open reconnects on its own. Runs before every push, log, activity and during wait. `stop` means stop.
+function ensureServer() {
+  const addr = readJSON(F.address, null);
+  if (!addr) return null;
+  const c = readJSON(F.console, null);
+  if (c && c.pid && alive(c.pid)) return c;
+  fs.rmSync(F.console, { force: true });
+  return waitForServer(spawnServer(addr.root || process.cwd(), addr));
+}
+
 // ---------------------------------------------------------------------------
+if (["push", "log", "activity"].includes(cmd)) ensureServer();
 if (cmd === "push") {
   if (!args.step || !STEPS.includes(args.step)) die(`--step must be one of ${STEPS.join(", ")}`);
   const s = session();
@@ -183,8 +214,8 @@ if (cmd === "push") {
     // every ~5s: if the console server died, say so instead of waiting forever
     if (++checks % 12 === 0) {
       const c = readJSON(F.console, null);
-      if (c && c.pid && !alive(c.pid)) {
-        console.log(JSON.stringify({ console_down: true, hint: "restart it with `console.mjs serve --run <dir>`; answers can also come from chat" }));
+      if ((!c || (c.pid && !alive(c.pid))) && readJSON(F.address, null) && !ensureServer()) {
+        console.log(JSON.stringify({ console_down: true, hint: "it could not be restarted; run `console.mjs serve --run <dir> --open`; answers can also come from chat" }));
         process.exit(3);
       }
     }
@@ -217,6 +248,7 @@ if (cmd === "push") {
     } catch {}
   }
   fs.rmSync(F.console, { force: true });
+  fs.rmSync(F.address, { force: true });
   console.log(JSON.stringify({ stopped: true }));
 } else if (cmd === "serve") {
   serve();
@@ -243,27 +275,16 @@ function serve() {
       } catch {}
       fs.rmSync(F.console, { force: true });
     }
-    const child = spawn(process.execPath, [fileURLToPath(import.meta.url), "serve", "--foreground", "--run", RUN, "--root", root, "--port", String(args.port || 0)], {
-      detached: true,
-      stdio: "ignore",
-    });
-    child.unref();
-    const t0 = Date.now();
-    const waitUp = () => {
-      const c = readJSON(F.console, null);
-      if (c && c.pid === child.pid) {
-        console.log(JSON.stringify({ ok: true, url: c.url, pid: c.pid }));
-        if (args.open) openUrl(c.url);
-        process.exit(0);
-      }
-      if (Date.now() - t0 > 8000) die("console server did not start");
-      setTimeout(waitUp, 150);
-    };
-    waitUp();
+    // a restart keeps the address (unless --port asks for another), so the open tab picks it up again
+    const addr = args.port ? null : readJSON(F.address, null);
+    const c = waitForServer(spawnServer(root, addr));
+    if (!c) die("console server did not start");
+    console.log(JSON.stringify({ ok: true, url: c.url, pid: c.pid, ...(addr && c.url.includes(addr.token) ? { same_address: true } : {}) }));
+    if (args.open) openUrl(c.url);
     return;
   }
 
-  const token = crypto.randomBytes(12).toString("hex");
+  const token = /^[a-f0-9]{24}$/.test(String(args.token || "")) ? String(args.token) : crypto.randomBytes(12).toString("hex");
   // files the console may serve: the workspace, installed skills (frame-preset showcases), and this skill
   const allowed = [root, SKILL_DIR, path.join(os.homedir(), ".claude", "skills"), path.join(os.homedir(), ".agents", "skills")]
     .filter((p) => fs.existsSync(p))
@@ -284,6 +305,10 @@ function serve() {
     for (const res of clients) res.write(`event: state\ndata: ${txt.replace(/\n/g, "")}\n\n`);
   };
   setInterval(broadcast, 500);
+  // a heartbeat, so the page can tell a quiet console from a dead connection (after sleep, a proxy, a stall)
+  setInterval(() => {
+    for (const res of clients) res.write("event: ping\ndata: 1\n\n");
+  }, 15000);
 
   // files of this session that must never be served (console.json holds the token URL)
   // compared by real path (e.g. macOS /var -> /private/var), resolved per request since the files come and go
@@ -294,7 +319,7 @@ function serve() {
       return path.resolve(p);
     }
   };
-  const isPrivate = (real) => [F.console, F.actions, F.consumed].some((p) => realOr(p) === real || path.resolve(p) === real);
+  const isPrivate = (real) => [F.console, F.address, F.actions, F.consumed].some((p) => realOr(p) === real || path.resolve(p) === real);
   const COOKIE = `rasa_${token.slice(0, 6)}`;
   const hasCookie = (req) => (req.headers.cookie || "").split(/;\s*/).includes(`${COOKIE}=${token}`);
   let port = 0;
@@ -415,8 +440,16 @@ function serve() {
   });
   // a single bad request must never take the console down
   process.on("uncaughtException", () => {});
-  server.listen(Number(args.port || 0), "127.0.0.1", () => {
+  let tries = 0;
+  server.on("error", (e) => {
+    // the old port is still closing (a restart) or someone else took it: retry a moment, then take any port
+    if (e && e.code === "EADDRINUSE" && tries++ < 15) return setTimeout(() => server.listen(tries < 15 ? Number(args.port || 0) : 0, "127.0.0.1"), 200);
+    if (e && e.code === "EADDRINUSE") return server.listen(0, "127.0.0.1");
+  });
+  server.listen(Number(args.port || 0), "127.0.0.1");
+  server.on("listening", () => {
     port = server.address().port;
+    writeJSON(F.address, { port, token, root });
     const url = `http://127.0.0.1:${port}/?t=${token}`;
     writeJSON(F.console, { url, port, pid: process.pid, root, started: now(), version: VERSION, skill: SKILL_DIR });
     // the page shows this copy's version and, from the last update check (no network here), a newer one

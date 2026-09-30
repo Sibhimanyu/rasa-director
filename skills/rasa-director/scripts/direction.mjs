@@ -25,9 +25,14 @@ import { resolvePicks, styleName, formula, promptParagraph, directionMd, suggest
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { readDesignMd } from "./lib/design-md.mjs";
+import { track, report } from "./lib/report.mjs";
 
 const args = parseArgs();
 const cmd = args._[0];
+track(
+  { directions: `Composing ${args.count || 3} complete directions from the style combinations`, compile: "Compiling the direction into DIRECTION.md", "pick-direction": "Applying the direction you picked" }[cmd],
+  { directions: "Directions ready, each with a board in your words", compile: "DIRECTION.md written: the art-direction brief Claude animates from", "pick-direction": "Direction applied to the plan" }[cmd]
+);
 const readDecisions = () => (args.decisions ? readJSON(path.resolve(String(args.decisions))) : { picks: {} });
 
 if (cmd === "compile") {
@@ -70,7 +75,8 @@ if (cmd === "compile") {
   // each card's image: that direction's look as a board on the user's words (in the brand's colors and fonts with --brand)
   if (!args["no-images"]) {
     const here = path.dirname(fileURLToPath(import.meta.url));
-    for (const d of r.directions) {
+    for (const [i, d] of r.directions.entries()) {
+      report(`Drawing direction ${i + 1} of ${r.directions.length}: ${d.name}`);
       const dir = path.join(out, d.id);
       writeFile(path.join(dir, "decisions.json"), JSON.stringify({ subject: D.subject, picks: d.picks }, null, 2));
       const a = ["looks", "--decisions", path.join(dir, "decisions.json"), "--out", path.join(dir, "look"), "--count", "2", "--stills", "--seed", d.id, "--aspect", String(args.aspect || "16:9")];
@@ -78,7 +84,7 @@ if (cmd === "compile") {
       if (args.sub) a.push("--sub", String(args.sub));
       if (args.brand) a.push("--brand", String(args.brand));
       if (args.mode) a.push("--mode", String(args.mode));
-      const run = spawnSync(process.execPath, [path.join(here, "design.mjs"), ...a], { encoding: "utf8", timeout: 120000 });
+      const run = spawnSync(process.execPath, [path.join(here, "design.mjs"), ...a], { encoding: "utf8", timeout: 120000, env: { ...process.env, RASA_DIRECTOR_QUIET: "1" } });
       const png = path.join(dir, "look", "A", "board.png");
       if (run.status === 0 && fs.existsSync(png)) d.image = path.relative(process.cwd(), png);
       else d.image_error = (run.stderr || "").trim().split("\n").pop() || "board did not render";

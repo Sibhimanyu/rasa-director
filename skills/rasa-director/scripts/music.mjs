@@ -11,8 +11,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { parseArgs, die } from "./lib/common.mjs";
+import { track } from "./lib/report.mjs";
 
 const args = parseArgs();
+track("Finding music that fits", "Music candidates ready");
 if (!args.run) die("--run required");
 if (!args.intents) die('--intents "mood one|mood two|mood three" required (2-4 moods drawn from the concept and motion feel)');
 const intents = String(args.intents).split("|").map((s) => s.trim()).filter(Boolean).slice(0, 4);

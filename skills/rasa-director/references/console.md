@@ -5,10 +5,17 @@
 ## The page
 
 - **Top bar**: five phases (Brief · Direction · Look & motion · Style frames · Build) instead of the step list, a status line and "Claude decides the rest". The status says "Waiting for you: <step>" while the current step awaits an answer, otherwise what Claude is doing (`session.working`), with a moving bar.
-- **What Claude is doing** (left): `session.activity`, newest first. Entries come from `activity`, `log`, every push ("Ready for you: the look", "Decided the look: …") and every answer the user sends ("You: picked the story: The shoebox wins").
+- **What Claude is doing** (left): `session.activity`, newest first. Entries come from `activity`, `log`, every push ("Ready for you: the look", "Decided the look: …"), every answer the user sends ("You: picked the story: The shoebox wins"), Rasa's own scripts (`lib/report.mjs`: each script says what it starts and finishes, into the run named in `.rasa-director/current`; a script run by another stays quiet) and, in the plugin, a PreToolUse hook (`hooks/hooks.json` → `scripts/hook-activity.mjs`) that adds each command (by its description), write and edit while a run is active; console plumbing is left out. The working view shows how long Claude has been at it and how long since the last update.
 - **The stage** (centre): only the current step, with its `question` as the heading. Pick-one steps (direction, concept, look, route, voice, music) are cards with the `recommended` one already selected and marked "Claude's pick", so one click on "Use this …" sends it; motion and transitions preselect the recommended letter the same way. Under every step: "Not sure? Let Claude decide this one". Once the user answers, or while Claude is between questions, the stage shows Claude working (the `working` message, the user's answer, the last few things done) until the next push.
 - **Your film** (right): every decided step's `decision`, each with "change" (opens that step again; a new answer is a correction), and "Tell Claude anything", which sends a `note` to the step on screen.
 - The page shows a notice when the last update check found a newer version (`session.app`).
+
+## Staying connected
+
+- The console's address (port and token) is kept in `<run>/address.json`. A restart (`serve`, or the automatic one) reuses it, so the tab the user has open reconnects by itself; only `stop` forgets it.
+- `push`, `activity`, `log` and `wait` restart a console that has stopped (sleep, a killed process); `wait` exits 3 only if that fails.
+- The stream sends a heartbeat every 15 s; the page reconnects and reloads the state after 40 s of silence, when the tab becomes visible again, and when the network comes back.
+- `setup.sh` records the run in `.rasa-director/current` and, run again, resumes an unfinished run (updated in the last 12 hours, not yet rendered) with its console instead of starting a second one.
 
 ## Security
 
@@ -25,7 +32,7 @@
 | `push --run <dir> --step <id> --file <payload.json>` (or `--data '<json>'`) `[--status awaiting\|working\|done\|skipped] [--current] [--merge] [--title "..."]` | **replaces** that step's payload (clearing old options, issues and the "you sent" banner); `--merge` keeps the previous fields instead. `status` defaults to `awaiting` (`working` for build); an awaiting step becomes the current one and the page jumps to it. The page also drops any unsent selections made against the old payload. |
 | `activity --run <dir> --message "..." [--level info\|ok\|warn] [--done]` | what Claude is doing now, between questions ("Capturing tally.app", "Drawing style frame 2 of 3"): a feed entry and the status line. `--done` records it without showing Claude as working. |
 | `log --run <dir> --message "..." [--level info\|ok\|warn\|error] [--stage <id> --stage-status working\|done\|failed]` | appends a build log line and sets a stage chip (stages: handoff, plan, design, build, verify, obey, render-gate). It moves the page to Build only while the current step is plan or build (never away from the render gate); `--stage render-gate --stage-status done` marks Build done. |
-| `wait --run <dir> [--step <id>] [--timeout <sec>]` | blocks until an unconsumed action arrives (for that step, or `*`), prints it, marks it consumed. Exit 2 on timeout; exit 3 (`console_down`) if the server died. Run it in the background, one at a time. |
+| `wait --run <dir> [--step <id>] [--timeout <sec>]` | blocks until an unconsumed action arrives (for that step, or `*`), prints it, marks it consumed. Exit 2 on timeout; a stopped server is restarted on the same address; exit 3 (`console_down`) only if that fails. Run it in the background, one at a time. |
 | `record --run <dir> --step <id> --type <type> [--value '<json>'] [--note "..."]` | logs an answer the user gave in chat (already consumed) so the session history is complete |
 | `state`, `url`, `stop` | print the session, reprint the URL (errors if the server is gone), stop the server |
 

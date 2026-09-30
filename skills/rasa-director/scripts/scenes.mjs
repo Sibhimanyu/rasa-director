@@ -11,8 +11,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { parseArgs, die, readJSON, writeFile, normalizeAspect } from "./lib/common.mjs";
 import { findSkill } from "./lib/hyperframes.mjs";
+import { track } from "./lib/report.mjs";
 
 const args = parseArgs();
+track("Timing the scenes into a storyboard", "Storyboard timing ready");
 if (!args.scenes || !args.out) die("--scenes <scenes.json> and --out <dir> are required");
 const ROUTES = ["product-launch-video", "faceless-explainer", "pr-to-video", "general-video"];
 const route = String(args.route || "product-launch-video");

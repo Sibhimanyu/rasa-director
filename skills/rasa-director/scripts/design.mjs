@@ -14,9 +14,14 @@ import path from "node:path";
 import { parseArgs, die, readJSON, writeFile, esc, normalizeAspect, chromeScreenshot, chromeDumpDom } from "./lib/common.mjs";
 import { generateLooks, lookAsBrand } from "./lib/looks.mjs";
 import { readDesignMd, toFrameMd, contrast } from "./lib/design-md.mjs";
+import { track } from "./lib/report.mjs";
 
 const args = parseArgs();
 const cmd = args._[0];
+track(
+  { looks: `Designing ${args.count || 6} looks${args.brand ? " in your brand" : ""}`, pick: "Applying the look you picked", stills: "Rendering the style frames as stills" }[cmd],
+  { looks: "Looks ready: palette, type and layout for each", pick: "Look applied: its frame.md is the video's design system", stills: "Style frames rendered" }[cmd]
+);
 
 function fontLinks(looks) {
   const fams = new Map();

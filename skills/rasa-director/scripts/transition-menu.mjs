@@ -13,8 +13,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { parseArgs, die, readLook, normalizeAspect, esc, googleFontLink, writeFile, chromeScreenshot, chromeDumpDom, gsapInline } from "./lib/common.mjs";
 import { resolvePreset, findSkill } from "./lib/hyperframes.mjs";
+import { track } from "./lib/report.mjs";
 
 const args = parseArgs();
+track("Rendering your scenes handing off, every way", "Transitions menu ready");
 if (!args.from || !args.to) die('--from "<scene A text>" and --to "<scene B text>" are required (two consecutive scenes of the video)');
 if (!args.out) die("--out required");
 const regDir = ["product-launch-video", "faceless-explainer", "pr-to-video"].map(findSkill).find(Boolean);

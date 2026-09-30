@@ -10,9 +10,14 @@ import path from "node:path";
 import { parseArgs, die, writeFile, esc, chromeScreenshot, readLook, normalizeAspect } from "./lib/common.mjs";
 import { findSkill } from "./lib/hyperframes.mjs";
 import { readDesignMd, toFrameMd, toTokensJson, findDesignMd, contrast } from "./lib/design-md.mjs";
+import { track } from "./lib/report.mjs";
 
 const args = parseArgs();
 const cmd = args._[0];
+track(
+  { read: "Reading your brand file", board: "Drawing your brand as a board", frame: "Turning your brand into the video's design system", tokens: "Reading your brand's tokens" }[cmd],
+  { read: "Brand read: colors by role and typefaces", board: "Brand board ready", frame: "Brand design system written (frame.md)", tokens: "Brand tokens written" }[cmd]
+);
 const mode = args.mode ? String(args.mode) : undefined;
 const need = () => {
   if (!args.file) die("--file <DESIGN.md> required");

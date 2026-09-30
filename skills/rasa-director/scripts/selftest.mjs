@@ -142,6 +142,30 @@ if (url) {
   } catch {}
   const msgs = (st.activity || []).map((x) => x.msg);
   ok("console feed: questions, your answers by name, and what Claude is doing", msgs.includes("Ready for you: the story") && msgs.includes("You: picked the story: One") && st.working && st.working.msg === "Drawing style frame 2 of 3", JSON.stringify(msgs));
+  // a console that stops comes back on the same address with the next push (the open tab reconnects by itself)
+  {
+    const c0 = JSON.parse(fs.readFileSync(path.join(run, "console.json"), "utf8"));
+    try { process.kill(c0.pid); } catch {}
+    await new Promise((r) => setTimeout(r, 600));
+    node("console.mjs", ["push", "--run", run, "--step", "concept", "--data", '{"question":"again","options":[{"id":"c1","title":"One"}]}']);
+    let c1 = {};
+    try { c1 = JSON.parse(fs.readFileSync(path.join(run, "console.json"), "utf8")); } catch {}
+    const back = await fetch(`${new URL(c0.url).origin}/api/state`, { headers: { cookie } }).then((r) => r.status).catch(() => 0);
+    ok("console that stops is restarted on the same address by the next push", c1.url === c0.url && c1.pid !== c0.pid && back === 200, `before ${c0.url}, after ${c1.url}, state ${back}`);
+  }
+  // scripts and the plugin hook report into the current run's feed; console plumbing stays out of it
+  {
+    fs.mkdirSync(path.join(TMP, ".rasa-director"), { recursive: true });
+    fs.writeFileSync(path.join(TMP, ".rasa-director", "current"), path.relative(TMP, run));
+    const hook = (j) => spawnSync(process.execPath, [path.join(HERE, "hook-activity.mjs")], { input: JSON.stringify({ cwd: TMP, ...j }), encoding: "utf8", env, timeout: 10000 });
+    hook({ tool_name: "Bash", tool_input: { command: "node build.mjs", description: "Rendering the preview" } });
+    hook({ tool_name: "Bash", tool_input: { command: "node console.mjs wait --run x", description: "Wait for the user" } });
+    hook({ tool_name: "Write", tool_input: { file_path: "videos/a/compositions/scene-03.html" } });
+    node("motion-md.mjs", ["write", "--personality", "swiss-precise", "--out", path.join(TMP, "motion-feed.md")]);
+    const feed = JSON.parse(fs.readFileSync(path.join(run, "session.json"), "utf8")).activity.map((x) => x.msg);
+    ok("live feed: scripts and Claude's actions show up, console plumbing doesn't", feed.includes("Rendering the preview") && feed.includes("Writing scene-03.html") && feed.includes("Motion rules written") && !feed.includes("Wait for the user"), JSON.stringify(feed.slice(-6)));
+    fs.rmSync(path.join(TMP, ".rasa-director"), { recursive: true, force: true });
+  }
   // a console started by an older version is replaced, never reused (it would serve the old page)
   const cj = path.join(run, "console.json");
   const old = JSON.parse(fs.readFileSync(cj, "utf8"));
@@ -150,7 +174,7 @@ if (url) {
   try {
     again = JSON.parse(node("console.mjs", ["serve", "--run", run, "--root", TMP]).stdout);
   } catch {}
-  ok("console from an older version is replaced, not reused", !!again.url && !again.reused && again.url !== old.url, JSON.stringify(again));
+  ok("console from an older version is replaced (a new server, same address), not reused", !!again.url && !again.reused && again.pid !== old.pid && again.url === old.url, JSON.stringify(again));
   node("console.mjs", ["stop", "--run", run]);
 }
 

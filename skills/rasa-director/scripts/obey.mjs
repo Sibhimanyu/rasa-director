@@ -17,8 +17,10 @@ import os from "node:os";
 import path from "node:path";
 import { parseArgs, die, readFrontmatterDoc, parseEase, chromeDumpDom, GSAP_PATH } from "./lib/common.mjs";
 import { classify, SIGNATURES, bannedHits } from "./lib/signatures.mjs";
+import { track } from "./lib/report.mjs";
 
 const args = parseArgs();
+track("Checking the motion against your motion rules", "Motion check done");
 const project = path.resolve(args.project || ".");
 const motionPath = path.resolve(args.motion || path.join(project, "motion.md"));
 if (!fs.existsSync(motionPath)) die(`motion.md not found at ${motionPath}`);

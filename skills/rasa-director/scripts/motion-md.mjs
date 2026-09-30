@@ -13,6 +13,7 @@ import fs from "node:fs";
 import { parseArgs, die, getPersonality, writeFrontmatterDoc, readFrontmatterDoc, writeFile, parseEase } from "./lib/common.mjs";
 import "./lib/motion-lang.mjs"; // registers motion-language terms ("lang-snappy") with getPersonality
 import { ADJUST, applyAdjustments } from "./lib/adjust.mjs";
+import { track } from "./lib/report.mjs";
 export { applyAdjustments };
 
 function motionMd(p, { mode, reason }) {
@@ -62,6 +63,7 @@ ${reason ? `\n## Why this personality\n\n${reason}\n` : ""}`;
 
 const args = parseArgs();
 const cmd = args._[0];
+track(cmd === "write" ? "Writing the motion rules (motion.md)" : null, cmd === "write" ? "Motion rules written" : null);
 if (cmd === "write") {
   if (args.language && !args.personality) args.personality = `lang-${String(args.language).replace(/^lang-/, "")}`;
   if (!args.personality) die("--personality <swatch id> or --language <motion-language term> required");

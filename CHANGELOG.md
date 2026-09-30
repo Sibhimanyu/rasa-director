@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0 (2026-09-30)
+
+- **The console stays connected**: if the console stops while Claude works (the laptop sleeps, a process is killed), the next thing Claude sends restarts it on the same address, so the tab you have open reconnects by itself and the next question appears live. Before, a restart got a new port and token and the open tab was stranded. The stream now has a heartbeat; the page reconnects after 40 s of silence, when the tab comes back into view and when the network returns. Running setup again for the same video resumes it in the same console instead of opening a second one (`--new` starts a fresh video).
+- **More live feedback**: Rasa's scripts report what they're doing on their own ("Composing three directions", "Drawing direction 2 of 3: Swiss grid", "Capturing tally.app", "Checking the motion"), and with the plugin every command, write and edit Claude makes shows in the feed, from the description Claude gives each command. The working view shows how long Claude has been at it and how long since the last update.
+- **Videos only**: Rasa never offers or makes slide decks, presentations or speaker notes, and never routes to HyperFrames' `slideshow` workflow. For a talk it makes the video that plays in it (an opener, a segment, a loop), and the deck is source material.
+
 ## 0.6.1 (2026-09-30)
 
 - **Updates install themselves when the skill loads**: setup checks for a newer release every time (a 10-minute cache instead of a day, so a release reaches everyone the same day; 2 seconds at most; silent offline), installs it the way Rasa was installed (Claude Code plugin, one-line installer, skills CLI, or a git checkout on `master`), and starts over from the new copy, so the run you just started already uses the new version; Claude re-reads the new instructions and tells you in one line what's new. A plugin update lands in a new folder, which setup switches to without a restart. `RASA_DIRECTOR_AUTO_UPDATE=0` reports instead of installing. Tested end to end for the installer, the plugin and the skills CLI.
