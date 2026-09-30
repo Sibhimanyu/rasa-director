@@ -153,6 +153,7 @@
   .choice .strip img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; background: var(--panel-2); }
   .choice .strip figcaption { position: absolute; left: 6px; bottom: 6px; font: 600 10.5px/1 var(--sans); background: rgba(22,24,29,.78); color: #fff; padding: 4px 6px; border-radius: 5px; max-width: calc(100% - 12px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .pick { position: absolute; z-index: 2; top: 10px; left: 10px; background: var(--pick); color: #2a1f00; font: 600 11.5px/1 var(--sans); padding: 6px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  .pick.inline { position: static; justify-self: start; margin-bottom: 2px; box-shadow: none; }
   .choice .tick { position: absolute; z-index: 2; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; display: none; place-items: center; font-size: 14px; }
   .choice.on .tick { display: grid; }
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
@@ -491,10 +492,10 @@
       function select(id) { local.presetSel = id; cards.forEach(function (c) { var on = c._id === id; c.classList.toggle("on", on); c.setAttribute("aria-checked", on ? "true" : "false"); }); useBtn.textContent = "Use " + byId[id].name; barName.textContent = byId[id].name; }
       function card(p, small, badge, why) {
         var c = h("div", { class: "choice" + (small ? " mini" : "") + (local.presetSel === p.id ? " on" : ""), role: "radio", tabindex: "0", "aria-checked": local.presetSel === p.id ? "true" : "false" }, [
-          badge ? h("span", { class: "pick", text: badge }) : null, h("span", { class: "tick", "aria-hidden": "true", text: "✓" }),
+          h("span", { class: "tick", "aria-hidden": "true", text: "✓" }),
           specimen(p, g, small),
           h("div", { class: "body" }, small ? [h("h3", { text: p.name }), h("div", { class: "meta", text: (g.families.filter(function (f) { return f.id === p.family; })[0] || {}).name || p.family })] : [
-            h("h3", { text: p.name }), h("p", { class: "clamp", text: p.what }), why && why !== p.what ? h("p", { class: "sub", text: why }) : null,
+            badge ? h("span", { class: "pick inline", text: badge }) : null, h("h3", { text: p.name }), h("p", { class: "clamp", text: p.what }), why && why !== p.what ? h("p", { class: "sub", text: why }) : null,
             h("div", { class: "terms" }, (p.feels || []).slice(0, 3).map(function (t) { return h("span", { text: t }); }))
           ])
         ]);
