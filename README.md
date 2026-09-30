@@ -1,4 +1,7 @@
-# Rasa Director
+<h1><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo/rasa-director-lockup-reverse.svg" />
+  <img src="docs/assets/logo/rasa-director-lockup.svg" alt="Rasa Director" height="56" />
+</picture></h1>
 
 **Direct your whole video in the terms motion designers use. Claude designs and animates it.** Launch films, explainers, PR videos, brand reels, music videos, reels cut from a folder of your own footage, captioned talking heads, and short motion graphics.
 

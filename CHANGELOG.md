@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Logo**: a lowercase r whose shoulder is an ease-out curve, landing on an amber keyframe. Mark, symbol, wordmark, Rasa Director and bilingual (ரசனை) lockups, light and reverse, in `docs/assets/logo/` (SVG, wordmarks outlined from Anek Latin / Anek Tamil; PNG icons at 1024/512/180). Used for the site favicon, apple-touch icon and nav, the console header and favicon, and the README title.
+
 ## 0.4.0 (2026-09-30)
 
 **Direction in proper terms; Claude designs and animates.** Rasa Director no longer offers canned animations as the product: it gives the user the vocabulary of motion design, compiles their decisions into an art-direction brief, and Claude designs and animates every frame from it.
