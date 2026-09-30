@@ -245,25 +245,43 @@ export function chromePath() {
   die("no Chrome found. Run `npx hyperframes browser ensure` or set RASA_DIRECTOR_CHROME.");
 }
 
+// Headless Chrome can hang forever on a page whose virtual time never settles (an open
+// network stream, a runaway timer), so every launch has a hard wall-clock limit and is
+// killed outright when it passes it, instead of blocking the calling script.
+function runChrome(argv, opts, budgetMs, what) {
+  try {
+    return execFileSync(chromePath(), argv, { ...opts, timeout: budgetMs + 30000, killSignal: "SIGKILL" });
+  } catch (e) {
+    if (e.code === "ETIMEDOUT" || e.signal === "SIGKILL") {
+      // thrown (not die) so callers like obey can record "could not run" for one file;
+      // uncaught, Node prints just this line (stack replaced) and exits 1
+      const err = new Error(`headless Chrome did not finish ${what} within ${Math.round((budgetMs + 30000) / 1000)}s and was stopped (the page never settled: an open connection or a runaway script)`);
+      err.stack = `rasa-director: ${err.message}`;
+      throw err;
+    }
+    throw e;
+  }
+}
+
 export function chromeDumpDom(file, budgetMs = 8000) {
-  const chrome = chromePath();
-  return execFileSync(
-    chrome,
+  return runChrome(
     ["--headless=new", "--disable-gpu", "--no-sandbox", "--hide-scrollbars", `--virtual-time-budget=${budgetMs}`, "--dump-dom", `file://${path.resolve(file)}`],
-    { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], maxBuffer: 64 * 1024 * 1024 }
+    { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], maxBuffer: 64 * 1024 * 1024 },
+    budgetMs,
+    `loading ${path.basename(file)}`
   );
 }
 
 export function chromeScreenshot(url, outPng, width, height, budgetMs = 8000) {
-  const chrome = chromePath();
-  execFileSync(
-    chrome,
+  runChrome(
     [
       "--headless=new", "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
       `--window-size=${width},${height}`, `--virtual-time-budget=${budgetMs}`,
       `--screenshot=${path.resolve(outPng)}`, url,
     ],
-    { stdio: ["ignore", "ignore", "ignore"] }
+    { stdio: ["ignore", "ignore", "ignore"] },
+    budgetMs,
+    `a screenshot of ${path.basename(outPng)}`
   );
 }
 
