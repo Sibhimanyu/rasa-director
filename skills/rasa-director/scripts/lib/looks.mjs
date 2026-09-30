@@ -135,6 +135,7 @@ export function generateLooks({ picks = {}, count = 6, seed = "rasa", brand = nu
     }
   }
   const looks = [];
+  const usedPairs = new Set();
   const letters = "ABCDEFGHIJ";
   for (let i = 0; i < count; i++) {
     const style = styles[i % styles.length];
@@ -171,8 +172,12 @@ export function generateLooks({ picks = {}, count = 6, seed = "rasa", brand = nu
       type = { display: brand.fonts.display, body: brand.fonts.body || brand.fonts.display, mono: brand.fonts.mono || null, id: "brand", classes: [] };
     } else {
       const want = pickedType.length ? pickedType : tr.typeClasses;
-      const pool = pairings.filter((p) => p.classes.some((c) => want.includes(c)));
-      const p = (pool.length ? pool : pairings)[Math.floor(R() * (pool.length || pairings.length))];
+      const pool0 = pairings.filter((p) => p.classes.some((c) => want.includes(c)));
+      // variants of one style never repeat a pairing (fall back to any unused pairing, then any)
+      const unused = (list) => list.filter((p) => !usedPairs.has(`${style.id}|${p.id}`));
+      const pool = unused(pool0).length ? unused(pool0) : unused(pairings).length ? unused(pairings) : pairings;
+      const p = pool[Math.floor(R() * pool.length)];
+      usedPairs.add(`${style.id}|${p.id}`);
       type = { display: p.display, body: p.body, mono: p.mono || null, id: p.id, classes: p.classes };
     }
     const typeTerm = (T.byId.typography.options.find((o) => o.id === (pickedType[0] || type.classes[0])) || {}).term;
