@@ -84,7 +84,7 @@ ln -s "$PWD/rasa-director/skills/rasa-director" ~/.claude/skills/rasa-director
 
 ### Updating
 
-Rasa checks for a new release when a run starts (at most once a day, silently offline) and tells you in one line; say **update** and Claude updates it the way you installed it. Set `RASA_DIRECTOR_AUTO_UPDATE=1` to update without asking, or `RASA_DIRECTOR_NO_UPDATE_CHECK=1` to turn the check off. By hand:
+From 0.6.1, Rasa updates itself: every time the skill loads it checks for a new release (2 seconds at most, silently offline), installs it the way you installed Rasa, and carries on with the new version in the same run, telling you in one line what's new. Set `RASA_DIRECTOR_AUTO_UPDATE=0` to be told instead, or `RASA_DIRECTOR_NO_UPDATE_CHECK=1` to turn the check off. A git checkout only updates itself on `master`. By hand:
 
 | Installed with | Update |
 |---|---|
@@ -93,7 +93,7 @@ Rasa checks for a new release when a run starts (at most once a day, silently of
 | one-line installer | run the installer again |
 | by hand | `git pull` in the checkout |
 
-Or run `node <skill dir>/scripts/update.mjs apply`, which works out which of these applies. Versions before 0.4.2 have no update check; update them once by hand.
+Or run `node <skill dir>/scripts/update.mjs apply`, which works out which of these applies. Versions before 0.6.1 don't update themselves (0.4.2–0.6.0 only tell you); update them once by hand and they stay current from then on.
 
 Check the install: `node ~/.claude/skills/rasa-director/scripts/selftest.mjs` (52 checks, about two and a half minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasa-director/`; run the same script from there.
 

@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Update check: is a newer Rasa Director out, how was this copy installed, and how to update it.
-//   node update.mjs check [--force]      compare with GitHub (at most once a day; silent offline)
+//   node update.mjs check [--force]      compare with GitHub (cached 10 minutes; silent offline) and, unless
+//                                        RASA_DIRECTOR_AUTO_UPDATE=0, install a newer release the way this copy was installed
 //   node update.mjs apply                update this copy the way it was installed
 //   node update.mjs version              this copy's version and install method, no network
 // Prints JSON; always exits 0 from check, so a failed check never blocks a run.
-// Env: RASA_DIRECTOR_NO_UPDATE_CHECK=1 skips the check; RASA_DIRECTOR_AUTO_UPDATE=1 lets check apply
-// the update itself; RASA_DIRECTOR_UPDATE_BASE points at another raw base (tests, forks).
+// Env: RASA_DIRECTOR_NO_UPDATE_CHECK=1 skips the check; RASA_DIRECTOR_AUTO_UPDATE=0 only reports a newer
+// release instead of installing it; RASA_DIRECTOR_UPDATE_BASE points at another raw base (tests, forks).
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -13,7 +14,8 @@ import { SKILL_DIR, STATE_DIR, parseArgs, die } from "./lib/common.mjs";
 
 const REPO = "Sibhimanyu/rasa-director";
 const BASE = (process.env.RASA_DIRECTOR_UPDATE_BASE || `https://raw.githubusercontent.com/${REPO}/master`).replace(/\/$/, "");
-const DAY_MS = 24 * 60 * 60 * 1000;
+// short enough that a release reaches everyone the same day, long enough not to fetch on every command
+const CACHE_MS = 10 * 60 * 1000;
 const CACHE = path.join(STATE_DIR, "update-check.json");
 
 const current = () => fs.readFileSync(path.join(SKILL_DIR, "VERSION"), "utf8").trim();
@@ -42,10 +44,14 @@ function method() {
   const top = run("git", ["-C", real, "rev-parse", "--show-toplevel"], { timeout: 5000 });
   if (top.status === 0) {
     const root = top.stdout.trim();
-    return { method: "git", root, command: `git -C "${root}" pull --ff-only`, restart: false };
+    // a checkout on another branch is someone's work in progress: report, never pull it automatically
+    const branch = run("git", ["-C", root, "rev-parse", "--abbrev-ref", "HEAD"], { timeout: 5000 }).stdout.trim();
+    return { method: "git", root, branch, auto: ["master", "main"].includes(branch), command: `git -C "${root}" pull --ff-only`, restart: false };
   }
   const home = process.env.HOME || "";
-  const global = [path.join(home, ".claude", "skills"), path.join(home, ".agents", "skills")].some((d) => real.startsWith(d + path.sep));
+  // compare real paths (macOS: /var is /private/var), or a global install looks project-level and the update lands elsewhere
+  const realOr = (d) => { try { return fs.realpathSync(d); } catch { return d; } };
+  const global = [path.join(home, ".claude", "skills"), path.join(home, ".agents", "skills")].map(realOr).some((d) => real.startsWith(d + path.sep));
   return { method: "skills-cli", command: `npx --yes skills add ${REPO} --skill rasa-director --yes${global ? " --global" : ""}`, restart: false };
 }
 
@@ -113,7 +119,7 @@ if (cmd === "version") {
     let latest = args.latest || null; // --latest simulates a release (tests)
     let changelog = null;
     if (latest) out.checked = "simulated";
-    else if (!args.force && cache && Date.now() - cache.at < DAY_MS && cache.base === BASE) {
+    else if (!args.force && cache && Date.now() - cache.at < CACHE_MS && cache.base === BASE) {
       latest = cache.latest;
       out.whats_new = cache.whats_new || [];
       out.checked = "cache";
@@ -132,7 +138,9 @@ if (cmd === "version") {
         fs.writeFileSync(CACHE, JSON.stringify({ at: Date.now(), base: BASE, latest, whats_new: out.whats_new }));
       }
     }
-    if (out.behind && process.env.RASA_DIRECTOR_AUTO_UPDATE === "1" && out.checked !== "simulated") {
+    // on by default: loading the skill brings it up to date (RASA_DIRECTOR_AUTO_UPDATE=0 to only report)
+    const autoOn = process.env.RASA_DIRECTOR_AUTO_UPDATE !== "0" && how.auto !== false && !process.env.RASA_DIRECTOR_JUST_UPDATED;
+    if (out.behind && autoOn && out.checked !== "simulated") {
       const r = apply(how);
       out.auto_updated = r.ok;
       if (!r.ok) out.error = r.error;
@@ -142,7 +150,7 @@ if (cmd === "version") {
   if (out.behind && !out.auto_updated) {
     out.message = `Rasa Director ${out.latest} is out (you have ${now}).`;
   } else if (out.auto_updated) {
-    out.message = how.restart ? `Updated Rasa Director to ${out.latest}; it takes effect in your next Claude Code session.` : `Updated Rasa Director to ${out.latest}.`;
+    out.message = `Updated Rasa Director from ${now} to ${out.latest}.`;
   }
   console.log(JSON.stringify(out, null, 2));
 } else if (cmd === "apply") {

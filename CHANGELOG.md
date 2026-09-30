@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.1 (2026-09-30)
+
+- **Updates install themselves when the skill loads**: setup checks for a newer release every time (a 10-minute cache instead of a day, so a release reaches everyone the same day; 2 seconds at most; silent offline), installs it the way Rasa was installed (Claude Code plugin, one-line installer, skills CLI, or a git checkout on `master`), and starts over from the new copy, so the run you just started already uses the new version; Claude re-reads the new instructions and tells you in one line what's new. A plugin update lands in a new folder, which setup switches to without a restart. `RASA_DIRECTOR_AUTO_UPDATE=0` reports instead of installing. Tested end to end for the installer, the plugin and the skills CLI.
+- Fixed: on macOS a global skills-CLI install was mistaken for a project one (`/var` vs `/private/var`), so an update landed in the project folder instead.
+
 ## 0.6.0 (2026-09-30)
 
 - **Every question looks like the redesign, not just the page around it**: 0.5.0 replaced the console's frame, but the steps inside kept their old controls, so an updated console still asked the old way. Now the pick-one steps (direction, story, look, workflow, voice, music) are cards with Claude's pick already selected and marked, one "Use this …" button, and the question as the heading; every step ends with "Not sure? Let Claude decide this one". Phases read Brief · Direction · Look & motion · Style frames · Build, with "2 of 5" on each step.

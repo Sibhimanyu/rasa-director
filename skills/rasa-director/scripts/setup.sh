@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Rasa Director setup: everything a run needs, in one command that itself needs only bash and curl.
 #
-#   bash setup.sh [--open]        find (or fetch) Node, check for updates, check HyperFrames and the
+#   bash setup.sh [--open]        find (or fetch) Node, update Rasa if a newer release is out, check HyperFrames and the
 #                                 browser, make the run folder, start the Director's Console
 #   bash setup.sh --node-only     just make sure Node >= 20 is available (used by install.sh)
 #
-# Prints KEY=VALUE lines (SKILL_DIR, RUN, NODE, PATH_PREFIX, UPDATE, HYPERFRAMES, BROWSER, CONSOLE)
+# Prints KEY=VALUE lines (SKILL_DIR, RUN, NODE, PATH_PREFIX, UPDATE, UPDATED, HYPERFRAMES, BROWSER, CONSOLE)
 # and PROBLEM: lines with the fix, then READY, or FAILED when a run can't start.
 # Node: the PATH first, then nvm / fnm / Volta / asdf / Homebrew / ~/.rasa-director/node; if none is
 # >= 20, a private copy of the current Node LTS is downloaded from nodejs.org into
@@ -30,6 +30,15 @@ node_ok() { # $1 = a node binary; true when it runs and is >= 20
   local v
   v=$("$1" -p 'process.versions.node.split(".")[0]' 2>/dev/null) || return 1
   [ -n "$v" ] && [ "$v" -ge 20 ] 2>/dev/null
+}
+
+# every installed copy (skills folders, the plugin cache, this one), newest VERSION first
+newest_skill_dir() {
+  local d
+  { for d in "$HOME/.claude/skills/rasa-director" "$HOME/.agents/skills/rasa-director" ".claude/skills/rasa-director" "$SKILL_DIR"; do echo "$d"; done
+    find "$HOME/.claude/plugins/cache" -maxdepth 6 -type d -path '*rasa-director*/skills/rasa-director' 2>/dev/null; } |
+  while IFS= read -r d; do [ -f "$d/SKILL.md" ] && echo "$(cat "$d/VERSION" 2>/dev/null || echo 0) $(cd "$d" && pwd -P)"; done |
+  sort -V | tail -1 | cut -d' ' -f2-
 }
 
 node_candidates() { # one path per line, newest version first within each manager
@@ -110,7 +119,19 @@ RUN=".rasa-director/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$RUN" && echo "RUN=$RUN"
 grep -qx '.rasa-director/' .gitignore 2>/dev/null || printf '\n.rasa-director/\n' >> .gitignore
 
-echo "UPDATE=$("$NODE" "$SKILL_DIR/scripts/update.mjs" check 2>/dev/null | tr -d '\n' | tr -s ' ')"
+# updates first: a newer release is installed the way this copy was installed, then setup starts over from
+# the newest copy (a plugin update lands in a new folder), so this run already uses the new version
+UPD=$("$NODE" "$SKILL_DIR/scripts/update.mjs" check 2>/dev/null | tr -d '\n' | tr -s ' ')
+echo "UPDATE=$UPD"
+if printf '%s' "$UPD" | grep -q '"auto_updated": true'; then
+  NEW_DIR=$(newest_skill_dir)
+  [ -n "$NEW_DIR" ] || NEW_DIR="$SKILL_DIR"
+  OLD_V=$(printf '%s' "$UPD" | sed -n 's/.*"current": "\([^"]*\)".*/\1/p')
+  echo "UPDATED=$OLD_V -> $(cat "$NEW_DIR/VERSION" 2>/dev/null)"
+  echo "NOTE: re-read $NEW_DIR/SKILL.md now; this run continues on the new version" >&2
+  rmdir "$RUN" 2>/dev/null
+  RASA_DIRECTOR_JUST_UPDATED="$OLD_V" exec bash "$NEW_DIR/scripts/setup.sh" "$@"
+fi
 
 FAILED=""
 if HF=$(npx --yes hyperframes --version 2>&1 | tail -1) && [ -n "$HF" ]; then
