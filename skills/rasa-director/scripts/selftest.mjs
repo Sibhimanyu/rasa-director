@@ -134,6 +134,23 @@ if (url) {
     });
   });
   ok("console rejects foreign Host headers (DNS rebinding)", rebind === 421, `got ${rebind}`);
+  // the live feed: pushes, Claude's activity and the user's answers (by name) all show, and the status knows who's up
+  node("console.mjs", ["activity", "--run", run, "--message", "Drawing style frame 2 of 3"]);
+  let st = {};
+  try {
+    st = JSON.parse(fs.readFileSync(path.join(run, "session.json"), "utf8"));
+  } catch {}
+  const msgs = (st.activity || []).map((x) => x.msg);
+  ok("console feed: questions, your answers by name, and what Claude is doing", msgs.includes("Ready for you: the story") && msgs.includes("You: picked the story: One") && st.working && st.working.msg === "Drawing style frame 2 of 3", JSON.stringify(msgs));
+  // a console started by an older version is replaced, never reused (it would serve the old page)
+  const cj = path.join(run, "console.json");
+  const old = JSON.parse(fs.readFileSync(cj, "utf8"));
+  fs.writeFileSync(cj, JSON.stringify({ ...old, version: "0.0.1" }));
+  let again = {};
+  try {
+    again = JSON.parse(node("console.mjs", ["serve", "--run", run, "--root", TMP]).stdout);
+  } catch {}
+  ok("console from an older version is replaced, not reused", !!again.url && !again.reused && again.url !== old.url, JSON.stringify(again));
   node("console.mjs", ["stop", "--run", run]);
 }
 

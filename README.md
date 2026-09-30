@@ -21,7 +21,7 @@ Your picks compile into **`DIRECTION.md`**: a style name ("Swiss / International
 
 ## What it does
 
-You say `/rasa-director make a 45s launch film for tally.app`. Rasa Director opens a **Director's Console** in your browser and walks you through every decision, each shown on your own content:
+You say `/rasa-director make a 45s launch film for tally.app`. Rasa Director opens a **Director's Console** in your browser. It always shows what Claude is doing (a live status and activity feed), asks one question at a time with Claude's pick already selected (one click moves on), and collects every decision in "Your film", where any of them can be changed. Each decision is shown on your own content:
 
 | Step | You see | You decide |
 |---|---|---|

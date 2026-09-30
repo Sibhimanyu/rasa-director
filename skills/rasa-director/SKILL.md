@@ -41,9 +41,9 @@ Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print 
 ## Setup (once per run)
 
 ```bash
-# SKILL_DIR = the base directory Claude Code printed when this skill loaded; this finds it otherwise
-SKILL_DIR=$(for d in ~/.claude/skills/rasa-director ~/.agents/skills/rasa-director .claude/skills/rasa-director; do [ -f "$d/SKILL.md" ] && (cd "$d" && pwd -P) && break; done)
-[ -n "$SKILL_DIR" ] || SKILL_DIR=$(dirname "$(find ~/.claude/plugins/cache -path '*rasa-director*/skills/rasa-director/SKILL.md' 2>/dev/null | sort -V | tail -1)")
+# SKILL_DIR = the base directory Claude Code printed when this skill loaded. Otherwise this finds every installed
+# copy (skills folders and the plugin cache) and takes the newest version, so an old copy never shadows an update
+SKILL_DIR=$(for d in ~/.claude/skills/rasa-director ~/.agents/skills/rasa-director .claude/skills/rasa-director $(find ~/.claude/plugins/cache -maxdepth 6 -type d -path '*rasa-director*/skills/rasa-director' 2>/dev/null); do [ -f "$d/SKILL.md" ] && echo "$(cat "$d/VERSION" 2>/dev/null || echo 0) $(cd "$d" && pwd -P)"; done | sort -V | tail -1 | cut -d' ' -f2-)
 bash "$SKILL_DIR/scripts/setup.sh" --open
 ```
 
@@ -76,6 +76,7 @@ A local page (`console.mjs`, 127.0.0.1 only, token + session cookie) with one pa
 1. **Push** the step's full payload (a push replaces the step): write it to a file, then `node $SKILL_DIR/scripts/console.mjs push --run "$RUN" --step <step> --file "$RUN/<step>.json"`. Paths inside payloads are workspace-relative.
 2. **Point to it in chat**, one line: what's waiting and your pick ("Next in the console: pick a direction. My pick is B, a Swiss grid launch film."). No option lists, no question tool.
 3. **Wait** with `run_in_background: true` so the user can also reply in chat: `node $SKILL_DIR/scripts/console.mjs wait --run "$RUN" --timeout 3000`. You're notified with one JSON action `{step, type, value, note}`. A chat answer → `console.mjs record --run "$RUN" --step <step> --type choose --value '<json>' --note "<their words>"`. Exit 2 = timeout (wait again); exit 3 = the console died (`serve` again, re-push). A late action for a settled step is a correction if it differs.
+   **Between questions, narrate the work to the console** so the user always sees what's happening: `node $SKILL_DIR/scripts/console.mjs activity --run "$RUN" --message "<what you're doing, in plain words>"` before each piece of work that takes more than a few seconds (capturing the site, composing directions, writing pitches, drawing style frames, building scene 3 of 9). One line each, the user's language, no file paths.
 4. **Act** on it (types: `submit`, `choose`, `adjust`, `more`, `approve`, `decide`, `decide-rest` on step `*`, `note`; see `references/console.md`).
 5. **Close** the step: `console.mjs push --run "$RUN" --step <step> --status done --data '{"decision":"<what + receipt>"}'` (or `--status skipped` for steps this route doesn't use), then push the next.
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0 (2026-09-30)
+
+- **The console, redesigned**: it always shows what Claude is doing, and asks one thing at a time. A light, calm page with five phases across the top (Brief · Direction · Look & sound · Approve · Build) instead of a 19-step sidebar; a status line that says either what Claude is doing right now or what it's waiting on you for; a live "What Claude is doing" feed; only the current question in the middle, with one button to go with Claude's pick; and "Your film", every decision so far with a "change" link, plus "Tell Claude anything". The moment you answer, the page shows Claude working on it until the next question arrives. Every step panel and action is unchanged, so nothing Claude sends or receives changed.
+- **`console.mjs activity`**: Claude narrates its work between questions ("Capturing tally.app", "Drawing style frame 2 of 3"); pushes, build logs and your own answers (by the option's name) land in the same feed.
+- **Updates reach the page**: a console server started by an older version is stopped and replaced instead of reused, and setup picks the newest installed copy of the skill (skills folders and plugin cache), so an old copy can't shadow an update. The page shows a notice when a newer release is out.
+- Site and README screenshots retaken from the new console.
+
 ## 0.4.3 (2026-09-30)
 
 - **Works without Node installed**: setup is now one command, `bash scripts/setup.sh --open`, which needs only bash and curl. It finds Node ≥ 20 on the PATH or where nvm, fnm, Volta, asdf or Homebrew put it (Claude Code's shell often misses these); if there is none, it downloads a private copy of Node LTS from nodejs.org into `~/.rasa-director/node`, verified against the official checksum, with no sudo and nothing changed system-wide. Then it checks for updates, checks HyperFrames and the browser, makes the run folder and starts the console, printing a `PROBLEM:` line with the fix for anything that fails instead of stopping silently. When Node isn't on the PATH it prints a `PATH_PREFIX` that Claude puts in front of every later command. The one-line installer no longer stops when Node is missing. `RASA_DIRECTOR_NO_NODE_DOWNLOAD=1` turns the download off.

@@ -2,6 +2,14 @@
 
 `scripts/console.mjs` runs a local page with one panel per step. The agent pushes each step's payload into `<run>/session.json`; the user's clicks are appended to `<run>/actions.jsonl`; `wait` hands the next one to the agent. The page updates live (server-sent events), so pushes appear without a reload.
 
+## The page
+
+- **Top bar**: five phases (Brief · Direction · Look & sound · Approve · Build) instead of the step list, a status line and "Claude decides the rest". The status says "Waiting for you: <step>" while the current step awaits an answer, otherwise what Claude is doing (`session.working`), with a moving bar.
+- **What Claude is doing** (left): `session.activity`, newest first. Entries come from `activity`, `log`, every push ("Ready for you: the look", "Decided the look: …") and every answer the user sends ("You: picked the story: The shoebox wins").
+- **The stage** (centre): only the current step. Its question, and for steps with a `recommended` option (concept, route, look, motion, transitions, voice, music) one button, "Go with Claude's pick: <name>", which sends `choose` with that id; the step's own panel below; "You decide this one". Once the user answers, or while Claude is between questions, the stage shows Claude working (the `working` message, the user's answer, the last few things done) until the next push.
+- **Your film** (right): every decided step's `decision`, each with "change" (opens that step again; a new answer is a correction), and "Tell Claude anything", which sends a `note` to the step on screen.
+- The page shows a notice when the last update check found a newer version (`session.app`).
+
 ## Security
 
 - Bound to 127.0.0.1 only; requests whose `Host` isn't `127.0.0.1:<port>` / `localhost:<port>` are refused (blocks DNS rebinding).
@@ -13,8 +21,9 @@
 
 | Command | Does |
 |---|---|
-| `serve --run <dir> [--root <workspace>] [--port N] [--open]` | starts the server in the background (reuses a running one), prints `{url}`; `--open` opens the browser. `--root` defaults to the current directory: only files under it, this skill, and installed skills (`~/.claude/skills`, `~/.agents/skills`) are served. |
+| `serve --run <dir> [--root <workspace>] [--port N] [--open]` | starts the server in the background (reuses a running one only if this same copy and version started it; a console from an older version is stopped and replaced, so an update always shows the new page), prints `{url}`; `--open` opens the browser. `--root` defaults to the current directory: only files under it, this skill, and installed skills (`~/.claude/skills`, `~/.agents/skills`) are served. |
 | `push --run <dir> --step <id> --file <payload.json>` (or `--data '<json>'`) `[--status awaiting\|working\|done\|skipped] [--current] [--merge] [--title "..."]` | **replaces** that step's payload (clearing old options, issues and the "you sent" banner); `--merge` keeps the previous fields instead. `status` defaults to `awaiting` (`working` for build); an awaiting step becomes the current one and the page jumps to it. The page also drops any unsent selections made against the old payload. |
+| `activity --run <dir> --message "..." [--level info\|ok\|warn] [--done]` | what Claude is doing now, between questions ("Capturing tally.app", "Drawing style frame 2 of 3"): a feed entry and the status line. `--done` records it without showing Claude as working. |
 | `log --run <dir> --message "..." [--level info\|ok\|warn\|error] [--stage <id> --stage-status working\|done\|failed]` | appends a build log line and sets a stage chip (stages: handoff, plan, design, build, verify, obey, render-gate). It moves the page to Build only while the current step is plan or build (never away from the render gate); `--stage render-gate --stage-status done` marks Build done. |
 | `wait --run <dir> [--step <id>] [--timeout <sec>]` | blocks until an unconsumed action arrives (for that step, or `*`), prints it, marks it consumed. Exit 2 on timeout; exit 3 (`console_down`) if the server died. Run it in the background, one at a time. |
 | `record --run <dir> --step <id> --type <type> [--value '<json>'] [--note "..."]` | logs an answer the user gave in chat (already consumed) so the session history is complete |

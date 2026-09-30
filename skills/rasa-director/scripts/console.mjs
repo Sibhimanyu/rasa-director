@@ -7,6 +7,7 @@
 //
 //   node console.mjs serve --run <run dir> [--root <workspace>] [--port 0] [--open]   (detaches; prints the URL)
 //   node console.mjs push  --run <dir> --step <id> (--data '<json>' | --file f.json) [--status awaiting|working|done|skipped] [--current]
+//   node console.mjs activity --run <dir> --message "Reading your DESIGN.md" [--level info|ok|warn]   (what Claude is doing now)
 //   node console.mjs log   --run <dir> --message "..." [--level info|ok|warn|error] [--stage <id>] [--stage-status working|done|failed]
 //   node console.mjs wait  --run <dir> [--step <id>] [--timeout <sec, default 3000>]   -> prints the next action JSON (exit 2 on timeout)
 //   node console.mjs record --run <dir> --step <id> --type <type> [--value '<json>'] [--note "..."]   (a choice made in chat)
@@ -18,7 +19,16 @@ import crypto from "node:crypto";
 import os from "node:os";
 import { spawn, execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { parseArgs, die, SKILL_DIR } from "./lib/common.mjs";
+import { parseArgs, die, SKILL_DIR, STATE_DIR } from "./lib/common.mjs";
+
+// this copy's version: a console started by an older copy is replaced, not reused
+const VERSION = (() => {
+  try {
+    return fs.readFileSync(path.join(SKILL_DIR, "VERSION"), "utf8").trim();
+  } catch {
+    return "0";
+  }
+})();
 
 const args = parseArgs();
 const cmd = args._[0];
@@ -53,6 +63,22 @@ function session() {
 function saveSession(s) {
   s.updated = now();
   writeJSON(F.session, s);
+}
+// the live feed on the page: what Claude did, what it's doing, what the user answered
+const LABELS = { brief: "the brief", brand: "your brand", route: "the workflow", footage: "your footage", direction: "the direction", concept: "the story", scenes: "the scenes", look: "the look", motion: "the motion", styleframes: "the style frames", reel: "the cut", transitions: "transitions", voice: "the voice", music: "the music", keyframes: "key poses", storyboard: "the storyboard", plan: "the plan", build: "the build", render: "the render" };
+// an option's human name ("The shoebox wins") for an id the user picked ("shoebox")
+function nameOf(s, step, value) {
+  const d = s.steps[step] || {};
+  for (const pool of [d.options, d.cells, d.looks]) {
+    const hit = (pool || []).find((o) => o && o.id === value);
+    if (hit) return hit.title || hit.label || hit.name || String(value);
+  }
+  return typeof value === "string" ? value : null;
+}
+function activity(s, msg, level = "info", working = null) {
+  s.activity = (s.activity || []).concat({ t: now(), msg: String(msg).slice(0, 300), level }).slice(-200);
+  // working: what the status line says Claude is doing (null = Claude is waiting on the user)
+  s.working = working ? { msg: String(working).slice(0, 300), t: now() } : null;
 }
 function parseData() {
   if (args.file) return readJSON(path.resolve(String(args.file)), null) ?? die(`cannot read JSON from ${args.file}`);
@@ -104,6 +130,10 @@ if (cmd === "push") {
   }
   s.steps[args.step] = next;
   if (args.current || next.status === "awaiting") s.current = args.step;
+  const label = LABELS[args.step] || args.step;
+  if (next.status === "awaiting") activity(s, `Ready for you: ${label}`, "ask");
+  else if (next.status === "working") activity(s, data.question || `Working on ${label}`, "info", data.question || `Working on ${label}…`);
+  else if (next.status === "done") activity(s, next.decision ? `Decided ${label}: ${next.decision}` : `Done: ${label}`, "ok", s.working && s.working.msg);
   saveSession(s);
   console.log(JSON.stringify({ ok: true, step: args.step, status: s.steps[args.step].status }));
 } else if (cmd === "log") {
@@ -111,12 +141,22 @@ if (cmd === "push") {
   const b = (s.steps.build = s.steps.build || { status: "working", log: [], stages: {} });
   b.log = b.log || [];
   b.stages = b.stages || {};
-  if (args.message) b.log.push({ t: now(), level: args.level || "info", msg: String(args.message) });
+  if (args.message) {
+    b.log.push({ t: now(), level: args.level || "info", msg: String(args.message) });
+    activity(s, args.message, args.level || "info", args["stage-status"] === "done" && args.stage === "render-gate" ? null : args.message);
+  }
   if (args.stage) b.stages[args.stage] = args["stage-status"] || "working";
   if (args.stage === "render-gate" && args["stage-status"] === "done") b.status = "done";
   else if (b.status !== "done") b.status = "working";
   // only pull the page to Build while the build is the thing happening (never away from the render gate)
   if (!s.current || ["plan", "build"].includes(s.current)) s.current = "build";
+  saveSession(s);
+  console.log(JSON.stringify({ ok: true }));
+} else if (cmd === "activity") {
+  // what Claude is doing right now, between questions ("Capturing tally.app", "Drawing style frame 2 of 3")
+  if (!args.message) die("--message is required");
+  const s = session();
+  activity(s, args.message, args.level || "info", args.done ? null : args.message);
   saveSession(s);
   console.log(JSON.stringify({ ok: true }));
 } else if (cmd === "record") {
@@ -191,13 +231,17 @@ function serve() {
   // detach unless already the background child
   if (!args.foreground) {
     const existing = readJSON(F.console, null);
-    if (existing && existing.pid) {
-      try {
-        if (!alive(existing.pid)) throw new Error("stale");
+    if (existing && existing.pid && alive(existing.pid)) {
+      // reuse only a console this same copy and version started; an older one would serve the old page
+      if (existing.version === VERSION && existing.skill === SKILL_DIR) {
         console.log(JSON.stringify({ ok: true, url: existing.url, reused: true }));
         if (args.open) openUrl(existing.url);
         return;
+      }
+      try {
+        process.kill(existing.pid);
       } catch {}
+      fs.rmSync(F.console, { force: true });
     }
     const child = spawn(process.execPath, [fileURLToPath(import.meta.url), "serve", "--foreground", "--run", RUN, "--root", root, "--port", String(args.port || 0)], {
       detached: true,
@@ -307,6 +351,11 @@ function serve() {
         const s = session();
         if (step === "*") s.decide_rest = { ts: action.ts };
         else if (Object.prototype.hasOwnProperty.call(s.steps, step)) s.steps[step].sent = { type: action.type, value: action.value, note: action.note, ts: action.ts };
+        const nm = nameOf(s, step, action.value);
+        const verb = { choose: "picked", submit: "sent", approve: "approved", adjust: "adjusted", more: "asked for more of" }[action.type] || action.type;
+        const said = action.type === "decide-rest" ? "Claude decides the rest" : action.type === "decide" ? `Claude decides ${LABELS[step] || step}` : action.type === "note" ? `Note: "${action.note}"` : `${verb} ${LABELS[step] || step}${nm ? ": " + nm : ""}`;
+        if (s.steps[step] && s.steps[step].sent && nm) s.steps[step].sent.name = nm;
+        activity(s, `You: ${said}`, "you", "Claude is reading your answer…");
         saveSession(s);
         send(200, { ok: true, action });
       });
@@ -369,8 +418,13 @@ function serve() {
   server.listen(Number(args.port || 0), "127.0.0.1", () => {
     port = server.address().port;
     const url = `http://127.0.0.1:${port}/?t=${token}`;
-    writeJSON(F.console, { url, port, pid: process.pid, root, started: now() });
-    if (!fs.existsSync(F.session)) saveSession(session());
+    writeJSON(F.console, { url, port, pid: process.pid, root, started: now(), version: VERSION, skill: SKILL_DIR });
+    // the page shows this copy's version and, from the last update check (no network here), a newer one
+    const s = session();
+    const upd = readJSON(path.join(STATE_DIR, "update-check.json"), null);
+    s.app = { version: VERSION, latest: upd && upd.latest ? upd.latest : VERSION };
+    if (!s.activity) activity(s, "Console open", "sys", "Getting started…");
+    saveSession(s);
   });
   const bye = () => {
     const c = readJSON(F.console, null);

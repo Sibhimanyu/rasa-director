@@ -3,185 +3,243 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rasa Director · Console</title>
+<title>Rasa Director</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' role='img' aria-label='Rasa'><title>Rasa</title><rect width='100' height='100' rx='22' fill='%231a2160'/><path d='M28 75V31M28 52C28 37 39 29 59 29' fill='none' stroke='%23eff0f2' stroke-width='12' stroke-linecap='round'/><path d='M67 19l10 10-10 10-10-10z' fill='%23eeb219'/></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Anek+Latin:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,400..800&family=Mukta:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
 <style>
   :root {
-    --bg: #0d0c0b; --panel: #151412; --panel-2: #1c1a17; --line: #2c2925; --ink: #efe9df; --ink-2: #b9b1a4; --ink-3: #948c80;
-    --accent: #e8a14b; --accent-ink: #1a1206; --ok: #7fbf8a; --warn: #e3c05b; --err: #ef7b6b; --focus: #f2c689;
-    --r: 10px; --display: "Young Serif", Georgia, serif; --sans: "Anek Latin", ui-sans-serif, system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --bg: #f6f5f1; --panel: #ffffff; --panel-2: #f1efe9; --line: #e6e3dc; --line-2: #d6d2c8; --ink: #16181d; --ink-2: #4f5461; --ink-3: #6b707a;
+    --accent: #1a2160; --accent-2: #2b3486; --accent-ink: #ffffff; --pick: #eeb219; --pick-soft: #fdf3d6; --ok: #1f7a4f; --ok-soft: #e3f5ec; --warn: #8a5a00; --err: #b3361f; --focus: #2b3486;
+    --r: 14px; --display: "Anek Latin", "Avenir Next Condensed", sans-serif; --sans: "Mukta", "Avenir Next", ui-sans-serif, system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-  body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); display: grid; grid-template-columns: 248px 1fr; grid-template-rows: 56px 1fr; }
+  html, body { min-height: 100%; }
+  body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
   button, input, textarea, select { font: inherit; color: inherit; }
   button { cursor: pointer; }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-  header { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; padding: 0 20px; border-bottom: 1px solid var(--line); background: #0b0a09; }
-  .brand { font: 400 18px/1 var(--display); letter-spacing: .01em; display: flex; align-items: baseline; gap: 10px; }
-  .brand small { font: 500 11px/1 var(--mono); color: var(--ink-3); letter-spacing: .14em; text-transform: uppercase; }
-  .mark { width: 22px; height: 22px; align-self: center; }
-  .proj { color: var(--ink-2); font-size: 13px; margin-left: 8px; }
-  .spacer { flex: 1; }
-  .conn { font: 500 11px/1 var(--mono); color: var(--ink-3); display: flex; align-items: center; gap: 6px; }
-  .conn i { width: 7px; height: 7px; border-radius: 50%; background: var(--err); display: inline-block; }
-  .conn.on i { background: var(--ok); }
-  nav { border-right: 1px solid var(--line); padding: 18px 12px; overflow: auto; background: #0b0a09; }
-  nav ol { list-style: none; display: grid; gap: 2px; counter-reset: s; }
-  nav ol button { width: 100%; text-align: left; background: none; border: 0; border-radius: 8px; padding: 9px 10px; display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 8px; color: var(--ink-2); }
-  nav ol button:hover { background: var(--panel); color: var(--ink); }
-  nav ol button.sel { background: var(--panel-2); color: var(--ink); }
-  nav .n { font: 500 11px/1 var(--mono); color: var(--ink-3); }
-  nav .dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
-  nav .dot.awaiting { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px rgba(232,161,75,.16); }
-  nav .dot.working { border-color: var(--warn); border-top-color: transparent; animation: spin 1s linear infinite; }
-  nav .dot.done { background: var(--ok); border-color: var(--ok); }
-  nav .dot.skipped { background: var(--ink-3); border-color: var(--ink-3); }
+
+  /* top bar */
+  .top { position: sticky; top: 0; z-index: 10; background: rgba(246,245,241,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .top-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 10px 22px; }
+  .brandline { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .mark { width: 24px; height: 24px; border-radius: 7px; background: var(--accent); color: #eff0f2; padding: 3px; flex: none; }
+  .brand { font: 700 17px/1 var(--display); font-stretch: 90%; white-space: nowrap; }
+  .proj { color: var(--ink-3); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .phases { display: flex; gap: 4px; }
+  .phase { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--ink-3); padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+  .phase b { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line-2); display: inline-grid; place-items: center; font: 500 10px/1 var(--mono); }
+  .phase.done { color: var(--ink-2); } .phase.done b { background: var(--ok); border-color: var(--ok); color: #fff; }
+  .phase.now { color: var(--ink); background: var(--panel); box-shadow: 0 0 0 1px var(--line); font-weight: 600; } .phase.now b { border-color: var(--accent); color: var(--accent); }
+  .top-right { display: flex; justify-content: flex-end; align-items: center; gap: 12px; min-width: 0; }
+  .status { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--ink-2); min-width: 0; }
+  .status span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px; }
+  #decideRest { white-space: nowrap; flex: none; }
+  .status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); flex: none; }
+  .status.working .dot { background: var(--pick); animation: pulse 1.1s ease-in-out infinite; }
+  .status.waiting .dot { background: var(--accent); }
+  .status.done .dot { background: var(--ok); }
+  .status.offline .dot { background: var(--err); }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(238,178,25,.55); } 50% { box-shadow: 0 0 0 6px rgba(238,178,25,0); } }
+  .bar { height: 2px; overflow: hidden; }
+  .bar.on::after { content: ""; display: block; height: 100%; width: 35%; background: linear-gradient(90deg, transparent, var(--pick), transparent); animation: slide 1.3s linear infinite; }
+  @keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(300%); } }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce) { nav .dot.working { animation: none; } }
-  .navfoot { margin-top: 18px; padding: 12px 10px; border-top: 1px solid var(--line); display: grid; gap: 8px; }
-  main { overflow: auto; padding: 28px 36px 60px; }
-  .stephead { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
-  .stephead h1 { font: 400 30px/1.1 var(--display); letter-spacing: -.01em; }
-  .badge { font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 5px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--ink-2); }
-  .badge.awaiting { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
-  .badge.done { color: var(--ok); border-color: rgba(127,191,138,.4); }
-  .question { font: 400 19px/1.45 var(--display); color: var(--ink); max-width: 820px; margin: 10px 0 6px; }
-  .context { color: var(--ink-2); max-width: 820px; margin-bottom: 18px; }
-  .decision { margin: 12px 0 18px; padding: 12px 14px; border-left: 3px solid var(--ok); background: rgba(127,191,138,.07); border-radius: 0 8px 8px 0; color: var(--ink-2); max-width: 820px; }
+  @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* layout */
+  .app { display: grid; grid-template-columns: 280px minmax(0, 1fr) 300px; gap: 22px; padding: 22px; max-width: 1640px; margin: 0 auto; align-items: start; }
+  .rail { position: sticky; top: 76px; max-height: calc(100vh - 96px); overflow: auto; }
+  .rail h4 { margin: 0 0 12px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .feed { list-style: none; }
+  .feed li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); animation: rise .35s ease-out; }
+  .feed li:first-child { border-top: 0; }
+  .feed li i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); margin-top: 6px; }
+  .feed li.ok i { background: var(--ok); } .feed li.ask i { background: var(--accent); } .feed li.you i { background: var(--ink); } .feed li.warn i, .feed li.error i { background: var(--err); }
+  .feed li.active { color: var(--ink); } .feed li.active i { background: var(--pick); animation: pulse 1.1s ease-in-out infinite; }
+  .feed li time { display: block; font: 400 11px/1.4 var(--mono); color: var(--ink-3); margin-top: 1px; }
+  .film { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+  .film-item { padding: 11px 0; border-top: 1px solid var(--line); animation: rise .35s ease-out; }
+  .film-item:first-child { border-top: 0; padding-top: 0; }
+  .film-item small { display: flex; justify-content: space-between; gap: 8px; font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 5px; }
+  .film-item small button { background: none; border: 0; color: var(--ink-3); text-transform: none; letter-spacing: 0; font: 400 12.5px/1 var(--sans); text-decoration: underline; text-underline-offset: 2px; }
+  .film-item small button:hover { color: var(--ink); }
+  .film-item p { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--ink); }
+  .film-item.pending p { color: var(--ink-2); font-weight: 400; }
+  .film-empty { color: var(--ink-3); font-size: 13.5px; }
+  .tell { margin-top: 14px; display: grid; gap: 8px; }
+  .tell textarea { border: 1px solid var(--line-2); border-radius: 12px; padding: 10px 12px; background: var(--panel); min-height: 44px; resize: vertical; font-size: 14px; }
+  .tell textarea:focus { border-color: var(--accent); outline: none; }
+  .tell .row { display: flex; gap: 8px; justify-content: space-between; align-items: center; }
+  .tell small { color: var(--ink-3); font-size: 12.5px; }
+
+  /* stage */
+  main { min-width: 0; }
+  .stage-card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 28px 30px 30px; }
+  .eyebrow { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+  .stephead h1 { font: 700 34px/1.05 var(--display); font-stretch: 90%; letter-spacing: -.01em; }
+  .question { font: 600 22px/1.3 var(--display); font-stretch: 95%; color: var(--ink); max-width: 860px; margin: 10px 0 4px; }
+  .context { color: var(--ink-2); max-width: 860px; margin-bottom: 16px; }
+  .decision { margin: 12px 0 16px; padding: 12px 14px; border-left: 3px solid var(--ok); background: var(--ok-soft); border-radius: 0 10px 10px 0; color: var(--ink-2); max-width: 860px; }
   .decision b { color: var(--ink); font-weight: 600; }
-  .sent { margin: 12px 0; padding: 10px 14px; border-left: 3px solid var(--accent); background: rgba(232,161,75,.08); border-radius: 0 8px 8px 0; color: var(--ink-2); max-width: 820px; font-size: 13px; }
-  .empty { color: var(--ink-3); padding: 40px 0; max-width: 560px; }
-  .grid { display: grid; gap: 16px; }
+  .quick { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 16px 0 22px; }
+  .quick .hint { color: var(--ink-3); font-size: 13px; }
+  .link { background: none; border: 0; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; padding: 6px 4px; font-size: 14.5px; }
+  .link:hover { color: var(--ink); }
+  .update { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; padding: 10px 14px; border-radius: 12px; background: var(--pick-soft); color: #5c4300; font-size: 14px; }
+  .rest { margin: 0 0 14px; padding: 10px 14px; border: 1px dashed var(--line-2); border-radius: 10px; color: var(--ink-2); font-size: 13.5px; }
+  .working-card { display: grid; gap: 14px; }
+  .working-card .now { display: flex; align-items: center; gap: 12px; font: 600 24px/1.2 var(--display); font-stretch: 92%; }
+  .spinner { width: 22px; height: 22px; border-radius: 50%; border: 2.5px solid var(--line-2); border-top-color: var(--pick); animation: spin .8s linear infinite; flex: none; }
+  .working-card .detail { color: var(--ink-2); margin-left: 34px; }
+  .working-card ol { list-style: none; margin-left: 34px; display: grid; gap: 6px; }
+  .working-card ol li { font-size: 14px; color: var(--ink-2); }
+  .working-card ol li::before { content: "✓"; color: var(--ok); margin-right: 8px; }
+  .working-card .answer { margin-left: 34px; padding: 10px 14px; border-radius: 10px; background: var(--panel-2); font-size: 14px; color: var(--ink-2); }
+  .empty { color: var(--ink-3); padding: 24px 0; max-width: 620px; }
+
+  /* shared panel parts (the step panels below use these) */
+  .grid { display: grid; gap: 14px; }
   .cards { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 10px; position: relative; }
-  .card.rec { border-color: rgba(232,161,75,.55); }
-  .card.chosen { outline: 2px solid var(--ok); }
-  .card h3 { font: 400 17px/1.25 var(--display); }
-  .card .meta { font: 500 11px/1.4 var(--mono); color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase; }
+  .card { background: var(--panel); border: 1.5px solid var(--line); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+  .card.rec { border-color: var(--pick); box-shadow: 0 0 0 3px var(--pick-soft); }
+  .card.chosen { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
+  .card h3 { font: 700 19px/1.2 var(--display); font-stretch: 92%; }
+  .card .meta, .meta { font: 500 11px/1.4 var(--mono); color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase; }
   .card p { color: var(--ink-2); }
   .card .row { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .tag { font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 4px 7px; border-radius: 99px; }
-  .tag.rec { background: var(--accent); color: var(--accent-ink); }
-  .tag.rare { border: 1px solid var(--line); color: var(--ink-2); }
-  .btn { border: 1px solid var(--line); background: var(--panel-2); border-radius: 8px; padding: 8px 14px; font-weight: 500; }
+  .tag { font: 600 11px/1 var(--sans); padding: 5px 9px; border-radius: 99px; background: var(--panel-2); color: var(--ink-2); }
+  .tag.rec { background: var(--pick); color: #2a1f00; }
+  .tag.rare { background: var(--panel-2); color: var(--ink-2); }
+  .btn { border: 1px solid var(--line-2); background: var(--panel); border-radius: 999px; padding: 9px 18px; font-weight: 500; font-size: 14.5px; }
   .btn:hover { border-color: var(--ink-3); }
-  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-  .btn.primary:hover { filter: brightness(1.06); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  .btn.primary:hover { background: var(--accent-2); }
+  .btn.big { padding: 13px 24px; font-size: 15.5px; }
   .btn.ghost { background: none; }
-  .btn.small { padding: 5px 10px; font-size: 13px; }
+  .btn.small { padding: 6px 12px; font-size: 13.5px; }
   a.btn { color: var(--ink); text-decoration: none; display: inline-block; }
-  .rest { margin: 0 0 16px; padding: 10px 14px; border: 1px dashed rgba(232,161,75,.5); border-radius: 8px; color: var(--ink-2); max-width: 820px; font-size: 13px; }
   .btn[disabled] { opacity: .45; cursor: default; }
-  .frame { position: relative; overflow: hidden; border-radius: 8px; background: #000; border: 1px solid var(--line); }
+  .frame { position: relative; overflow: hidden; border-radius: 12px; background: #000; border: 1px solid var(--line); }
   .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #fff; }
-  .frame .open { position: absolute; right: 8px; bottom: 8px; font: 500 11px/1 var(--mono); background: rgba(0,0,0,.65); color: var(--ink); padding: 6px 8px; border-radius: 6px; text-decoration: none; }
+  .frame .open { position: absolute; right: 8px; bottom: 8px; font: 500 11px/1 var(--mono); background: rgba(22,24,29,.75); color: #fff; padding: 6px 8px; border-radius: 6px; text-decoration: none; }
   .cellpick { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
-  .cellpick button { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 8px 12px; text-align: left; }
-  .cellpick button b { font: 600 13px/1 var(--mono); background: var(--ink); color: var(--bg); border-radius: 4px; padding: 2px 6px; margin-right: 8px; }
-  .cellpick button.sel { border-color: var(--accent); background: rgba(232,161,75,.1); }
+  .cellpick button { border: 1.5px solid var(--line); background: var(--panel); border-radius: 10px; padding: 8px 12px; text-align: left; }
+  .cellpick button b { font: 600 12px/1 var(--mono); background: var(--ink); color: #fff; border-radius: 4px; padding: 2px 6px; margin-right: 8px; }
+  .cellpick button.sel { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { border: 1px solid var(--line); background: none; border-radius: 99px; padding: 6px 12px; font-size: 13px; color: var(--ink-2); }
-  .chip.on { border-color: var(--accent); color: var(--ink); background: rgba(232,161,75,.12); }
+  .chip { border: 1px solid var(--line-2); background: var(--panel); border-radius: 99px; padding: 6px 13px; font-size: 13.5px; color: var(--ink-2); }
+  .chip.on { border-color: var(--accent); color: #fff; background: var(--accent); }
   .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 16px 0; }
-  .form { display: grid; gap: 16px; max-width: 720px; }
+  .form { display: grid; gap: 16px; max-width: 760px; }
   .field label { display: block; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
-  .field input, .field textarea, .field select { width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
-  .field input:focus, .field textarea:focus { border-color: var(--ink-3); outline: none; }
+  .field input, .field textarea, .field select { width: 100%; background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; padding: 10px 12px; }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); outline: none; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .notebar { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); display: grid; gap: 10px; max-width: 820px; }
-  .notebar textarea { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-height: 64px; resize: vertical; }
-  .notebar .row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 980px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .list { list-style: none; display: grid; gap: 8px; }
-  .list li { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; color: var(--ink-2); }
-  .shape { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 16px 0; max-width: 980px; }
-  .shape div { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .list li { background: var(--panel-2); border-radius: 10px; padding: 10px 12px; color: var(--ink-2); }
+  .shape { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 16px 0; }
+  .shape div { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
   .shape span { display: block; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
   .stages { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
-  .stage { font: 500 12px/1 var(--mono); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); color: var(--ink-3); }
-  .stage.working { color: var(--warn); border-color: rgba(227,192,91,.5); }
-  .stage.done { color: var(--ok); border-color: rgba(127,191,138,.5); }
-  .stage.failed { color: var(--err); border-color: rgba(239,123,107,.5); }
-  .log { font: 12px/1.6 var(--mono); background: #090807; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; max-height: 360px; overflow: auto; max-width: 980px; }
+  .stage { font: 500 12px/1 var(--mono); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink-3); background: var(--panel); }
+  .stage.working { color: var(--warn); border-color: var(--pick); background: var(--pick-soft); }
+  .stage.done { color: var(--ok); border-color: #bfe6d1; background: var(--ok-soft); }
+  .stage.failed { color: var(--err); border-color: rgba(179,54,31,.4); }
+  .log { font: 12.5px/1.6 var(--mono); background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; max-height: 380px; overflow: auto; }
   .log div { color: var(--ink-2); } .log .warn { color: var(--warn); } .log .error { color: var(--err); } .log .ok { color: var(--ok); }
   .log time { color: var(--ink-3); margin-right: 10px; }
-  .media { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); max-width: 1200px; }
-  .media video, .media img { width: 100%; border-radius: 8px; border: 1px solid var(--line); background: #000; display: block; }
+  .media { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .media video, .media img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #000; display: block; }
   .track { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
   .track audio { width: 100%; margin-top: 6px; }
-  .toast { position: fixed; right: 20px; bottom: 20px; background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 8px; max-width: 380px; transform: translateY(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility .25s; }
+  .toast { position: fixed; right: 20px; bottom: 20px; background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 10px; max-width: 380px; transform: translateY(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility .25s; z-index: 30; }
   .toast.show { transform: none; opacity: 1; visibility: visible; }
-  nav ol button.skipped { opacity: .45; }
-  .timeline { display: flex; height: 54px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); margin: 14px 0 6px; max-width: 1200px; }
-  .timeline div { position: relative; border-right: 2px solid var(--bg); background: var(--panel-2); padding: 6px 8px; font: 500 11px/1.25 var(--mono); color: var(--ink-2); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .timeline { display: flex; height: 54px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); margin: 14px 0 6px; }
+  .timeline div { position: relative; border-right: 2px solid var(--panel); background: var(--panel-2); padding: 6px 8px; font: 500 11px/1.25 var(--mono); color: var(--ink-2); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .timeline div b { display: block; color: var(--ink); font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
-  .timeline div i { position: absolute; left: -1px; top: 0; bottom: 0; width: 3px; background: var(--accent); }
+  .timeline div i { position: absolute; left: -1px; top: 0; bottom: 0; width: 3px; background: var(--pick); }
   .tl-meta { font: 500 12px/1 var(--mono); color: var(--ink-3); margin-bottom: 16px; }
-  .clips { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; max-width: 1200px; }
-  .clip { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .clips { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .clip { border: 1px solid var(--line); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
   .clip.bad { opacity: .6; }
-  .clip img { width: 100%; border-radius: 6px; display: block; background: #000; }
+  .clip img { width: 100%; border-radius: 8px; display: block; background: #000; }
   .clip .row { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
   .clip details p { font-size: 13px; color: var(--ink-2); margin-top: 6px; }
   label.chk { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
   .inout { display: flex; gap: 6px; align-items: center; }
   .inout input { width: 70px; }
-  .timeline div.card-seg { background: color-mix(in srgb, var(--accent) 22%, var(--panel-2)); }
-  .reel-preview { max-height: 420px; max-width: 100%; border-radius: 10px; background: #000; display: block; margin-bottom: 8px; }
-  h3.sub-h { font: 600 14px/1 var(--display, inherit); margin: 22px 0 4px; }
+  .timeline div.card-seg { background: var(--pick-soft); }
+  .reel-preview { max-height: 420px; max-width: 100%; border-radius: 12px; background: #000; display: block; margin-bottom: 8px; }
+  h3.sub-h { font: 700 16px/1 var(--display); margin: 22px 0 6px; }
   .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
   .swatch { display: flex; align-items: center; gap: 8px; font: 500 12px/1 var(--mono); color: var(--ink-2); }
-  .swatch i { display: block; width: 34px; height: 34px; border-radius: 6px; border: 1px solid var(--line); }
-  .warn-line { color: #f0b35b; font-size: 13px; margin: 4px 0; }
-  .formula { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; max-width: 1200px; }
+  .swatch i { display: block; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); }
+  .warn-line { color: var(--warn); font-size: 13.5px; margin: 4px 0; }
+  .formula { background: var(--panel-2); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
   .formula ol { margin: 8px 0 0 18px; font: 500 13px/1.6 var(--mono); color: var(--ink); }
-  details.dim { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; max-width: 1200px; }
-  details.dim.set { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  details.dim { border: 1px solid var(--line); border-radius: 12px; margin: 8px 0; }
+  details.dim.set { border-color: var(--accent); }
   details.dim > summary { cursor: pointer; padding: 12px 14px; display: flex; gap: 12px; align-items: baseline; list-style: none; }
   details.dim > summary .meta { color: var(--ink-3); }
   details.dim > *:not(summary) { margin-left: 14px; margin-right: 14px; }
   .fam { font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 14px 14px 6px; }
   .opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; margin-bottom: 8px; }
-  .opt { text-align: left; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 11px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
-  .opt b { font-size: 13.5px; }
-  .opt span { font-size: 12px; color: var(--ink-2); line-height: 1.35; }
-  .opt small { font-size: 11px; color: var(--ink-3); line-height: 1.3; }
-  .opt.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
-  .grid.frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; max-width: 1200px; }
-  figure.sf { margin: 0; } figure.sf img { width: 100%; border-radius: 8px; display: block; background: #000; } figure.sf figcaption { font-size: 12.5px; color: var(--ink-2); margin-top: 6px; }
-  table.scenes { width: 100%; max-width: 1200px; border-collapse: separate; border-spacing: 0 8px; }
+  .opt { text-align: left; background: var(--panel); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 11px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+  .opt b { font-size: 14px; }
+  .opt span { font-size: 12.5px; color: var(--ink-2); line-height: 1.35; }
+  .opt small { font-size: 11.5px; color: var(--ink-3); line-height: 1.3; }
+  .opt.on { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
+  .grid.frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+  figure.sf { margin: 0; } figure.sf img { width: 100%; border-radius: 12px; display: block; background: #000; border: 1px solid var(--line); } figure.sf figcaption { font-size: 13px; color: var(--ink-2); margin-top: 6px; }
+  table.scenes { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
   table.scenes th { text-align: left; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding: 0 6px; }
-  table.scenes td { background: var(--panel); padding: 8px 6px; vertical-align: top; }
-  table.scenes td:first-child { border-radius: 8px 0 0 8px; font: 500 12px/1 var(--mono); color: var(--ink-3); padding-top: 14px; }
-  table.scenes td:last-child { border-radius: 0 8px 8px 0; white-space: nowrap; }
-  .toolbar select { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; }
-  table.scenes input, table.scenes textarea, table.scenes select { width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: 13px; }
+  table.scenes td { background: var(--panel-2); padding: 8px 6px; vertical-align: top; }
+  table.scenes td:first-child { border-radius: 10px 0 0 10px; font: 500 12px/1 var(--mono); color: var(--ink-3); padding-top: 14px; }
+  table.scenes td:last-child { border-radius: 0 10px 10px 0; white-space: nowrap; }
+  .toolbar select { background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; padding: 8px 10px; font-size: 13.5px; }
+  table.scenes input, table.scenes textarea, table.scenes select { width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: 13.5px; }
   table.scenes textarea { min-height: 52px; resize: vertical; }
   table.scenes .num { width: 70px; }
-  .iconbtn { background: none; border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; color: var(--ink-2); margin-left: 4px; }
-  .warnbox { border: 1px solid rgba(239,123,107,.45); background: rgba(239,123,107,.08); color: #f3b3a8; padding: 10px 14px; border-radius: 8px; margin: 12px 0; max-width: 980px; }
-  @media (max-width: 880px) { body { grid-template-columns: 1fr; grid-template-rows: 56px auto 1fr; } nav { border-right: 0; border-bottom: 1px solid var(--line); } nav ol { grid-auto-flow: column; overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } main { padding: 20px; } }
+  .iconbtn { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; color: var(--ink-2); margin-left: 4px; }
+  .warnbox { border: 1px solid rgba(179,54,31,.35); background: #fbeeea; color: var(--err); padding: 10px 14px; border-radius: 10px; margin: 12px 0; }
+  @media (prefers-reduced-motion: reduce) { .status.working .dot, .feed li.active i, .spinner, .bar.on::after { animation: none; } }
+  @media (max-width: 1200px) { .app { grid-template-columns: minmax(0, 1fr) 280px; } .rail.left { display: none; } }
+  @media (max-width: 860px) { .app { grid-template-columns: 1fr; padding: 14px; } .rail { position: static; max-height: none; } .top-in { grid-template-columns: 1fr; } .phases { overflow-x: auto; } .two, .cols { grid-template-columns: 1fr; } .stage-card { padding: 20px; } }
 </style>
 </head>
 <body>
-<header>
-  <svg class="mark" viewBox="18 16 62 68" aria-hidden="true"><path d="M28 75V31M28 52C28 37 39 29 59 29" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><path d="M67 19l10 10-10 10-10-10z" fill="#eeb219"/></svg>
-  <div class="brand">Rasa Director <small>Console</small></div>
-  <div class="proj" id="proj"></div>
-  <div class="spacer"></div>
-  <div class="conn" id="conn"><i></i><span>offline</span></div>
-</header>
-<nav aria-label="Steps">
-  <ol id="steps"></ol>
-  <div class="navfoot">
-    <button class="btn ghost small" id="decideRest" title="Hand every remaining step to the agent">You decide the rest</button>
-    <span style="color:var(--ink-3);font-size:12px">You can also answer in chat. Either works.</span>
+<header class="top">
+  <div class="top-in">
+    <div class="brandline">
+      <svg class="mark" viewBox="18 16 62 68" aria-hidden="true"><path d="M28 75V31M28 52C28 37 39 29 59 29" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><path d="M67 19l10 10-10 10-10-10z" fill="#eeb219"/></svg>
+      <span class="brand">Rasa Director</span><span class="proj" id="proj"></span>
+    </div>
+    <nav class="phases" id="phases" aria-label="Progress"></nav>
+    <div class="top-right">
+      <div class="status offline" id="status" role="status" aria-live="polite"><span class="dot"></span><span id="statusText">Connecting…</span></div>
+      <button class="btn small ghost" id="decideRest" title="Claude makes every remaining decision; it still asks before the final render">Claude decides the rest</button>
+    </div>
   </div>
-</nav>
-<main id="main" tabindex="-1"></main>
+  <div class="bar" id="bar"></div>
+</header>
+<div class="app">
+  <aside class="rail left" aria-label="What Claude is doing">
+    <h4>What Claude is doing</h4>
+    <ul class="feed" id="feed"></ul>
+  </aside>
+  <main id="main" tabindex="-1"></main>
+  <aside class="rail right" aria-label="Your film">
+    <h4>Your film</h4>
+    <div class="film" id="film"></div>
+    <div class="tell">
+      <textarea id="tell" placeholder="Tell Claude anything: a correction, a mix of two options, a question…" aria-label="Note to Claude"></textarea>
+      <div class="row"><small>Goes to the step you're looking at</small><button class="btn small" id="tellSend">Send</button></div>
+    </div>
+  </aside>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 (function () {
@@ -191,7 +249,14 @@
     ["styleframes", "Style frames"], ["reel", "Cut"], ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
     ["plan", "Plan"], ["build", "Build"], ["render", "Render"]
   ];
-  var S = { steps: {} }, viewing = null, followCurrent = true, local = {};
+  // five phases instead of nineteen steps; a step only ever appears when Claude has something for it
+  var PHASES = [
+    ["Brief", ["brief", "brand", "route", "footage"]], ["Direction", ["direction", "concept", "scenes"]], ["Look & sound", ["look", "motion", "transitions", "voice", "music"]],
+    ["Approve", ["styleframes", "reel", "keyframes", "storyboard", "plan"]], ["Build", ["build", "render"]]
+  ];
+  // steps whose recommended option is chosen with one click
+  var PICKABLE = { concept: 1, route: 1, look: 1, motion: 1, transitions: 1, voice: 1, music: 1 };
+  var S = { steps: {} }, viewing = null, followCurrent = true, local = {}, online = false;
   var Q = new URLSearchParams(location.search), PINNED = Q.get("step");
 
   function h(tag, attrs, kids) {
@@ -224,7 +289,7 @@
   function send(step, type, value, note) {
     return fetch("/api/action", { method: "POST", headers: { "content-type": "application/json", "x-rasa-token": TOKEN }, body: JSON.stringify({ step: step, type: type, value: value, note: note || "" }) })
       .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-      .then(function () { toast("Sent to the agent. It picks this up and continues."); })
+      .then(function () { toast("Sent. Claude takes it from here."); })
       .catch(function (e) { toast("Could not send: " + e.message); });
   }
 
@@ -251,42 +316,6 @@
     requestAnimationFrame(fit);
     window.addEventListener("resize", fit);
     return box;
-  }
-
-  function headNodes(step, label, d) {
-    var out = [];
-    if (S.decide_rest) out.push(h("div", { class: "rest", text: "You handed the remaining steps to the agent. It will still ask before the final render. You can still step in anywhere." }));
-    return out.concat(head(step, label, d));
-  }
-  function renderNav() {
-    var ol = document.getElementById("steps");
-    ol.innerHTML = "";
-    STEPS.forEach(function (s, i) {
-      var st = (S.steps[s[0]] || {}).status || "pending";
-      ol.appendChild(h("li", null, [h("button", { class: (viewing === s[0] ? "sel" : "") + (st === "skipped" ? " skipped" : ""), "aria-current": viewing === s[0] ? "step" : null, onclick: function () { viewing = s[0]; followCurrent = false; render(); } }, [
-        h("span", { class: "n", text: String(i + 1).padStart(2, "0") }), h("span", { text: s[1] }), h("span", { class: "dot " + st, title: st })
-      ])]));
-    });
-    document.getElementById("proj").textContent = S.title && S.title !== "Rasa Director" ? "· " + S.title : "";
-  }
-
-  function head(step, label, d) {
-    var st = d.status || "pending";
-    var kids = [h("div", { class: "stephead" }, [h("h1", { text: label }), h("span", { class: "badge " + st, text: st === "awaiting" ? "your call" : st })])];
-    if (d.question) kids.push(h("p", { class: "question", text: d.question }));
-    if (d.context) kids.push(h("p", { class: "context", text: d.context }));
-    if (d.decision) kids.push(h("div", { class: "decision" }, [h("b", { text: "Decided: " }), d.decision]));
-    if (d.sent && st === "awaiting") kids.push(h("div", { class: "sent", text: "You sent: " + d.sent.type + (d.sent.value != null ? " → " + (typeof d.sent.value === "string" ? d.sent.value : JSON.stringify(d.sent.value)) : "") + (d.sent.note ? ' · "' + d.sent.note + '"' : "") + ". Waiting for the agent…" }));
-    return kids;
-  }
-  function noteBar(step, extra) {
-    var ta = h("textarea", { placeholder: "Tell the agent anything: a correction, a mix (“the framing of 2 with the hook of 4”), a question…", "aria-label": "Note to the agent" });
-    ta.value = local.note || "";
-    ta.addEventListener("input", function () { local.note = ta.value; });
-    return h("div", { class: "notebar" }, [ta, h("div", { class: "row" }, (extra || []).concat([
-      h("button", { class: "btn", onclick: function () { if (!ta.value.trim()) return toast("Write a note first."); send(step, "note", null, ta.value.trim()); ta.value = ""; } , text: "Send note" }),
-      h("button", { class: "btn ghost", onclick: function () { send(step, "decide", null, ta.value.trim()); }, text: "You decide this step" })
-    ]))]);
   }
   function empty(text) { return h("p", { class: "empty", text: text }); }
   var uid = 0;
@@ -335,7 +364,7 @@
           o.world ? h("p", { text: o.world }) : null,
           o.hook ? h("p", { text: "Opens: " + o.hook }) : null,
           h("div", { class: "row" }, [
-            d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null,
+            d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null,
             o.rare ? h("span", { class: "tag rare", text: "off the beaten path" }) : null,
             h("span", { style: "flex:1" }),
             h("button", { class: "btn small primary", onclick: function () { send("concept", "choose", o.id); }, text: "Pick" })
@@ -459,7 +488,7 @@
           controls.innerHTML = "";
           controls.appendChild(h("div", { class: "cellpick", role: "group", "aria-label": "Looks" }, looks.map(function (L) {
             var on = local.look === L.id;
-            return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.look = L.id; drawL(); } }, [h("b", { text: L.id }), L.name + (d.recommended === L.id ? "  ★ recommended" : "")]);
+            return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.look = L.id; drawL(); } }, [h("b", { text: L.id }), L.name + (d.recommended === L.id ? "  · Claude's pick" : "")]);
           })));
           var cur = looks.filter(function (L) { return L.id === local.look; })[0];
           var ty = cur && cur.type ? (typeof cur.type === "string" ? cur.type : (cur.type.display && cur.type.display.family) + " + " + (cur.type.body && cur.type.body.family)) : "";
@@ -479,7 +508,7 @@
           o.showcase ? scaledFrame(o.showcase, 1920, 1080) : null,
           h("h3", { text: o.id }),
           o.description ? h("p", { text: o.description.length > 220 ? o.description.slice(0, 217) + "…" : o.description }) : null,
-          h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("span", { style: "flex:1" }),
+          h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("span", { style: "flex:1" }),
             h("button", { class: "btn small primary", onclick: function () { send("look", "choose", o.id); }, text: "Use this look" })])
         ]);
       })), d.note_brand ? h("p", { class: "context", text: d.note_brand }) : null];
@@ -502,7 +531,7 @@
         var kids = [];
         kids.push(h("div", { class: "cellpick", role: "group", "aria-label": "Personalities" }, cells.map(function (c) {
           var on = local.cell === c.id;
-          return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.cell = c.id; drawControls(); }, title: c.oneLiner || "" }, [h("b", { text: c.letter }), c.name + (d.recommended === c.id ? "  ★ recommended" : "")]);
+          return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.cell = c.id; drawControls(); }, title: c.oneLiner || "" }, [h("b", { text: c.letter }), c.name + (d.recommended === c.id ? "  · Claude's pick" : "")]);
         })));
         var cur = cells.filter(function (c) { return c.id === local.cell; })[0];
         if (cur && cur.oneLiner) kids.push(h("p", { class: "context", text: cur.letter + " · " + cur.oneLiner }));
@@ -529,7 +558,7 @@
       return [h("div", { class: "grid cards" }, opts.map(function (o) {
         return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
           h("div", { class: "meta", text: o.id }), h("h3", { text: o.label || o.id }), o.why ? h("p", { text: o.why }) : null,
-          h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("span", { style: "flex:1" }),
+          h("div", { class: "row" }, [d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("span", { style: "flex:1" }),
             h("button", { class: "btn small primary", onclick: function () { send("route", "choose", o.id); }, text: "Build it this way" })])
         ]);
       }))];
@@ -690,7 +719,7 @@
         controls.innerHTML = "";
         controls.appendChild(h("div", { class: "cellpick", role: "group", "aria-label": "Transitions" }, cells.map(function (c) {
           var on = local.tr === c.id;
-          return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.tr = c.id; drawC(); } }, [h("b", { text: c.letter }), c.label + (d.recommended === c.id ? "  ★ recommended" : "")]);
+          return h("button", { class: on ? "sel" : "", "aria-pressed": on ? "true" : "false", onclick: function () { local.tr = c.id; drawC(); } }, [h("b", { text: c.letter }), c.label + (d.recommended === c.id ? "  · Claude's pick" : "")]);
         })));
         controls.appendChild(h("p", { class: "context", text: "This becomes the default handoff between scenes. Override single scenes in Scenes (e.g. zoom-through into a new section)." }));
         controls.appendChild(h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () { send("transitions", "choose", local.tr); }, text: "Use " + (local.tr || "") + " between scenes" })]));
@@ -704,7 +733,7 @@
       if (!opts.length) kids.push(empty(d.unavailable || "Voice samples appear here: your hook line spoken in a few voices."));
       kids.push(h("div", { class: "grid", style: "max-width:820px" }, opts.map(function (o) {
         return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
-          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("div", { class: "meta", text: [o.mood, o.source].filter(Boolean).join(" · ") })]),
+          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("div", { class: "meta", text: [o.mood, o.source].filter(Boolean).join(" · ") })]),
             h("button", { class: "btn small primary", onclick: function () { send("voice", "choose", o.id); }, text: "Use this voice" })]),
           o.file ? h("audio", { controls: true, preload: "none", src: fsUrl(o.file) }) : null
         ]);
@@ -741,7 +770,7 @@
         h("button", { class: "btn primary", disabled: (d.issues || []).length > 0, onclick: function () { send("keyframes", "approve", null); }, text: "Approve these poses" }),
         h("button", { class: "btn", onclick: function () { send("keyframes", "choose", "skip"); }, text: "Skip keyframes" })
       ]));
-      kids.push(h("p", { class: "context", text: "Want changes? Write them below (“hold longer on the tagline”, “snap into 4”) and send a note." }));
+      kids.push(h("p", { class: "context", text: "Want changes? Tell Claude in the box on the right (“hold longer on the tagline”, “snap into 4”)." }));
       return kids;
     },
     music: function (d) {
@@ -750,7 +779,7 @@
       if (!opts.length) kids.push(empty(d.unavailable || "Music candidates appear here with players. Or keep it silent."));
       kids.push(h("div", { class: "grid", style: "max-width:820px" }, opts.map(function (o) {
         return h("div", { class: "card" + (d.recommended === o.id ? " rec" : "") + (d.sent && d.sent.value === o.id ? " chosen" : "") }, [
-          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "recommended" }) : null, h("div", { class: "meta", text: [o.mood, o.duration ? o.duration + "s" : "", o.source].filter(Boolean).join(" · ") })]),
+          h("div", { class: "track" }, [h("div", null, [h("h3", { text: o.title || o.id }), d.recommended === o.id ? h("span", { class: "tag rec", text: "Claude's pick" }) : null, h("div", { class: "meta", text: [o.mood, o.duration ? o.duration + "s" : "", o.source].filter(Boolean).join(" · ") })]),
             h("button", { class: "btn small primary", onclick: function () { send("music", "choose", o.id); }, text: "Use this" })]),
           o.file ? h("audio", { controls: true, preload: "none", src: fsUrl(o.file) }) : null
         ]);
@@ -801,61 +830,153 @@
     }
   };
 
+  function labelOf(step) { var s = STEPS.filter(function (x) { return x[0] === step; })[0]; return s ? s[1] : step; }
+  function phaseOf(step) { for (var i = 0; i < PHASES.length; i++) if (PHASES[i][1].indexOf(step) > -1) return i; return 0; }
+  function cmpVer(a, b) { var x = String(a).split("."), y = String(b).split("."); for (var i = 0; i < 3; i++) { var d = (+x[i] || 0) - (+y[i] || 0); if (d) return d; } return 0; }
+  function ago(t) { var s = Math.max(0, (Date.now() - Date.parse(t)) / 1000); return s < 50 ? "just now" : s < 3600 ? Math.round(s / 60) + " min ago" : new Date(t).toTimeString().slice(0, 5); }
+  // the name of the recommended option, for the one-click button
+  function recName(step, d) {
+    var r = d.recommended, pools = [d.options, d.cells, d.looks];
+    for (var i = 0; i < pools.length; i++) {
+      var hit = (pools[i] || []).filter(function (o) { return o.id === r; })[0];
+      if (hit) return hit.title || hit.label || hit.name || hit.id;
+    }
+    return String(r);
+  }
+  function sentText(x) { return x.type === "decide" ? "Claude decides" : x.type === "note" ? "a note" : x.name || (typeof x.value === "string" ? x.value : x.type === "approve" ? "approved" : "sent"); }
+  function isDone() { return (S.steps.render || {}).status === "done"; }
+  function waitingOnUser() { var d = S.steps[S.current] || {}; return d.status === "awaiting" && !d.sent; }
+
+  function renderTop() {
+    document.getElementById("proj").textContent = S.title && S.title !== "Rasa Director" ? S.title : "";
+    var cur = phaseOf(S.current || "brief"), done = isDone();
+    var ph = document.getElementById("phases"); ph.innerHTML = "";
+    PHASES.forEach(function (p, i) {
+      var cls = done || i < cur ? "done" : i === cur ? "now" : "";
+      ph.appendChild(h("span", { class: "phase " + cls, "aria-current": cls === "now" ? "step" : null }, [h("b", { text: cls === "done" ? "✓" : String(i + 1) }), p[0]]));
+    });
+    var st = document.getElementById("status"), txt, kind;
+    if (!online && !Q.get("snapshot")) { kind = "offline"; txt = "Reconnecting to Claude…"; }
+    else if (done) { kind = "done"; txt = "Done: your video is ready"; }
+    else if (waitingOnUser()) { kind = "waiting"; txt = "Waiting for you: " + labelOf(S.current).toLowerCase(); }
+    else if (S.working) { kind = "working"; txt = S.working.msg; }
+    else { kind = "working"; txt = "Claude is working…"; }
+    st.className = "status " + kind;
+    document.getElementById("statusText").textContent = txt;
+    document.getElementById("bar").className = "bar" + (kind === "working" ? " on" : "");
+    document.getElementById("decideRest").hidden = done || !!S.decide_rest;
+  }
+  function renderFeed() {
+    var ul = document.getElementById("feed"), items = (S.activity || []).slice(-60).reverse();
+    ul.innerHTML = "";
+    if (!items.length) ul.appendChild(h("li", null, [h("i"), h("div", { text: "Claude's steps show up here as it works." })]));
+    items.forEach(function (a, i) {
+      var active = i === 0 && S.working && !waitingOnUser();
+      ul.appendChild(h("li", { class: (a.level || "info") + (active ? " active" : "") }, [h("i"), h("div", null, [a.msg, h("time", { datetime: a.t, text: ago(a.t) })])]));
+    });
+  }
+  function renderFilm() {
+    var box = document.getElementById("film"); box.innerHTML = "";
+    var n = 0;
+    STEPS.forEach(function (s) {
+      var d = S.steps[s[0]]; if (!d) return;
+      var text = d.status === "done" ? (d.decision || "Done") : d.sent ? "You picked: " + sentText(d.sent) : null;
+      if (!text || s[0] === "build") return;
+      n++;
+      box.appendChild(h("div", { class: "film-item" + (d.status === "done" ? "" : " pending") }, [
+        h("small", null, [s[1], d.status === "done" && s[0] !== "render" ? h("button", { onclick: function () { viewing = s[0]; followCurrent = false; render(true); }, text: "change" }) : null]),
+        h("p", { text: text })
+      ]));
+    });
+    if (!n) box.appendChild(h("p", { class: "film-empty", text: "Every decision lands here as you make it. Click change on any of them to revisit it." }));
+  }
+
+  function stepHead(step, d) {
+    var kids = [];
+    if (S.app && S.app.latest && cmpVer(S.app.latest, S.app.version) > 0) kids.push(h("div", { class: "update" }, ["Rasa Director " + S.app.latest + " is out (this is " + S.app.version + "). Say “update” to Claude when this video is done."]));
+    if (S.decide_rest) kids.push(h("div", { class: "rest", text: "Claude is deciding the remaining steps. It still asks before the final render, and you can step in anywhere." }));
+    var ph = PHASES[phaseOf(step)][0];
+    kids.push(h("div", { class: "eyebrow", text: ph + (step !== S.current && d.status === "done" ? " · already decided" : "") }));
+    kids.push(h("div", { class: "stephead" }, [h("h1", { text: labelOf(step) })]));
+    if (d.question) kids.push(h("p", { class: "question", text: d.question }));
+    if (d.context) kids.push(h("p", { class: "context", text: d.context }));
+    if (d.decision) kids.push(h("div", { class: "decision" }, [h("b", { text: "Decided: " }), d.decision]));
+    var quick = [];
+    if (PICKABLE[step] && d.recommended && d.status === "awaiting" && !d.sent) quick.push(h("button", { class: "btn primary big", onclick: function () { send(step, "choose", d.recommended); }, text: "Go with Claude's pick: " + recName(step, d) }));
+    if (d.status === "awaiting" && step !== "build" && step !== "render") quick.push(h("button", { class: "link", onclick: function () { send(step, "decide", null); }, text: "You decide this one" }));
+    if (quick.length) kids.push(h("div", { class: "quick" }, quick.concat(PICKABLE[step] && d.recommended ? [h("span", { class: "hint", text: "or pick one below" })] : [])));
+    return kids;
+  }
+  function workingCard(d, step) {
+    var recent = (S.activity || []).filter(function (a) { return a.level === "ok" || a.level === "info"; }).slice(-5);
+    return h("div", { class: "working-card" }, [
+      h("div", { class: "now" }, [h("span", { class: "spinner" }), (S.working && S.working.msg) || "Claude is working…"]),
+      h("p", { class: "detail", text: "You'll see the next question here the moment it's ready. You can leave this tab open." }),
+      d && d.sent ? h("div", { class: "answer", text: "Your answer on " + labelOf(step).toLowerCase() + ": " + sentText(d.sent) + (d.sent.note ? " · “" + d.sent.note + "”" : "") }) : null,
+      recent.length ? h("ol", null, recent.map(function (a) { return h("li", { text: a.msg }); })) : null
+    ]);
+  }
+
   var seenUpdated = {};
-  function render() {
+  function render(force) {
+    renderTop(); renderFeed(); renderFilm();
     if (followCurrent && S.current) viewing = S.current;
     viewing = viewing || "brief";
-    // the agent re-pushed this step: drop selections made against the old payload
-    var upd = (S.steps[viewing] || {}).updated;
-    if (upd && seenUpdated[viewing] && seenUpdated[viewing] !== upd) local = {};
-    seenUpdated[viewing] = upd;
-    renderNav();
     var d = S.steps[viewing] || {};
-    var label = STEPS.filter(function (s) { return s[0] === viewing; })[0][1];
+    // the agent re-pushed this step: drop selections made against the old payload
+    if (d.updated && seenUpdated[viewing] && seenUpdated[viewing] !== d.updated) local = {};
+    seenUpdated[viewing] = d.updated;
     var main = document.getElementById("main");
-    var scroll = main.scrollTop;
-    // light update: same step, same payload (only "you sent" or other steps changed) →
-    // refresh the header only, so live previews (tasting, board, showcases) keep playing
-    var sig = viewing + "|" + (d.updated || "") + "|" + (d.status || "");
-    var headBox = document.getElementById("headBox");
-    if (main._sig === sig && headBox && viewing !== "build") {
-      headBox.innerHTML = "";
-      headNodes(viewing, label, d).forEach(function (n) { headBox.appendChild(n); });
-      return;
-    }
+    // Claude is between questions (you answered, or it's preparing the next one): show it working
+    var busy = viewing === S.current && !isDone() && viewing !== "build" && (d.sent || d.status === "working" || (!waitingOnUser() && S.working && d.status !== "awaiting"));
+    var sig = viewing + "|" + (d.updated || "") + "|" + (d.status || "") + "|" + (busy ? "busy:" + (S.working && S.working.msg) + (S.activity || []).length : "") + "|" + (S.app && S.app.latest) + "|" + !!S.decide_rest + "|" + !!d.sent;
+    if (!force && main._sig === sig && viewing !== "build") return; // same view: leave live previews playing
     main._sig = sig;
+    var scroll = window.scrollY;
     main.innerHTML = "";
-    headBox = h("div", { id: "headBox" });
-    headNodes(viewing, label, d).forEach(function (n) { headBox.appendChild(n); });
-    main.appendChild(headBox);
-    (PANELS[viewing](d) || []).forEach(function (n) { if (n) main.appendChild(n); });
-    if (viewing !== "build") main.appendChild(noteBar(viewing));
-    main.scrollTop = scroll;
+    var card = h("div", { class: "stage-card" });
+    if (busy) {
+      stepHead(viewing, d).slice(0, S.app && S.app.latest && cmpVer(S.app.latest, S.app.version) > 0 ? 1 : 0).forEach(function (n) { card.appendChild(n); });
+      card.appendChild(workingCard(d, viewing));
+    } else if (!S.steps[viewing]) {
+      card.appendChild(workingCard(null, viewing));
+    } else {
+      stepHead(viewing, d).forEach(function (n) { card.appendChild(n); });
+      (PANELS[viewing](d) || []).forEach(function (n) { if (n) card.appendChild(n); });
+      if (viewing !== S.current && S.current) card.appendChild(h("div", { class: "toolbar" }, [h("button", { class: "link", onclick: function () { followCurrent = true; render(true); }, text: "Back to what's happening now" })]));
+    }
+    main.appendChild(card);
+    if (force) window.scrollTo({ top: 0 }); else window.scrollTo({ top: scroll });
   }
 
   document.getElementById("decideRest").addEventListener("click", function () {
-    if (confirm("Hand every remaining step to the agent? It will still ask before the final render.")) send("*", "decide-rest", null);
+    if (confirm("Let Claude make every remaining decision? It still asks before the final render.")) send("*", "decide-rest", null);
   });
+  function sendTell() {
+    var ta = document.getElementById("tell"), v = ta.value.trim();
+    if (!v) return toast("Write something first.");
+    send(viewing || S.current || "brief", "note", null, v); ta.value = "";
+  }
+  document.getElementById("tellSend").addEventListener("click", sendTell);
+  document.getElementById("tell").addEventListener("keydown", function (e) { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) sendTell(); });
+  setInterval(function () { renderFeed(); }, 30000); // keep "3 min ago" honest
 
-  var lastStep = null;
   function onState(s) {
     var prevCurrent = S.current;
     S = s || { steps: {} };
     // a new step from the agent pulls the view to it (unless the page was opened pinned to a step)
     if (S.current !== prevCurrent && !PINNED) { followCurrent = true; local = {}; }
-    if (lastStep !== S.current) { lastStep = S.current; }
     render();
   }
   function connect() {
-    var conn = document.getElementById("conn");
     var es = new EventSource("/api/events");
-    es.addEventListener("state", function (e) { try { onState(JSON.parse(e.data)); } catch (_) {} });
-    es.onopen = function () { conn.classList.add("on"); conn.querySelector("span").textContent = "live"; };
-    es.onerror = function () { conn.classList.remove("on"); conn.querySelector("span").textContent = "reconnecting"; };
+    es.addEventListener("state", function (e) { try { online = true; onState(JSON.parse(e.data)); } catch (_) {} });
+    es.onopen = function () { online = true; renderTop(); };
+    es.onerror = function () { online = false; renderTop(); };
   }
   // ?snapshot=1&step=<id>: a static render for stills (no live stream, which would keep the page "loading")
   if (PINNED) { viewing = PINNED; followCurrent = false; }
-  fetch("/api/state").then(function (r) { return r.json(); }).then(onState).catch(function () {});
+  fetch("/api/state").then(function (r) { return r.json(); }).then(function (s) { online = true; onState(s); }).catch(function () {});
   if (!Q.get("snapshot")) connect();
 })();
 </script>
