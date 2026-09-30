@@ -147,7 +147,7 @@
         "palette": {"canvas": "#0a0e27", "ink": "#e8ecff", "accent": "#7aa2ff", "accent2": "#ff8fd8", "surface": "#151a3d", "muted": "#7c84b0"},
         "fonts": {"display": "Sora", "body": "Inter", "displayWeight": 600, "case": "none", "tracking": -0.02},
         "layout": "diagram", "radius": 999, "stroke": {"width": 0, "color": "ink", "style": "solid"},
-        "shadow": "glow", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "none", "motif": "orbits", "motion": "drift"
+        "shadow": "glow", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "none", "motif": "orbits", "motion": "drift", "diagram": "network"
       }
     },
     {
@@ -280,6 +280,24 @@
         "fonts": {"display": "DM Serif Display", "body": "DM Sans", "displayWeight": 400, "case": "none", "tracking": -0.01},
         "layout": "device", "radius": 16, "stroke": {"width": 0, "color": "ink", "style": "solid"},
         "shadow": "float", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "mask"
+      }
+    },
+    {
+      "id": "isotype",
+      "name": "Isotype",
+      "aka": ["Vienna method", "Neurath pictograms", "picture statistics", "pictorial statistics", "ISOTYPE chart"],
+      "what": "Otto Neurath's picture statistics: flat red, blue and black pictograms counted in rows, one figure standing for a fixed quantity, Futura-style caps on buff paper.",
+      "feels": ["clear", "civic", "matter-of-fact"],
+      "use": ["public-information explainers", "population and census stories", "social-impact reports", "museum and education films"],
+      "not": "Not a modern flat infographic: every figure is the same size and counts a fixed number, repeated in rows rather than scaled into a chart.",
+      "search": ["isotype pictogram animation", "otto neurath picture statistics", "pictogram counting infographic motion"],
+      "stack": {"visual-style": ["modernist", "abstract-geometric"], "era": ["bauhaus"], "illustration": ["pictogram"], "iconography": ["pictogram"], "data-viz": ["statistic", "comparison-cards"], "format": ["animated-infographic", "statistics-animation"], "color": ["limited-palette", "primary-colors"], "typography": ["geometric-sans"], "composition": ["modular-grid"], "motion-language": ["mechanical"], "transitions": ["hard-cut", "wipe"]},
+      "recipe": {
+        "palette": {"canvas": "#f1ebdd", "ink": "#1c1c1c", "accent": "#c8372d", "accent2": "#2e5f8a", "surface": "#e6dcc6", "muted": "#6b6457"},
+        "fonts": {"display": "Jost", "body": "Jost", "displayWeight": 700, "case": "upper", "tracking": 0.04},
+        "layout": "bento", "radius": 0, "stroke": {"width": 0, "color": "ink", "style": "solid"},
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "paper", "icons": "filled", "iconSet": "pictogram", "motif": "pictograms", "motion": "step", "chart": "none",
+        "labels": {"stat": "1 : 10", "people": "Each figure stands for ten"}
       }
     }
   ]

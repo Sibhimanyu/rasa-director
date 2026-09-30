@@ -236,7 +236,7 @@
         "palette": { "canvas": "#f3f8f7", "ink": "#0e2a2a", "accent": "#19b394", "accent2": "#7fd1e8", "surface": "#ffffff", "muted": "#6a8a88" },
         "fonts": { "display": "Manrope", "body": "Manrope", "displayWeight": 700, "case": "none", "tracking": -0.03 },
         "layout": "diagram", "radius": 999, "stroke": { "width": 0, "color": "ink", "style": "solid" },
-        "shadow": "soft", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "line", "motif": "orbits", "motion": "fade"
+        "shadow": "soft", "shadowColor": "accent", "surface": "flat", "texture": "none", "icons": "line", "motif": "orbits", "motion": "fade", "edgeColor": "accent", "diagram": "network"
       }
     },
     {
@@ -321,7 +321,7 @@
         "palette": { "canvas": "#0c0a1f", "ink": "#efeaff", "accent": "#a78bfa", "accent2": "#34d399", "surface": "#1d1840", "muted": "#9a93c2" },
         "fonts": { "display": "Space Grotesk", "body": "Space Grotesk", "displayWeight": 600, "case": "none", "tracking": -0.03 },
         "layout": "diagram", "radius": 20, "stroke": { "width": 0, "color": "ink", "style": "solid" },
-        "shadow": "glow", "shadowColor": "accent", "surface": "glass", "texture": "dots", "icons": "duotone", "motif": "none", "motion": "slide"
+        "shadow": "glow", "shadowColor": "accent", "surface": "glass", "texture": "dots", "icons": "duotone", "motif": "none", "motion": "slide", "diagram": "network"
       }
     },
     {

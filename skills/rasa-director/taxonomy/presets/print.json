@@ -1,0 +1,2171 @@
+{
+  "family": {
+    "id": "print",
+    "name": "Print",
+    "what": "Styles named for how the ink met the paper: presses, duplicators, stencils, foils and the printed objects they made."
+  },
+  "presets": [
+    {
+      "id": "wood-type-poster",
+      "name": "Wood type poster",
+      "aka": [
+        "wood type",
+        "playbill poster",
+        "Hamilton wood type",
+        "circus poster type",
+        "letterpress poster"
+      ],
+      "what": "Mixed fat-face and slab wood type locked up in a strict grid, black and vermilion ink on buff stock, grain showing through.",
+      "feels": [
+        "loud",
+        "honest",
+        "crafted",
+        "old-time"
+      ],
+      "use": [
+        "event and festival announcements",
+        "craft beer and food",
+        "heritage brands",
+        "music gig promos"
+      ],
+      "not": "Not letterpress stationery: this is a shouting poster of stacked big wood letters, not typewriter text pressed into cotton card.",
+      "search": [
+        "wood type poster animation",
+        "letterpress poster typography motion",
+        "Hamilton wood type poster"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "handmade"
+        ],
+        "typography": [
+          "slab-serif",
+          "condensed"
+        ],
+        "composition": [
+          "poster",
+          "typography-led"
+        ],
+        "material": [
+          "paper",
+          "wood"
+        ],
+        "texture": [
+          "ink-bleed",
+          "print-grain"
+        ],
+        "color": [
+          "limited-palette",
+          "warm-palette"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "hard-cut",
+          "slide"
+        ],
+        "era": [
+          "mid-century-modern"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eee2c6",
+          "ink": "#1b1611",
+          "accent": "#c3262d",
+          "accent2": "#23408e",
+          "surface": "#e4d3ae",
+          "muted": "#6d5f47"
+        },
+        "fonts": {
+          "display": "Ultra",
+          "body": "Old Standard TT",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "typegrid",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "glyph",
+        "iconSet": "ornament",
+        "motif": "rules",
+        "motion": "step",
+        "density": "dense",
+        "labels": {
+          "kicker": "Grand Opening",
+          "section": "One Night Only",
+          "date": "Doors at Eight"
+        }
+      }
+    },
+    {
+      "id": "cyanotype",
+      "name": "Cyanotype sun print",
+      "aka": [
+        "cyanotype",
+        "sun print",
+        "photogram",
+        "Anna Atkins botanical",
+        "blueprint photogram"
+      ],
+      "what": "Prussian-blue sun-print plates with white botanical silhouettes, brushed chemistry edges and small Victorian captions in old-style serif.",
+      "feels": [
+        "botanical",
+        "quiet",
+        "handmade",
+        "archival"
+      ],
+      "use": [
+        "nature and wellness brands",
+        "gardening and botany",
+        "museum and heritage films",
+        "slow-living and craft"
+      ],
+      "not": "Not a blueprint: no engineering linework or grid; soft white leaf and flower shadows exposed onto deep blue paper.",
+      "search": [
+        "cyanotype animation",
+        "sun print botanical motion graphics",
+        "photogram cyanotype title"
+      ],
+      "stack": {
+        "visual-style": [
+          "monochrome",
+          "handmade"
+        ],
+        "color": [
+          "monochrome",
+          "cool-palette"
+        ],
+        "photo-video": [
+          "masked-photography"
+        ],
+        "illustration": [
+          "cutout-character"
+        ],
+        "texture": [
+          "paper-grain",
+          "rough-edges"
+        ],
+        "material": [
+          "paper"
+        ],
+        "color-grade": [
+          "tinted-monochrome"
+        ],
+        "motion-language": [
+          "organic"
+        ],
+        "transitions": [
+          "dissolve",
+          "light-wipe"
+        ],
+        "tone": [
+          "calm",
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#16396a",
+          "ink": "#f3f6f4",
+          "accent": "#e4edf3",
+          "accent2": "#2e5c95",
+          "surface": "#1d4780",
+          "muted": "#a8bdd8"
+        },
+        "fonts": {
+          "display": "IM Fell English SC",
+          "body": "IM Fell English",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.02
+        },
+        "layout": "photo",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "line",
+        "iconSet": "nature",
+        "motif": "none",
+        "motion": "fade",
+        "effects": [
+          "vignette"
+        ],
+        "labels": {
+          "kicker": "Photographs of plants",
+          "caption": "Fern, exposed twelve minutes",
+          "date": "Plate XII"
+        },
+        "scene": "botanical",
+        "photoColors": [
+          "#f3f6f4",
+          "#16396a"
+        ],
+        "photoTone": "flat"
+      }
+    },
+    {
+      "id": "wirephoto-halftone",
+      "name": "Wirephoto halftone",
+      "aka": [
+        "wirephoto",
+        "newspaper halftone photo",
+        "coarse halftone",
+        "photo engraving",
+        "press photo"
+      ],
+      "what": "One coarse-screen halftone press photo in black on grey newsprint, a typed wire caption strip and a bold grotesk slug above it.",
+      "feels": [
+        "documentary",
+        "urgent",
+        "stark"
+      ],
+      "use": [
+        "documentary and history films",
+        "journalism and podcasts",
+        "anniversary and archive stories",
+        "PR announcements"
+      ],
+      "not": "Not the newspaper broadsheet: no columns or masthead; one big dotted photograph and its wire caption carry the frame.",
+      "search": [
+        "halftone photo animation",
+        "wirephoto newspaper motion graphics",
+        "coarse halftone dot photo effect"
+      ],
+      "stack": {
+        "visual-style": [
+          "halftone",
+          "documentary"
+        ],
+        "color": [
+          "grayscale",
+          "high-contrast"
+        ],
+        "photo-video": [
+          "documentary-footage",
+          "ken-burns"
+        ],
+        "material": [
+          "newsprint"
+        ],
+        "texture": [
+          "halftone",
+          "print-grain"
+        ],
+        "typography": [
+          "grotesk",
+          "monospace"
+        ],
+        "color-grade": [
+          "bw-contrast"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "hard-cut",
+          "push"
+        ],
+        "tone": [
+          "serious",
+          "editorial"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e6e2d8",
+          "ink": "#141414",
+          "accent": "#2b2b2b",
+          "accent2": "#8d8a83",
+          "surface": "#f1eee6",
+          "muted": "#5f5c56"
+        },
+        "fonts": {
+          "display": "Libre Franklin",
+          "body": "Courier Prime",
+          "displayWeight": 900,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "photo",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "halftone",
+        "icons": "none",
+        "motif": "none",
+        "motion": "snap",
+        "effects": [
+          "grain-heavy"
+        ],
+        "labels": {
+          "kicker": "Wirephoto",
+          "caption": "(NY4) Crowds gather at first light",
+          "date": "WX-1014"
+        },
+        "scene": "city"
+      }
+    },
+    {
+      "id": "newsprint-classifieds",
+      "name": "Newsprint classifieds",
+      "aka": [
+        "classified ads",
+        "want ads",
+        "small ads page",
+        "personals column"
+      ],
+      "what": "A dense page of tiny boxed small ads on grey newsprint, bold condensed caps heads, hairline rules and one highlighter-yellow circle.",
+      "feels": [
+        "busy",
+        "funny",
+        "local",
+        "nosy"
+      ],
+      "use": [
+        "community and marketplace apps",
+        "hiring and job campaigns",
+        "humour and parody spots",
+        "local business promos"
+      ],
+      "not": "Not the broadsheet front page: no hero headline or photo; many tiny equal boxes, the joke is in the small print.",
+      "search": [
+        "classified ads page animation",
+        "newspaper small ads motion graphics",
+        "want ads typography video"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial"
+        ],
+        "composition": [
+          "modular-grid",
+          "editorial-grid"
+        ],
+        "material": [
+          "newsprint"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "typography": [
+          "condensed",
+          "serif-editorial"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "color": [
+          "grayscale",
+          "accent-color-system"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "transitions": [
+          "hard-cut",
+          "zoom"
+        ],
+        "tone": [
+          "quirky",
+          "friendly"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e7e2d4",
+          "ink": "#161514",
+          "accent": "#f2d53c",
+          "accent2": "#161514",
+          "surface": "#efebdf",
+          "muted": "#5d5a52"
+        },
+        "fonts": {
+          "display": "Fjalla One",
+          "body": "PT Serif",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "bento",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "glyph",
+        "iconSet": "geometric",
+        "motif": "rules",
+        "motion": "snap",
+        "density": "dense",
+        "labels": {
+          "kicker": "Classifieds",
+          "stat": "$40 obo",
+          "section": "For sale · Wanted · Rooms",
+          "date": "Page C7",
+          "people": "Call after six"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "gocco-pastel",
+      "name": "Print Gocco pastel",
+      "aka": [
+        "Print Gocco",
+        "gocco print",
+        "Japanese mini screen print",
+        "pastel block print"
+      ],
+      "what": "Tiny flat pastel inks from a Japanese Gocco press: salmon, mint and soft plum on warm white, slightly off-register, round gothic type.",
+      "feels": [
+        "gentle",
+        "cute",
+        "handmade",
+        "cosy"
+      ],
+      "use": [
+        "greeting and stationery brands",
+        "kids and family",
+        "cafés and bakeries",
+        "craft and maker shops"
+      ],
+      "not": "Not risograph: no fluoro grain; small, soft, matte pastel stamps with rounded edges, cute rather than zine-like.",
+      "search": [
+        "print gocco style illustration",
+        "pastel screen print animation",
+        "japanese gocco print design"
+      ],
+      "stack": {
+        "visual-style": [
+          "screen-print",
+          "kawaii"
+        ],
+        "color": [
+          "pastel",
+          "limited-palette"
+        ],
+        "illustration": [
+          "flat-vector",
+          "grainy-vector"
+        ],
+        "material": [
+          "screen-print",
+          "paper"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "typography": [
+          "rounded"
+        ],
+        "shape": [
+          "rounded",
+          "organic"
+        ],
+        "motion-language": [
+          "stop-motion-like"
+        ],
+        "transitions": [
+          "hard-cut",
+          "scale"
+        ],
+        "tone": [
+          "cute",
+          "soft"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fbf3e8",
+          "ink": "#3b3252",
+          "accent": "#f2a39c",
+          "accent2": "#8ac6bd",
+          "surface": "#fff9f1",
+          "muted": "#8a7f98"
+        },
+        "fonts": {
+          "display": "Zen Maru Gothic",
+          "body": "Zen Maru Gothic",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "collage",
+        "radius": 10,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "riso",
+        "icons": "filled",
+        "iconSet": "nature",
+        "motif": "none",
+        "motion": "step",
+        "effects": [
+          "misregister"
+        ],
+        "density": "airy",
+        "labels": {
+          "kicker": "Small batch",
+          "badge": "Hand printed",
+          "cta": "Open"
+        }
+      }
+    },
+    {
+      "id": "letraset-dry-transfer",
+      "name": "Letraset dry transfer",
+      "aka": [
+        "Letraset",
+        "rub-down lettering",
+        "instant lettering",
+        "transfer type",
+        "dry transfer type"
+      ],
+      "what": "Rub-down alphabets on a pale blue backing sheet: tight condensed black capitals, cracked letters, spacing guides and a red sheet number.",
+      "feels": [
+        "DIY",
+        "seventies",
+        "graphic",
+        "precise"
+      ],
+      "use": [
+        "type and design tools",
+        "album and poster promos",
+        "architecture and model-making",
+        "retro brand films"
+      ],
+      "not": "Not a type specimen: it is the sheet itself, rows of rub-down letters with nicks and cracks, not a clean foundry showing.",
+      "search": [
+        "letraset animation",
+        "dry transfer lettering style",
+        "rub down letters typography motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "swiss-international"
+        ],
+        "era": [
+          "seventies"
+        ],
+        "typography": [
+          "condensed",
+          "neo-grotesk"
+        ],
+        "composition": [
+          "typography-led",
+          "swiss-grid"
+        ],
+        "texture": [
+          "distressed-edges",
+          "print-grain"
+        ],
+        "color": [
+          "black-and-white",
+          "accent-color-system"
+        ],
+        "motion-language": [
+          "choppy-stepped"
+        ],
+        "transitions": [
+          "hard-cut",
+          "wipe"
+        ],
+        "tone": [
+          "nostalgic",
+          "editorial"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#dde5ea",
+          "ink": "#101112",
+          "accent": "#101112",
+          "accent2": "#d4372c",
+          "surface": "#e9eef1",
+          "muted": "#5b6770"
+        },
+        "fonts": {
+          "display": "Anton",
+          "body": "Archivo",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "list",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "#8fa0ab",
+          "style": "dashed"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "glyph",
+        "motif": "none",
+        "motion": "step",
+        "labels": {
+          "kicker": "Instant lettering",
+          "title": "Sheet 142 · 48 pt",
+          "date": "Rub down",
+          "items": [
+            "A B C D E F G",
+            "H I J K L M N",
+            "O P Q R S T U",
+            "V W X Y Z & ?",
+            "0 1 2 3 4 5 6"
+          ],
+          "tags": "caps · figures · points"
+        }
+      }
+    },
+    {
+      "id": "stencil-crate",
+      "name": "Stencil crate",
+      "aka": [
+        "shipping crate stencil",
+        "spray stencil",
+        "military stencil",
+        "cargo markings",
+        "crate lettering"
+      ],
+      "what": "Black spray-stencilled numbers and bridged capitals on raw plywood, overspray fuzz, handling marks and a red FRAGILE stamp.",
+      "feels": [
+        "rugged",
+        "utilitarian",
+        "no-nonsense"
+      ],
+      "use": [
+        "logistics and shipping",
+        "hardware and tools",
+        "outdoor and workwear brands",
+        "product drop teasers"
+      ],
+      "not": "Not industrial hazard: no safety yellow or double boxes; bare wood, bridged stencil letters and spray bleed.",
+      "search": [
+        "stencil crate typography animation",
+        "shipping crate stencil lettering",
+        "spray stencil text motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "grunge",
+          "brutalism"
+        ],
+        "typography": [
+          "condensed",
+          "display"
+        ],
+        "material": [
+          "wood",
+          "cardboard"
+        ],
+        "texture": [
+          "ink-bleed",
+          "distressed-edges"
+        ],
+        "color": [
+          "earth-tones",
+          "limited-palette"
+        ],
+        "data-viz": [
+          "number-counter"
+        ],
+        "motion-language": [
+          "heavy"
+        ],
+        "transitions": [
+          "hard-cut",
+          "mask-reveal"
+        ],
+        "tone": [
+          "bold",
+          "urgent"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#c9a06a",
+          "ink": "#17130f",
+          "accent": "#17130f",
+          "accent2": "#b3291f",
+          "surface": "#d8b27d",
+          "muted": "#5e4526"
+        },
+        "fonts": {
+          "display": "Stardos Stencil",
+          "body": "Roboto Mono",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.04
+        },
+        "layout": "bignumber",
+        "radius": 0,
+        "stroke": {
+          "width": 3,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "filled",
+        "iconSet": "geometric",
+        "motif": "crosshair",
+        "motion": "step",
+        "effects": [
+          "grain-heavy"
+        ],
+        "labels": {
+          "kicker": "Contents",
+          "title": "Gross weight",
+          "stat": "Nº 07",
+          "caption": "This side up · Handle with care",
+          "readouts": [
+            "48 KG",
+            "3 OF 6",
+            "LOT 12"
+          ]
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "blind-deboss",
+      "name": "Blind deboss",
+      "aka": [
+        "blind emboss",
+        "debossed stationery",
+        "blind embossing",
+        "tone-on-tone letterpress"
+      ],
+      "what": "No ink at all: type and marks pressed into heavy off-white cotton card, readable only as soft shadowed dents in raking light.",
+      "feels": [
+        "restrained",
+        "tactile",
+        "premium",
+        "silent"
+      ],
+      "use": [
+        "luxury and fashion reveals",
+        "architecture and design studios",
+        "wedding and invitation brands",
+        "logo reveals"
+      ],
+      "not": "Not neumorphism: nothing floats up as UI; the paper is pressed down and the only colour is the card itself.",
+      "search": [
+        "blind deboss logo reveal",
+        "embossed paper animation",
+        "debossed letterpress mockup motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "extreme-minimal",
+          "luxury"
+        ],
+        "material": [
+          "paper"
+        ],
+        "shadow": [
+          "inner"
+        ],
+        "texture": [
+          "paper-grain",
+          "fibers"
+        ],
+        "color": [
+          "monochrome",
+          "low-contrast"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "lighting": [
+          "side-light"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "fade",
+          "light-wipe"
+        ],
+        "tone": [
+          "premium",
+          "minimal"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#efebe3",
+          "ink": "#57524a",
+          "accent": "#d9d3c7",
+          "accent2": "#c7c0b2",
+          "surface": "#e9e4da",
+          "muted": "#8b8478"
+        },
+        "fonts": {
+          "display": "Bodoni Moda",
+          "body": "Jost",
+          "displayWeight": 500,
+          "case": "upper",
+          "tracking": 0.1
+        },
+        "layout": "poster",
+        "radius": 4,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "inset",
+        "shadowColor": "#8b8478",
+        "surface": "paper",
+        "texture": "paper",
+        "icons": "none",
+        "motif": "none",
+        "motion": "fade",
+        "density": "airy",
+        "labels": {
+          "kicker": "Pressed by hand"
+        }
+      }
+    },
+    {
+      "id": "foil-stamped-bookcloth",
+      "name": "Foil-stamped bookcloth",
+      "aka": [
+        "hot foil stamping",
+        "gilt book cover",
+        "gold foil blocking",
+        "clothbound classic"
+      ],
+      "what": "Bright gold foil blocked into navy book cloth: small-cap serif title, a double-rule panel, fleurons, and a glint sweeping across.",
+      "feels": [
+        "heritage",
+        "literary",
+        "precious",
+        "classic"
+      ],
+      "use": [
+        "publishing and book launches",
+        "heritage and anniversary films",
+        "whisky and spirits",
+        "awards and invitations"
+      ],
+      "not": "Not black-and-gold luxury: it is a bound book cover, gilt pressed into woven blue cloth inside a ruled panel, not glowing gold on black.",
+      "search": [
+        "gold foil stamping animation",
+        "clothbound book cover reveal",
+        "foil blocked title motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "print-editorial"
+        ],
+        "material": [
+          "fabric",
+          "metal"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "serif-editorial"
+        ],
+        "stroke": [
+          "double-line",
+          "hairline"
+        ],
+        "color": [
+          "limited-palette",
+          "complementary"
+        ],
+        "texture": [
+          "fibers"
+        ],
+        "lighting": [
+          "specular-sweep"
+        ],
+        "iconography": [
+          "glyph"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "light-wipe",
+          "fade"
+        ],
+        "tone": [
+          "premium",
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#16264a",
+          "ink": "#ead08c",
+          "accent": "#d6b264",
+          "accent2": "#8a6d34",
+          "surface": "#1c2f59",
+          "muted": "#9ba7c4"
+        },
+        "fonts": {
+          "display": "Playfair Display SC",
+          "body": "Cormorant Garamond",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.08
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 3,
+          "color": "accent",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "weave",
+        "icons": "glyph",
+        "iconSet": "ornament",
+        "motif": "none",
+        "motion": "mask",
+        "effects": [
+          "glint"
+        ],
+        "labels": {
+          "kicker": "Volume the First"
+        }
+      }
+    },
+    {
+      "id": "carbon-copy-form",
+      "name": "Carbon-copy form",
+      "aka": [
+        "carbonless triplicate",
+        "NCR form",
+        "duplicate book",
+        "invoice pad",
+        "triplicate form"
+      ],
+      "what": "White, yellow and pink triplicate sheets fanned out, carbon-blue typed entries in ruled boxes and a red rubber DUPLICATE stamp.",
+      "feels": [
+        "bureaucratic",
+        "dry",
+        "funny",
+        "official"
+      ],
+      "use": [
+        "fintech and invoicing tools",
+        "legal and admin products",
+        "government and civic explainers",
+        "office humour spots"
+      ],
+      "not": "Not the evidence board: no cork or string; tidy stacked office forms in carbon blue with a stamp, bureaucracy not mystery.",
+      "search": [
+        "carbon copy form animation",
+        "triplicate invoice motion graphics",
+        "office paperwork stamp animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "technical-minimal"
+        ],
+        "composition": [
+          "stacked-cards",
+          "modular-grid"
+        ],
+        "material": [
+          "paper"
+        ],
+        "typography": [
+          "monospace",
+          "condensed"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "color": [
+          "limited-palette",
+          "pastel"
+        ],
+        "texture": [
+          "ink-bleed"
+        ],
+        "ui-treatment": [
+          "form-based-ui"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "slide",
+          "card-flip"
+        ],
+        "tone": [
+          "quirky",
+          "professional"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f1dde2",
+          "ink": "#1f2c7a",
+          "accent": "#c8323b",
+          "accent2": "#f4e8a4",
+          "surface": "#fffdf5",
+          "muted": "#5b6297"
+        },
+        "fonts": {
+          "display": "Courier Prime",
+          "body": "Archivo Narrow",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "stack",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "#7a5a66",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "line",
+        "motif": "none",
+        "motion": "slide",
+        "labels": {
+          "title": "Form 27-B",
+          "badge": "Duplicate",
+          "items": [
+            "Copy 1 — White — Customer",
+            "Copy 2 — Yellow — Accounts",
+            "Copy 3 — Pink — File"
+          ]
+        }
+      }
+    },
+    {
+      "id": "dot-matrix-printout",
+      "name": "Dot-matrix printout",
+      "aka": [
+        "continuous feed paper",
+        "green bar paper",
+        "tractor feed printout",
+        "line printer",
+        "computer printout"
+      ],
+      "what": "Nine-pin dot type chattering onto green-bar continuous paper with tractor holes, columns of figures, perforated page breaks.",
+      "feels": [
+        "mechanical",
+        "nerdy",
+        "nostalgic"
+      ],
+      "use": [
+        "data and analytics reports",
+        "fintech and accounting",
+        "developer tools",
+        "retro tech explainers"
+      ],
+      "not": "Not a green-screen terminal: nothing glows; dotted black ink printed on striped paper, line by line.",
+      "search": [
+        "dot matrix printer animation",
+        "green bar paper printout motion",
+        "continuous feed paper text effect"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "monochrome"
+        ],
+        "era": [
+          "eighties",
+          "early-desktop"
+        ],
+        "typography": [
+          "pixel",
+          "monospace"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "print-grain",
+          "stipple"
+        ],
+        "color": [
+          "grayscale",
+          "limited-palette"
+        ],
+        "ui-interaction": [
+          "typing",
+          "streaming-text"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "push",
+          "hard-cut"
+        ],
+        "tone": [
+          "technical",
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#edf2e6",
+          "ink": "#232323",
+          "accent": "#9bc69a",
+          "accent2": "#b9b9b3",
+          "surface": "#f7f9f1",
+          "muted": "#62685e"
+        },
+        "fonts": {
+          "display": "DotGothic16",
+          "body": "DotGothic16",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.04
+        },
+        "layout": "terminal",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "perforation",
+        "icons": "none",
+        "motif": "none",
+        "motion": "type",
+        "chrome": "none",
+        "labels": {
+          "window": "PAGE 001",
+          "lines": [
+            "RUN 0412   BATCH REPORT      PAGE 001",
+            "ITEM ........................ 004,812",
+            "ITEM ........................ 001,209",
+            "TOTAL ....................... 006,021",
+            "*** END OF REPORT ***"
+          ]
+        }
+      }
+    },
+    {
+      "id": "thermal-receipt",
+      "name": "Thermal receipt",
+      "aka": [
+        "till receipt",
+        "POS receipt",
+        "receipt printer",
+        "thermal paper slip"
+      ],
+      "what": "A narrow curling till receipt: faded grey-black mono type, dashed tear rules, dotted leaders to prices, a big TOTAL and a barcode.",
+      "feels": [
+        "everyday",
+        "wry",
+        "honest"
+      ],
+      "use": [
+        "retail and e-commerce",
+        "fintech and budgeting apps",
+        "year-in-review recaps",
+        "food delivery"
+      ],
+      "not": "Not a dot-matrix printout: no green bars or tractor holes; a small white thermal slip with dotted leaders and a total.",
+      "search": [
+        "receipt animation",
+        "thermal receipt printing motion graphics",
+        "receipt list typography video"
+      ],
+      "stack": {
+        "visual-style": [
+          "extreme-minimal",
+          "monochrome"
+        ],
+        "typography": [
+          "monospace"
+        ],
+        "composition": [
+          "typography-led",
+          "centered-hero"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "color": [
+          "grayscale"
+        ],
+        "data-viz": [
+          "ranking-list"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "push",
+          "hard-cut"
+        ],
+        "tone": [
+          "quirky",
+          "minimal"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f7f6f1",
+          "ink": "#2a2a2a",
+          "accent": "#1b1b1b",
+          "accent2": "#a3a29c",
+          "surface": "#fbfaf6",
+          "muted": "#6c6b66"
+        },
+        "fonts": {
+          "display": "JetBrains Mono",
+          "body": "JetBrains Mono",
+          "displayWeight": 800,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "list",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "dashed"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "type",
+        "density": "dense",
+        "labels": {
+          "kicker": "Store 0042",
+          "title": "Receipt",
+          "date": "#0042 · 14:07",
+          "items": [
+            "1 × Item one ........ 4.00",
+            "2 × Item two ........ 7.50",
+            "1 × Item three ...... 2.25",
+            "Subtotal ........... 13.75",
+            "Total .............. 13.75"
+          ],
+          "tags": "Thank you · Come again"
+        }
+      }
+    },
+    {
+      "id": "diazo-whiteprint",
+      "name": "Diazo whiteprint",
+      "aka": [
+        "whiteprint",
+        "diazo print",
+        "bluelines",
+        "ammonia print",
+        "architect's print"
+      ],
+      "what": "Blue-violet architect's linework on faintly tinted white diazo paper: site plan, dashed boundaries, lettered labels and a north arrow.",
+      "feels": [
+        "architectural",
+        "drafted",
+        "calm",
+        "precise"
+      ],
+      "use": [
+        "architecture and real estate",
+        "urban planning and civic projects",
+        "construction and property tech",
+        "place-based stories"
+      ],
+      "not": "Not a blueprint: the ground is white and the lines blue-violet, the reverse of white-on-Prussian-blue engineering drawings.",
+      "search": [
+        "whiteprint site plan animation",
+        "diazo architectural drawing motion",
+        "architect plan line animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal"
+        ],
+        "illustration": [
+          "technical-diagram",
+          "blueprint"
+        ],
+        "data-viz": [
+          "map"
+        ],
+        "stroke": [
+          "technical",
+          "animated-draw-on"
+        ],
+        "typography": [
+          "handwritten",
+          "monospace"
+        ],
+        "color": [
+          "monochrome",
+          "cool-palette"
+        ],
+        "texture": [
+          "paper-grain"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "line-draw",
+          "wipe"
+        ],
+        "tone": [
+          "technical",
+          "calm"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eceee7",
+          "ink": "#2c3a8a",
+          "accent": "#5a3f9e",
+          "accent2": "#a3acd8",
+          "surface": "#f5f6f0",
+          "muted": "#6a72a6"
+        },
+        "fonts": {
+          "display": "Architects Daughter",
+          "body": "B612 Mono",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.03
+        },
+        "layout": "map",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "dashed"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "line",
+        "motif": "contours",
+        "motion": "mask",
+        "labels": {
+          "kicker": "Site plan · Sheet A-2",
+          "places": [
+            "Lot 4",
+            "North gate",
+            "Courtyard",
+            "Service yard"
+          ]
+        }
+      }
+    },
+    {
+      "id": "spirit-duplicator",
+      "name": "Spirit duplicator ditto",
+      "aka": [
+        "ditto sheet",
+        "spirit duplicator",
+        "mimeograph",
+        "school worksheet",
+        "purple ditto"
+      ],
+      "what": "A school handout run off in fuzzy violet ditto ink: hand-lettered title, typed questions, Name and Date blanks, soft bleeding lines.",
+      "feels": [
+        "nostalgic",
+        "homely",
+        "earnest"
+      ],
+      "use": [
+        "education and edtech",
+        "back-to-school campaigns",
+        "nostalgic brand stories",
+        "quizzes and explainers"
+      ],
+      "not": "Not a notebook doodle: everything is one smudgy duplicated purple, typed and ruled like an official classroom sheet.",
+      "search": [
+        "ditto sheet purple ink style",
+        "mimeograph worksheet animation",
+        "retro school worksheet motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "handmade"
+        ],
+        "era": [
+          "mid-century-modern",
+          "seventies"
+        ],
+        "color": [
+          "monochrome",
+          "cool-palette"
+        ],
+        "typography": [
+          "handwritten",
+          "monospace"
+        ],
+        "texture": [
+          "ink-bleed",
+          "photocopy-noise"
+        ],
+        "material": [
+          "paper"
+        ],
+        "composition": [
+          "editorial-grid"
+        ],
+        "motion-language": [
+          "handmade-imperfect"
+        ],
+        "transitions": [
+          "fade",
+          "page-flip"
+        ],
+        "tone": [
+          "nostalgic",
+          "friendly"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f7f5f1",
+          "ink": "#56308a",
+          "accent": "#b89ad9",
+          "accent2": "#7b4bb3",
+          "surface": "#fbfaf7",
+          "muted": "#8a70ab"
+        },
+        "fonts": {
+          "display": "Patrick Hand",
+          "body": "Cutive Mono",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "doodle",
+        "iconSet": "hand",
+        "motif": "rules",
+        "motion": "fade",
+        "labels": {
+          "kicker": "Name __________",
+          "section": "Unit 4 · Worksheet",
+          "date": "Date ______",
+          "quote": "Show your work."
+        }
+      }
+    },
+    {
+      "id": "offset-press-proof",
+      "name": "Offset press proof",
+      "aka": [
+        "CMYK press sheet",
+        "registration marks",
+        "printer's proof",
+        "crop marks and colour bars",
+        "make-ready sheet"
+      ],
+      "what": "An untrimmed press sheet: cyan, magenta, yellow and black plates slightly off register, crop marks, registration targets and colour bars.",
+      "feels": [
+        "technical",
+        "graphic",
+        "behind-the-scenes"
+      ],
+      "use": [
+        "design studios and agencies",
+        "print and packaging",
+        "brand system reveals",
+        "creative tool launches"
+      ],
+      "not": "Not risograph: sharp process CMYK on bright white with the printer's furniture showing, not grainy fluoro spot inks.",
+      "search": [
+        "cmyk registration marks animation",
+        "press proof crop marks motion",
+        "cmyk misregistration typography"
+      ],
+      "stack": {
+        "visual-style": [
+          "swiss-international",
+          "print-editorial"
+        ],
+        "color": [
+          "primary-colors",
+          "high-contrast"
+        ],
+        "typography": [
+          "grotesk",
+          "condensed"
+        ],
+        "composition": [
+          "swiss-grid",
+          "typography-led"
+        ],
+        "texture": [
+          "halftone"
+        ],
+        "effects": [
+          "rgb-split"
+        ],
+        "stroke": [
+          "hairline",
+          "technical"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "hard-cut",
+          "color-match"
+        ],
+        "tone": [
+          "technical",
+          "bold"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f8f8f6",
+          "ink": "#111111",
+          "accent": "#00a0e3",
+          "accent2": "#e6007e",
+          "surface": "#ffed00",
+          "muted": "#6b6b6b"
+        },
+        "fonts": {
+          "display": "Archivo Black",
+          "body": "Archivo",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": -0.02
+        },
+        "layout": "typegrid",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "crosshair",
+        "motion": "snap",
+        "effects": [
+          "misregister"
+        ],
+        "density": "dense",
+        "labels": {
+          "kicker": "Press proof",
+          "section": "Sheet 2 of 4",
+          "date": "C · M · Y · K"
+        }
+      }
+    },
+    {
+      "id": "banknote-intaglio",
+      "name": "Banknote intaglio",
+      "aka": [
+        "security printing",
+        "guilloché",
+        "engraved banknote",
+        "currency design",
+        "stock certificate"
+      ],
+      "what": "Engraved currency: fine guilloché line patterns in bank-note green on pale security paper, a huge denomination, roman caps and a seal.",
+      "feels": [
+        "official",
+        "valuable",
+        "intricate",
+        "trustworthy"
+      ],
+      "use": [
+        "fintech and banking",
+        "crypto and payments launches",
+        "pricing and money explainers",
+        "anniversary and value stories"
+      ],
+      "not": "Not private banking luxury: busy engraved line-work, guilloché and big numerals like real money, not calm serif on cream.",
+      "search": [
+        "banknote guilloche animation",
+        "engraved currency motion graphics",
+        "money security print design"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "luxury"
+        ],
+        "illustration": [
+          "ink",
+          "geometric-vector"
+        ],
+        "stroke": [
+          "hairline",
+          "double-line"
+        ],
+        "color": [
+          "monochrome",
+          "cool-palette"
+        ],
+        "texture": [
+          "hatching",
+          "stipple"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "data-viz": [
+          "number-counter",
+          "statistic"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "line-draw",
+          "mask-reveal"
+        ],
+        "tone": [
+          "trustworthy",
+          "premium"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e5eadb",
+          "ink": "#1f3a2b",
+          "accent": "#3e6b52",
+          "accent2": "#9b4a36",
+          "surface": "#eef1e6",
+          "muted": "#5d7564"
+        },
+        "fonts": {
+          "display": "Marcellus SC",
+          "body": "Old Standard TT",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.06
+        },
+        "layout": "bignumber",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "accent",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "hatching",
+        "icons": "glyph",
+        "iconSet": "ornament",
+        "motif": "contours",
+        "motion": "mask",
+        "labels": {
+          "kicker": "Legal tender",
+          "title": "Series",
+          "stat": "50",
+          "caption": "Fifty · Series A · Payable to bearer",
+          "readouts": [
+            "A 0042 7731",
+            "Series A",
+            "No. 12"
+          ]
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "ticket-stub",
+      "name": "Ticket stub",
+      "aka": [
+        "admit one ticket",
+        "raffle ticket",
+        "cinema ticket",
+        "roll ticket",
+        "perforated stub"
+      ],
+      "what": "A mustard roll ticket split by a perforated seam: ADMIT ONE on one side, a red serial stub on the other, heavy condensed caps.",
+      "feels": [
+        "exciting",
+        "retro",
+        "inviting"
+      ],
+      "use": [
+        "events and festivals",
+        "cinema and theatre",
+        "launch invitations",
+        "giveaways and raffles"
+      ],
+      "not": "Not a die-cut sticker: flat printed card torn along a dotted perforation, serial numbers, no glossy border.",
+      "search": [
+        "admit one ticket animation",
+        "ticket stub motion graphics",
+        "raffle ticket design video"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "mid-century"
+        ],
+        "composition": [
+          "split-screen",
+          "centered-hero"
+        ],
+        "typography": [
+          "condensed",
+          "slab-serif"
+        ],
+        "material": [
+          "cardboard"
+        ],
+        "stroke": [
+          "offset-line",
+          "heavy"
+        ],
+        "color": [
+          "warm-palette",
+          "limited-palette"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "transitions": [
+          "split",
+          "wipe"
+        ],
+        "tone": [
+          "energetic",
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f2c95a",
+          "ink": "#1d1914",
+          "accent": "#c7362a",
+          "accent2": "#1d1914",
+          "surface": "#f7d983",
+          "muted": "#6b5520"
+        },
+        "fonts": {
+          "display": "Big Shoulders Display",
+          "body": "Courier Prime",
+          "displayWeight": 900,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "split",
+        "radius": 6,
+        "stroke": {
+          "width": 3,
+          "color": "ink",
+          "style": "dashed"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "glyph",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "before": "Admit one",
+          "after": "Nº 004512",
+          "badge": "Keep this stub"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "dymo-label-tape",
+      "name": "Dymo label tape",
+      "aka": [
+        "Dymo labels",
+        "embossed label tape",
+        "label maker",
+        "punched plastic tape"
+      ],
+      "what": "Strips of glossy black, red and blue plastic tape with white raised capitals punched in by a label maker, stuck on grey steel.",
+      "feels": [
+        "tactile",
+        "organised",
+        "quirky",
+        "DIY"
+      ],
+      "use": [
+        "productivity and organisation apps",
+        "hardware and workshops",
+        "creator and maker brands",
+        "social teasers"
+      ],
+      "not": "Not a pill-button UI: each strip is a stamped plastic label with raised letters and a dent shadow, not a rounded control.",
+      "search": [
+        "dymo label animation",
+        "embossed label tape typography",
+        "label maker text motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "sticker"
+        ],
+        "material": [
+          "plastic",
+          "metal"
+        ],
+        "typography": [
+          "condensed",
+          "dimensional"
+        ],
+        "shape": [
+          "rectilinear"
+        ],
+        "shadow": [
+          "inner"
+        ],
+        "color": [
+          "primary-colors",
+          "high-contrast"
+        ],
+        "texture": [
+          "clean"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "slide",
+          "hard-cut"
+        ],
+        "tone": [
+          "quirky",
+          "playful"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#43474d",
+          "ink": "#ffffff",
+          "accent": "#d7261e",
+          "accent2": "#1f4fae",
+          "surface": "#121212",
+          "muted": "#b9bdc3"
+        },
+        "fonts": {
+          "display": "Saira Extra Condensed",
+          "body": "Saira Extra Condensed",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.12
+        },
+        "layout": "pills",
+        "radius": 3,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "inset",
+        "shadowColor": "#000000",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "filled",
+        "iconSet": "tech",
+        "motif": "none",
+        "motion": "slide",
+        "labels": {
+          "kicker": "Label it",
+          "badge": "On",
+          "hint": "TYPE A LABEL"
+        },
+        "density": "airy",
+        "chart": "none"
+      }
+    },
+    {
+      "id": "large-letter-postcard",
+      "name": "Large-letter postcard",
+      "aka": [
+        "Greetings from postcard",
+        "linen postcard",
+        "Curt Teich postcard",
+        "vintage travel postcard"
+      ],
+      "what": "Big blocky extruded capitals on linen-textured card, a script 'Greetings from', saturated sky blue and sunset orange, white border.",
+      "feels": [
+        "sunny",
+        "nostalgic",
+        "welcoming",
+        "fun"
+      ],
+      "use": [
+        "travel and tourism",
+        "city and event promos",
+        "hospitality",
+        "summer campaigns"
+      ],
+      "not": "Not seventies groovy: flat printed linen card with a white border and extruded block caps, not swirly rainbow lettering.",
+      "search": [
+        "greetings from postcard animation",
+        "large letter postcard typography",
+        "vintage linen postcard motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "mid-century"
+        ],
+        "era": [
+          "mid-century-modern"
+        ],
+        "typography": [
+          "extruded-3d",
+          "display"
+        ],
+        "color": [
+          "high-saturation",
+          "warm-palette"
+        ],
+        "texture": [
+          "paper-grain",
+          "print-grain"
+        ],
+        "depth": [
+          "extruded-2d"
+        ],
+        "material": [
+          "paper"
+        ],
+        "motion-language": [
+          "springy"
+        ],
+        "transitions": [
+          "scale",
+          "push"
+        ],
+        "tone": [
+          "optimistic",
+          "friendly"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f2e6c8",
+          "ink": "#1b2a4a",
+          "accent": "#e0592a",
+          "accent2": "#2a8fb8",
+          "surface": "#fbf4e2",
+          "muted": "#6b6150"
+        },
+        "fonts": {
+          "display": "Bowlby One SC",
+          "body": "Oswald",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.01
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 4,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "hard",
+        "shadowColor": "accent2",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "filled",
+        "iconSet": "nature",
+        "motif": "rays",
+        "motion": "spring",
+        "effects": [
+          "extrude"
+        ],
+        "labels": {
+          "kicker": "Greetings from"
+        }
+      }
+    },
+    {
+      "id": "spot-colour-swatch-book",
+      "name": "Spot-colour swatch book",
+      "aka": [
+        "swatch fan",
+        "colour chip book",
+        "spot colour guide",
+        "ink formula guide"
+      ],
+      "what": "A fanned deck of spot-colour chips: big solid ink panels on white stock, small mono ink numbers, coated and uncoated tags.",
+      "feels": [
+        "precise",
+        "colourful",
+        "designerly"
+      ],
+      "use": [
+        "brand identity reveals",
+        "design tools and paint brands",
+        "product colourway launches",
+        "creative agency reels"
+      ],
+      "not": "Not colour blocking: the colours are specimen chips in a fanned guide with ink numbers, not a layout split into fields.",
+      "search": [
+        "swatch book fan animation",
+        "colour chip reveal motion graphics",
+        "spot colour guide design"
+      ],
+      "stack": {
+        "visual-style": [
+          "swiss-international",
+          "clean-minimal"
+        ],
+        "composition": [
+          "stacked-cards",
+          "centered-hero"
+        ],
+        "color": [
+          "brand-palette",
+          "high-saturation"
+        ],
+        "typography": [
+          "grotesk",
+          "monospace"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "clean"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "card-flip",
+          "slide"
+        ],
+        "tone": [
+          "professional",
+          "confident"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e9e8e4",
+          "ink": "#111111",
+          "accent": "#ff5a1f",
+          "accent2": "#0057b8",
+          "surface": "#ffffff",
+          "muted": "#6d6d6a"
+        },
+        "fonts": {
+          "display": "Hanken Grotesk",
+          "body": "IBM Plex Mono",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "stack",
+        "radius": 8,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "slide",
+        "labels": {
+          "title": "Formula guide",
+          "badge": "Coated",
+          "items": [
+            "021 C · Orange",
+            "286 C · Blue",
+            "Warm Grey 1 C",
+            "Process Black C"
+          ]
+        }
+      }
+    }
+  ]
+}

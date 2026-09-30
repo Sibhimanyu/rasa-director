@@ -74,7 +74,8 @@
   initCopy();
 })();
 
-// style library: assets/presets.json (every preset) drawn live by assets/presets.js
+// style library: assets/presets.json (every preset) drawn live by assets/presets.js,
+// each card linking its DESIGN.md from systems/
 (function () {
   var grid = document.getElementById("lib-grid");
   if (!grid || !window.RasaPresets) return;
@@ -102,7 +103,21 @@
     more.hidden = !capped; more.textContent = "Show all " + data.presets.length + " styles";
     [].forEach.call(famsEl.children, function (b) { b.classList.toggle("on", b._fam === fam); });
   }
-  fetch("assets/presets.json").then(function (r) { return r.json(); }).then(function (d) {
+  // every style is also a complete DESIGN.md in systems/ (index: [{id, name, family, file}]); link only files that exist
+  var systems = fetch("systems/index.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (list) {
+    if (!Array.isArray(list)) return null;
+    var m = {}; list.forEach(function (s) { if (s && s.id) m[s.id] = s.file || s.id + ".md"; }); return m;
+  }).catch(function () { return null; });
+  function dl(p, file) {
+    var a = document.createElement("a"); a.className = "lib-dl";
+    a.href = "systems/" + file; a.setAttribute("download", file);
+    a.setAttribute("aria-label", "Download " + p.name + " as a DESIGN.md");
+    a.innerHTML = '<svg aria-hidden="true"><use href="#i-down"/></svg>DESIGN.md';
+    a.addEventListener("click", function (e) { e.stopPropagation(); });
+    return a;
+  }
+  Promise.all([fetch("assets/presets.json").then(function (r) { return r.json(); }), systems]).then(function (res) {
+    var d = res[0], files = res[1];
     data = d;
     RasaPresets.loadFonts(d.presets);
     [{ id: "all", name: "All" }].concat(d.families).forEach(function (f) {
@@ -115,6 +130,8 @@
       var b = document.createElement("b"); b.textContent = p.name; c.appendChild(b);
       var sm = document.createElement("small"); sm.textContent = (d.families.filter(function (f) { return f.id === p.family; })[0] || {}).name || p.family; c.appendChild(sm);
       var pr = document.createElement("p"); pr.textContent = p.what; c.appendChild(pr);
+      var file = files ? files[p.id] : p.id + ".md";
+      if (file) c.appendChild(dl(p, file));
       function play() { var st = c._spec.firstChild; if (!st) return; st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); }
       c.addEventListener("mouseenter", play); c.addEventListener("click", play);
       grid.appendChild(c); cards.push(c); io.observe(c);

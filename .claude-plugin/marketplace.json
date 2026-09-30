@@ -1,7 +1,7 @@
 {
   "$schema": "https://code.claude.com/schemas/marketplace.json",
   "name": "rasa-director",
-  "description": "Rasa Director: direct whole videos in motion-design terms or from your DESIGN.md; Claude designs and animates them through HyperFrames.",
+  "description": "Rasa Director: pick one of three complete films, notes on a timed animatic, a final you review by clicking on moments. Claude designs and animates it through HyperFrames.",
   "owner": {
     "name": "Sibhimanyu",
     "url": "https://github.com/Sibhimanyu"
@@ -10,7 +10,7 @@
     {
       "name": "rasa-director",
       "source": "./",
-      "description": "Direct your whole video in motion-design terms or bring your DESIGN.md; Claude designs and animates it through HyperFrames.",
+      "description": "Pick the film, Claude makes it: 403 design systems, real story devices, music edited to picture, an anti-slop gate. Built on HyperFrames.",
       "category": "design",
       "tags": [
         "video",

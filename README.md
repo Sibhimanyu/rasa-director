@@ -3,51 +3,43 @@
   <img src="docs/assets/logo/rasa-director-lockup.svg" alt="Rasa Director" height="56" />
 </picture></h1>
 
-**Direct your whole video in the terms motion designers use. Claude designs and animates it.** Launch films, explainers, PR videos, brand reels, music videos, reels cut from a folder of your own footage, captioned talking heads, and short motion graphics.
+**Pick the film. Claude makes it.** Launch films, explainers, PR videos, brand films, music videos, reels cut from a folder of your own footage, captioned talking heads, and short motion graphics.
 
-*Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. Left alone, every AI video has the same one: the obvious story, a default look, and text that fades up and slides into place on the same ease in every scene. Rasa Director is a Claude Code skill that puts every creative decision in front of you in proper terms, shows it by eye, compiles your choices into an art-direction brief and a motion contract, and checks that what Claude builds follows them.
+*Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. When thirty people make an AI video, they get thirty videos with different content and the same film: the obvious story, a default look, everything fading up on one ease, a 30-second music loop under a 45-second film, a whoosh on every cut and glowing text. Rasa Director is a Claude Code skill that replaces every one of those defaults with a decision, and checks the build against it.
 
-![Design directions: six complete looks on the same headline](docs/img/looks.jpg)
+![Films: three complete films, each a named style drawn live on its own hook line with a story angle](docs/img/console-films.jpg)
 
 **Website:** https://sibhimanyu.github.io/rasa-director/
 
-## A style is a stack of decisions
+## Four calls, and you see your film at every one
 
-Two videos can both be "2D UI animation" and look nothing alike, because a style is never one choice. Rasa Director holds the vocabulary of motion design as data: **30 dimensions and about 880 terms** (format, UI treatment, product-demo language, UI interaction, data viz, photo/video integration, illustration, character, iconography, visual style, era, color, typography, composition, shape, stroke, shadow, material, texture, depth, motion language, motion function, transitions, camera, effects, pacing, narrative, sound, production, tone). Every term has a definition, what it looks like, how it moves, where it's used, what it's often confused with, and the precise instruction Claude follows. 35 known style combinations help Claude decide the dimensions you hand over, and it never picks the generic default.
+You say `/rasa-director make a 45s launch film for tally.app`. A **Director's Console** opens in your browser: a dark review room that shows what Claude is doing, live, and stops you only four times.
 
-Your picks compile into **`DIRECTION.md`**: a style name ("Swiss / International Typographic Style, simplified-UI product launch film, precise motion"), the style formula as a stack, and a Do / not-to-be-confused-with instruction for every decision. It goes to every builder with **`motion.md`**, the motion contract of the motion language you chose.
-
-![The Direction step: three complete directions, Claude's pick selected, with Fine-tune below](docs/img/console-direction.jpg)
-
-## What it does
-
-You say `/rasa-director make a 45s launch film for tally.app`. Rasa Director opens a **Director's Console** in your browser. It always shows what Claude is doing (a live status and activity feed), asks one question at a time with Claude's pick already selected (one click moves on), and collects every decision in "Your film", where any of them can be changed. Each decision is shown on your own content:
-
-**You're asked only what is yours to judge:**
-
-| You decide | You see |
-|---|---|
-| **Brief** | a form: what the video is, the key line, where it plays, length, voiceover or not |
-| **Brand** | your DESIGN.md read back as a board (when the project has one) |
-| **Style** | three styles from a library of **hundreds of named motion-graphics styles** (soft neo-brutalism, claymorphism, Swiss grid, Y2K chrome, blueprint HUD, risograph zine…), each drawn live on your words, and a searchable gallery of all of them |
-| **Story** | three pitches, each shown as three sketch frames in your style, two of them unusual |
-| **Voice** and **Music** | your hook line in a few voices; tracks to audition, or your own (when there's sound) |
-| **Style frames** | the key frames Claude designs, to approve before anything moves |
-| **Render** | proof snapshots, then "preview first" or "render" |
-
-**Claude decides the craft** the way a senior motion designer would, following a written playbook (`references/craft.md`): the HyperFrames workflow, scenes and pacing, the motion language your style implies, transitions (cuts, match cuts and one signature move), key poses and the plan. Each call shows up in "Your film" with its reason, and you can change any of them by discussing it with Claude in the console.
-
-**Footage reels** add **Footage** (every clip in your folder with a contact sheet and a word-level transcript) and **Cut** (the edit as an editable list: clips with in and out points, cards between them, overlays on top, captions). Claude drafts the cut from your direction, then designs and animates every card and overlay itself from a brief per card.
-
-Any question can be handed back with **"you decide"**, or everything after it with **"you decide the rest"**, with a one-line reason for every choice Claude makes.
-
-**Claude does the animating.** Rasa's boards and swatches exist only so you can choose by eye. Claude designs the style frames, the scenes and the reel cards from `DIRECTION.md`, `frame.md` and `motion.md`, through the matching [HyperFrames](https://hyperframes.heygen.com) workflow (`product-launch-video`, `faceless-explainer`, `pr-to-video`, `general-video`, `music-to-video`, `talking-head-recut`, `embedded-captions`, `motion-graphics`), and every built scene is checked in headless Chrome against the motion contract before the render question.
-
-| Your DESIGN.md as the look | Brand-locked design directions | A style frame Claude designed |
+| | You see | You do |
 |---|---|---|
-| ![](docs/img/brand-board.jpg) | ![](docs/img/looks-brand.jpg) | ![](docs/img/styleframe-hook.jpg) |
+| **1 · Brief** | one sentence you can edit: "A 45-second launch film for Tally, 16:9 for the website, with voiceover, in Tally's own colours and type", and what Claude captured | fix a word, press Start, or **Just make it** |
+| **2 · Films** | three complete films, each a named design system drawn live and moving on the film's own opening line, with a story angle (Sure · Bold · Wild), a logline and its music | pick one; or "more like these", "mix two", an energy knob, browse all the styles |
+| **3 · Animatic** | the whole film rough: a key frame for every scene at its real length, with the real music edit and the voice | play it, click any moment to leave a note, swap the music or voice, then **Looks right, build it**. You watch it build, scene by scene |
+| **4 · Final** | the rendered film with scene markers, versions and what changed | click a moment to note it, apply notes, render, download |
 
-**Bring your DESIGN.md.** Rasa reads the common shapes (design.md spec frontmatter with oklch colors and nested typography, impeccable, gstack, Stitch-style prose, CSS custom properties, token tables), assigns every color a role, maps platform fonts to shipped equivalents, stages the fonts, and writes a frame.md HyperFrames accepts, verified with HyperFrames' own parser. [An example](docs/examples/DESIGN.md).
+**Claude decides the craft**, the way a senior motion designer would, from a quantified playbook: the story device, the scenes and their timing, the motion language, transitions, the music edit, every sound effect, lighting and grade. Every call is in the **Decisions** drawer with its reason, and you can change any of it by telling Claude (⌘K).
+
+![The animatic: the film's key frames on a timeline with the music, notes pinned to moments](docs/img/console-animatic.jpg)
+
+## What makes the films different
+
+- **A story, not the story.** Before any concept, Claude writes a truth sheet from your product (what really changes, for whom, in the product's own words and numbers). A catalogue of 66 narrative devices from great launch films and ads (the museum label, the countdown, the one-take, the object's point of view…) gives three pitches that differ on at least five axes, and a rubric rejects the default arc (hook, problem, "Introducing X", three features, call to action) and any pitch that would work for any product.
+- **403 design systems.** A library of named motion-graphics styles in 20 families: editorial, bold, soft, playful, dimensional, luxury, retro, future, data, cinematic, product, heritage (Bauhaus, constructivism, Polish poster school…), broadcast, science, print, interface, nature and material, music scenes, place and wayfinding. Each is a stack of taxonomy terms, a recipe the console draws live on your words, a motion contract, and a complete **DESIGN.md** you can download and use for anything else.
+- **Music edited to picture.** Tracks long enough for the film, analysed with nothing but Node and FFmpeg (beats, bars, sections, a real ending), cut on bar lines so it never loops audibly, with the reveal and the logo on downbeats. Sound effects only for things you can see happen, on a budget. Mixed to −14 LUFS.
+- **An anti-slop gate.** Before anything reaches you, `slop.mjs` checks the copy ("seamless", "unlock", "not X, it's Y", em dashes), the look (neon glow text, purple-blue gradients, particle filler, corner timecodes, Inter everywhere), the motion (idle loops, everything entering the same way), the timing (unreadable text, uniform shot lengths, no end hold) and the sound (looping beds, whoosh per cut, loudness, dead air).
+- **A motion contract.** The chosen style's motion language becomes `motion.md`, and `obey.mjs` loads every built scene in headless Chrome and checks each tween against it.
+- **Claude does the animating.** The style specimens exist so you can choose by eye. Claude designs every key frame and scene from the direction, through the matching [HyperFrames](https://hyperframes.heygen.com) workflow (`product-launch-video`, `faceless-explainer`, `pr-to-video`, `general-video`, `music-to-video`, `talking-head-recut`, `embedded-captions`, `motion-graphics`).
+
+**Footage reels** add **Footage** (every clip with a contact sheet and a word-level transcript) and **Cut** (the edit as an editable list: clips with in and out points, cards between them, overlays, captions). Claude drafts the cut and designs every card itself.
+
+**Bring your DESIGN.md.** Rasa reads the common shapes (design.md spec frontmatter with oklch colors, impeccable, gstack, Stitch-style prose, CSS custom properties, token tables), assigns every color a role, maps platform fonts to shipped equivalents and draws all three films in your brand. [An example](docs/examples/DESIGN.md).
+
+![The final: the rendered film with scene markers, notes and versions](docs/img/console-final.jpg)
 
 ## Install
 
@@ -92,7 +84,7 @@ From 0.6.1, Rasa updates itself: every time the skill loads it checks for a new 
 
 Or run `node <skill dir>/scripts/update.mjs apply`, which works out which of these applies. Versions before 0.6.1 don't update themselves (0.4.2–0.6.0 only tell you); update them once by hand and they stay current from then on.
 
-Check the install: `node ~/.claude/skills/rasa-director/scripts/selftest.mjs` (52 checks, about two and a half minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasa-director/`; run the same script from there.
+Check the install: `node ~/.claude/skills/rasa-director/scripts/selftest.mjs` (84 checks, a few minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasa-director/`; run the same script from there.
 
 With the plugin install Claude Code namespaces the skill: invoke it as `/rasa-director:rasa-director` (or just describe the video you want; it triggers on video requests).
 
@@ -100,7 +92,7 @@ With the plugin install Claude Code namespaces the skill: invoke it as `/rasa-di
 
 ```
 /rasa-director make a 45s launch film for https://tally.app
-/rasa-director a 60s explainer on how DNS works, vertical, no voiceover. You decide the look.
+/rasa-director a 60s explainer on how DNS works, vertical, no voiceover. Just make it.
 /rasa-director turn PR #482 into a 30s changelog video
 /rasa-director a lyric video for song.mp3, you decide the rest
 /rasa-director cut ~/Footage/lisbon-trip into a 30s reel: best moments, a title card, captions
@@ -108,46 +100,40 @@ With the plugin install Claude Code namespaces the skill: invoke it as `/rasa-di
 /rasa-director a 6s title sting for "Ship it in an afternoon", neo-brutalist, springy
 /rasa-director a product film for our app using our DESIGN.md, like these references: ref1.png ref2.png
 /rasa-director revise videos/tally-launch: calmer motion, swap the music
+/rasa-director export the Swiss grid style as a DESIGN.md
 ```
 
 ## How it works
 
 ```
 skills/rasa-director/
-  SKILL.md                    the step machine the agent follows
-  console/index.html          the Director's Console page
-  taxonomy/                   the motion-design vocabulary: 30 dimensions (dimensions/*.json), 35 style
-                              combinations, type pairings for design directions; SCHEMA.md
-  personalities/*.json        10 calibrated preview swatches (the motion languages borrow their choreography)
+  SKILL.md                    the flow the agent follows: Brief · Films · Animatic · Final
+  console/index.html          the Director's Console; console/presets.js draws any style live
+  taxonomy/                   the vocabulary: 32 dimensions (dimensions/*.json), 66 story devices (devices.json),
+                              403 styles in 20 families (presets/*.json), type pairings; schemas
   scripts/
-    taxonomy.mjs              validate, list and look up terms
-    direction.mjs             decisions -> DIRECTION.md; "you decide" candidates; reference analyze / compare
-    design.mjs                design directions (looks) as boards + frame.md; style-frame stills
-    brand.mjs                 a project's DESIGN.md: detect, read, convert to frame.md / tokens.json, brand board
-    console.mjs               the console server + push / wait / log / record (127.0.0.1, token-protected)
-    tasting.mjs               motion-language swatches of your lines
-    motion-md.mjs             writes motion.md from a motion-language term; adjectives (slower, calmer…)
-    scenes.mjs                the scene list -> STORYBOARD.md + SCRIPT.md in the workflows' exact format
-    transition-menu.mjs       two of your scenes handing off through every registry transition
-    voice.mjs, music.mjs      voice samples and music candidates through HyperFrames media-use
-    reel.mjs                  footage reels: scan; card briefs for Claude; build (segments, Claude's cards,
-                              captions, ducked music), lint, obey, render
-    video.mjs                 entire videos: init, capture, write the plan (BRIEF.md, frame.md with fonts,
-                              contract and direction, DIRECTION.md, storyboard, script, music), inject, audio-lock
-    handoff.mjs               single short units: the /motion-graphics project
+    story.mjs                 truth sheet, three distinct story devices, the pitch rubric
+    presets.mjs               the style library: validate, list, suggest, gallery, pick, stills, site
+    design-system.mjs         any style as a complete DESIGN.md (export, export-all)
+    sound.mjs, music.mjs      track analysis (beats, bars, sections, endings), the edit to picture, SFX plan,
+                              mix check; music candidates long enough for the film
+    slop.mjs                  the anti-slop gate: copy, look, motion, timing, sound, the rendered video
     obey.mjs                  checks built compositions obey motion.md; waive
-    board.mjs, pick.mjs, memory.mjs, selftest.mjs
-    lib/                      design-md (the DESIGN.md adapter), looks, direction, install, fonts, taxonomy,
-                              motion-lang, engine (preview choreography), signatures, common
+    console.mjs               the console server + push / wait / ask / reply / activity / resolve / record
+    taxonomy.mjs, direction.mjs, design.mjs, brand.mjs, motion-md.mjs, scenes.mjs, voice.mjs,
+    reel.mjs, video.mjs, handoff.mjs, tasting.mjs, transition-menu.mjs, board.mjs, pick.mjs,
+    memory.mjs, update.mjs, setup.sh, selftest.mjs
+    lib/                      audio analysis, the DESIGN.md adapter, looks, direction, fonts, engine, common
     vendor/gsap.min.js        GSAP 3.14.2
-  references/                 direction, brand, video, reel, console, motion.md contract, board, handoff, personalities
+  references/                 craft (the playbook), vocabulary (film terms → code), story, sound, direction,
+                              brand, video, reel, console, motion.md contract, board, handoff, personalities
 ```
 
-- **The terms are data.** Every option shown and every decision recorded is a taxonomy term, and prompts to builders are compiled from its entry. Each motion language carries a contract, and its swatch passes the same checker the build must pass.
+- **The terms are data.** Every style, story device and decision is a taxonomy entry, and prompts to builders are compiled from it, with `references/vocabulary.md` turning each film term (a rack focus, a bleach-bypass grade, a J-cut) into an HTML/CSS/GSAP recipe with numbers.
 - **The checker** (`obey.mjs`) loads each composition in headless Chrome with GSAP, walks every tween, samples its real start and end values, and flags off-scale durations, eases outside the set, implicit default eases, banned patterns (fade-up-slide in all its forms, bounce, overshoot, blur-in, scale-pop…), non-GSAP motion and short holds. "Could not run" is never reported as clean.
 - **Local only.** The console binds to 127.0.0.1, refuses foreign Host headers, and requires a per-session token (then an HttpOnly cookie) for every route; it serves files only from your workspace and installed skills, never its own token file, and refuses to run with your home directory as the root. Voice samples, music and site capture go through HyperFrames' own tools; nothing else leaves your machine.
 
-Details: [SKILL.md](skills/rasa-director/SKILL.md) · [direction & taxonomy](skills/rasa-director/references/direction.md) · [DESIGN.md](skills/rasa-director/references/brand.md) · [entire videos](skills/rasa-director/references/video.md) · [footage reels](skills/rasa-director/references/reel.md) · [console](skills/rasa-director/references/console.md) · [motion.md contract](skills/rasa-director/references/motion-md-contract.md) · [keyframe board](skills/rasa-director/references/board-format.md) · [handoff](skills/rasa-director/references/handoff.md) · [personalities](skills/rasa-director/references/personalities.md) · [design doc](docs/designs/motion-director.md)
+Details: [SKILL.md](skills/rasa-director/SKILL.md) · [craft](skills/rasa-director/references/craft.md) · [vocabulary](skills/rasa-director/references/vocabulary.md) · [story](skills/rasa-director/references/story.md) · [sound](skills/rasa-director/references/sound.md) · [styles](skills/rasa-director/taxonomy/presets/SCHEMA.md) · [direction & taxonomy](skills/rasa-director/references/direction.md) · [DESIGN.md](skills/rasa-director/references/brand.md) · [entire videos](skills/rasa-director/references/video.md) · [footage reels](skills/rasa-director/references/reel.md) · [console](skills/rasa-director/references/console.md) · [motion.md contract](skills/rasa-director/references/motion-md-contract.md) · [keyframe board](skills/rasa-director/references/board-format.md) · [handoff](skills/rasa-director/references/handoff.md) · [personalities](skills/rasa-director/references/personalities.md) · [design doc](docs/designs/motion-director.md)
 
 ## Publishing notes (for the maintainer)
 
@@ -157,7 +143,7 @@ Details: [SKILL.md](skills/rasa-director/SKILL.md) · [direction & taxonomy](ski
 
 ## Known limits
 
-- Boards and swatches are previews made from tokens and text; the real frames (product shots, logos, data, illustration) are designed by Claude at style-frame and build time.
+- Style specimens are previews drawn from tokens and text; the real frames (product shots, logos, data, illustration) are designed by Claude as key frames and at build time.
 - The DESIGN.md adapter reads the common formats but brand documents vary a lot; it reports what it couldn't find (fonts, an accent) and the brand board shows what it understood before anything is built.
 - Footage reels cut on word boundaries from Whisper transcripts and on detected shot changes; there's no automatic best-take or visual-content ranking beyond what Claude reads from the contact sheets and transcripts. Cards and overlays run at least their motion's minimum length (entrance, required hold, exit); a shorter request is lengthened with a warning.
 - Previews use Google Fonts; offline they fall back to system fonts.

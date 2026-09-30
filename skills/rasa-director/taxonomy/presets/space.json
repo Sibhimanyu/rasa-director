@@ -1,0 +1,360 @@
+{
+  "family": { "id": "space", "name": "Place & wayfinding", "what": "Styles borrowed from the built world: transit diagrams, road, airport and hospital signs, maps, architecture diagrams, plaques, hoardings and the lettering of streets and stations." },
+  "presets": [
+    {
+      "id": "metro-line-diagram",
+      "name": "Metro line diagram",
+      "aka": ["transit diagram", "Beck-style map", "Vignelli subway diagram", "in-car line strip", "tube map style"],
+      "what": "A white field crossed by one thick coloured line, round station stops and interchange rings, neat grotesk station names and journey minutes.",
+      "feels": ["orderly", "clear", "civic"],
+      "use": ["journey and roadmap films", "onboarding steps", "city and mobility brands", "process explainers"],
+      "not": "Not a timeline explainer: the axis is a railway line with stops and a next-stop marker, coloured like a network, not a row of dates.",
+      "search": ["metro map animation", "subway line diagram motion graphics", "transit map style explainer"],
+      "stack": { "visual-style": ["swiss-international", "modernist"], "composition": ["timeline", "negative-space"], "data-viz": ["flow-diagram", "timeline"], "typography": ["neo-grotesk"], "color": ["limited-palette", "high-contrast"], "stroke": ["heavy", "uniform"], "shape": ["circular", "rectilinear"], "motion-function": ["show-progress", "show-location"], "motion-language": ["precise"], "transitions": ["line-draw", "wipe"], "tone": ["trustworthy", "minimal"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#1c1c1c", "accent": "#dc241f", "accent2": "#0019a8", "surface": "#ffffff", "muted": "#6b6b6b" },
+        "fonts": { "display": "Hanken Grotesk", "body": "Hanken Grotesk", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "timeline", "radius": 999, "stroke": { "width": 7, "color": "ink", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "iconSet": "geometric", "motif": "none", "motion": "slide", "marker": "ring", "density": "balanced",
+        "labels": { "kicker": "Line 2 · Eastbound", "steps": ["Northgate", "Mill Lane", "Central", "Riverside", "Harbour"], "dates": ["0 min", "3 min", "6 min", "9 min", "12 min"], "badge": "Next stop" }
+      }
+    },
+    {
+      "id": "airport-wayfinding",
+      "name": "Airport wayfinding",
+      "aka": ["airport signage", "Schiphol-style signs", "Frutiger signage", "yellow sign system", "terminal signage"],
+      "what": "Black-on-yellow sign panels over charcoal, a humanist Frutiger-like sans, bold gate codes and pictogram tiles read at a glance.",
+      "feels": ["clear", "efficient", "international"],
+      "use": ["travel and mobility", "logistics", "feature tours", "event and venue films"],
+      "not": "Not hazard-industrial: the yellow is a calm information panel with humanist type and pictograms, no stencils, stripes or warnings.",
+      "search": ["airport signage motion graphics", "wayfinding animation yellow black", "airport sign style video"],
+      "stack": { "visual-style": ["modernist", "clean-minimal"], "iconography": ["pictogram"], "typography": ["humanist-sans"], "composition": ["modular-grid"], "color": ["high-contrast", "limited-palette"], "shape": ["rectilinear"], "motion-function": ["direct-attention", "show-navigation"], "motion-language": ["precise"], "transitions": ["slide", "wipe"], "tone": ["professional", "trustworthy"] },
+      "recipe": {
+        "palette": { "canvas": "#1f2022", "ink": "#ffd100", "accent": "#111214", "accent2": "#00843d", "surface": "#ffd100", "muted": "#8d8f93" },
+        "fonts": { "display": "Hind", "body": "Hind", "displayWeight": 600, "case": "none", "tracking": -0.01 },
+        "layout": "bento", "radius": 6, "stroke": { "width": 0, "color": "ink", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "duotone", "iconSet": "tech", "motif": "none", "motion": "slide", "chart": "none",
+        "labels": { "stat": "B12", "people": "Gates B1–B24" }
+      }
+    },
+    {
+      "id": "highway-guide-sign",
+      "name": "Highway guide sign",
+      "aka": ["interstate sign", "freeway signage", "Highway Gothic", "motorway sign", "green guide sign"],
+      "what": "A reflective green panel with a white border and rounded corners, Highway Gothic–style lettering and a route marker over dusk asphalt.",
+      "feels": ["direct", "American", "on the move"],
+      "use": ["road-trip and travel films", "automotive", "chapter cards", "direction and milestone moments"],
+      "not": "Not enamel street signs: a big retroreflective road panel read at speed, green and white, with a route marker instead of a plaque.",
+      "search": ["highway sign animation", "interstate sign motion graphics", "freeway sign title card"],
+      "stack": { "visual-style": ["modernist"], "typography": ["condensed", "neutral-sans"], "composition": ["centered-hero", "poster"], "color": ["limited-palette", "high-contrast"], "shape": ["rounded", "rectilinear"], "stroke": ["medium"], "material": ["metal"], "motion-language": ["smooth"], "transitions": ["push", "slide"], "tone": ["confident", "optimistic"] },
+      "recipe": {
+        "palette": { "canvas": "#2a2d31", "ink": "#ffffff", "accent": "#0d8a58", "accent2": "#ffcc00", "surface": "#00673f", "muted": "#b9c2bd" },
+        "fonts": { "display": "Overpass", "body": "Overpass", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "poster", "radius": 22, "stroke": { "width": 6, "color": "#ffffff", "style": "solid" }, "shadow": "soft", "shadowColor": "ink", "surface": "gradient", "texture": "none", "icons": "line", "iconSet": "geometric", "motif": "none", "motion": "slide", "labels": { "emblem": "↑" }
+      }
+    },
+    {
+      "id": "hospital-wayfinding",
+      "name": "Hospital wayfinding",
+      "aka": ["healthcare signage", "clinical wayfinding", "colour-coded zones", "NHS-style signs"],
+      "what": "Clinical white directory panels with colour-coded blue and aqua zones, zone chips, big row numbers and a legibility-first sans.",
+      "feels": ["calm", "reassuring", "clear"],
+      "use": ["health and care", "public services", "insurance and benefits explainers", "patient onboarding"],
+      "not": "Not exhibition wayfinding: bright clinical white with colour-coded zones and a legibility-first face; reassuring, not curatorial.",
+      "search": ["hospital wayfinding design", "healthcare signage animation", "colour coded wayfinding motion"],
+      "stack": { "visual-style": ["clean-minimal", "corporate-flat"], "iconography": ["pictogram"], "typography": ["humanist-sans"], "composition": ["stacked-cards", "asymmetric"], "color": ["cool-palette", "accent-color-system"], "shape": ["pill", "geometric"], "motion-function": ["show-navigation", "direct-attention"], "motion-language": ["smooth"], "transitions": ["slide", "fade"], "pacing": ["medium-explanatory"], "tone": ["calm", "trustworthy", "human"], "data-viz": ["ranking-list"] },
+      "recipe": {
+        "palette": { "canvas": "#eef3f6", "ink": "#0b2a4a", "accent": "#005eb8", "accent2": "#00a499", "surface": "#ffffff", "muted": "#5b7085" },
+        "fonts": { "display": "Atkinson Hyperlegible", "body": "Atkinson Hyperlegible", "displayWeight": 700, "case": "none", "tracking": -0.01 },
+        "layout": "list", "radius": 14, "stroke": { "width": 0, "color": "ink", "style": "solid" }, "shadow": "soft", "shadowColor": "#0b2a4a", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "slide",
+        "labels": { "kicker": "Main building", "title": "Level 1", "date": "Zones A–C", "items": ["Reception", "Outpatients", "Imaging", "Pharmacy", "Wards 1–6"], "tags": ["Zone A", "Zone A", "Zone B", "Zone B", "Zone C"] }
+      }
+    },
+    {
+      "id": "museum-wall-text",
+      "name": "Museum wall text",
+      "aka": ["gallery wall text", "exhibition graphics", "vinyl wall lettering", "curatorial text panel"],
+      "what": "Vinyl-cut lettering on a pale gallery wall: a large grotesk title, one ultramarine colour field, a short text column and room numbers.",
+      "feels": ["curatorial", "quiet", "intelligent"],
+      "use": ["culture and arts", "brand heritage films", "case studies", "manifestos read slowly"],
+      "not": "Not exhibition wayfinding: this is the wall itself, a curatorial text block beside one colour field, not directional sign panels.",
+      "search": ["exhibition wall text design", "museum graphics motion", "gallery typography animation"],
+      "stack": { "visual-style": ["editorial", "clean-minimal"], "typography": ["grotesk"], "composition": ["editorial-grid", "negative-space", "asymmetric"], "color": ["limited-palette", "accent-color-system"], "material": ["perfectly-flat"], "motion-language": ["luxurious-slow"], "transitions": ["fade", "wipe"], "pacing": ["pause-heavy"], "tone": ["intellectual", "calm", "editorial"] },
+      "recipe": {
+        "palette": { "canvas": "#e8e7e3", "ink": "#161616", "accent": "#2a3cc7", "accent2": "#c9c6bd", "surface": "#f3f2ee", "muted": "#6f6d68" },
+        "fonts": { "display": "Instrument Sans", "body": "Instrument Sans", "displayWeight": 600, "case": "none", "tracking": -0.03 },
+        "layout": "editorial", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "fade", "photo": "none", "density": "airy",
+        "labels": { "kicker": "Room 04", "section": "Gallery Two", "date": "1968–1974", "quote": "Untitled, 1971. Acrylic on canvas." }
+      }
+    },
+    {
+      "id": "smart-city-dashboard",
+      "name": "Smart-city dashboard",
+      "aka": ["urban data dashboard", "city operations centre", "digital twin UI", "urban analytics display"],
+      "what": "A calm city operations screen: deep harbour-navy frame, a teal district ring, amber live readouts for air, transit and energy in a mono face.",
+      "feels": ["civic", "informed", "steady"],
+      "use": ["govtech and infrastructure", "mobility and energy", "sustainability reports", "data-led city stories"],
+      "not": "Not a tactical HUD: civic data like air quality, transit and energy in quiet teal and amber, with no targeting, glow or sci-fi chrome.",
+      "search": ["smart city dashboard animation", "urban data visualisation motion graphics", "city operations centre UI"],
+      "stack": { "visual-style": ["technical-minimal", "futuristic-tech"], "ui-treatment": ["dashboard-ui", "fui"], "data-viz": ["dashboard", "status-indicator", "number-counter"], "color": ["dark-ui", "cool-palette"], "typography": ["monospace", "geometric-sans"], "format": ["dashboard-animation", "data-visualization"], "motion-function": ["show-data-change", "show-state-change"], "motion-language": ["precise"], "transitions": ["wipe", "line-draw"], "tone": ["trustworthy", "technical", "calm"] },
+      "recipe": {
+        "palette": { "canvas": "#0e1b25", "ink": "#e6edf1", "accent": "#3fbfae", "accent2": "#f2a93b", "surface": "#152634", "muted": "#7d93a3" },
+        "fonts": { "display": "Chivo", "body": "Chivo Mono", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "hud", "radius": 0, "stroke": { "width": 1, "color": "#2a4150", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "iconSet": "tech", "motif": "contours", "motion": "slide",
+        "labels": { "hud": "City ops · Live", "readouts": ["AQI 32", "94% on time", "18 °C", "2.1 GW"] }
+      }
+    },
+    {
+      "id": "isometric-city-block",
+      "name": "Isometric city block",
+      "aka": ["isometric city", "city-builder style", "SimCity style", "isometric urban illustration"],
+      "what": "A city-builder block in true 30° isometric: brick, concrete and glass-teal buildings outlined in ink on a tiled pavement slab with cast shadows.",
+      "feels": ["busy", "friendly", "constructive"],
+      "use": ["urban and property", "smart-city and mobility", "marketplaces and local services", "growth stories"],
+      "not": "Not isometric 3D product style: an urban block of building materials and pavement, outlined like a city-builder game, not floating UI blocks.",
+      "search": ["isometric city animation", "isometric city block illustration motion", "city builder style explainer"],
+      "stack": { "visual-style": ["isometric", "corporate-flat"], "illustration": ["isometric", "thick-outline"], "depth": ["isometric"], "camera": ["isometric"], "composition": ["isometric-scene", "multi-object-choreography"], "color": ["earth-tones", "analogous"], "stroke": ["medium", "uniform"], "motion-language": ["springy"], "transitions": ["scale", "camera-move"], "tone": ["friendly", "optimistic"] },
+      "recipe": {
+        "palette": { "canvas": "#dde6e8", "ink": "#1e2428", "accent": "#c65a3a", "accent2": "#4f9d9a", "surface": "#efe9dd", "muted": "#66737a" },
+        "fonts": { "display": "Red Hat Display", "body": "Red Hat Text", "displayWeight": 800, "case": "none", "tracking": -0.03 },
+        "layout": "isometric", "radius": 0, "stroke": { "width": 2, "color": "ink", "style": "solid" }, "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "pop", "density": "dense",
+        "labels": { "kicker": "Block 12 · Harbour Ward" }
+      }
+    },
+    {
+      "id": "hotel-brass-directory",
+      "name": "Hotel brass signage",
+      "aka": ["hotel wayfinding", "grand hotel directory", "brass plaque signage", "lobby directory", "hospitality signage"],
+      "what": "Engraved brass on smoked-oak black: wide-tracked roman capitals, hairline rows, floor numbers in brass rings; a grand hotel's lobby directory.",
+      "feels": ["gracious", "discreet", "warm"],
+      "use": ["hospitality and travel", "members' clubs", "premium services", "event programmes"],
+      "not": "Not black-and-gold luxury: a working directory of floors and hairline rows in brass and ivory, not a glowing gold logo reveal.",
+      "search": ["hotel signage design", "brass wayfinding sign", "luxury hotel directory motion graphics"],
+      "stack": { "visual-style": ["luxury", "art-deco"], "typography": ["serif-editorial", "display"], "composition": ["asymmetric", "negative-space"], "data-viz": ["ranking-list"], "color": ["warm-palette", "dark-ui"], "material": ["brushed-metal", "wood"], "stroke": ["hairline"], "motion-language": ["luxurious-slow"], "transitions": ["fade", "mask-reveal"], "pacing": ["luxurious"], "tone": ["luxurious", "calm"] },
+      "recipe": {
+        "palette": { "canvas": "#1c1915", "ink": "#efe6d2", "accent": "#c4a46c", "accent2": "#7c6440", "surface": "#26221c", "muted": "#9b8f7a" },
+        "fonts": { "display": "Marcellus", "body": "Jost", "displayWeight": 400, "case": "upper", "tracking": 0.1 },
+        "layout": "list", "radius": 999, "stroke": { "width": 0, "color": "accent", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "fade",
+        "labels": { "kicker": "Guest directory", "title": "Floors", "date": "Lobby level", "items": ["Reception & lounge", "The dining room", "Spa & pool", "Rooms 401–420", "Roof terrace"], "tags": ["G", "1", "−1", "4", "R"] }
+      }
+    },
+    {
+      "id": "parking-garage-level",
+      "name": "Parking garage level graphics",
+      "aka": ["car park wayfinding", "parking level signage", "supergraphics", "garage level numbers", "stencilled floor numbers"],
+      "what": "A huge stencilled level number painted in one level colour on raw concrete, a caption rule, bay letters and a small occupancy chart.",
+      "feels": ["blunt", "urban", "memorable"],
+      "use": ["mobility and EV", "urban services", "stat reveals", "chapter numbers"],
+      "not": "Not hazard-industrial: a colour-coded level number painted huge on grey concrete, wayfinding rather than yellow warning signage.",
+      "search": ["parking garage supergraphics", "car park wayfinding design", "stencil number animation"],
+      "stack": { "visual-style": ["brutalism", "modernist"], "typography": ["condensed", "display"], "composition": ["typography-led", "asymmetric"], "data-viz": ["number-counter", "statistic"], "color": ["limited-palette", "accent-color-system"], "texture": ["print-grain"], "material": ["matte-product"], "motion-language": ["heavy"], "transitions": ["wipe", "hard-cut"], "tone": ["bold", "confident"] },
+      "recipe": {
+        "palette": { "canvas": "#c9c7c1", "ink": "#151515", "accent": "#0a5fc2", "accent2": "#ffcc00", "surface": "#dedcd6", "muted": "#595753" },
+        "fonts": { "display": "Big Shoulders Stencil Display", "body": "Barlow Semi Condensed", "displayWeight": 800, "case": "upper", "tracking": 0 },
+        "layout": "bignumber", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "noise", "icons": "none", "motif": "none", "motion": "snap", "chart": "none",
+        "labels": { "stat": "P3", "caption": "Level 3 · Bays A–F", "kicker": "Short stay", "title": "Spaces free" }
+      }
+    },
+    {
+      "id": "trail-marker-signage",
+      "name": "National park trail signage",
+      "aka": ["trail signs", "park trail markers", "routed wood signs", "trail blazes", "hiking signage"],
+      "what": "Routed brown timber with cream slab-serif lettering, painted diamond trail blazes and distances marked along a winding path.",
+      "feels": ["outdoorsy", "sturdy", "welcoming"],
+      "use": ["outdoor and travel", "journeys and roadmaps", "sustainability films", "step-by-step guides"],
+      "not": "Not a WPA park poster: the trail sign itself, routed timber, blazes and distances, not a screen-printed landscape.",
+      "search": ["national park sign style", "trail sign animation", "hiking trail marker motion graphics"],
+      "stack": { "visual-style": ["handmade", "mid-century"], "typography": ["slab-serif"], "composition": ["timeline", "asymmetric"], "data-viz": ["timeline"], "color": ["earth-tones", "warm-palette"], "material": ["wood"], "texture": ["film-grain"], "motion-function": ["show-progress", "show-location"], "motion-language": ["organic"], "transitions": ["slide", "line-draw"], "tone": ["friendly", "human"] },
+      "recipe": {
+        "palette": { "canvas": "#4a3526", "ink": "#f0e4c8", "accent": "#f2b233", "accent2": "#8fb36a", "surface": "#5c4331", "muted": "#bba98b" },
+        "fonts": { "display": "Bitter", "body": "Bitter", "displayWeight": 700, "case": "none", "tracking": -0.01 },
+        "layout": "timeline", "radius": 0, "stroke": { "width": 4, "color": "ink", "style": "solid" }, "shadow": "hard", "shadowColor": "#2e2118", "surface": "flat", "texture": "grain", "icons": "line", "iconSet": "nature", "motif": "none", "motion": "slide", "marker": "rect",
+        "labels": { "kicker": "Loop trail · 7 km", "steps": ["Trailhead", "Creek", "Falls", "Ridge", "Summit"], "dates": ["0.0 km", "1.2 km", "2.8 km", "4.5 km", "6.1 km"], "badge": "You are here" }
+      }
+    },
+    {
+      "id": "split-flap-departures",
+      "name": "Split-flap departure board",
+      "aka": ["Solari board", "flip board", "departure board", "station board", "flap display"],
+      "what": "Black flap tiles with white mono characters, times and destinations in rows, amber highlight and status chips flicking over like a station board.",
+      "feels": ["anticipatory", "mechanical", "travel-worn"],
+      "use": ["launch countdowns", "schedules and line-ups", "travel and events", "release notes"],
+      "not": "Not a financial terminal: rows of destinations and times on dark flap tiles, one amber row, the clack of a station board rather than a data screen.",
+      "search": ["split flap display animation", "solari board motion graphics", "departure board text effect"],
+      "stack": { "visual-style": ["retro-futurism", "technical-minimal"], "typography": ["monospace"], "composition": ["modular-grid", "asymmetric"], "data-viz": ["table", "ranking-list"], "color": ["dark-ui", "high-contrast"], "shape": ["rectilinear", "modular"], "motion-function": ["show-state-change", "build-anticipation"], "motion-language": ["mechanical"], "transitions": ["card-flip", "hard-cut"], "sound": ["clicks"], "tone": ["nostalgic", "energetic"] },
+      "recipe": {
+        "palette": { "canvas": "#111214", "ink": "#f2f2ee", "accent": "#ffb000", "accent2": "#3ec46d", "surface": "#1f2124", "muted": "#8a8d91" },
+        "fonts": { "display": "Space Mono", "body": "Space Mono", "displayWeight": 700, "case": "upper", "tracking": 0.02 },
+        "layout": "list", "radius": 4, "stroke": { "width": 0, "color": "ink", "style": "solid" }, "shadow": "inset", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "step",
+        "labels": { "kicker": "Platform 2", "title": "Departures", "date": "08:09", "items": ["08:12 Northgate", "08:20 Harbour", "08:27 Airport", "08:31 Old Town", "08:44 Riverside"], "tags": ["Boarding", "On time", "On time", "Delayed", "Gate 4"] }
+      }
+    },
+    {
+      "id": "campus-map",
+      "name": "Illustrated campus map",
+      "aka": ["campus map", "visitor map", "site map", "park map", "friendly illustrated map"],
+      "what": "A friendly visitor map: ivory grounds on lawn green, soft-shadowed building pins with rounded labels, a dotted walking route and a legend card.",
+      "feels": ["welcoming", "helpful", "sunny"],
+      "use": ["education and campuses", "events and festivals", "local businesses", "onboarding tours"],
+      "not": "Not a map explainer: a warm visitor map with a walking route and friendly labels, not a newsroom data map.",
+      "search": ["illustrated campus map animation", "visitor map motion graphics", "friendly map explainer"],
+      "stack": { "visual-style": ["corporate-flat", "clean-minimal"], "data-viz": ["map"], "format": ["map-animation"], "camera": ["top-down"], "color": ["analogous", "warm-palette"], "shape": ["rounded", "organic"], "shadow": ["soft-diffuse"], "motion-function": ["show-location", "show-navigation"], "motion-language": ["bouncy"], "transitions": ["zoom", "line-draw"], "tone": ["friendly", "optimistic"] },
+      "recipe": {
+        "palette": { "canvas": "#a9cf8f", "ink": "#1d2b1f", "accent": "#d2452c", "accent2": "#2f6fb0", "surface": "#fbf8f0", "muted": "#4f6451" },
+        "fonts": { "display": "Figtree", "body": "Figtree", "displayWeight": 800, "case": "none", "tracking": -0.03 },
+        "layout": "map", "radius": 16, "stroke": { "width": 2, "color": "ink", "style": "sketch" }, "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "filled", "iconSet": "nature", "motif": "none", "motion": "pop",
+        "labels": { "kicker": "Visitor map", "places": ["Library", "Main Quad", "Science Hall", "Gate 3"] }
+      }
+    },
+    {
+      "id": "old-world-map",
+      "name": "Old-world chart",
+      "aka": ["antique map", "sea chart", "portolan chart", "treasure map", "cartographic engraving"],
+      "what": "Hand-inked coastlines on foxed parchment, a dotted voyage route in indigo, compass rose and engraved old-style lettering in iron-gall brown.",
+      "feels": ["adventurous", "storied", "curious"],
+      "use": ["history and heritage", "travel and exploration", "origin stories", "games and fiction"],
+      "not": "Not a map explainer: an antique chart with parchment, hand-inked coasts and engraved lettering, not a clean newsroom map.",
+      "search": ["old map animation", "antique map motion graphics", "vintage sea chart style video"],
+      "stack": { "visual-style": ["handmade", "editorial"], "illustration": ["ink", "hand-drawn"], "data-viz": ["map"], "format": ["map-animation"], "typography": ["serif-editorial"], "color": ["earth-tones", "muted"], "texture": ["paper-grain", "ink-bleed"], "material": ["paper"], "camera": ["top-down", "pan"], "motion-language": ["organic"], "transitions": ["line-draw", "dissolve"], "tone": ["nostalgic", "mysterious"] },
+      "recipe": {
+        "palette": { "canvas": "#e6d8b6", "ink": "#3b2a1a", "accent": "#2e4a6b", "accent2": "#6f8f5a", "surface": "#f1e6c9", "muted": "#7a6446" },
+        "fonts": { "display": "IM Fell English", "body": "IM Fell English", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "map", "radius": 2, "stroke": { "width": 2, "color": "ink", "style": "sketch" }, "shadow": "none", "shadowColor": "ink", "surface": "paper", "texture": "paper", "icons": "line", "iconSet": "ornament", "motif": "none", "motion": "drift", "effects": ["vignette"],
+        "labels": { "kicker": "A new chart of the coast", "places": ["Harbour", "Old Fort", "Cape", "The Isle"] }
+      }
+    },
+    {
+      "id": "ski-piste-map",
+      "name": "Ski resort piste map",
+      "aka": ["piste map", "trail map", "ski resort map", "mountain resort graphics"],
+      "what": "Snow-white slopes on glacier blue, red and blue piste markers, a lift route, faint mountain contours and tall condensed resort capitals.",
+      "feels": ["crisp", "sporty", "alpine"],
+      "use": ["outdoor and sport", "winter campaigns", "travel", "event and venue guides"],
+      "not": "Not an illustrated campus map: cold blue and snow white, piste colours and alpine contours, tall condensed caps instead of friendly rounded type.",
+      "search": ["ski piste map design", "ski resort map animation", "alpine map motion graphics"],
+      "stack": { "visual-style": ["clean-minimal", "modernist"], "data-viz": ["map"], "format": ["map-animation"], "camera": ["top-down", "zoom"], "typography": ["condensed"], "color": ["cool-palette", "light-ui"], "composition": ["full-bleed"], "motion-function": ["show-location"], "motion-language": ["snappy"], "transitions": ["zoom", "line-draw"], "tone": ["energetic", "optimistic"] },
+      "recipe": {
+        "palette": { "canvas": "#cfe0ee", "ink": "#10233a", "accent": "#d7262b", "accent2": "#1c5fb8", "surface": "#ffffff", "muted": "#58708a" },
+        "fonts": { "display": "Antonio", "body": "Barlow", "displayWeight": 700, "case": "upper", "tracking": 0.01 },
+        "layout": "map", "radius": 6, "stroke": { "width": 2, "color": "#10233a", "style": "solid" }, "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "filled", "iconSet": "nature", "motif": "contours", "motion": "snap",
+        "labels": { "kicker": "Piste map · Winter", "places": ["Village", "Mid station", "Col", "Summit"] }
+      }
+    },
+    {
+      "id": "railway-nameboard",
+      "name": "Heritage railway nameboard",
+      "aka": ["station nameboard", "heritage railway signage", "painted station sign", "lined-out signwriting", "green and cream railway livery"],
+      "what": "A painted station nameboard: deep Brunswick green, cream serif capitals, ochre lining-out in a double rule and a small cast ornament.",
+      "feels": ["civic", "steadfast", "nostalgic"],
+      "use": ["heritage and anniversaries", "place and travel brands", "title and chapter cards", "food, drink and craft brands"],
+      "not": "Not art deco: a signwritten railway board, green and cream with lined-out borders, civic and hand-painted rather than gilded.",
+      "search": ["railway station sign design", "heritage railway typography", "station nameboard title animation"],
+      "stack": { "visual-style": ["print-editorial", "handmade"], "era": ["mid-century-modern"], "typography": ["serif-editorial", "display"], "composition": ["centered-hero", "symmetrical"], "color": ["limited-palette", "warm-palette"], "material": ["wood"], "stroke": ["double-line"], "shape": ["rectilinear"], "motion-language": ["smooth"], "transitions": ["fade", "mask-reveal"], "tone": ["nostalgic", "trustworthy"] },
+      "recipe": {
+        "palette": { "canvas": "#1f4d45", "ink": "#f3ecd9", "accent": "#c9a24a", "accent2": "#8a2f34", "surface": "#efe6cf", "muted": "#a9bfb6" },
+        "fonts": { "display": "Libre Caslon Text", "body": "Libre Franklin", "displayWeight": 700, "case": "upper", "tracking": 0.06 },
+        "layout": "poster", "radius": 0, "stroke": { "width": 4, "color": "accent", "style": "double" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "filled", "iconSet": "ornament", "motif": "none", "motion": "fade", "labels": { "emblem": "" }
+      }
+    },
+    {
+      "id": "enamel-street-plaque",
+      "name": "Enamel street sign",
+      "aka": ["Paris street sign", "vitreous enamel plaque", "street name plate", "plaque de rue"],
+      "what": "A deep-blue vitreous enamel plate with a green rim and white condensed capitals, softly shadowed on pale limestone: a Parisian street sign.",
+      "feels": ["charming", "European", "timeless"],
+      "use": ["place and travel brands", "food and hospitality", "chapter and location cards", "local stories"],
+      "not": "Not a highway guide sign: a small hand-finished enamel plate on stone, blue with a green rim and no route markers.",
+      "search": ["paris street sign design", "enamel sign title animation", "street name plate motion graphics"],
+      "stack": { "visual-style": ["print-editorial", "modernist"], "typography": ["condensed", "neutral-sans"], "composition": ["centered-hero", "negative-space"], "color": ["limited-palette", "cool-palette"], "material": ["ceramic", "metal"], "shape": ["rounded"], "shadow": ["soft-diffuse"], "motion-language": ["smooth"], "transitions": ["fade", "scale"], "tone": ["nostalgic", "friendly"] },
+      "recipe": {
+        "palette": { "canvas": "#e7e1d5", "ink": "#1b2233", "accent": "#1f58b5", "accent2": "#1f7a4d", "surface": "#0b3b8c", "muted": "#6b6f78" },
+        "fonts": { "display": "IBM Plex Sans Condensed", "body": "IBM Plex Sans Condensed", "displayWeight": 600, "case": "upper", "tracking": 0.02 },
+        "layout": "poster", "radius": 28, "stroke": { "width": 7, "color": "#1f7a4d", "style": "solid" }, "shadow": "float", "shadowColor": "ink", "surface": "gradient", "texture": "grain", "icons": "none", "motif": "none", "motion": "fade", "density": "airy"
+      }
+    },
+    {
+      "id": "construction-hoarding",
+      "name": "Construction hoarding",
+      "aka": ["site hoarding", "building-site graphics", "developer hoarding", "coming soon hoarding"],
+      "what": "Painted plywood hoarding green meeting safety orange, a heavy grotesk slogan split across the seam, the site today against the finished skyline.",
+      "feels": ["ambitious", "under way", "confident"],
+      "use": ["before-and-after reveals", "property and infrastructure", "rebrands and relaunches", "coming-soon teasers"],
+      "not": "Not hazard-industrial: a developer's hoarding with painted panels and a big promise, not black-and-yellow warning signage.",
+      "search": ["construction hoarding design", "site hoarding graphics", "coming soon hoarding animation"],
+      "stack": { "visual-style": ["modernist", "brutalism"], "typography": ["grotesk", "display"], "composition": ["split-screen", "typography-led"], "format": ["before-after"], "narrative": ["transformation"], "color": ["complementary", "high-contrast"], "material": ["wood"], "motion-language": ["snappy"], "transitions": ["wipe", "push"], "tone": ["bold", "optimistic"] },
+      "recipe": {
+        "palette": { "canvas": "#20483a", "ink": "#f3f1e9", "accent": "#ff6a13", "accent2": "#f3f1e9", "surface": "#2c5a48", "muted": "#a9bdb2" },
+        "fonts": { "display": "Public Sans", "body": "Public Sans", "displayWeight": 900, "case": "upper", "tracking": -0.03 },
+        "layout": "split", "radius": 0, "stroke": { "width": 4, "color": "ink", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "snap", "chart": "none",
+        "labels": { "before": "The site", "after": "Coming soon" }
+      }
+    },
+    {
+      "id": "real-estate-brochure",
+      "name": "Real-estate brochure",
+      "aka": ["property brochure", "development brochure", "residential marketing", "property listing design"],
+      "what": "An airy property brochure: a sunlit sage duotone plate, wide-tracked geometric capitals, stone and white space, and plot details in small caps.",
+      "feels": ["aspirational", "calm", "spacious"],
+      "use": ["property and interiors", "hospitality", "architecture studios", "premium launches"],
+      "not": "Not an editorial photo essay: sales-brochure calm, wide-tracked capitals and plot numbers, no double rules or reportage captions.",
+      "search": ["real estate brochure design", "property marketing video", "luxury residential motion graphics"],
+      "stack": { "visual-style": ["warm-minimal", "editorial"], "typography": ["geometric-sans"], "composition": ["asymmetric", "negative-space"], "photo-video": ["masked-photography", "ken-burns"], "color": ["muted", "light-ui"], "lighting": ["golden-hour"], "motion-language": ["luxurious-slow"], "camera": ["push-in"], "transitions": ["dissolve", "mask-reveal"], "tone": ["premium", "calm"] },
+      "recipe": {
+        "palette": { "canvas": "#f6f5f1", "ink": "#22262a", "accent": "#b7c4ab", "accent2": "#6e7f79", "surface": "#ffffff", "muted": "#7c8079" },
+        "fonts": { "display": "Jost", "body": "Jost", "displayWeight": 500, "case": "upper", "tracking": 0.12 },
+        "layout": "photo", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" }, "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "fade", "scene": "interior", "density": "airy",
+        "labels": { "kicker": "Residence 04", "caption": "South terrace, evening light", "date": "PLOT 12" }
+      }
+    },
+    {
+      "id": "massing-model-diagram",
+      "name": "Architectural massing diagram",
+      "aka": ["massing model", "BIG-style diagram", "architecture concept diagram", "volumetric diagram", "white model"],
+      "what": "White massing volumes on a pale grey site, one orange volume singled out, hairline edges and soft ambient shadow, like a practice's concept diagram.",
+      "feels": ["conceptual", "clean", "intelligent"],
+      "use": ["architecture and property", "strategy and structure explainers", "product architecture", "competition pitches"],
+      "not": "Not an isometric city block: abstract white volumes with one highlighted mass, no materials, windows or streets.",
+      "search": ["architecture massing diagram animation", "BIG architecture diagram style", "white model concept diagram motion"],
+      "stack": { "visual-style": ["isometric", "extreme-minimal"], "illustration": ["axonometric", "isometric"], "depth": ["isometric"], "camera": ["isometric", "orthographic"], "composition": ["isometric-scene", "negative-space"], "color": ["grayscale", "accent-color-system"], "shadow": ["ambient-occlusion"], "stroke": ["hairline"], "motion-language": ["precise"], "transitions": ["slide", "camera-move"], "tone": ["intellectual", "minimal"] },
+      "recipe": {
+        "palette": { "canvas": "#e9e8e4", "ink": "#1d1d1d", "accent": "#fbfaf8", "accent2": "#ff5a1f", "surface": "#f6f5f2", "muted": "#7a7873" },
+        "fonts": { "display": "Albert Sans", "body": "Albert Sans", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "isometric", "radius": 0, "stroke": { "width": 1, "color": "#3a3a3a", "style": "solid" }, "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "slide",
+        "labels": { "kicker": "Scheme B · Massing" }
+      }
+    },
+    {
+      "id": "road-marking-lettering",
+      "name": "Road-marking lettering",
+      "aka": ["road markings", "street paint type", "thermoplastic lettering", "painted road text", "lane lettering"],
+      "what": "Thermoplastic paint on asphalt: towering condensed white words, a traffic-yellow block, lane rules and coarse road grain.",
+      "feels": ["loud", "streetwise", "kinetic"],
+      "use": ["mobility and delivery", "sport and street culture", "urban campaigns", "kinetic type statements"],
+      "not": "Not a big-type poster: the words are painted on asphalt with lane rules and traffic yellow, stretched for drivers, not printed on paper.",
+      "search": ["road marking typography", "street paint lettering animation", "asphalt text motion graphics"],
+      "stack": { "visual-style": ["graffiti-street", "swiss-international"], "typography": ["condensed", "display"], "composition": ["typography-led", "swiss-grid"], "format": ["kinetic-typography"], "color": ["high-contrast", "limited-palette"], "texture": ["digital-noise", "distressed-edges"], "material": ["perfectly-flat"], "motion-language": ["snappy"], "transitions": ["wipe", "hard-cut"], "tone": ["bold", "energetic"] },
+      "recipe": {
+        "palette": { "canvas": "#2c2d2f", "ink": "#f4f4f0", "accent": "#f5c400", "accent2": "#3b3c3f", "surface": "#35363a", "muted": "#9a9a96" },
+        "fonts": { "display": "League Gothic", "body": "Barlow", "displayWeight": 400, "case": "upper", "tracking": 0.02 },
+        "layout": "typegrid", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" }, "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "noise", "icons": "none", "motif": "rules", "motion": "mask", "density": "airy",
+        "labels": { "kicker": "Lane 2", "section": "Bus · Cycle", "date": "Keep clear" }
+      }
+    },
+    {
+      "id": "architectural-floor-plan",
+      "name": "Architectural floor plan",
+      "aka": ["floor plan", "architectural plan", "plan drawing", "you-are-here plan", "space plan"],
+      "what": "A clean architect's plan: solid poché walls, door swings, glazing, a stair, rooms named in small caps, one room picked out in vermilion with the route to it.",
+      "feels": ["precise", "calm", "spatial"],
+      "use": ["architecture and interiors", "property and venue films", "office and campus moves", "wayfinding explainers"],
+      "not": "Not a blueprint: black walls on warm white paper with one accent room, not white lines on cyanotype blue.",
+      "search": ["architectural floor plan animation", "floor plan motion graphics", "animated plan drawing walkthrough"],
+      "stack": { "visual-style": ["technical-minimal", "modernist"], "illustration": ["technical-diagram", "schematic"], "stroke": ["heavy", "technical"], "composition": ["asymmetric", "negative-space"], "typography": ["condensed", "monospace"], "data-viz": ["map"], "camera": ["top-down", "orthographic"], "color": ["limited-palette", "light-ui"], "motion-language": ["precise"], "transitions": ["line-draw", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#f4f2ec", "ink": "#1b1b1b", "accent": "#d9502b", "accent2": "#9fb4c7", "surface": "#ffffff", "muted": "#77746c" },
+        "fonts": { "display": "Archivo Narrow", "body": "Archivo", "displayWeight": 700, "case": "upper", "tracking": 0.04, "mono": "IBM Plex Mono" },
+        "layout": "floorplan", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "mask",
+        "labels": { "kicker": "Ground floor · Plan", "places": ["Living", "Kitchen", "Study", "Bath", "Entry"], "scale": "5 m" }
+      }
+    }
+  ]
+}

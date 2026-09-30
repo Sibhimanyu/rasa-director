@@ -177,7 +177,9 @@ function assignRoles(colors, { mode } = {}) {
   const pool = colors.filter((c) => c.alpha > 0.6 && inMode(c));
   const scored = pool.map((c) => ({ c, s: scoreRoles(c), L: luminance(c.hex), C: chroma(c.hex) }));
   const pick = (role, filter = () => true) => scored.filter((x) => x.s[role] && filter(x)).map((x) => x.c)[0];
-  let canvas = pick("canvas", (x) => x.C < 0.35) || pick("canvas");
+  // a color named exactly for its role is that role: the author said so (design systems exported by Rasa rely on it)
+  const exact = (re, not = []) => (scored.find((x) => re.test(x.c.name.trim()) && !not.includes(x.c)) || {}).c;
+  let canvas = exact(/^(canvas|background)$/i) || pick("canvas", (x) => x.C < 0.35) || pick("canvas");
   // design-picker convention: "primary" is the background when "on-primary" exists and nothing else claims the ground
   if (!canvas) {
     const prim = scored.find((x) => /^primary$/i.test(x.c.name)), onp = scored.find((x) => /^on-primary$/i.test(x.c.name));
@@ -190,12 +192,12 @@ function assignRoles(colors, { mode } = {}) {
     warnings.push("no color is named as the background; using the lightest neutral");
   }
   const cv = canvas ? canvas.hex : "#ffffff";
-  let ink = pick("ink", (x) => contrast(x.c.hex, cv) >= 4.5 && !x.s.muted && !x.s.accent && x.C < 0.2);
+  let ink = exact(/^(ink|text|foreground)$/i, [canvas]) || pick("ink", (x) => contrast(x.c.hex, cv) >= 4.5 && !x.s.muted && !x.s.accent && x.C < 0.2);
   if (!ink) ink = scored.filter((x) => x.c !== canvas && x.C < 0.2).sort((a, b) => contrast(b.c.hex, cv) - contrast(a.c.hex, cv)).map((x) => x.c)[0];
   if (!ink) ink = scored.filter((x) => x.c !== canvas).sort((a, b) => contrast(b.c.hex, cv) - contrast(a.c.hex, cv)).map((x) => x.c)[0];
   if (ink && contrast(ink.hex, cv) < 4.5) warnings.push(`ink ${ink.hex} on ${cv} is only ${contrast(ink.hex, cv).toFixed(1)}:1`);
   const taken = new Set([canvas, ink].filter(Boolean));
-  let accent = scored.filter((x) => x.s.accent && !taken.has(x.c) && x.C > 0.15 && !x.s.border).sort((a, b) => b.C - a.C).map((x) => x.c)[0];
+  let accent = exact(/^accent$/i, [...taken]) || scored.filter((x) => x.s.accent && !taken.has(x.c) && x.C > 0.15 && !x.s.border).sort((a, b) => b.C - a.C).map((x) => x.c)[0];
   if (!accent) accent = scored.filter((x) => !taken.has(x.c) && !x.s.status && !x.s.border && !x.s.muted).sort((a, b) => b.C - a.C).map((x) => x.c).find((c) => chroma(c.hex) > 0.12);
   if (!accent) {
     // monochrome brand: the accent is its second-strongest ink (HyperFrames never takes the ink itself as the accent)
@@ -224,8 +226,9 @@ const FONT_ROLE = {
 };
 // platform fonts don't exist in a clean headless render: map them to the nearest shipped face
 const SYSTEM_MAP = [
-  [/sf ?mono|sfmono|ui-monospace|menlo|monaco|consolas|courier/i, "JetBrains Mono"],
-  [/sf pro|san francisco|-apple-system|blinkmacsystemfont|system[- ]ui|system stack|system font|^system$|segoe ui|helvetica|arial|roboto/i, "Inter"],
+  // only the platform faces themselves: Google families (Roboto and its variants, Courier Prime) stay as they are
+  [/sf ?mono|sfmono|ui-monospace|menlo|monaco|consolas|^courier( new)?$/i, "JetBrains Mono"],
+  [/sf pro|san francisco|-apple-system|blinkmacsystemfont|system[- ]ui|system stack|system font|^system$|segoe ui|helvetica|arial/i, "Inter"],
   [/new york|georgia|times/i, "Source Serif 4"],
   [/^calibri$/i, "Carlito"],
   [/^cambria$/i, "Caladea"],

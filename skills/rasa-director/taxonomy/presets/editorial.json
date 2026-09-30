@@ -99,7 +99,8 @@
         "texture": "halftone",
         "icons": "filled",
         "motif": "none",
-        "motion": "snap"
+        "motion": "snap",
+        "chart": "none"
       }
     },
     {
@@ -178,7 +179,8 @@
           "body": "Newsreader",
           "displayWeight": 400,
           "case": "none",
-          "tracking": -0.02
+          "tracking": -0.02,
+          "italic": true
         },
         "layout": "editorial",
         "radius": 0,
@@ -193,7 +195,9 @@
         "texture": "paper",
         "icons": "none",
         "motif": "rules",
-        "motion": "mask"
+        "motion": "mask",
+        "photo": "plate",
+        "scene": "still-life"
       }
     },
     {
@@ -274,7 +278,8 @@
           "body": "Jost",
           "displayWeight": 500,
           "case": "upper",
-          "tracking": 0.02
+          "tracking": 0.02,
+          "italic": true
         },
         "layout": "editorial",
         "radius": 0,
@@ -289,7 +294,9 @@
         "texture": "grain",
         "icons": "none",
         "motif": "none",
-        "motion": "fade"
+        "motion": "fade",
+        "photo": "plate",
+        "scene": "portrait"
       }
     },
     {
@@ -386,7 +393,9 @@
         "texture": "halftone",
         "icons": "glyph",
         "motif": "rules",
-        "motion": "slide"
+        "motion": "slide",
+        "photo": "plate",
+        "scene": "city"
       }
     },
     {
@@ -765,7 +774,9 @@
         "texture": "none",
         "icons": "none",
         "motif": "crosshair",
-        "motion": "mask"
+        "motion": "mask",
+        "photo": "plate",
+        "scene": "interior"
       }
     },
     {
@@ -1528,7 +1539,8 @@
         "texture": "grain",
         "icons": "none",
         "motif": "none",
-        "motion": "drift"
+        "motion": "drift",
+        "photo": "plate"
       }
     },
     {

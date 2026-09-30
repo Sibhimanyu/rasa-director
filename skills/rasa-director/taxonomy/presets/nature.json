@@ -1,0 +1,2089 @@
+{
+ "family": {
+  "id": "nature",
+  "name": "Nature & material",
+  "what": "Styles made of the natural world and real materials: plants, stone, wood, clay, cloth, metal, water and ice."
+ },
+ "presets": [
+  {
+   "id": "botanical-watercolour",
+   "name": "Botanical watercolour plate",
+   "aka": [
+    "botanical illustration",
+    "watercolour botanical",
+    "flora plate",
+    "herbal watercolour"
+   ],
+   "what": "Loose sap-green and rose-madder washes bleeding at the edges of cold-press paper, a Cormorant Garamond title on a deckled plate, pressed-flower icons.",
+   "feels": [
+    "gentle",
+    "natural",
+    "cultivated"
+   ],
+   "use": [
+    "skincare and apothecary brands",
+    "garden and florist films",
+    "wedding and stationery",
+    "tea and wellness launches"
+   ],
+   "not": "Not flat watercolour: that is a bright kids'-book wash behind a hand font; this is a scientific flora plate with a classical serif and muted pigments.",
+   "search": [
+    "botanical watercolor animation",
+    "watercolor floral title motion",
+    "botanical illustration brand video"
+   ],
+   "stack": {
+    "visual-style": [
+     "handmade",
+     "warm-minimal"
+    ],
+    "illustration": [
+     "watercolor"
+    ],
+    "typography": [
+     "serif-editorial"
+    ],
+    "color": [
+     "muted",
+     "analogous"
+    ],
+    "texture": [
+     "paper-grain",
+     "paint"
+    ],
+    "material": [
+     "paper"
+    ],
+    "motion-language": [
+     "organic"
+    ],
+    "transitions": [
+     "dissolve",
+     "mask-reveal"
+    ],
+    "tone": [
+     "calm",
+     "premium"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#f7f4ec",
+     "ink": "#25331f",
+     "accent": "#8fb07a",
+     "accent2": "#e0a1ab",
+     "surface": "#fcfaf4",
+     "muted": "#7c8672"
+    },
+    "fonts": {
+     "display": "Cormorant Garamond",
+     "body": "EB Garamond",
+     "displayWeight": 600,
+     "case": "none",
+     "tracking": -0.01
+    },
+    "layout": "poster",
+    "radius": 6,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "soft",
+    "shadowColor": "#6b7a5e",
+    "surface": "paper",
+    "texture": "paper",
+    "icons": "duotone",
+    "motif": "blobs",
+    "motion": "fade",
+    "iconSet": "nature",
+    "density": "airy"
+   }
+  },
+  {
+   "id": "herbarium-pressed-flowers",
+   "name": "Herbarium pressed flowers",
+   "aka": [
+    "herbarium sheet",
+    "pressed botanicals",
+    "specimen sheet",
+    "dried flower collage"
+   ],
+   "what": "Faded olive and petal-tan specimens taped to an aged mount board, a typed Courier collector's label and a Libre Caslon title slip.",
+   "feels": [
+    "archival",
+    "curious",
+    "quiet"
+   ],
+   "use": [
+    "natural history and museum films",
+    "slow-craft brands",
+    "botanical and perfume stories",
+    "documentary openers"
+   ],
+   "not": "Not scrapbook collage: no stickers or bright paper; every scrap is a dried specimen or a typed label on archival board.",
+   "search": [
+    "herbarium specimen animation",
+    "pressed flowers stop motion",
+    "vintage botanical specimen video"
+   ],
+   "stack": {
+    "visual-style": [
+     "mixed-media-collage",
+     "print-editorial"
+    ],
+    "illustration": [
+     "collage"
+    ],
+    "typography": [
+     "serif-editorial",
+     "monospace"
+    ],
+    "color": [
+     "muted",
+     "earth-tones"
+    ],
+    "texture": [
+     "paper-grain",
+     "fibers"
+    ],
+    "material": [
+     "paper"
+    ],
+    "motion-language": [
+     "stop-motion-like"
+    ],
+    "transitions": [
+     "hard-cut",
+     "slide"
+    ],
+    "tone": [
+     "nostalgic",
+     "intellectual"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#ece5d3",
+     "ink": "#2a2a22",
+     "accent": "#9aa66a",
+     "accent2": "#cfae8a",
+     "surface": "#faf6ea",
+     "muted": "#7e7866"
+    },
+    "fonts": {
+     "display": "Libre Caslon Display",
+     "body": "Courier Prime",
+     "displayWeight": 400,
+     "case": "none",
+     "tracking": -0.01
+    },
+    "layout": "collage",
+    "radius": 2,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "soft",
+    "shadowColor": "#5d5646",
+    "surface": "paper",
+    "texture": "paper",
+    "icons": "filled",
+    "motif": "none",
+    "motion": "step",
+    "iconSet": "nature"
+   }
+  },
+  {
+   "id": "terrazzo",
+   "name": "Terrazzo",
+   "aka": [
+    "terrazzo pattern",
+    "speckled stone",
+    "venetian terrazzo",
+    "chip aggregate"
+   ],
+   "what": "Terracotta, sage and charcoal chips scattered through warm off-white poured stone; rounded tiles and a sturdy Epilogue grotesk.",
+   "feels": [
+    "crafted",
+    "sunny",
+    "grounded"
+   ],
+   "use": [
+    "interior and homeware brands",
+    "cafés and hospitality",
+    "architecture studios",
+    "lifestyle social"
+   ],
+   "not": "Not Memphis: the chips are stone aggregate in earthy tones, not squiggles and primaries; calm, not loud.",
+   "search": [
+    "terrazzo pattern animation",
+    "terrazzo brand identity motion",
+    "speckled terrazzo background video"
+   ],
+   "stack": {
+    "visual-style": [
+     "warm-minimal",
+     "abstract-geometric"
+    ],
+    "typography": [
+     "grotesk"
+    ],
+    "composition": [
+     "bento-grid"
+    ],
+    "color": [
+     "earth-tones",
+     "limited-palette"
+    ],
+    "material": [
+     "ceramic"
+    ],
+    "shape": [
+     "rounded",
+     "irregular"
+    ],
+    "motion-language": [
+     "smooth"
+    ],
+    "transitions": [
+     "slide",
+     "shape-match"
+    ],
+    "tone": [
+     "friendly",
+     "calm"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#f3eee6",
+     "ink": "#262626",
+     "accent": "#d77a4f",
+     "accent2": "#789f93",
+     "surface": "#fbf8f3",
+     "muted": "#8a847a"
+    },
+    "fonts": {
+     "display": "Epilogue",
+     "body": "Epilogue",
+     "displayWeight": 800,
+     "case": "none",
+     "tracking": -0.03
+    },
+    "layout": "bento",
+    "radius": 18,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "terrazzo",
+    "icons": "filled",
+    "motif": "none",
+    "motion": "slide",
+    "chart": "none",
+    "iconSet": "geometric",
+    "labels": {
+     "stat": "No. 04",
+     "people": "Marble · quartz · glass"
+    }
+   }
+  },
+  {
+   "id": "travertine-stone",
+   "name": "Travertine stone",
+   "aka": [
+    "travertine",
+    "honed stone",
+    "Roman travertine",
+    "limestone minimal"
+   ],
+   "what": "Honed travertine: pitted warm-beige stone, a slab of darker vein, wide-set Italiana capitals over Jost, a single column of air.",
+   "feels": [
+    "sunlit",
+    "architectural",
+    "unhurried"
+   ],
+   "use": [
+    "architecture and interiors",
+    "hotels and spas",
+    "furniture launches",
+    "fragrance and ceramics"
+   ],
+   "not": "Not marble and gold: no metallic accents or polish; porous, matte stone in one warm family, the luxury is the material.",
+   "search": [
+    "travertine aesthetic animation",
+    "stone texture brand film",
+    "travertine minimal motion design"
+   ],
+   "stack": {
+    "visual-style": [
+     "warm-minimal",
+     "editorial"
+    ],
+    "typography": [
+     "display",
+     "geometric-sans"
+    ],
+    "composition": [
+     "editorial-grid",
+     "negative-space"
+    ],
+    "color": [
+     "monochrome",
+     "earth-tones"
+    ],
+    "texture": [
+     "print-grain"
+    ],
+    "material": [
+     "matte-product"
+    ],
+    "motion-language": [
+     "luxurious-slow"
+    ],
+    "pacing": [
+     "slow"
+    ],
+    "transitions": [
+     "crossfade",
+     "mask-reveal"
+    ],
+    "tone": [
+     "premium",
+     "calm"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#e8ddcb",
+     "ink": "#2b241c",
+     "accent": "#c2ab8e",
+     "accent2": "#9c8163",
+     "surface": "#f0e8da",
+     "muted": "#857866"
+    },
+    "fonts": {
+     "display": "Italiana",
+     "body": "Jost",
+     "displayWeight": 400,
+     "case": "upper",
+     "tracking": 0.06
+    },
+    "layout": "editorial",
+    "radius": 0,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "noise",
+    "icons": "none",
+    "motif": "none",
+    "motion": "fade",
+    "density": "airy",
+    "labels": {
+     "kicker": "Honed finish",
+     "section": "Material studies",
+     "date": "No. 3",
+     "quote": "Worn by water, set by hand."
+    }
+   }
+  },
+  {
+   "id": "beton-brut-formwork",
+   "name": "Béton brut formwork",
+   "aka": [
+    "board-formed concrete",
+    "béton brut",
+    "raw concrete poster",
+    "brutalist architecture type"
+   ],
+   "what": "Board-marked grey concrete on a strict formwork grid, stencilled Big Shoulders capitals cast into the panels, one word on a darker pour.",
+   "feels": [
+    "monumental",
+    "honest",
+    "severe"
+   ],
+   "use": [
+    "architecture and civic films",
+    "fashion and streetwear drops",
+    "exhibition openers",
+    "manifestos"
+   ],
+   "not": "Not concrete brutalist 3D: no floating slabs or depth; a flat poster grid where the type is stencil-cast into the wall.",
+   "search": [
+    "brutalist concrete typography",
+    "stencil concrete poster animation",
+    "beton brut graphic design"
+   ],
+   "stack": {
+    "visual-style": [
+     "brutalism",
+     "swiss-international"
+    ],
+    "typography": [
+     "condensed",
+     "display"
+    ],
+    "composition": [
+     "swiss-grid",
+     "typography-led"
+    ],
+    "color": [
+     "grayscale",
+     "low-contrast"
+    ],
+    "texture": [
+     "print-grain"
+    ],
+    "shape": [
+     "rectilinear",
+     "grid-based"
+    ],
+    "motion-language": [
+     "heavy"
+    ],
+    "transitions": [
+     "hard-cut",
+     "wipe"
+    ],
+    "tone": [
+     "bold",
+     "serious"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#bdb9b1",
+     "ink": "#191918",
+     "accent": "#7f7b74",
+     "accent2": "#e2dfd8",
+     "surface": "#cfccc5",
+     "muted": "#56534e"
+    },
+    "fonts": {
+     "display": "Big Shoulders Stencil Display",
+     "body": "IBM Plex Mono",
+     "displayWeight": 800,
+     "case": "upper",
+     "tracking": 0.0
+    },
+    "layout": "typegrid",
+    "radius": 0,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "noise",
+    "icons": "none",
+    "motif": "grid",
+    "motion": "slide",
+    "density": "dense",
+    "labels": {
+     "kicker": "Cast in place",
+     "section": "Level 03",
+     "date": "Pour 07"
+    }
+   }
+  },
+  {
+   "id": "japandi-oak-linen",
+   "name": "Japandi oak & linen",
+   "aka": [
+    "Japandi",
+    "Scandi-Japanese",
+    "oak and linen",
+    "calm Nordic interior"
+   ],
+   "what": "Undyed linen ground, pale white-oak and olive cards with soft daylight shadows, a light Albert Sans voice and fine leaf line icons.",
+   "feels": [
+    "calm",
+    "tactile",
+    "honest"
+   ],
+   "use": [
+    "furniture and homeware",
+    "wellness and sleep apps",
+    "interior studios",
+    "slow-living brand films"
+   ],
+   "not": "Not Nordic soft: that is cool grey UI tiles; Japandi is warm wood and linen with Japanese restraint, fewer things, more air.",
+   "search": [
+    "japandi aesthetic animation",
+    "oak and linen brand video",
+    "japandi interior motion graphics"
+   ],
+   "stack": {
+    "visual-style": [
+     "warm-minimal",
+     "clean-minimal"
+    ],
+    "typography": [
+     "humanist-sans"
+    ],
+    "composition": [
+     "floating-cards",
+     "negative-space"
+    ],
+    "color": [
+     "earth-tones",
+     "low-contrast"
+    ],
+    "texture": [
+     "fibers"
+    ],
+    "material": [
+     "wood",
+     "fabric"
+    ],
+    "motion-language": [
+     "floating"
+    ],
+    "pacing": [
+     "meditative"
+    ],
+    "transitions": [
+     "crossfade",
+     "slide"
+    ],
+    "tone": [
+     "calm",
+     "minimal"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#ebe5da",
+     "ink": "#262320",
+     "accent": "#b8966a",
+     "accent2": "#77806a",
+     "surface": "#f6f2eb",
+     "muted": "#8b847a"
+    },
+    "fonts": {
+     "display": "Albert Sans",
+     "body": "Albert Sans",
+     "displayWeight": 500,
+     "case": "none",
+     "tracking": -0.03
+    },
+    "layout": "cards",
+    "radius": 10,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "soft",
+    "shadowColor": "#6e5a40",
+    "surface": "flat",
+    "texture": "weave",
+    "icons": "line",
+    "motif": "none",
+    "motion": "drift",
+    "iconSet": "nature",
+    "density": "airy",
+    "labels": {
+     "title": "Oak · linen · clay",
+     "badge": "Unhurried"
+    }
+   }
+  },
+  {
+   "id": "celadon-glaze",
+   "name": "Celadon glaze",
+   "aka": [
+    "celadon ceramic",
+    "glazed stoneware",
+    "reactive glaze",
+    "pottery glaze"
+   ],
+   "what": "Jade-green celadon pooling into a glossy rounded tile, iron-brown speckle, a light glint across the glaze and a Gilda Display title.",
+   "feels": [
+    "serene",
+    "glossy",
+    "handmade"
+   ],
+   "use": [
+    "ceramics and tableware",
+    "tea and restaurants",
+    "skincare",
+    "craft studio films"
+   ],
+   "not": "Not matte ceramic UI: that is chalky clay pills; this is a wet, glossy glaze that pools and catches the light.",
+   "search": [
+    "celadon glaze aesthetic",
+    "ceramic glaze animation",
+    "pottery brand motion design"
+   ],
+   "stack": {
+    "visual-style": [
+     "warm-minimal",
+     "glossy-3d"
+    ],
+    "typography": [
+     "high-contrast-serif"
+    ],
+    "composition": [
+     "centered-hero",
+     "negative-space"
+    ],
+    "color": [
+     "analogous",
+     "muted"
+    ],
+    "material": [
+     "ceramic",
+     "glossy-product"
+    ],
+    "lighting": [
+     "specular-sweep"
+    ],
+    "shape": [
+     "rounded"
+    ],
+    "motion-language": [
+     "fluid"
+    ],
+    "transitions": [
+     "dissolve",
+     "liquid"
+    ],
+    "tone": [
+     "calm",
+     "premium"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#d3dfd1",
+     "ink": "#1c2a24",
+     "accent": "#8fb09c",
+     "accent2": "#6a4028",
+     "surface": "#e8efe5",
+     "muted": "#5f7268"
+    },
+    "fonts": {
+     "display": "Gilda Display",
+     "body": "Mulish",
+     "displayWeight": 400,
+     "case": "none",
+     "tracking": -0.01
+    },
+    "layout": "poster",
+    "radius": 48,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "soft",
+    "shadowColor": "#3d5a4a",
+    "surface": "gradient",
+    "texture": "none",
+    "icons": "filled",
+    "motif": "none",
+    "motion": "drift",
+    "iconSet": "nature",
+    "effects": [
+     "glint"
+    ]
+   }
+  },
+  {
+   "id": "indigo-shibori",
+   "name": "Indigo shibori",
+   "aka": [
+    "shibori",
+    "indigo dye",
+    "aizome",
+    "resist-dyed textile"
+   ],
+   "what": "Undyed cotton meeting deep aizome indigo at a dip line, resist-dot pattern, the headline crossing both in Zen Old Mincho.",
+   "feels": [
+    "crafted",
+    "cool",
+    "contemplative"
+   ],
+   "use": [
+    "textile and fashion labels",
+    "craft and heritage films",
+    "Japanese food and hospitality",
+    "sustainable goods"
+   ],
+   "not": "Not selvedge denim: soft resist-dyed cloth with white left undyed and a Japanese serif, not raw twill and copper stitching.",
+   "search": [
+    "shibori indigo animation",
+    "indigo dye brand video",
+    "japanese textile motion design"
+   ],
+   "stack": {
+    "visual-style": [
+     "handmade",
+     "duotone"
+    ],
+    "typography": [
+     "serif-editorial"
+    ],
+    "composition": [
+     "split-screen"
+    ],
+    "color": [
+     "duotone",
+     "cool-palette"
+    ],
+    "texture": [
+     "ink-bleed",
+     "fibers"
+    ],
+    "material": [
+     "fabric"
+    ],
+    "motion-language": [
+     "organic"
+    ],
+    "transitions": [
+     "wipe",
+     "dissolve"
+    ],
+    "tone": [
+     "calm",
+     "human"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#f2f0e8",
+     "ink": "#172444",
+     "accent": "#223a6e",
+     "accent2": "#8fa7cc",
+     "surface": "#e4e8ef",
+     "muted": "#6b7590"
+    },
+    "fonts": {
+     "display": "Zen Old Mincho",
+     "body": "Zen Kaku Gothic New",
+     "displayWeight": 700,
+     "case": "none",
+     "tracking": 0.0
+    },
+    "layout": "split",
+    "radius": 0,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "dots",
+    "icons": "none",
+    "motif": "none",
+    "motion": "mask",
+    "chart": "none",
+    "labels": {
+     "before": "Resist",
+     "after": "Dyed"
+    }
+   }
+  },
+  {
+   "id": "woven-rattan",
+   "name": "Woven rattan",
+   "aka": [
+    "cane webbing",
+    "rattan boho",
+    "wicker",
+    "seventies cane"
+   ],
+   "what": "Honey cane webbing, pill-shaped rattan-wrapped controls with dark cane edges, a monstera green accent and chunky Gloock serifs.",
+   "feels": [
+    "breezy",
+    "warm",
+    "relaxed"
+   ],
+   "use": [
+    "summer and travel campaigns",
+    "furniture and homeware",
+    "beach clubs and hospitality",
+    "lifestyle social"
+   ],
+   "not": "Not seventies groovy: no psychedelic type or orange stripes; the look is the woven material itself, sun-bleached and natural.",
+   "search": [
+    "rattan aesthetic animation",
+    "cane webbing pattern motion",
+    "boho rattan brand video"
+   ],
+   "stack": {
+    "visual-style": [
+     "warm-minimal",
+     "handmade"
+    ],
+    "typography": [
+     "serif-editorial"
+    ],
+    "composition": [
+     "stacked-cards",
+     "centered-hero"
+    ],
+    "color": [
+     "earth-tones",
+     "warm-palette"
+    ],
+    "texture": [
+     "fibers"
+    ],
+    "material": [
+     "wood"
+    ],
+    "shape": [
+     "pill",
+     "rounded"
+    ],
+    "motion-language": [
+     "smooth"
+    ],
+    "transitions": [
+     "slide",
+     "push"
+    ],
+    "tone": [
+     "friendly",
+     "calm"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#e9d3a6",
+     "ink": "#2e2215",
+     "accent": "#a8702f",
+     "accent2": "#4f6d3b",
+     "surface": "#f5e8cb",
+     "muted": "#7a6446"
+    },
+    "fonts": {
+     "display": "Gloock",
+     "body": "Karla",
+     "displayWeight": 400,
+     "case": "none",
+     "tracking": -0.01
+    },
+    "layout": "pills",
+    "radius": 999,
+    "stroke": {
+     "width": 3,
+     "color": "accent",
+     "style": "solid"
+    },
+    "shadow": "soft",
+    "shadowColor": "#6b4a22",
+    "surface": "flat",
+    "texture": "weave",
+    "icons": "line",
+    "motif": "none",
+    "motion": "slide",
+    "iconSet": "nature",
+    "labels": {
+     "hint": "Woven by hand"
+    }
+   }
+  },
+  {
+   "id": "woodland-moss",
+   "name": "Woodland moss",
+   "aka": [
+    "forest floor",
+    "moss green aesthetic",
+    "woodland",
+    "forest bathing"
+   ],
+   "what": "Deep moss-green understory, spores and dappled light out of focus behind a seasons timeline, chanterelle-gold marker, Alegreya serif.",
+   "feels": [
+    "hushed",
+    "alive",
+    "rooted"
+   ],
+   "use": [
+    "outdoor and conservation films",
+    "wellness and retreats",
+    "nature documentaries",
+    "sustainability reports"
+   ],
+   "not": "Not solarpunk: no optimistic tech or bright greens; dark, damp, quiet forest with the light filtered through the canopy.",
+   "search": [
+    "forest aesthetic motion graphics",
+    "moss green brand video",
+    "woodland nature documentary titles"
+   ],
+   "stack": {
+    "visual-style": [
+     "cinematic",
+     "documentary"
+    ],
+    "typography": [
+     "serif-editorial",
+     "humanist-sans"
+    ],
+    "composition": [
+     "timeline"
+    ],
+    "color": [
+     "earth-tones",
+     "dark-ui"
+    ],
+    "texture": [
+     "film-grain"
+    ],
+    "lighting": [
+     "atmospheric-haze"
+    ],
+    "effects": [
+     "depth-of-field"
+    ],
+    "motion-language": [
+     "organic"
+    ],
+    "pacing": [
+     "slow"
+    ],
+    "transitions": [
+     "dissolve",
+     "camera-move"
+    ],
+    "tone": [
+     "calm",
+     "mysterious"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#1d291c",
+     "ink": "#e6ead6",
+     "accent": "#93b24f",
+     "accent2": "#d2a24c",
+     "surface": "#2a3927",
+     "muted": "#97a58a"
+    },
+    "fonts": {
+     "display": "Alegreya",
+     "body": "Alegreya Sans",
+     "displayWeight": 700,
+     "case": "none",
+     "tracking": -0.01
+    },
+    "layout": "timeline",
+    "radius": 14,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "grain",
+    "icons": "filled",
+    "motif": "none",
+    "motion": "drift",
+    "iconSet": "nature",
+    "effects": [
+     "blur-depth"
+    ],
+    "labels": {
+     "steps": [
+      "Spore",
+      "Sprout",
+      "Frond",
+      "Canopy",
+      "Leaf-fall"
+     ],
+     "dates": [
+      "March",
+      "May",
+      "July",
+      "Sept",
+      "Nov"
+     ],
+     "badge": "Now",
+     "kicker": "Seasons"
+    }
+   }
+  },
+  {
+   "id": "desert-sandstone",
+   "name": "Desert sandstone",
+   "aka": [
+    "canyon country",
+    "red rock desert",
+    "southwest sandstone",
+    "desert modern"
+   ],
+   "what": "A trail map carved in sandstone: canyon-red strata as contour lines on sand, sage-brush accent, dashed trail, Zilla Slab capitals.",
+   "feels": [
+    "vast",
+    "sun-baked",
+    "adventurous"
+   ],
+   "use": [
+    "outdoor gear and travel",
+    "national park and tourism",
+    "road-trip films",
+    "festival openers"
+   ],
+   "not": "Not map explainer: a neutral information map; this is one warm landscape, strata and sand, with the map as a keepsake.",
+   "search": [
+    "desert canyon map animation",
+    "sandstone aesthetic motion design",
+    "red rock trail map video"
+   ],
+   "stack": {
+    "visual-style": [
+     "warm-minimal",
+     "print-editorial"
+    ],
+    "typography": [
+     "slab-serif"
+    ],
+    "composition": [
+     "full-bleed"
+    ],
+    "color": [
+     "earth-tones",
+     "warm-palette"
+    ],
+    "texture": [
+     "print-grain"
+    ],
+    "data-viz": [
+     "map"
+    ],
+    "lighting": [
+     "golden-hour"
+    ],
+    "motion-language": [
+     "smooth"
+    ],
+    "transitions": [
+     "camera-move",
+     "line-draw"
+    ],
+    "tone": [
+     "optimistic",
+     "human"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#efd8b6",
+     "ink": "#3a2414",
+     "accent": "#c0602e",
+     "accent2": "#7d9168",
+     "surface": "#e2b485",
+     "muted": "#8a6a4f"
+    },
+    "fonts": {
+     "display": "Zilla Slab",
+     "body": "Work Sans",
+     "displayWeight": 700,
+     "case": "upper",
+     "tracking": 0.0
+    },
+    "layout": "map",
+    "radius": 8,
+    "stroke": {
+     "width": 2,
+     "color": "ink",
+     "style": "dashed"
+    },
+    "shadow": "soft",
+    "shadowColor": "#7a4a25",
+    "surface": "flat",
+    "texture": "grain",
+    "icons": "filled",
+    "motif": "contours",
+    "motion": "slide",
+    "iconSet": "nature",
+    "labels": {
+     "kicker": "Trail 07",
+     "places": [
+      "Mesa",
+      "Arch",
+      "Wash",
+      "Butte"
+     ]
+    }
+   }
+  },
+  {
+   "id": "glacial-ice",
+   "name": "Glacial ice",
+   "aka": [
+    "arctic blue",
+    "glacier",
+    "polar minimal",
+    "frozen"
+   ],
+   "what": "Pale glacier-blue ground, a frosted-ice panel holding one giant sub-zero figure, a cold glint crossing it and clean Sora numerals.",
+   "feels": [
+    "crisp",
+    "pure",
+    "still"
+   ],
+   "use": [
+    "climate and science films",
+    "water and beverage brands",
+    "winter sports",
+    "cooling and hardware launches"
+   ],
+   "not": "Not light glassmorphism: no colourful blurred blobs behind glass; one cold blue family, ice and snow light, and data at the centre.",
+   "search": [
+    "arctic ice animation",
+    "glacier blue motion graphics",
+    "frozen ice title design"
+   ],
+   "stack": {
+    "visual-style": [
+     "clean-minimal",
+     "glass"
+    ],
+    "typography": [
+     "geometric-sans"
+    ],
+    "composition": [
+     "single-object-hero",
+     "negative-space"
+    ],
+    "color": [
+     "cool-palette",
+     "monochrome"
+    ],
+    "material": [
+     "frosted-glass",
+     "crystal"
+    ],
+    "data-viz": [
+     "statistic",
+     "line-graph"
+    ],
+    "lighting": [
+     "high-key"
+    ],
+    "motion-language": [
+     "weightless"
+    ],
+    "transitions": [
+     "blur",
+     "crossfade"
+    ],
+    "tone": [
+     "calm",
+     "trustworthy"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#e6f0f5",
+     "ink": "#0f2a3a",
+     "accent": "#5fb0d4",
+     "accent2": "#bde0ee",
+     "surface": "#f6fafc",
+     "muted": "#6a8595"
+    },
+    "fonts": {
+     "display": "Sora",
+     "body": "IBM Plex Sans",
+     "displayWeight": 600,
+     "case": "none",
+     "tracking": -0.04
+    },
+    "layout": "bignumber",
+    "radius": 22,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "float",
+    "shadowColor": "ink",
+    "surface": "glass",
+    "texture": "none",
+    "icons": "line",
+    "motif": "none",
+    "motion": "drift",
+    "effects": [
+     "glint"
+    ],
+    "labels": {
+     "stat": "−18°",
+     "caption": "below the surface",
+     "kicker": "Ice sheet"
+    }
+   }
+  },
+  {
+   "id": "ocean-depth-zones",
+   "name": "Ocean depth zones",
+   "aka": [
+    "bathymetric",
+    "deep sea",
+    "ocean zones",
+    "abyssal"
+   ],
+   "what": "Descending through the water column: petrol-teal to abyssal navy, bathymetric contour lines, a ruled list of depth zones in Libre Franklin.",
+   "feels": [
+    "deep",
+    "curious",
+    "immersive"
+   ],
+   "use": [
+    "ocean and science documentaries",
+    "marine conservation",
+    "diving and travel",
+    "data stories about depth or scale"
+   ],
+   "not": "Not data noir: no neon or dashboards; a natural-history descent where colour darkens with depth.",
+   "search": [
+    "ocean depth infographic animation",
+    "deep sea zones motion graphics",
+    "bathymetry map style video"
+   ],
+   "stack": {
+    "visual-style": [
+     "documentary",
+     "technical-minimal"
+    ],
+    "typography": [
+     "neo-grotesk"
+    ],
+    "composition": [
+     "editorial-grid"
+    ],
+    "color": [
+     "cool-palette",
+     "dark-ui"
+    ],
+    "data-viz": [
+     "ranking-list"
+    ],
+    "lighting": [
+     "low-key"
+    ],
+    "motion-language": [
+     "floating"
+    ],
+    "pacing": [
+     "slow"
+    ],
+    "transitions": [
+     "push",
+     "dissolve"
+    ],
+    "tone": [
+     "intellectual",
+     "mysterious"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#061f2d",
+     "ink": "#e3f1f4",
+     "accent": "#34b8b3",
+     "accent2": "#11607a",
+     "surface": "#0b3243",
+     "muted": "#7fa6b3"
+    },
+    "fonts": {
+     "display": "Libre Franklin",
+     "body": "Libre Franklin",
+     "displayWeight": 800,
+     "case": "none",
+     "tracking": -0.03
+    },
+    "layout": "list",
+    "radius": 0,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "none",
+    "icons": "none",
+    "motif": "contours",
+    "motion": "drift",
+    "labels": {
+     "kicker": "Descent",
+     "title": "Depth",
+     "date": "Metres",
+     "items": [
+      "Sunlight zone",
+      "Twilight zone",
+      "Midnight zone",
+      "Abyssal zone",
+      "Hadal zone"
+     ],
+     "tags": [
+      "0",
+      "200",
+      "1000",
+      "4000",
+      "6000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "volcanic-basalt",
+   "name": "Volcanic basalt",
+   "aka": [
+    "basalt columns",
+    "lava rock",
+    "volcanic",
+    "Giant's Causeway"
+   ],
+   "what": "Charcoal basalt columns stepped in true isometric, a seam of molten lava orange, coarse rock grain and Space Grotesk labels.",
+   "feels": [
+    "elemental",
+    "powerful",
+    "dark"
+   ],
+   "use": [
+    "energy and hardware launches",
+    "geology and science films",
+    "outdoor and adventure",
+    "game and esports teasers"
+   ],
+   "not": "Not isometric 3D product worlds: no pastel toy blocks; heavy black rock and a single molten accent.",
+   "search": [
+    "basalt columns animation",
+    "volcanic lava motion graphics",
+    "lava rock isometric design"
+   ],
+   "stack": {
+    "visual-style": [
+     "isometric",
+     "cinematic"
+    ],
+    "typography": [
+     "grotesk",
+     "monospace"
+    ],
+    "composition": [
+     "isometric-scene"
+    ],
+    "color": [
+     "accent-color-system",
+     "dark-ui"
+    ],
+    "texture": [
+     "digital-noise"
+    ],
+    "depth": [
+     "isometric"
+    ],
+    "lighting": [
+     "low-key"
+    ],
+    "shape": [
+     "geometric",
+     "angular"
+    ],
+    "motion-language": [
+     "heavy"
+    ],
+    "transitions": [
+     "hard-cut",
+     "push"
+    ],
+    "tone": [
+     "bold",
+     "dramatic"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#18181a",
+     "ink": "#eeeae4",
+     "accent": "#e4571f",
+     "accent2": "#403e42",
+     "surface": "#2a292c",
+     "muted": "#8b8680"
+    },
+    "fonts": {
+     "display": "Space Grotesk",
+     "body": "Space Mono",
+     "displayWeight": 700,
+     "case": "none",
+     "tracking": -0.03
+    },
+    "layout": "isometric",
+    "radius": 0,
+    "stroke": {
+     "width": 2,
+     "color": "#0b0b0c",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "noise",
+    "icons": "filled",
+    "motif": "none",
+    "motion": "slide",
+    "iconSet": "geometric",
+    "effects": [
+     "vignette"
+    ],
+    "labels": {
+     "kicker": "Layer 03"
+    }
+   }
+  },
+  {
+   "id": "autumn-leaf-fall",
+   "name": "Autumn leaf fall",
+   "aka": [
+    "autumn palette",
+    "fall foliage",
+    "leaf litter",
+    "harvest season"
+   ],
+   "what": "Words tumbling like maple leaves across a wet-bark ground in maple orange, ochre and pale birch, set in heavy Bricolage Grotesque.",
+   "feels": [
+    "warm",
+    "wistful",
+    "seasonal"
+   ],
+   "use": [
+    "seasonal campaigns",
+    "food and drink",
+    "back-to-school and harvest",
+    "retail and social"
+   ],
+   "not": "Not seventies groovy: no retro rounded type or stripes; the colour is foliage, the motion is falling leaves on dark ground.",
+   "search": [
+    "autumn leaves kinetic typography",
+    "fall foliage motion graphics",
+    "autumn season title animation"
+   ],
+   "stack": {
+    "visual-style": [
+     "editorial",
+     "organic-biomorphic"
+    ],
+    "typography": [
+     "display",
+     "grotesk"
+    ],
+    "composition": [
+     "typography-led",
+     "asymmetric"
+    ],
+    "color": [
+     "warm-palette",
+     "earth-tones"
+    ],
+    "texture": [
+     "film-grain"
+    ],
+    "lighting": [
+     "golden-hour"
+    ],
+    "motion-language": [
+     "floating"
+    ],
+    "transitions": [
+     "push",
+     "color-match"
+    ],
+    "tone": [
+     "nostalgic",
+     "friendly"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#2a1c13",
+     "ink": "#f4e7d1",
+     "accent": "#df6a2c",
+     "accent2": "#e3ad3e",
+     "surface": "#3a2a1e",
+     "muted": "#b39a80"
+    },
+    "fonts": {
+     "display": "Bricolage Grotesque",
+     "body": "Bricolage Grotesque",
+     "displayWeight": 800,
+     "case": "none",
+     "tracking": -0.04
+    },
+    "layout": "typegrid",
+    "radius": 12,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "grain",
+    "icons": "none",
+    "motif": "none",
+    "motion": "drift",
+    "labels": {
+     "kicker": "Leaf-fall",
+     "section": "Maple · birch · oak",
+     "date": "October"
+    }
+   }
+  },
+  {
+   "id": "cyanotype-print",
+   "name": "Cyanotype",
+   "aka": [
+    "sun print",
+    "blueprint photogram",
+    "Anna Atkins",
+    "Prussian blue print"
+   ],
+   "what": "A Prussian-blue sun print: landscape and silhouettes exposed pale on deep cyan paper, uneven emulsion, an IM Fell English title.",
+   "feels": [
+    "dreamlike",
+    "historic",
+    "handmade"
+   ],
+   "use": [
+    "art and photography films",
+    "botanical and science stories",
+    "album and music visuals",
+    "heritage brand films"
+   ],
+   "not": "Not blueprint schematic: no technical line drawing or grid; a photographic chemical print with soft, sunlit tones.",
+   "search": [
+    "cyanotype animation",
+    "sun print aesthetic video",
+    "cyanotype title design"
+   ],
+   "stack": {
+    "visual-style": [
+     "duotone",
+     "handmade"
+    ],
+    "typography": [
+     "serif-editorial",
+     "monospace"
+    ],
+    "composition": [
+     "full-bleed"
+    ],
+    "color": [
+     "duotone",
+     "monochrome"
+    ],
+    "texture": [
+     "paper-grain",
+     "ink-bleed"
+    ],
+    "photo-video": [
+     "full-bleed-footage"
+    ],
+    "color-grade": [
+     "tinted-monochrome"
+    ],
+    "motion-language": [
+     "organic"
+    ],
+    "pacing": [
+     "slow"
+    ],
+    "transitions": [
+     "dissolve",
+     "luma-matte"
+    ],
+    "tone": [
+     "nostalgic",
+     "cinematic"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#123a70",
+     "ink": "#f1f5fb",
+     "accent": "#e4edf7",
+     "accent2": "#2d63a6",
+     "surface": "#1b4784",
+     "muted": "#a5bbd9"
+    },
+    "fonts": {
+     "display": "IM Fell English",
+     "body": "Courier Prime",
+     "displayWeight": 400,
+     "case": "none",
+     "tracking": -0.01
+    },
+    "layout": "photo",
+    "radius": 0,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "paper",
+    "icons": "none",
+    "motif": "none",
+    "motion": "fade",
+    "photoColors": ["#f1f5fb", "#123a70"],
+    "scene": "botanical",
+    "density": "airy",
+    "effects": [
+     "grain-heavy"
+    ],
+    "labels": {
+     "caption": "Exposed twelve minutes",
+     "kicker": "Photogram"
+    }
+   }
+  },
+  {
+   "id": "saddle-leather",
+   "name": "Saddle leather & stitch",
+   "aka": [
+    "tooled leather",
+    "leathercraft",
+    "saddle stitch",
+    "heritage workshop"
+   ],
+   "what": "Cognac saddle leather, dark tooled patches with cream saddle-stitched edges and burnished drop edges, pebbled grain, a sturdy Bitter slab.",
+   "feels": [
+    "rugged",
+    "crafted",
+    "dependable"
+   ],
+   "use": [
+    "leather goods and workwear",
+    "whisky and coffee",
+    "motorcycle and outdoor",
+    "craft workshop films"
+   ],
+   "not": "Not felt and stitch: that is soft playful fabric; this is stiff, burnished leather with a workshop, heritage tone.",
+   "search": [
+    "leather texture animation",
+    "stitched leather brand video",
+    "leathercraft motion graphics"
+   ],
+   "stack": {
+    "visual-style": [
+     "handmade",
+     "warm-minimal"
+    ],
+    "typography": [
+     "slab-serif"
+    ],
+    "composition": [
+     "floating-cards",
+     "asymmetric"
+    ],
+    "color": [
+     "earth-tones",
+     "warm-palette"
+    ],
+    "texture": [
+     "print-grain"
+    ],
+    "material": [
+     "fabric"
+    ],
+    "stroke": [
+     "medium"
+    ],
+    "motion-language": [
+     "heavy"
+    ],
+    "transitions": [
+     "slide",
+     "hard-cut"
+    ],
+    "tone": [
+     "confident",
+     "human"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#bb7b4b",
+     "ink": "#1d120a",
+     "accent": "#f3e2c4",
+     "accent2": "#5a2f17",
+     "surface": "#7a4526",
+     "muted": "#4a2e1c"
+    },
+    "fonts": {
+     "display": "Bitter",
+     "body": "Karla",
+     "displayWeight": 800,
+     "case": "none",
+     "tracking": -0.02
+    },
+    "layout": "cards",
+    "radius": 16,
+    "stroke": {
+     "width": 3,
+     "color": "#f3dfb8",
+     "style": "dashed"
+    },
+    "shadow": "hard",
+    "shadowColor": "#3a1f0f",
+    "surface": "flat",
+    "texture": "noise",
+    "icons": "line",
+    "motif": "none",
+    "motion": "slide",
+    "iconSet": "ornament",
+    "labels": {
+     "title": "Hand-stitched",
+     "badge": "Full grain"
+    }
+   }
+  },
+  {
+   "id": "selvedge-denim",
+   "name": "Selvedge denim",
+   "aka": [
+    "raw denim",
+    "indigo twill",
+    "workwear denim",
+    "copper stitch"
+   ],
+   "what": "Raw indigo twill tiles topstitched in copper thread, a red selvedge line, rivet-tough Barlow Condensed capitals.",
+   "feels": [
+    "tough",
+    "authentic",
+    "street"
+   ],
+   "use": [
+    "fashion and workwear",
+    "streetwear drops",
+    "craft brewing and barbers",
+    "music and tour visuals"
+   ],
+   "not": "Not indigo shibori: dark rigid twill with orange topstitching and condensed caps, not soft resist-dyed cloth.",
+   "search": [
+    "denim texture animation",
+    "raw denim brand video",
+    "workwear denim motion graphics"
+   ],
+   "stack": {
+    "visual-style": [
+     "handmade",
+     "editorial"
+    ],
+    "typography": [
+     "condensed"
+    ],
+    "composition": [
+     "bento-grid"
+    ],
+    "color": [
+     "complementary",
+     "dark-ui"
+    ],
+    "texture": [
+     "print-grain"
+    ],
+    "material": [
+     "fabric"
+    ],
+    "stroke": [
+     "thin"
+    ],
+    "motion-language": [
+     "snappy"
+    ],
+    "transitions": [
+     "hard-cut",
+     "slide"
+    ],
+    "tone": [
+     "bold",
+     "confident"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#1c2944",
+     "ink": "#eef0f3",
+     "accent": "#d9893a",
+     "accent2": "#b8322e",
+     "surface": "#26365a",
+     "muted": "#9aa6bd"
+    },
+    "fonts": {
+     "display": "Barlow Condensed",
+     "body": "Barlow",
+     "displayWeight": 700,
+     "case": "upper",
+     "tracking": 0.01
+    },
+    "layout": "bento",
+    "radius": 6,
+    "stroke": {
+     "width": 2,
+     "color": "accent",
+     "style": "dashed"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "weave",
+    "icons": "filled",
+    "motif": "none",
+    "motion": "snap",
+    "chart": "none",
+    "labels": {
+     "stat": "14 oz",
+     "people": "Raw · rigid · unwashed"
+    }
+   }
+  },
+  {
+   "id": "corten-steel",
+   "name": "Corten steel",
+   "aka": [
+    "weathering steel",
+    "rusted steel",
+    "corten",
+    "patina steel"
+   ],
+   "what": "A deep oxide-brown steel wall, laser-cut Antonio capitals, a ruled weathering timeline from mill-scale grey to bright rust orange.",
+   "feels": [
+    "industrial",
+    "enduring",
+    "architectural"
+   ],
+   "use": [
+    "architecture and landscape",
+    "memorials and civic",
+    "outdoor furniture and signage",
+    "wine and spirits"
+   ],
+   "not": "Not hazard industrial: no warning stripes or yellow; one oxidised orange on grey, calm and architectural.",
+   "search": [
+    "corten steel aesthetic",
+    "rusted steel typography animation",
+    "weathering steel brand design"
+   ],
+   "stack": {
+    "visual-style": [
+     "brutalism",
+     "metallic"
+    ],
+    "typography": [
+     "condensed"
+    ],
+    "composition": [
+     "timeline",
+     "negative-space"
+    ],
+    "color": [
+     "earth-tones",
+     "accent-color-system"
+    ],
+    "texture": [
+     "distressed-edges"
+    ],
+    "material": [
+     "metal"
+    ],
+    "shape": [
+     "rectilinear",
+     "sharp"
+    ],
+    "motion-language": [
+     "heavy"
+    ],
+    "transitions": [
+     "wipe",
+     "hard-cut"
+    ],
+    "tone": [
+     "serious",
+     "confident"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#3a1f14",
+     "ink": "#f0e6db",
+     "accent": "#d4692c",
+     "accent2": "#8a8680",
+     "surface": "#4a2a1c",
+     "muted": "#c3a591"
+    },
+    "fonts": {
+     "display": "Antonio",
+     "body": "Archivo",
+     "displayWeight": 700,
+     "case": "upper",
+     "tracking": 0.02
+    },
+    "layout": "timeline",
+    "radius": 0,
+    "stroke": {
+     "width": 0,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "noise",
+    "icons": "none",
+    "motif": "rules",
+    "motion": "mask",
+    "labels": {
+     "steps": [
+      "Mill scale",
+      "Flash rust",
+      "Oxide",
+      "Patina",
+      "Stable"
+     ],
+     "dates": [
+      "Day 1",
+      "Week 2",
+      "Month 3",
+      "Year 1",
+      "Year 5"
+     ],
+     "badge": "Now",
+     "kicker": "Weathering"
+    }
+   }
+  },
+  {
+   "id": "national-park-poster",
+   "name": "National park poster",
+   "aka": [
+    "WPA poster",
+    "vintage park poster",
+    "screen-printed landscape",
+    "travel poster"
+   ],
+   "what": "Layered ridges in flat pine teal and sunset orange on cream stock, captioned like a park series print, big Big Shoulders capitals.",
+   "feels": [
+    "adventurous",
+    "nostalgic",
+    "wholesome"
+   ],
+   "use": [
+    "outdoor brands and tourism",
+    "event and festival posters",
+    "conservation films",
+    "travel social"
+   ],
+   "not": "Not mid-century modern: landscape-led and screen-printed, ridges and sky in a few flat inks, not atomic shapes and furniture.",
+   "search": [
+    "WPA national park poster animation",
+    "vintage travel poster motion",
+    "national park poster style video"
+   ],
+   "stack": {
+    "visual-style": [
+     "screen-print",
+     "mid-century"
+    ],
+    "typography": [
+     "condensed",
+     "display"
+    ],
+    "composition": [
+     "poster",
+     "layered-depth"
+    ],
+    "color": [
+     "limited-palette",
+     "warm-palette"
+    ],
+    "texture": [
+     "print-grain"
+    ],
+    "illustration": [
+     "layered-2-5d"
+    ],
+    "era": [
+     "mid-century-modern"
+    ],
+    "motion-language": [
+     "smooth"
+    ],
+    "transitions": [
+     "crossfade",
+     "parallax"
+    ],
+    "tone": [
+     "optimistic",
+     "nostalgic"
+    ]
+   },
+   "recipe": {
+    "palette": {
+     "canvas": "#efe2c0",
+     "ink": "#1e2d38",
+     "accent": "#f5d38a",
+     "accent2": "#2e5c60",
+     "surface": "#f7eed6",
+     "muted": "#7d7361"
+    },
+    "fonts": {
+     "display": "Big Shoulders Display",
+     "body": "Lato",
+     "displayWeight": 800,
+     "case": "upper",
+     "tracking": 0.01
+    },
+    "layout": "photo",
+    "radius": 0,
+    "stroke": {
+     "width": 4,
+     "color": "ink",
+     "style": "solid"
+    },
+    "shadow": "none",
+    "shadowColor": "ink",
+    "surface": "flat",
+    "texture": "grain",
+    "icons": "none",
+    "motif": "none",
+    "motion": "fade",
+    "sky": ["#e79a55", "#f5d38a"],
+    "photoColors": ["#1e2d38", "#2e5c60", "#c9824a", "#f5d38a"],
+    "photoTone": "flat",
+    "labels": {
+     "kicker": "Park series",
+     "caption": "Ridge at dusk",
+     "date": "No. 12"
+    }
+   }
+  }
+ ]
+}

@@ -4,7 +4,7 @@ A motion-graphics style is never one style. It is a stack of design decisions: f
 
 ## The taxonomy
 
-`taxonomy/dimensions/<id>.json`, one file per dimension (schema: `taxonomy/SCHEMA.md`; `node scripts/taxonomy.mjs validate`). 30 dimensions, about 880 terms, each with:
+`taxonomy/dimensions/<id>.json`, one file per dimension (schema: `taxonomy/SCHEMA.md`; `node scripts/taxonomy.mjs validate`). 32 dimensions, 926 terms, each with:
 
 | field | meaning |
 |---|---|

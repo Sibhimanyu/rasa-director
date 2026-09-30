@@ -10,7 +10,7 @@
 //   node video.mjs audio-lock --project-dir <dir> --music <file>   (after audio.mjs fetch-sfx, before assemble-index)
 import fs from "node:fs";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { parseArgs, die, readJSON, writeFile, normalizeAspect, readFrontmatterDoc } from "./lib/common.mjs";
 import { resolvePreset, findSkill } from "./lib/hyperframes.mjs";
@@ -121,18 +121,25 @@ if (cmd === "init") {
   try {
     dur = Number(run("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", path.join(dir, rel)]).trim()) || null;
   } catch {}
+  // a bed mastered by sound.mjs render (about -14 LUFS) sits 12 LU under a -16 LUFS voice at 0.2; a raw track needs less
+  let lufs = null;
+  try {
+    const r = spawnSync("ffmpeg", ["-hide_banner", "-i", path.join(dir, rel), "-af", "ebur128", "-f", "null", "-"], { encoding: "utf8" });
+    lufs = Number(((r.stderr || "").match(/I:\s+(-?[\d.]+) LUFS/g) || []).pop()?.match(/-?[\d.]+/)?.[0]);
+  } catch {}
+  const mastered = args.mastered != null ? args.mastered !== "false" : Number.isFinite(lufs) && lufs > -16.5 && lufs < -11.5;
   const patch = (file) => {
     const p = path.join(dir, file);
     const meta = fs.existsSync(p) ? readJSON(p) : {};
     const voiced = Array.isArray(meta.voices) && meta.voices.length > 0;
-    meta.bgm = { ...(meta.bgm || {}), path: rel.split(path.sep).join("/"), volume: voiced ? 0.12 : 0.9, query: "locked by Rasa Director", duration_s: dur };
+    meta.bgm = { ...(meta.bgm || {}), path: rel.split(path.sep).join("/"), volume: mastered ? (voiced ? 0.2 : 1.0) : voiced ? 0.12 : 0.9, query: "locked by Rasa Director", duration_s: dur };
     delete meta.bgm_pending;
     fs.writeFileSync(p, JSON.stringify(meta, null, 2) + "\n");
     return file;
   };
   const patched = [patch("audio_meta.json")];
   if (fs.existsSync(path.join(dir, "audio_engine_meta.json"))) patched.push(patch("audio_engine_meta.json"));
-  console.log(JSON.stringify({ ok: true, music: rel, duration_s: dur, patched }, null, 2));
+  console.log(JSON.stringify({ ok: true, music: rel, duration_s: dur, lufs: Number.isFinite(lufs) ? lufs : null, mastered, patched }, null, 2));
 } else {
   die("usage: video.mjs init|capture|write|inject|audio-lock ... (see the header)");
 }
@@ -294,9 +301,17 @@ async function write() {
   if (musicRel && route !== "music-to-video") custom.push(`**Music:** the user chose \`${musicRel}\`${D.music.title ? ` (${D.music.title})` : ""} as the bed for the whole film. After the audio step's \`fetch-sfx\` and before \`assemble-index\`, run \`node "${path.join(rasa, "video.mjs")}" audio-lock --project-dir . --music ${musicRel}\` so that exact track is used.`);
   else if (D.music === "none") custom.push("**Music:** none (the storyboard says `music: none`).");
   else if (D.music && D.music.mood) custom.push(`**Music:** mood "${D.music.mood}" (the storyboard's \`music:\` field).`);
+  // the animatic's approved key frames: one still per scene, the visual target every frame worker matches
+  const keyframes = (D.keyframes || D.styleframes || []).map((k) => (typeof k === "string" ? { image: k } : k)).filter((k) => k && k.image && fs.existsSync(rel(k.image)));
+  if (keyframes.length) {
+    fs.mkdirSync(path.join(dir, "assets", "keyframes"), { recursive: true });
+    const kf = keyframes.map((k) => { const to = path.join("assets", "keyframes", (k.scene ? `${k.scene}` : path.basename(k.image, path.extname(k.image))) + path.extname(k.image)); fs.copyFileSync(rel(k.image), path.join(dir, to)); wrote.push(to); return to; });
+    custom.push(`**Key frames are approved.** The user approved one key frame per scene in the animatic: ${kf.map((k) => `\`${k}\``).join(", ")}. Each is the visual target for its scene (composition, type, colour, the moment that matters); give every frame worker its scene's key frame as a reference and build toward it. Motion adds to it; it never replaces its design.`);
+  }
+  if (!footage) custom.push(`**Sound:** only causal sound. After the audio step's \`fetch-sfx\`, replace its cue list with the \`audio_meta_sfx\` from \`node "${path.join(rasa, "sound.mjs")}" sfx-plan --scenes <timeline.json> --bed assets/music-bed.wav --words audio_meta.json --project .\` (SFX only on visible events, budgeted, no whoosh per cut, none where the music already hits). The music bed is edited to picture; never loop it.`);
   if (!footage && M) {
     custom.push(`**Motion is decided:** ${motionLabel(M)}. Its contract is appended to frame.md (every frame worker reads it). After the workflow writes its frame packets, run \`node "${path.join(rasa, "video.mjs")}" inject --project-dir .\` so every packet carries it too, and append DISPATCH.md to every frame-worker dispatch.`);
-    custom.push(`**Check:** after the workflow's verify step and before its render question, run \`node "${path.join(rasa, "obey.mjs")}" --project .\`; after any repair, re-run lint, check and snapshots, then obey.`);
+    custom.push(`**Check:** after the workflow's verify step and before its render question, run \`node "${path.join(rasa, "obey.mjs")}" --project .\` and \`node "${path.join(rasa, "slop.mjs")}" --project .\` (AI-slop tells); after any repair, re-run lint, check and snapshots, then obey and slop.`);
   }
   if (dirInstalled) custom.push(`**Art direction is decided:** ${dirInstalled.direction.style_name}. DIRECTION.md is the full brief (every decision in proper motion-design terms, with what to do and what it is not); its binding summary is in frame.md and goes into every frame packet with the motion contract (\`video.mjs inject\`). Design every frame from it; do not substitute the workflow's default visual-design lens where they differ.`);
   if (footage && D.footage) custom.push(`**Style (pre-approved, skip the style questions):** ${Object.entries(D.footage).map(([k, v]) => `${k}: ${v}`).join(" · ")}.`);
@@ -311,7 +326,7 @@ async function write() {
   if (!footage && M) {
     put(
       "DISPATCH.md",
-      `# Rasa Director dispatch addendum (entire video)\n\nAppend this whole file to every subagent the /${route} workflow dispatches to build or repair frames. The same contract is appended to frame.md and injected into every frame packet.\n\n## Decided before the build (do not re-decide)\n\n- Message: ${q(D.message)}\n- Plan: STORYBOARD.md (approved), ${fs.existsSync(path.join(dir, "SCRIPT.md")) ? "SCRIPT.md (locked narration)" : "no narration"}\n- Look: frame.md${preset ? ` (${preset})` : designMd ? ` (the project's brand reference, ${path.basename(designMd)})` : D.look && D.look.name ? ` (${D.look.name})` : ""}\n${dirInstalled ? `- Art direction: DIRECTION.md (${dirInstalled.direction.style_name})\n` : ""}- Music: ${musicRel || (D.music === "none" ? "none" : D.music && D.music.mood ? D.music.mood : "workflow default")}\n\n${contractText(M, { lengthS, W, H, video: true, feel })}${dirInstalled ? `\n${dirInstalled.section}` : ""}\n## Check\n\n\`node "${path.join(rasa, "obey.mjs")}" --project "${dir}"\` must exit 0 before the render question (frame files are checked; the assembled index.html and captions are the workflow's own).\n`
+      `# Rasa Director dispatch addendum (entire video)\n\nAppend this whole file to every subagent the /${route} workflow dispatches to build or repair frames. The same contract is appended to frame.md and injected into every frame packet.\n\n## Decided before the build (do not re-decide)\n\n- Message: ${q(D.message)}\n- Plan: STORYBOARD.md (approved), ${fs.existsSync(path.join(dir, "SCRIPT.md")) ? "SCRIPT.md (locked narration)" : "no narration"}\n- Look: frame.md${preset ? ` (${preset})` : designMd ? ` (the project's brand reference, ${path.basename(designMd)})` : D.look && D.look.name ? ` (${D.look.name})` : ""}\n${dirInstalled ? `- Art direction: DIRECTION.md (${dirInstalled.direction.style_name})\n` : ""}- Music: ${musicRel || (D.music === "none" ? "none" : D.music && D.music.mood ? D.music.mood : "workflow default")}\n${fs.existsSync(path.join(dir, "assets", "keyframes")) ? "- Key frames: assets/keyframes/<scene id>.png, approved by the user. Build each scene toward its key frame.\n" : ""}\n${contractText(M, { lengthS, W, H, video: true, feel })}${dirInstalled ? `\n${dirInstalled.section}` : ""}\n## Check\n\n\`node "${path.join(rasa, "obey.mjs")}" --project "${dir}"\` must exit 0 before the render question (frame files are checked; the assembled index.html and captions are the workflow's own), and so must \`node "${path.join(rasa, "slop.mjs")}" --project "${dir}"\` (no AI-slop tells: glow text, uniform entrances, generic copy, whoosh per cut, looping music).\n`
     );
   }
 

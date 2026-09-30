@@ -15,6 +15,10 @@
 // 9. direction: the taxonomy validates, every motion-language swatch obeys its own contract, DESIGN.md shapes
 //    are read into roles and fonts and converted to a frame.md that reads back, the direction compiles and
 //    rejects unknown terms, design directions are distinct and brand-locked on request, the console page parses
+// 10. setup and updates: Node discovery, VERSION matches the plugin, newer releases reported
+// 11. story: the device catalog validates, pick is distinct and deterministic, the rubric ships a good pitch and rejects the cliché
+// 12. anti-slop: a project full of AI-video tells fails with fixes; a clean one passes
+// 13. sound: analyze/fit/render/check on a synthetic 120 BPM track, needs_longer, loop detection, SFX rules
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -305,7 +309,7 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   try {
     tj = JSON.parse(tv.stdout);
   } catch {}
-  ok("taxonomy validates (30 dimensions, 800+ terms, combinations resolve)", tv.status === 0 && tj.dimensions >= 30 && tj.options >= 800 && tj.combinations >= 30, (tj.problems || []).slice(0, 5).join("; ") || tv.stderr);
+  ok("taxonomy validates (32 dimensions, 900+ terms, combinations resolve)", tv.status === 0 && tj.dimensions >= 32 && tj.options >= 900 && tj.combinations >= 30, (tj.problems || []).slice(0, 5).join("; ") || tv.stderr);
   const langs = JSON.parse(fs.readFileSync(path.join(HERE, "..", "taxonomy", "dimensions", "motion-language.json"), "utf8")).options.map((o) => o.id);
   const bad = [];
   for (const id of quick ? langs.slice(0, 4) : langs) {
@@ -397,6 +401,20 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
       const lk = readLook(path.join(TMP, "preset", "frame.md"));
       ok("picking a style merges its terms and writes a frame.md that reads back", pk.status === 0 && dd.style_preset.id === ss[0].id && dd.picks["visual-style"] && !(lk.defaulted || []).length, pk.stderr);
     }
+    // every style exports as a DESIGN.md design system that reads back as a brand (colors by role, display face)
+    const ex = node("design-system.mjs", ["export-all", "--out", path.join(TMP, "systems")]);
+    const idx = JSON.parse(fs.readFileSync(path.join(TMP, "systems", "index.json"), "utf8"));
+    const pdir = path.join(HERE, "..", "taxonomy", "presets");
+    const lib = Object.fromEntries(fs.readdirSync(pdir).filter((f) => f.endsWith(".json") && !f.startsWith("_")).flatMap((f) => JSON.parse(fs.readFileSync(path.join(pdir, f), "utf8")).presets.map((p) => [p.id, p])));
+    const { readDesignMd } = await import("./lib/design-md.mjs");
+    const off = [];
+    for (const s0 of idx) {
+      const B = readDesignMd(path.join(TMP, "systems", s0.file));
+      const P = lib[s0.id].recipe;
+      if (B.roles.canvas.toLowerCase() !== P.palette.canvas.toLowerCase() || B.roles.ink.toLowerCase() !== P.palette.ink.toLowerCase() || (B.roles.accent || "").toLowerCase() !== P.palette.accent.toLowerCase() || (B.fonts.display || {}).family !== P.fonts.display) off.push(s0.id);
+      if (off.length > 5) break;
+    }
+    ok("every style exports as a DESIGN.md that reads back exactly (canvas, ink, accent, display face)", ex.status === 0 && idx.length === Object.keys(lib).length && !off.length, off.join(", ") || ex.stderr);
     const docs = path.join(HERE, "..", "..", "..", "docs", "assets");
     if (fs.existsSync(path.join(docs, "presets.js"))) {
       const same = fs.readFileSync(path.join(docs, "presets.js"), "utf8") === fs.readFileSync(path.join(HERE, "..", "console", "presets.js"), "utf8");
@@ -439,6 +457,89 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   ok("setup finds Node off the PATH and prints the PATH prefix", found.status === 0 && found.stdout.includes(`NODE=${path.join(nh, "node", "bin", "node")}`) && /PATH_PREFIX=/.test(found.stdout) && /READY/.test(found.stdout), found.stdout + found.stderr);
   const none = sh({ RASA_DIRECTOR_HOME: path.join(TMP, "nonode"), RASA_DIRECTOR_SKIP_NODE_SEARCH: "1", RASA_DIRECTOR_NO_NODE_DOWNLOAD: "1" });
   ok("setup without Node says how to fix it and fails", none.status === 1 && /PROBLEM: Node >= 20 is required/.test(none.stderr) && /FAILED/.test(none.stdout), none.stdout + none.stderr);
+}
+
+// 11. story: the device catalog validates; pick returns three devices that differ (family, protagonist, visual world,
+//     >= 5 of 7 axes), deterministically per seed; check ships a concept pitch and rejects the cliche arc
+{
+  const v = node("story.mjs", ["validate"]);
+  let vj = {};
+  try { vj = JSON.parse(v.stdout); } catch {}
+  ok("story: device catalog validates (60+ narrative devices)", v.status === 0 && vj.devices >= 60, v.stdout.slice(0, 300) + v.stderr);
+  const sd = path.join(TMP, "story");
+  fs.mkdirSync(sd, { recursive: true });
+  const truth = path.join(sd, "truth.json");
+  fs.writeFileSync(truth, JSON.stringify({ product: { name: "Lintel" }, tags: ["ai", "devtool"], format: { format: "launch", length: "36" }, tone: ["deadpan"], transformation: "from PRs that wait to PRs already reviewed", emotional_truth: "the guilty LGTM", enemy: ["the review queue"], objects: ["the diff", "the LGTM comment", "the pager alert", "the review badge", "conflict markers", "the CI checkmark", "the nit: prefix", "the blame gutter"], forms: ["pull request", "review thread", "commit log", "incident postmortem", "changelog"], words: ["Lintel", "LGTM", "Apply suggestion"], proof: ["Reviews a 400-line PR in under 90 seconds (brief)"], competitors: ["Rival"], cliche: ["hook", "montage", "introducing", "f1", "f2", "f3"] }));
+  const picks = ["a", "b", "c"].map((s) => node("story.mjs", ["pick", "--truth", truth, "--seed", s]));
+  const P = picks.map((r) => { try { return JSON.parse(r.stdout); } catch { return { picks: [], distance: { matrix: [] } }; } });
+  const differ = P.every((r) => r.picks.length === 3 && ["family", "protagonist", "visual_world"].every((k) => new Set(r.picks.map((p) => p.axes[k])).size === 3) && r.distance.matrix.flat().every((d) => d === null || d >= 5));
+  const again = node("story.mjs", ["pick", "--truth", truth, "--seed", "a"]);
+  ok("story: pick gives Sure/Bold/Wild that differ (family, protagonist, visual world, >= 5 of 7 axes); same seed, same picks", differ && P[0].picks.map((p) => p.label).join() === "Sure,Bold,Wild" && again.stdout === picks[0].stdout, picks.map((r) => r.stderr).join(" "));
+  const beat = (name, on_screen, duration_s, extra = {}) => ({ name, on_screen, visual: `${name}, in the review thread`, duration_s, ...extra });
+  const scores = { originality: 4, clarity: 4, fit: 5, memorability: 4, feasibility: 5 };
+  const good = { title: "Unmerged", logline: "A 2 am outage rewinds to the one line nobody read.", device: "rewind", beats: [beat("The pager alert", "02:14 · checkout-api down", 4), beat("Rewind the postmortem", "deploy ← merge", 7), beat("The LGTM comment un-types", "LGTM · 11:04 pm", 6), beat("The diff, unread", "one hunk", 6), beat("Lintel reads it", "Apply suggestion", 6, { turn: true }), beat("The pager stays dark", "Lintel reads every line.", 7)], first_4s: "A pager alert that plays backwards", clear_by_s4: true, swap_test: { competitor: "Rival", result: "breaks", why: "the LGTM and the comment label are Lintel's own" }, grounded_claims: [], honest_demo: true, build: { hardest_shot: "the reverse scrub", needs_live_action: false }, scores };
+  const bad = { title: "Meet Lintel", logline: "Meet Lintel, the AI reviewer that supercharges your team.", device: "before-after", beats: [beat("Hook", "PRs wait 2 days?", 3), beat("Problem montage", "Code review is broken", 3), beat("Introducing Lintel", "Introducing Lintel", 3), beat("Feature 1", "AI comments", 3), beat("Feature 2", "Suggestions", 3), beat("Feature 3", "Integrations", 3), beat("Social proof", "Trusted by 500 teams", 3), beat("CTA", "Try it free", 3)], first_4s: "a stat", clear_by_s4: true, swap_test: { competitor: "Rival", result: "survives" }, honest_demo: true, scores };
+  fs.writeFileSync(path.join(sd, "good.json"), JSON.stringify(good));
+  fs.writeFileSync(path.join(sd, "bad.json"), JSON.stringify(bad));
+  const cg = node("story.mjs", ["check", "--pitch", path.join(sd, "good.json"), "--truth", truth]);
+  const cb = node("story.mjs", ["check", "--pitch", path.join(sd, "bad.json"), "--truth", truth]);
+  let rb = { gates: [] };
+  try { rb = JSON.parse(cb.stdout); } catch {}
+  ok("story: check ships a distinctive pitch (exit 0)", cg.status === 0, cg.stdout.slice(0, 400) + cg.stderr);
+  ok("story: check rejects the cliche arc (default beats in order, swap test survives, ungrounded numbers; exit 2)", cb.status === 2 && ["G1", "G2", "G4"].every((g) => rb.gates.some((x) => x.id === g && !x.pass)), cb.stdout.slice(0, 400) + cb.stderr);
+}
+// 12. anti-slop: a project full of AI-video tells fails with fixes; a clean one passes
+{
+  const mk = (name, html, scenes, bedSeconds) => {
+    const d = path.join(TMP, "slop", name);
+    fs.mkdirSync(path.join(d, "compositions"), { recursive: true });
+    fs.mkdirSync(path.join(d, "assets"), { recursive: true });
+    fs.writeFileSync(path.join(d, "compositions", "s1.html"), html);
+    fs.writeFileSync(path.join(d, "scenes.json"), JSON.stringify({ scenes }));
+    spawnSync("ffmpeg", ["-loglevel", "error", "-y", "-f", "lavfi", "-i", `sine=frequency=330:duration=${bedSeconds}`, path.join(d, "assets", "music-bed.wav")]);
+    return d;
+  };
+  const badHtml = `<style>.h{text-shadow:0 0 18px #0ff}.k{text-shadow:0 0 12px #f0f}.bg{background:linear-gradient(135deg,#7c3aed,#2563eb)}</style><div class="bg"><h1 class="h">Introducing Tally — seamless bookkeeping!</h1><span>00:12</span><span>120 BPM</span></div><p>It's not just an app, it's your accountant.</p><script>gsap.to(".x",{y:10,repeat:-1,yoyo:true});${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => `tl.from(".e${i}",{opacity:0,y:40,duration:0.6})`).join(";")}</script>`;
+  const bad = mk("bad", badHtml, [{ title: "a", duration: 4, on_screen: "Streamline your workflow with our amazing new platform today" }, { title: "b", duration: 4 }, { title: "c", duration: 4 }, { title: "end", duration: 1, on_screen: "Tally" }], 5);
+  const good = mk("good", `<style>h1{font-family:"Bricolage Grotesque"}</style><h1>Paper forgets.</h1><p>Tally reads every receipt the moment you get it.</p><script>tl.from(".h",{clipPath:"inset(0 100% 0 0)"});tl.from(".p",{scale:0.9,opacity:0});tl.fromTo(".r",{xPercent:-100},{xPercent:0});tl.from(".n",{y:30,opacity:0});tl.from(".l",{drawSVG:0});tl.from(".c",{x:-60});tl.from(".b",{rotation:-8,scale:0.8});tl.from(".t",{opacity:0})</script>`, [{ title: "Hook", duration: 2.5, on_screen: "Paper forgets." }, { title: "Year", duration: 6, on_screen: "Twelve months of paper." }, { title: "Tap", duration: 4.5, on_screen: "One tap." }, { title: "End", duration: 3, on_screen: "Tally" }], 20);
+  const rb = node("slop.mjs", ["--project", bad, "--json"]);
+  const rg = node("slop.mjs", ["--project", good, "--json"]);
+  let jb = { findings: [] };
+  try { jb = JSON.parse(rb.stdout); } catch {}
+  const rules = new Set(jb.findings.map((f) => f.rule));
+  ok("anti-slop: generic copy, \"not X, it's Y\", neon glow, AI gradient, corner labels, idle loops, everything fading up, unreadable text, no end hold and a looping bed are caught (exit 2)", rb.status === 2 && ["generic-copy", "not-x-its-y", "neon-glow-text", "ai-gradient", "corner-labels", "idle-breathing", "uniform-entrances", "unreadable", "no-end-hold", "music-loop"].every((r) => rules.has(r)), [...rules].join(", ") + rb.stderr);
+  ok("anti-slop: a clean project passes", rg.status === 0, rg.stdout.slice(0, 300));
+}
+// 13. sound: a 120 BPM track with a real ending is read right, fitted without a loop, rendered to -14 LUFS;
+//     a too-short track says needs_longer; a looped bed is caught; SFX obey causality and the budget
+{
+  const d = path.join(TMP, "sound");
+  fs.mkdirSync(d, { recursive: true });
+  const J = (r) => { try { return JSON.parse(r.stdout); } catch { return {}; } };
+  // kick on every beat (accented downbeats), a 17-bar chord cycle (no verbatim repeats), final hit at 40 s ringing out
+  const expr = "0.5*(lt(t\\,40)*(sin(2*PI*55*t)*exp(-25*mod(t\\,0.5))*if(lt(mod(t\\,2)\\,0.5)\\,1\\,0.55)+0.12*sin(2*PI*196*pow(2\\,mod(5*floor(t/2)\\,17)/12)*t)+0.08*sin(2*PI*294*pow(2\\,mod(5*floor(t/2)\\,17)/12)*t))+gte(t\\,40)*exp(-2.2*(t-40))*(0.9*sin(2*PI*55*t)+0.3*sin(2*PI*220*t)))";
+  const track = path.join(d, "track.wav");
+  spawnSync("ffmpeg", ["-loglevel", "error", "-y", "-f", "lavfi", "-i", `aevalsrc='${expr}':s=44100:d=45`, track]);
+  const a = J(node("sound.mjs", ["analyze", "--track", track]));
+  ok("sound: analyze reads 120 BPM, bars on the beat and the real ending at 40 s", Math.abs(a.bpm - 120) < 1 && Math.abs(a.bars?.[1] - 2) < 0.03 && a.ending?.natural && Math.abs(a.ending.hit - 40) < 0.05, JSON.stringify({ bpm: a.bpm, bars: a.bars?.slice(0, 2), ending: a.ending }));
+  const f = node("sound.mjs", ["fit", "--track", track, "--film", "30", "--out", path.join(d, "plan.json")]);
+  const p = J(f);
+  ok("sound: fit plans 30 s within +/-1 s on bar lines, no repeat", f.status === 0 && Math.abs(p.film_duration - 30) <= 1 && !p.needs_longer && p.shape !== "repeat" && p.grid?.downbeats?.length > 10, f.stderr || JSON.stringify({ shape: p.shape, film: p.film_duration }));
+  const r = J(node("sound.mjs", ["render", "--plan", path.join(d, "plan.json"), "--out", path.join(d, "bed.wav")]));
+  ok("sound: render masters the bed to -14 LUFS, true peak <= -1 dBTP", Math.abs(r.lufs + 14) <= 1 && r.true_peak <= -1, JSON.stringify(r).slice(0, 200));
+  const c = node("sound.mjs", ["check", "--audio", path.join(d, "bed.wav")]);
+  ok("sound: check passes the fitted bed", c.status === 0, c.stdout.slice(0, 300));
+  const long = J(node("sound.mjs", ["fit", "--track", track, "--film", "70"]));
+  ok("sound: a 45 s track for a 70 s film says needs_longer", long.needs_longer === true, JSON.stringify({ shape: long.shape, needs_longer: long.needs_longer }));
+  spawnSync("ffmpeg", ["-loglevel", "error", "-y", "-stream_loop", "2", "-i", track, "-t", "100", path.join(d, "looped.wav")]);
+  const cl = node("sound.mjs", ["check", "--audio", path.join(d, "looped.wav")]);
+  ok("sound: check catches a looped bed (exit 2, audible loop)", cl.status === 2 && /audible loop/.test(cl.stdout), `exit ${cl.status}`);
+  fs.writeFileSync(path.join(d, "scenes.json"), JSON.stringify({ narration: true, scenes: [{ title: "a", duration: 10, voiceover: "x" }, { title: "b", duration: 10, voiceover: "y" }, { title: "c", duration: 10 }] }));
+  fs.writeFileSync(path.join(d, "events.json"), JSON.stringify({ events: [{ id: "fade", t: 1, kind: "fade" }, { id: "cut", t: 10, kind: "whoosh" }, { id: "l1", t: 12, kind: "land", group: "g" }, { id: "l2", t: 12.3, kind: "land", group: "g" }, { id: "l3", t: 12.6, kind: "land", group: "g" }, ...[0, 0.2, 0.4, 0.6].map((x, i) => ({ id: `c${i}`, t: 20 + x, kind: "click" }))] }));
+  const sx = J(node("sound.mjs", ["sfx-plan", "--scenes", path.join(d, "scenes.json"), "--events", path.join(d, "events.json")]));
+  const why = (id) => (sx.skipped || []).find((s) => s.event === id)?.why || "";
+  const inWin = (sx.cues || []).filter((q) => q.t >= 20 && q.t < 21).length;
+  ok("sfx-plan: no sound for a fade, no whoosh on an ordinary cut, stagger keeps first+last, <= 3 per second", /not a causal/.test(why("fade")) && /ordinary transition/.test(why("cut")) && /stagger/.test(why("l2")) && inWin <= 3 && (sx.cues || []).every((q) => q.start <= q.t), JSON.stringify(sx.skipped).slice(0, 400));
 }
 
 fs.rmSync(TMP, { recursive: true, force: true });

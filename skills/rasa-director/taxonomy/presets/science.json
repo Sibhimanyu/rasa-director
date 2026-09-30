@@ -1,0 +1,2164 @@
+{
+  "family": {
+    "id": "science",
+    "name": "Science",
+    "what": "Styles borrowed from scientific instruments, charts and technical drawing: notebooks, plates, maps, scans and read-outs."
+  },
+  "presets": [
+    {
+      "id": "lab-notebook",
+      "name": "Lab notebook",
+      "aka": [
+        "laboratory notebook",
+        "research notebook",
+        "engineer's notebook",
+        "graph-paper notes"
+      ],
+      "what": "A bound lab-notebook page: faint quad grid, ballpoint-blue hand lettering, dated numbered entries ruled off, one red-pen correction.",
+      "feels": [
+        "methodical",
+        "candid",
+        "human"
+      ],
+      "use": [
+        "research and R&D stories",
+        "founder origin films",
+        "experiment explainers",
+        "engineering blogs"
+      ],
+      "not": "Not doodle notebook or bullet journal: a working record, dated and numbered in ballpoint on quad grid, no doodles or stickers.",
+      "search": [
+        "lab notebook animation",
+        "handwritten research notes motion graphics",
+        "graph paper notebook explainer"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "technical-minimal"
+        ],
+        "typography": [
+          "handwritten"
+        ],
+        "material": [
+          "paper"
+        ],
+        "stroke": [
+          "hand-drawn",
+          "thin"
+        ],
+        "color": [
+          "limited-palette"
+        ],
+        "composition": [
+          "typography-led"
+        ],
+        "format": [
+          "educational-motion",
+          "process-explainer"
+        ],
+        "motion-language": [
+          "handmade-imperfect"
+        ],
+        "transitions": [
+          "line-draw",
+          "wipe"
+        ],
+        "tone": [
+          "intellectual",
+          "human"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f3f5f0",
+          "ink": "#1f2a5c",
+          "accent": "#c8322b",
+          "accent2": "#8fb1c9",
+          "surface": "#fbfcf8",
+          "muted": "#69728f"
+        },
+        "fonts": {
+          "display": "Kalam",
+          "body": "Kalam",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "list",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grid",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask",
+        "density": "dense",
+        "labels": {
+          "kicker": "Notebook 3 · p. 42",
+          "title": "Entries",
+          "date": "14 Mar",
+          "items": [
+            "Sample prepared",
+            "Baseline reading",
+            "Repeat three times",
+            "Unexpected result",
+            "Check calibration",
+            "Witnessed and signed"
+          ],
+          "tags": [
+            "09:10",
+            "09:45",
+            "10:30",
+            "11:05",
+            "13:20",
+            "sign"
+          ]
+        }
+      }
+    },
+    {
+      "id": "patent-drawing",
+      "name": "Patent drawing",
+      "aka": [
+        "patent illustration",
+        "patent figure",
+        "USPTO drawing",
+        "technical line drawing"
+      ],
+      "what": "Black ink line art on bright white: a device drawn in isometric, grey-shaded faces, reference numerals and a lettered FIG. 1; no colour.",
+      "feels": [
+        "exact",
+        "inventive",
+        "matter-of-fact"
+      ],
+      "use": [
+        "hardware and invention stories",
+        "how-it-works explainers",
+        "IP and deep-tech launches",
+        "maker brands"
+      ],
+      "not": "Not a blueprint: black line on white with no grid or blue ground; parts are shaded grey and carry reference numerals.",
+      "search": [
+        "patent drawing animation",
+        "patent illustration style motion",
+        "technical line drawing isometric animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "monochrome"
+        ],
+        "illustration": [
+          "technical-diagram",
+          "axonometric"
+        ],
+        "color": [
+          "black-and-white"
+        ],
+        "stroke": [
+          "thin",
+          "technical"
+        ],
+        "texture": [
+          "hatching"
+        ],
+        "depth": [
+          "isometric"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "line-draw",
+          "wipe"
+        ],
+        "tone": [
+          "technical",
+          "serious"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fbfbf9",
+          "ink": "#111111",
+          "accent": "#efefec",
+          "accent2": "#d6d6d2",
+          "surface": "#ffffff",
+          "muted": "#6b6b6b"
+        },
+        "fonts": {
+          "display": "Old Standard TT",
+          "body": "Old Standard TT",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "isometric",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "hatching",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask",
+        "density": "dense",
+        "labels": {
+          "kicker": "FIG. 1"
+        }
+      }
+    },
+    {
+      "id": "engineering-drawing",
+      "name": "Engineering drawing",
+      "aka": [
+        "orthographic drawing",
+        "technical drawing",
+        "CAD drawing sheet",
+        "drafting sheet",
+        "ISO drawing"
+      ],
+      "what": "A drafting sheet: black linework on white film, a round part in front view with centre lines, dimension callouts, border frame and red markup.",
+      "feels": [
+        "precise",
+        "engineered",
+        "calm"
+      ],
+      "use": [
+        "hardware and manufacturing",
+        "product engineering films",
+        "industrial design",
+        "spec reveals"
+      ],
+      "not": "Not blueprint: black line on white drafting film, not white on blue; dimensioned and framed like a real CAD sheet.",
+      "search": [
+        "engineering drawing animation",
+        "orthographic technical drawing motion graphics",
+        "CAD drawing reveal"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "monochrome"
+        ],
+        "illustration": [
+          "technical-diagram",
+          "schematic"
+        ],
+        "stroke": [
+          "hairline",
+          "technical"
+        ],
+        "color": [
+          "black-and-white",
+          "accent-color-system"
+        ],
+        "composition": [
+          "negative-space",
+          "asymmetric"
+        ],
+        "camera": [
+          "orthographic"
+        ],
+        "typography": [
+          "condensed",
+          "monospace"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "line-draw",
+          "wipe"
+        ],
+        "tone": [
+          "technical"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f6f6f2",
+          "ink": "#141414",
+          "accent": "#1c1c1c",
+          "accent2": "#d7262e",
+          "surface": "#ffffff",
+          "muted": "#707070"
+        },
+        "fonts": {
+          "display": "Sofia Sans Condensed",
+          "body": "Sofia Sans",
+          "displayWeight": 600,
+          "case": "upper",
+          "tracking": 0.03
+        },
+        "layout": "hud",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "crosshair",
+        "motion": "mask",
+        "labels": {
+          "hud": "DWG A-1042 · Sheet 1 of 3",
+          "readouts": [
+            "Ø 42.00",
+            "R 12",
+            "± 0.05",
+            "1:2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "topographic-survey",
+      "name": "Topographic survey map",
+      "aka": [
+        "topo map",
+        "USGS quad",
+        "contour map",
+        "survey sheet",
+        "Ordnance Survey style"
+      ],
+      "what": "A survey quad: brown contour lines, woodland-green land tint, blue water, a red trail between pins, compass, scale bar and fine sans lettering.",
+      "feels": [
+        "grounded",
+        "exploratory",
+        "precise"
+      ],
+      "use": [
+        "outdoor and travel brands",
+        "field research stories",
+        "site and land explainers",
+        "expedition films"
+      ],
+      "not": "Not a map explainer: a surveyor's sheet with contours, land tints and a scale bar, not bold news markers on a dot grid.",
+      "search": [
+        "topographic map animation",
+        "contour lines motion graphics",
+        "USGS topo map style video"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal"
+        ],
+        "data-viz": [
+          "map"
+        ],
+        "format": [
+          "map-animation"
+        ],
+        "camera": [
+          "top-down"
+        ],
+        "color": [
+          "earth-tones"
+        ],
+        "stroke": [
+          "thin",
+          "technical"
+        ],
+        "texture": [
+          "paper-grain"
+        ],
+        "motion-function": [
+          "show-location"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "line-draw",
+          "zoom"
+        ],
+        "tone": [
+          "technical",
+          "calm"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#d4e5ea",
+          "ink": "#3a2a1c",
+          "accent": "#b8412a",
+          "accent2": "#3a7fb4",
+          "surface": "#dbe7c4",
+          "muted": "#7b6a55"
+        },
+        "fonts": {
+          "display": "Archivo Narrow",
+          "body": "Archivo",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.03
+        },
+        "layout": "map",
+        "radius": 2,
+        "stroke": {
+          "width": 2,
+          "color": "#8a5a32",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "none",
+        "motif": "contours",
+        "motion": "mask",
+        "density": "dense",
+        "labels": {
+          "kicker": "Quadrangle 7.5′",
+          "places": [
+            "Trailhead",
+            "Spring",
+            "Saddle",
+            "Summit"
+          ]
+        }
+      }
+    },
+    {
+      "id": "celestial-atlas",
+      "name": "Celestial atlas",
+      "aka": [
+        "star chart",
+        "star atlas",
+        "constellation map",
+        "uranography",
+        "antique sky map"
+      ],
+      "what": "An engraved star-atlas plate: midnight-blue ground, pale-gold star points and double-ruled frame, a cartouche title in Fell small caps.",
+      "feels": [
+        "awed",
+        "timeless",
+        "scholarly"
+      ],
+      "use": [
+        "astronomy and space stories",
+        "science documentaries",
+        "planetarium and museum",
+        "brand origin myths"
+      ],
+      "not": "Not orbital space: an antique engraved plate with gold rules and star points, not a black void with orbit paths.",
+      "search": [
+        "star atlas animation",
+        "antique celestial map motion graphics",
+        "constellation chart title design"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial"
+        ],
+        "illustration": [
+          "ink"
+        ],
+        "color": [
+          "limited-palette",
+          "dark-ui"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "stroke": [
+          "double-line",
+          "hairline"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "composition": [
+          "centered-hero",
+          "symmetrical"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "pacing": [
+          "slow"
+        ],
+        "transitions": [
+          "dissolve",
+          "fade"
+        ],
+        "tone": [
+          "mysterious",
+          "intellectual"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0f1c33",
+          "ink": "#efe6cc",
+          "accent": "#d6b36a",
+          "accent2": "#9fb3d1",
+          "surface": "#15284a",
+          "muted": "#8e98ad"
+        },
+        "fonts": {
+          "display": "IM Fell English SC",
+          "body": "IM Fell English",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.04
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "accent",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "grain",
+        "icons": "line",
+        "motif": "stars",
+        "motion": "fade",
+        "effects": [
+          "vignette"
+        ]
+      }
+    },
+    {
+      "id": "histology-stain",
+      "name": "Histology stain (H&E)",
+      "aka": [
+        "H&E stain",
+        "microscope slide",
+        "stained section",
+        "pathology slide",
+        "micrograph"
+      ],
+      "what": "Stained tissue under glass: eosin-pink and haematoxylin-violet cell blobs washing a slide-white field, frosted panels and clean lab sans.",
+      "feels": [
+        "organic",
+        "clinical",
+        "curious"
+      ],
+      "use": [
+        "biotech and pharma",
+        "medical research stories",
+        "healthcare explainers",
+        "lab and diagnostics brands"
+      ],
+      "not": "Not organic biomorphic: the blobs are stained cells on a glass slide in eosin pink and haematoxylin violet, labelled like a lab.",
+      "search": [
+        "microscope slide animation",
+        "H&E stain motion graphics",
+        "cell biology explainer style"
+      ],
+      "stack": {
+        "visual-style": [
+          "organic-biomorphic",
+          "clean-minimal"
+        ],
+        "color": [
+          "limited-palette",
+          "pastel"
+        ],
+        "shape": [
+          "blob",
+          "organic"
+        ],
+        "material": [
+          "glass"
+        ],
+        "camera": [
+          "macro",
+          "rack-focus"
+        ],
+        "format": [
+          "educational-motion",
+          "concept-explainer"
+        ],
+        "motion-language": [
+          "organic"
+        ],
+        "transitions": [
+          "dissolve",
+          "zoom"
+        ],
+        "tone": [
+          "intellectual",
+          "calm"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fbf6f9",
+          "ink": "#2e1a47",
+          "accent": "#e46aa0",
+          "accent2": "#6b4fa0",
+          "surface": "#ffffff",
+          "muted": "#8a7596"
+        },
+        "fonts": {
+          "display": "Public Sans",
+          "body": "Public Sans",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "cards",
+        "radius": 6,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "accent2",
+        "surface": "glass",
+        "texture": "riso",
+        "icons": "line",
+        "iconSet": "geometric",
+        "motif": "blobs",
+        "motion": "fade",
+        "labels": {
+          "title": "Section 04 · ×400",
+          "badge": "H&E"
+        }
+      }
+    },
+    {
+      "id": "radiology-viewer",
+      "name": "Radiology viewer (MRI)",
+      "aka": [
+        "MRI scan",
+        "DICOM viewer",
+        "medical imaging",
+        "fMRI heat map",
+        "CT scan"
+      ],
+      "what": "A radiology workstation: greyscale scan panes on black, DICOM corner text, fine noise, and one hot-orange false-colour signal.",
+      "feels": [
+        "clinical",
+        "serious",
+        "revealing"
+      ],
+      "use": [
+        "medtech and health AI",
+        "neuroscience stories",
+        "diagnostics launches",
+        "research explainers"
+      ],
+      "not": "Not a dark ops dashboard: greyscale scan panes and corner metadata; colour appears only where the false-colour signal is.",
+      "search": [
+        "MRI scan motion graphics",
+        "medical imaging UI animation",
+        "radiology viewer style video"
+      ],
+      "stack": {
+        "visual-style": [
+          "monochrome",
+          "technical-minimal"
+        ],
+        "color": [
+          "grayscale",
+          "accent-color-system"
+        ],
+        "ui-treatment": [
+          "dashboard-ui"
+        ],
+        "composition": [
+          "modular-grid"
+        ],
+        "data-viz": [
+          "heat-map"
+        ],
+        "texture": [
+          "digital-noise"
+        ],
+        "typography": [
+          "monospace",
+          "neo-grotesk"
+        ],
+        "color-grade": [
+          "cool-clinical"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "crossfade",
+          "wipe"
+        ],
+        "tone": [
+          "serious",
+          "technical"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#050505",
+          "ink": "#e4e4e4",
+          "accent": "#ff7a1a",
+          "accent2": "#3c3c3c",
+          "surface": "#131313",
+          "muted": "#8a8a8a"
+        },
+        "fonts": {
+          "display": "Chivo",
+          "body": "Chivo Mono",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "bento",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "#2e2e2e",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "line",
+        "iconSet": "geometric",
+        "motif": "crosshair",
+        "motion": "mask",
+        "density": "dense",
+        "labels": {
+          "kicker": "SE 4 · IM 12",
+          "stat": "T2",
+          "people": "Axial · 3 mm · W 400 L 40"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "periodic-table",
+      "name": "Periodic table",
+      "aka": [
+        "element tiles",
+        "periodic table grid",
+        "chemistry chart",
+        "element cell"
+      ],
+      "what": "Square element cells on white, hairline black rules, big symbols with small numbers, category colours: metal yellow, gas blue.",
+      "feels": [
+        "orderly",
+        "clever",
+        "friendly"
+      ],
+      "use": [
+        "science education",
+        "materials and chemistry brands",
+        "systems and taxonomy explainers",
+        "listicle films"
+      ],
+      "not": "Not bento showcase: a strict chart of equal square cells, ruled and colour-coded by category, not rounded product tiles.",
+      "search": [
+        "periodic table animation",
+        "element tile motion graphics",
+        "periodic table style design"
+      ],
+      "stack": {
+        "visual-style": [
+          "swiss-international"
+        ],
+        "composition": [
+          "modular-grid",
+          "bento-grid"
+        ],
+        "color": [
+          "color-blocking"
+        ],
+        "shape": [
+          "rectilinear",
+          "grid-based"
+        ],
+        "stroke": [
+          "thin",
+          "uniform"
+        ],
+        "typography": [
+          "grotesk"
+        ],
+        "format": [
+          "educational-motion",
+          "animated-infographic"
+        ],
+        "data-viz": [
+          "table"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "transitions": [
+          "hard-cut",
+          "scale"
+        ],
+        "tone": [
+          "intellectual",
+          "friendly"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f4f4f0",
+          "ink": "#161616",
+          "accent": "#f5c542",
+          "accent2": "#8cc6e8",
+          "surface": "#ffffff",
+          "muted": "#737373"
+        },
+        "fonts": {
+          "display": "Work Sans",
+          "body": "Work Sans",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "bento",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "stat": "79 Au",
+          "people": "118 elements · 18 groups"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "nautical-chart",
+      "name": "Nautical chart",
+      "aka": [
+        "sea chart",
+        "hydrographic chart",
+        "navigation chart",
+        "admiralty chart"
+      ],
+      "what": "A hydrographic chart: pale-blue water, buff land, a magenta course line and notes, graticule ticks and an upright serif title.",
+      "feels": [
+        "steady",
+        "adventurous",
+        "exact"
+      ],
+      "use": [
+        "maritime and logistics",
+        "travel and expedition films",
+        "ocean science",
+        "supply-route explainers"
+      ],
+      "not": "Not a topographic survey: the sea is the subject, pale blue with magenta navigation notes; the land is left blank buff.",
+      "search": [
+        "nautical chart animation",
+        "sea chart motion graphics",
+        "navigation chart route animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "print-editorial"
+        ],
+        "data-viz": [
+          "map"
+        ],
+        "format": [
+          "map-animation"
+        ],
+        "camera": [
+          "top-down"
+        ],
+        "color": [
+          "cool-palette",
+          "limited-palette"
+        ],
+        "stroke": [
+          "thin",
+          "technical"
+        ],
+        "typography": [
+          "serif-editorial"
+        ],
+        "motion-function": [
+          "show-location"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "line-draw",
+          "push"
+        ],
+        "tone": [
+          "calm",
+          "technical"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#d2e5ee",
+          "ink": "#0f2a44",
+          "accent": "#b4177d",
+          "accent2": "#e0b43a",
+          "surface": "#f2e6c2",
+          "muted": "#5a7187"
+        },
+        "fonts": {
+          "display": "Spectral",
+          "body": "Spectral",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.05
+        },
+        "layout": "map",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "slide",
+        "density": "dense",
+        "labels": {
+          "kicker": "Chart 2 · Soundings in metres",
+          "places": [
+            "Harbour",
+            "Buoy 4",
+            "Light",
+            "Anchorage"
+          ]
+        }
+      }
+    },
+    {
+      "id": "seismograph-record",
+      "name": "Seismograph record",
+      "aka": [
+        "seismogram",
+        "helicorder",
+        "drum recorder",
+        "earthquake trace"
+      ],
+      "what": "A drum-recorder sheet: black trace on white graph paper, red time marks, one magnitude set huge and a station code in mono.",
+      "feels": [
+        "urgent",
+        "factual",
+        "tense"
+      ],
+      "use": [
+        "disaster and resilience stories",
+        "science news",
+        "risk and insurance films",
+        "impact reports"
+      ],
+      "not": "Not metric count-up: a paper instrument record, black on grid with red time marks, not a bold marketing number.",
+      "search": [
+        "seismograph animation",
+        "earthquake data motion graphics",
+        "seismogram style infographic"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "monochrome"
+        ],
+        "data-viz": [
+          "line-graph",
+          "statistic"
+        ],
+        "format": [
+          "data-visualization",
+          "statistics-animation"
+        ],
+        "color": [
+          "black-and-white",
+          "accent-color-system"
+        ],
+        "stroke": [
+          "hairline",
+          "technical"
+        ],
+        "typography": [
+          "condensed",
+          "monospace"
+        ],
+        "composition": [
+          "asymmetric",
+          "negative-space"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "wipe",
+          "line-draw"
+        ],
+        "tone": [
+          "urgent",
+          "technical"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fafaf7",
+          "ink": "#111111",
+          "accent": "#d7261e",
+          "accent2": "#9a9a9a",
+          "surface": "#ffffff",
+          "muted": "#6d6d6d"
+        },
+        "fonts": {
+          "display": "IBM Plex Sans Condensed",
+          "body": "IBM Plex Mono",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02,
+          "mono": "IBM Plex Mono"
+        },
+        "layout": "bignumber",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grid",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask",
+        "labels": {
+          "stat": "M 6.4",
+          "caption": "Peak ground motion · station 04",
+          "kicker": "Seismic record",
+          "title": "Trace",
+          "readouts": [
+            "12 km",
+            "38 s",
+            "VII"
+          ],
+          "metrics": [
+            "depth",
+            "duration",
+            "intensity"
+          ]
+        },
+        "chart": "jagged",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flight-checklist",
+      "name": "Flight checklist",
+      "aka": [
+        "flight data file",
+        "Apollo checklist",
+        "mission procedures",
+        "space program manual",
+        "procedure card"
+      ],
+      "what": "A sixties space-program procedures card: off-white stock, black geometric caps, numbered steps with boxed crew codes and a safety-orange mark.",
+      "feels": [
+        "disciplined",
+        "heroic",
+        "clear"
+      ],
+      "use": [
+        "launches and countdowns",
+        "onboarding and how-to films",
+        "aerospace and deep tech",
+        "process explainers"
+      ],
+      "not": "Not mission control: the printed card the crew holds, black caps on paper and a checklist, not glowing screens.",
+      "search": [
+        "Apollo checklist design animation",
+        "NASA manual style motion graphics",
+        "checklist countdown video"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist",
+          "technical-minimal"
+        ],
+        "era": [
+          "mid-century-modern"
+        ],
+        "typography": [
+          "geometric-sans"
+        ],
+        "composition": [
+          "typography-led"
+        ],
+        "data-viz": [
+          "ranking-list"
+        ],
+        "color": [
+          "limited-palette",
+          "accent-color-system"
+        ],
+        "material": [
+          "paper"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "hard-cut",
+          "wipe"
+        ],
+        "tone": [
+          "technical",
+          "confident"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eeebe1",
+          "ink": "#151515",
+          "accent": "#e0561a",
+          "accent2": "#2c5aa0",
+          "surface": "#f8f6ef",
+          "muted": "#6b675e"
+        },
+        "fonts": {
+          "display": "League Spartan",
+          "body": "Jost",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "list",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "rules",
+        "motion": "snap",
+        "density": "dense",
+        "labels": {
+          "kicker": "Flight data file · Rev. B",
+          "title": "Procedure 4-12",
+          "date": "T–00:30",
+          "items": [
+            "Cabin pressure — verify",
+            "Guidance — align",
+            "Fuel cells — on line",
+            "Comms — check",
+            "Cameras — configure",
+            "Crew — go"
+          ],
+          "tags": [
+            "CDR",
+            "PLT",
+            "ENG",
+            "CDR",
+            "PLT",
+            "ALL"
+          ]
+        }
+      }
+    },
+    {
+      "id": "spectroscopy",
+      "name": "Spectroscopy",
+      "aka": [
+        "prism spectrum",
+        "spectral lines",
+        "light dispersion",
+        "spectrograph",
+        "optics bench"
+      ],
+      "what": "White light split by a prism across a black bench: fine spectral beams, one sodium-yellow line measured huge in nanometres, mono read-outs.",
+      "feels": [
+        "luminous",
+        "precise",
+        "curious"
+      ],
+      "use": [
+        "optics and photonics",
+        "lighting and display tech",
+        "physics explainers",
+        "brand films about light"
+      ],
+      "not": "Not holographic iridescent: a physics bench with a prism and one measured spectral line on black, not a shimmering foil surface.",
+      "search": [
+        "prism spectrum animation",
+        "light dispersion motion graphics",
+        "spectroscopy explainer visuals"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal"
+        ],
+        "effects": [
+          "refraction",
+          "light-streaks"
+        ],
+        "color": [
+          "dark-ui",
+          "accent-color-system"
+        ],
+        "typography": [
+          "monospace",
+          "neo-grotesk"
+        ],
+        "data-viz": [
+          "statistic",
+          "line-graph"
+        ],
+        "composition": [
+          "asymmetric",
+          "negative-space"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "light-wipe",
+          "fade"
+        ],
+        "tone": [
+          "intellectual",
+          "cinematic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0a0a0d",
+          "ink": "#f1f1f3",
+          "accent": "#ffd23a",
+          "accent2": "#8a93a6",
+          "surface": "#14141a",
+          "muted": "#8a8a96"
+        },
+        "fonts": {
+          "display": "DM Mono",
+          "body": "DM Sans",
+          "displayWeight": 500,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "bignumber",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "#2a2a33",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "refraction",
+        "motion": "mask",
+        "labels": {
+          "stat": "589 nm",
+          "caption": "Sodium D line · emission",
+          "kicker": "Spectral line",
+          "title": "Intensity"
+        }
+      }
+    },
+    {
+      "id": "museum-specimen-label",
+      "name": "Museum specimen label",
+      "aka": [
+        "natural history label",
+        "collection label",
+        "type specimen tag",
+        "herbarium label"
+      ],
+      "what": "A specimen drawer: cream typewritten labels with fine black borders on dark cabinet green, catalogue numbers and a red type-specimen tag.",
+      "feels": [
+        "curious",
+        "scholarly",
+        "quiet"
+      ],
+      "use": [
+        "museum and heritage",
+        "natural history stories",
+        "collections and archives",
+        "craft and provenance films"
+      ],
+      "not": "Not archival documentary: small typed labels in a cabinet drawer, catalogue-numbered, not sepia photos panned on paper.",
+      "search": [
+        "museum label animation",
+        "natural history specimen label design",
+        "collection tag motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "documentary"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "paper-grain"
+        ],
+        "typography": [
+          "serif-editorial",
+          "monospace"
+        ],
+        "composition": [
+          "stacked-cards"
+        ],
+        "color": [
+          "earth-tones",
+          "muted"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "dissolve",
+          "card-flip"
+        ],
+        "tone": [
+          "nostalgic",
+          "intellectual"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#2f3d36",
+          "ink": "#efe9d8",
+          "accent": "#b3261e",
+          "accent2": "#d8c99f",
+          "surface": "#f5efdc",
+          "muted": "#a8b0a6"
+        },
+        "fonts": {
+          "display": "Gelasio",
+          "body": "Courier Prime",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "stack",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "#2b2b2b",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "grain",
+        "icons": "line",
+        "iconSet": "nature",
+        "motif": "none",
+        "motion": "fade",
+        "labels": {
+          "kicker": "Coll. No. 1893.412",
+          "items": [
+            "Holotype · north ridge",
+            "Paratype · the spring",
+            "Coll. on the slope",
+            "Det. by the curator"
+          ]
+        }
+      }
+    },
+    {
+      "id": "geologic-time-scale",
+      "name": "Geologic time scale",
+      "aka": [
+        "stratigraphic chart",
+        "deep time chart",
+        "geological timeline",
+        "strata column"
+      ],
+      "what": "The stratigraphic chart: period names on an axis in millions of years, stone-white ground, strata-green progress and plain sans.",
+      "feels": [
+        "vast",
+        "patient",
+        "grounded"
+      ],
+      "use": [
+        "history and heritage films",
+        "climate and earth science",
+        "company anniversaries",
+        "long-view manifestos"
+      ],
+      "not": "Not a timeline explainer: deep time in millions of years with named periods and stratigraphic colour, no product milestones.",
+      "search": [
+        "geologic time scale animation",
+        "deep time timeline motion graphics",
+        "stratigraphy explainer video"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial",
+          "clean-minimal"
+        ],
+        "format": [
+          "timeline",
+          "educational-motion"
+        ],
+        "data-viz": [
+          "timeline"
+        ],
+        "composition": [
+          "timeline"
+        ],
+        "color": [
+          "earth-tones",
+          "analogous"
+        ],
+        "typography": [
+          "grotesk"
+        ],
+        "stroke": [
+          "medium"
+        ],
+        "narrative": [
+          "timeline"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "push",
+          "wipe"
+        ],
+        "tone": [
+          "intellectual",
+          "calm"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eef0ea",
+          "ink": "#26241f",
+          "accent": "#5f8a3a",
+          "accent2": "#d9542c",
+          "surface": "#f8f8f4",
+          "muted": "#77736a"
+        },
+        "fonts": {
+          "display": "Karla",
+          "body": "Karla",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "timeline",
+        "radius": 0,
+        "stroke": {
+          "width": 3,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "line",
+        "motif": "rules",
+        "motion": "slide",
+        "density": "dense",
+        "labels": {
+          "kicker": "Palaeozoic era",
+          "steps": [
+            "Cambrian",
+            "Ordovician",
+            "Silurian",
+            "Devonian",
+            "Carbonif.",
+            "Permian",
+            "Triassic"
+          ],
+          "dates": [
+            "541 Ma",
+            "485",
+            "444",
+            "419",
+            "359",
+            "299",
+            "252"
+          ],
+          "badge": "Current stratum"
+        }
+      }
+    },
+    {
+      "id": "skew-t-sounding",
+      "name": "Skew-T sounding",
+      "aka": [
+        "radiosonde plot",
+        "skew-T log-P",
+        "atmospheric sounding",
+        "weather balloon chart"
+      ],
+      "what": "A meteorologist's sounding chart: fine grid on white, a red temperature trace and green dashed dewpoint, pressure in hPa, plain condensed labels.",
+      "feels": [
+        "analytical",
+        "trustworthy",
+        "airy"
+      ],
+      "use": [
+        "weather and climate",
+        "energy and forecasting",
+        "aviation",
+        "risk and data explainers"
+      ],
+      "not": "Not data journalism: an instrument chart from meteorology, grid-led with red and green traces, no newsroom serif or furniture.",
+      "search": [
+        "skew-T chart design",
+        "weather balloon data visualization",
+        "meteorology chart motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "clean-minimal"
+        ],
+        "data-viz": [
+          "line-graph"
+        ],
+        "format": [
+          "data-visualization",
+          "technical-explainer"
+        ],
+        "color": [
+          "complementary",
+          "light-ui"
+        ],
+        "stroke": [
+          "thin",
+          "technical"
+        ],
+        "typography": [
+          "condensed"
+        ],
+        "texture": [
+          "clean"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "line-draw",
+          "wipe"
+        ],
+        "tone": [
+          "technical",
+          "trustworthy"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#fcfcfa",
+          "ink": "#1d232a",
+          "accent": "#d62728",
+          "accent2": "#2a9d3a",
+          "surface": "#ffffff",
+          "muted": "#6b7580"
+        },
+        "fonts": {
+          "display": "Encode Sans Condensed",
+          "body": "Encode Sans",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "data",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "#9aa5b1",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grid",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask",
+        "labels": {
+          "stat": "−21°"
+        }
+      }
+    },
+    {
+      "id": "collider-event-display",
+      "name": "Collider event display",
+      "aka": [
+        "particle detector display",
+        "CERN-style event display",
+        "particle tracks",
+        "detector cross-section"
+      ],
+      "what": "A detector cross-section on black: concentric grey barrel rings, curling yellow particle tracks, cyan energy deposits, run and event numbers.",
+      "feels": [
+        "rigorous",
+        "vast",
+        "electric"
+      ],
+      "use": [
+        "physics and research",
+        "deep-tech and compute",
+        "science documentaries",
+        "data-at-scale stories"
+      ],
+      "not": "Not a sci-fi HUD: a real detector read-out, rings and curling tracks on black with no glow, brackets or targeting.",
+      "search": [
+        "particle physics event display animation",
+        "CERN detector graphics",
+        "particle tracks motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "futuristic-tech"
+        ],
+        "illustration": [
+          "technical-diagram"
+        ],
+        "composition": [
+          "radial",
+          "negative-space"
+        ],
+        "color": [
+          "dark-ui",
+          "complementary"
+        ],
+        "stroke": [
+          "hairline"
+        ],
+        "typography": [
+          "geometric-sans",
+          "monospace"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "zoom",
+          "flash"
+        ],
+        "tone": [
+          "intellectual",
+          "futuristic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#06080b",
+          "ink": "#e9edf1",
+          "accent": "#f2c200",
+          "accent2": "#29b6d9",
+          "surface": "#11161c",
+          "muted": "#7d8793"
+        },
+        "fonts": {
+          "display": "Saira",
+          "body": "Saira",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "hud",
+        "radius": 0,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "orbits",
+        "motion": "snap",
+        "labels": {
+          "hud": "Run 412 · Event 88 031",
+          "readouts": [
+            "√s 13.6 TeV",
+            "pT 42 GeV",
+            "η 1.2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "card-catalogue",
+      "name": "Card catalogue",
+      "aka": [
+        "library index card",
+        "catalog card",
+        "card index",
+        "archive file card"
+      ],
+      "what": "A typed library card lifted from an oak drawer: cream stock, call number, all-caps typewriter heading and indented entries.",
+      "feels": [
+        "patient",
+        "nostalgic",
+        "orderly"
+      ],
+      "use": [
+        "libraries and archives",
+        "research and knowledge products",
+        "heritage brands",
+        "book and publishing"
+      ],
+      "not": "Not a screenplay page: a small catalogue card on oak, call number and entries, not a script on a bare page.",
+      "search": [
+        "library card catalog animation",
+        "index card typewriter motion graphics",
+        "archive card design video"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial"
+        ],
+        "typography": [
+          "monospace"
+        ],
+        "material": [
+          "paper",
+          "wood"
+        ],
+        "texture": [
+          "paper-grain"
+        ],
+        "composition": [
+          "centered-hero"
+        ],
+        "color": [
+          "earth-tones"
+        ],
+        "shadow": [
+          "floating"
+        ],
+        "ui-interaction": [
+          "typing"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "slide",
+          "card-flip"
+        ],
+        "tone": [
+          "nostalgic",
+          "intellectual"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#6b4a2f",
+          "ink": "#f3ead6",
+          "accent": "#b8322a",
+          "accent2": "#d9c8a4",
+          "surface": "#f7f1e1",
+          "muted": "#cbb998"
+        },
+        "fonts": {
+          "display": "Cutive Mono",
+          "body": "Cutive Mono",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "terminal",
+        "radius": 4,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "float",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "type",
+        "chrome": "none",
+        "labels": {
+          "window": "QA 76.9 · C3 · 1987",
+          "lines": [
+            "Field notes on light and instruments",
+            "212 p. : ill. ; 24 cm",
+            "1. Optics   2. Instruments",
+            "Shelved: stack 4, row C"
+          ]
+        }
+      }
+    },
+    {
+      "id": "genome-browser",
+      "name": "Genome browser",
+      "aka": [
+        "genome track view",
+        "sequencing tracks",
+        "genomics viewer",
+        "DNA sequence browser"
+      ],
+      "what": "Stacked sequencing tracks on white: a coordinate header, numbered track rows, file-type chips in genome-browser blue and dense mono labels.",
+      "feels": [
+        "precise",
+        "dense",
+        "modern"
+      ],
+      "use": [
+        "genomics and biotech",
+        "health data platforms",
+        "research tools",
+        "AI-for-science launches"
+      ],
+      "not": "Not developer docs: horizontal data tracks on a genomic coordinate, ruled and labelled, not prose and code.",
+      "search": [
+        "genome browser visualization",
+        "DNA sequencing motion graphics",
+        "genomics data UI animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "clean-minimal"
+        ],
+        "data-viz": [
+          "table"
+        ],
+        "ui-treatment": [
+          "dashboard-ui",
+          "simplified-ui"
+        ],
+        "typography": [
+          "monospace",
+          "neo-grotesk"
+        ],
+        "color": [
+          "light-ui",
+          "accent-color-system"
+        ],
+        "composition": [
+          "modular-grid"
+        ],
+        "motion-language": [
+          "linear"
+        ],
+        "transitions": [
+          "push",
+          "wipe"
+        ],
+        "tone": [
+          "technical",
+          "intellectual"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ffffff",
+          "ink": "#1b1f24",
+          "accent": "#1f4fa8",
+          "accent2": "#c8102e",
+          "surface": "#f4f6f9",
+          "muted": "#6a737d"
+        },
+        "fonts": {
+          "display": "Source Code Pro",
+          "body": "Source Sans 3",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "list",
+        "radius": 2,
+        "stroke": {
+          "width": 1,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "grid",
+        "motion": "slide",
+        "density": "dense",
+        "labels": {
+          "kicker": "chr7 : 55,019,017",
+          "title": "Tracks",
+          "date": "hg38",
+          "items": [
+            "Coverage",
+            "Reference · ACGT",
+            "Gene model",
+            "Variants",
+            "Conservation",
+            "Aligned reads"
+          ],
+          "tags": [
+            "bigWig",
+            "fasta",
+            "exon",
+            "SNV",
+            "phyloP",
+            "BAM"
+          ]
+        }
+      }
+    },
+    {
+      "id": "oscilloscope-trace",
+      "name": "Oscilloscope trace",
+      "aka": [
+        "scope trace",
+        "phosphor oscilloscope",
+        "waveform display",
+        "bench scope"
+      ],
+      "what": "A bench-scope screen: graticule grid on near-black, phosphor-green and yellow channel traces, centre cross and readouts in plain mono.",
+      "feels": [
+        "technical",
+        "analog",
+        "focused"
+      ],
+      "use": [
+        "audio and hardware",
+        "signal and sensor tech",
+        "engineering explainers",
+        "music-tech launches"
+      ],
+      "not": "Not a green-screen terminal: a measuring instrument with a graticule and two coloured waveforms, not lines of text.",
+      "search": [
+        "oscilloscope animation",
+        "waveform motion graphics",
+        "scope trace style video"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "monochrome"
+        ],
+        "data-viz": [
+          "line-graph"
+        ],
+        "ui-treatment": [
+          "retro-ui"
+        ],
+        "color": [
+          "dark-ui",
+          "limited-palette"
+        ],
+        "typography": [
+          "monospace"
+        ],
+        "lighting": [
+          "screen-glow"
+        ],
+        "motion-language": [
+          "linear"
+        ],
+        "transitions": [
+          "line-draw",
+          "wipe"
+        ],
+        "tone": [
+          "technical"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#08120d",
+          "ink": "#d7efdc",
+          "accent": "#8ff0a8",
+          "accent2": "#f2d024",
+          "surface": "#0e1a13",
+          "muted": "#6f8a78"
+        },
+        "fonts": {
+          "display": "Share Tech Mono",
+          "body": "Share Tech Mono",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "data",
+        "radius": 4,
+        "stroke": {
+          "width": 1,
+          "color": "#2c4a38",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grid",
+        "icons": "none",
+        "motif": "crosshair",
+        "motion": "mask",
+        "labels": {
+          "stat": "1 kHz"
+        },
+        "chart": "wave"
+      }
+    },
+    {
+      "id": "thermal-imaging",
+      "name": "Thermal imaging",
+      "aka": [
+        "infrared camera",
+        "ironbow thermography",
+        "heat camera",
+        "IR imaging"
+      ],
+      "what": "An infrared camera frame: a full-bleed scene in a heat ramp from violet-black through red-orange to a white-hot spot, with an emissivity and spot readout.",
+      "feels": [
+        "revealing",
+        "tense",
+        "investigative"
+      ],
+      "use": [
+        "energy and buildings",
+        "security and inspection",
+        "science documentaries",
+        "climate stories"
+      ],
+      "not": "Not photographic duotone: the ramp reads as temperature, violet to yellow with a spot meter, not an art-directed two-colour print.",
+      "search": [
+        "thermal camera look motion graphics",
+        "infrared thermography video style",
+        "heat map camera overlay"
+      ],
+      "stack": {
+        "visual-style": [
+          "duotone",
+          "technical-minimal"
+        ],
+        "photo-video": [
+          "full-bleed-footage"
+        ],
+        "color-grade": [
+          "duotone-grade"
+        ],
+        "color": [
+          "duotone",
+          "warm-palette"
+        ],
+        "composition": [
+          "full-bleed"
+        ],
+        "typography": [
+          "geometric-sans"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "color-match",
+          "dissolve"
+        ],
+        "tone": [
+          "technical",
+          "mysterious"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#14061a",
+          "ink": "#fbf1e4",
+          "accent": "#ff5a1f",
+          "accent2": "#7a12b0",
+          "surface": "#1f0b26",
+          "muted": "#b59ab0"
+        },
+        "fonts": {
+          "display": "Tomorrow",
+          "body": "Tomorrow",
+          "displayWeight": 600,
+          "case": "upper",
+          "tracking": 0.01
+        },
+        "layout": "photo",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "none",
+        "motif": "crosshair",
+        "motion": "fade",
+        "labels": {
+          "caption": "IR · Spot 36.4 °C · ε 0.95",
+          "kicker": "Thermal survey"
+        },
+        "scene": "portrait",
+        "photoColors": [
+          "#fcfdbf",
+          "#fb8761",
+          "#b5367a",
+          "#3b0f70",
+          "#050014"
+        ]
+      }
+    }
+  ]
+}

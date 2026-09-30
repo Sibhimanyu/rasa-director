@@ -1,0 +1,377 @@
+{
+  "family": { "id": "interface", "name": "Interface", "what": "Native software and operating-system worlds: desktop chrome, phone and watch screens, editors, terminals and tools, each drawn in its own materials, type and colours." },
+  "presets": [
+    {
+      "id": "windows-aero-glass",
+      "name": "Windows Aero glass",
+      "aka": ["Windows 7 Aero", "Aero Glass", "Vista glass UI", "Aero theme"],
+      "what": "Translucent sky-blue glass window frames with a white specular sweep over a deep Harmony-blue desktop, Segoe-style sans and glossy 3D icons.",
+      "feels": ["glossy", "optimistic", "nostalgic"],
+      "use": ["late-2000s nostalgia ads", "desktop software launches", "retro tech explainers"],
+      "not": "Not Frutiger Aero: no bubbles, grass or sky scenes; this is the window chrome itself, dark glass frames on a deep blue desktop.",
+      "search": ["windows 7 aero glass animation", "aero glass UI motion", "vista glass window nostalgia"],
+      "stack": { "visual-style": ["glass", "web-2"], "era": ["glassmorphism", "skeuomorphism"], "ui-treatment": ["windowed-ui", "glassmorphic-ui", "retro-ui"], "material": ["frosted-glass"], "color": ["cool-palette", "gradient"], "iconography": "skeuomorphic", "shadow": ["floating"], "motion-language": ["smooth"], "transitions": ["fade", "scale"] },
+      "recipe": {
+        "palette": { "canvas": "#0d3563", "ink": "#f4f9ff", "accent": "#6fc3ff", "accent2": "#c42b1c", "surface": "#245f99", "muted": "#a8c6e4" },
+        "fonts": { "display": "Noto Sans", "body": "Noto Sans", "displayWeight": 600, "case": "none", "tracking": -0.01 },
+        "layout": "window", "radius": 8, "stroke": { "width": 1, "color": "#bfe3ff", "style": "solid" },
+        "shadow": "float", "shadowColor": "#020c1a", "surface": "glass", "texture": "none", "icons": "emoji3d", "motif": "none", "motion": "fade",
+        "effects": ["glint"], "chrome": "classic",
+        "labels": { "window": "Libraries", "title": "Details", "cta": "OK" }
+      }
+    },
+    {
+      "id": "mac-os-9-platinum",
+      "name": "Mac OS 9 Platinum",
+      "aka": ["Platinum appearance", "Mac OS 8", "classic Mac OS", "late-90s Mac desktop"],
+      "what": "Light platinum-grey windows with fine pinstriped title bars, soft 3D bevels and lavender highlights on a periwinkle desktop, bold Charcoal-style system type.",
+      "feels": ["nostalgic", "orderly", "friendly"],
+      "use": ["creative-tool launches", "late-90s nostalgia films", "indie software teasers"],
+      "not": "Not Windows 95: Platinum is lighter and softer, with pinstriped bars, bevels and lavender, not navy title bars on teal.",
+      "search": ["mac os 9 platinum UI animation", "classic mac os interface motion", "mac os 8 desktop aesthetic"],
+      "stack": { "visual-style": ["metallic", "clean-minimal"], "era": ["retro-os", "nineties"], "ui-treatment": ["retro-ui", "windowed-ui", "skeuomorphic-ui"], "color": ["grayscale", "pastel"], "typography": ["grotesk"], "stroke": ["thin"], "shadow": ["inner"], "motion-language": ["mechanical"], "transitions": ["hard-cut", "zoom"] },
+      "recipe": {
+        "palette": { "canvas": "#8f93c9", "ink": "#000000", "accent": "#ccccff", "accent2": "#3a3a8c", "surface": "#dedede", "muted": "#4d4d4d" },
+        "fonts": { "display": "Archivo", "body": "Archivo", "displayWeight": 800, "case": "none", "tracking": -0.01 },
+        "layout": "window", "radius": 3, "stroke": { "width": 2, "color": "ink", "style": "solid" },
+        "shadow": "inset", "shadowColor": "#555566", "surface": "flat", "texture": "scanlines", "icons": "filled", "motif": "none", "motion": "snap",
+        "chrome": "classic",
+        "labels": { "window": "Macintosh HD", "title": "Get Info", "cta": "OK" }
+      }
+    },
+    {
+      "id": "beos-yellow-tab",
+      "name": "BeOS yellow tab",
+      "aka": ["BeOS", "Haiku OS", "yellow tab windows", "BeOS R5"],
+      "what": "Windows crowned by a narrow sunflower-yellow title tab, flat grey panels with crisp black outlines on a steel-blue desktop, tidy Helvetica-style type.",
+      "feels": ["quirky", "precise", "cult"],
+      "use": ["indie software launches", "developer-culture films", "alt-computing nostalgia"],
+      "not": "Not Windows 95: the title lives in a small yellow tab, not a full-width navy bar, and the desktop is steel blue, not teal.",
+      "search": ["beos yellow tab interface", "haiku os desktop animation", "beos window aesthetic"],
+      "stack": { "visual-style": ["clean-minimal", "corporate-flat"], "era": ["retro-os", "nineties"], "ui-treatment": ["retro-ui", "windowed-ui", "flat-ui"], "color": ["limited-palette", "cool-palette"], "typography": ["neo-grotesk"], "stroke": ["medium"], "shadow": ["hard"], "motion-language": ["snappy"], "transitions": ["hard-cut", "slide"] },
+      "recipe": {
+        "palette": { "canvas": "#336699", "ink": "#ffffff", "accent": "#ffcb00", "accent2": "#111111", "surface": "#dcdcdc", "muted": "#c9d8e8" },
+        "fonts": { "display": "Arimo", "body": "Arimo", "displayWeight": 700, "case": "none", "tracking": -0.01 },
+        "layout": "window", "radius": 0, "stroke": { "width": 2, "color": "#111111", "style": "solid" },
+        "shadow": "hard", "shadowColor": "#1a2c44", "surface": "flat", "texture": "none", "icons": "duotone", "motif": "none", "motion": "snap",
+        "chrome": "tabs",
+        "labels": { "window": "Tracker", "title": "Preferences", "cta": "Done" }
+      }
+    },
+    {
+      "id": "amiga-workbench",
+      "name": "Amiga Workbench",
+      "aka": ["Workbench 1.3", "AmigaOS", "Amiga desktop", "Topaz font"],
+      "what": "Workbench-blue screen with white and orange window gadgets, black outlines, depth boxes in the title bar and chunky Topaz-style bitmap type.",
+      "feels": ["nostalgic", "nerdy", "cheerful"],
+      "use": ["demoscene tributes", "retro game launches", "creative-coding films"],
+      "not": "Not DOS text mode: Workbench is a windowed desktop in blue, white, black and orange, not a full-screen console in DOS blue and yellow.",
+      "search": ["amiga workbench animation", "amiga 500 interface aesthetic", "workbench 1.3 UI"],
+      "stack": { "visual-style": ["pixel-art", "retro-futurism"], "era": ["eighties", "early-desktop"], "ui-treatment": ["retro-ui", "windowed-ui", "terminal-ui"], "color": ["limited-palette", "high-contrast"], "typography": ["pixel"], "stroke": ["medium"], "shadow": ["none"], "motion-language": ["choppy-stepped"], "transitions": ["hard-cut", "pixel-dissolve"] },
+      "recipe": {
+        "palette": { "canvas": "#0055aa", "ink": "#ffffff", "accent": "#ff8800", "accent2": "#000022", "surface": "#004a96", "muted": "#a8c8ec" },
+        "fonts": { "display": "Silkscreen", "body": "VT323", "displayWeight": 700, "case": "upper", "tracking": 0.02 },
+        "layout": "terminal", "radius": 0, "stroke": { "width": 3, "color": "#ffffff", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "pixel", "motif": "none", "motion": "step",
+        "chrome": "classic",
+        "labels": { "window": "Shell", "lines": ["1.SYS:> dir", "  Prefs (dir)    Tools (dir)", "1.SYS:> run preview", "1.SYS:> _"] }
+      }
+    },
+    {
+      "id": "terminal-tui-dashboard",
+      "name": "Terminal TUI dashboard",
+      "aka": ["TUI", "ncurses interface", "htop look", "text user interface"],
+      "what": "Box-drawn panes on a black terminal, block-character meters shading green to red, bracketed key hints along the bottom, one monospace face throughout.",
+      "feels": ["technical", "dense", "honest"],
+      "use": ["CLI tool launches", "infrastructure products", "developer changelog films"],
+      "not": "Not a code editor or green-screen CRT: modern full-colour terminal panes and meters, flat and sharp, no syntax colours and no phosphor glow.",
+      "search": ["TUI dashboard animation", "htop btop terminal aesthetic", "ncurses interface motion"],
+      "stack": { "visual-style": ["technical-minimal", "monochrome"], "era": ["modern-saas"], "ui-treatment": ["terminal-ui", "dashboard-ui"], "color": ["dark-ui", "accent-color-system"], "typography": ["monospace"], "data-viz": ["progress-bar", "dashboard"], "stroke": ["hairline"], "shadow": ["none"], "motion-language": ["mechanical"], "transitions": ["hard-cut"] },
+      "recipe": {
+        "palette": { "canvas": "#0c0c0c", "ink": "#e4e4e4", "accent": "#5fd75f", "accent2": "#ff5f5f", "surface": "#121212", "muted": "#8a8a8a" },
+        "fonts": { "display": "Ubuntu Mono", "body": "Ubuntu Mono", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "terminal", "radius": 0, "stroke": { "width": 1, "color": "#5fd75f", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "glyph", "iconSet": "tech", "motif": "none", "motion": "step",
+        "density": "dense", "chrome": "none",
+        "labels": { "window": "top", "lines": ["CPU [██████████░░░░░] 68%", "MEM [██████░░░░░░░░░] 41%", "NET ▁▂▅▇▅▃▂▁▂▄", "F1 Help  F2 Setup  F10 Quit"] }
+      }
+    },
+    {
+      "id": "tiling-wm-rice",
+      "name": "Tiling window-manager rice",
+      "aka": ["unixporn rice", "i3 / Hyprland desktop", "Gruvbox theme", "tiling WM"],
+      "what": "Gapped tiles on a warm Gruvbox-dark desktop, cream monospace text, mustard and olive accents, a mustard border marking the focused pane.",
+      "feels": ["crafted", "nerdy", "warm"],
+      "use": ["open-source launches", "developer tooling", "dotfiles and setup videos"],
+      "not": "Not dark dev-tool SaaS: warm retro-toned terminal tiles in Gruvbox cream and mustard, mono everywhere, not cool near-black with one indigo accent.",
+      "search": ["tiling window manager rice", "gruvbox desktop aesthetic", "hyprland unixporn setup"],
+      "stack": { "visual-style": ["technical-minimal", "warm-minimal"], "era": ["modern-saas"], "ui-treatment": ["terminal-ui", "bento-ui", "flat-ui"], "composition": ["modular-grid", "desktop-workspace"], "color": ["dark-ui", "earth-tones"], "typography": ["monospace"], "stroke": ["medium"], "shadow": ["none"], "motion-language": ["snappy"], "transitions": ["hard-cut", "push"] },
+      "recipe": {
+        "palette": { "canvas": "#282828", "ink": "#ebdbb2", "accent": "#fabd2f", "accent2": "#b8bb26", "surface": "#3c3836", "muted": "#a89984" },
+        "fonts": { "display": "JetBrains Mono", "body": "JetBrains Mono", "displayWeight": 800, "case": "lower", "tracking": -0.02 },
+        "layout": "bento", "radius": 4, "stroke": { "width": 2, "color": "accent", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "glyph", "iconSet": "tech", "motif": "none", "motion": "snap",
+        "labels": { "stat": "[3]", "people": "workspace 3 · 4 panes" }
+      }
+    },
+    {
+      "id": "self-order-kiosk",
+      "name": "Self-order kiosk",
+      "aka": ["touchscreen kiosk UI", "point-of-sale screen", "self-checkout", "ordering kiosk"],
+      "what": "Oversized touch tiles in tomato red and mustard on warm white, one loud order button, heavy rounded type built to be read from a metre away.",
+      "feels": ["direct", "friendly", "loud"],
+      "use": ["retail and food-service films", "payments launches", "in-store screens"],
+      "not": "Not gamified UI: no XP, streaks or confetti; big-target transactional controls with one loud call to action.",
+      "search": ["self order kiosk UI", "touchscreen kiosk animation", "point of sale interface motion"],
+      "stack": { "visual-style": ["corporate-flat", "clean-minimal"], "era": ["flat-design"], "ui-treatment": ["oversized-ui", "flat-ui", "form-based-ui"], "color": ["high-saturation", "warm-palette"], "typography": ["rounded"], "shape": ["pill", "rounded"], "iconography": "filled", "shadow": ["soft-diffuse"], "motion-language": ["snappy"], "transitions": ["push", "scale"], "ui-interaction": ["click", "progress"] },
+      "recipe": {
+        "palette": { "canvas": "#fbf6ee", "ink": "#1b1b1b", "accent": "#e63323", "accent2": "#ffc72c", "surface": "#ffffff", "muted": "#6e6a64" },
+        "fonts": { "display": "Rubik", "body": "Rubik", "displayWeight": 800, "case": "none", "tracking": -0.02 },
+        "layout": "bento", "radius": 28, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "#8a6d4a", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "pop", "chart": "none",
+        "density": "airy",
+        "labels": { "stat": "Order", "people": "Eat in · Take away", "cta": "Tap to start" }
+      }
+    },
+    {
+      "id": "metro-live-tiles",
+      "name": "Metro live tiles",
+      "aka": ["Windows Phone Metro", "Modern UI", "Windows 8 Start screen", "live tiles"],
+      "what": "Flat square tiles in cobalt, teal and magenta on black, big lowercase Segoe-style type flush left, no shadows, gradients or rounded corners.",
+      "feels": ["crisp", "confident", "modern"],
+      "use": ["platform and OS launches", "sports and media apps", "early-2010s nostalgia"],
+      "not": "Not Material You: hard square tiles in saturated solids with lowercase headlines, not rounded tonal containers.",
+      "search": ["metro UI live tiles animation", "windows phone metro design motion", "windows 8 start screen aesthetic"],
+      "stack": { "visual-style": ["corporate-flat", "swiss-international"], "era": ["flat-design"], "ui-treatment": ["flat-ui", "bento-ui", "full-screen-ui"], "composition": ["modular-grid"], "color": ["color-blocking", "dark-ui"], "typography": ["humanist-sans"], "shape": ["rectilinear"], "shadow": ["none"], "motion-language": ["snappy"], "transitions": ["slide", "card-flip"] },
+      "recipe": {
+        "palette": { "canvas": "#0a0a0a", "ink": "#ffffff", "accent": "#00aba9", "accent2": "#d80073", "surface": "#0050ef", "muted": "#a6a6a6" },
+        "fonts": { "display": "Open Sans", "body": "Open Sans", "displayWeight": 300, "case": "lower", "tracking": -0.03, "bodyWeight": 300 },
+        "layout": "bento", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "line", "motif": "none", "motion": "slide", "chart": "none",
+        "labels": { "stat": "12", "people": "people" }
+      }
+    },
+    {
+      "id": "spreadsheet-grid",
+      "name": "Spreadsheet grid",
+      "aka": ["Excel look", "spreadsheet UI", "cell grid", "worksheet style"],
+      "what": "Hairline grey cell grid on white, lettered column headers and numbered rows, a green selection outline, Calibri-style figures in tidy right-aligned cells.",
+      "feels": ["orderly", "plain", "trustworthy"],
+      "use": ["finance and ops explainers", "productivity launches", "data-story openers"],
+      "not": "Not a data dashboard: no charts or KPI cards; the grid of cells, headers and selection is the whole look.",
+      "search": ["spreadsheet animation motion graphic", "excel grid aesthetic video", "spreadsheet UI explainer"],
+      "stack": { "visual-style": ["corporate-flat", "technical-minimal"], "era": ["modern-saas"], "ui-treatment": ["production-faithful-ui", "flat-ui"], "composition": ["swiss-grid"], "data-viz": ["table", "ranking-list"], "color": ["light-ui", "accent-color-system"], "typography": ["humanist-sans"], "stroke": ["hairline"], "shadow": ["none"], "motion-language": ["precise"], "transitions": ["hard-cut", "wipe"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#1f1f1f", "accent": "#107c41", "accent2": "#ffe699", "surface": "#f3f3f3", "muted": "#616161" },
+        "fonts": { "display": "Carlito", "body": "Carlito", "displayWeight": 700, "case": "none", "tracking": 0 },
+        "layout": "list", "radius": 0, "stroke": { "width": 1, "color": "#d4d4d4", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "grid", "icons": "none", "motif": "grid", "motion": "snap",
+        "density": "dense",
+        "labels": { "title": "Sheet 1", "date": "A1", "items": ["Opening balance", "Carried forward", "Adjustments", "Subtotal", "Running total", "Closing balance"], "tags": ["1,204", "860", "−42", "2,022", "3,118", "3,076"], "kicker": "fx  =SUM(B2:B7)" }
+      }
+    },
+    {
+      "id": "block-editor-page",
+      "name": "Block-editor doc page",
+      "aka": ["Notion-style page", "doc canvas", "block editor", "wiki page look"],
+      "what": "A calm white document with a big emoji page icon, bold warm-black sans title, grey drag handles, toggles and to-do checkboxes, wide margins.",
+      "feels": ["calm", "organised", "approachable"],
+      "use": ["productivity and docs tools", "internal comms", "how-to explainers"],
+      "not": "Not calm productivity: no phone frame or warm serif paper; a desktop document page in warm-black sans with emoji and block handles.",
+      "search": ["notion style animation", "doc page UI motion graphic", "block editor aesthetic video"],
+      "stack": { "visual-style": ["clean-minimal", "saas-minimal"], "era": ["modern-saas"], "ui-treatment": ["minimal-ui", "editorial-ui", "canvas-ui"], "composition": ["negative-space", "typography-led"], "color": ["light-ui", "muted"], "typography": ["neutral-sans"], "iconography": "emoji-like", "shadow": ["none"], "motion-language": ["smooth"], "transitions": ["fade", "slide"], "ui-interaction": ["typing", "checkbox", "drag"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#37352f", "accent": "#9ec5ea", "accent2": "#dfab01", "surface": "#f7f6f3", "muted": "#787774" },
+        "fonts": { "display": "Public Sans", "body": "Public Sans", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "editorial", "radius": 4, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "emoji3d", "motif": "none", "motion": "type", "photo": "none",
+        "density": "airy",
+        "labels": { "kicker": "Workspace / Notes", "section": "Private", "date": "Edited just now", "quote": "☐ Draft   ☐ Review   ☑ Share" }
+      }
+    },
+    {
+      "id": "design-tool-canvas",
+      "name": "Design-tool canvas",
+      "aka": ["Figma-style canvas", "design file view", "multiplayer canvas", "artboard view"],
+      "what": "Neutral grey infinite canvas holding white frames, a bright blue selection box with square handles and size tag, coloured named cursors drifting in.",
+      "feels": ["collaborative", "precise", "creative"],
+      "use": ["design-tool launches", "agency case studies", "process and making-of films"],
+      "not": "Not node canvas: no wired nodes or data pulses; frames, selection handles and multiplayer cursors from a design tool.",
+      "search": ["figma canvas animation", "design tool UI motion graphic", "multiplayer cursors animation"],
+      "stack": { "visual-style": ["saas-minimal", "clean-minimal"], "era": ["modern-saas"], "ui-treatment": ["canvas-ui", "floating-card-ui", "production-faithful-ui"], "composition": ["infinite-canvas", "floating-cards"], "color": ["light-ui", "accent-color-system"], "typography": ["neutral-sans"], "stroke": ["thin"], "shadow": ["none"], "motion-language": ["precise"], "transitions": ["zoom", "camera-move"], "ui-interaction": ["multiplayer-cursors", "marquee-selection", "resize"] },
+      "recipe": {
+        "palette": { "canvas": "#e5e5e5", "ink": "#1e1e1e", "accent": "#0d99ff", "accent2": "#f24822", "surface": "#ffffff", "muted": "#6b6b6b" },
+        "fonts": { "display": "Inter Tight", "body": "Inter", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "cards", "radius": 2, "stroke": { "width": 2, "color": "accent", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "line", "iconSet": "geometric", "motif": "crosshair", "motion": "snap",
+        "labels": { "title": "Frame 1", "badge": "3 editors", "people": "3 editors" }
+      }
+    },
+    {
+      "id": "phone-messaging-thread",
+      "name": "Phone messaging thread",
+      "aka": ["text message UI", "iMessage-style bubbles", "SMS conversation", "chat bubbles"],
+      "what": "Bright blue sent bubbles and light grey received bubbles on white, tailed corners, a slim header with avatar, delivery receipts and a typing indicator.",
+      "feels": ["personal", "immediate", "familiar"],
+      "use": ["social ads", "consumer app stories", "dialogue-led explainers"],
+      "not": "Not AI chat product: no prompt bar or sparkles; a person-to-person thread in blue and grey bubbles.",
+      "search": ["text message animation", "imessage bubble motion graphic", "chat conversation video template"],
+      "stack": { "visual-style": ["clean-minimal"], "era": ["modern-saas"], "ui-treatment": ["chat-ui", "production-faithful-ui", "device-bound-ui"], "composition": ["phone-composition"], "color": ["light-ui", "accent-color-system"], "typography": ["neutral-sans"], "shape": ["rounded"], "shadow": ["none"], "motion-language": ["springy"], "transitions": ["push", "scale"], "ui-interaction": ["typing", "notification"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#111111", "accent": "#0a84ff", "accent2": "#34c759", "surface": "#e9e9eb", "muted": "#8a8a8e" },
+        "fonts": { "display": "Figtree", "body": "Figtree", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "chat", "radius": 22, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "spring",
+        "labels": { "title": "Sam", "badge": "Delivered", "messages": ["Are you free later?", "Look at this first", "Sending it now", "Okay, wow"] }
+      }
+    },
+    {
+      "id": "lock-screen-notifications",
+      "name": "Lock-screen notifications",
+      "aka": ["notification stack", "push notifications", "phone lock screen", "toast stack"],
+      "what": "Frosted slate notification cards fanned over a dusky wallpaper, bold app titles, grey timestamps, a big clock above, cards sliding up one by one.",
+      "feels": ["intimate", "timely", "calm"],
+      "use": ["app launches", "social ads", "story openers about everyday life"],
+      "not": "Not spatial glass: flat phone-sized notification cards stacked over a wallpaper, not floating 3D panels in space.",
+      "search": ["lock screen notification animation", "push notification motion graphic", "notification stack video"],
+      "stack": { "visual-style": ["glass", "clean-minimal"], "era": ["glassmorphism"], "ui-treatment": ["glassmorphic-ui", "production-faithful-ui", "device-bound-ui"], "composition": ["stacked-cards", "phone-composition"], "color": ["dark-ui", "cool-palette"], "typography": ["neutral-sans"], "material": ["frosted-glass"], "shadow": ["floating"], "motion-language": ["smooth"], "transitions": ["slide", "blur"], "ui-interaction": ["notification", "swipe"] },
+      "recipe": {
+        "palette": { "canvas": "#243148", "ink": "#ffffff", "accent": "#ff9f6b", "accent2": "#7fb3d5", "surface": "#46526b", "muted": "#b9c2d3" },
+        "fonts": { "display": "Plus Jakarta Sans", "body": "Plus Jakarta Sans", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "stack", "radius": 20, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "#0a1020", "surface": "glass", "texture": "grain", "icons": "emoji3d", "motif": "none", "motion": "slide",
+        "effects": ["blur-depth"],
+        "labels": { "date": "9:41", "items": ["New message", "Reminder in 10 min", "Download complete", "Clear skies tonight", "Parcel on its way"], "times": ["now", "4m ago", "12m ago", "1h ago", "Yesterday"] }
+      }
+    },
+    {
+      "id": "smartwatch-face",
+      "name": "Smartwatch face",
+      "aka": ["watch complications", "wearable UI", "watch face design", "OLED watch face"],
+      "what": "True-black watch face with huge rounded digits, small circular complications and red, lime and cyan activity rings closing around the edge.",
+      "feels": ["glanceable", "sporty", "personal"],
+      "use": ["health and fitness apps", "wearable launches", "sports social"],
+      "not": "Not calm biometric rings: a true-black OLED face with saturated rings and chunky digits, not misty sage cards.",
+      "search": ["smartwatch face animation", "watch complications motion graphic", "activity rings animation"],
+      "stack": { "visual-style": ["clean-minimal", "futuristic-tech"], "era": ["modern-saas"], "ui-treatment": ["micro-ui", "widget-ui", "device-bound-ui"], "data-viz": ["progress-ring", "number-counter"], "color": ["dark-ui", "high-saturation"], "typography": ["rounded"], "shape": ["circular"], "shadow": ["none"], "motion-language": ["springy"], "transitions": ["scale", "zoom"] },
+      "recipe": {
+        "palette": { "canvas": "#000000", "ink": "#ffffff", "accent": "#fa114f", "accent2": "#a6ff00", "surface": "#1c1c1e", "muted": "#8e8e93" },
+        "fonts": { "display": "Outfit", "body": "Outfit", "displayWeight": 700, "case": "none", "tracking": -0.03 },
+        "layout": "bignumber", "radius": 36, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "line", "motif": "orbits", "motion": "spring", "chart": "donut",
+        "labels": { "stat": "10:09", "caption": "Move 420 / 500 kcal", "readouts": ["72 bpm", "8,204", "18°"], "kicker": "Activity", "title": "Rings" }
+      }
+    },
+    {
+      "id": "e-ink-reader",
+      "name": "E-ink reader",
+      "aka": ["e-reader page", "e-paper UI", "Kindle-style screen", "electronic paper"],
+      "what": "Matte warm-grey e-paper in a slim black bezel, bookish Literata serif, dithered greyscale, pages that flash black before settling.",
+      "feels": ["quiet", "bookish", "unhurried"],
+      "use": ["publishing and reading apps", "long-form storytelling", "calm brand films"],
+      "not": "Not book typography: the page lives on a device screen in grey e-paper with dithering and a refresh flash, not on printed cream stock.",
+      "search": ["e-ink display animation", "e-reader UI aesthetic", "e-paper refresh motion"],
+      "stack": { "visual-style": ["monochrome", "extreme-minimal"], "era": ["modern-saas"], "ui-treatment": ["device-bound-ui", "minimal-ui"], "composition": ["phone-composition", "negative-space"], "color": ["grayscale", "low-contrast"], "typography": ["serif-editorial"], "texture": ["stipple"], "shadow": ["soft-diffuse"], "motion-language": ["choppy-stepped"], "transitions": ["flash", "page-flip"] },
+      "recipe": {
+        "palette": { "canvas": "#cfccc4", "ink": "#1c1c1c", "accent": "#3c3c3a", "accent2": "#8a8984", "surface": "#e8e6df", "muted": "#595955" },
+        "fonts": { "display": "Literata", "body": "Literata", "displayWeight": 600, "case": "none", "tracking": -0.01 },
+        "layout": "device", "radius": 18, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "#4a4740", "surface": "paper", "texture": "dots", "icons": "line", "motif": "none", "motion": "step",
+        "density": "airy",
+        "labels": { "title": "Chapter 3", "date": "12%", "caption": "Location 412 of 3,380" }
+      }
+    },
+    {
+      "id": "turn-by-turn-navigation",
+      "name": "Turn-by-turn navigation",
+      "aka": ["sat-nav UI", "maps navigation screen", "GPS directions", "night-mode map"],
+      "what": "Night-mode map in slate and charcoal, a thick bright-blue route line, a green turn banner with a big arrow and distance, an ETA pill below.",
+      "feels": ["guided", "calm", "in-motion"],
+      "use": ["mobility and delivery apps", "travel stories", "automotive launches"],
+      "not": "Not map explainer: a live driver's view with route, turn banner and ETA in night mode, not an annotated editorial map.",
+      "search": ["turn by turn navigation animation", "GPS map UI motion graphic", "night mode map route animation"],
+      "stack": { "visual-style": ["clean-minimal", "technical-minimal"], "era": ["modern-saas"], "ui-treatment": ["production-faithful-ui", "full-screen-ui", "in-context-ui"], "data-viz": ["map", "status-indicator"], "color": ["dark-ui", "accent-color-system"], "typography": ["neutral-sans"], "shadow": ["floating"], "motion-language": ["smooth"], "transitions": ["camera-move", "slide"] },
+      "recipe": {
+        "palette": { "canvas": "#1f2630", "ink": "#f1f5f9", "accent": "#4c8dff", "accent2": "#1e8e3e", "surface": "#2c3542", "muted": "#94a3b8" },
+        "fonts": { "display": "Roboto", "body": "Roboto", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "map", "radius": 16, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "float", "shadowColor": "#05080d", "surface": "flat", "texture": "none", "icons": "filled", "motif": "grid", "motion": "slide",
+        "labels": { "kicker": "In 300 m", "badge": "12 min · 4.2 km", "places": ["Harbour Rd", "Exit 12", "Market St", "Ring Rd", "Station"] }
+      }
+    },
+    {
+      "id": "media-player-skin",
+      "name": "Media-player skin",
+      "aka": ["Winamp-style skin", "2000s MP3 player", "skinned player UI", "oscilloscope visualiser"],
+      "what": "Brushed gunmetal player chrome with a big green LCD readout, a green oscilloscope trace, bevelled transport buttons and scrolling pixel text.",
+      "feels": ["nostalgic", "tinkery", "loud"],
+      "use": ["music releases", "audio app launches", "early-2000s nostalgia"],
+      "not": "Not automotive HMI: small, dense, bevelled gunmetal chrome with a green LCD and pixel readouts, not calm cyan gauges.",
+      "search": ["winamp skin aesthetic", "mp3 player UI animation", "spectrum analyzer retro player"],
+      "stack": { "visual-style": ["metallic", "y2k"], "era": ["y2k", "retro-os"], "ui-treatment": ["skeuomorphic-ui", "retro-ui", "micro-ui"], "material": ["brushed-metal"], "color": ["dark-ui", "limited-palette"], "typography": ["pixel"], "data-viz": ["bar-chart"], "shadow": ["inner"], "motion-language": ["rhythmic"], "transitions": ["hard-cut", "flash"] },
+      "recipe": {
+        "palette": { "canvas": "#16161c", "ink": "#d8dce4", "accent": "#22e022", "accent2": "#f0b400", "surface": "#34363f", "muted": "#8b8f99" },
+        "fonts": { "display": "VT323", "body": "Arimo", "displayWeight": 400, "case": "upper", "tracking": 0.04 },
+        "layout": "data", "radius": 2, "stroke": { "width": 1, "color": "#5a5d66", "style": "solid" },
+        "shadow": "inset", "shadowColor": "#000000", "surface": "metal", "texture": "noise", "icons": "glyph", "motif": "none", "motion": "snap", "chart": "spectrum",
+        "density": "dense",
+        "labels": { "hud": "Stereo", "kicker": "Now playing", "readouts": ["128 kbps", "44 kHz", "EQ"] }
+      }
+    },
+    {
+      "id": "video-editor-timeline",
+      "name": "Video-editor timeline",
+      "aka": ["NLE timeline", "editing timeline", "editing suite UI", "multitrack view"],
+      "what": "Charcoal editing workspace with coloured clip blocks on stacked tracks, a playhead cutting through, waveform strips and a monospace timecode ruler.",
+      "feels": ["focused", "professional", "crafty"],
+      "use": ["creator-tool launches", "making-of films", "video and audio software"],
+      "not": "Not a timeline explainer: the editor's multitrack workspace in dark grey with clips and playhead, not an illustrated history axis.",
+      "search": ["video editing timeline animation", "NLE interface motion graphic", "editing suite UI aesthetic"],
+      "stack": { "visual-style": ["technical-minimal", "saas-minimal"], "era": ["modern-saas"], "ui-treatment": ["production-faithful-ui", "dashboard-ui"], "composition": ["timeline", "temporal-composition"], "color": ["dark-ui", "accent-color-system"], "typography": ["condensed", "monospace"], "shadow": ["none"], "motion-language": ["precise"], "transitions": ["hard-cut", "wipe"], "ui-interaction": ["drag", "scroll"] },
+      "recipe": {
+        "palette": { "canvas": "#1e1e22", "ink": "#e8e8ea", "accent": "#3fa9f5", "accent2": "#3ecf6e", "surface": "#2a2a30", "muted": "#8a8a93" },
+        "fonts": { "display": "IBM Plex Sans Condensed", "body": "IBM Plex Mono", "displayWeight": 600, "case": "none", "tracking": -0.01 },
+        "layout": "timeline", "radius": 3, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "line", "motif": "none", "motion": "snap", "marker": "rect",
+        "density": "dense",
+        "labels": { "steps": ["Intro", "Setup", "Build", "Reveal", "Outro"], "dates": ["00:00", "00:12", "00:24", "00:36", "00:48"], "badge": "Playhead", "kicker": "Sequence 01" }
+      }
+    },
+    {
+      "id": "code-diff-view",
+      "name": "Code diff view",
+      "aka": ["side-by-side diff", "pull request diff", "git diff UI", "code review view"],
+      "what": "A split code review: pale red removed lines on one side, pale green added lines on the other, gutter numbers, hairline rules and monospace text.",
+      "feels": ["candid", "technical", "exacting"],
+      "use": ["developer tool launches", "changelog films", "refactor and migration stories"],
+      "not": "Not a before/after product split: a line-by-line code diff in red and green tints with gutters and monospace.",
+      "search": ["code diff animation", "pull request diff motion graphic", "git diff UI aesthetic"],
+      "stack": { "visual-style": ["technical-minimal"], "era": ["modern-saas"], "ui-treatment": ["production-faithful-ui", "flat-ui"], "composition": ["split-screen"], "narrative": ["before-after"], "color": ["light-ui", "complementary"], "typography": ["monospace"], "stroke": ["hairline"], "shadow": ["none"], "motion-language": ["precise"], "transitions": ["wipe", "split"] },
+      "recipe": {
+        "palette": { "canvas": "#ffebe9", "ink": "#1f2328", "accent": "#1a7f37", "accent2": "#cf222e", "surface": "#ffffff", "muted": "#59636e" },
+        "fonts": { "display": "Source Code Pro", "body": "Source Sans 3", "displayWeight": 700, "case": "none", "tracking": -0.02 },
+        "layout": "split", "radius": 6, "stroke": { "width": 1, "color": "#d1d9e0", "style": "solid" },
+        "shadow": "none", "surface": "flat", "texture": "none", "icons": "glyph", "iconSet": "tech", "motif": "none", "motion": "mask",
+        "labels": { "before": "− 12 lines", "after": "+ 18 lines" }
+      }
+    },
+    {
+      "id": "kanban-board",
+      "name": "Kanban board",
+      "aka": ["task board", "card wall", "sprint board", "Trello-style board"],
+      "what": "White task cards with coloured label chips and checklists stacked in lanes on a saturated blue board, cards dragged from lane to lane.",
+      "feels": ["organised", "busy", "collaborative"],
+      "use": ["project-management launches", "team workflow explainers", "roadmap updates"],
+      "not": "Not bento: cards are equal-width task tickets in lanes with label chips, not a modular grid of feature tiles.",
+      "search": ["kanban board animation", "task board motion graphic", "trello style cards animation"],
+      "stack": { "visual-style": ["corporate-flat", "saas-minimal"], "era": ["modern-saas"], "ui-treatment": ["production-faithful-ui", "floating-card-ui"], "composition": ["stacked-cards", "modular-grid"], "data-viz": ["status-indicator"], "color": ["high-saturation", "light-ui"], "typography": ["neutral-sans"], "shadow": ["soft-diffuse"], "motion-language": ["snappy"], "transitions": ["slide", "push"], "ui-interaction": ["drag", "drop", "checkbox"] },
+      "recipe": {
+        "palette": { "canvas": "#0067a3", "ink": "#ffffff", "accent": "#61bd4f", "accent2": "#f2d600", "surface": "#ffffff", "muted": "#cfe3f2" },
+        "fonts": { "display": "Plus Jakarta Sans", "body": "Plus Jakarta Sans", "displayWeight": 800, "case": "none", "tracking": -0.02 },
+        "layout": "list", "radius": 8, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "#0b2a44", "surface": "flat", "texture": "none", "icons": "filled", "motif": "none", "motion": "slide", "density": "dense",
+        "labels": { "title": "Doing", "date": "Sprint 4", "items": ["Draft outline", "Collect references", "First cut", "Review notes", "Final polish", "Ship it"], "tags": ["Design", "Research", "Build", "Review", "Build", "Done"], "kicker": "Team board" }
+      }
+    }
+  ]
+}

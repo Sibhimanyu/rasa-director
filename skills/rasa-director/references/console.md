@@ -4,11 +4,15 @@
 
 ## The page
 
-- **Top bar**: five phases (Brief · Direction · Look & motion · Style frames · Build) instead of the step list, a status line and "Claude decides the rest". The status says "Waiting for you: <step>" while the current step awaits an answer, otherwise what Claude is doing (`session.working`), with a moving bar.
-- **What Claude is doing** (left): `session.activity`, newest first. Entries come from `activity`, `log`, every push ("Ready for you: the look", "Decided the look: …"), every answer the user sends ("You: picked the story: The shoebox wins"), Rasa's own scripts (`lib/report.mjs`: each script says what it starts and finishes, into the run named in `.rasa-director/current`; a script run by another stays quiet) and, in the plugin, a PreToolUse hook (`hooks/hooks.json` → `scripts/hook-activity.mjs`) that adds each command (by its description), write and edit while a run is active; console plumbing is left out. The working view shows how long Claude has been at it and how long since the last update.
-- **The stage** (centre): only the current step, with its `question` as the heading. Pick-one steps (direction, concept, look, route, voice, music) are cards with the `recommended` one already selected and marked "Claude's pick", so one click on "Use this …" sends it; motion and transitions preselect the recommended letter the same way. Under every step: "Not sure? Let Claude decide this one". Once the user answers, or while Claude is between questions, the stage shows Claude working (the `working` message, the user's answer, the last few things done) until the next push.
-- **Discuss with Claude** (under every step): the step's `thread` of messages; the user writes (a `note`), Claude answers with `reply`, the options stay on screen meanwhile with "Claude is replying…".
-- **Your film** (right): every decided step's `decision`, each with "change" (opens that step again; a new answer is a correction), and "Tell Claude anything", which sends a `note` to the step on screen.
+A dark, neutral review room: the film is the brightest thing on screen.
+
+- **Header**: the four states (Brief · Films · Animatic · Final), a one-line status ("Waiting for you: pick a film", or what Claude is doing now, with a moving bar), **Decisions** (the drawer) and **Tell Claude** (⌘K). Every step maps to one state: Brief = brief, brand, route, footage; Films = films, direction, look, concept, motion, transitions; Animatic = animatic, scenes, styleframes, storyboard, keyframes, voice, music, reel, plan, build; Final = render, final.
+- **The stage**: only the current call, with its `question` as the heading and one primary button. Brief is one editable sentence; Films are three live, animated style specimens (each drawn on the film's `hook`) with a story angle; Animatic is a player (key frames at their real durations, the music bed, a scene strip, a scrubber) where a click on the frame leaves a note; Build shows the newest built still and the strip filling in; Final is a video player with scene markers, notes, versions and what changed. Any other step (brand, footage, reel, voice, music…) shows its own panel on the same page.
+- **While Claude works**: the stage shows what it's doing (`session.activity`, newest first). Entries come from `activity`, `log`, every push, every answer the user sends, Rasa's own scripts (`lib/report.mjs`, into the run named in `.rasa-director/current`) and, in the plugin, a PreToolUse hook (`hooks/hooks.json` → `scripts/hook-activity.mjs`) that adds each command (by its description), write and edit while a run is active.
+- **Decisions** (drawer): every decided step's `decision` (Claude's craft calls with their reasons, and the user's picks), each changeable by telling Claude.
+- **Tell Claude** (⌘K) sends a `note` to the step on screen; the step's `thread` shows the conversation (Claude answers with `reply`). An `ask` card sits on top of the stage when Claude asks something that isn't a call.
+- **Notes** (Animatic, Final): a click on the frame opens a note at that moment (`scene`, `t`, and the point `x`, `y` as fractions), with quick notes (Slower, Faster, Bigger, Simpler, Cut it) and a scope (this scene / whole film). Notes collect as pins on the frame and marks on the scrubber until the user presses **Apply N notes**.
+- **Keys**: ⌘K Tell Claude · Space play/pause · C note at the playhead · ←/→ step through scenes · 1/2/3 pick a film · Enter the primary button.
 - The page shows a notice when the last update check found a newer version (`session.app`).
 
 ## Staying connected
@@ -36,6 +40,7 @@
 | `activity --run <dir> --message "..." [--level info\|ok\|warn] [--done]` | what Claude is doing now, between questions ("Capturing tally.app", "Drawing style frame 2 of 3"): a feed entry and the status line. `--done` records it without showing Claude as working. |
 | `log --run <dir> --message "..." [--level info\|ok\|warn\|error] [--stage <id> --stage-status working\|done\|failed]` | appends a build log line and sets a stage chip (stages: handoff, plan, design, build, verify, obey, render-gate). It moves the page to Build only while the current step is plan or build (never away from the render gate); `--stage render-gate --stage-status done` marks Build done. |
 | `wait --run <dir> [--step <id>] [--timeout <sec>]` | blocks until an unconsumed action arrives (for that step, or `*`), prints it, marks it consumed. Exit 2 on timeout; a stopped server is restarted on the same address; exit 3 (`console_down`) only if that fails. Run it in the background, one at a time. |
+| `resolve --run <dir> --ids a,b [--note "..."] [--all]` | marks notes (`comment` actions) as handled after an Apply; `--note` says what changed (shown to the user); `--all` resolves every open note |
 | `record --run <dir> --step <id> --type <type> [--value '<json>'] [--note "..."]` | logs an answer the user gave in chat (already consumed) so the session history is complete |
 | `state`, `url`, `stop` | print the session, reprint the URL (errors if the server is gone), stop the server |
 
@@ -55,27 +60,36 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 
 ## Per-step payloads
 
+The four calls:
+
 | Step | Fields |
 |---|---|
-| `brief` | `fields: {content, sub, destination, aspect, length_s, narration}` (prefill; `narration` true/false), `aspects` (default 16:9, 9:16, 1:1, 4:5) |
-| `brand` | `brand` (brand.mjs `read` summary: roles, fonts, modes, warnings), `board` (brand-board.html), `unavailable` → brand board, swatches, mode chips, three choices |
+| `brief` | `fields: {length_s, kind, subject, aspect, destination, narration, brand_name?, use_brand?}` (the sentence, prefilled), `choices: {<field>: [values or {value, label}]}` (optional, narrows a field's menu), `captures: [{image, caption}]` (what Claude will use) → one editable sentence, Start and "Just make it" |
+| `films` | `films: [{id, angle: "Sure"\|"Bold"\|"Wild", title, logline, hook, why, preset (style id), music, frames?: [3 PNGs], beats?: [3 captions]}]`, `recommended`, `gallery` (presets.mjs gallery's presets.json), `headline`/`sub` (fallback words), `brand` (optional) → three live films, energy knob (Calmer · As is · Punchier), More like these, Mix two, Browse all styles, "Show in my brand" |
+| `animatic` | `scenes: [{id, title, line, visual, duration, thumb}]`, `music: {title, file, offset?, alternatives: [{id, title, mood, file}]}`, `voice: {name, alternatives: [{id, name}]}` (omit when silent), `audio` (optional, a mixed track instead of `music.file`), `angles: false` hides "Try another angle" → the player, chips (Music, Voice, Try another angle), notes, "Looks right, build it" / "Apply N notes" |
+| `build` | `scenes: [{id, title, duration, thumb, state: todo\|working\|done, frame}]`, `latest` (newest still) → the newest built still and the strip filling in; `log` also writes here (`log: [{t, level, msg}]`, `stages`) |
+| `render` / `final` | `video` (or `videos: [..]`, the newest last), `poster`, `scenes: [{id, title, start, thumb}]` (markers), `duration`, `version`, `versions: [{v, when}]`, `changes: [..]`, `studio` (preview URL), `images` (optional snapshots) → the player with markers, notes, versions; not done: "Render the final" / "Preview first"; done: "Download MP4" |
+
+Other steps (Claude usually pushes these `--status done` with only a `decision`; their panels open when a step needs the user or they ask to see it):
+
+| Step | Fields |
+|---|---|
+| `brand` | `brand` (brand.mjs `read` summary: roles, fonts, modes, warnings), `board` (brand-board.html) |
 | `route` | `options: [{id, label, why}]` (HyperFrames workflow ids, or `reel`) |
-| `direction` | `directions` (direction.mjs `directions`: `{id, name, why, terms, image, rare, picks}`), `recommended`, `dimensions` (direction.mjs `menu`) → three direction cards with Claude's pick selected, "Use this direction", "Show 3 more", and Fine-tune: the key dimensions (UI treatment, illustration, typography, motion language, transitions, pacing) as chips preset to the selected direction, plus "Every dimension", the full form (every dimension as a group of term cards, facet chips, "Claude decides" per dimension, notes, a live style formula). With `dimensions` only, the full form is shown. |
 | `footage` | `clips` (footage.json's clips from `reel.mjs scan`) → a card per clip: contact sheet, facts, transcript, include checkbox |
-| `concept` | `options: [{id, title, logline, frames: [3 PNGs], beats: [3 short captions], rare}]`, `recommended` → story cards, each a strip of three sketch frames with its captions, the title and the logline; Claude's pick selected, "Use this story". (Text-only `{title, world, hook}` still renders.) |
-| `scenes` | `scenes: [{title, on_screen, visual, voiceover, duration, transition_in, intensity, …}]` (scenes.json's list; extra fields pass through), `target_s`, `transition_default`, `narrated` → editable table + timeline strip |
-| `styleframes` | `images: [..]`, `captions: [..]` → the stills Claude designed, with Approve |
-| `look` | design directions: `looks` (looks.json's looks; made with `--stills`, each has a `still`), `recommended` → look cards with Claude's pick selected, "Use this look", "Show 6 more"; without stills, `page` (design.mjs looks index.html) → the board grid and letter pickers; or the older preset form `options: [{id, showcase, description}]`, `note_brand` |
-| `motion` | `tasting` (index.html from tasting.mjs), `cells` (tasting.json's `cells`: `{letter, id, name, oneLiner, parent?, adjust?}`), `adjectives` (the object `motion-md.mjs adjectives` prints, or a list of ids), `recommended` → one card per motion language, each a live tile playing the user's line (`index.html?cell=<letter>`, the swatch alone), its name and one line; Claude's pick selected, "Use this motion", "Show others", and "Adjust" (the adjective chips → `adjust`). |
 | `reel` | `timeline`, `overlays`, `captions`, `clips: [{name, duration}]`, optional `edl` (reel.edl.json) and `video` (draft render) → the editable cut (references/reel.md) |
-| `transitions` | `menu` (index.html from transition-menu.mjs), `cells` (transitions.json's `cells`: `{letter, id, label, energy, duration_s}`), `recommended` |
-| `voice` | `options: [{id, title, mood, file, source}]` (output of voice.mjs), `recommended`, `unavailable` |
-| `storyboard` | `timeline` (timeline.json from scenes.mjs) → the timing strip; `sheet` (the workflow's storyboard.html, optional `sheet_width`/`sheet_height`) → the sheet plus an Approve button |
-| `keyframes` | none → "show poses / go straight to build" buttons; `board` (board.html) and `issues` (from board.json) → the live board with Approve (disabled while issues exist), `board_height` (optional, px) |
-| `music` | `options: [{id, title, mood, duration, file, source}]` (output of music.mjs), `unavailable` (message when none could be fetched) |
-| `plan` | `shape: {route, aspect, length, scenes, look, motion, transitions, voice, music}` (any keys; shown as a table), `stated: [..]`, `agent: [..]` |
-| `build` | written by `log`: `log: [{t, level, msg}]`, `stages: {id: status}`; optional `obey` summary line (push) |
-| `render` | `images: [..]` (snapshots, contact sheet), `videos: [..]` (renders), `studio` (Studio preview URL) |
+| `direction` | `gallery`, `suggestions: [{id, why, rare}]`, `recommended`, `dimensions` → the style picker (or the older `directions` cards) |
+| `concept` | `options: [{id, title, logline, frames, beats, rare}]`, `recommended` → story cards |
+| `scenes` | `scenes`, `target_s`, `transition_default`, `narrated` → editable table + timeline strip |
+| `styleframes` | `images`, `captions` → stills with Approve |
+| `look` | `looks`, `recommended` (design.mjs looks) |
+| `motion` | `tasting`, `cells`, `adjectives`, `recommended` (tasting.mjs swatches) |
+| `transitions` | `menu`, `cells`, `recommended` (transition-menu.mjs) |
+| `voice` | `options: [{id, title, mood, file, source}]` (voice.mjs), `recommended`, `unavailable` |
+| `music` | `options: [{id, title, mood, duration, file, preview (the fitted edit; played instead of file), bpm, summary, ending, fit, license, attribution, source}]` (music.mjs), `unavailable` |
+| `storyboard` | `timeline` (timeline.json), `sheet` (the workflow's storyboard.html) |
+| `keyframes` | `board` (board.html), `issues` (single units' key poses) |
+| `plan` | `shape`, `stated`, `agent` |
 
 ## Actions (what `wait` returns)
 
@@ -83,25 +97,27 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 
 | type | step | value |
 |---|---|---|
-| `submit` | brief | `{content, sub, destination, aspect, length_s, narration}` |
-| `submit` | scenes | `{scenes: [...]}`: the full edited list, in order |
-| `submit` | footage | `{include: [clip ids]}` |
-| `choose` | direction | a direction id (from `directions`) |
-| `submit` | direction | Fine-tune: `{direction: id, picks: {dimension: [id]}, decided_by, notes}` (the direction plus the changed terms); full form: `{picks: {dimension: [term ids], "dim:facet": [id]}, decided_by: {dimension: "user"|"agent"}, notes: {dimension: text}}` |
-| `choose` | brand | `{use: "direct"|"remix"|"none", mode}` |
-| `submit` | reel | `{timeline, overlays, captions}`: the full edited cut |
-| `choose` | route | workflow id |
-| `choose` | transitions | the exact `transition_in` string (`cut`, `crossfade`, `push-slide LEFT`…) |
-| `choose` | voice | voice id or `"none"` |
-| `choose` | concept, look, motion | option id (a look letter; a motion cell id such as `lang-snappy`, or with `+` an adjusted variant: `lang-snappy+slower`) |
-| `choose` | keyframes | `"poses"` or `"skip"` |
-| `choose` | music | track id, `"none"`, or `{file}` |
+| `submit` | brief | the sentence's fields: `{length_s, kind, subject, aspect, destination, narration, use_brand}` |
+| `choose` | films | a film id |
+| `more` | films | `{near: film id, exclude: [film ids]}`: more films like the selected one |
+| `mix` | films | `{look: film id, story: film id}`: one film's style with another's story |
+| `knob` | films | `{name: "energy", value: "calmer"\|"as is"\|"punchier", film}` (not an answer; the step stays open) |
+| `swap` | films | `{chip: "style", film, preset}`: redo that film in a style from Browse all |
+| `swap` | animatic | `{chip: "music"\|"voice", id}` |
+| `more` | animatic | `{what: "angle"}`: another story angle |
+| `comment` | animatic, render, final | `{scene, t, x, y, scope: "scene"\|"film", quick}`; the text is in `note`. Stored as an open note (`session.comments`); not an answer, the step stays open |
+| `apply` | animatic, render, final | `{ids: [note ids]}`: make these notes, then `resolve` them |
+| `approve` | animatic, storyboard, styleframes, keyframes, plan | null |
 | `choose` | render | `"preview"` or `"render"` |
+| `version` | render, final | `{restore: v}` |
+| `submit` | footage | `{include: [clip ids]}` |
+| `submit` | reel | `{timeline, overlays, captions}`: the full edited cut |
+| `submit` | scenes | `{scenes: [...]}`: the full edited list, in order |
+| `choose` | brand | `{use: "direct"\|"remix"\|"none", mode}` |
+| `choose` | route, voice, music, concept, look, motion, transitions, direction, keyframes | an option id (as each panel offers) |
 | `adjust` | motion | `{id, adjust: [adjectives]}` |
-| `more` | direction, motion, look | `{exclude: [ids]}` |
-| `approve` | storyboard, styleframes, keyframes, plan | null |
 | `decide` | any | null: "you decide" for that step |
-| `decide-rest` | `*` | null: "you decide the rest" |
+| `decide-rest` | `*` | null: "Just make it" (Claude decides every remaining call and stops only at the Final) |
 | `answer` | the step an `ask` was raised on | `{ask: id, choice: option id or null, text}` (the free text is also in `note`) |
 | `note` | any | null; the text is in `note`. It's also added to that step's discussion thread; answer with `reply`. |
 

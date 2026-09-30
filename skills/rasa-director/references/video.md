@@ -79,7 +79,8 @@ Everything a frame worker must honour is written **inside** its `## Frame N — 
   "motion": ".rasa-director/<ts>/motion.md",
   "storyboard_dir": ".rasa-director/<ts>/plan",
   "voice": { "id": "<heygen voice id>", "name": "Maya", "provider": "heygen" },
-  "music": { "path": ".rasa-director/<ts>/music/warm-pulse.mp3", "title": "Warm Pulse" },
+  "music": { "path": ".rasa-director/<ts>/bed.wav", "title": "Warm Pulse" },
+  "keyframes": [{ "scene": "s1", "image": ".rasa-director/<ts>/frames/s1.png" }, { "scene": "s2", "image": ".rasa-director/<ts>/frames/s2.png" }],
   "mode": "collaborative",
   "confirmed": { "aspect": true, "look": true, "voice": true, "destination": false, "language": false },
   "receipts": { "stated": ["aspect 16:9 (from the request)"], "agent": ["Motion language: precise, passed over smooth (the generic default)"] },
@@ -90,8 +91,9 @@ Everything a frame worker must honour is written **inside** its `## Frame N — 
 
 - `look`: `{ "preset": "<id>" }`, `{ "frame": "<frame.md>", "name": "<look name>" }` (a design direction from `design.mjs looks`, or the user's own frame spec), `{ "design_md": "DESIGN.md", "mode": "dark" }` (the project's brand reference, converted; references/brand.md) or `{ "design_md": …, "preset": "<id>" }` (the brand remixed onto a preset's layout). Fonts are staged into `assets/fonts/` with an `@font-face` section in frame.md.
 - `direction`: a compiled direction folder (`direction.mjs compile --out`); installs `DIRECTION.md`, appends its binding summary to frame.md and DISPATCH.md, and `inject` adds it to every frame packet (references/direction.md).
-- `music`: `{ "path", "title" }` (exact track, locked with `audio-lock`), `{ "mood": "..." }`, or `"none"`.
-- `mode: "autonomous"` (after "you decide the rest") sets `storyboard: no`, so the workflow skips its sketch pass; otherwise the sketch pass and layout gate run and are relayed to the console.
+- `music`: `{ "path", "title" }` (the exact bed: normally the one `sound.mjs render` edited to picture and mastered; locked with `audio-lock`), `{ "mood": "..." }`, or `"none"`.
+- `keyframes`: the animatic's approved key frames, one per scene (`[{scene, image}]`, or plain paths). `write` copies them to `assets/keyframes/<scene>.png` and tells the workflow (BRIEF.md Customizations and DISPATCH.md) that each is its scene's visual target. `styleframes` is read the same way.
+- `mode: "autonomous"` (after "Just make it", the `decide-rest` action) sets `storyboard: no`, so the workflow skips its sketch pass; otherwise the sketch pass and layout gate run and are relayed to the console.
 - `confirmed`: only answers the user actually gave; those are recorded into HyperFrames' own preference store (media-use `prefs.mjs`). Agent decisions are never recorded as preferences.
 - Footage routes: `motion` and `storyboard_dir` are optional; `footage` holds the style fields the workflow would otherwise ask (e.g. `{"caption_style": "bold pop, 2 words per line", "position": "lower third", "accent": "#FFB000"}`).
 - `write` validates every input before writing anything. A project with built frames is refused unless `--revise`, which moves compositions, snapshots, renders, index.html, the audio metas, frame packets and storyboard.html into `.superseded/<stamp>/`.

@@ -1,0 +1,2145 @@
+{
+  "family": {
+    "id": "broadcast",
+    "name": "Broadcast",
+    "what": "TV, sport and live-event graphics: lower thirds, tickers, scorebugs, league tables, election maps, idents and on-air clocks."
+  },
+  "presets": [
+    {
+      "id": "football-matchday-package",
+      "name": "Football matchday package",
+      "aka": [
+        "Premier League graphics style",
+        "football broadcast package",
+        "league table graphics",
+        "matchday graphics"
+      ],
+      "what": "Deep royal purple with electric green and hot magenta, a slabbed league table of condensed caps, rows that push in hard.",
+      "feels": [
+        "energetic",
+        "premium",
+        "competitive"
+      ],
+      "use": [
+        "sports and club content",
+        "league and fixture announcements",
+        "fan and betting apps",
+        "season recaps"
+      ],
+      "not": "Not the generic sports broadcast: one owned brand palette (purple, green, magenta) and table-led data, not navy stat tiles with yellow hits.",
+      "search": [
+        "premier league broadcast graphics",
+        "football league table animation",
+        "matchday graphics package motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "abstract-geometric"
+        ],
+        "format": [
+          "sports-graphics",
+          "broadcast-package"
+        ],
+        "typography": [
+          "condensed",
+          "geometric-sans"
+        ],
+        "data-viz": [
+          "ranking-list",
+          "table"
+        ],
+        "color": [
+          "brand-palette",
+          "high-saturation"
+        ],
+        "shape": [
+          "angular"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "pacing": [
+          "fast"
+        ],
+        "transitions": [
+          "push",
+          "wipe"
+        ],
+        "tone": [
+          "energetic",
+          "confident"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#38003c",
+          "ink": "#ffffff",
+          "accent": "#00ff85",
+          "accent2": "#e90052",
+          "surface": "#4d0a54",
+          "muted": "#c9a6ce"
+        },
+        "fonts": {
+          "display": "Saira Condensed",
+          "body": "Saira",
+          "displayWeight": 800,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "list",
+        "radius": 4,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "hard",
+        "shadowColor": "accent2",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "kicker": "Matchday 24",
+          "title": "League table",
+          "date": "Pts",
+          "items": [
+            "North End",
+            "Athletic",
+            "City",
+            "Rovers",
+            "Wanderers",
+            "United"
+          ],
+          "tags": [
+            "64",
+            "61",
+            "58",
+            "55",
+            "53",
+            "50"
+          ]
+        },
+        "density": "dense"
+      }
+    },
+    {
+      "id": "racecard-form-guide",
+      "name": "Racecard form guide",
+      "aka": [
+        "horse racing graphics",
+        "form guide",
+        "runners and riders",
+        "racing post style"
+      ],
+      "what": "Turf-green card with cream slab-serif runners, gold odds chips and thin newsprint rules, like a racecard read trackside.",
+      "feels": [
+        "traditional",
+        "informed",
+        "sporting"
+      ],
+      "use": [
+        "racing and betting",
+        "heritage sport",
+        "rankings and shortlists",
+        "event line-ups"
+      ],
+      "not": "Not a league table package: a printed racecard's slab serif, rules and odds, calm and traditional rather than loud and slabbed.",
+      "search": [
+        "horse racing broadcast graphics",
+        "racecard form guide design",
+        "runners and riders graphic"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial"
+        ],
+        "format": [
+          "sports-graphics"
+        ],
+        "typography": [
+          "slab-serif",
+          "condensed"
+        ],
+        "data-viz": [
+          "table",
+          "ranking-list"
+        ],
+        "color": [
+          "earth-tones",
+          "limited-palette"
+        ],
+        "material": [
+          "newsprint"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "slide",
+          "wipe"
+        ],
+        "tone": [
+          "professional",
+          "nostalgic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0e3b2c",
+          "ink": "#f6f1e1",
+          "accent": "#e8b93a",
+          "accent2": "#c8102e",
+          "surface": "#154a38",
+          "muted": "#a9bfae"
+        },
+        "fonts": {
+          "display": "Zilla Slab",
+          "body": "Roboto Condensed",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "list",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "rules",
+        "motion": "slide",
+        "labels": {
+          "kicker": "Race 4 · 2m 1f",
+          "title": "Runners & riders",
+          "date": "Odds",
+          "items": [
+            "Silver Arrow",
+            "Northern Lad",
+            "Quiet Storm",
+            "Midnight Run",
+            "Harbour Light",
+            "Blue Ribbon"
+          ],
+          "tags": [
+            "5/2",
+            "3/1",
+            "9/2",
+            "6/1",
+            "8/1",
+            "12/1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "courtside-stat-package",
+      "name": "Courtside stat package",
+      "aka": [
+        "basketball broadcast graphics",
+        "NBA on ESPN look",
+        "player stat card",
+        "stat bug"
+      ],
+      "what": "One towering condensed stat in broadcast red on black, a white caption rule, a player trend chart, cuts on every beat.",
+      "feels": [
+        "punchy",
+        "competitive",
+        "confident"
+      ],
+      "use": [
+        "sports highlights",
+        "athlete and creator stats",
+        "fitness milestones",
+        "recap reels"
+      ],
+      "not": "Not a metric count-up: dark, red and sport-coded with a player's trend panel, not a neutral black-on-white KPI.",
+      "search": [
+        "nba broadcast stat graphics",
+        "basketball player stat animation",
+        "espn stat card motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist"
+        ],
+        "format": [
+          "sports-graphics",
+          "statistics-animation"
+        ],
+        "typography": [
+          "condensed",
+          "display"
+        ],
+        "data-viz": [
+          "statistic",
+          "number-counter",
+          "line-graph"
+        ],
+        "color": [
+          "high-contrast",
+          "limited-palette"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "pacing": [
+          "staccato"
+        ],
+        "transitions": [
+          "hard-cut",
+          "wipe"
+        ],
+        "tone": [
+          "energetic",
+          "bold"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0f0f10",
+          "ink": "#ffffff",
+          "accent": "#e4202a",
+          "accent2": "#f58426",
+          "surface": "#1c1c1f",
+          "muted": "#9a9aa0"
+        },
+        "fonts": {
+          "display": "Teko",
+          "body": "Roboto Condensed",
+          "displayWeight": 600,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "bignumber",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "stat": "38",
+          "caption": "points tonight · season high",
+          "kicker": "Player of the game",
+          "title": "Last 10 games",
+          "readouts": [
+            "12",
+            "9",
+            "61%"
+          ],
+          "metrics": [
+            "rebounds",
+            "assists",
+            "field goals"
+          ]
+        },
+        "chart": "bars",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "on-air-countdown-clock",
+      "name": "On-air countdown clock",
+      "aka": [
+        "broadcast countdown",
+        "studio clock",
+        "live countdown",
+        "going live timer"
+      ],
+      "what": "A white studio clock ring on black with a red sweeping second arc, monospaced time readouts and stepped, ticking reveals.",
+      "feels": [
+        "tense",
+        "precise",
+        "anticipatory"
+      ],
+      "use": [
+        "live launches and premieres",
+        "event openers",
+        "stream starts",
+        "deadline announcements"
+      ],
+      "not": "Not a sci-fi HUD: a real studio clock in black, white and on-air red; nothing futuristic, only time running out.",
+      "search": [
+        "broadcast countdown clock animation",
+        "going live countdown graphic",
+        "studio clock countdown motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "monochrome"
+        ],
+        "format": [
+          "broadcast-package",
+          "event-opener"
+        ],
+        "typography": [
+          "monospace"
+        ],
+        "data-viz": [
+          "progress-ring",
+          "number-counter"
+        ],
+        "color": [
+          "black-and-white",
+          "accent-color-system"
+        ],
+        "motion-function": [
+          "build-anticipation",
+          "show-progress"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "pacing": [
+          "event-driven"
+        ],
+        "transitions": [
+          "hard-cut"
+        ],
+        "tone": [
+          "urgent",
+          "technical"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0a0a0a",
+          "ink": "#ffffff",
+          "accent": "#e6e6e6",
+          "accent2": "#ff2d1a",
+          "surface": "#161616",
+          "muted": "#8c8c8c"
+        },
+        "fonts": {
+          "display": "Azeret Mono",
+          "body": "Azeret Mono",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": -0.03
+        },
+        "layout": "hud",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "step",
+        "labels": {
+          "hud": "On air in",
+          "readouts": [
+            "00:10",
+            "Standby",
+            "Cam 1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "games-pictogram-system",
+      "name": "Olympic-style pictogram system",
+      "aka": [
+        "Olympic pictograms",
+        "Games identity",
+        "sport pictogram system",
+        "multi-sport event graphics"
+      ],
+      "what": "Crisp white modular tiles, solid ring-colour blocks in blue, red, green and black, flat geometric pictograms and tight bold sans.",
+      "feels": [
+        "optimistic",
+        "international",
+        "orderly"
+      ],
+      "use": [
+        "events and conferences",
+        "multi-track programmes",
+        "wayfinding and schedules",
+        "sport and community campaigns"
+      ],
+      "not": "Not a bento product showcase: an event identity system of pictograms and ring colours on white, not device UI tiles.",
+      "search": [
+        "olympic pictogram animation",
+        "games identity motion design",
+        "sport pictogram system graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "swiss-international",
+          "abstract-geometric"
+        ],
+        "format": [
+          "motion-identity-system",
+          "sports-graphics"
+        ],
+        "iconography": [
+          "pictogram"
+        ],
+        "composition": [
+          "bento-grid",
+          "modular-grid"
+        ],
+        "color": [
+          "primary-colors",
+          "light-ui"
+        ],
+        "shape": [
+          "geometric"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "shape-match",
+          "wipe"
+        ],
+        "tone": [
+          "optimistic",
+          "friendly"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ffffff",
+          "ink": "#111111",
+          "accent": "#0081c8",
+          "accent2": "#ee334e",
+          "surface": "#f2f3f5",
+          "muted": "#00a651"
+        },
+        "fonts": {
+          "display": "Red Hat Display",
+          "body": "Red Hat Text",
+          "displayWeight": 900,
+          "case": "none",
+          "tracking": -0.03
+        },
+        "layout": "bento",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "stat": "Day 8",
+          "people": "12 events today"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "game-show-board",
+      "name": "Game-show board",
+      "aka": [
+        "quiz show graphics",
+        "Jeopardy board look",
+        "game show tiles",
+        "prime-time quiz"
+      ],
+      "what": "Saturated TV-blue tiles on a midnight set, gold compressed numbers, black gaps between cells, marquee sparkles and pop-in reveals.",
+      "feels": [
+        "exciting",
+        "playful",
+        "suspenseful"
+      ],
+      "use": [
+        "quizzes and challenges",
+        "giveaways and reveals",
+        "community and social campaigns",
+        "event shows"
+      ],
+      "not": "Not arcade pixels: a studio board of big glossy tiles and gold numbers, not a retro game screen.",
+      "search": [
+        "game show board graphics",
+        "quiz show motion graphics",
+        "jeopardy style board animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "retro-futurism"
+        ],
+        "format": [
+          "broadcast-package",
+          "ident"
+        ],
+        "composition": [
+          "modular-grid",
+          "bento-grid"
+        ],
+        "color": [
+          "primary-colors",
+          "high-saturation"
+        ],
+        "lighting": [
+          "spotlight-pool"
+        ],
+        "sound": [
+          "impacts",
+          "risers"
+        ],
+        "motion-language": [
+          "springy"
+        ],
+        "transitions": [
+          "card-flip",
+          "flash"
+        ],
+        "tone": [
+          "playful",
+          "energetic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#060a42",
+          "ink": "#ffffff",
+          "accent": "#ffc72c",
+          "accent2": "#e0197d",
+          "surface": "#1233d1",
+          "muted": "#9fb0ff"
+        },
+        "fonts": {
+          "display": "Antonio",
+          "body": "Barlow Condensed",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "bento",
+        "radius": 4,
+        "stroke": {
+          "width": 5,
+          "color": "#02041c",
+          "style": "solid"
+        },
+        "shadow": "hard",
+        "shadowColor": "#000000",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "stars",
+        "motion": "pop",
+        "effects": [
+          "glint"
+        ],
+        "labels": {
+          "stat": "800",
+          "people": "3 contestants"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "esports-match-overlay",
+      "name": "Esports match overlay",
+      "aka": [
+        "esports tournament graphics",
+        "versus screen",
+        "team vs team overlay",
+        "match intro"
+      ],
+      "what": "A hard split between deep-navy blue side and signal-red red side, angular techno caps crossing the seam, instant snaps.",
+      "feels": [
+        "competitive",
+        "charged",
+        "sharp"
+      ],
+      "use": [
+        "esports and gaming",
+        "head-to-head comparisons",
+        "tournament promos",
+        "launch versus moments"
+      ],
+      "not": "Not a cyberpunk neon look: flat team colours and a hard versus split, no glow, rain or city lights.",
+      "search": [
+        "esports match overlay graphics",
+        "versus screen animation",
+        "esports tournament broadcast package"
+      ],
+      "stack": {
+        "visual-style": [
+          "futuristic-tech",
+          "abstract-geometric"
+        ],
+        "format": [
+          "sports-graphics",
+          "broadcast-package"
+        ],
+        "composition": [
+          "split-screen"
+        ],
+        "typography": [
+          "display",
+          "geometric-sans"
+        ],
+        "color": [
+          "dark-ui",
+          "complementary"
+        ],
+        "shape": [
+          "angular",
+          "sharp"
+        ],
+        "narrative": [
+          "comparison"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "pacing": [
+          "hyper-fast"
+        ],
+        "transitions": [
+          "wipe",
+          "shape-match"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0a1428",
+          "ink": "#eef1f6",
+          "accent": "#ff4655",
+          "accent2": "#0bc4e3",
+          "surface": "#13233f",
+          "muted": "#8a9ab5"
+        },
+        "fonts": {
+          "display": "Tomorrow",
+          "body": "Barlow",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.01
+        },
+        "layout": "split",
+        "radius": 0,
+        "stroke": {
+          "width": 4,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "tech",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "before": "Blue side",
+          "after": "Red side"
+        }
+      }
+    },
+    {
+      "id": "election-night-map",
+      "name": "Election-night map",
+      "aka": [
+        "election results map",
+        "results night graphics",
+        "red and blue map",
+        "decision desk"
+      ],
+      "what": "White districts on cool grey, red and blue regions filling in, hatched too-close-to-call areas, pinned results in a newsroom sans.",
+      "feels": [
+        "authoritative",
+        "suspenseful",
+        "clear"
+      ],
+      "use": [
+        "results and rollouts",
+        "regional reports",
+        "news and civic explainers",
+        "market-share maps"
+      ],
+      "not": "Not a map explainer: a results map, two opposing colours filling regions and calls being made, not a route between places.",
+      "search": [
+        "election night map graphics",
+        "election results map animation",
+        "red blue results map broadcast"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial"
+        ],
+        "data-viz": [
+          "map",
+          "status-indicator",
+          "statistic"
+        ],
+        "format": [
+          "news-graphics",
+          "map-animation"
+        ],
+        "color": [
+          "complementary",
+          "light-ui"
+        ],
+        "camera": [
+          "top-down",
+          "zoom"
+        ],
+        "motion-function": [
+          "show-location",
+          "show-data-change"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "wipe",
+          "zoom"
+        ],
+        "tone": [
+          "serious",
+          "trustworthy"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e9ecf1",
+          "ink": "#14171c",
+          "accent": "#d62839",
+          "accent2": "#2458c6",
+          "surface": "#ffffff",
+          "muted": "#687080"
+        },
+        "fonts": {
+          "display": "Libre Franklin",
+          "body": "Libre Franklin",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "map",
+        "radius": 4,
+        "stroke": {
+          "width": 2,
+          "color": "#aab2c0",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "slide",
+        "labels": {
+          "kicker": "Projection",
+          "places": [
+            "District 4",
+            "North",
+            "Riverside",
+            "East"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tv-weather-map",
+      "name": "TV weather map",
+      "aka": [
+        "weather forecast graphics",
+        "weather presenter map",
+        "forecast map",
+        "met office style"
+      ],
+      "what": "Pale green land on a mid-blue sea, isobar contours, warm-front orange and cold-front cyan regions, temperature pins in friendly rounded sans.",
+      "feels": [
+        "friendly",
+        "clear",
+        "reassuring"
+      ],
+      "use": [
+        "forecasts and outlooks",
+        "regional rollouts",
+        "travel and outdoor brands",
+        "local news"
+      ],
+      "not": "Not an election map: a natural sea-and-land palette with isobars and temperatures, not two opposing result colours.",
+      "search": [
+        "tv weather map graphics",
+        "weather forecast motion graphics",
+        "weather presenter map animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal"
+        ],
+        "data-viz": [
+          "map",
+          "heat-map"
+        ],
+        "format": [
+          "map-animation",
+          "broadcast-package"
+        ],
+        "camera": [
+          "top-down",
+          "push-in"
+        ],
+        "color": [
+          "cool-palette",
+          "complementary"
+        ],
+        "motion-function": [
+          "show-location",
+          "show-state-change"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "crossfade",
+          "wipe"
+        ],
+        "tone": [
+          "friendly",
+          "trustworthy"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#1f5f99",
+          "ink": "#ffffff",
+          "accent": "#ff8a1f",
+          "accent2": "#33c1ff",
+          "surface": "#d6ebc4",
+          "muted": "#b9d4ea"
+        },
+        "fonts": {
+          "display": "Mulish",
+          "body": "Mulish",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "map",
+        "radius": 16,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "nature",
+        "motif": "contours",
+        "motion": "slide",
+        "labels": {
+          "kicker": "Tomorrow",
+          "places": [
+            "North 12°",
+            "Coast 17°",
+            "Valley 21°",
+            "Hills 9°"
+          ]
+        }
+      }
+    },
+    {
+      "id": "breaking-news-band",
+      "name": "Breaking-news band",
+      "aka": [
+        "breaking news lower third",
+        "news ticker",
+        "rolling news",
+        "news crawl"
+      ],
+      "what": "Footage under a white lower-third slab with a red Breaking tab, navy crawl band, yellow Live chip and a channel bug.",
+      "feels": [
+        "urgent",
+        "credible",
+        "immediate"
+      ],
+      "use": [
+        "announcements",
+        "news-style promos",
+        "PR and statements",
+        "live updates"
+      ],
+      "not": "Not a news package: only the on-air overlay layer (tab, slab, crawl, bug) over footage, no studio panels or globes.",
+      "search": [
+        "breaking news lower third animation",
+        "news ticker motion graphics",
+        "rolling news overlay"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial"
+        ],
+        "format": [
+          "news-graphics",
+          "lower-thirds"
+        ],
+        "photo-video": [
+          "full-bleed-footage"
+        ],
+        "composition": [
+          "full-bleed",
+          "layered-depth"
+        ],
+        "typography": [
+          "condensed",
+          "neutral-sans"
+        ],
+        "color": [
+          "accent-color-system",
+          "high-contrast"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "pacing": [
+          "event-driven"
+        ],
+        "transitions": [
+          "wipe",
+          "push"
+        ],
+        "tone": [
+          "urgent",
+          "serious"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0b1630",
+          "ink": "#ffffff",
+          "accent": "#d10a11",
+          "accent2": "#ffd100",
+          "surface": "#ffffff",
+          "muted": "#9aa6bf"
+        },
+        "fonts": {
+          "display": "Archivo Narrow",
+          "body": "Archivo",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": -0.01
+        },
+        "layout": "ticker",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "glyph",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "mask",
+        "labels": {
+          "kicker": "Breaking news",
+          "badge": "Live",
+          "bug": "24",
+          "ticker": [
+            "More to follow on this story",
+            "Live coverage continues",
+            "Officials expected to speak shortly",
+            "Stay with us for updates"
+          ]
+        },
+        "scene": "city"
+      }
+    },
+    {
+      "id": "business-news-ticker",
+      "name": "Business-news ticker",
+      "aka": [
+        "markets TV graphics",
+        "Bloomberg TV look",
+        "CNBC style",
+        "stock ticker lower third"
+      ],
+      "what": "Dusk skyline footage, a dark navy lower third in condensed sans, blue Markets tab, green movers chip and a monospaced price crawl.",
+      "feels": [
+        "professional",
+        "fast-moving",
+        "credible"
+      ],
+      "use": [
+        "finance and fintech",
+        "earnings and results",
+        "investor updates",
+        "B2B announcements"
+      ],
+      "not": "Not a financial terminal: broadcast overlays over footage with a scrolling price crawl, not an amber screen of dense tables.",
+      "search": [
+        "business news ticker graphics",
+        "stock market ticker lower third",
+        "financial news broadcast package"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal"
+        ],
+        "format": [
+          "news-graphics",
+          "lower-thirds"
+        ],
+        "data-viz": [
+          "number-counter",
+          "status-indicator"
+        ],
+        "photo-video": [
+          "full-bleed-footage"
+        ],
+        "typography": [
+          "condensed",
+          "monospace"
+        ],
+        "color": [
+          "dark-ui",
+          "accent-color-system"
+        ],
+        "motion-language": [
+          "linear"
+        ],
+        "pacing": [
+          "continuous"
+        ],
+        "transitions": [
+          "push",
+          "slide"
+        ],
+        "tone": [
+          "professional",
+          "trustworthy"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#06121f",
+          "ink": "#ffffff",
+          "accent": "#1f7ae0",
+          "accent2": "#00c774",
+          "surface": "#0c2744",
+          "muted": "#8fa6bf"
+        },
+        "fonts": {
+          "display": "IBM Plex Sans Condensed",
+          "body": "IBM Plex Mono",
+          "displayWeight": 600,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "ticker",
+        "radius": 2,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "slide",
+        "labels": {
+          "kicker": "Markets",
+          "badge": "Movers",
+          "bug": "BIZ",
+          "date": "16:00",
+          "ticker": [
+            "Stocks ▲ 0.8%",
+            "Bonds ▼ 0.2%",
+            "Oil ▲ 1.1%",
+            "Gold ▲ 0.4%",
+            "Dollar ▼ 0.3%"
+          ]
+        },
+        "scene": "city"
+      }
+    },
+    {
+      "id": "late-night-talk-show",
+      "name": "Late-night talk show",
+      "aka": [
+        "late show graphics",
+        "talk show package",
+        "tonight show look",
+        "city skyline set"
+      ],
+      "what": "A glowing city-at-dusk backdrop in midnight navy and marquee gold, a high-contrast display serif headline, curtain-red touches, warm studio glow.",
+      "feels": [
+        "witty",
+        "warm",
+        "showbiz"
+      ],
+      "use": [
+        "personality-led content",
+        "podcast and interview promos",
+        "entertainment brands",
+        "event hosts"
+      ],
+      "not": "Not a cinematic title: a studio set's skyline, marquee gold and warm glow, sized for chat and laughs rather than drama.",
+      "search": [
+        "late night talk show graphics",
+        "talk show intro motion design",
+        "late night show package"
+      ],
+      "stack": {
+        "visual-style": [
+          "cinematic"
+        ],
+        "format": [
+          "broadcast-package",
+          "lower-thirds"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "geometric-sans"
+        ],
+        "photo-video": [
+          "full-bleed-footage"
+        ],
+        "lighting": [
+          "blue-hour",
+          "spotlight-pool"
+        ],
+        "color": [
+          "cool-palette",
+          "accent-color-system"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "pacing": [
+          "medium-explanatory"
+        ],
+        "transitions": [
+          "push",
+          "light-wipe"
+        ],
+        "tone": [
+          "friendly",
+          "confident"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0a1433",
+          "ink": "#fff4dc",
+          "accent": "#f5b631",
+          "accent2": "#b3202a",
+          "surface": "#16224d",
+          "muted": "#a9b0cc"
+        },
+        "fonts": {
+          "display": "Gloock",
+          "body": "Montserrat",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "photo",
+        "radius": 8,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "slide",
+        "density": "airy",
+        "effects": [
+          "vignette"
+        ],
+        "labels": {
+          "kicker": "Tonight",
+          "caption": "Live from the studio"
+        },
+        "scene": "city"
+      }
+    },
+    {
+      "id": "awards-show-gold",
+      "name": "Awards-show gold",
+      "aka": [
+        "award ceremony graphics",
+        "red carpet look",
+        "Oscars style",
+        "winner reveal"
+      ],
+      "what": "Cream serif capitals with deep gold 3D extrusion on black, a gold star, spotlight rays fanning behind and a specular glint.",
+      "feels": [
+        "celebratory",
+        "glamorous",
+        "grand"
+      ],
+      "use": [
+        "awards and winner reveals",
+        "milestones and anniversaries",
+        "galas and events",
+        "customer awards"
+      ],
+      "not": "Not black-and-gold luxury: showbiz and spotlit, with extruded trophy type and rays, not quiet hairlines and engraved restraint.",
+      "search": [
+        "award show graphics gold",
+        "awards ceremony motion graphics",
+        "winner reveal gold animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "metallic"
+        ],
+        "format": [
+          "event-opener",
+          "title-sequence"
+        ],
+        "typography": [
+          "high-contrast-serif",
+          "extruded-3d"
+        ],
+        "lighting": [
+          "spotlight-pool",
+          "volumetric-god-rays"
+        ],
+        "color": [
+          "warm-palette",
+          "high-contrast"
+        ],
+        "material": [
+          "metal"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "pacing": [
+          "slow"
+        ],
+        "transitions": [
+          "light-wipe",
+          "fade"
+        ],
+        "tone": [
+          "premium",
+          "dramatic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0b0706",
+          "ink": "#f7ecd2",
+          "accent": "#d4a640",
+          "accent2": "#7a1020",
+          "surface": "#1a1310",
+          "muted": "#9c8a66"
+        },
+        "fonts": {
+          "display": "Playfair Display SC",
+          "body": "Jost",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "default",
+        "motif": "rays",
+        "motion": "drift",
+        "effects": [
+          "extrude",
+          "glint"
+        ]
+      }
+    },
+    {
+      "id": "morning-show-sunshine",
+      "name": "Morning-show sunshine",
+      "aka": [
+        "breakfast TV graphics",
+        "morning show package",
+        "daytime TV look",
+        "coming up rundown"
+      ],
+      "what": "Sky-blue set with soft sunny blobs, rounded white cards stacked as the rundown, yellow and coral icons, a chunky friendly sans.",
+      "feels": [
+        "cheerful",
+        "warm",
+        "approachable"
+      ],
+      "use": [
+        "lifestyle and wellness",
+        "daily updates and roundups",
+        "consumer apps",
+        "community news"
+      ],
+      "not": "Not pastel minimal: a busy, sunny daytime-TV rundown of cards and icons, not sparse calm pastel space.",
+      "search": [
+        "morning show graphics package",
+        "breakfast tv motion graphics",
+        "daytime tv lower third"
+      ],
+      "stack": {
+        "visual-style": [
+          "warm-minimal"
+        ],
+        "format": [
+          "broadcast-package",
+          "lower-thirds"
+        ],
+        "composition": [
+          "stacked-cards"
+        ],
+        "color": [
+          "pastel",
+          "warm-palette"
+        ],
+        "shape": [
+          "rounded"
+        ],
+        "shadow": [
+          "soft-diffuse"
+        ],
+        "motion-language": [
+          "springy"
+        ],
+        "transitions": [
+          "slide",
+          "scale"
+        ],
+        "tone": [
+          "friendly",
+          "optimistic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#dff0ff",
+          "ink": "#13294b",
+          "accent": "#ffb000",
+          "accent2": "#ff6f59",
+          "surface": "#ffffff",
+          "muted": "#5d7290"
+        },
+        "fonts": {
+          "display": "Gabarito",
+          "body": "Figtree",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "stack",
+        "radius": 28,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "nature",
+        "motif": "blobs",
+        "motion": "pop",
+        "labels": {
+          "kicker": "Coming up",
+          "items": [
+            "Your headlines",
+            "Weather at the half",
+            "In the kitchen",
+            "Our guest",
+            "Weekend picks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "public-broadcaster-clean",
+      "name": "Public-broadcaster clean",
+      "aka": [
+        "BBC-style graphics",
+        "public service broadcast look",
+        "clean news explainer",
+        "reality check style"
+      ],
+      "what": "Pure white with one sober news red, a plain grotesk headline, ruled margins, flat grey data cards and nothing decorative.",
+      "feels": [
+        "trustworthy",
+        "calm",
+        "impartial"
+      ],
+      "use": [
+        "explainers and fact-checks",
+        "public sector and NGOs",
+        "research findings",
+        "policy and health updates"
+      ],
+      "not": "Not Swiss poster type: a newsroom explainer system of cards and charts, restrained and legible rather than typographic art.",
+      "search": [
+        "bbc news graphics style",
+        "public broadcaster explainer animation",
+        "clean news explainer motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "swiss-international",
+          "clean-minimal"
+        ],
+        "format": [
+          "news-graphics",
+          "concept-explainer"
+        ],
+        "typography": [
+          "neo-grotesk"
+        ],
+        "composition": [
+          "swiss-grid",
+          "negative-space"
+        ],
+        "data-viz": [
+          "bar-chart",
+          "statistic"
+        ],
+        "color": [
+          "accent-color-system",
+          "light-ui"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "push",
+          "wipe"
+        ],
+        "tone": [
+          "trustworthy",
+          "serious"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ffffff",
+          "ink": "#141414",
+          "accent": "#b80000",
+          "accent2": "#3f3f42",
+          "surface": "#f1f1f1",
+          "muted": "#5a5a5a"
+        },
+        "fonts": {
+          "display": "Public Sans",
+          "body": "Public Sans",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "cards",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "rules",
+        "motion": "slide",
+        "labels": {
+          "title": "The numbers",
+          "badge": "Live"
+        }
+      }
+    },
+    {
+      "id": "live-stream-overlay",
+      "name": "Live-stream overlay",
+      "aka": [
+        "Twitch overlay",
+        "streamer overlay",
+        "stream chat graphics",
+        "live stream alerts"
+      ],
+      "what": "Near-black stream UI with charcoal chat rows, the headline as a purple highlighted message, green avatars and fast-scrolling replies.",
+      "feels": [
+        "live",
+        "social",
+        "playful"
+      ],
+      "use": [
+        "creator and gaming content",
+        "community launches",
+        "livestream promos",
+        "social clips"
+      ],
+      "not": "Not an AI chat product: a crowd of viewers reacting live in stream colours, not a calm one-to-one assistant conversation.",
+      "search": [
+        "twitch overlay animation",
+        "live stream chat graphics",
+        "streamer overlay motion design"
+      ],
+      "stack": {
+        "visual-style": [
+          "playful-tech"
+        ],
+        "ui-treatment": [
+          "chat-ui",
+          "stylized-ui"
+        ],
+        "format": [
+          "brand-social-content",
+          "reel-short-form-edit"
+        ],
+        "ui-interaction": [
+          "notification",
+          "streaming-text"
+        ],
+        "color": [
+          "dark-ui",
+          "brand-palette"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "pacing": [
+          "rapid-fire"
+        ],
+        "transitions": [
+          "slide",
+          "scale"
+        ],
+        "tone": [
+          "playful",
+          "energetic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0e0e10",
+          "ink": "#efeff1",
+          "accent": "#9147ff",
+          "accent2": "#00d68f",
+          "surface": "#1f1f23",
+          "muted": "#adadb8"
+        },
+        "fonts": {
+          "display": "Rubik",
+          "body": "Inter",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "chat",
+        "radius": 10,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "tech",
+        "motif": "none",
+        "motion": "pop",
+        "density": "dense",
+        "labels": {
+          "title": "Stream chat",
+          "badge": "● Live · 1.2k watching",
+          "messages": [
+            "gg that was clean",
+            "wait what",
+            "clip it",
+            "LET'S GO"
+          ]
+        }
+      }
+    },
+    {
+      "id": "eighties-network-ident",
+      "name": "80s network ident",
+      "aka": [
+        "station ident",
+        "retro channel ident",
+        "80s CGI ident",
+        "network promo"
+      ],
+      "what": "Early-CGI blocks in red, yellow and cyan on a wireframed floor, cobalt sky, white edge lines, wide techno caps, scanlines and a glint.",
+      "feels": [
+        "nostalgic",
+        "proud",
+        "bright"
+      ],
+      "use": [
+        "retro brand moments",
+        "anniversaries",
+        "channel and podcast idents",
+        "throwback campaigns"
+      ],
+      "not": "Not synthwave: primary-colour CGI blocks and broadcast scanlines from a TV station, no neon sunsets or magenta grids.",
+      "search": [
+        "80s tv station ident",
+        "retro channel ident animation",
+        "80s cgi broadcast graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "retro-futurism",
+          "isometric"
+        ],
+        "era": [
+          "eighties"
+        ],
+        "format": [
+          "ident",
+          "logo-sting"
+        ],
+        "depth": [
+          "isometric"
+        ],
+        "color": [
+          "primary-colors",
+          "high-saturation"
+        ],
+        "texture": [
+          "crt-scanlines"
+        ],
+        "production": [
+          "3d-keyframe"
+        ],
+        "motion-language": [
+          "inertial"
+        ],
+        "transitions": [
+          "zoom-through",
+          "light-wipe"
+        ],
+        "tone": [
+          "nostalgic",
+          "bold"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0a1a5c",
+          "ink": "#ffffff",
+          "accent": "#ff3131",
+          "accent2": "#ffd400",
+          "surface": "#00b3e6",
+          "muted": "#8ea2e8"
+        },
+        "fonts": {
+          "display": "Michroma",
+          "body": "Barlow",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "isometric",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "scanlines",
+        "icons": "filled",
+        "motif": "none",
+        "motion": "spring",
+        "effects": [
+          "glint"
+        ],
+        "labels": {
+          "kicker": "Coming up · 8:00"
+        }
+      }
+    },
+    {
+      "id": "stadium-jumbotron",
+      "name": "Stadium jumbotron",
+      "aka": [
+        "arena big screen",
+        "crowd prompt graphics",
+        "scoreboard hype",
+        "LED screen graphics"
+      ],
+      "what": "Huge blocky caps smashed across a black LED dot field, a red slab, a yellow disc, one word turned sideways, flashing on the beat.",
+      "feels": [
+        "loud",
+        "hyped",
+        "communal"
+      ],
+      "use": [
+        "live events and arenas",
+        "hype reels",
+        "countdowns and drops",
+        "sports and music promos"
+      ],
+      "not": "Not a big-type poster: an LED-screen crowd prompt with a pixel dot field and chunky display caps, flashing rather than composed.",
+      "search": [
+        "stadium jumbotron graphics",
+        "arena screen hype animation",
+        "make some noise scoreboard graphic"
+      ],
+      "stack": {
+        "visual-style": [
+          "brutalism"
+        ],
+        "format": [
+          "event-backdrop",
+          "kinetic-typography"
+        ],
+        "typography": [
+          "display",
+          "dimensional"
+        ],
+        "composition": [
+          "typography-led",
+          "full-bleed"
+        ],
+        "texture": [
+          "pixelation"
+        ],
+        "color": [
+          "high-contrast",
+          "primary-colors"
+        ],
+        "lighting": [
+          "screen-glow"
+        ],
+        "motion-language": [
+          "rhythmic"
+        ],
+        "pacing": [
+          "hyper-fast"
+        ],
+        "transitions": [
+          "flash",
+          "hard-cut"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#050505",
+          "ink": "#ffffff",
+          "accent": "#ff1d25",
+          "accent2": "#ffd100",
+          "surface": "#151515",
+          "muted": "#8a8a8a"
+        },
+        "fonts": {
+          "display": "Bungee",
+          "body": "Barlow Condensed",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "typegrid",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "halftone",
+        "icons": "none",
+        "motif": "none",
+        "motion": "snap",
+        "density": "airy",
+        "effects": [
+          "extrude"
+        ],
+        "labels": {
+          "kicker": "Section 112",
+          "section": "Make some noise",
+          "date": "Row 12"
+        }
+      }
+    },
+    {
+      "id": "grass-court-championship",
+      "name": "Grass-court championship",
+      "aka": [
+        "Wimbledon style graphics",
+        "tennis broadcast graphics",
+        "tournament draw",
+        "heritage sport graphics"
+      ],
+      "what": "Crisp white with deep grass green and royal purple, a bookish serif headline, the draw as a timeline from first round to final.",
+      "feels": [
+        "heritage",
+        "composed",
+        "prestigious"
+      ],
+      "use": [
+        "tournaments and seasons",
+        "heritage and premium sport",
+        "roadmaps with prestige",
+        "anniversary journeys"
+      ],
+      "not": "Not a roadmap explainer: a tournament draw in heritage green and purple with a serif voice, not a startup timeline.",
+      "search": [
+        "wimbledon broadcast graphics",
+        "tennis tournament draw animation",
+        "heritage sport motion design"
+      ],
+      "stack": {
+        "visual-style": [
+          "editorial"
+        ],
+        "format": [
+          "sports-graphics",
+          "timeline"
+        ],
+        "composition": [
+          "timeline",
+          "negative-space"
+        ],
+        "typography": [
+          "serif-editorial",
+          "humanist-sans"
+        ],
+        "data-viz": [
+          "timeline"
+        ],
+        "color": [
+          "limited-palette",
+          "light-ui"
+        ],
+        "narrative": [
+          "journey"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "pacing": [
+          "medium-explanatory"
+        ],
+        "transitions": [
+          "mask-reveal",
+          "crossfade"
+        ],
+        "tone": [
+          "premium",
+          "calm"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ffffff",
+          "ink": "#0b3d2c",
+          "accent": "#5b1f8f",
+          "accent2": "#c9a227",
+          "surface": "#f1eef6",
+          "muted": "#5f7a6d"
+        },
+        "fonts": {
+          "display": "Libre Baskerville",
+          "body": "Karla",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "timeline",
+        "radius": 14,
+        "stroke": {
+          "width": 3,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "motif": "none",
+        "motion": "mask",
+        "labels": {
+          "kicker": "The draw",
+          "badge": "Today",
+          "steps": [
+            "Round 1",
+            "Round 3",
+            "Quarters",
+            "Semis",
+            "Final"
+          ],
+          "dates": [
+            "Mon",
+            "Fri",
+            "Tue",
+            "Thu",
+            "Sun"
+          ]
+        }
+      }
+    },
+    {
+      "id": "home-shopping-channel",
+      "name": "Home-shopping channel",
+      "aka": [
+        "shopping TV graphics",
+        "teleshopping",
+        "QVC style",
+        "call now price graphic"
+      ],
+      "what": "A giant red price on white with a sunburst behind, navy caption rule, yellow offset panels and everything popping in with a bounce.",
+      "feels": [
+        "eager",
+        "urgent",
+        "cheerful"
+      ],
+      "use": [
+        "sales and offers",
+        "e-commerce drops",
+        "retail promos",
+        "limited-time announcements"
+      ],
+      "not": "Not hard-sell retail: a clean white TV set with one giant price and a sales trend, not a red sale flyer covered in stickers.",
+      "search": [
+        "home shopping channel graphics",
+        "teleshopping price animation",
+        "call now price reveal motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "pop-art"
+        ],
+        "format": [
+          "broadcast-package",
+          "social-ad"
+        ],
+        "data-viz": [
+          "number-counter",
+          "statistic"
+        ],
+        "typography": [
+          "condensed",
+          "display"
+        ],
+        "color": [
+          "primary-colors",
+          "high-saturation"
+        ],
+        "motion-function": [
+          "direct-attention",
+          "emphasize"
+        ],
+        "motion-language": [
+          "bouncy"
+        ],
+        "pacing": [
+          "fast"
+        ],
+        "transitions": [
+          "scale",
+          "flash"
+        ],
+        "tone": [
+          "energetic",
+          "urgent"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ffffff",
+          "ink": "#0d1b4c",
+          "accent": "#e3001b",
+          "accent2": "#ffd400",
+          "surface": "#eef3ff",
+          "muted": "#51607f"
+        },
+        "fonts": {
+          "display": "Fjalla One",
+          "body": "Barlow",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": -0.01
+        },
+        "layout": "bignumber",
+        "radius": 12,
+        "stroke": {
+          "width": 3,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "hard",
+        "shadowColor": "accent2",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "motif": "rays",
+        "motion": "bounce",
+        "labels": {
+          "stat": "49.99",
+          "caption": "Today only · while stocks last",
+          "kicker": "On air now",
+          "title": "Units sold"
+        }
+      }
+    }
+  ]
+}

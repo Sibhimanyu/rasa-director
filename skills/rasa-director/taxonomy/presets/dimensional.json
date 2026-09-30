@@ -202,7 +202,7 @@
         "palette": { "canvas": "#1c3654", "ink": "#fdf6ec", "accent": "#f2a541", "accent2": "#e4572e", "surface": "#2a4f78", "muted": "#a9bcd2" },
         "fonts": { "display": "Bricolage Grotesque", "body": "Manrope", "displayWeight": 800, "case": "none", "tracking": -0.03 },
         "layout": "bento", "radius": 24, "stroke": { "width": 0, "color": "ink", "style": "solid" },
-        "shadow": "layered", "shadowColor": "#0d1d30", "surface": "paper", "texture": "paper", "icons": "filled", "motif": "none", "motion": "step"
+        "shadow": "layered", "shadowColor": "#0d1d30", "surface": "paper", "texture": "paper", "icons": "filled", "motif": "none", "motion": "step", "chart": "none"
       }
     },
     {

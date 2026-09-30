@@ -1,0 +1,387 @@
+{
+  "family": { "id": "sound", "name": "Music & scene", "what": "Styles from records, clubs, gigs and scenes: sleeves, flyers, band tees, tapes, line-ups and the gear the music plays on." },
+  "presets": [
+    {
+      "id": "blue-note-jazz-sleeve",
+      "name": "Blue Note jazz sleeve",
+      "aka": ["Reid Miles cover", "Blue Note Records sleeve", "hard bop LP", "50s jazz album cover"],
+      "what": "Reid Miles-style LP sleeve: huge condensed caps cropped across a deep-blue field, white type, one word on a mustard block, a black record disc.",
+      "feels": ["cool", "confident", "sophisticated"],
+      "use": ["jazz and live-music promos", "record label idents", "podcast title cards", "club and venue posters"],
+      "not": "Not Swiss International: the grid swings, type is cropped and jammed together, and the field is a tinted photographic blue, not white paper.",
+      "search": ["reid miles blue note cover design", "blue note album cover typography", "jazz album cover motion graphics"],
+      "stack": { "visual-style": ["modernist", "duotone"], "era": ["mid-century-modern"], "typography": ["condensed", "grotesk"], "color": ["duotone", "limited-palette"], "composition": ["asymmetric", "typography-led"], "motion-language": ["rhythmic"], "pacing": "beat-driven", "transitions": ["hard-cut", "wipe"], "shadow": ["none"], "shape": ["rectilinear", "circular"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#123f85", "ink": "#ffffff", "accent": "#f4b400", "accent2": "#0b0b0b", "surface": "#0b2a5c", "muted": "#a9bfe0" },
+        "fonts": { "display": "Oswald", "body": "Libre Franklin", "displayWeight": 700, "case": "upper", "tracking": -0.01 },
+        "layout": "typegrid", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "mask",
+        "labels": { "kicker": "Vol. 2", "section": "Recorded in one take", "date": "Side A" }
+      }
+    },
+    {
+      "id": "factory-records-minimal",
+      "name": "Factory Records minimal",
+      "aka": ["Peter Saville", "post-punk sleeve", "Manchester minimal", "Unknown Pleasures lines"],
+      "what": "Peter Saville restraint: a near-black field, faint plotted contour lines, one quiet lower-case line of geometric type and nothing else.",
+      "feels": ["austere", "enigmatic", "cool"],
+      "use": ["album and single announcements", "gallery and museum idents", "fashion teasers", "music documentaries"],
+      "not": "Not extreme-minimal product design: the emptiness is moody and archival, cold black with plotted data lines, not clean white UI space.",
+      "search": ["peter saville factory records design", "unknown pleasures style animation", "post punk minimal album cover"],
+      "stack": { "visual-style": ["extreme-minimal"], "era": ["eighties"], "typography": ["geometric-sans"], "color": ["monochrome", "low-contrast"], "composition": ["negative-space", "centered-hero"], "motion-language": ["cinematic"], "pacing": "pause-heavy", "transitions": ["fade", "hard-cut"], "shadow": ["none"], "shape": ["geometric"], "tone": ["mysterious", "intellectual"] },
+      "recipe": {
+        "palette": { "canvas": "#111111", "ink": "#e6e3dc", "accent": "#9a9a94", "accent2": "#d8412f", "surface": "#1b1b1b", "muted": "#8a8a84" },
+        "fonts": { "display": "Jost", "body": "IBM Plex Mono", "displayWeight": 300, "case": "lower", "tracking": 0.02 },
+        "layout": "poster", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "contours", "motion": "fade",
+        "density": "airy"
+      }
+    },
+    {
+      "id": "hip-hop-mixtape",
+      "name": "Hip-hop mixtape cover",
+      "aka": ["Pen & Pixel", "No Limit era cover", "bling mixtape", "Dirty South CD art"],
+      "what": "Late-90s Pen & Pixel mixtape art: a giant extruded gold volume number with a glint, oxblood-to-black background, chrome panel and loud caps.",
+      "feels": ["flashy", "loud", "triumphant"],
+      "use": ["hip-hop and rap releases", "mixtape and single drops", "nightlife promos", "meme-literate social ads"],
+      "not": "Not Y2K chrome: the metal is gold and gaudy around a volume number, pure bling, not cool silver sci-fi blobs.",
+      "search": ["pen and pixel mixtape cover", "90s rap cd cover design", "bling gold chrome text animation"],
+      "stack": { "visual-style": ["metallic", "chrome"], "era": ["nineties"], "typography": ["extruded-3d", "chrome"], "material": ["chrome"], "color": ["high-saturation", "warm-palette"], "composition": ["single-object-hero", "typography-led"], "motion-language": ["heavy"], "pacing": "beat-driven", "transitions": ["flash", "zoom"], "shadow": ["hard"], "shape": ["rounded"], "sound": ["music-led", "impacts"] },
+      "recipe": {
+        "palette": { "canvas": "#1a0606", "ink": "#fff4d6", "accent": "#f5b82e", "accent2": "#c1121f", "surface": "#3a0d0d", "muted": "#c9a36a" },
+        "fonts": { "display": "Titan One", "body": "Archivo", "displayWeight": 400, "case": "upper", "tracking": 0 },
+        "layout": "bignumber", "radius": 6, "stroke": { "width": 3, "color": "accent", "style": "solid" },
+        "shadow": "hard", "shadowColor": "accent2", "surface": "metal", "texture": "none", "icons": "filled", "motif": "none", "motion": "pop", "chart": "none",
+        "effects": ["extrude", "glint"],
+        "labels": { "stat": "Vol.2", "caption": "Hosted and mixed · limited run", "kicker": "Exclusive", "title": "Side A" }
+      }
+    },
+    {
+      "id": "kpop-comeback-teaser",
+      "name": "K-pop comeback teaser",
+      "aka": ["comeback scheduler", "K-pop teaser poster", "concept photo teaser", "idol album rollout"],
+      "what": "The comeback scheduler: a clean white page counting D-7 to release, wide extended caps, one hot cherry accent, pale sky-blue details and mono credits.",
+      "feels": ["polished", "anticipatory", "youthful"],
+      "use": ["release countdowns", "album rollouts", "fandom social", "event schedules"],
+      "not": "Not a plain roadmap timeline: it's a fan-facing release countdown with idol-album polish, wide type and a single signature colour.",
+      "search": ["kpop comeback schedule design", "kpop teaser poster motion", "album release countdown graphic"],
+      "stack": { "visual-style": ["fashion-editorial"], "era": ["y2k"], "typography": ["extended", "monospace"], "color": ["accent-color-system", "light-ui"], "composition": ["timeline", "swiss-grid"], "format": ["teaser", "announcement"], "narrative": "setup-anticipation-payoff", "motion-language": ["snappy"], "pacing": "beat-driven", "transitions": ["hard-cut", "flash"], "shadow": ["none"], "shape": ["circular", "geometric"], "tone": ["youthful", "confident"] },
+      "recipe": {
+        "palette": { "canvas": "#f7f7f5", "ink": "#111114", "accent": "#e8173b", "accent2": "#9fc3e6", "surface": "#ffffff", "muted": "#8a8a92" },
+        "fonts": { "display": "Unbounded", "body": "IBM Plex Mono", "displayWeight": 700, "case": "upper", "tracking": -0.02 },
+        "layout": "timeline", "radius": 999, "stroke": { "width": 2, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "iconSet": "geometric", "motif": "crosshair", "motion": "snap",
+        "labels": { "kicker": "The 3rd mini album", "steps": ["Scheduler", "Concept photo", "Tracklist", "MV teaser", "Release"], "dates": ["D-7", "D-5", "D-3", "D-1", "D-DAY"], "badge": "Coming soon" }
+      }
+    },
+    {
+      "id": "berlin-techno-poster",
+      "name": "Berlin techno poster",
+      "aka": ["club night poster", "techno flyer", "warehouse rave timetable", "industrial club graphics"],
+      "what": "Black-and-white club-night timetable: towering condensed industrial caps, photocopy noise, hairline rules and floor slots set in mono, no colour at all.",
+      "feels": ["stark", "nocturnal", "uncompromising"],
+      "use": ["club and festival line-ups", "electronic music releases", "fashion drops", "late-night event promos"],
+      "not": "Not the 90s rave flyer: no colour, smileys or chrome; austere industrial monochrome where the timetable is the design.",
+      "search": ["berlin techno poster design", "techno club flyer typography", "black and white rave poster animation"],
+      "stack": { "visual-style": ["monochrome", "photocopy-xerox"], "typography": ["condensed", "monospace"], "color": ["black-and-white", "high-contrast"], "texture": ["photocopy-noise"], "composition": ["swiss-grid", "typography-led"], "motion-language": ["mechanical"], "pacing": "beat-driven", "transitions": ["hard-cut", "flash"], "shadow": ["none"], "shape": ["rectilinear"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#0a0a0a", "ink": "#f2f2f2", "accent": "#ffffff", "accent2": "#6b6b6b", "surface": "#1a1a1a", "muted": "#8c8c8c" },
+        "fonts": { "display": "Big Shoulders Display", "body": "Space Mono", "displayWeight": 900, "case": "upper", "tracking": 0.01 },
+        "layout": "list", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "noise", "icons": "none", "motif": "none", "motion": "snap",
+        "labels": { "kicker": "Saturday into Monday", "title": "Floor one", "date": "Doors 23:59", "items": ["Opening set", "Live", "Extended set", "Closing set", "Sunday morning"], "tags": ["23:00", "01:00", "03:00", "08:00", "14:00"] }
+      }
+    },
+    {
+      "id": "lofi-study-beats",
+      "name": "Lo-fi study beats",
+      "aka": ["lofi hip hop radio", "chillhop", "beats to relax to", "study girl aesthetic"],
+      "what": "Dusky anime-still palette: indigo evening, warm desk-lamp amber and dusty rose, soft rounded lower-case type over a grainy window view.",
+      "feels": ["cozy", "nostalgic", "calm"],
+      "use": ["music livestream loops", "playlist and podcast covers", "study and focus apps", "ambient brand content"],
+      "not": "Not synthwave: no neon grid or chrome; the light is a warm lamp in a quiet room at dusk, grainy and soft.",
+      "search": ["lofi hip hop aesthetic animation", "lofi study stream background", "chillhop cover art style"],
+      "stack": { "visual-style": ["anime-cel"], "typography": ["rounded"], "color": ["warm-palette", "muted"], "texture": ["film-grain"], "lighting": ["window-light", "blue-hour"], "color-grade": "faded-vintage", "composition": ["full-bleed", "negative-space"], "format": ["loop", "music-visualizer"], "motion-language": ["floating"], "pacing": "meditative", "transitions": ["crossfade", "dissolve"], "shadow": ["soft-diffuse"], "shape": ["rounded"], "sound": ["music-led", "ambient-sound"] },
+      "recipe": {
+        "palette": { "canvas": "#1d2140", "ink": "#f6e7d8", "accent": "#f2a65a", "accent2": "#c97b84", "surface": "#2a2f55", "muted": "#a8a3c2" },
+        "fonts": { "display": "M PLUS Rounded 1c", "body": "Nunito", "displayWeight": 700, "case": "lower", "tracking": -0.01 },
+        "layout": "photo", "radius": 18, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "drift", "scene": "interior",
+        "effects": ["vignette"],
+        "labels": { "kicker": "Side B · rainy evening", "caption": "Late, with the window open" }
+      }
+    },
+    {
+      "id": "metal-band-tee",
+      "name": "Metal band tee",
+      "aka": ["heavy metal merch", "blackletter band logo", "black metal shirt", "tour tee print"],
+      "what": "Screen-printed band shirt: white blackletter on pitch-black cotton, one blood-red fleuron, cracked plastisol grain over everything.",
+      "feels": ["menacing", "raw", "loyal"],
+      "use": ["metal and rock releases", "tour announcements", "merch drops", "horror and gaming trailers"],
+      "not": "Not gothic luxury: nothing is polished or gold; it's cheap, cracked screen-print ink on a black tee with aggressive letterforms.",
+      "search": ["metal band logo animation", "blackletter band tee design", "heavy metal poster motion graphics"],
+      "stack": { "visual-style": ["screen-print", "grunge"], "typography": ["display"], "color": ["black-and-white", "high-contrast"], "texture": ["distressed-edges", "print-grain"], "material": ["screen-print", "fabric"], "composition": ["centered-hero", "symmetrical"], "motion-language": ["heavy"], "pacing": "staccato", "transitions": ["hard-cut", "flash"], "shadow": ["none"], "shape": ["sharp", "angular"], "tone": ["rebellious", "dramatic"], "sound": ["music-led", "impacts"] },
+      "recipe": {
+        "palette": { "canvas": "#0b0b0b", "ink": "#f1efe9", "accent": "#b3121b", "accent2": "#f1efe9", "surface": "#151515", "muted": "#7a7a7a" },
+        "fonts": { "display": "Pirata One", "body": "Oswald", "displayWeight": 400, "case": "none", "tracking": 0.01 },
+        "layout": "poster", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "glyph", "iconSet": "ornament", "motif": "none", "motion": "snap", "labels": { "emblem": "" },
+        "effects": ["grain-heavy"]
+      }
+    },
+    {
+      "id": "bollywood-hand-painted",
+      "name": "Bollywood hand-painted poster",
+      "aka": ["Bollywood poster art", "hand-painted film hoarding", "70s Hindi film poster", "filmi title art"],
+      "what": "Painted film hoarding: bevelled saffron-extruded title lettering on a hot magenta-to-marigold painted panel, deep teal night, glitter stars, darkened edges.",
+      "feels": ["dramatic", "exuberant", "nostalgic"],
+      "use": ["film and music launches", "Diwali and festival campaigns", "South Asian brand spots", "retro social ads"],
+      "not": "Not seventies groovy: the lettering is bevelled and extruded like a painted hoarding, in magenta, saffron and teal, not brown and orange.",
+      "search": ["bollywood hand painted poster", "vintage hindi film title design", "bollywood retro title animation"],
+      "stack": { "visual-style": ["handmade", "pop-art"], "illustration": ["brush"], "typography": ["extruded-3d", "display"], "color": ["high-saturation", "warm-palette"], "texture": ["paint"], "era": ["seventies"], "composition": ["centered-hero", "poster"], "camera": ["push-in"], "motion-language": ["cinematic"], "pacing": "montage", "transitions": ["zoom", "flash"], "shadow": ["long"], "shape": ["soft"], "tone": ["dramatic", "playful"] },
+      "recipe": {
+        "palette": { "canvas": "#11363d", "ink": "#fff3d1", "accent": "#ff9f1c", "accent2": "#e0218a", "surface": "#b0165e", "muted": "#f2c6a0" },
+        "fonts": { "display": "Rozha One", "body": "Poppins", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "poster", "radius": 24, "stroke": { "width": 4, "color": "accent", "style": "solid" },
+        "shadow": "long", "shadowColor": "#07181b", "surface": "gradient", "texture": "grain", "icons": "filled", "iconSet": "ornament", "motif": "stars", "motion": "pop",
+        "effects": ["extrude", "vignette"]
+      }
+    },
+    {
+      "id": "roots-reggae-print",
+      "name": "Roots reggae print",
+      "aka": ["Rasta colours", "sound system poster", "reggae 45 label", "roots and culture"],
+      "what": "Sound-system tiles in Rasta red, gold and green: black blocks on a sun-gold ground, fat rounded caps, hand-cut stars and a big green number tile.",
+      "feels": ["warm", "defiant", "joyful"],
+      "use": ["reggae and dancehall events", "Caribbean food and culture brands", "heritage-month content", "summer festival promos"],
+      "not": "Not colour-blocking: the three colours are the Rasta flag in fixed roles on gold and black, with sound-system poster type, not arbitrary bright blocks.",
+      "search": ["reggae poster design", "rasta colours motion graphics", "sound system flyer typography"],
+      "stack": { "visual-style": ["screen-print", "handmade"], "typography": ["display", "rounded"], "color": ["limited-palette", "warm-palette"], "composition": ["bento-grid", "modular-grid"], "motion-language": ["rhythmic"], "pacing": "beat-driven", "transitions": ["push", "hard-cut"], "shadow": ["none"], "shape": ["rounded", "modular"], "tone": ["friendly", "rebellious"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#f4c20d", "ink": "#111111", "accent": "#1e7b34", "accent2": "#c8102e", "surface": "#111111", "muted": "#5a4a06" },
+        "fonts": { "display": "Bowlby One", "body": "Archivo", "displayWeight": 400, "case": "upper", "tracking": 0 },
+        "layout": "bento", "radius": 20, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "duotone", "motif": "stars", "motion": "slide", "chart": "none",
+        "labels": { "stat": "45", "people": "Selector · MC · crew" }
+      }
+    },
+    {
+      "id": "grime-pirate-tv",
+      "name": "Grime pirate TV",
+      "aka": ["Channel U look", "pirate radio grime", "UK grime DVD", "SMS shout-out ticker"],
+      "what": "Early-2000s UK music-TV look: murky tower-block duotone, hi-vis orange tab, blocky condensed caps and a text-message shout-out ticker below.",
+      "feels": ["gritty", "urgent", "local"],
+      "use": ["grime, drill and UK rap releases", "youth culture docs", "streetwear drops", "radio and podcast promos"],
+      "not": "Not a news broadcast: the TV is low-budget and pirate, with SMS shout-outs, signal noise and crew energy instead of polished headlines.",
+      "search": ["channel u grime aesthetic", "pirate radio grime graphics", "uk grime music video titles"],
+      "stack": { "visual-style": ["grunge"], "era": ["y2k"], "typography": ["condensed"], "color": ["dark-ui", "high-contrast"], "texture": ["vhs", "compression-artifacts"], "color-grade": "video-tape", "effects": ["rgb-split"], "format": ["lower-thirds"], "composition": ["full-bleed"], "motion-language": ["glitchy"], "pacing": "rapid-fire", "transitions": ["glitch", "hard-cut"], "shadow": ["none"], "shape": ["rectilinear"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#15171a", "ink": "#f4f4f0", "accent": "#ff6a00", "accent2": "#ffe600", "surface": "#f4f4f0", "muted": "#9a9a96" },
+        "fonts": { "display": "Bebas Neue", "body": "Barlow Condensed", "displayWeight": 400, "case": "upper", "tracking": 0.01 },
+        "layout": "ticker", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "scanlines", "icons": "glyph", "motif": "none", "motion": "glitch", "scene": "city",
+        "effects": ["rgb-split", "noise-bars"],
+        "labels": { "bug": "CH 7", "kicker": "Exclusive", "badge": "Shout-outs", "date": "Late", "ticker": ["Big up the whole crew", "Text your shout-outs in", "Next up: the freestyle", "Request line open"] }
+      }
+    },
+    {
+      "id": "city-pop",
+      "name": "City pop",
+      "aka": ["Japanese city pop", "Hiroshi Nagai style", "80s Japan album art", "resort pop"],
+      "what": "Hiroshi Nagai-style resort cover: swimming-pool blue and flamingo-pink light on a sunlit plate, crisp white margins, navy streamline title.",
+      "feels": ["breezy", "sunny", "wistful"],
+      "use": ["summer campaigns", "travel and hospitality", "music and playlist covers", "lifestyle brands"],
+      "not": "Not vaporwave: city pop is the sincere, sunlit original, flat blue skies and pools, without glitch, statues or irony.",
+      "search": ["city pop album cover art", "hiroshi nagai style illustration", "80s japanese city pop aesthetic video"],
+      "stack": { "visual-style": ["duotone"], "illustration": ["flat-vector"], "era": ["eighties"], "typography": ["display"], "color": ["pastel", "cool-palette"], "lighting": ["hard-noon"], "color-grade": "bright-airy", "composition": ["negative-space", "editorial-grid"], "motion-language": ["smooth"], "pacing": "flowing", "transitions": ["slide", "crossfade"], "shadow": ["none"], "shape": ["rounded"], "tone": ["optimistic", "nostalgic"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#1d4e9e", "accent": "#2bb6e8", "accent2": "#ff8fab", "surface": "#ffffff", "muted": "#5d7ba8" },
+        "fonts": { "display": "Righteous", "body": "Josefin Sans", "displayWeight": 400, "case": "none", "tracking": -0.01 },
+        "layout": "photo", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "slide", "scene": "poolside",
+        "labels": { "kicker": "Side A · summer", "caption": "Poolside, late afternoon", "date": "No. 04" }
+      }
+    },
+    {
+      "id": "classical-yellow-label",
+      "name": "Classical yellow label",
+      "aka": ["Deutsche Grammophon style", "yellow cartouche", "classical record label", "concert season brochure"],
+      "what": "The classical label look: bright white page, one sun-yellow cartouche block, engraved Garamond titles, programme columns and thin black rules.",
+      "feels": ["cultured", "assured", "timeless"],
+      "use": ["orchestra and opera seasons", "classical releases", "museums and galleries", "premium education"],
+      "not": "Not magazine serif: one sacred colour block and restrained programme typography, not a busy spread of photos and pull quotes.",
+      "search": ["deutsche grammophon cover design", "classical album cover typography", "orchestra season brochure design"],
+      "stack": { "visual-style": ["print-editorial"], "typography": ["serif-editorial"], "color": ["accent-color-system", "light-ui"], "composition": ["editorial-grid", "negative-space"], "motion-language": ["luxurious-slow"], "pacing": "slow", "transitions": ["fade", "wipe"], "shadow": ["none"], "shape": ["rectilinear"], "tone": ["premium", "editorial"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#ffffff", "ink": "#1a1a1a", "accent": "#f6cf00", "accent2": "#1a1a1a", "surface": "#ffffff", "muted": "#6d6d6d" },
+        "fonts": { "display": "EB Garamond", "body": "EB Garamond", "displayWeight": 500, "case": "none", "tracking": -0.01 },
+        "layout": "editorial", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "none", "motif": "none", "motion": "fade",
+        "labels": { "kicker": "Season 25/26", "section": "Symphony No. 5", "date": "Sunday, 7.30", "quote": "Allegro con brio" }
+      }
+    },
+    {
+      "id": "festival-lineup-poster",
+      "name": "Festival line-up poster",
+      "aka": ["festival bill", "line-up poster", "summer festival key art", "music festival poster"],
+      "what": "Summer festival bill: tall grotesque caps broken across a sunset-orange field, a sun-yellow disc, one rotated word, one act on a hot-pink block.",
+      "feels": ["festive", "sun-drenched", "energetic"],
+      "use": ["festival and event announcements", "line-up reveals", "ticket on-sale ads", "summer campaigns"],
+      "not": "Not the Swiss poster: tilted, crowded and warm with on-sale energy, where Swiss is strict, cool and gridded.",
+      "search": ["music festival lineup poster design", "festival poster typography animation", "summer festival key art"],
+      "stack": { "visual-style": ["abstract-geometric"], "typography": ["grotesk", "condensed"], "color": ["warm-palette", "high-saturation"], "composition": ["poster", "typography-led"], "format": ["announcement", "event-opener"], "motion-language": ["rhythmic"], "pacing": "beat-driven", "transitions": ["push", "scale"], "shadow": ["none"], "shape": ["circular", "geometric"], "tone": ["energetic", "optimistic"] },
+      "recipe": {
+        "palette": { "canvas": "#ff7a1a", "ink": "#1b0f2e", "accent": "#ff4fa3", "accent2": "#ffd23f", "surface": "#ffe9c7", "muted": "#6b2f10" },
+        "fonts": { "display": "Bricolage Grotesque", "body": "Archivo", "displayWeight": 800, "case": "upper", "tracking": -0.03 },
+        "layout": "typegrid", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "pop",
+        "labels": { "kicker": "Three days", "section": "Main stage", "date": "Fri—Sun" }
+      }
+    },
+    {
+      "id": "cassette-j-card",
+      "name": "Cassette J-card",
+      "aka": ["mixtape J-card", "tape inlay", "cassette insert", "home-dubbed mixtape"],
+      "what": "A home-dubbed tape inlay: white card, felt-marker title, a typed track list on dashed write-in lines, durations in the margin, red and blue ink.",
+      "feels": ["personal", "nostalgic", "handmade"],
+      "use": ["playlists and podcast episodes", "music releases", "personal-story films", "retro product teasers"],
+      "not": "Not the bullet journal: the page is a cassette inlay, a track list with sides and durations, not a planner or a notebook.",
+      "search": ["cassette j card design", "mixtape tracklist animation", "cassette inlay handwritten"],
+      "stack": { "visual-style": ["handmade"], "typography": ["handwritten", "monospace"], "stroke": ["marker"], "material": ["paper"], "era": ["eighties"], "color": ["limited-palette", "light-ui"], "composition": ["asymmetric", "typography-led"], "data-viz": ["ranking-list"], "motion-language": ["handmade-imperfect"], "pacing": "medium-explanatory", "transitions": ["slide", "wipe"], "shadow": ["none"], "shape": ["rectilinear"], "tone": ["human", "nostalgic"] },
+      "recipe": {
+        "palette": { "canvas": "#f4f4f1", "ink": "#1d1d1f", "accent": "#d7262e", "accent2": "#1f5fae", "surface": "#ffffff", "muted": "#6e6e73" },
+        "fonts": { "display": "Permanent Marker", "body": "Courier Prime", "displayWeight": 400, "case": "none", "tracking": 0 },
+        "layout": "list", "radius": 0, "stroke": { "width": 2, "color": "ink", "style": "dashed" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "paper", "icons": "none", "motif": "none", "motion": "type",
+        "labels": { "kicker": "For you", "title": "Side A", "date": "C90", "items": ["Opening track", "Off the radio", "Slow one", "Title track", "Last song on side A"], "tags": ["3:42", "4:05", "5:11", "3:58", "6:02"] }
+      }
+    },
+    {
+      "id": "modular-synth-patch",
+      "name": "Modular synth patch",
+      "aka": ["Eurorack", "patch cable diagram", "modular synthesizer panel", "synth module layout"],
+      "what": "Eurorack rack look: brushed-aluminium modules with tight condensed caps on a black rail, red and yellow modules, patch lines linking VCO, VCF and VCA.",
+      "feels": ["tactile", "precise", "nerdy"],
+      "use": ["audio hardware and plugin launches", "process explainers", "music-tech education", "creative-tool demos"],
+      "not": "Not a systems diagram: the nodes are hardware modules in brushed metal with jacks and signal names, not abstract boxes on white.",
+      "search": ["eurorack modular synth animation", "patch cable diagram design", "modular synthesizer graphics"],
+      "stack": { "visual-style": ["technical-minimal"], "material": ["brushed-metal"], "typography": ["condensed"], "iconography": ["technical"], "composition": ["flowchart", "node-map"], "data-viz": ["flow-diagram"], "motion-language": ["precise"], "pacing": "medium-explanatory", "transitions": ["line-draw", "wipe"], "shadow": ["soft-diffuse"], "shape": ["technical", "circular"], "stroke": ["medium"], "sound": ["synth-effects"] },
+      "recipe": {
+        "palette": { "canvas": "#1c1c1e", "ink": "#ededed", "accent": "#e63a2e", "accent2": "#f2c230", "surface": "#b9bcc0", "muted": "#8e8e93" },
+        "fonts": { "display": "Barlow Condensed", "body": "Barlow Condensed", "displayWeight": 700, "case": "upper", "tracking": 0.03 },
+        "layout": "diagram", "radius": 6, "stroke": { "width": 2, "color": "#0a0a0a", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "metal", "texture": "none", "icons": "line", "iconSet": "tech", "motif": "circuit", "motion": "snap", "edgeColor": "accent", "edges": "line",
+        "labels": { "steps": ["VCO", "VCF", "VCA", "ENV"] }
+      }
+    },
+    {
+      "id": "hifi-tuner-dial",
+      "name": "Hi-fi tuner dial",
+      "aka": ["70s stereo receiver", "FM tuning dial", "silver-face receiver", "analog radio scale"],
+      "what": "Silver-age stereo receiver: backlit blue-black dial glass, pale wide-cap scale numerals in MHz, an amber tuning needle resting on the station.",
+      "feels": ["warm", "precise", "nostalgic"],
+      "use": ["radio and podcast promos", "audio hardware launches", "music-discovery apps", "retro brand stories"],
+      "not": "Not a roadmap timeline: the axis is a tuning scale in MHz with an amber needle on dark dial glass, not milestones on paper.",
+      "search": ["vintage stereo receiver dial", "fm radio dial animation", "70s hi-fi design motion graphics"],
+      "stack": { "visual-style": ["retro-futurism"], "era": ["seventies"], "typography": ["extended"], "material": ["glass", "brushed-metal"], "lighting": ["screen-glow"], "color": ["dark-ui", "warm-palette"], "composition": ["timeline"], "data-viz": ["timeline"], "iconography": ["technical"], "motion-language": ["inertial"], "pacing": "continuous", "transitions": ["slide", "push"], "shadow": ["soft-diffuse"], "shape": ["technical", "circular"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#0c1a26", "ink": "#dcecf2", "accent": "#ffae1a", "accent2": "#4fa6c4", "surface": "#13293a", "muted": "#7d98a8" },
+        "fonts": { "display": "Michroma", "body": "Barlow", "displayWeight": 400, "case": "upper", "tracking": 0.02 },
+        "layout": "timeline", "radius": 999, "stroke": { "width": 2, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "line", "iconSet": "tech", "motif": "none", "motion": "slide",
+        "labels": { "kicker": "FM stereo", "steps": ["Jazz", "Talk", "Soul", "Late show", "Static"], "dates": ["88", "92", "98", "104", "108"], "badge": "Tuned in" }
+      }
+    },
+    {
+      "id": "tour-dates-map",
+      "name": "Tour-dates map",
+      "aka": ["world tour poster", "tour itinerary graphic", "tour merch back print", "band tour map"],
+      "what": "The tour announcement: a night-black atlas in charcoal and bone, a dotted red tour-bus route linking stamped city pins, a slab-caps title card with a red offset.",
+      "feels": ["adventurous", "road-worn", "anticipatory"],
+      "use": ["tour and event announcements", "travel stories", "retail store openings", "roadshow recaps"],
+      "not": "Not a map explainer: the map is a tour poster, dark and merch-like, with a route and nights, not a neutral information graphic.",
+      "search": ["band tour poster map", "tour dates announcement animation", "world tour graphic design"],
+      "stack": { "visual-style": ["screen-print"], "format": ["map-animation", "announcement"], "data-viz": ["map"], "composition": ["full-bleed", "layered-depth"], "typography": ["condensed", "display"], "color": ["dark-ui", "limited-palette"], "camera": ["pan", "push-in"], "motion-language": ["smooth"], "pacing": "medium-explanatory", "transitions": ["camera-move", "line-draw"], "shadow": ["hard"], "shape": ["rectilinear"] },
+      "recipe": {
+        "palette": { "canvas": "#1d1f24", "ink": "#f0ebe0", "accent": "#e8412c", "accent2": "#f2b134", "surface": "#2e3139", "muted": "#9a978f" },
+        "fonts": { "display": "Staatliches", "body": "Archivo Narrow", "displayWeight": 400, "case": "upper", "tracking": 0.01 },
+        "layout": "map", "radius": 4, "stroke": { "width": 2, "color": "ink", "style": "dashed" },
+        "shadow": "hard", "shadowColor": "accent", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "slide",
+        "labels": { "kicker": "World tour", "places": ["Night one", "Night two", "Sold out", "Final night"] }
+      }
+    },
+    {
+      "id": "shoegaze-sleeve",
+      "name": "Shoegaze sleeve",
+      "aka": ["dream pop cover", "Loveless-style blur", "4AD-era sleeve", "shoegaze album art"],
+      "what": "Dream-pop sleeve: an out-of-focus photograph drowned in rose-red and magenta haze, small lower-case serif, warm light leaks and grain.",
+      "feels": ["hazy", "romantic", "hypnotic"],
+      "use": ["indie and alternative releases", "fashion films", "fragrance and beauty teasers", "music video titles"],
+      "not": "Not dreamy soft-focus pastel: the blur is saturated and overdriven, rose-red and magenta like a wall of feedback, not calm wellness pastel.",
+      "search": ["shoegaze album cover aesthetic", "loveless cover style blur", "dream pop music video titles"],
+      "stack": { "visual-style": ["cinematic"], "photo-video": ["full-bleed-footage"], "effects": ["depth-of-field", "grain"], "color": ["high-saturation", "warm-palette"], "color-grade": "tinted-monochrome", "camera": ["rack-focus"], "typography": ["serif-editorial"], "composition": ["full-bleed", "negative-space"], "motion-language": ["fluid"], "pacing": "slow", "transitions": ["dissolve", "blur"], "shadow": ["none"], "shape": ["organic"], "tone": ["mysterious", "dramatic"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#2a0610", "ink": "#ffd9e2", "accent": "#ff3d6e", "accent2": "#b0126a", "surface": "#3a0a18", "muted": "#d98aa0" },
+        "fonts": { "display": "Cormorant", "body": "Work Sans", "displayWeight": 500, "case": "lower", "tracking": 0.01 },
+        "layout": "photo", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "fade", "scene": "abstract",
+        "effects": ["blur-depth", "light-leak"], "density": "airy",
+        "labels": { "kicker": "Twelve songs", "caption": "Side one · feedback" }
+      }
+    },
+    {
+      "id": "hyperpop",
+      "name": "Hyperpop",
+      "aka": ["hyperpop cover art", "digicore", "PC Music aesthetic", "Y2K internet pop"],
+      "what": "Maximal internet pop: acid-lime ground, puffy bubble type, bubblegum-pink and baby-blue cut-outs, glossy 3D hearts, sparkle glints and chromatic fringes.",
+      "feels": ["chaotic", "sugary", "extremely online"],
+      "use": ["pop and electronic releases", "Gen Z brand social", "creator merch drops", "gaming and streaming promos"],
+      "not": "Not Y2K chrome: hyperpop is louder and messier, acid lime and bubblegum with cut-outs and fringing, not a cool silver tech sheen.",
+      "search": ["hyperpop album cover design", "hyperpop aesthetic animation", "y2k internet pop graphics"],
+      "stack": { "visual-style": ["y2k", "mixed-media-collage"], "typography": ["inflated"], "iconography": ["3d"], "color": ["fluorescent", "high-saturation"], "effects": ["chromatic-aberration"], "composition": ["collage", "asymmetric"], "motion-language": ["bouncy"], "pacing": "hyper-fast", "transitions": ["glitch", "zoom"], "shadow": ["hard"], "shape": ["inflated", "blob"], "tone": ["playful", "youthful"], "sound": ["music-led", "synth-effects"] },
+      "recipe": {
+        "palette": { "canvas": "#c8ff3a", "ink": "#111111", "accent": "#ff4fd8", "accent2": "#7fd1ff", "surface": "#ffffff", "muted": "#4a5a10" },
+        "fonts": { "display": "Bagel Fat One", "body": "Space Grotesk", "displayWeight": 400, "case": "lower", "tracking": -0.01 },
+        "layout": "collage", "radius": 28, "stroke": { "width": 4, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "ink", "surface": "flat", "texture": "none", "icons": "emoji3d", "motif": "stars", "motion": "bounce",
+        "effects": ["rgb-split", "glint"]
+      }
+    },
+    {
+      "id": "two-tone-ska",
+      "name": "2 Tone ska",
+      "aka": ["two-tone", "ska revival graphics", "rude boy style", "black-and-white ska"],
+      "what": "2 Tone Records look: a hard black-and-white split down the middle, heavy condensed caps reversing across the seam, halftone grit, nothing grey.",
+      "feels": ["sharp", "defiant", "rhythmic"],
+      "use": ["ska, punk and indie releases", "unity campaigns", "streetwear drops", "club nights"],
+      "not": "Not high-contrast monochrome photography: black and white are graphic halves in dialogue, a split identity with no greys and no photos.",
+      "search": ["2 tone ska graphic design", "two tone records poster", "black and white ska aesthetic"],
+      "stack": { "visual-style": ["monochrome", "punk-zine"], "era": ["eighties"], "color": ["black-and-white", "high-contrast"], "composition": ["split-screen", "typography-led"], "typography": ["grotesk", "condensed"], "motion-language": ["snappy"], "pacing": "staccato", "transitions": ["split", "wipe"], "shadow": ["hard"], "shape": ["rectilinear", "geometric"], "tone": ["rebellious", "energetic"], "sound": ["music-led"] },
+      "recipe": {
+        "palette": { "canvas": "#f4f4f0", "ink": "#0d0d0d", "accent": "#0d0d0d", "accent2": "#d62828", "surface": "#ffffff", "muted": "#5c5c5c" },
+        "fonts": { "display": "Archivo Black", "body": "Archivo", "displayWeight": 400, "case": "upper", "tracking": -0.01 },
+        "layout": "split", "radius": 0, "stroke": { "width": 4, "color": "ink", "style": "solid" },
+        "shadow": "hard", "shadowColor": "ink", "surface": "flat", "texture": "checker", "icons": "none", "motif": "none", "motion": "snap", "chart": "none",
+        "labels": { "before": "Side A", "after": "Side B" }
+      }
+    },
+    {
+      "id": "vinyl-record-sleeve",
+      "name": "Vinyl record sleeve",
+      "aka": ["LP sleeve", "12-inch record", "album jacket", "vinyl mock-up", "record release"],
+      "what": "A square LP jacket carrying the title in heavy caps, the black vinyl sliding out with grooves and a coloured centre label, a short track list beside it.",
+      "feels": ["tactile", "warm", "collectible"],
+      "use": ["album and single announcements", "label and reissue campaigns", "podcast season launches", "record-store and venue promos"],
+      "not": "Not the Blue Note sleeve: this is the object itself, jacket and disc, not one label's cropped typographic cover.",
+      "search": ["vinyl record sleeve animation", "album release record slide out motion", "LP mockup title animation"],
+      "stack": { "visual-style": ["print-editorial", "modernist"], "material": ["vinyl", "paper"], "composition": ["single-object-hero", "asymmetric"], "typography": ["grotesk"], "color": ["limited-palette", "warm-palette"], "shape": ["circular", "rectilinear"], "motion-language": ["smooth"], "transitions": ["slide", "mask-reveal"], "sound": ["music-led"], "tone": ["nostalgic", "confident"] },
+      "recipe": {
+        "palette": { "canvas": "#e9e3d6", "ink": "#1a1714", "accent": "#d8452b", "accent2": "#2d4f7c", "surface": "#f3eee4", "muted": "#6f675b" },
+        "fonts": { "display": "Archivo Black", "body": "Archivo", "displayWeight": 400, "case": "upper", "tracking": -0.01 },
+        "layout": "record", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
+        "shadow": "soft", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "none", "motif": "none", "motion": "slide",
+        "labels": { "kicker": "LP · 12 inch", "title": "Side A", "badge": "33⅓ RPM", "items": ["Opening", "Slow one", "Title track", "Interlude", "Last song"], "emblem": "" }
+      }
+    }
+  ]
+}

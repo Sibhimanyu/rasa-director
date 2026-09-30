@@ -1,0 +1,2414 @@
+{
+  "family": {
+    "id": "heritage",
+    "name": "Heritage",
+    "what": "Design movements and regional traditions: the schools, posters, prints and crafts that each gave the world a look."
+  },
+  "presets": [
+    {
+      "id": "de-stijl",
+      "name": "De Stijl",
+      "aka": [
+        "Neoplasticism",
+        "Mondrian style",
+        "Mondrian grid",
+        "Dutch modernism"
+      ],
+      "what": "Heavy black grid lines dividing white fields with a few solid blocks of red, blue and yellow; blocky capitals, only right angles.",
+      "feels": [
+        "rigorous",
+        "pure",
+        "balanced",
+        "artful"
+      ],
+      "use": [
+        "museum and gallery films",
+        "architecture and furniture",
+        "design-school brands",
+        "idents"
+      ],
+      "not": "Not Bauhaus: De Stijl allows only horizontals, verticals and a black grid, never circles, triangles or diagonals.",
+      "search": [
+        "Mondrian animation",
+        "De Stijl motion graphics",
+        "neoplasticism grid animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "abstract-geometric",
+          "modernist"
+        ],
+        "color": [
+          "primary-colors",
+          "color-blocking"
+        ],
+        "composition": [
+          "modular-grid",
+          "asymmetric"
+        ],
+        "shape": [
+          "rectilinear",
+          "grid-based"
+        ],
+        "stroke": [
+          "heavy"
+        ],
+        "typography": [
+          "display",
+          "grotesk"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "wipe",
+          "slide"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#111111",
+          "ink": "#f5f2ea",
+          "accent": "#d8231b",
+          "accent2": "#1c3f9e",
+          "surface": "#f5f2ea",
+          "muted": "#f1c40f"
+        },
+        "fonts": {
+          "display": "Archivo Black",
+          "body": "Archivo",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": -0.01
+        },
+        "layout": "bento",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "none",
+        "motif": "none",
+        "motion": "slide",
+        "density": "airy",
+        "labels": {
+          "stat": "No. 1",
+          "people": "Compositie in rood, geel, blauw"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "vienna-secession",
+      "name": "Vienna Secession",
+      "aka": [
+        "Secession style",
+        "Wiener Werkstätte",
+        "Ver Sacrum",
+        "Jugendstil Vienna",
+        "Klimt style"
+      ],
+      "what": "Ver Sacrum pages: black and gold on cream, square checkerboard grids, tall geometric Secession lettering, strict symmetrical blocks.",
+      "feels": [
+        "stately",
+        "ornamental",
+        "disciplined",
+        "artful"
+      ],
+      "use": [
+        "museum and exhibition films",
+        "architecture and interiors",
+        "cultural institutions",
+        "premium book and wine brands"
+      ],
+      "not": "Not art deco: Secession is 1900 Vienna, flat squares and checkerboards on cream paper; deco is 1920s sunbursts and streamlined glamour.",
+      "search": [
+        "Vienna Secession poster animation",
+        "Ver Sacrum typography",
+        "Koloman Moser graphic design motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "abstract-geometric"
+        ],
+        "composition": [
+          "symmetrical",
+          "editorial-grid"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "shape": [
+          "rectilinear",
+          "geometric"
+        ],
+        "stroke": [
+          "double-line"
+        ],
+        "typography": [
+          "display",
+          "condensed"
+        ],
+        "texture": [
+          "paper-grain"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "mask-reveal",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#efe8d6",
+          "ink": "#16140f",
+          "accent": "#a8802a",
+          "accent2": "#16140f",
+          "surface": "#f7f2e4",
+          "muted": "#76694f"
+        },
+        "fonts": {
+          "display": "Federo",
+          "body": "Spectral",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.06
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 3,
+          "color": "accent",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "glyph",
+        "iconSet": "ornament",
+        "motif": "grid",
+        "motion": "mask",
+        "labels": {
+          "kicker": "Ver Sacrum",
+          "section": "XIV. Ausstellung",
+          "date": "MCMII"
+        }
+      }
+    },
+    {
+      "id": "art-nouveau",
+      "name": "Art Nouveau",
+      "aka": [
+        "Mucha style",
+        "Jugendstil",
+        "Liberty style",
+        "whiplash ornament",
+        "Belle Époque poster"
+      ],
+      "what": "Mucha-style poster: a haloed arch panel framed in old-gold double lines, floral ornaments, sage and dusty rose, decorative swash lettering.",
+      "feels": [
+        "romantic",
+        "ornate",
+        "graceful"
+      ],
+      "use": [
+        "perfume, tea and botanical brands",
+        "theatre and festival titles",
+        "wedding and events",
+        "heritage packaging"
+      ],
+      "not": "Not art deco: nouveau is organic, floral and curving (1890s); deco is geometric, symmetrical and metallic (1920s).",
+      "search": [
+        "Alphonse Mucha animation",
+        "art nouveau motion graphics",
+        "art nouveau poster title"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "luxury"
+        ],
+        "illustration": [
+          "editorial",
+          "textured-vector"
+        ],
+        "shape": [
+          "organic",
+          "rounded"
+        ],
+        "stroke": [
+          "double-line",
+          "variable-width"
+        ],
+        "color": [
+          "muted",
+          "earth-tones"
+        ],
+        "typography": [
+          "display",
+          "serif-editorial"
+        ],
+        "composition": [
+          "symmetrical",
+          "centered-hero"
+        ],
+        "texture": [
+          "paper-grain"
+        ],
+        "motion-language": [
+          "fluid"
+        ],
+        "transitions": [
+          "dissolve",
+          "mask-reveal"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#dcd3b4",
+          "ink": "#2c281d",
+          "accent": "#a67a2e",
+          "accent2": "#b0646a",
+          "surface": "#f1e8cf",
+          "muted": "#6f684f"
+        },
+        "fonts": {
+          "display": "Macondo Swash Caps",
+          "body": "Cormorant Garamond",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.01
+        },
+        "layout": "poster",
+        "radius": 48,
+        "stroke": {
+          "width": 3,
+          "color": "accent",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "paper",
+        "texture": "paper",
+        "icons": "filled",
+        "iconSet": "ornament",
+        "motif": "rays",
+        "motion": "drift",
+        "density": "airy"
+      }
+    },
+    {
+      "id": "ulm-functionalism",
+      "name": "Ulm functionalism",
+      "aka": [
+        "Braun design",
+        "Dieter Rams style",
+        "HfG Ulm",
+        "less but better",
+        "German functionalism"
+      ],
+      "what": "Braun-grey panels, rounded control pills, one orange signal dot and a green power light, a neutral lowercase grotesk, a fine dot grid.",
+      "feels": [
+        "quiet",
+        "precise",
+        "honest",
+        "useful"
+      ],
+      "use": [
+        "hardware and appliance launches",
+        "audio and consumer electronics",
+        "tool and utility apps",
+        "industrial design studios"
+      ],
+      "not": "Not Swiss poster style: Ulm is product design, with controls, dials and grids at rest, never expressive type.",
+      "search": [
+        "Dieter Rams design animation",
+        "Braun product style motion",
+        "HfG Ulm functionalist design"
+      ],
+      "stack": {
+        "visual-style": [
+          "technical-minimal",
+          "modernist"
+        ],
+        "ui-treatment": [
+          "minimal-ui",
+          "flat-ui"
+        ],
+        "color": [
+          "muted",
+          "accent-color-system"
+        ],
+        "shape": [
+          "rounded",
+          "circular"
+        ],
+        "typography": [
+          "neo-grotesk"
+        ],
+        "material": [
+          "matte-product"
+        ],
+        "composition": [
+          "negative-space",
+          "modular-grid"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "slide",
+          "fade"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e4e3df",
+          "ink": "#1c1c1a",
+          "accent": "#ec6a1f",
+          "accent2": "#3a8a4d",
+          "surface": "#f4f4f1",
+          "muted": "#84837d"
+        },
+        "fonts": {
+          "display": "Hanken Grotesk",
+          "body": "Hanken Grotesk",
+          "displayWeight": 500,
+          "case": "lower",
+          "tracking": -0.02
+        },
+        "layout": "pills",
+        "radius": 18,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "soft",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "dots",
+        "icons": "line",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "snap",
+        "density": "airy",
+        "labels": {
+          "hint": "volume"
+        }
+      }
+    },
+    {
+      "id": "japanese-modernist-poster",
+      "name": "Japanese modernist poster",
+      "aka": [
+        "Tokyo 1964 style",
+        "Kamekura poster",
+        "Tanaka Ikko style",
+        "Japanese Swiss",
+        "Nihon modernism"
+      ],
+      "what": "A huge red sun disc on off-white, heavy black gothic type broken across the grid, one indigo block, generous emptiness.",
+      "feels": [
+        "bold",
+        "serene",
+        "exact"
+      ],
+      "use": [
+        "sport and event openers",
+        "cultural festivals",
+        "design and architecture brands",
+        "national campaigns"
+      ],
+      "not": "Not sumi-e or wabi-sabi: hard-edged 1960s geometric print design, a flat red circle and gothic type, not brushwork or texture.",
+      "search": [
+        "Tokyo 1964 olympic poster style",
+        "Japanese modernist graphic design motion",
+        "Ikko Tanaka poster animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist",
+          "abstract-geometric"
+        ],
+        "era": [
+          "mid-century-modern"
+        ],
+        "composition": [
+          "asymmetric",
+          "negative-space",
+          "typography-led"
+        ],
+        "shape": [
+          "circular",
+          "geometric"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "typography": [
+          "display",
+          "grotesk"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "shape-match",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f2eee4",
+          "ink": "#141414",
+          "accent": "#1d2f5c",
+          "accent2": "#d42a20",
+          "surface": "#f8f5ed",
+          "muted": "#7b766b"
+        },
+        "fonts": {
+          "display": "Dela Gothic One",
+          "body": "Zen Kaku Gothic New",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": -0.02
+        },
+        "layout": "typegrid",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "mask",
+        "density": "airy",
+        "labels": {
+          "kicker": "No. 64",
+          "section": "Tokyo",
+          "date": "10—24"
+        }
+      }
+    },
+    {
+      "id": "ukiyo-e",
+      "name": "Ukiyo-e woodblock",
+      "aka": [
+        "Japanese woodblock print",
+        "Hiroshige style",
+        "Hokusai style",
+        "floating world print",
+        "bokashi gradient"
+      ],
+      "what": "A Hiroshige-style print: Prussian-blue bokashi sky graded to pale horizon, flat layered hills, a white sun, Mincho title set low.",
+      "feels": [
+        "poetic",
+        "tranquil",
+        "crafted"
+      ],
+      "use": [
+        "travel and hospitality",
+        "tea, sake and food",
+        "cultural documentaries",
+        "seasonal campaigns"
+      ],
+      "not": "Not sumi-e: ukiyo-e is flat printed colour with graded skies and crisp layers, not black ink brushwork.",
+      "search": [
+        "ukiyo-e animation",
+        "Hiroshige style motion graphics",
+        "Japanese woodblock print animated"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "print-editorial"
+        ],
+        "illustration": [
+          "flat-vector",
+          "layered-2-5d"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "paper-grain",
+          "print-grain"
+        ],
+        "color": [
+          "complementary",
+          "limited-palette"
+        ],
+        "composition": [
+          "full-bleed",
+          "asymmetric"
+        ],
+        "depth": [
+          "layered-2d"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "dissolve",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#16336a",
+          "ink": "#f6ecd6",
+          "accent": "#a8c6e4",
+          "accent2": "#1d4f9c",
+          "surface": "#1d3d78",
+          "muted": "#c9c0aa"
+        },
+        "fonts": {
+          "display": "Shippori Mincho B1",
+          "body": "Zen Old Mincho",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": 0.02
+        },
+        "layout": "photo",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "none",
+        "motif": "none",
+        "motion": "fade",
+        "density": "airy",
+        "labels": {
+          "caption": "Evening snow — sixth station",
+          "kicker": "Fifty-three stations"
+        },
+        "sky": [
+          "#0f2656",
+          "#6f93c2",
+          "#dfe3dc"
+        ]
+      }
+    },
+    {
+      "id": "loteria",
+      "name": "Lotería cards",
+      "aka": [
+        "Mexican lotería",
+        "Mexican folk print",
+        "lotería mexicana",
+        "papel picado palette"
+      ],
+      "what": "A fanned deck of numbered folk cards with thick black frames on rosa mexicano, marigold and turquoise, wood-type names, sun and moon glyphs.",
+      "feels": [
+        "festive",
+        "warm",
+        "folkloric"
+      ],
+      "use": [
+        "food and drink brands",
+        "festival and event promos",
+        "music releases",
+        "cultural campaigns"
+      ],
+      "not": "Not Memphis: the colour and framing come from Mexican printed folk cards and wood type, not 80s squiggles.",
+      "search": [
+        "loteria card animation",
+        "Mexican folk art motion graphics",
+        "loteria style design"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "screen-print"
+        ],
+        "color": [
+          "high-saturation",
+          "warm-palette"
+        ],
+        "typography": [
+          "display",
+          "slab-serif"
+        ],
+        "illustration": [
+          "flat-vector",
+          "iconographic"
+        ],
+        "stroke": [
+          "heavy"
+        ],
+        "shadow": [
+          "hard"
+        ],
+        "composition": [
+          "stacked-cards"
+        ],
+        "motion-language": [
+          "playful"
+        ],
+        "transitions": [
+          "card-flip",
+          "slide"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#c8005f",
+          "ink": "#fff5e3",
+          "accent": "#ffb000",
+          "accent2": "#00979a",
+          "surface": "#fff5e3",
+          "muted": "#ffd0e2"
+        },
+        "fonts": {
+          "display": "Sancreek",
+          "body": "Alegreya Sans",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.01
+        },
+        "layout": "stack",
+        "radius": 4,
+        "stroke": {
+          "width": 6,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "hard",
+        "shadowColor": "#2a0616",
+        "surface": "flat",
+        "texture": "halftone",
+        "icons": "filled",
+        "iconSet": "nature",
+        "motif": "none",
+        "motion": "slide",
+        "labels": {
+          "kicker": "Lotería",
+          "items": [
+            "El Cantarito",
+            "La Luna",
+            "La Rosa",
+            "El Sol",
+            "La Sirena"
+          ]
+        }
+      }
+    },
+    {
+      "id": "indian-truck-art",
+      "name": "Indian truck art",
+      "aka": [
+        "Horn OK Please",
+        "lorry art",
+        "South Asian truck art",
+        "hand-painted truck",
+        "desi kitsch"
+      ],
+      "what": "Hand-painted panels in peacock blue, parrot green and marigold on crimson, double keyline borders, ornament medallions, sign-painter letters.",
+      "feels": [
+        "exuberant",
+        "devotional",
+        "loud",
+        "handmade"
+      ],
+      "use": [
+        "food and street brands",
+        "music and festival promos",
+        "travel and mobility",
+        "fashion drops"
+      ],
+      "not": "Not pop art: dense, ornamental South Asian sign painting with borders around everything, not comic dots and speech bubbles.",
+      "search": [
+        "Indian truck art animation",
+        "Horn OK Please design",
+        "truck art motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "pop-art"
+        ],
+        "color": [
+          "high-saturation",
+          "complementary"
+        ],
+        "typography": [
+          "display",
+          "dimensional"
+        ],
+        "stroke": [
+          "double-line",
+          "heavy"
+        ],
+        "shadow": [
+          "hard"
+        ],
+        "composition": [
+          "modular-grid",
+          "symmetrical"
+        ],
+        "texture": [
+          "paint"
+        ],
+        "motion-language": [
+          "rhythmic"
+        ],
+        "transitions": [
+          "hard-cut",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#6e0d24",
+          "ink": "#fff1d0",
+          "accent": "#22b35e",
+          "accent2": "#ffb400",
+          "surface": "#0b3f6b",
+          "muted": "#f4b7a8"
+        },
+        "fonts": {
+          "display": "Yatra One",
+          "body": "Hind",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "bento",
+        "radius": 22,
+        "stroke": {
+          "width": 4,
+          "color": "accent2",
+          "style": "double"
+        },
+        "shadow": "hard",
+        "shadowColor": "#2a0410",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "ornament",
+        "motif": "repeat",
+        "motion": "pop",
+        "labels": {
+          "stat": "OK",
+          "people": "Horn please · Use dipper at night"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "moroccan-zellige",
+      "name": "Moroccan zellige",
+      "aka": [
+        "zellij",
+        "Moorish tilework",
+        "Islamic geometric tiles",
+        "Fez tile mosaic"
+      ],
+      "what": "Glazed tile panels in cobalt, emerald and saffron set in white plaster grout, eight-point star ornaments, geometric Arabic-inspired lettering.",
+      "feels": [
+        "intricate",
+        "cool",
+        "timeless"
+      ],
+      "use": [
+        "hospitality and riads",
+        "ceramics and interiors",
+        "food and tea",
+        "travel films"
+      ],
+      "not": "Not azulejo: zellige is chipped, multi-coloured glazed mosaic built from star geometry; azulejo is painted blue-and-white tiles.",
+      "search": [
+        "zellige pattern animation",
+        "Moroccan tile motion graphics",
+        "Islamic geometric pattern animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "abstract-geometric",
+          "handmade"
+        ],
+        "material": [
+          "ceramic"
+        ],
+        "color": [
+          "high-saturation",
+          "cool-palette"
+        ],
+        "shape": [
+          "geometric",
+          "grid-based"
+        ],
+        "composition": [
+          "modular-grid",
+          "symmetrical"
+        ],
+        "iconography": [
+          "geometric"
+        ],
+        "motion-language": [
+          "precise"
+        ],
+        "transitions": [
+          "shape-match",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f4efe4",
+          "ink": "#10243f",
+          "accent": "#127a5a",
+          "accent2": "#e0a526",
+          "surface": "#1f56a8",
+          "muted": "#b5532f"
+        },
+        "fonts": {
+          "display": "El Messiri",
+          "body": "El Messiri",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "bento",
+        "radius": 6,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "inset",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "ornament",
+        "motif": "tiles",
+        "motion": "mask",
+        "labels": {
+          "stat": "Fès",
+          "people": "Glazed · Cut · Set by hand"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "scandinavian-folk",
+      "name": "Scandinavian folk art",
+      "aka": [
+        "Dala horse style",
+        "rosemaling",
+        "Nordic folk",
+        "Swedish folk pattern",
+        "kurbits"
+      ],
+      "what": "Dala red ground, painted flowers and hearts in yellow, cornflower blue and white, rounded folk capitals and soft hand-drawn outlines.",
+      "feels": [
+        "cosy",
+        "cheerful",
+        "homespun"
+      ],
+      "use": [
+        "holiday campaigns",
+        "food, bakery and craft brands",
+        "kids and family",
+        "wool, home and gift"
+      ],
+      "not": "Not nordic soft minimalism: this is painted peasant ornament, saturated red and flowers, not pale calm interiors.",
+      "search": [
+        "Scandinavian folk art animation",
+        "Dala horse motion graphics",
+        "rosemaling pattern animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "childlike"
+        ],
+        "illustration": [
+          "hand-drawn",
+          "flat-vector"
+        ],
+        "color": [
+          "warm-palette",
+          "primary-colors"
+        ],
+        "shape": [
+          "organic",
+          "rounded"
+        ],
+        "stroke": [
+          "hand-drawn"
+        ],
+        "typography": [
+          "display",
+          "rounded"
+        ],
+        "motion-language": [
+          "organic"
+        ],
+        "transitions": [
+          "slide",
+          "scale"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#b3212c",
+          "ink": "#fff6ea",
+          "accent": "#f3c14b",
+          "accent2": "#3a73c0",
+          "surface": "#fff6ea",
+          "muted": "#f5c7bd"
+        },
+        "fonts": {
+          "display": "Grandstander",
+          "body": "Nunito",
+          "displayWeight": 800,
+          "case": "none",
+          "tracking": -0.01
+        },
+        "layout": "timeline",
+        "radius": 26,
+        "stroke": {
+          "width": 3,
+          "color": "ink",
+          "style": "sketch"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "doodle",
+        "iconSet": "nature",
+        "motif": "stars",
+        "motion": "spring",
+        "labels": {
+          "kicker": "The folk year",
+          "steps": [
+            "Midwinter",
+            "Easter",
+            "Midsummer",
+            "Harvest",
+            "Yule"
+          ],
+          "dates": [
+            "Jan",
+            "Apr",
+            "Jun",
+            "Sep",
+            "Dec"
+          ],
+          "badge": "Midsommar"
+        }
+      }
+    },
+    {
+      "id": "italian-futurism",
+      "name": "Italian Futurism",
+      "aka": [
+        "Futurist typography",
+        "parole in libertà",
+        "words in freedom",
+        "Depero style",
+        "Marinetti poster"
+      ],
+      "what": "Words in freedom: heavy grotesque and Bodoni capitals crashing at angles across newsprint in black and red, one black disc, speed.",
+      "feels": [
+        "loud",
+        "fast",
+        "insurgent",
+        "mechanical"
+      ],
+      "use": [
+        "motorsport and speed",
+        "manifesto films",
+        "music and nightlife",
+        "art and culture openers"
+      ],
+      "not": "Not constructivism: Futurism is Italian, onomatopoeic and typographically chaotic, celebrating speed, not ordered agitprop geometry.",
+      "search": [
+        "Italian futurism typography animation",
+        "parole in liberta motion",
+        "Depero poster animation"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "mixed-media-collage"
+        ],
+        "typography": [
+          "condensed",
+          "high-contrast-serif"
+        ],
+        "composition": [
+          "asymmetric",
+          "typography-led",
+          "collage"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "motion-language": [
+          "mechanical"
+        ],
+        "transitions": [
+          "push",
+          "whip"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#ebe3d0",
+          "ink": "#121110",
+          "accent": "#cc2019",
+          "accent2": "#121110",
+          "surface": "#f4eee0",
+          "muted": "#6c645a"
+        },
+        "fonts": {
+          "display": "Anton",
+          "body": "Bodoni Moda",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0
+        },
+        "layout": "typegrid",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "noise",
+        "icons": "none",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "kicker": "Zang Tumb Tumb",
+          "section": "Manifesto",
+          "date": "MCMXIV"
+        }
+      }
+    },
+    {
+      "id": "polish-poster-school",
+      "name": "Polish poster school",
+      "aka": [
+        "Polish film poster",
+        "Polska Szkoła Plakatu",
+        "Lenica style",
+        "Cieślewicz style"
+      ],
+      "what": "Painterly, surreal flat shapes in hot red and ochre on bottle green, wobbly hand-painted lettering, grainy poster paper.",
+      "feels": [
+        "surreal",
+        "witty",
+        "melancholic",
+        "artful"
+      ],
+      "use": [
+        "film and theatre titles",
+        "festival posters",
+        "book and music releases",
+        "arthouse campaigns"
+      ],
+      "not": "Not Swiss poster: the Polish school is painterly and hand-lettered with metaphor-led images, never grid-bound type.",
+      "search": [
+        "Polish poster school animation",
+        "Polish film poster style",
+        "Lenica animation style"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "print-editorial"
+        ],
+        "illustration": [
+          "conceptual",
+          "brush"
+        ],
+        "color": [
+          "muted",
+          "accent-color-system"
+        ],
+        "typography": [
+          "handwritten",
+          "display"
+        ],
+        "texture": [
+          "print-grain",
+          "paint"
+        ],
+        "shape": [
+          "organic",
+          "irregular"
+        ],
+        "composition": [
+          "centered-hero",
+          "poster"
+        ],
+        "motion-language": [
+          "handmade-imperfect"
+        ],
+        "transitions": [
+          "morph",
+          "dissolve"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#27392f",
+          "ink": "#f0e4c4",
+          "accent": "#e2432c",
+          "accent2": "#d6a23e",
+          "surface": "#34493d",
+          "muted": "#b6ab8e"
+        },
+        "fonts": {
+          "display": "Londrina Solid",
+          "body": "Karla",
+          "displayWeight": 900,
+          "case": "upper",
+          "tracking": 0.01
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "blobs",
+        "motion": "step"
+      }
+    },
+    {
+      "id": "olivetti-modernism",
+      "name": "Olivetti modernism",
+      "aka": [
+        "Italian corporate modernism",
+        "Pintori style",
+        "Olivetti poster",
+        "Milanese modernism"
+      ],
+      "what": "Playful giant numerals and flat fields of red, cobalt and sun yellow on white, lowercase geometric sans, a precise Milanese grid.",
+      "feels": [
+        "witty",
+        "optimistic",
+        "intelligent"
+      ],
+      "use": [
+        "fintech and calculators",
+        "office and productivity tools",
+        "corporate brand films",
+        "annual reports"
+      ],
+      "not": "Not American mid-century: Italian corporate design is lighter and wittier, abstract numbers and letters rather than atomic stars.",
+      "search": [
+        "Giovanni Pintori Olivetti poster",
+        "Olivetti graphic design animation",
+        "Italian modernism motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "modernist",
+          "mid-century"
+        ],
+        "era": [
+          "mid-century-modern"
+        ],
+        "color": [
+          "primary-colors",
+          "color-blocking"
+        ],
+        "typography": [
+          "geometric-sans",
+          "display"
+        ],
+        "composition": [
+          "asymmetric",
+          "swiss-grid"
+        ],
+        "data-viz": [
+          "number-counter",
+          "statistic"
+        ],
+        "motion-language": [
+          "playful"
+        ],
+        "transitions": [
+          "slide",
+          "scale"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f6f4ee",
+          "ink": "#1a1a1a",
+          "accent": "#e2231a",
+          "accent2": "#1f4aa8",
+          "surface": "#f8d21c",
+          "muted": "#77746c"
+        },
+        "fonts": {
+          "display": "Jost",
+          "body": "Jost",
+          "displayWeight": 500,
+          "case": "lower",
+          "tracking": -0.03
+        },
+        "layout": "bignumber",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "filled",
+        "iconSet": "geometric",
+        "motif": "none",
+        "motion": "pop",
+        "labels": {
+          "stat": "22",
+          "caption": "cifre, lettere, idee",
+          "kicker": "numeri",
+          "readouts": [
+            "1",
+            "10",
+            "100"
+          ]
+        }
+      }
+    },
+    {
+      "id": "soviet-space-poster",
+      "name": "Soviet space poster",
+      "aka": [
+        "Soviet cosmos poster",
+        "space race propaganda",
+        "cosmonaut poster",
+        "Soviet space age graphics"
+      ],
+      "what": "Midnight-blue sky with orbit rings and a red launch path, gold stars, blocky Russo capitals, milestones marked like a mission chart.",
+      "feels": [
+        "heroic",
+        "optimistic",
+        "monumental"
+      ],
+      "use": [
+        "space and science brands",
+        "anniversaries and milestones",
+        "roadmaps",
+        "tech manifestos"
+      ],
+      "not": "Not space-age retro-futurism: this is Soviet state poster graphics, deep blue and red with heroic geometry, not cream Googie cartoons.",
+      "search": [
+        "Soviet space poster animation",
+        "cosmonaut propaganda poster design",
+        "space race graphics motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "retro-futurism",
+          "constructivist"
+        ],
+        "era": [
+          "mid-century-modern"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "typography": [
+          "display",
+          "extended"
+        ],
+        "composition": [
+          "timeline",
+          "orbit"
+        ],
+        "shape": [
+          "geometric",
+          "circular"
+        ],
+        "motion-language": [
+          "cinematic"
+        ],
+        "transitions": [
+          "push",
+          "line-draw"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0e1a3d",
+          "ink": "#f3efe4",
+          "accent": "#d8262c",
+          "accent2": "#f2c230",
+          "surface": "#162859",
+          "muted": "#9aa3bd"
+        },
+        "fonts": {
+          "display": "Russo One",
+          "body": "PT Sans",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "timeline",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "filled",
+        "iconSet": "geometric",
+        "motif": "orbits",
+        "motion": "mask",
+        "labels": {
+          "kicker": "Mission chart",
+          "steps": [
+            "Launch",
+            "Orbit",
+            "Spacewalk",
+            "Docking",
+            "Return"
+          ],
+          "dates": [
+            "1957",
+            "1961",
+            "1965",
+            "1971",
+            "1975"
+          ],
+          "badge": "In orbit"
+        }
+      }
+    },
+    {
+      "id": "chinese-propaganda-poster",
+      "name": "Chinese propaganda poster",
+      "aka": [
+        "revolutionary poster",
+        "Maoist poster style",
+        "red sun poster",
+        "socialist poster"
+      ],
+      "what": "Signal-red field with golden sunrays bursting from the centre, heavy blocky gold capitals, a cream star, flat print colour.",
+      "feels": [
+        "rousing",
+        "declarative",
+        "monumental"
+      ],
+      "use": [
+        "campaign launches",
+        "manifesto films",
+        "retro-ironic brand spots",
+        "event openers"
+      ],
+      "not": "Not constructivism: red ground and radiating gold sun, centred and ceremonial, not black diagonals on cream.",
+      "search": [
+        "Chinese propaganda poster style",
+        "red sunburst poster animation",
+        "revolutionary poster motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "pop-art",
+          "screen-print"
+        ],
+        "color": [
+          "limited-palette",
+          "warm-palette"
+        ],
+        "composition": [
+          "radial",
+          "centered-hero",
+          "poster"
+        ],
+        "typography": [
+          "display",
+          "condensed"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "motion-language": [
+          "heavy"
+        ],
+        "transitions": [
+          "zoom",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#b0141c",
+          "ink": "#ffe9a8",
+          "accent": "#ffcb2e",
+          "accent2": "#fff4d6",
+          "surface": "#8e0f15",
+          "muted": "#f5b98d"
+        },
+        "fonts": {
+          "display": "ZCOOL QingKe HuangYou",
+          "body": "PT Sans",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "filled",
+        "iconSet": "default",
+        "motif": "rays",
+        "motion": "pop"
+      }
+    },
+    {
+      "id": "dada-photomontage",
+      "name": "Dada photomontage",
+      "aka": [
+        "Dada collage",
+        "Hannah Höch style",
+        "Berlin Dada",
+        "cut-up montage",
+        "anti-art collage"
+      ],
+      "what": "Newsprint and halftone photo scraps pasted at odd angles, mismatched heavy grotesk and old serif, black, signal red and grey on yellowed paper.",
+      "feels": [
+        "absurd",
+        "subversive",
+        "sharp"
+      ],
+      "use": [
+        "art and culture",
+        "satire and commentary",
+        "music releases",
+        "manifesto films"
+      ],
+      "not": "Not scrapbook: Dada is anti-art, angular and political, newspaper and photo fragments, never tape-and-sticker keepsakes.",
+      "search": [
+        "Dada photomontage animation",
+        "Hannah Hoch collage motion",
+        "Dada collage video"
+      ],
+      "stack": {
+        "visual-style": [
+          "mixed-media-collage",
+          "photocopy-xerox"
+        ],
+        "composition": [
+          "collage",
+          "asymmetric"
+        ],
+        "texture": [
+          "halftone",
+          "print-grain"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "typography": [
+          "grotesk",
+          "serif-editorial"
+        ],
+        "photo-video": [
+          "photo-cutout"
+        ],
+        "motion-language": [
+          "stop-motion-like"
+        ],
+        "transitions": [
+          "hard-cut",
+          "graphic-match"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e6dec8",
+          "ink": "#131313",
+          "accent": "#c4201c",
+          "accent2": "#8b8a82",
+          "surface": "#f4f0e3",
+          "muted": "#5f5c55"
+        },
+        "fonts": {
+          "display": "Chivo",
+          "body": "Libre Caslon Text",
+          "displayWeight": 900,
+          "case": "upper",
+          "tracking": -0.02
+        },
+        "layout": "collage",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "halftone",
+        "icons": "glyph",
+        "iconSet": "default",
+        "motif": "none",
+        "motion": "step",
+        "effects": [
+          "misregister"
+        ]
+      }
+    },
+    {
+      "id": "persian-miniature",
+      "name": "Persian miniature",
+      "aka": [
+        "Persian manuscript",
+        "illuminated manuscript",
+        "Safavid miniature",
+        "Mughal miniature page"
+      ],
+      "what": "A lapis-blue manuscript page inside gold illuminated double borders, a gilded panel, turquoise and vermilion details, graceful Persian-inspired lettering.",
+      "feels": [
+        "opulent",
+        "poetic",
+        "storied"
+      ],
+      "use": [
+        "cultural and museum films",
+        "perfume and textiles",
+        "poetry and storytelling",
+        "festive greetings"
+      ],
+      "not": "Not art deco: gold on deep colour, but framed like a hand-illuminated book page with floral ornament, not streamlined sunbursts.",
+      "search": [
+        "Persian miniature animation",
+        "illuminated manuscript motion graphics",
+        "Persian ornament design"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "print-editorial"
+        ],
+        "stroke": [
+          "double-line"
+        ],
+        "color": [
+          "high-contrast",
+          "cool-palette"
+        ],
+        "composition": [
+          "editorial-grid",
+          "symmetrical"
+        ],
+        "typography": [
+          "display",
+          "serif-editorial"
+        ],
+        "material": [
+          "paper"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "page-flip",
+          "dissolve"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#14255a",
+          "ink": "#f3e6c3",
+          "accent": "#d3a548",
+          "accent2": "#2aa39a",
+          "surface": "#1c3170",
+          "muted": "#b7ab8c"
+        },
+        "fonts": {
+          "display": "Lalezar",
+          "body": "Vazirmatn",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.01
+        },
+        "layout": "editorial",
+        "radius": 0,
+        "stroke": {
+          "width": 3,
+          "color": "accent",
+          "style": "double"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "glyph",
+        "iconSet": "ornament",
+        "motif": "stars",
+        "motion": "fade",
+        "labels": {
+          "kicker": "Folio XII",
+          "section": "The garden of verses",
+          "date": "Tabriz"
+        },
+        "photo": "plate",
+        "scene": "botanical"
+      }
+    },
+    {
+      "id": "dutch-total-design",
+      "name": "Dutch Total Design",
+      "aka": [
+        "Wim Crouwel style",
+        "Stedelijk poster",
+        "gridnik",
+        "Dutch grid modernism"
+      ],
+      "what": "A visible square grid on white, modular square-cornered capitals set strictly to it, one red block, a grey square, radical order.",
+      "feels": [
+        "radical",
+        "systematic",
+        "cool"
+      ],
+      "use": [
+        "museum and exhibition identities",
+        "tech and engineering brands",
+        "type-led titles",
+        "design conferences"
+      ],
+      "not": "Not Swiss International: the grid is shown, not hidden, and the letters themselves are built from it, square and modular.",
+      "search": [
+        "Wim Crouwel poster animation",
+        "Stedelijk museum poster style",
+        "grid typography motion design"
+      ],
+      "stack": {
+        "visual-style": [
+          "swiss-international",
+          "technical-minimal"
+        ],
+        "era": [
+          "swiss"
+        ],
+        "composition": [
+          "swiss-grid",
+          "typography-led"
+        ],
+        "shape": [
+          "grid-based",
+          "rectilinear"
+        ],
+        "typography": [
+          "display",
+          "extended"
+        ],
+        "color": [
+          "limited-palette",
+          "light-ui"
+        ],
+        "motion-language": [
+          "robotic"
+        ],
+        "transitions": [
+          "wipe",
+          "hard-cut"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f3f3ef",
+          "ink": "#111111",
+          "accent": "#e1261c",
+          "accent2": "#c4c4bd",
+          "surface": "#ffffff",
+          "muted": "#7c7c77"
+        },
+        "fonts": {
+          "display": "Tektur",
+          "body": "Work Sans",
+          "displayWeight": 700,
+          "case": "lower",
+          "tracking": 0
+        },
+        "layout": "typegrid",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grid",
+        "icons": "none",
+        "motif": "none",
+        "motion": "step",
+        "density": "dense",
+        "labels": {
+          "kicker": "vormgevers",
+          "section": "stedelijk",
+          "date": "05.07—29.09"
+        }
+      }
+    },
+    {
+      "id": "cuban-silkscreen-poster",
+      "name": "Cuban silkscreen poster",
+      "aka": [
+        "ICAIC film poster",
+        "Cuban poster art",
+        "Havana silkscreen",
+        "Cuban film poster"
+      ],
+      "what": "Two flat silkscreen inks split down the middle, hot pink against deep forest green, a bold condensed title printed across both.",
+      "feels": [
+        "vivid",
+        "graphic",
+        "defiant"
+      ],
+      "use": [
+        "film and festival titles",
+        "music releases",
+        "before/after stories",
+        "campaign posters"
+      ],
+      "not": "Not duotone photography: pure flat ink fields and bold condensed type, no photographic image.",
+      "search": [
+        "Cuban film poster design",
+        "ICAIC poster animation",
+        "silkscreen two colour poster motion"
+      ],
+      "stack": {
+        "visual-style": [
+          "screen-print",
+          "pop-art"
+        ],
+        "color": [
+          "complementary",
+          "color-blocking"
+        ],
+        "composition": [
+          "split-screen",
+          "typography-led"
+        ],
+        "typography": [
+          "condensed",
+          "display"
+        ],
+        "texture": [
+          "print-grain"
+        ],
+        "motion-language": [
+          "snappy"
+        ],
+        "transitions": [
+          "split",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#0f3b2c",
+          "ink": "#ffe6ef",
+          "accent": "#ff3d8b",
+          "accent2": "#f7d23e",
+          "surface": "#17513d",
+          "muted": "#9cc5b4"
+        },
+        "fonts": {
+          "display": "Bebas Neue",
+          "body": "Work Sans",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.01
+        },
+        "layout": "split",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "snap",
+        "labels": {
+          "before": "Primera",
+          "after": "Segunda"
+        },
+        "chart": "none"
+      }
+    },
+    {
+      "id": "arts-and-crafts",
+      "name": "Arts and Crafts",
+      "aka": [
+        "William Morris style",
+        "Kelmscott Press",
+        "Arts & Crafts movement",
+        "Morris & Co."
+      ],
+      "what": "A Kelmscott contents page: blackletter title, ruled chapters with roman numerals in madder red, willow green, handmade paper.",
+      "feels": [
+        "crafted",
+        "earnest",
+        "rich"
+      ],
+      "use": [
+        "book and publishing",
+        "craft, textile and home",
+        "heritage and wellness brands",
+        "literary titles"
+      ],
+      "not": "Not Art Nouveau: Arts and Crafts is medieval, dense and book-like, black-bordered pages, not flowing whiplash curves.",
+      "search": [
+        "William Morris animation",
+        "Kelmscott Press typography",
+        "arts and crafts movement motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "print-editorial",
+          "handmade"
+        ],
+        "material": [
+          "paper"
+        ],
+        "texture": [
+          "paper-grain",
+          "print-grain"
+        ],
+        "color": [
+          "earth-tones",
+          "muted"
+        ],
+        "typography": [
+          "display",
+          "serif-editorial"
+        ],
+        "composition": [
+          "editorial-grid",
+          "typography-led"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "page-flip",
+          "wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#efe6d0",
+          "ink": "#1b1814",
+          "accent": "#9c2f24",
+          "accent2": "#4e6b3a",
+          "surface": "#f6efdd",
+          "muted": "#6c604b"
+        },
+        "fonts": {
+          "display": "Grenze Gotisch",
+          "body": "Cormorant Garamond",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": 0
+        },
+        "layout": "list",
+        "radius": 0,
+        "stroke": {
+          "width": 5,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "paper",
+        "icons": "line",
+        "iconSet": "ornament",
+        "motif": "rules",
+        "motion": "fade",
+        "labels": {
+          "kicker": "Kelmscott",
+          "title": "Contents",
+          "date": "MDCCCXCVI",
+          "items": [
+            "Of the garden",
+            "Of the orchard",
+            "Of the loom",
+            "Of the press",
+            "Of the hearth",
+            "Of the road"
+          ],
+          "tags": [
+            "I",
+            "II",
+            "III",
+            "IV",
+            "V",
+            "VI"
+          ]
+        }
+      }
+    },
+    {
+      "id": "byzantine-mosaic",
+      "name": "Byzantine mosaic",
+      "aka": [
+        "Byzantine gold mosaic",
+        "Ravenna mosaic",
+        "icon painting style",
+        "gold-ground mosaic"
+      ],
+      "what": "A gold-leaf tessera ground, a deep lapis panel edged in crimson, a haloed cross ornament and solemn uncial capitals.",
+      "feels": [
+        "sacred",
+        "radiant",
+        "ancient"
+      ],
+      "use": [
+        "history and religion documentaries",
+        "museum and heritage films",
+        "premium spirits and jewellery",
+        "choral and classical music"
+      ],
+      "not": "Not art deco gold: the gold is a glittering tessera ground behind flat, frontal forms, with uncial letters, not streamlined metal.",
+      "search": [
+        "Byzantine mosaic animation",
+        "Ravenna gold mosaic style",
+        "gold mosaic motion graphics"
+      ],
+      "stack": {
+        "visual-style": [
+          "luxury",
+          "handmade"
+        ],
+        "material": [
+          "ceramic",
+          "metal"
+        ],
+        "texture": [
+          "stipple",
+          "print-grain"
+        ],
+        "color": [
+          "warm-palette",
+          "high-contrast"
+        ],
+        "composition": [
+          "symmetrical",
+          "centered-hero"
+        ],
+        "typography": [
+          "display",
+          "serif-editorial"
+        ],
+        "motion-language": [
+          "luxurious-slow"
+        ],
+        "transitions": [
+          "dissolve",
+          "light-wipe"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#c49a3e",
+          "ink": "#161a45",
+          "accent": "#9e1f2c",
+          "accent2": "#f3e2a6",
+          "surface": "#1d2466",
+          "muted": "#5c4516"
+        },
+        "fonts": {
+          "display": "Uncial Antiqua",
+          "body": "Cormorant Garamond",
+          "displayWeight": 400,
+          "case": "none",
+          "tracking": 0.01
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 4,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "halftone",
+        "icons": "filled",
+        "iconSet": "ornament",
+        "motif": "rays",
+        "motion": "fade",
+        "effects": [
+          "glint"
+        ]
+      }
+    },
+    {
+      "id": "lissitzky-proun",
+      "name": "Lissitzky Proun",
+      "aka": [
+        "Proun",
+        "El Lissitzky style",
+        "suprematist axonometric",
+        "Russian avant-garde architecture"
+      ],
+      "what": "Weightless axonometric blocks and planes in red, black and warm grey floating on off-white, a wide geometric title, suprematist balance.",
+      "feels": [
+        "visionary",
+        "balanced",
+        "architectural"
+      ],
+      "use": [
+        "architecture and engineering",
+        "design and art institutions",
+        "product systems explainers",
+        "manifesto films"
+      ],
+      "not": "Not constructivist posters: Prouns are spatial, floating axonometric constructions, not flat, shouting agitprop layouts.",
+      "search": [
+        "El Lissitzky Proun animation",
+        "suprematist axonometric motion",
+        "Russian avant-garde 3D composition"
+      ],
+      "stack": {
+        "visual-style": [
+          "constructivist",
+          "abstract-geometric"
+        ],
+        "era": [
+          "constructivism"
+        ],
+        "depth": [
+          "isometric"
+        ],
+        "composition": [
+          "isometric-scene",
+          "asymmetric"
+        ],
+        "shape": [
+          "geometric",
+          "rectilinear"
+        ],
+        "color": [
+          "limited-palette",
+          "high-contrast"
+        ],
+        "typography": [
+          "extended",
+          "geometric-sans"
+        ],
+        "motion-language": [
+          "floating"
+        ],
+        "transitions": [
+          "camera-move",
+          "slide"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#eee9dd",
+          "ink": "#151413",
+          "accent": "#c7231f",
+          "accent2": "#151413",
+          "surface": "#d6d0c3",
+          "muted": "#6e685c"
+        },
+        "fonts": {
+          "display": "Syncopate",
+          "body": "Archivo",
+          "displayWeight": 700,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "isometric",
+        "radius": 0,
+        "stroke": {
+          "width": 2,
+          "color": "ink",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "grain",
+        "icons": "none",
+        "motif": "none",
+        "motion": "drift",
+        "labels": {
+          "kicker": "Proun 1D"
+        }
+      }
+    },
+    {
+      "id": "kente-cloth",
+      "name": "Kente cloth",
+      "aka": [
+        "kente",
+        "Asante kente",
+        "Ewe kente",
+        "strip-woven cloth",
+        "West African textile"
+      ],
+      "what": "Asante strip-woven cloth: narrow bands of gold, green, red and black set edge to edge, zigzag blocks, heavy woven texture, blocky monoline caps.",
+      "feels": [
+        "proud",
+        "rhythmic",
+        "celebratory"
+      ],
+      "use": [
+        "cultural festivals and heritage months",
+        "graduation and ceremony films",
+        "music and fashion launches",
+        "community campaigns"
+      ],
+      "not": "Not a generic tribal print: kente is woven in narrow strips sewn side by side, so the pattern runs in bands with blocks, not an all-over printed motif.",
+      "search": [
+        "kente cloth pattern animation",
+        "kente textile motion graphics",
+        "African woven pattern title design"
+      ],
+      "stack": {
+        "visual-style": [
+          "abstract-geometric",
+          "handmade"
+        ],
+        "material": [
+          "fabric"
+        ],
+        "color": [
+          "high-saturation",
+          "warm-palette"
+        ],
+        "shape": [
+          "geometric",
+          "grid-based"
+        ],
+        "composition": [
+          "symmetrical",
+          "poster"
+        ],
+        "texture": [
+          "fibers"
+        ],
+        "typography": [
+          "display"
+        ],
+        "motion-language": [
+          "rhythmic"
+        ],
+        "transitions": [
+          "wipe",
+          "slide"
+        ],
+        "tone": [
+          "bold",
+          "energetic"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#e8b021",
+          "ink": "#161310",
+          "accent": "#1f7a3c",
+          "accent2": "#c8352b",
+          "surface": "#161310",
+          "muted": "#5a3d12"
+        },
+        "fonts": {
+          "display": "Rubik Mono One",
+          "body": "Work Sans",
+          "displayWeight": 400,
+          "case": "upper",
+          "tracking": 0.02
+        },
+        "layout": "poster",
+        "radius": 0,
+        "stroke": {
+          "width": 0,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "weave",
+        "icons": "filled",
+        "iconSet": "geometric",
+        "motif": "stripes",
+        "motion": "slide",
+        "labels": {
+          "emblem": ""
+        }
+      }
+    },
+    {
+      "id": "azulejo",
+      "name": "Azulejo",
+      "aka": [
+        "azulejos",
+        "Portuguese tiles",
+        "Lisbon tiles",
+        "blue and white tiles",
+        "tin-glazed tilework"
+      ],
+      "what": "Portuguese tin-glazed tiles: cobalt stars and crosses painted on white, a solid cobalt half, italic high-contrast serif crossing the seam.",
+      "feels": [
+        "cool",
+        "crafted",
+        "sunlit"
+      ],
+      "use": [
+        "travel and city films",
+        "hospitality and food",
+        "ceramics and interiors",
+        "cultural programmes"
+      ],
+      "not": "Not Moroccan zellige: azulejo is painted, glazed square tiles in blue on white; zellige is chipped multi-coloured mosaic.",
+      "search": [
+        "azulejo tile pattern animation",
+        "portuguese tiles motion graphics",
+        "lisbon blue tile design"
+      ],
+      "stack": {
+        "visual-style": [
+          "handmade",
+          "abstract-geometric"
+        ],
+        "material": [
+          "ceramic"
+        ],
+        "color": [
+          "limited-palette",
+          "cool-palette"
+        ],
+        "shape": [
+          "geometric",
+          "grid-based"
+        ],
+        "composition": [
+          "split-screen",
+          "symmetrical"
+        ],
+        "typography": [
+          "high-contrast-serif"
+        ],
+        "iconography": [
+          "geometric"
+        ],
+        "motion-language": [
+          "smooth"
+        ],
+        "transitions": [
+          "wipe",
+          "fade"
+        ],
+        "tone": [
+          "calm",
+          "editorial"
+        ]
+      },
+      "recipe": {
+        "palette": {
+          "canvas": "#f5f3ee",
+          "ink": "#132a6b",
+          "accent": "#1f4fa8",
+          "accent2": "#6f8fcf",
+          "surface": "#ffffff",
+          "muted": "#4a5a86"
+        },
+        "fonts": {
+          "display": "Playfair Display",
+          "body": "Lora",
+          "displayWeight": 700,
+          "case": "none",
+          "tracking": 0,
+          "italic": true
+        },
+        "layout": "split",
+        "radius": 4,
+        "stroke": {
+          "width": 3,
+          "color": "accent",
+          "style": "solid"
+        },
+        "shadow": "none",
+        "shadowColor": "ink",
+        "surface": "flat",
+        "texture": "none",
+        "icons": "line",
+        "iconSet": "ornament",
+        "motif": "tiles",
+        "motion": "fade",
+        "chart": "none"
+      }
+    }
+  ]
+}

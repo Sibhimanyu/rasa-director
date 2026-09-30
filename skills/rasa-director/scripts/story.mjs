@@ -1,0 +1,672 @@
+#!/usr/bin/env node
+// Story: the concept engine. Keeps every film from telling the default launch story
+// (hook -> problem -> "Introducing X" -> 3 features -> CTA) by starting from the product's truth,
+// sampling narrative devices that differ from each other, and gating pitches against the cliche arc.
+//   node story.mjs truth --out <truth.md> [--product "<name>"]
+//        -> writes the truth-sheet template for Claude to fill (transformation, emotional truth, enemy,
+//           the product's own objects/formats/words, proof, audience, the cliche version to avoid)
+//   node story.mjs devices [--family f] [--fits <tag>] [--q "<text>"] [--id <id>] [--overused|--fresh]
+//        -> list / search the device catalog (taxonomy/devices.json); --id prints one device in full
+//   node story.mjs cliche
+//        -> the default arc's 8 beats, stock openers, overused devices and visual cliches
+//   node story.mjs pick --truth <truth.md|truth.json> [--count 3] [--seed s] [--recent ids] [--exclude ids]
+//        [--like id] [--format launch|explainer|brand|social] [--tone t]
+//        -> three devices ("Sure", "Bold", "Wild") that differ on >= 5 of 7 axes, with different family,
+//           protagonist and visual world; each with beats, pitfalls, an example and native material to fuse
+//           with. Deterministic for a seed (default seed: product name + today's date).
+//   node story.mjs check --pitch <pitch.json | pitches.json> [--truth <truth.md|json>] [--footage]
+//        -> the rubric: 5 pass/fail gates + the weighted 1-5 score (ship at >= 3.8, no dimension < 3).
+//           Exit 0 = ship, 2 = rewrite (reasons in the JSON), 1 = bad input.
+//   node story.mjs validate
+//        -> checks devices.json against its schema (vocabularies, ids, counts)
+// Pitch format: references/story.md. Catalog schema: taxonomy/devices-SCHEMA.md.
+import fs from "node:fs";
+import path from "node:path";
+import { parseArgs, die, readJSON, writeFile, SKILL_DIR } from "./lib/common.mjs";
+import { track } from "./lib/report.mjs";
+
+const args = parseArgs();
+const cmd = args._[0];
+track(
+  { pick: "Picking three story devices that differ from each other", check: "Checking the pitches against the cliche arc" }[cmd],
+  { pick: "Three story devices picked: Sure, Bold and Wild", check: "Pitches checked" }[cmd]
+);
+const CATALOG_PATH = path.join(SKILL_DIR, "taxonomy", "devices.json");
+const CAT = readJSON(CATALOG_PATH);
+const DEVICES = CAT.devices;
+const AXES = Object.keys(CAT.axes);
+const out = (o) => console.log(JSON.stringify(o, null, 2));
+const list = (v) => (v == null || v === true ? [] : String(v).split(",").map((s) => s.trim()).filter(Boolean));
+const norm = (s) => String(s || "").toLowerCase();
+
+// a device by id, research code ("A5") or name
+function findDevice(key) {
+  const k = norm(key).trim();
+  return DEVICES.find((d) => d.id === k || norm(d.code) === k || norm(d.name) === k) || null;
+}
+
+// --- seeded randomness ---------------------------------------------------------
+function hashSeed(s) {
+  let h = 2166136261 >>> 0;
+  for (const ch of String(s)) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+  return h;
+}
+function rng(seed) {
+  let a = hashSeed(seed);
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function weightedSample(pool, k, rand) {
+  const items = pool.filter((p) => p.w > 0).slice();
+  const picked = [];
+  while (picked.length < k && items.length) {
+    const total = items.reduce((s, p) => s + p.w, 0);
+    let r = rand() * total;
+    let i = 0;
+    for (; i < items.length - 1; i++) if ((r -= items[i].w) <= 0) break;
+    picked.push(items.splice(i, 1)[0]);
+  }
+  return picked;
+}
+
+// --- the truth sheet -----------------------------------------------------------
+// Each section: its heading, the key it parses to, whether it's a list, and the hint Claude sees.
+const TRUTH = [
+  { h: "Product", key: "product", fields: ["name", "does"], hint: "name: <product name>\ndoes: <what it does, one plain sentence>" },
+  { h: "Tags", key: "tags", list: true, hint: `- <product-type tags from: ${CAT.tags.products.filter((t) => t !== "any").join(", ")}>` },
+  { h: "Format", key: "format", fields: ["format", "length", "aspect"], hint: "format: <launch | explainer | brand | social>\nlength: <seconds, e.g. 30>\naspect: <16:9 | 9:16 | 1:1>" },
+  { h: "Tone", key: "tone", list: true, hint: `- <one or two of: ${CAT.tags.tones.join(", ")}>` },
+  { h: "Audience", key: "audience", hint: "<who watches, where, what they already know and believe>" },
+  { h: "Transformation", key: "transformation", hint: "from <the before, in the audience's words> to <the after>" },
+  { h: "Emotional truth", key: "emotional_truth", hint: "<the feeling under the task: the small shame, fear, longing or relief; not a feature>" },
+  { h: "Enemy", key: "enemy", list: true, hint: "- <the villain: a thing, a habit, a phrase, a deadline>" },
+  { h: "Native objects", key: "objects", list: true, min: 8, hint: "- <at least 8 physical or digital objects, sounds and details from the product's world, as specific as possible>" },
+  { h: "Native formats", key: "forms", list: true, min: 5, hint: "- <at least 5 document or media formats that exist in this world (a receipt, a changelog, a status page, a calendar invite)>" },
+  { h: "Native words", key: "words", list: true, min: 3, hint: "- <the product's exact words: UI labels, button text, jargon, error messages, the name itself. Copy them from the site or screenshots; never invent them>" },
+  { h: "Proof", key: "proof", list: true, hint: "- <each claim the film may make, with its source: \"Sorts a receipt in 2 s (site, /features)\". Only what is true>" },
+  { h: "Surprising facts", key: "facts", list: true, hint: "- <at least one non-obvious truth about the product or its world, with its source>" },
+  { h: "Must-show features", key: "features", list: true, hint: "- <at most 3; each will live inside the device, not in a list>" },
+  { h: "Assets", key: "assets", list: true, hint: "- <what exists: screenshots, logo, UI captures, footage, product sounds, real data>" },
+  { h: "Competitors", key: "competitors", list: true, hint: "- <1-3 names, for the swap test>" },
+  { h: "The cliche version", key: "cliche", list: true, hint: "- <write the default-arc version in 6 lines (hook stat -> problem montage -> \"Introducing X\" -> feature 1/2/3 -> CTA). This is what the pitches must not be>" },
+];
+
+function truthTemplate(product) {
+  const secs = TRUTH.map((s) => `## ${s.h}\n\n${s.hint}\n`).join("\n");
+  return `# Truth sheet${product ? `: ${product}` : ""}
+
+> Fill every section before any concept. Specificity comes from here: real objects, real words, real numbers.
+> Replace each <placeholder>; lines still in <angle brackets> are ignored. Never invent claims, numbers or UI labels:
+> anything the film shows as fact must be in Proof or Native words with a source.
+
+${secs}`;
+}
+
+const headKey = (s) => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
+// a line still holding a template placeholder ("<product name>", "from <the before> to <the after>") is unfilled
+const isPlaceholder = (s) => /<[a-z][^<>]*\s[^<>]*>/i.test(s) || /^(todo|tbd|\.\.\.)$/i.test(s.trim()) || !s.trim();
+
+function parseTruthMd(text) {
+  const t = {};
+  const sections = {};
+  let cur = null;
+  for (const raw of text.replace(/\r\n/g, "\n").split("\n")) {
+    const m = raw.match(/^##\s+(.+?)\s*$/);
+    if (m) {
+      const h = headKey(m[1]);
+      const spec = TRUTH.find((s) => h === headKey(s.h) || h.startsWith(headKey(s.h)));
+      cur = spec ? spec.key : null;
+      if (cur) sections[cur] = [];
+      continue;
+    }
+    if (!cur || /^\s*>/.test(raw) || /^#\s/.test(raw)) continue;
+    const line = raw.replace(/^\s*[-*]\s+/, "").replace(/^\s*\d+[.)]\s+/, "").trim();
+    if (!isPlaceholder(line)) sections[cur].push(line);
+  }
+  for (const s of TRUTH) {
+    const lines = sections[s.key] || [];
+    if (s.fields) {
+      const o = {};
+      for (const l of lines) {
+        const f = l.match(/^([a-z_ ]+):\s*(.*)$/i);
+        if (f && !isPlaceholder(f[2])) o[norm(f[1]).trim()] = f[2].trim();
+      }
+      t[s.key] = o;
+    } else if (s.list) t[s.key] = lines;
+    else t[s.key] = lines.join(" ");
+  }
+  return t;
+}
+
+function loadTruth(p) {
+  if (!p || p === true) return null;
+  const f = path.resolve(String(p));
+  if (!fs.existsSync(f)) die(`truth sheet not found: ${f}`);
+  const text = fs.readFileSync(f, "utf8");
+  let t;
+  if (/\.json$/i.test(f)) {
+    t = JSON.parse(text);
+    if (typeof t.product === "string") t.product = { name: t.product };
+    if (typeof t.format === "string") t.format = { format: t.format };
+    for (const s of TRUTH) if (s.list && typeof t[s.key] === "string") t[s.key] = [t[s.key]];
+  } else t = parseTruthMd(text);
+  for (const s of TRUTH) if (s.list && !Array.isArray(t[s.key])) t[s.key] = [];
+  t.product = t.product || {};
+  t.format = t.format || {};
+  return t;
+}
+
+function truthGaps(t) {
+  const gaps = [];
+  if (!t.product.name) gaps.push("Product: no name");
+  for (const k of ["transformation", "emotional_truth"]) if (!String(t[k] || "").trim()) gaps.push(`${TRUTH.find((s) => s.key === k).h}: empty`);
+  for (const s of TRUTH.filter((x) => x.list)) {
+    const n = t[s.key].length;
+    if (s.min && n < s.min) gaps.push(`${s.h}: ${n} of at least ${s.min}`);
+    else if (!s.min && !n && ["enemy", "proof", "cliche", "competitors"].includes(s.key)) gaps.push(`${s.h}: empty`);
+  }
+  return gaps;
+}
+
+// the lookup phrase of a native item: "thermal receipt (fades to blank)" -> "thermal receipt"
+const itemKey = (s) => norm(s).split(/\s[(—-]\s?|[(:;,]/)[0].replace(/["'`]/g, "").trim();
+function mentions(text, item) {
+  const k = itemKey(item);
+  if (!k || k.length < 3) return false;
+  const tx = norm(text);
+  if (tx.includes(k)) return true;
+  // else its most distinctive word (the longest, 5+ letters), as a whole word or plural
+  const head = k.split(/\s+/).filter((w) => /^[a-z]{5,}$/.test(w)).sort((a, b) => b.length - a.length)[0];
+  return !!head && new RegExp(`\\b${head}(s|es)?\\b`).test(tx);
+}
+
+// --- device scoring and distance ------------------------------------------------
+const distance = (a, b) => AXES.filter((k) => a.axes[k] !== b.axes[k]).length;
+const hardDiffer = (a, b) => a.axes.family !== b.axes.family && a.axes.protagonist !== b.axes.protagonist && a.axes.visual_world !== b.axes.visual_world;
+const trioOk = (trio) => trio.every((a, i) => trio.every((b, j) => j <= i || (distance(a, b) >= 5 && hardDiffer(a, b))));
+const BUILD_W = { 5: 1.1, 4: 1, 3: 0.8, 2: 0.4, 1: 0.15 };
+
+function weigh(d, ctx) {
+  const why = [];
+  let w = 1;
+  if (d.family === "container") { w *= 1.5; why.push("borrowed container x1.5"); }
+  if (d.family === "metaphor") { w *= 1.3; why.push("metaphor x1.3"); }
+  if (d.overused) { w *= 0.3; why.push("LLM-overused x0.3"); }
+  if (ctx.recent.has(d.id)) { w *= 0.15; why.push("used recently x0.15"); }
+  const prods = d.fits.products;
+  if (ctx.tags.length) {
+    if (prods.some((p) => ctx.tags.includes(p))) { w *= 1.5; why.push("fits the product x1.5"); }
+    else if (prods.includes("any")) w *= 1.1;
+    else { w *= 0.8; why.push("product fit weak x0.8"); }
+  }
+  if (ctx.format) {
+    if (d.fits.formats.includes(ctx.format)) w *= 1.3;
+    else { w *= 0.5; why.push(`not a ${ctx.format} format x0.5`); }
+  }
+  if (ctx.tones.length && d.fits.tones.some((t) => ctx.tones.includes(t))) { w *= 1.3; why.push("tone match x1.3"); }
+  let bw = BUILD_W[d.build.score] ?? 1;
+  if (d.needs === "footage" && ctx.footage) bw = 1; // footage supplied: the founder monologue is buildable
+  if (bw !== 1) why.push(`buildability ${d.build.score}/5 x${bw}`);
+  w *= bw;
+  if (ctx.like && ctx.like.id !== d.id && AXES.filter((k) => ctx.like.axes[k] === d.axes[k]).length >= 3) { w *= 2; why.push(`like ${ctx.like.id} x2`); }
+  return { w: Math.round(w * 1000) / 1000, why };
+}
+
+// Sure = the clearest, most buildable; Wild = the furthest reach; Bold = the one in between
+function ladder(trio) {
+  const sure = trio.slice().sort((a, b) => (b.d.build.score - b.d.ambition * 0.6 + (["container", "rhetoric"].includes(b.d.family) ? 0.5 : 0)) - (a.d.build.score - a.d.ambition * 0.6 + (["container", "rhetoric"].includes(a.d.family) ? 0.5 : 0)) || a.d.id.localeCompare(b.d.id))[0];
+  const rest = trio.filter((x) => x !== sure);
+  const wild = rest.slice().sort((a, b) => (b.d.ambition - b.d.build.score * 0.3) - (a.d.ambition - a.d.build.score * 0.3) || a.d.id.localeCompare(b.d.id))[0];
+  const bold = rest.find((x) => x !== wild);
+  return [{ ...sure, label: "Sure" }, { ...bold, label: "Bold" }, { ...wild, label: "Wild" }];
+}
+
+const LABEL_MEANING = {
+  Sure: "high feasibility, reads instantly: the safe recommendation",
+  Bold: "high originality, still on the brief",
+  Wild: "the reach: might be the best film, might not work",
+};
+
+// --- the cliche detector ---------------------------------------------------------
+const CL = CAT.cliche;
+function beatText(b) { return [b.name, b.on_screen, b.visual].filter(Boolean).join(" • "); }
+const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+// a signal matches at a word start ("hud" never matches "should"); stems like "frustrat" still match "frustrated"
+const hasSignal = (text, sig) => (/^[a-z]/i.test(sig) ? new RegExp(`(^|[^a-z])${esc(sig.toLowerCase())}`).test(text) : text.includes(sig.toLowerCase()));
+function detectDefaultBeat(b, i, n) {
+  const all = norm(beatText(b)); // name + on screen + visual
+  const said = norm([b.name, b.on_screen].filter(Boolean).join(" \u2022 ")); // what the beat is and what the viewer reads
+  const hit = (id, t = said) => CL.beats.find((x) => x.id === id).signals.some((s) => hasSignal(t, s));
+  if (hit("intro-reveal")) return "intro-reveal";
+  if (hit("social-proof")) return "social-proof";
+  if (i >= n - 2 && hit("cta")) return "cta";
+  if (/\bfeatures?\b|\bbenefits?\b|capabilit/.test(said)) return "feature";
+  if (i === 0 && (hit("hook-stat", all) || /^\s*\d[\d,.]*\s*%/.test(norm(b.on_screen)) || /\?\s*$/.test(String(b.on_screen || "").trim()))) return "hook-stat";
+  if (i <= 2 && hit("problem-montage", all)) return "problem-montage";
+  return "none";
+}
+// longest run of default beats appearing in the default order (a longest increasing subsequence)
+function inOrder(nums) {
+  const best = [];
+  for (let i = 0; i < nums.length; i++) {
+    best[i] = 1;
+    for (let j = 0; j < i; j++) if (nums[j] < nums[i]) best[i] = Math.max(best[i], best[j] + 1);
+  }
+  return nums.length ? Math.max(...best) : 0;
+}
+function clicheMap(beats) {
+  const n = beats.length;
+  let featureN = 4;
+  return beats.map((b, i) => {
+    const declared = b.maps_to && b.maps_to !== "none" ? String(b.maps_to) : null;
+    let det = detectDefaultBeat(b, i, n);
+    let id = declared || det;
+    if (id === "feature" || /^feature/.test(id)) { id = `feature-${Math.min(featureN, 6) - 3}`; featureN++; }
+    const beat = CL.beats.find((x) => x.id === id);
+    return { beat: i + 1, name: b.name, default_beat: beat ? beat.id : "none", n: beat ? beat.n : null, source: declared ? "declared" : det !== "none" ? "detected" : null };
+  });
+}
+function visualCliches(texts) {
+  const t = norm(texts.join(" • "));
+  return CL.visuals.filter((v) => v.signals.some((s) => hasSignal(t, s))).map((v) => v.name);
+}
+
+// --- commands -------------------------------------------------------------------
+if (cmd === "truth") {
+  if (!args.out || args.out === true) die("--out <truth.md> required");
+  const f = path.resolve(String(args.out));
+  if (fs.existsSync(f) && !args.force) die(`${f} exists (pass --force to overwrite)`);
+  writeFile(f, truthTemplate(args.product && args.product !== true ? String(args.product) : ""));
+  out({ ok: true, truth: f, sections: TRUTH.map((s) => s.h), next: `Fill it (every <placeholder>), then: node story.mjs pick --truth ${path.basename(f)}` });
+} else if (cmd === "devices") {
+  if (args.id) {
+    const d = findDevice(args.id);
+    if (!d) die(`unknown device "${args.id}". List: node story.mjs devices`);
+    out(d);
+  } else {
+    let ds = DEVICES;
+    if (args.family) {
+      const f = norm(args.family);
+      ds = ds.filter((d) => d.family === f || norm(CAT.families[d.family].code) === f);
+      if (!ds.length) die(`unknown family "${args.family}". Families: ${Object.entries(CAT.families).map(([k, v]) => `${k} (${v.code})`).join(", ")}`);
+    }
+    if (args.fits) {
+      const tags = list(args.fits).map(norm);
+      ds = ds.filter((d) => tags.every((t) => [...d.fits.products, ...d.fits.tones, ...d.fits.formats].includes(t)));
+    }
+    if (args.overused) ds = ds.filter((d) => d.overused);
+    if (args.fresh) ds = ds.filter((d) => !d.overused);
+    if (args.q) {
+      const words = norm(args.q).split(/\s+/).filter(Boolean);
+      ds = ds.filter((d) => {
+        const hay = norm([d.id, d.code, d.name, d.what, d.example, d.seen_in, ...d.fits.products, ...d.fits.tones, ...Object.values(d.axes)].join(" "));
+        return words.every((w) => hay.includes(w));
+      });
+    }
+    out({
+      count: ds.length,
+      devices: ds.map((d) => ({ id: d.id, code: d.code, name: d.name, family: d.family, what: d.what, build: d.build.score, overused: d.overused || undefined, fits: [...d.fits.products, ...d.fits.formats].join(", ") })),
+      hint: "Full entry: node story.mjs devices --id <id>",
+    });
+  }
+} else if (cmd === "cliche") {
+  out({ ...CL, overused_devices: CL.overused_devices.map((id) => ({ id, name: findDevice(id)?.name })) });
+} else if (cmd === "pick") {
+  const truth = loadTruth(args.truth);
+  if (!truth) die("--truth <truth.md|truth.json> required (write one with: node story.mjs truth --out truth.md)");
+  const gaps = truthGaps(truth);
+  const filled = truth.objects.length + truth.forms.length + (truth.transformation ? 1 : 0) + (truth.emotional_truth ? 1 : 0);
+  if (filled < 4) die(`the truth sheet is still empty (fill it first):\n- ${gaps.join("\n- ")}`);
+  const count = Math.max(1, Math.min(3, Number(args.count || 3)));
+  const format = norm(args.format && args.format !== true ? args.format : truth.format.format || "").trim() || null;
+  if (format && !CAT.tags.formats.includes(format)) die(`unknown format "${format}". Use: ${CAT.tags.formats.join(", ")}`);
+  const tones = (args.tone && args.tone !== true ? list(args.tone) : truth.tone).map(norm).filter((t) => CAT.tags.tones.includes(t));
+  const tags = truth.tags.map(norm).filter((t) => CAT.tags.products.includes(t));
+  const like = args.like ? findDevice(args.like) : null;
+  if (args.like && !like) die(`unknown device for --like: "${args.like}"`);
+  const recentIds = list(args.recent).map((r) => findDevice(r)?.id).filter(Boolean);
+  const exclude = new Set(list(args.exclude).map((r) => findDevice(r)?.id).filter(Boolean));
+  const footage = !!args.footage || truth.assets.some((a) => /footage|video of|founder on camera/i.test(a));
+  const seed = args.seed && args.seed !== true ? String(args.seed) : `${truth.product.name || "product"}|${new Date().toISOString().slice(0, 10)}`;
+  const rand = rng(seed);
+  const ctx = { recent: new Set(recentIds), tags, format, tones, like, footage };
+  const scored = DEVICES.filter((d) => !exclude.has(d.id)).map((d) => ({ d, ...weigh(d, ctx) }));
+
+  // candidates: at least one per family, two from the containers and metaphors, then three more from anywhere
+  const fams = Object.keys(CAT.families);
+  let cands = [];
+  for (const f of fams) cands.push(...weightedSample(scored.filter((s) => s.d.family === f), f === "container" || f === "metaphor" ? 2 : 1, rand));
+  cands.push(...weightedSample(scored.filter((s) => !cands.includes(s)), 3, rand));
+  // jitter so the heaviest devices don't win every seed
+  const jitter = new Map(cands.map((c) => [c.d.id, 0.7 + 0.6 * rand()]));
+  const val = (c) => c.w * (jitter.get(c.d.id) ?? 1);
+  const bestTrio = (pool) => {
+    let best = null;
+    let bestV = -1;
+    for (let i = 0; i < pool.length; i++)
+      for (let j = i + 1; j < pool.length; j++)
+        for (let k = j + 1; k < pool.length; k++) {
+          const trio = [pool[i], pool[j], pool[k]];
+          if (!trioOk(trio.map((x) => x.d))) continue;
+          const v = trio.reduce((s, x) => s + val(x), 0) + 0.02 * (distance(pool[i].d, pool[j].d) + distance(pool[i].d, pool[k].d) + distance(pool[j].d, pool[k].d));
+          if (v > bestV) { bestV = v; best = trio; }
+        }
+    return best;
+  };
+  let trio = bestTrio(cands);
+  let widened = false;
+  if (!trio) {
+    // widen: the whole (non-excluded) catalog, with seeded jitter
+    for (const s of scored) if (!jitter.has(s.d.id)) jitter.set(s.d.id, 0.7 + 0.6 * rand());
+    trio = bestTrio(scored.slice().sort((a, b) => val(b) - val(a)).slice(0, 24));
+    widened = true;
+  }
+  if (!trio) die("no three devices satisfy the distance rule with these exclusions; drop some --exclude ids");
+  const laddered = ladder(trio);
+  // native material to fuse each device with: seeded, never the same central item twice
+  const native = [...truth.forms.map((x) => ({ kind: "format", item: x })), ...truth.objects.map((x) => ({ kind: "object", item: x }))];
+  const used = new Set();
+  const fuse = () => {
+    const pool = native.filter((n) => !used.has(n.item));
+    const pickN = [];
+    const forms = pool.filter((n) => n.kind === "format");
+    const objs = pool.filter((n) => n.kind === "object");
+    if (forms.length) pickN.push(forms[Math.floor(rand() * forms.length)]);
+    if (objs.length) pickN.push(objs[Math.floor(rand() * objs.length)]);
+    pickN.forEach((n) => used.add(n.item));
+    return pickN.map((n) => `${n.item} (${n.kind})`);
+  };
+  const picks = laddered.slice(0, count).map((x) => {
+    const d = x.d;
+    return {
+      label: x.label,
+      ladder: LABEL_MEANING[x.label],
+      id: d.id, code: d.code, name: d.name, family: `${CAT.families[d.family].code} ${CAT.families[d.family].name}`,
+      what: d.what,
+      axes: d.axes,
+      beats: d.beats,
+      pitfalls: d.pitfalls,
+      example: d.example,
+      build: d.build,
+      needs: d.needs,
+      overused: d.overused || undefined,
+      fuse_with: fuse(),
+      weight: x.w, weight_why: x.why,
+    };
+  });
+  const matrix = picks.map((a) => picks.map((b) => (a === b ? null : distance(findDevice(a.id), findDevice(b.id)))));
+  out({
+    ok: true,
+    seed,
+    product: truth.product.name || null,
+    format, tones, tags,
+    truth_gaps: gaps.length ? gaps : undefined,
+    considered: cands.map((c) => ({ id: c.d.id, w: c.w })),
+    widened: widened || undefined,
+    picks,
+    distance: { axes: AXES, matrix, rule: "every pair differs on >= 5 of 7 axes, and on family, protagonist and visual_world" },
+    avoid: {
+      cliche_arc: CL.arc,
+      stock_openers: "Meet X / Introducing X / What if...? / Tired of...? / Imagine... / The future of ___ is here / Say goodbye to...",
+      visual_cliches: CL.visuals.map((v) => v.name),
+    },
+    next: "Write one pitch per pick (references/story.md: title, <= 12-word logline, timed beats with the turn at 60-75%, three sketch frames) fusing the device with its fuse_with material, then: node story.mjs check --pitch <pitches.json> --truth <truth>",
+  });
+} else if (cmd === "check") {
+  if (!args.pitch || args.pitch === true) die("--pitch <pitch.json> required");
+  const pf = path.resolve(String(args.pitch));
+  if (!fs.existsSync(pf)) die(`pitch not found: ${pf}`);
+  let raw;
+  try { raw = readJSON(pf); } catch (e) { die(`pitch is not valid JSON: ${e.message}`); }
+  const pitches = Array.isArray(raw) ? raw : Array.isArray(raw.pitches) ? raw.pitches : [raw];
+  const truth = loadTruth(args.truth);
+  const footage = !!args.footage || !!(truth && truth.assets.some((a) => /footage|video of|founder on camera/i.test(a)));
+  const results = pitches.map((p, i) => checkPitch(p, i, truth, footage));
+  const portfolio = pitches.length > 1 ? checkPortfolio(pitches, results) : null;
+  const ship = results.every((r) => r.verdict === "ship") && (!portfolio || portfolio.pass);
+  out(pitches.length === 1 && !portfolio ? results[0] : { ok: ship, verdict: ship ? "ship" : "rewrite", pitches: results, portfolio });
+  process.exit(results.some((r) => r.verdict === "invalid") ? 1 : ship ? 0 : 2);
+} else if (cmd === "validate") {
+  const problems = [];
+  const ids = new Set();
+  const codes = new Set();
+  for (const d of DEVICES) {
+    if (ids.has(d.id)) problems.push(`duplicate id ${d.id}`);
+    if (codes.has(d.code)) problems.push(`duplicate code ${d.code}`);
+    ids.add(d.id); codes.add(d.code);
+    for (const k of ["id", "code", "name", "family", "what", "example"]) if (!d[k]) problems.push(`${d.id}: missing ${k}`);
+    if (!CAT.families[d.family]) problems.push(`${d.id}: unknown family ${d.family}`);
+    if (d.code[0] !== CAT.families[d.family]?.code) problems.push(`${d.id}: code ${d.code} not in family ${d.family}`);
+    for (const k of AXES) if (!CAT.axes[k].values.includes(d.axes?.[k])) problems.push(`${d.id}: axes.${k} "${d.axes?.[k]}" not in vocabulary`);
+    if (d.axes.family !== d.family) problems.push(`${d.id}: axes.family != family`);
+    for (const k of ["products", "tones", "formats"]) for (const t of d.fits?.[k] || []) if (!CAT.tags[k].includes(t)) problems.push(`${d.id}: fits.${k} "${t}" not in tags.${k}`);
+    if (!(d.beats || []).length || d.beats.some((b) => !b.name || !b.purpose)) problems.push(`${d.id}: beats need name + purpose`);
+    if (!(d.pitfalls || []).length) problems.push(`${d.id}: no pitfalls`);
+    if (!(d.build?.score >= 1 && d.build.score <= 5)) problems.push(`${d.id}: build.score must be 1-5`);
+    if (!(d.ambition >= 1 && d.ambition <= 5)) problems.push(`${d.id}: ambition must be 1-5`);
+    if (typeof d.overused !== "boolean") problems.push(`${d.id}: overused must be boolean`);
+  }
+  for (const id of CL.overused_devices) if (!findDevice(id)?.overused) problems.push(`cliche.overused_devices: ${id} is not a device marked overused`);
+  if (CL.beats.length !== 8) problems.push(`cliche.beats: ${CL.beats.length}, expected 8`);
+  const byFam = Object.fromEntries(Object.keys(CAT.families).map((f) => [f, DEVICES.filter((d) => d.family === f).length]));
+  out({ ok: !problems.length, devices: DEVICES.length, by_family: byFam, overused: DEVICES.filter((d) => d.overused).map((d) => d.id), problems });
+  process.exit(problems.length ? 1 : 0);
+} else {
+  die("usage: story.mjs truth|devices|cliche|pick|check|validate (see the header of scripts/story.mjs)");
+}
+
+// --- check -------------------------------------------------------------------------
+function checkPitch(p, idx, truth, footage) {
+  const name = p.id || p.title || `pitch ${idx + 1}`;
+  const errors = [];
+  const warnings = [];
+  const gates = [];
+  const gate = (id, title, reasons, extra = {}) => gates.push({ id, gate: title, pass: !reasons.length, reasons, ...extra });
+
+  // shape
+  const deviceIds = (Array.isArray(p.device) ? p.device : [p.device]).filter(Boolean);
+  const devices = deviceIds.map((d) => findDevice(d));
+  if (!deviceIds.length) errors.push("device: missing (a device id from taxonomy/devices.json)");
+  devices.forEach((d, i) => { if (!d) errors.push(`device: unknown "${deviceIds[i]}"`); });
+  const dev = devices[0] || null;
+  if (!p.title) errors.push("title: missing");
+  const logWords = String(p.logline || "").trim().split(/\s+/).filter(Boolean).length;
+  if (!p.logline) errors.push("logline: missing");
+  else if (logWords > 12) errors.push(`logline: ${logWords} words (12 at most)`);
+  if (p.title && String(p.title).trim().split(/\s+/).length > 5) warnings.push("title: keep it to 2-4 words");
+  if (p.label && !["Sure", "Bold", "Wild"].includes(p.label)) warnings.push(`label "${p.label}": use Sure, Bold or Wild`);
+  const beats = Array.isArray(p.beats) ? p.beats : [];
+  if (beats.length < 3) errors.push(`beats: ${beats.length} (need 3-8, each {name, on_screen, visual, duration_s})`);
+  if (beats.length > 9) warnings.push(`beats: ${beats.length}; more than 8 usually means a list, not a story`);
+  beats.forEach((b, i) => {
+    if (!b.name) errors.push(`beats[${i}]: name missing`);
+    if (!(Number(b.duration_s) > 0)) errors.push(`beats[${i}] "${b.name || ""}": duration_s must be > 0`);
+    if (b.visual == null) warnings.push(`beats[${i}] "${b.name || ""}": visual missing`);
+  });
+  const scores = p.scores || {};
+  const DIMS = ["originality", "clarity", "fit", "memorability", "feasibility"];
+  for (const k of DIMS) if (!(Number(scores[k]) >= 1 && Number(scores[k]) <= 5)) errors.push(`scores.${k}: a number 1-5 required (self-assessed)`);
+  if (errors.length) return { pitch: name, ok: false, verdict: "invalid", errors, hint: "Pitch format: references/story.md (Pitch JSON)" };
+
+  // timing and the turn
+  let t = 0;
+  const starts = beats.map((b) => { const s = t; t += Number(b.duration_s); return s; });
+  const lengthS = t;
+  const turnIdx = beats.findIndex((b) => b.turn === true);
+  const turnAt = turnIdx >= 0 ? starts[turnIdx] / lengthS : null;
+  if (turnIdx < 0) warnings.push("no beat marked \"turn\": true (-1 memorability): name the turn and place it at 60-75%");
+  else if (turnAt < 0.5 || turnAt > 0.85) warnings.push(`the turn lands at ${Math.round(turnAt * 100)}% of the film; aim for 60-75%`);
+  const targetLen = truth && Number(String(truth.format.length || "").replace(/[^\d.]/g, ""));
+  if (targetLen && Math.abs(lengthS - targetLen) / targetLen > 0.25) warnings.push(`beats total ${lengthS} s; the brief says ${targetLen} s`);
+
+  // G1: distance from the cliche arc
+  const map = clicheMap(beats);
+  const nums = map.filter((m) => m.n).map((m) => m.n);
+  const order = inOrder(nums);
+  const g1 = [];
+  if (order >= 4) g1.push(`${order} default beats appear in the default order (${map.filter((m) => m.n).map((m) => m.default_beat).join(" -> ")}); 3 at most`);
+  const featureRun = (() => { let run = 0, best = 0; for (const m of map) { run = /^feature/.test(m.default_beat) ? run + 1 : 0; best = Math.max(best, run); } return best; })();
+  if (featureRun >= 3) g1.push(`${featureRun} feature beats in a row: features must live inside the device, not in a list`);
+  const opener = [p.logline, beats[0]?.on_screen, p.title].filter(Boolean).map((s) => norm(s).trim());
+  const stock = CL.stock_openers.find((re) => opener.some((o) => new RegExp(re, "i").test(o)));
+  if (stock) g1.push(`stock opener: matches /${stock}/ ("Meet X", "Introducing X", "What if...?", "Tired of...?")`);
+  const vis = visualCliches([...beats.map((b) => `${b.visual || ""} ${b.on_screen || ""}`), ...(p.visual_motifs || []), p.signature_image || ""]);
+  if (vis.length >= 2) g1.push(`${vis.length} visual cliches: ${vis.join(", ")}`);
+  if (/\blogo\b/i.test(`${beats[0]?.visual || ""} ${beats[0]?.name || ""}`) && !/no logo/i.test(beats[0]?.visual || "")) g1.push("opens on the logo: the first 1.5-2 s must be the most striking image or line");
+  gate("G1", "Distance from the cliche arc", g1, { beat_map: map, default_beats_in_order: order });
+
+  // G2: swap test
+  const g2 = [];
+  const sw = p.swap_test || {};
+  const product = truth?.product?.name || p.product || "<product>";
+  const competitor = sw.competitor || truth?.competitors?.[0] || "<a competitor>";
+  const verdict = norm(sw.result || (typeof p.swap_test === "string" ? p.swap_test : ""));
+  if (!verdict) g2.push(`swap_test.result missing: answer the prompt below with "breaks" or "survives"`);
+  else if (/surviv|still works|works/.test(verdict) && !/break/.test(verdict)) g2.push(`the concept survives swapping ${product} for ${competitor}: it isn't built from this product's material`);
+  if (verdict && !/surviv/.test(verdict) && !sw.why && typeof p.swap_test !== "string") g2.push("swap_test.why missing: name the image or line that breaks");
+  let own = null;
+  if (truth) {
+    const nat = [...truth.objects, ...truth.forms, ...truth.words];
+    own = beats.map((b, i) => ({ beat: i + 1, uses: nat.filter((n) => mentions(`${b.on_screen || ""} ${b.visual || ""} ${b.name || ""}`, n)).map(itemKey) })).filter((x) => x.uses.length);
+    if (!own.length) g2.push("no beat uses anything from the truth sheet's native objects, formats or words: the swap test will survive");
+    else if (own.length < Math.ceil(beats.length / 3)) warnings.push(`only ${own.length} of ${beats.length} beats use the product's own material`);
+  }
+  gate("G2", "Swap test (only this product could make this film)", g2, {
+    prompt: `Replace "${product}" with "${competitor}" in: "${p.logline}" and in every beat. Does the film still work? If it does, it fails. Name the image or line that breaks.`,
+    own_material: own || undefined,
+  });
+
+  // G3: clear by second 4
+  const g3 = [];
+  const c4 = typeof p.clear_by_s4 === "object" && p.clear_by_s4 ? p.clear_by_s4 : { names_device: p.clear_by_s4, first_4s: p.first_4s };
+  if (!String(c4.first_4s || "").trim()) g3.push("first_4s missing: describe in one line what seconds 0-4 show");
+  if (c4.names_device !== true) g3.push("clear_by_s4 is not true: the first 4 s must make the device obvious (\"oh, it's a weather report\")");
+  const early = beats.filter((b, i) => starts[i] < 4);
+  if (early.some((b) => /\blogo\b|\btitle card\b|studio logos/i.test(`${b.visual || ""}`)) && !["movie-trailer", "cover-version"].includes(dev.id)) g3.push("seconds 0-4 spend time on a logo or title card");
+  if (dev && c4.first_4s && !early.length) g3.push("no beat starts in the first 4 s");
+  gate("G3", "Clarity by second 4", g3, { first_4s: c4.first_4s || null });
+
+  // G4: honest demo and grounding
+  const g4 = [];
+  if (p.honest_demo === false) g4.push("honest_demo is false: never show a capability the product lacks");
+  else if (p.honest_demo !== true) warnings.push("honest_demo not stated: set true once every capability shown is real");
+  const claims = (p.grounded_claims || []).map((c) => (typeof c === "string" ? { claim: c } : c));
+  claims.forEach((c, i) => { if (!c.source) g4.push(`grounded_claims[${i}] "${c.claim}": no source (site, docs, screenshot, the user)`); });
+  const groundText = norm([...claims.map((c) => c.claim), ...(truth ? [...truth.proof, ...truth.facts, ...truth.words, ...truth.objects] : [])].join(" ")).replace(/,/g, "");
+  const props = (p.props || []).map((x) => norm(x).replace(/,/g, ""));
+  const propHits = [];
+  const numRe = /(?<![\w.])\$?\d[\d,]*(?:\.\d+)?\s?(?:%|x\b|k\b|m\b|ms\b|s\b|sec|seconds?|min|minutes?|hours?|hrs?|days?)?/gi;
+  const ungrounded = [];
+  for (const b of beats) for (const m of String(b.on_screen || "").replace(/\b\d{1,2}:\d{2}(\s?[ap]\.?m\.?)?/gi, " ").match(numRe) || []) {
+    const n = m.replace(/,/g, "").match(/\d+(?:\.\d+)?/)[0];
+    const um = m.trim().match(/\d\s?(%|x|k|m|ms|s|sec|seconds?|min|minutes?|hours?|hrs?|days?)$/i);
+    const unit = um ? um[1].toLowerCase() : "";
+    if (/^(19|20)\d\d$/.test(n) || (/^0?\d$/.test(n) && !unit && !/^\$/.test(m.trim()))) continue; // years, times of day and bare single digits (step numbers) pass
+    // whole numbers only ("2" is not in "#4127"); with a unit, the unit must match too ("2 days" is not "2 am")
+    const stem = unit.length > 2 ? `\\s?${unit.slice(0, 3)}` : unit ? `\\s?${unit.replace("%", "(%|\\s?percent)")}` : "";
+    const numIn = (text) => new RegExp(`(?<![\\d.])${n.replace(".", "\\.")}(?![\\d])${stem}`).test(text);
+    if (numIn(groundText)) continue;
+    if (props.some(numIn)) { propHits.push(m.trim()); continue; }
+    ungrounded.push(`"${m.trim()}" in "${b.name}"`);
+  }
+  if (propHits.length) warnings.push(`numbers shown as story props, not claims: ${propHits.join(", ")}; make sure none reads as a product claim`);
+  if (ungrounded.length) g4.push(`numbers on screen not in grounded_claims or the truth sheet (a claim needs a source; a story detail goes in "props"): ${ungrounded.join("; ")}`);
+  const labels = p.ui_labels || [];
+  if (labels.length && truth) {
+    const words = truth.words.map((w) => norm(w));
+    const bad = labels.filter((l) => !words.some((w) => w.includes(norm(l))));
+    if (bad.length) g4.push(`UI labels not in the truth sheet's Native words (never invent them): ${bad.join(", ")}`);
+  } else if (labels.length && !truth) warnings.push("ui_labels given without --truth: can't verify them");
+  gate("G4", "Honest demo (grounded claims, numbers and UI labels)", g4);
+
+  // G5: buildable
+  const g5 = [];
+  const bld = p.build || {};
+  const needsFootage = bld.needs_live_action === true || dev.needs === "footage";
+  if (needsFootage && !footage) g5.push(`${bld.needs_live_action ? "needs live action" : `${dev.name} needs footage`} and none is supplied: stylize it (type, illustration) or pick another device`);
+  if (dev.needs && dev.needs !== "footage" && !(truth && truth.assets.some((a) => norm(a).includes(norm(dev.needs).split(" ").pop())))) warnings.push(`${dev.name} needs ${dev.needs}; confirm they exist`);
+  if (!bld.hardest_shot) warnings.push("build.hardest_shot missing: name the hardest shot and how it's built");
+  if (dev.build.score <= 2 && !footage) g5.push(`${dev.name} is buildability ${dev.build.score}/5 in code-built motion`);
+  gate("G5", "Buildable in code-built motion graphics", g5, { device_build: `${dev.build.score}/5 (${dev.build.how.join(", ")})` });
+
+  // scores: self-assessed, then adjusted by rule
+  const self = Object.fromEntries(DIMS.map((k) => [k, Number(scores[k])]));
+  const adj = { ...self };
+  const adjustments = [];
+  const bump = (k, v, why) => { adj[k] += v; adjustments.push(`${v > 0 ? "+" : ""}${v} ${k}: ${why}`); };
+  if (devices.some((d) => d && d.overused)) {
+    if (!String(p.twist || "").trim()) bump("originality", -2, `${devices.find((d) => d.overused).name} is LLM-overused and the pitch names no twist`);
+    else warnings.push(`overused device with a twist ("${p.twist}"): make sure the twist is the idea, not decoration`);
+  }
+  if (p.form_proves_claim === true) bump("originality", +1, "the form itself proves the claim");
+  if (vis.length) bump("fit", -vis.length, `visual cliche${vis.length > 1 ? "s" : ""}: ${vis.join(", ")}`);
+  if (turnIdx < 0) bump("memorability", -1, "no named turn");
+  const featCap = Math.min(5, dev.build.score + 1);
+  if (adj.feasibility > featCap) bump("feasibility", featCap - adj.feasibility, `${dev.name} is buildability ${dev.build.score}/5; self-score capped at ${featCap}`);
+  if (order >= 3 && adj.originality > 3) bump("originality", 3 - adj.originality, `${order} default beats in order: originality capped at 3`);
+  if (!gates.find((g) => g.id === "G3").pass && adj.clarity > 2) bump("clarity", 2 - adj.clarity, "the device isn't clear by second 4");
+  for (const k of DIMS) adj[k] = Math.max(1, Math.min(5, adj[k]));
+  const W = { originality: 0.25, clarity: 0.2, fit: 0.2, memorability: 0.2, feasibility: 0.15 };
+  const total = Math.round(DIMS.reduce((s, k) => s + W[k] * adj[k], 0) * 100) / 100;
+  const low = DIMS.filter((k) => adj[k] < 3);
+
+  // the eight self-critique prompts
+  const CRIT = { retell: "The party retell: \"It's the one where...\"", first_4s: "What does second 0-4 show?", turn: "What's the turn and when does it land?", own_material: "What's made of the product's own material?", swap: "Swap test result?", second_reading: "What's the hostile second reading?", default_beats: "Which of the 8 default beats does it contain?", hardest_shot: "What's the single hardest shot to build, and how?" };
+  const crit = p.critique || {};
+  const unanswered = Object.keys(CRIT).filter((k) => !String(crit[k] || "").trim());
+  if (unanswered.length) warnings.push(`self-critique unanswered: ${unanswered.map((k) => CRIT[k]).join(" | ")}`);
+
+  const failedGates = gates.filter((g) => !g.pass);
+  const reasons = [...failedGates.map((g) => `${g.id} ${g.gate}: ${g.reasons.join("; ")}`)];
+  if (total < 3.8) reasons.push(`score ${total} < 3.8`);
+  if (low.length) reasons.push(`dimension${low.length > 1 ? "s" : ""} below 3: ${low.map((k) => `${k} ${adj[k]}`).join(", ")}`);
+  const ship = !reasons.length;
+  return {
+    pitch: name,
+    label: p.label || null,
+    device: devices.filter(Boolean).map((d) => d.id),
+    ok: ship,
+    verdict: ship ? "ship" : "rewrite",
+    reasons,
+    gates,
+    scores: { self, adjusted: adj, adjustments, weights: W, total, threshold: 3.8 },
+    turn: turnIdx >= 0 ? { beat: turnIdx + 1, at_s: starts[turnIdx], at_pct: Math.round(turnAt * 100) } : null,
+    length_s: lengthS,
+    sketch_frames: {
+      opening: { beat: 1, at_s: 0, caption: beats[0].on_screen || beats[0].name },
+      turn: turnIdx >= 0 ? { beat: turnIdx + 1, at_s: starts[turnIdx], caption: beats[turnIdx].on_screen || beats[turnIdx].name } : null,
+      close: { beat: beats.length, at_s: starts[beats.length - 1], caption: beats[beats.length - 1].on_screen || beats[beats.length - 1].name },
+    },
+    warnings,
+    rewrite: ship ? undefined : "Push, in order: a more specific artifact from the truth sheet -> a sharper turn -> a stricter constraint. Two rewrites at most, then replace the device with the next candidate from pick.",
+  };
+}
+
+function checkPortfolio(pitches, results) {
+  const reasons = [];
+  const ds = pitches.map((p) => findDevice(Array.isArray(p.device) ? p.device[0] : p.device)).filter(Boolean);
+  for (let i = 0; i < ds.length; i++)
+    for (let j = i + 1; j < ds.length; j++) {
+      const a = ds[i], b = ds[j];
+      const pa = pitches[i].title || a.id, pb = pitches[j].title || b.id;
+      if (a.family === b.family) reasons.push(`"${pa}" and "${pb}" share the ${a.family} family`);
+      if (a.axes.protagonist === b.axes.protagonist && a.axes.turn === b.axes.turn) reasons.push(`"${pa}" and "${pb}" share protagonist and turn type`);
+      if (a.axes.visual_world === b.axes.visual_world) reasons.push(`"${pa}" and "${pb}" share the ${a.axes.visual_world} visual world`);
+      if (distance(a, b) < 5) reasons.push(`"${pa}" and "${pb}" differ on ${distance(a, b)} of 7 axes (5 required)`);
+      const ia = norm(pitches[i].signature_image), ib = norm(pitches[j].signature_image);
+      if (ia && ia === ib) reasons.push(`"${pa}" and "${pb}" share a signature image`);
+    }
+  const adj = results.filter((r) => r.scores).map((r) => r.scores.adjusted);
+  if (pitches.length >= 3) {
+    if (!adj.some((s) => s.originality >= 4)) reasons.push("no pitch scores 4+ on originality (the brave one)");
+    if (!adj.some((s) => s.feasibility >= 4)) reasons.push("no pitch scores 4+ on feasibility (the sure one)");
+    const labels = pitches.map((p) => p.label).filter(Boolean);
+    if (labels.length && new Set(labels).size !== labels.length) reasons.push(`labels repeat: ${labels.join(", ")}`);
+  }
+  return { pass: !reasons.length, reasons };
+}

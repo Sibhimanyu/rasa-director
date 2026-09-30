@@ -25,15 +25,28 @@ const args = parseArgs();
 const cmd = args._[0];
 
 export const VOCAB = {
-  layout: ["pills", "cards", "bento", "poster", "hud", "terminal", "window", "editorial", "device", "diagram", "collage", "data"],
+  layout: ["pills", "cards", "bento", "poster", "hud", "terminal", "window", "editorial", "device", "diagram", "collage", "data", "map", "split", "bignumber", "typegrid", "timeline", "photo", "stack", "list", "isometric", "chat", "ticker", "floorplan", "record"],
   shadow: ["none", "soft", "hard", "long", "inset", "neu", "glow", "layered", "float"],
   surface: ["flat", "gradient", "glass", "metal", "clay", "paper", "neon"],
-  texture: ["none", "grain", "halftone", "paper", "scanlines", "noise", "dots", "grid", "riso", "crt"],
+  texture: ["none", "grain", "halftone", "paper", "scanlines", "noise", "dots", "grid", "riso", "crt", "hatching", "checker", "woodgrain", "veining", "weave", "terrazzo", "perforation"],
   icons: ["doodle", "line", "filled", "duotone", "pixel", "glyph", "emoji3d", "none"],
-  motif: ["none", "stars", "squiggles", "grid", "crosshair", "stickers", "blobs", "rays", "confetti", "rules", "circuit", "orbits"],
+  motif: ["none", "stars", "squiggles", "grid", "crosshair", "stickers", "blobs", "rays", "confetti", "rules", "circuit", "orbits", "particles", "refraction", "contours", "tiles", "stripes", "repeat", "pictograms"],
   motion: ["pop", "snap", "slide", "mask", "type", "glitch", "spring", "drift", "step", "fade", "bounce"],
   strokeStyle: ["solid", "dashed", "double", "sketch"],
-  families: ["bold", "soft", "editorial", "retro", "future", "handmade", "dimensional", "product", "data", "cinematic", "playful", "luxury"],
+  // optional recipe fields (absent = the renderer's defaults)
+  effects: ["rgb-split", "extrude", "halation", "grain-heavy", "vignette", "blur-depth", "glint", "scanline-heavy", "misregister", "noise-bars", "light-leak"],
+  iconSet: ["default", "geometric", "nature", "tech", "hand", "ornament", "pictogram"],
+  density: ["airy", "balanced", "dense"],
+  chrome: ["auto", "mac", "classic", "tabs", "none"],
+  labels: ["kicker", "section", "date", "window", "title", "badge", "stat", "caption", "quote", "cta", "hint", "hud", "readouts", "steps", "dates", "items", "tags", "places", "before", "after", "messages", "ticker", "bug", "lines", "people", "corner", "emblem", "metrics", "times", "scale"],
+  chart: ["auto", "none", "bars", "line", "wave", "jagged", "spectrum", "steps", "scatter", "donut"],
+  scene: ["landscape", "city", "botanical", "interior", "poolside", "portrait", "still-life", "abstract", "night-sky"],
+  photoTone: ["smooth", "flat"],
+  photo: ["block", "plate", "none"],
+  marker: ["auto", "circle", "diamond", "square", "rect", "ring"],
+  diagram: ["flow", "tree", "network"],
+  edges: ["arrow", "line"],
+  families: ["bold", "soft", "editorial", "retro", "future", "handmade", "dimensional", "product", "data", "cinematic", "playful", "luxury", "heritage", "broadcast", "science", "print", "interface", "nature", "sound", "space"],
 };
 
 export function loadPresets() {
@@ -59,6 +72,7 @@ export function validate(presets) {
   for (const p of presets) {
     const where = `${p.file}:${p.id || "(no id)"}`;
     const bad = (m) => problems.push(`${where}: ${m}`);
+    if (p.family && !VOCAB.families.includes(p.family)) bad(`family "${p.family}" is not one of ${VOCAB.families.join("|")}`);
     if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.id || "")) bad("id must be kebab-case");
     if (ids.has(p.id)) bad(`duplicate id (also in ${ids.get(p.id)})`);
     ids.set(p.id, p.file);
@@ -82,13 +96,41 @@ export function validate(presets) {
     if (isHex(P.ink) && isHex(P.surface) && contrast(P.ink, P.surface) < 4.5 && contrast(P.surface, "#ffffff") < 4.5 && contrast(P.surface, "#16181d") < 4.5) bad("nothing reads on the surface color");
     const F = r.fonts || {};
     if (!F.display || !F.body) bad("recipe.fonts needs display and body (Google Fonts families)");
+    const weight = (w) => Number.isInteger(w) && w >= 100 && w <= 900 && w % 100 === 0;
+    if (F.displayWeight != null && !weight(F.displayWeight)) bad("recipe.fonts.displayWeight must be 100–900 in steps of 100 (200/300 for light styles)");
+    if (F.bodyWeight != null && !weight(F.bodyWeight)) bad("recipe.fonts.bodyWeight must be 100–900 in steps of 100");
+    if (F.mono != null && (typeof F.mono !== "string" || !F.mono)) bad("recipe.fonts.mono must be a Google Fonts family name");
+    if (F.italic != null && typeof F.italic !== "boolean") bad("recipe.fonts.italic must be true or false");
     for (const [k, list] of [["layout", VOCAB.layout], ["shadow", VOCAB.shadow], ["surface", VOCAB.surface], ["texture", VOCAB.texture], ["icons", VOCAB.icons], ["motif", VOCAB.motif], ["motion", VOCAB.motion]]) if (!list.includes(r[k])) bad(`recipe.${k} "${r[k]}" is not one of ${list.join("|")}`);
     if (typeof r.radius !== "number" || r.radius < 0 || (r.radius > 48 && r.radius !== 999)) bad("recipe.radius must be 0–48 or 999");
     const st = r.stroke || {};
     if (typeof st.width !== "number" || st.width < 0 || st.width > 8) bad("recipe.stroke.width must be 0–8");
     if (st.style && !VOCAB.strokeStyle.includes(st.style)) bad(`recipe.stroke.style "${st.style}"`);
+    if (r.effects != null) {
+      if (!Array.isArray(r.effects)) bad("recipe.effects must be a list");
+      else {
+        for (const e of r.effects) if (!VOCAB.effects.includes(e)) bad(`recipe.effects: "${e}" is not one of ${VOCAB.effects.join("|")}`);
+        if (new Set(r.effects).size !== r.effects.length) bad("recipe.effects repeats an effect");
+        if (r.effects.length > 3) bad("recipe.effects: at most 3 (effects are a finish, not the style)");
+      }
+    }
+    for (const k of ["iconSet", "density", "chrome", "chart", "scene", "photoTone", "photo", "marker", "diagram", "edges"]) if (r[k] != null && !VOCAB[k].includes(r[k])) bad(`recipe.${k} "${r[k]}" is not one of ${VOCAB[k].join("|")}`);
+    if (r.edgeColor != null && !["ink", "accent", "accent2"].includes(r.edgeColor) && !isHex(r.edgeColor)) bad(`recipe.edgeColor must be ink|accent|accent2 or a #rrggbb color`);
+    for (const [k, lo, hi] of [["photoColors", 2, 6], ["sky", 2, 3]]) if (r[k] != null && (!Array.isArray(r[k]) || r[k].length < lo || r[k].length > hi || !r[k].every(isHex))) bad(`recipe.${k} must be a list of ${lo}–${hi} #rrggbb colors`);
+    if (r.labels != null) {
+      if (typeof r.labels !== "object" || Array.isArray(r.labels)) bad("recipe.labels must be an object of short strings");
+      else for (const [k, v] of Object.entries(r.labels)) {
+        if (!VOCAB.labels.includes(k)) { bad(`recipe.labels.${k}: unknown label (one of ${VOCAB.labels.join("|")})`); continue; }
+        const list = Array.isArray(v) ? v : [v];
+        if (Array.isArray(v) && v.length > 8) bad(`recipe.labels.${k}: at most 8 entries`);
+        for (const x of list) if (typeof x !== "string" || x.length > 48) bad(`recipe.labels.${k}: entries must be strings of at most 48 characters`);
+      }
+    }
     // two presets that would draw the same are one preset
-    const sig = [r.layout, r.surface, r.shadow, r.texture, r.icons, r.motif, Math.round((st.width || 0) / 2), r.radius > 30 ? "round" : r.radius > 8 ? "soft" : "sharp", String(P.canvas).toLowerCase(), String(P.accent).toLowerCase()].join("|");
+    const sig = [r.layout, r.surface, r.shadow, r.texture, r.icons, r.motif, Math.round((st.width || 0) / 2), r.radius > 30 ? "round" : r.radius > 8 ? "soft" : "sharp", String(P.canvas).toLowerCase(), String(P.accent).toLowerCase()].join("|") +
+      // the optional fields change the drawing too (absent on older presets, so their signatures are unchanged)
+      [[...(r.effects || [])].sort().join("+"), r.icons !== "none" && r.iconSet && r.iconSet !== "default" ? r.iconSet : "", r.density && r.density !== "balanced" ? r.density : "", r.chrome && r.chrome !== "auto" ? r.chrome : "",
+        r.chart && r.chart !== "auto" ? "chart:" + r.chart : "", r.scene && r.scene !== "landscape" ? "scene:" + r.scene : "", r.photoColors ? "ramp:" + r.photoColors.join("") : "", r.photoTone === "flat" ? "flat" : "", r.photo && r.photo !== "block" ? "photo:" + r.photo : "", r.diagram && r.diagram !== "flow" ? r.diagram : "", r.marker && r.marker !== "auto" ? "marker:" + r.marker : ""].filter(Boolean).map((x) => "|" + x).join("");
     if (sigs.has(sig)) bad(`draws the same as ${sigs.get(sig)} (layout, surface, shadow, texture, icons, motif, stroke, radius, colors); make it distinct`);
     sigs.set(sig, p.id);
   }

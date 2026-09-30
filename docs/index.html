@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rasa Director: direct the whole video in motion-design terms. Claude animates it.</title>
-<meta name="description" content="A Claude Code skill for entire videos. Decide every creative choice in the terms motion designers use (30 dimensions, 881 terms) or bring your DESIGN.md; Claude designs and animates every frame to that direction through HyperFrames, and it is checked before render." />
+<title>Rasa Director: pick the film. Claude makes it.</title>
+<meta name="description" content="A Claude Code skill for entire videos. You make four calls in a local console: the brief, one of three complete films, notes on a timed animatic, the final. Claude decides the craft from a quantified playbook, lists every call with its reason, and checks the film for AI-video tells before you see it." />
 <meta name="theme-color" content="#1a2160" />
-<meta property="og:title" content="Rasa Director" />
-<meta property="og:description" content="Direct the whole video in motion-design terms, or bring your DESIGN.md. Claude designs and animates it." />
-<meta property="og:image" content="img/looks.jpg" />
+<meta property="og:title" content="Rasa Director: pick the film. Claude makes it." />
+<meta property="og:description" content="Four calls, three complete films, 403 design systems. Claude decides the story, motion, music edit and sound, and checks the film for AI-video tells." />
+<meta property="og:image" content="img/console-films.jpg" />
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="assets/logo/rasa-mark-180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,16 +25,17 @@
   <symbol id="i-plus" viewBox="0 0 18 18"><path d="M9 2v14M2 9h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
   <symbol id="i-gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2.5v8M4.5 7.5 8 11l3.5-3.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <header class="hero">
   <nav class="nav wrap" aria-label="Primary">
     <a class="brand" href="#main"><svg aria-hidden="true"><use href="#i-mark"/></svg>Rasa Director</a>
     <div class="nav-links">
-      <a class="hide-s" href="#stack">Direction</a>
       <a class="hide-s" href="#flow">How it runs</a>
+      <a class="hide-s" href="#different">What's different</a>
+      <a class="hide-s" href="#styles">Styles</a>
       <a class="hide-s" href="#brand">Your brand</a>
-      <a class="hide-s" href="#claude">Claude animates</a>
       <a class="hide-s" href="#reels">Reels</a>
       <a href="#install">Install</a>
       <a class="hide-xs" href="https://github.com/Sibhimanyu/rasa-director">GitHub</a>
@@ -43,9 +44,9 @@
   </nav>
 
   <div class="wrap hero-head">
-    <h1>Direct the whole video.<br /><em>Claude animates it.</em></h1>
+    <h1>Pick the film.<br /><em>Claude makes it.</em></h1>
     <div class="hero-side">
-      <p><strong>Rasa Director</strong> is a Claude Code skill for entire videos: launch films, explainers, PR videos, music videos, reels cut from your own footage, motion graphics. You make every creative decision in the terms motion designers use, or hand any of them to Claude. Bring your DESIGN.md and it becomes the look. Then Claude designs and animates every frame to that direction, through HyperFrames, and every scene is checked before you render.</p>
+      <p><strong>Rasa Director</strong> is a Claude Code skill for entire videos: launch films, explainers, PR videos, music videos, reels cut from your own footage, motion graphics. You make four calls and see your film at each one. Claude makes every craft decision, lists each with its reason, and checks the film for AI-video tells before you see it.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#install">Install the skill <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost" href="https://github.com/Sibhimanyu/rasa-director"><svg aria-hidden="true"><use href="#i-gh"/></svg> GitHub</a>
@@ -74,36 +75,205 @@
 
   <!-- the problem -->
   <section class="section problem">
-    <div class="wrap two">
-      <h2>Every AI video looks the same because nobody made the decisions.</h2>
-      <div>
-        <p class="lede">Ask for a launch video and you get the obvious story, a default look, and every line fading up and sliding into place on the same ease. Not because the model can't do better, but because nothing told it what to do instead.</p>
-        <p>Motion studios don't start with "make it pop". They decide the format, how the product appears, the visual style, the type, the color, the depth, how things move, how scenes hand off and the pacing, and they lock it in style frames before anyone animates. Rasa Director gives you that process and makes Claude follow it.</p>
+    <div class="wrap">
+      <div class="two">
+        <h2>Thirty people make an AI video. They get thirty videos and one film.</h2>
+        <div>
+          <p class="lede">The content differs. The film is the same: the obvious story, a default look, everything fading up on one ease, a 30-second music loop under a 45-second film, a whoosh on every cut, glowing text. Viewers now name these tells on sight.</p>
+          <p>Each one is a default nobody chose. Rasa Director replaces every default with a decision, then checks the build against all of them.</p>
+        </div>
+      </div>
+      <ul class="swaps" aria-label="Defaults and the decisions that replace them">
+        <li><s>Hook, problem, "Introducing X", three features, call to action</s><span>One of 66 narrative devices, picked from what is true about your product</span></li>
+        <li><s>A default look</s><span>A named design system, matched to the story</span></li>
+        <li><s>Everything fades up on the same ease</s><span>A motion contract, checked tween by tween</span></li>
+        <li><s>A 30-second loop under a 45-second film</s><span>A track cut on bar lines that ends when the film ends</span></li>
+        <li><s>A whoosh on every cut</s><span>Sound effects only for things you can see happen</span></li>
+        <li><s>Glowing text</s><span>A gate that rejects the look, copy, motion and sound tells</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- the four calls -->
+  <section class="section dark" id="flow">
+    <div class="wrap">
+      <p class="eyebrow">How it runs</p>
+      <h2 class="mega">Four calls. You see your film at every one.</h2>
+      <p class="lede narrow">You type <code>/rasa-director make a 45s launch film for tally.app</code>. A Director's Console opens in your browser, shows what Claude is doing as it works, and stops you four times.</p>
+
+      <ol class="calls">
+        <li class="call">
+          <div class="call-text">
+            <p class="call-n">1</p>
+            <h3>Brief</h3>
+            <p>One sentence you can edit: "A 45-second launch film for Tally, 16:9 for the website, with voiceover, in Tally's own colours and type", and what Claude captured from the site.</p>
+            <p class="call-do"><b>Your call</b>Fix a word and press Start, or press Just make it.</p>
+          </div>
+          <figure class="showcase"><img src="img/console-brief.jpg" width="1440" height="900" loading="lazy" alt="The Brief call in the Director's Console: one editable sentence describing the film, with the site captures Claude will use below it" /></figure>
+        </li>
+        <li class="call">
+          <div class="call-text">
+            <p class="call-n">2</p>
+            <h3>Films</h3>
+            <p>Three complete films. Each is a named design system, drawn live and moving on the film's own opening line, with a story angle (Sure, Bold or Wild), a logline and its music feel.</p>
+            <p class="call-do"><b>Your call</b>Pick one, or ask for more like these, mix two, turn the energy up or down, or browse every style.</p>
+          </div>
+          <figure class="showcase"><img src="img/console-films.jpg" width="1440" height="900" loading="lazy" alt="The Films call: three film cards side by side, each a different design system animating its opening line, labelled Sure, Bold and Wild with a logline and a music feel" /></figure>
+        </li>
+        <li class="call">
+          <div class="call-text">
+            <p class="call-n">3</p>
+            <h3>Animatic</h3>
+            <p>The whole film, rough: every scene's key frame at its real duration, with the real music edit and the voice.</p>
+            <p class="call-do"><b>Your call</b>Play it and click any moment to leave a note. Then Claude builds it scene by scene while you watch.</p>
+          </div>
+          <figure class="showcase"><img src="img/console-animatic.jpg" width="1440" height="1120" loading="lazy" alt="The Animatic call: the film's key frames on a timeline under a player, the music waveform beneath, and notes pinned to moments" /></figure>
+        </li>
+        <li class="call">
+          <div class="call-text">
+            <p class="call-n">4</p>
+            <h3>Final</h3>
+            <p>The rendered film with scene markers, your notes, every version and what changed between them.</p>
+            <p class="call-do"><b>Your call</b>Note a moment, apply the notes, render and download.</p>
+          </div>
+          <figure class="showcase"><img src="img/console-final.jpg" width="1440" height="900" loading="lazy" alt="The Final call: the rendered film in a player with scene markers on the scrubber, a notes list and a version history" /></figure>
+        </li>
+      </ol>
+
+      <div class="two decide">
+        <div>
+          <h3 class="decide-h">Claude decides the rest.</h3>
+          <p class="lede">The craft is decided the way a senior motion designer would decide it, from a quantified playbook, and every call is listed in the Decisions drawer with its reason. Change any of it by telling Claude (<kbd>⌘K</kbd>) or leaving a note.</p>
+          <ul class="chips" aria-label="What Claude decides">
+            <li>Story device</li><li>Scenes</li><li>Timing</li><li>Motion language</li><li>Transitions</li><li>Music edit</li><li>Sound effects</li><li>Lighting</li><li>Grade</li><li>HyperFrames workflow</li>
+          </ul>
+          <p class="decide-note">Claude's pick is the most ambitious film that still tells the truth clearly. Every decision names the obvious option it passed over.</p>
+        </div>
+        <div class="file drawer">
+          <div class="file-top"><span>Decisions</span><span class="tag">every call, with its reason</span></div>
+          <dl>
+            <div><dt>Story</dt><dd>The Museum Exhibit. The old way of doing taxes, shown as artifacts. Passed over: problem, then solution.</dd></div>
+            <div><dt>Style</dt><dd>Museum wall text. The story is an exhibition, so the film is a gallery wall.</dd></div>
+            <div><dt>Motion</dt><dd>Luxurious / slow: circ.out, 600 to 2800 ms, holds of 1.8 s or more.</dd></div>
+            <div><dt>Transitions</dt><dd>Hard cuts, and one match cut from the shoebox to the booked month.</dd></div>
+            <div><dt>Scenes</dt><dd>7 scenes in 45 s. The hook lands at 1.6 s; the end card holds 2.4 s.</dd></div>
+            <div><dt>Music</dt><dd>Edited to 45 s on bar lines. The reveal falls on the downbeat of bar 9.</dd></div>
+            <div><dt>Sound</dt><dd>4 effects, each on something you see: the lid, the stamp, the tap, the logo.</dd></div>
+            <div><dt>Light</dt><dd>A spotlight pool on each exhibit. Grade: clean neutral.</dd></div>
+          </dl>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- the stack -->
+  <!-- what makes the films different -->
+  <section class="section" id="different">
+    <div class="wrap">
+      <p class="eyebrow">Under the four calls</p>
+      <h2 class="mega">What makes the films different.</h2>
+      <div class="diffs">
+        <article>
+          <h3>A story picked from what is true</h3>
+          <p>Before any concept, Claude writes a truth sheet from your product: what really changes, for whom, in its own words and numbers. From 66 narrative devices it pitches three films that differ on at least five of seven axes. A rubric rejects the default arc, and any pitch that would work for any product.</p>
+          <p class="eg"><span>Example</span>For a bookkeeping app, The Museum Exhibit: the shoebox of receipts under glass (c. 2019), a placard for every late-night spreadsheet, and an empty plinth where tax season used to be.</p>
+        </article>
+        <article>
+          <h3>403 design systems</h3>
+          <p>Named styles in 20 families, from Swiss grids and risograph zines to split-flap departure boards. Each is a stack of taxonomy terms, a recipe drawn live on your words, a motion contract and a complete DESIGN.md. Claude matches the system to the story.</p>
+          <p class="eg"><span>Example</span>Museum wall text: Instrument Sans on a pale gallery wall, one ultramarine field, no shadows, circ.out entrances of 600 to 2800 ms.</p>
+        </article>
+        <article>
+          <h3>Music edited to the picture</h3>
+          <p>Tracks long enough for the film, analysed with nothing but Node and FFmpeg for beats, bars, sections and a real ending, then cut on bar lines so the music never loops. The reveal and the logo land on downbeats. Sound effects only for visible events, on a budget. Mixed to −14 LUFS.</p>
+          <p class="eg"><span>Example</span>A 45-second film gets a track that ends at 45 seconds: one forward jump on a bar line into the real ending, and half a bar of near-silence before the reveal.</p>
+        </article>
+        <article>
+          <h3>An anti-slop gate</h3>
+          <p>Before anything reaches you, <code>slop.mjs</code> checks five kinds of tell. Copy: <code>seamless</code>, <code>unlock</code>, the not-X-it's-Y line, em dashes. Look: neon glow text, purple-blue gradients, particle filler, corner timecodes, Inter everywhere. Motion: idle loops, everything entering the same way. Timing: unreadable text, uniform shots, no end hold. Sound: loops, a whoosh per cut, loudness, dead air.</p>
+          <p class="eg"><span>Example</span><code>generic-copy · error</code> on the headline <code>Unlock seamless bookkeeping</code>. Fix: the real outcome, number or feature, in the product's own words.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- the meaning -->
+  <section class="section meaning">
+    <div class="wrap two meaning-grid">
+      <div class="word-col"><p class="word" lang="ta">ரசனை</p><p class="gloss"><b>rasanai</b> <span class="mono">/ˈrʌ.sə.nai/ · Tamil ரசனை, from Sanskrit रस <i>rasa</i></span></p></div>
+      <div>
+        <ol class="defs"><li>Taste; the eye (and ear) for what feels right. <i>“Avarukku nalla rasanai”</i>: they have good taste.</li><li>From <i>rasa</i>: in Indian aesthetics, the feeling a work leaves in the person experiencing it. What is tasted, more than what is shown.</li></ol>
+        <p class="pull">A video keeps its rasa in how it looks, moves, cuts and sounds. Rasa Director is the rasanai: the taste to choose it, on purpose.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- the style library -->
+  <section class="section dark" id="styles">
+    <div class="wrap">
+      <p class="eyebrow">The style library</p>
+      <h2 class="mega">403 design systems. Pick one by eye.</h2>
+      <div class="two lead-row">
+        <p class="lede">Every style has a proper name and sits in one of 20 families: bold, soft, editorial, retro, future, handmade, 3D and materials, product, data, cinematic, playful, luxury, heritage, broadcast, science, print, interface, nature, music and scene, place and wayfinding. Each is drawn live on your own words.</p>
+        <p>Every style is a complete design system: colors by role, type, radii, shadows, components, the motion contract, and what to do and avoid. Download any card as a DESIGN.md and any agent or tool can build from it. With your DESIGN.md, the styles are drawn in your colors and type. Tap a card to see it move.</p>
+      </div>
+      <div class="lib" id="lib">
+        <div class="lib-controls">
+          <label class="lib-try"><span>Your words</span><input id="lib-words" type="text" value="Tax season. Again." maxlength="40" autocomplete="off" spellcheck="false" /></label>
+          <input id="lib-search" class="lib-search" type="search" placeholder="Search: shadows, retro, glass, doodle, luxury…" aria-label="Search styles" />
+        </div>
+        <div class="lib-fams" id="lib-fams" role="group" aria-label="Families"></div>
+        <p class="lib-count" id="lib-count" aria-live="polite"></p>
+        <div class="lib-grid" id="lib-grid"></div>
+        <button class="btn btn-ghost lib-more" id="lib-more" type="button" hidden>Show all styles</button>
+        <noscript><p>The library draws each style with JavaScript. Every style is also a DESIGN.md in <a href="systems/index.json">systems/</a>.</p></noscript>
+      </div>
+      <p class="note">The whole library as files: <a class="link-light" href="systems/index.json">systems/index.json</a> lists every style with its DESIGN.md. Inside Claude Code, ask for any style by name: <code>/rasa-director export the Swiss grid style as a DESIGN.md</code>.</p>
+    </div>
+  </section>
+
+  <!-- brand -->
+  <section class="section" id="brand">
+    <div class="wrap">
+      <p class="eyebrow">Your brand</p>
+      <h2 class="mega">Bring your DESIGN.md.</h2>
+      <div class="two">
+        <div>
+          <p class="lede">If your project has a brand reference, it becomes the look. All three films are drawn in its colors and type, and the brief sentence says so. Ask for a new look and the styles use their own colors instead.</p>
+          <ul class="ticks">
+            <li>Reads the common shapes: design.md spec frontmatter with <code>oklch()</code> colors and nested typography, impeccable and gstack files, Stitch-style prose, CSS custom properties, token tables with or without <code>#</code>.</li>
+            <li>Gives every color a role (canvas, ink, accent, surface, muted, status) from its name and comment, then contrast. A saturated "text accent" never becomes the ink; status colors never become the accent.</li>
+            <li>Finds the fonts, skips "banned" ones, maps platform fonts the renderer doesn't have (SF Pro → Inter, SF Mono → JetBrains Mono, Calibri → Carlito) and says so.</li>
+            <li>Writes a frame.md HyperFrames accepts, checks it with HyperFrames' own parser, and stages every font file into the project.</li>
+          </ul>
+          <p><a class="link" href="examples/DESIGN.md">See an example DESIGN.md</a></p>
+        </div>
+        <figure class="showcase"><img src="img/brand-board.jpg" width="1600" height="900" loading="lazy" alt="A brand board read from Tally's DESIGN.md: the wordmark, the palette by role (canvas, ink, a mint accent, surface, muted), Bricolage Grotesque and DM Sans, radius 12px" /><figcaption><b>What Rasa read.</b> Colors by role, the fonts, the radius, and the one rule for the accent.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- the vocabulary -->
   <section class="section dark" id="stack">
     <div class="wrap">
       <p class="eyebrow">The vocabulary</p>
-      <h2 class="mega">A style is a stack of decisions.</h2>
+      <h2 class="mega">A film is a stack of decisions.</h2>
       <div class="two lead-row">
-        <p class="lede">Two pieces can both be "2D UI animation" and look nothing alike. Rasa holds the vocabulary of motion design as data: <b>30 dimensions and 881 terms</b>, each with a definition, what it looks like, how it moves, where it's used, what it's confused with, and the precise instruction Claude follows.</p>
-        <p>You decide any dimension, or mark it "Claude decides". Claude's picks come from 35 known style combinations that fit what you've already chosen, never the generic default, and each comes with a receipt: what it picked, and the obvious option it passed over.</p>
+        <p class="lede">Two pieces can both be "2D UI animation" and look nothing alike. Rasa holds the vocabulary of motion design as data: <b>32 dimensions and 926 terms</b>, each with a definition, what it looks like, how it moves, where it's used, what it's confused with, and the instruction Claude follows.</p>
+        <p>Every decision Claude makes, and every prompt to a builder, is written in these terms. A film vocabulary turns each one (a rack focus, a bleach-bypass grade, a J-cut) into an HTML, CSS and GSAP recipe with numbers. Share a screenshot or a video you like and Claude reads it into the same terms.</p>
       </div>
 
       <div class="dims">
-        <div><h3>Format &amp; tone</h3><p>Format (66) · Tone (29)</p><small>product launch film · feature reveal · logo sting · concept explainer · kinetic typography · title sequence · reel / short-form edit · confident · premium · playful</small></div>
-        <div><h3>What's on screen</h3><p>UI treatment (44) · Product demo (28) · UI interaction (51) · Data viz (23) · Photo &amp; video (21) · Illustration (40) · Character (17)</p><small>simplified UI · exploded UI · bento UI · terminal UI · cursor-driven demo · input → output · number counter · flat vector · doodle mascot</small></div>
-        <div><h3>Look</h3><p>Visual style (77) · Era (22) · Color (28) · Typography (24) · Composition (34) · Shape · Stroke · Shadow · Material · Texture · Depth · Iconography</p><small>Swiss / International · neo-brutalism · risograph · soft 3D · Y2K · grotesk · high-contrast serif · duotone · hard offset shadow · film grain · 2.5D</small></div>
-        <div><h3>Motion</h3><p>Motion language (32) · Motion function (24) · Transitions (44) · Camera (24) · Effects (34) · Production (25)</p><small>precise · springy · cinematic · stop-motion-like · UI morph · match cut · mask reveal · push-in · parallax · motion blur</small></div>
-        <div><h3>Story &amp; sound</h3><p>Narrative (24) · Pacing (18) · Sound (15)</p><small>problem → solution · statement → evidence → payoff · demo loop · feature montage · beat-driven · voiceover-synchronized · music-led</small></div>
+        <div><h3>Format &amp; tone</h3><p>Format (66) · Tone (29)</p><small>product launch film · feature reveal · logo sting · concept explainer · kinetic typography · title sequence · confident · premium · playful</small></div>
+        <div><h3>What's on screen</h3><p>UI treatment (44) · Product demo (28) · UI interaction (51) · Data viz (23) · Photo &amp; video (21) · Illustration (40) · Character (17)</p><small>simplified UI · exploded UI · bento UI · terminal UI · cursor-driven demo · input → output · number counter · flat vector</small></div>
+        <div><h3>Look</h3><p>Visual style (77) · Era (22) · Color (28) · Typography (24) · Composition (34) · Material (31) · Texture (28) · Shape · Stroke · Shadow · Depth · Iconography</p><small>Swiss / International · neo-brutalism · risograph · soft 3D · Y2K · grotesk · duotone · hard offset shadow · film grain</small></div>
+        <div><h3>Light &amp; grade</h3><p>Lighting (22) · Color grade (23)</p><small>key, fill and rim · low-key · window light · neon practicals · volumetric god rays · bleach bypass · teal-orange · Kodachrome · day for night</small></div>
+        <div><h3>Motion</h3><p>Motion language (32) · Motion function (24) · Transitions (44) · Camera (24) · Effects (34) · Production (25)</p><small>precise · springy · cinematic · stop-motion-like · UI morph · match cut · mask reveal · push-in · parallax</small></div>
+        <div><h3>Story &amp; sound</h3><p>Narrative (24) · Pacing (18) · Sound (15)</p><small>statement → evidence → payoff · feature montage · beat-driven · voiceover-synchronized · music-led</small></div>
       </div>
 
       <div class="two stack-demo">
         <div class="file">
-          <div class="file-top"><span>DIRECTION.md</span><span class="tag">compiled from your picks</span></div>
+          <div class="file-top"><span>DIRECTION.md</span><span class="tag">compiled from the chosen film</span></div>
 <pre><code><span class="c"># Direction:</span> Swiss / International Typographic Style,
   simplified-UI product launch film, precise motion
 
@@ -120,7 +290,7 @@ Typography: Grotesk
         ↓
 Motion language: Precise
 
-<span class="k">### UI treatment — Simplified UI</span>
+<span class="k">### UI treatment: Simplified UI</span>
 <b>Simplified UI.</b> The real interface with non-essential
 detail removed.
 - <span class="k">Do:</span> keep its true layout and hierarchy; remove
@@ -134,84 +304,7 @@ detail removed.
           <figure class="formula-card"><figcaption>Technical monochrome developer-tool animation</figcaption><ol><li>terminal UI · monospace</li><li>black and white</li><li>technical diagram</li><li>precise · linear motion</li><li>hard cut · wipe</li></ol></figure>
         </div>
       </div>
-      <p class="note">The compiled brief goes to every builder: into <code>frame.md</code>, into every scene's work packet with the motion contract, and into every reel card's brief. Share a screenshot or a video you like and Claude analyzes it into these terms, category by category, with its evidence and confidence.</p>
-    </div>
-  </section>
-
-  <!-- the flow -->
-  <section class="section" id="flow">
-    <div class="wrap">
-      <p class="eyebrow">How it runs</p>
-      <h2 class="mega">You judge the taste. Claude handles the craft.</h2>
-      <p class="lede narrow">A local page, the Director's Console, opens in your browser. It shows what Claude is doing, live, and asks only what is yours to judge, one thing at a time, with Claude's pick already selected. The craft (scenes, pacing, motion, transitions) Claude decides the way a senior motion designer would, and shows you each call in "Your film", where anything can be changed by talking it through.</p>
-
-      <ol class="acts">
-        <li><h3>You decide</h3><ol><li><b>Brief</b> what the video is, where it plays, how long, voiceover or not</li><li><b>Brand</b> your DESIGN.md, read back as a board (when you have one)</li><li><b>Style</b> from hundreds of named styles, three picked for you</li><li><b>Story</b> three pitches, each shown as three sketch frames</li></ol></li>
-        <li><h3>You hear and see</h3><ol><li><b>Voice</b> your hook line in a few voices</li><li><b>Music</b> tracks to audition, or your own</li><li><b>Style frames</b> the key frames, drawn by Claude, approved before anything moves</li></ol></li>
-        <li><h3>Claude decides</h3><ol><li><b>Workflow</b> which HyperFrames route builds it</li><li><b>Scenes and pacing</b> structure, lengths, reading time</li><li><b>Motion</b> the motion language your style implies</li><li><b>Transitions</b> cuts, match cuts and one signature move</li></ol></li>
-        <li><h3>Build</h3><ol><li><b>Build</b> Claude animates every scene, the checker verifies it</li><li><b>Render</b> you preview, then render</li></ol></li>
-      </ol>
-
-      <div class="shots">
-        <figure class="showcase wide"><img src="img/console-direction.jpg" width="1440" height="1250" loading="lazy" alt="The Direction step: three complete directions as cards with board images, Claude's pick selected, and the Fine-tune chips below" /><figcaption><b>Direction.</b> Three complete directions in your brand, Claude's pick already selected. Fine-tune any term, or open all 30 dimensions.</figcaption></figure>
-        <figure class="showcase"><img src="img/console-look.jpg" width="1440" height="1000" loading="lazy" alt="The Look step: six design directions in the project's brand" /><figcaption><b>Look.</b> Design directions on your own words; here, six in the project's brand.</figcaption></figure>
-        <figure class="showcase"><img src="img/console-motion.jpg" width="1440" height="1000" loading="lazy" alt="The Motion step: the user's lines in six motion languages, side by side" /><figcaption><b>Motion.</b> Your lines in candidate motion languages, each with its contract.</figcaption></figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- the meaning -->
-  <section class="section meaning">
-    <div class="wrap two meaning-grid">
-      <div class="word-col"><p class="word" lang="ta">ரசனை</p><p class="gloss"><b>rasanai</b> <span class="mono">/ˈrʌ.sə.nai/ · Tamil ரசனை, from Sanskrit रस <i>rasa</i></span></p></div>
-      <div>
-        <ol class="defs"><li>Taste; the eye (and ear) for what feels right. <i>“Avarukku nalla rasanai”</i>: they have good taste.</li><li>From <i>rasa</i>: in Indian aesthetics, the feeling a work leaves in the person experiencing it. Not what is shown, but what is tasted.</li></ol>
-        <p class="pull">A video keeps its rasa in how it looks, moves, cuts and sounds. Rasa Director is the rasanai: the taste to choose it, on purpose.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- brand -->
-  <section class="section" id="brand">
-    <div class="wrap">
-      <p class="eyebrow">Your brand</p>
-      <h2 class="mega">Bring your DESIGN.md.</h2>
-      <div class="two">
-        <div>
-          <p class="lede">If your project already has a brand reference, it becomes the look. Its colors and typefaces are used exactly; the directions vary the art direction around them.</p>
-          <ul class="ticks">
-            <li>Reads the common shapes: design.md spec frontmatter with <code>oklch()</code> colors and nested typography, impeccable and gstack files, Stitch-style prose, CSS custom properties, token tables with or without <code>#</code>.</li>
-            <li>Gives every color a role (canvas, ink, accent, surface, muted, status) from its name and comment, then contrast. A saturated "text accent" never becomes the ink; status colors never become the accent.</li>
-            <li>Finds the fonts, skips "banned" ones, maps platform fonts the renderer doesn't have (SF Pro → Inter, SF Mono → JetBrains Mono, Calibri → Carlito) and says so.</li>
-            <li>Writes a frame.md HyperFrames accepts, checks it with HyperFrames' own parser, and stages every font file into the project.</li>
-          </ul>
-          <p><a class="link" href="examples/DESIGN.md">See an example DESIGN.md</a></p>
-        </div>
-        <figure class="showcase"><img src="img/console-brand.jpg" width="1440" height="1000" loading="lazy" alt="The Brand step: the project's DESIGN.md read back as a board with colors by role and fonts" /><figcaption><b>The Brand step.</b> Use it as the look, use it across new design directions, or leave it out for this video.</figcaption></figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- design directions -->
-  <section class="section dark" id="styles">
-    <div class="wrap">
-      <p class="eyebrow">The style library</p>
-      <h2 class="mega">Hundreds of styles. Pick one by eye.</h2>
-      <div class="two lead-row">
-        <p class="lede">Every style is a complete look with a proper name: soft neo-brutalism, claymorphism, Swiss grid, Y2K chrome, blueprint HUD, risograph zine and many more. Each is drawn live on your own words, and Claude picks the three that suit your video best, one of them unusual.</p>
-        <p>Each style carries the motion-design terms that define it (UI treatment, visual style, illustration, stroke, shadow, material, texture, motion language, transitions), so picking one writes a real art-direction brief. With your DESIGN.md, every style is shown in your colors and type. Hover or tap a card to see how it moves.</p>
-      </div>
-      <div class="lib" id="lib">
-        <div class="lib-controls">
-          <label class="lib-try"><span>Your words</span><input id="lib-words" type="text" value="Tax season. Again." maxlength="40" autocomplete="off" spellcheck="false" /></label>
-          <input id="lib-search" class="lib-search" type="search" placeholder="Search: shadows, retro, glass, doodle, luxury…" aria-label="Search styles" />
-        </div>
-        <div class="lib-fams" id="lib-fams" role="group" aria-label="Families"></div>
-        <p class="lib-count" id="lib-count" aria-live="polite"></p>
-        <div class="lib-grid" id="lib-grid"></div>
-        <button class="btn btn-ghost lib-more" id="lib-more" type="button" hidden>Show all styles</button>
-        <noscript><p>The library draws each style with JavaScript.</p></noscript>
-      </div>
+      <p class="note">The compiled direction goes to every builder: into <code>frame.md</code>, into every scene's work packet with the motion contract, and into every reel card's brief.</p>
     </div>
   </section>
 
@@ -221,7 +314,7 @@ detail removed.
       <p class="eyebrow">The motion</p>
       <h2 class="mega">A motion language, with a contract.</h2>
       <div class="two lead-row">
-        <p class="lede">"If these graphics were alive, what laws would they follow?" Each of the 32 motion languages is a term with a binding contract: its eases, the durations allowed, the stagger, the minimum hold, and the moves it bans. The one you choose becomes <code>motion.md</code>.</p>
+        <p class="lede">"If these graphics were alive, what laws would they follow?" Each of the 32 motion languages is a term with a binding contract: its eases, the durations allowed, the stagger, the minimum hold, and the moves it bans. The chosen style's language becomes <code>motion.md</code>.</p>
         <p>Every language's swatch passes the same checker the real build must pass, so what you see is what's enforced. One language governs the whole film; scenes differ only in intensity.</p>
       </div>
       <div class="langs">
@@ -232,7 +325,7 @@ detail removed.
         <div><b>Luxurious / slow</b><span class="mono">circ.out / circ.in · 600–2800 ms · hold 1800</span><small>Restraint as the signal of value.</small></div>
         <div><b>Stop-motion-like</b><span class="mono">steps(6) / steps(4) · 12 fps · hold 750</span><small>Held poses on twos, like physical stop-motion.</small></div>
       </div>
-      <figure class="showcase"><img src="img/swatches.jpg" width="1600" height="900" loading="lazy" alt="The user's lines in six motion languages, side by side, in the chosen look" /><figcaption><b>Swatches of your lines</b>, in your look, for choosing by eye. Then the language's contract governs every scene Claude builds.</figcaption></figure>
+      <figure class="showcase"><img src="img/swatches.jpg" width="1600" height="900" loading="lazy" alt="The same lines in six motion languages, side by side, in one look" /><figcaption><b>The same lines in six languages.</b> The chosen language's contract then governs every scene Claude builds.</figcaption></figure>
     </div>
   </section>
 
@@ -242,19 +335,19 @@ detail removed.
       <p class="eyebrow">Who animates</p>
       <h2 class="mega">Claude designs and animates every frame.</h2>
       <div class="two lead-row">
-        <p class="lede">Rasa never ships canned animation. Its boards and swatches exist so you can choose. The frames, the scenes and the cards are Claude's, drawn fresh from your direction.</p>
-        <p>Before anything moves, Claude designs the key frames as stills for you to approve, the way studios lock art direction before animation. Then it builds every scene through the matching HyperFrames workflow, from <code>DIRECTION.md</code>, <code>frame.md</code> and <code>motion.md</code>.</p>
+        <p class="lede">Rasa never ships canned animation. The style specimens exist so you can choose by eye. The frames, the scenes and the cards are Claude's, drawn fresh from the chosen film.</p>
+        <p>For the animatic, Claude designs one key frame per scene, the moment that scene is about, and times them to the music before anything moves. Then it builds every scene through the matching HyperFrames workflow, from <code>DIRECTION.md</code>, <code>frame.md</code> and <code>motion.md</code>, and you watch each one turn from key frame to finished.</p>
       </div>
       <div class="shots two-up">
-        <figure class="showcase"><img src="img/styleframe-hook.jpg" width="1600" height="900" loading="lazy" alt="A style frame Claude designed: Tax season. Again. on a Swiss grid, receipts piled on the right" /><figcaption><b>Style frame: the hook.</b> Swiss grid, grotesk, the brand's paper and ink.</figcaption></figure>
-        <figure class="showcase"><img src="img/styleframe-product.jpg" width="1600" height="900" loading="lazy" alt="A style frame: simplified product UI with March books balanced and a single mint accent" /><figcaption><b>Style frame: the product.</b> Simplified UI, one mint accent for the balanced state.</figcaption></figure>
+        <figure class="showcase"><img src="img/styleframe-hook.jpg" width="1600" height="900" loading="lazy" alt="A key frame Claude designed: Tax season. Again. on a Swiss grid, receipts piled on the right" /><figcaption><b>Key frame: the hook.</b> Swiss grid, grotesk, the brand's paper and ink.</figcaption></figure>
+        <figure class="showcase"><img src="img/styleframe-product.jpg" width="1600" height="900" loading="lazy" alt="A key frame: simplified product UI with March books balanced and a single mint accent" /><figcaption><b>Key frame: the product.</b> Simplified UI, one mint accent for the balanced state.</figcaption></figure>
       </div>
       <ol class="loop">
-        <li><b>Direction</b><span>DIRECTION.md and motion.md, compiled from your decisions</span></li>
-        <li><b>Style frames</b><span>Claude draws the key frames; you approve</span></li>
+        <li><b>Film</b><span>A story device and a design system, compiled into DIRECTION.md and motion.md</span></li>
+        <li><b>Key frames</b><span>One per scene, timed to the music edit and the voice</span></li>
         <li><b>Build</b><span>Every scene worker reads the direction and the contract in its packet</span></li>
-        <li><b>Cards</b><span>For reels, a brief per card; Claude writes each one</span></li>
-        <li><b>Check</b><span>Every scene and card is verified against the contract</span></li>
+        <li><b>Gates</b><span>Anti-slop, the motion contract and the sound check, on every scene</span></li>
+        <li><b>Final</b><span>Render, notes on any moment, versions</span></li>
       </ol>
     </div>
   </section>
@@ -263,18 +356,19 @@ detail removed.
   <section class="section">
     <div class="wrap">
       <p class="eyebrow">Every kind of video</p>
-      <h2 class="mega">Whole films, not single titles.</h2>
-      <p class="lede narrow">Rasa hands the approved plan to the HyperFrames workflow that fits, pre-writing what it reads (the brief, the storyboard and script in its exact format, frame.md, the music), so it asks nothing and re-decides nothing.</p>
+      <h2 class="mega">Whole films, from any source.</h2>
+      <p class="lede narrow">Rasa hands the approved plan to the HyperFrames workflow that fits, pre-writing what it reads (the brief, the storyboard and script in its exact format, frame.md, the music edit), so it asks nothing and re-decides nothing.</p>
       <div class="routes">
         <div><b>Launch film</b><span class="mono">product-launch-video</span><p>From a product URL: capture, story, scenes, voice, music.</p></div>
         <div><b>Explainer</b><span class="mono">faceless-explainer</span><p>A topic, article or how-to, told with invented visuals.</p></div>
         <div><b>PR video</b><span class="mono">pr-to-video</span><p>A pull request as a changelog film, code excerpts and all.</p></div>
-        <div><b>Custom piece</b><span class="mono">general-video</span><p>Brand reels, montages, anything multi-scene.</p></div>
+        <div><b>Custom piece</b><span class="mono">general-video</span><p>Brand films, montages, anything multi-scene.</p></div>
         <div><b>Music video</b><span class="mono">music-to-video</span><p>Cut to a track's beat grid; lyric videos.</p></div>
         <div><b>Footage reel</b><span class="mono">reel</span><p>A folder of your clips, cut together with cards and captions.</p></div>
         <div><b>Captions &amp; overlays</b><span class="mono">embedded-captions · talking-head-recut</span><p>A talking-head clip, captioned or recut with designed cards.</p></div>
         <div><b>Motion graphics</b><span class="mono">motion-graphics</span><p>A title, sting, stat hit or lower third.</p></div>
       </div>
+      <p class="note">Videos only. For a talk, Rasa makes the video that plays in it; the deck is source material.</p>
     </div>
   </section>
 
@@ -284,28 +378,29 @@ detail removed.
       <p class="eyebrow">Footage</p>
       <h2 class="mega">Point it at a folder of clips.</h2>
       <div class="two lead-row">
-        <p class="lede">Rasa examines every clip (length, orientation, frame rate, sound, a contact sheet, shot changes, silences and a word-level transcript), then Claude drafts the cut from your direction, cutting on word boundaries.</p>
-        <p>You edit it as a list: in and out points, order, cards between clips, overlays on top, captions from what's said, a music bed that ducks under speech. Claude designs and animates every card and overlay from a brief; the build conforms your footage, lints, checks and renders.</p>
+        <p class="lede">Rasa examines every clip (length, orientation, frame rate, sound, a contact sheet, shot changes, silences and a word-level transcript), then Claude drafts the cut, cutting on word boundaries.</p>
+        <p>A reel adds two calls: Footage, where you untick clips to leave out, and Cut, the reel's animatic, where you edit the list: in and out points, order, cards between clips, overlays, captions from what's said, a music bed that ducks under speech. Claude designs and animates every card and overlay.</p>
       </div>
       <div class="shots two-up">
         <figure class="showcase"><img src="img/console-footage.jpg" width="1440" height="900" loading="lazy" alt="The Footage step: each clip with its contact sheet, length, format and sound" /><figcaption><b>Footage.</b> Every clip, with what's in it and what's said.</figcaption></figure>
-        <figure class="showcase"><img src="img/console-cut.jpg" width="1440" height="1100" loading="lazy" alt="The Cut step: clips with in and out points, cards between them, overlays and captions" /><figcaption><b>Cut.</b> The edit as a list you can change, with a draft to watch.</figcaption></figure>
+        <figure class="showcase"><img src="img/console-cut.jpg" width="1440" height="900" loading="lazy" alt="The Cut step: clips with in and out points, cards between them, overlays and captions" /><figcaption><b>Cut.</b> The edit as a list you can change, with a draft to watch.</figcaption></figure>
       </div>
     </div>
   </section>
 
-  <!-- guarantee -->
+  <!-- the checks -->
   <section class="section">
     <div class="wrap two">
       <div>
-        <p class="eyebrow">The check</p>
-        <h2>What you picked is what gets built.</h2>
-        <p class="lede">Your choices don't dissolve into a vague prompt. Every tween in every scene and card is walked in a real browser and compared with the contract before you're asked to render.</p>
+        <p class="eyebrow">The checks</p>
+        <h2>Checked before you see it.</h2>
+        <p class="lede">A film ships only after four gates pass: the story rubric, the anti-slop gate, the motion contract and the sound check. The motion check walks every tween of every scene in a real browser and compares it with the contract.</p>
         <ul class="ticks">
           <li><b>Durations</b> on the language's scale, <b>eases</b> from its set, written explicitly, never the GSAP default.</li>
           <li><b>Banned moves</b> caught in every form, including the generic fade-up-slide.</li>
           <li><b>Holds</b> long enough to read; <b>GSAP only</b>, seekable, deterministic.</li>
-          <li>Violations go back to the builder, at most twice; anything left is yours to fix or waive. A check that couldn't run is never reported as a pass.</li>
+          <li><b>Sound</b> at −14 LUFS, no audible loop, effects within budget, no dead air.</li>
+          <li>Failures go back to the builder, at most twice; anything left is yours to fix or waive at the Final. A check that couldn't run is never reported as a pass.</li>
         </ul>
       </div>
       <div class="file">
@@ -329,23 +424,24 @@ detail removed.
   <section class="section dark" id="install">
     <div class="wrap">
       <h2 class="mega">Install</h2>
-      <p class="lede narrow">Needs Claude Code, Node.js 20 or newer, the HyperFrames skills (<code>npx hyperframes skills update</code>), and FFmpeg for footage reels.</p>
+      <p class="lede narrow">Needs Claude Code, Node.js 20 or newer (Rasa fetches a private copy if you have none), the HyperFrames skills (<code>npx hyperframes skills update</code>), and FFmpeg for music and footage.</p>
       <div class="install">
         <div><h3>Claude Code plugin</h3><p>From inside Claude Code.</p>
           <div class="cmd"><code><span class="p">&gt; </span>/plugin marketplace add Sibhimanyu/rasa-director</code><button class="copy" type="button" data-copy="/plugin marketplace add Sibhimanyu/rasa-director" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
           <div class="cmd"><code><span class="p">&gt; </span>/plugin install rasa-director@rasa-director</code><button class="copy" type="button" data-copy="/plugin install rasa-director@rasa-director" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div></div>
         <div><h3>skills CLI</h3><p>From your terminal.</p>
-          <div class="cmd"><code><span class="p">$ </span>npx skills add Sibhimanyu/rasa-director</code><button class="copy" type="button" data-copy="npx skills add Sibhimanyu/rasa-director" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div></div>
+          <div class="cmd"><code><span class="p">$ </span>npx skills add Sibhimanyu/rasa-director --skill rasa-director</code><button class="copy" type="button" data-copy="npx skills add Sibhimanyu/rasa-director --skill rasa-director" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div></div>
         <div><h3>One-line installer</h3><p>Clones and links the skill.</p>
           <div class="cmd"><code><span class="p">$ </span>curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasa-director/master/install.sh | bash</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasa-director/master/install.sh | bash" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div></div>
       </div>
       <h3 class="try-h">Then try</h3>
       <div class="examples">
         <div class="cmd"><code><span class="p">&gt; </span>/rasa-director make a 45s launch film for https://tally.app</code><button class="copy" type="button" data-copy="/rasa-director make a 45s launch film for https://tally.app" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
-        <div class="cmd"><code><span class="p">&gt; </span>/rasa-director a product film using our DESIGN.md, like these references: ref1.png ref2.png</code><button class="copy" type="button" data-copy="/rasa-director a product film using our DESIGN.md, like these references: ref1.png ref2.png" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+        <div class="cmd"><code><span class="p">&gt; </span>/rasa-director a 60s explainer on how DNS works, vertical, no voiceover. Just make it.</code><button class="copy" type="button" data-copy="/rasa-director a 60s explainer on how DNS works, vertical, no voiceover. Just make it." aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
         <div class="cmd"><code><span class="p">&gt; </span>/rasa-director cut ~/Footage/lisbon into a 30s reel with a title card and captions</code><button class="copy" type="button" data-copy="/rasa-director cut ~/Footage/lisbon into a 30s reel with a title card and captions" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+        <div class="cmd"><code><span class="p">&gt; </span>/rasa-director export the Swiss grid style as a DESIGN.md</code><button class="copy" type="button" data-copy="/rasa-director export the Swiss grid style as a DESIGN.md" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
       </div>
-      <p class="note">Check the install with <code>node ~/.claude/skills/rasa-director/scripts/selftest.mjs</code> (52 checks, no network needed).</p>
+      <p class="note">Rasa updates itself when the skill loads. Check the install with <code>node ~/.claude/skills/rasa-director/scripts/selftest.mjs</code> (84 checks, no network needed).</p>
     </div>
   </section>
 
@@ -354,12 +450,15 @@ detail removed.
     <div class="wrap two">
       <h2>Questions</h2>
       <div>
-        <details><summary>Who actually animates the video?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Claude. Rasa Director gives you the decisions and the vocabulary; its boards and swatches are only for choosing by eye. Claude designs the style frames, the scenes and the reel cards from your direction, HyperFrames renders them, and a checker confirms the motion follows the contract you chose.</p></div></details>
-        <details><summary>Do I need to know motion-design terms?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>No. Every term comes with a plain definition, what it looks like and what it's used for, and anything you skip, Claude decides. The terms are what make the result precise: "simplified UI, grotesk, precise motion, UI-morph transitions" builds something very different from "make it modern".</p></div></details>
-        <details><summary>Can it use my brand?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Put your DESIGN.md (or design.md) in the project. Rasa reads it, shows you what it understood as a brand board, and uses your colors and fonts exactly, either as the look or across new design directions.</p></div></details>
-        <details><summary>What does “you decide” actually do?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>It hands that decision to Claude, and it never means the generic default: candidates come from known style combinations that fit your other choices, the generic option is excluded, recent picks rotate out, and every choice comes with a receipt naming the obvious option passed over.</p></div></details>
-        <details><summary>Can I skip everything?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Say “you decide the rest” at any step; only the source (what the video is about) is required. The one question that always runs is “preview first, or render?”</p></div></details>
-        <details><summary>Does anything leave my machine?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>The console runs on 127.0.0.1 with a per-session token and serves files only from your workspace. Site capture, voice samples, music and fonts go through HyperFrames' tools, Google Fonts or Fontshare; nothing else leaves your machine.</p></div></details>
+        <details><summary>What do I actually decide?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Four things: the brief (one sentence), which of three complete films to make, notes on the animatic, and the final. Everything else is craft, and Claude decides it. If a question would need expertise to answer, Rasa doesn't ask it.</p></div></details>
+        <details><summary>Can I change what Claude decided?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Every call is in the Decisions drawer with its reason and the obvious option it passed over. Tell Claude (<kbd>⌘K</kbd>) or leave a note on a moment in the animatic or the final, and it changes only what the note points at.</p></div></details>
+        <details><summary>Who actually animates the video?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Claude. The style specimens in the console are for choosing by eye. Claude designs the key frames, the scenes and the reel cards from the chosen film, HyperFrames renders them, and the gates confirm the motion, copy and sound before you see the result.</p></div></details>
+        <details><summary>Do I need to know motion-design terms?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>No. You choose by watching and listening. Claude works in the terms, because they make the result precise: "simplified UI, grotesk, precise motion, UI-morph transitions" builds something very different from "make it modern".</p></div></details>
+        <details><summary>Why do the three films look so different from each other?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Because they are different films. Each pairs a different story device with a design system from a different family and its own music feel, and the three pitches differ on at least five of seven story axes. Your recent styles and devices rotate out, so ten films never settle into one house style.</p></div></details>
+        <details><summary>Can I use a style outside Rasa?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Every style in the library downloads as a DESIGN.md (colors by role, type, radii, shadows, components, the motion contract), which any agent or design tool can build from. The link is on each card above.</p></div></details>
+        <details><summary>Can it use my brand?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Put your DESIGN.md (or design.md) in the project. Rasa reads it, gives every color a role, and draws all three films in your colors and type.</p></div></details>
+        <details><summary>Can I skip everything?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Say "just make it" and Claude decides every call up to the Final, which always runs so you can review before the render. Only the source (what the video is about) is required.</p></div></details>
+        <details><summary>Does anything leave my machine?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>The console runs on 127.0.0.1 with a per-session token and serves files only from your workspace. Music analysis runs locally with Node and FFmpeg. Site capture, voice samples, music and fonts go through HyperFrames' tools, Google Fonts or Fontshare; nothing else leaves your machine.</p></div></details>
         <details><summary>What's the license?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>MIT. The vendored GSAP stays under its own GSAP Standard License.</p></div></details>
       </div>
     </div>
@@ -370,7 +469,7 @@ detail removed.
   <div class="wrap foot-row">
     <p class="foot-big" aria-label="Rasa Director">Rasa<br /><span>Director</span></p>
     <p>Built on <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a> and Claude Code.<br />MIT · GSAP under its own license.</p>
-    <ul class="foot-links"><li><a href="#stack">Direction</a></li><li><a href="#brand">Your brand</a></li><li><a href="#reels">Reels</a></li><li><a href="#install">Install</a></li><li><a href="https://github.com/Sibhimanyu/rasa-director">GitHub</a></li></ul>
+    <ul class="foot-links"><li><a href="#flow">How it runs</a></li><li><a href="#styles">Styles</a></li><li><a href="#brand">Your brand</a></li><li><a href="#install">Install</a></li><li><a href="https://github.com/Sibhimanyu/rasa-director">GitHub</a></li></ul>
   </div>
 </footer>
 

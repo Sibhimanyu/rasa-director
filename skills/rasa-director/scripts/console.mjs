@@ -10,6 +10,7 @@
 //   node console.mjs activity --run <dir> --message "Reading your DESIGN.md" [--level info|ok|warn]   (what Claude is doing now)
 //   node console.mjs ask   --run <dir> --question "..." [--context "..."] [--options '[{"id","label","detail"}]'] [--recommended <id>] [--placeholder "..."]
 //        (any question outside the steps: missing material, a thin capture, an ambiguity; shown on the page, answered there)
+//   node console.mjs resolve --run <dir> --ids a,b [--note "what changed"]   (notes left on the animatic/final are done)
 //   node console.mjs reply --run <dir> --step <id> --message "..."   (Claude answers the user in that step's discussion)
 //   node console.mjs log   --run <dir> --message "..." [--level info|ok|warn|error] [--stage <id>] [--stage-status working|done|failed]
 //   node console.mjs wait  --run <dir> [--step <id>] [--timeout <sec, default 3000>]   -> prints the next action JSON (exit 2 on timeout)
@@ -46,7 +47,7 @@ const F = {
   // the console's address (port + token), kept across restarts so an open tab reconnects by itself; removed only by `stop`
   address: path.join(RUN, "address.json"),
 };
-export const STEPS = ["brief", "brand", "route", "footage", "direction", "concept", "scenes", "look", "motion", "styleframes", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render"];
+export const STEPS = ["brief", "brand", "route", "footage", "direction", "films", "concept", "scenes", "look", "motion", "styleframes", "animatic", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render", "final"];
 
 const readJSON = (p, d) => {
   try {
@@ -70,7 +71,7 @@ function saveSession(s) {
   writeJSON(F.session, s);
 }
 // the live feed on the page: what Claude did, what it's doing, what the user answered
-const LABELS = { brief: "the brief", brand: "your brand", route: "the workflow", footage: "your footage", direction: "the direction", concept: "the story", scenes: "the scenes", look: "the look", motion: "the motion", styleframes: "the style frames", reel: "the cut", transitions: "transitions", voice: "the voice", music: "the music", keyframes: "key poses", storyboard: "the storyboard", plan: "the plan", build: "the build", render: "the render" };
+const LABELS = { films: "the film", animatic: "the animatic", final: "the final cut", brief: "the brief", brand: "your brand", route: "the workflow", footage: "your footage", direction: "the direction", concept: "the story", scenes: "the scenes", look: "the look", motion: "the motion", styleframes: "the style frames", reel: "the cut", transitions: "transitions", voice: "the voice", music: "the music", keyframes: "key poses", storyboard: "the storyboard", plan: "the plan", build: "the build", render: "the render" };
 // an option's human name ("The shoebox wins") for an id the user picked ("shoebox")
 function nameOf(s, step, value) {
   const d = s.steps[step] || {};
@@ -155,7 +156,9 @@ if (cmd === "push") {
   if (args.title) s.title = String(args.title);
   // a push REPLACES the step's payload (stale options, issues or a "you sent" banner must
   // not survive a re-push); --merge keeps the previous fields for small incremental updates
-  const base = args.merge ? prev : {};
+  // closing a step with only its decision keeps what it showed (the animatic's scenes stay viewable)
+  const onlyDecision = (args.status === "done" || data.status === "done") && Object.keys(data).every((k) => ["decision", "status"].includes(k));
+  const base = args.merge || onlyDecision ? prev : {};
   const next = { ...base, ...data, status: args.status || data.status || (args.step === "build" ? "working" : "awaiting"), updated: now() };
   delete next.sent;
   // the step's discussion survives a re-push (Claude revising the options is the answer to it)
@@ -165,7 +168,7 @@ if (cmd === "push") {
     next.stages = data.stages || prev.stages || {};
   }
   s.steps[args.step] = next;
-  if (args.current || next.status === "awaiting") s.current = args.step;
+  if (args.current || next.status === "awaiting" || (next.status === "working" && ["build", "render", "final"].includes(args.step))) s.current = args.step;
   const label = LABELS[args.step] || args.step;
   if (next.status === "awaiting") activity(s, `Ready for you: ${label}`, "ask");
   else if (next.status === "working") activity(s, data.question || `Working on ${label}`, "info", data.question || `Working on ${label}…`);
@@ -202,6 +205,15 @@ if (cmd === "push") {
   activity(s, `Claude needs your call: ${s.ask.question}`, "ask", null);
   saveSession(s);
   console.log(JSON.stringify({ ok: true, ask: id, step: s.ask.step }));
+} else if (cmd === "resolve") {
+  // notes (comment actions) Claude has applied: they leave the page's open list
+  const ids = String(args.ids || "").split(",").filter(Boolean);
+  const s = session();
+  let n = 0;
+  for (const c of s.comments || []) if (ids.includes(c.id) || args.all) { if (c.state !== "resolved") n++; c.state = "resolved"; c.resolved = now(); if (args.note) c.resolution = String(args.note); }
+  if (n) activity(s, `Applied ${n} note${n > 1 ? "s" : ""}${args.note ? ": " + args.note : ""}`, "ok", null);
+  saveSession(s);
+  console.log(JSON.stringify({ ok: true, resolved: n }));
 } else if (cmd === "reply") {
   // Claude's answer in a step's discussion thread, shown on the page under that step
   if (!args.step || !STEPS.includes(args.step)) die(`--step must be one of ${STEPS.join(", ")}`);
@@ -408,13 +420,21 @@ function serve() {
         const action = appendAction({ step, type: String(a.type), value: a.value ?? null, note: String(a.note || "").slice(0, 4000), source: "console" });
         const s = session();
         if (step === "*") s.decide_rest = { ts: action.ts };
-        else if (Object.prototype.hasOwnProperty.call(s.steps, step)) s.steps[step].sent = { type: action.type, value: action.value, note: action.note, ts: action.ts };
+        else if (Object.prototype.hasOwnProperty.call(s.steps, step) && !["comment", "knob"].includes(action.type)) s.steps[step].sent = { type: action.type, value: action.value, note: action.note, ts: action.ts };
         // an answer to an `ask` card: record it on the question and clear it from the page
         if (action.type === "answer" && s.ask && !s.ask.answered) {
           const v = action.value || {};
           const opt = (s.ask.options || []).find((o) => o.id === v.choice);
           s.ask.answered = { choice: v.choice || null, label: opt ? opt.label : null, text: v.text || "", t: action.ts };
           activity(s, `You answered: ${opt ? opt.label : ""}${opt && v.text ? " · " : ""}${v.text ? "“" + String(v.text).slice(0, 120) + "”" : ""}`, "you", "Claude is reading your answer…");
+          saveSession(s);
+          return send(200, { ok: true, action });
+        }
+        // a note pinned to a moment of the animatic or the final: kept on the page until Claude resolves it
+        if (action.type === "comment") {
+          const v = action.value || {};
+          s.comments = (s.comments || []).concat({ id: action.id, step, scene: v.scene ?? null, t: typeof v.t === "number" ? v.t : null, x: typeof v.x === "number" ? v.x : null, y: typeof v.y === "number" ? v.y : null, scope: v.scope || "scene", quick: v.quick || null, text: action.note || v.quick || "", state: "open", ts: action.ts }).slice(-200);
+          activity(s, `You left a note${v.t != null ? " at " + Math.floor(v.t / 60) + ":" + String(Math.floor(v.t % 60)).padStart(2, "0") : ""}: ${action.note || v.quick}`, "you", null);
           saveSession(s);
           return send(200, { ok: true, action });
         }

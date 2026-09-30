@@ -168,7 +168,7 @@
         "palette": { "canvas": "#efe6d2", "ink": "#1e2a2a", "accent": "#d8572a", "accent2": "#2f8c85", "surface": "#f7f0e0", "muted": "#7d7560" },
         "fonts": { "display": "Josefin Sans", "body": "Josefin Sans", "displayWeight": 700, "case": "upper", "tracking": 0.04 },
         "layout": "editorial", "radius": 0, "stroke": { "width": 0, "color": "ink", "style": "solid" },
-        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "filled", "motif": "stars", "motion": "mask"
+        "shadow": "none", "shadowColor": "ink", "surface": "flat", "texture": "grain", "icons": "filled", "motif": "stars", "motion": "mask", "scene": "abstract", "photo": "plate"
       }
     },
     {

@@ -1,0 +1,1164 @@
+{
+  "version": 1,
+  "what": "Narrative devices: the one idea a film is built on, laid over any product so the story is not the default launch arc. Used by scripts/story.mjs (pick samples three that differ on the axes; check scores a pitch against the cliche arc). Schema: taxonomy/devices-SCHEMA.md.",
+  "families": {
+    "container": { "code": "A", "name": "Borrowed container", "what": "Hijack a form the audience already reads fluently (a search box, a receipt, a weather report) and misuse its grammar." },
+    "camera": { "code": "B", "name": "Camera / space", "what": "One camera or framing rule carries the whole film (no cuts, one zoom, a locked frame, a split)." },
+    "time": { "code": "C", "name": "Time", "what": "One rule about time (compressed, reversed, looped, real time, from the future) shapes the story." },
+    "rhetoric": { "code": "D", "name": "Structural / rhetorical", "what": "A shape of argument (misdirect, list that breaks, question chain) with a built-in turn." },
+    "character": { "code": "E", "name": "Character", "what": "Who tells it or whom it follows is the idea (the product, the villain, the skeptic, the least likely witness)." },
+    "metaphor": { "code": "F", "name": "Metaphor / world", "what": "One metaphor or invented world, rendered physically and pushed as far as it goes." },
+    "constraint": { "code": "G", "name": "Constraint / stunt", "what": "A strict self-imposed rule (five seconds, only words, one shape, made from the product's output)." }
+  },
+  "axes": {
+    "family": { "what": "The device family (see families).", "values": ["container", "camera", "time", "rhetoric", "character", "metaphor", "constraint"] },
+    "protagonist": { "what": "Whose story it is.", "values": ["user", "product", "object", "side-character", "problem", "audience", "none"] },
+    "time": { "what": "How time is treated.", "values": ["linear", "compressed", "reversed", "looped", "real-time", "frozen", "future"] },
+    "camera": { "what": "The camera or framing rule.", "values": ["cuts", "oner", "locked-off", "zoom-scales", "split", "top-down"] },
+    "tone": { "what": "The emotional register.", "values": ["deadpan", "warm", "epic", "absurd", "lyrical", "tense"] },
+    "turn": { "what": "The kind of turn at 60-75% of the film.", "values": ["reveal", "reversal", "list-break", "pov-swap", "escalation-collapse", "reframe-line"] },
+    "visual_world": { "what": "The visual register the film lives in.", "values": ["typographic", "ui-native", "illustrated", "abstract-material", "data-viz", "pastiche", "paper-craft", "diagram"] }
+  },
+  "tags": {
+    "products": ["any", "ai", "devtool", "saas", "productivity", "collaboration", "fintech", "commerce", "consumer", "hardware", "creative", "data", "infra", "security", "health", "education", "automation", "search", "social", "legacy-replacement", "platform"],
+    "tones": ["playful", "warm", "deadpan", "epic", "lyrical", "tense", "premium", "serious", "bold"],
+    "formats": ["launch", "explainer", "brand", "social"]
+  },
+  "cliche": {
+    "what": "The default launch arc every AI-made video falls into: a sales deck built outward from the feature list, with no turn. A pitch that reuses 4+ of these beats in this order, or lists three features back to back, fails check's gate G1.",
+    "arc": "hook stat or question -> problem montage -> \"Introducing <product>\" logo reveal -> feature 1 -> feature 2 -> feature 3 -> social proof -> CTA",
+    "beats": [
+      { "n": 1, "id": "hook-stat", "name": "Hook stat or question", "what": "Opens on a statistic or a rhetorical question (\"Drowning in X?\", \"73% of teams...\").", "signals": ["hook", "stat ", "stats", "statistic", "did you know", "what if", "tired of", "imagine", "ever wonder", "drowning in", "struggling with"] },
+      { "n": 2, "id": "problem-montage", "name": "Problem montage", "what": "Quick cuts of people or screens suffering the problem.", "signals": ["problem", "pain point", "painful", "struggle", "frustrat", "chaos", "messy", "montage", "overwhelm", "stressed"] },
+      { "n": 3, "id": "intro-reveal", "name": "\"Introducing <product>\" reveal", "what": "The product name or logo arrives as the answer.", "signals": ["introducing", "meet ", "say hello", "presenting", "logo reveal", "product reveal"] },
+      { "n": 4, "id": "feature-1", "name": "Feature 1", "what": "First feature card or UI demo.", "signals": ["feature", "benefit", "capability", "card slides"] },
+      { "n": 5, "id": "feature-2", "name": "Feature 2", "what": "Second feature card or UI demo.", "signals": ["feature", "benefit", "capability", "card slides"] },
+      { "n": 6, "id": "feature-3", "name": "Feature 3", "what": "Third feature card or UI demo.", "signals": ["feature", "benefit", "capability", "card slides"] },
+      { "n": 7, "id": "social-proof", "name": "Social proof", "what": "Testimonial, customer logos, user counts.", "signals": ["testimonial", "trusted by", "customers", "users love", "join ", "reviews", "social proof", "logo wall", "logo strip", "5 stars"] },
+      { "n": 8, "id": "cta", "name": "CTA / URL", "what": "\"Download now\", \"Try it free\", a URL.", "signals": ["cta", "call to action", "download", "sign up", "try it", "try free", "get started", "visit", "available now", "link in bio", "join the waitlist", ".com", ".app", ".io"] }
+    ],
+    "stock_openers": ["^meet\\b", "^introducing\\b", "^what if\\b", "^tired of\\b", "^imagine\\b", "the future of .* is here", "^say goodbye to\\b", "^are you\\b", "^ever (wonder|wish)", "^struggling (with|to)\\b", "^drowning in\\b", "^did you know\\b", "^in a world\\b"],
+    "overused_devices": ["day-in-the-life", "before-after", "cosmos-zoom", "product-as-character", "chat-thread", "movie-trailer"],
+    "overused_patterns": [
+      { "id": "chaos-to-calm", "name": "Chaos to calm", "what": "A messy montage resolves into a clean UI (a subtype of before/after)." },
+      { "id": "glowing-prompt-box", "name": "Typing into a glowing prompt box", "what": "The default opener for AI products: a caret blinks in a glowing input, a prompt types itself." },
+      { "id": "friendly-blob", "name": "Friendly blob mascot", "what": "A soft rounded character stands in for the product." },
+      { "id": "hyperlapse-day", "name": "Hyperlapse day", "what": "Dawn to dusk at 100x with the product in every micro-moment." }
+    ],
+    "visuals": [
+      { "id": "glowing-orb", "name": "Glowing orbs or brains", "signals": ["glowing orb", "orb", "glowing brain", "neural brain", "brain made of"] },
+      { "id": "particle-network", "name": "Particle networks / plexus", "signals": ["particle network", "plexus", "connected dots", "node network", "floating particles", "particles"] },
+      { "id": "blue-purple-gradient", "name": "Blue-purple gradients", "signals": ["blue-purple", "purple gradient", "blue to purple", "violet gradient", "gradient blob", "aurora gradient"] },
+      { "id": "sparkles", "name": "The sparkles icon", "signals": ["sparkle", "✨", "magic wand"] },
+      { "id": "holographic-ui", "name": "Holographic UI panels", "signals": ["hologram", "holographic", "hud"] },
+      { "id": "isometric-cards", "name": "Isometric floating cards", "signals": ["isometric", "floating cards", "floating card"] },
+      { "id": "future-is-here", "name": "\"The future is here\" copy", "signals": ["future is here", "revolutioniz", "next-level", "seamless", "game-changer", "supercharge", "unlock the power"] },
+      { "id": "stock-handshake", "name": "Stock-footage handshake / smiling team", "signals": ["handshake", "stock footage", "smiling team", "high five"] },
+      { "id": "three-feature-cards", "name": "Three feature cards sliding in", "signals": ["three cards", "3 cards", "feature cards", "three feature", "cards slide in"] },
+      { "id": "tilted-dashboard", "name": "Dashboard floating in a void at a 30-degree tilt", "signals": ["tilted dashboard", "floating dashboard", "dashboard in a void", "3d tilt", "perspective tilt"] },
+      { "id": "confetti-cta", "name": "Confetti CTA", "signals": ["confetti"] },
+      { "id": "glowing-globe", "name": "The glowing globe / network of arcs", "signals": ["glowing globe", "spinning globe", "globe with arcs", "earth at night"] },
+      { "id": "lens-flare", "name": "Lens flares and drifting bokeh", "signals": ["lens flare", "bokeh"] }
+    ]
+  },
+  "devices": [
+    {
+      "id": "query-log", "code": "A1", "name": "The Search / Query Log", "family": "container",
+      "what": "The whole story is told through what one person types into a box, one query at a time.",
+      "fits": { "products": ["search", "ai", "consumer", "productivity", "any"], "tones": ["warm", "playful", "lyrical"], "formats": ["launch", "brand", "social"] },
+      "beats": [
+        { "name": "Innocent query", "purpose": "Sets the person and the stakes in a few typed words." },
+        { "name": "Escalating queries", "purpose": "Each query reveals more of a life; the gaps carry the emotion." },
+        { "name": "Turning-point query", "purpose": "One query changes the story's direction (the turn)." },
+        { "name": "Resolution query", "purpose": "A quiet, often funny query shows the new life." },
+        { "name": "Name", "purpose": "The product name in the same box, or as the last result." }
+      ],
+      "example": "A travel app: \"cheap flights lisbon\" -> \"lisbon alone safe\" -> \"portuguese for 'is this seat taken'\" -> \"lisbon apartment long term\".",
+      "pitfalls": ["A gimmick with no emotional arc", "Too many queries; five to eight is plenty", "Typing too fast to read (at least 0.3 s per word)", "The default AI glowing prompt box: use the product's real input, not a generic one"],
+      "build": { "score": 5, "how": ["typography", "ui"], "note": "Typing animation, a caret, hard cuts between queries; the product's real input field if it has one." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "user", "time": "compressed", "camera": "locked-off", "tone": "warm", "turn": "reveal", "visual_world": "ui-native" },
+      "seen_in": "Google \"Parisian Love\" (2010)"
+    },
+    {
+      "id": "receipt", "code": "A2", "name": "The Receipt", "family": "container",
+      "what": "The film is one long receipt printing; its line items tell the story and the total is the punchline.",
+      "fits": { "products": ["fintech", "commerce", "productivity", "consumer", "any"], "tones": ["deadpan", "playful", "warm"], "formats": ["launch", "brand", "social"] },
+      "beats": [
+        { "name": "Header", "purpose": "The store name is the setting (\"YOUR 2025\", \"MONDAY STANDUP\")." },
+        { "name": "Line items", "purpose": "Items escalate from literal to emotional, each with a price." },
+        { "name": "Subtotal", "purpose": "The turn: a line that reframes the cost." },
+        { "name": "Total", "purpose": "The payoff line, in the receipt's own grammar." },
+        { "name": "Footer", "purpose": "\"THANK YOU, COME AGAIN\" becomes the sign-off." }
+      ],
+      "example": "A meeting-notes app: \"STANDUP x 212 ... 53 HRS\", \"'CAN YOU SEE MY SCREEN' x 94\", subtotal \"MEETINGS THAT COULD BE A NOTE: 61%\", total \"YOU GET BACK: FRIDAYS\".",
+      "pitfalls": ["A monotone scroll with no turn line", "Generic jokes; every item must be specific", "Invented numbers: every figure must be real or clearly playful"],
+      "build": { "score": 5, "how": ["typography"], "note": "A monospace scroll on a paper texture, a tear at the end." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "audience", "time": "compressed", "camera": "oner", "tone": "deadpan", "turn": "reframe-line", "visual_world": "typographic" }
+    },
+    {
+      "id": "chat-thread", "code": "A3", "name": "The Chat Conversation", "family": "container",
+      "what": "The story plays out in a messaging thread, typing dots and all.",
+      "fits": { "products": ["social", "collaboration", "ai", "consumer"], "tones": ["playful", "warm", "deadpan"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "Opening message", "purpose": "Who's talking and what they want." },
+        { "name": "Escalation", "purpose": "A misunderstanding or a pile-up of messages." },
+        { "name": "Typing indicator", "purpose": "Suspense in the three dots." },
+        { "name": "The reply", "purpose": "The message that changes everything (the turn)." },
+        { "name": "Last message", "purpose": "The sign-off doubles as the call to action." }
+      ],
+      "example": "A code-review tool: a junior dev and a senior in DMs at 11 pm, \"quick q\", a 400-line diff, three dots... \"approved. go to bed.\"",
+      "pitfalls": ["Everyone does fake iMessage: subvert the sender, the platform or the voice", "Reading load: keep messages to a few words", "A chatbot thread for an AI product is the most generic option there is"],
+      "build": { "score": 5, "how": ["ui", "typography"], "note": "Bubbles, typing dots, timestamps." },
+      "overused": true, "ambition": 1,
+      "axes": { "family": "container", "protagonist": "side-character", "time": "linear", "camera": "locked-off", "tone": "absurd", "turn": "reveal", "visual_world": "ui-native" }
+    },
+    {
+      "id": "weather-report", "code": "A4", "name": "The Weather Report", "family": "container",
+      "what": "A broadcast forecast where the weather is the problem domain, with fronts, warnings and an outlook.",
+      "fits": { "products": ["data", "infra", "devtool", "fintech", "security", "saas"], "tones": ["deadpan", "playful"], "formats": ["launch", "social", "explainer"] },
+      "beats": [
+        { "name": "Anchor intro", "purpose": "The broadcast frame, instantly recognizable." },
+        { "name": "Fronts on the map", "purpose": "The problem as weather systems moving in." },
+        { "name": "Severe warning", "purpose": "Stakes: the storm is coming." },
+        { "name": "High-pressure system", "purpose": "The product clears it (the turn)." },
+        { "name": "Seven-day outlook", "purpose": "The new normal, as icons; the sign-off." }
+      ],
+      "example": "An uptime monitor: \"a cold front of 502s moving over us-east, a 90% chance of pager by 3 am... but a high-pressure alerting system is pushing through. Outlook: sleep.\"",
+      "pitfalls": ["The joke fades after 20 s: keep it under 45 s or escalate", "Map clutter; one front per beat"],
+      "build": { "score": 5, "how": ["data-viz", "illustration", "typography"], "note": "A map, weather icons, lower thirds, a ticker." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "problem", "time": "future", "camera": "cuts", "tone": "deadpan", "turn": "reversal", "visual_world": "data-viz" }
+    },
+    {
+      "id": "museum-exhibit", "code": "A5", "name": "The Museum Exhibit / Auction", "family": "container",
+      "what": "The old way presented as artifacts in a gallery (or lots at an auction), with placards.",
+      "fits": { "products": ["legacy-replacement", "saas", "productivity", "fintech", "security", "any"], "tones": ["deadpan", "premium", "playful"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "Entrance plaque", "purpose": "Names the museum: the whole premise in one line." },
+        { "name": "Exhibits", "purpose": "Two to four artifacts of the old way, each with a witty placard." },
+        { "name": "The empty plinth", "purpose": "The turn: where the problem used to be." },
+        { "name": "Gift shop / exit", "purpose": "The call to action in the museum's grammar." }
+      ],
+      "example": "A password manager: \"The Museum of Forgotten Passwords\": the sticky note on a monitor (c. 1995), \"Password1!\" under glass, and an empty plinth, \"Your next reset. Nothing to see here.\"",
+      "pitfalls": ["Slow: keep each exhibit to 5 s or less", "Placards must be witty and legible at speed"],
+      "build": { "score": 5, "how": ["illustration", "typography"], "note": "A slow 2.5D dolly past spotlit objects and placards." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "audience", "time": "frozen", "camera": "oner", "tone": "deadpan", "turn": "reveal", "visual_world": "illustrated" },
+      "seen_in": "Apple \"Privacy on iPhone: Data Auction\" (2022)"
+    },
+    {
+      "id": "infomercial", "code": "A6", "name": "The Mock Infomercial", "family": "container",
+      "what": "The 3 am TV sales format, played straight or ironically.",
+      "fits": { "products": ["consumer", "productivity", "saas"], "tones": ["playful", "bold"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "Fail montage", "purpose": "Black-and-white \"are YOU tired of...\" disasters." },
+        { "name": "Introducing!", "purpose": "The switch to color." },
+        { "name": "Absurd demo", "purpose": "The product doing its one thing, overplayed." },
+        { "name": "But wait, there's more!", "purpose": "The turn: a second capability or a self-aware twist." },
+        { "name": "Flashing offer", "purpose": "Price and URL in the format's loud type." }
+      ],
+      "example": "A calendar app: a man in black and white is buried under double-booked meeting invites, \"there's GOT to be a better way!\", color, one drag and the week untangles.",
+      "pitfalls": ["It is the cliche arc wearing a costume unless it's self-aware", "Needs real craft to read as parody, not cheapness"],
+      "build": { "score": 3, "how": ["illustration", "typography"], "note": "Without live action, render as an illustrated or type-driven infomercial with a VHS grade." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "container", "protagonist": "user", "time": "linear", "camera": "cuts", "tone": "absurd", "turn": "reversal", "visual_world": "pastiche" }
+    },
+    {
+      "id": "recipe", "code": "A7", "name": "The Recipe", "family": "container",
+      "what": "The outcome presented as a dish: ingredients, method, timers and plating.",
+      "fits": { "products": ["automation", "platform", "creative", "saas", "devtool"], "tones": ["warm", "playful"], "formats": ["explainer", "launch", "social"] },
+      "beats": [
+        { "name": "Dish name", "purpose": "The outcome, named like a recipe (\"serves 1 team\")." },
+        { "name": "Ingredients", "purpose": "The inputs, specific and funny." },
+        { "name": "Method", "purpose": "Two or three steps with timers." },
+        { "name": "Plating", "purpose": "The result, beautifully served (the turn if the method has a surprise)." },
+        { "name": "Serves", "purpose": "The sign-off." }
+      ],
+      "example": "A workflow-automation tool: \"Monday Report (serves 1 manager). Ingredients: 3 spreadsheets, 1 CRM, 0 interns. Method: connect, let rest overnight, serve at 9 am.\"",
+      "pitfalls": ["The overhead cooking-video cliche", "The method must reveal a real insight, not just list steps"],
+      "build": { "score": 5, "how": ["illustration", "typography"], "note": "A top-down flat lay with labels and timers." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "container", "protagonist": "none", "time": "linear", "camera": "top-down", "tone": "warm", "turn": "reframe-line", "visual_world": "illustrated" }
+    },
+    {
+      "id": "flat-pack-manual", "code": "A8", "name": "The Instruction Manual / Flat-pack Guide", "family": "container",
+      "what": "Wordless assembly diagrams, numbered steps, a stick figure, a parts list.",
+      "fits": { "products": ["hardware", "devtool", "saas", "productivity", "any"], "tones": ["deadpan", "playful"], "formats": ["explainer", "launch", "social"] },
+      "beats": [
+        { "name": "Parts list", "purpose": "What you need (and the part you no longer need)." },
+        { "name": "Numbered steps", "purpose": "The figure does it in two or three steps." },
+        { "name": "The removed part", "purpose": "The turn: the frustration part crossed out." },
+        { "name": "Happy figure", "purpose": "The finished state." },
+        { "name": "Back page", "purpose": "The name, like a manual's back cover." }
+      ],
+      "example": "A deploy tool: parts \"1x repo, 1x branch, 0x YAML (discard)\"; step 1 the figure pushes; step 2 a URL appears; the warning icon shows a crossed-out pager.",
+      "pitfalls": ["Can read as help docs: commit fully to the visual language", "Too many steps"],
+      "build": { "score": 5, "how": ["diagram"], "note": "Line art with SVG stroke draws and numbered callouts." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "user", "time": "linear", "camera": "locked-off", "tone": "deadpan", "turn": "reframe-line", "visual_world": "diagram" }
+    },
+    {
+      "id": "changelog-poem", "code": "A9", "name": "The Changelog as Poetry", "family": "container",
+      "what": "Release notes performed as verse: every line a real change, with a volta.",
+      "fits": { "products": ["devtool", "saas", "ai", "productivity"], "tones": ["lyrical", "warm", "premium"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "Version number", "purpose": "The title, set like a poem's." },
+        { "name": "Stanzas", "purpose": "Each line a real, specific change." },
+        { "name": "Volta", "purpose": "The turn: why it matters, in one line." },
+        { "name": "Last line", "purpose": "The version shipping." }
+      ],
+      "example": "An editor: \"v4 / We taught undo to remember yesterday. / We made search forgive a typo. / We removed a setting nobody found. / We gave you back the afternoon.\"",
+      "pitfalls": ["Pretentious if the changes are trivial", "Every line must be a real change from the actual release notes"],
+      "build": { "score": 5, "how": ["typography"], "note": "Kinetic type, line by line, with real UI inserts for two lines at most." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "product", "time": "linear", "camera": "cuts", "tone": "lyrical", "turn": "reframe-line", "visual_world": "typographic" }
+    },
+    {
+      "id": "silent-film", "code": "A10", "name": "The Silent Film with Intertitles", "family": "container",
+      "what": "1920s title-card storytelling: melodrama, piano, iris wipes.",
+      "fits": { "products": ["consumer", "productivity", "saas", "any"], "tones": ["playful", "warm"], "formats": ["launch", "explainer", "social"] },
+      "beats": [
+        { "name": "Card: our hero", "purpose": "Sets the character in the format's voice." },
+        { "name": "Peril", "purpose": "The villain (the problem) strikes." },
+        { "name": "Card: but lo!", "purpose": "The turn." },
+        { "name": "Rescue", "purpose": "The product saves the day." },
+        { "name": "Card: THE END", "purpose": "The name." }
+      ],
+      "example": "A backup app: our heroine's laptop is tied to the tracks by the dastardly Spilled Coffee; card \"But lo!\"; the files are already safe.",
+      "pitfalls": ["The style is the joke, so the story still needs a real turn", "Card reading time"],
+      "build": { "score": 4, "how": ["illustration", "typography"], "note": "Grain, vignette, iris wipes, card typography; illustrated or silhouette action." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "user", "time": "linear", "camera": "cuts", "tone": "absurd", "turn": "reversal", "visual_world": "pastiche" }
+    },
+    {
+      "id": "nature-documentary", "code": "A11", "name": "The Nature Documentary", "family": "container",
+      "what": "A hushed wildlife narrator observes users (or data) in their habitat.",
+      "fits": { "products": ["consumer", "collaboration", "saas", "productivity"], "tones": ["deadpan", "playful"], "formats": ["launch", "brand", "social"] },
+      "beats": [
+        { "name": "Habitat", "purpose": "The establishing shot, the narrator's voice." },
+        { "name": "Observed behavior", "purpose": "The creature's rituals (the old way)." },
+        { "name": "The predator", "purpose": "The problem arrives." },
+        { "name": "An adaptation", "purpose": "The turn: a new behavior (the product)." },
+        { "name": "The herd thrives", "purpose": "The close." }
+      ],
+      "example": "A team chat app: \"Here, in the open-plan office, the Project Manager performs the ancient ritual of the reply-all... but look: a new behavior.\"",
+      "pitfalls": ["The voice carries it: needs good VO or type-as-VO", "Well-worn in comedy; find a specific behavior"],
+      "build": { "score": 3, "how": ["illustration", "typography"], "note": "An illustrated or diorama habitat, observational framing, lower-third species labels." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "container", "protagonist": "user", "time": "linear", "camera": "locked-off", "tone": "deadpan", "turn": "reveal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "sports-broadcast", "code": "A12", "name": "The Sports Broadcast / Play-by-play", "family": "container",
+      "what": "Commentators call a mundane task as a big game, with replays, a telestrator and stat overlays.",
+      "fits": { "products": ["productivity", "devtool", "consumer", "saas"], "tones": ["epic", "playful", "bold"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "Pregame", "purpose": "The scoreboard: what's at stake." },
+        { "name": "The play", "purpose": "The task, called live." },
+        { "name": "Slow-mo replay", "purpose": "The telestrator circles the real detail (the turn)." },
+        { "name": "Stat overlay", "purpose": "The proof number (sourced)." },
+        { "name": "Post-game line", "purpose": "The sign-off." }
+      ],
+      "example": "A keyboard launcher: \"she's got four windows open and two seconds on the clock... the shortcut! Let's see that again: look at the fuzzy match on 'fgma'.\"",
+      "pitfalls": ["Noise: the telestrator must reveal a real detail", "Stats must be real"],
+      "build": { "score": 5, "how": ["data-viz", "ui", "typography"], "note": "Scoreboards, telestrator strokes, replay wipes over real UI." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "container", "protagonist": "user", "time": "real-time", "camera": "cuts", "tone": "epic", "turn": "reveal", "visual_world": "data-viz" }
+    },
+    {
+      "id": "movie-trailer", "code": "A13", "name": "The Movie Trailer", "family": "container",
+      "what": "Epic trailer grammar: studio logos, \"In a world...\", a stinger.",
+      "fits": { "products": ["consumer", "platform", "any"], "tones": ["epic", "playful"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "Studio logos", "purpose": "The format's signal." },
+        { "name": "In a world...", "purpose": "The premise." },
+        { "name": "Rising stakes", "purpose": "The problem, dramatized." },
+        { "name": "Rapid montage", "purpose": "Escalation." },
+        { "name": "Title and date", "purpose": "The launch." },
+        { "name": "Stinger", "purpose": "A last joke after the title." }
+      ],
+      "example": "A to-do app: \"In a world... where every list grows longer... one app... will say no.\" Title card, release date, stinger: an unchecked box twitches.",
+      "pitfalls": ["Heavily parodied; the most predictable parody there is", "Needs specific wit or a structural twist"],
+      "build": { "score": 5, "how": ["typography"], "note": "Type, whooshes, flashes, a date stinger." },
+      "overused": true, "ambition": 1,
+      "axes": { "family": "container", "protagonist": "product", "time": "linear", "camera": "cuts", "tone": "epic", "turn": "reveal", "visual_world": "typographic" }
+    },
+    {
+      "id": "fine-print", "code": "A14", "name": "The Legal Disclaimer / Terms & Conditions", "family": "container",
+      "what": "The fine print starts telling the truth and slowly takes over the ad.",
+      "fits": { "products": ["fintech", "security", "saas", "consumer"], "tones": ["deadpan", "playful"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "A normal ad", "purpose": "A calm hero shot." },
+        { "name": "Fine print appears", "purpose": "Tiny, at the bottom." },
+        { "name": "The fine print tells the truth", "purpose": "The turn: it goes rogue." },
+        { "name": "It takes over", "purpose": "It fills the frame." },
+        { "name": "An honest CTA", "purpose": "The close, in legalese." }
+      ],
+      "example": "A privacy-first email app: \"*We do not read your email. We could not if we tried. Side effects include an inbox that isn't a product.\"",
+      "pitfalls": ["Must stay legible", "Best as a coda or a short"],
+      "build": { "score": 5, "how": ["typography"], "note": "Scaling fine print, a calm plate behind it." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "object", "time": "linear", "camera": "locked-off", "tone": "deadpan", "turn": "reversal", "visual_world": "typographic" }
+    },
+    {
+      "id": "horoscope", "code": "A15", "name": "The Horoscope / Fortune", "family": "container",
+      "what": "Readings by star sign or tarot card that are secretly use cases.",
+      "fits": { "products": ["consumer", "social", "productivity", "any"], "tones": ["playful", "warm"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "Cosmic intro", "purpose": "The format." },
+        { "name": "Sign-by-sign readings", "purpose": "Each a specific use case, escalating." },
+        { "name": "The final card", "purpose": "The turn: a reading for the viewer." },
+        { "name": "Sign-off", "purpose": "The name." }
+      ],
+      "example": "A budgeting app: \"Scorpio: you have 14 subscriptions and use two. Gemini: you split a dinner in 2022 and still think about it. Leo: this is the month you finally save.\"",
+      "pitfalls": ["List-shaped: needs escalation and a turn", "Twelve signs is too many; three to five"],
+      "build": { "score": 5, "how": ["illustration", "typography"], "note": "Tarot-card frames, constellations drawn with strokes." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "audience", "time": "future", "camera": "cuts", "tone": "absurd", "turn": "list-break", "visual_world": "illustrated" }
+    },
+    {
+      "id": "obituary", "code": "A16", "name": "The Obituary / Eulogy", "family": "container",
+      "what": "A mock-solemn farewell to the old way.",
+      "fits": { "products": ["legacy-replacement", "saas", "productivity", "any"], "tones": ["deadpan", "playful"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "We are gathered", "purpose": "The format." },
+        { "name": "The life of the problem", "purpose": "Its history, told with love." },
+        { "name": "The mourners", "purpose": "Users, visibly relieved (the turn)." },
+        { "name": "The successor", "purpose": "The product, gently." }
+      ],
+      "example": "A scheduling tool: \"The Reply-All Thread, 1996-2026. It found a time for no one. It is survived by 41 'does Tuesday work?' messages.\"",
+      "pitfalls": ["Can feel negative; keep it light", "Mocking something the audience still uses"],
+      "build": { "score": 5, "how": ["typography", "paper"], "note": "A funeral program or memorial card, candlelight, a slow push." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "container", "protagonist": "problem", "time": "compressed", "camera": "locked-off", "tone": "deadpan", "turn": "reframe-line", "visual_world": "paper-craft" }
+    },
+    {
+      "id": "interface-world", "code": "A17", "name": "The Interface-as-World", "family": "container",
+      "what": "The camera travels through a landscape built from the product's UI: menus as architecture, notifications as weather.",
+      "fits": { "products": ["saas", "platform", "devtool", "ai", "productivity"], "tones": ["epic", "lyrical", "premium"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "The edge of the world", "purpose": "We arrive; the UI is terrain." },
+        { "name": "Journey", "purpose": "Moving through the product's structures." },
+        { "name": "Problem terrain", "purpose": "A place that's broken or impassable." },
+        { "name": "The product builds a road", "purpose": "The turn." },
+        { "name": "Overview", "purpose": "Pull back: the whole world, ordered." }
+      ],
+      "example": "A project tracker: a city of issue cards, a traffic jam of blocked tickets, and a new road of dependencies that clears it.",
+      "pitfalls": ["Very craft-heavy", "Abstract without a protagonist"],
+      "build": { "score": 3, "how": ["ui", "illustration"], "note": "2.5D layered UI planes are doable; full 3D is costly." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "container", "protagonist": "none", "time": "linear", "camera": "oner", "tone": "lyrical", "turn": "reveal", "visual_world": "ui-native" }
+    },
+    {
+      "id": "oner", "code": "B1", "name": "The Oner", "family": "camera",
+      "what": "No cuts: one continuous camera move connects every station of the story.",
+      "fits": { "products": ["automation", "platform", "collaboration", "saas", "any"], "tones": ["epic", "premium", "lyrical"], "formats": ["launch", "brand", "explainer"] },
+      "beats": [
+        { "name": "Tight on a detail", "purpose": "The first frame is a close-up of one thing." },
+        { "name": "The move reveals context", "purpose": "The camera starts travelling." },
+        { "name": "Stations", "purpose": "Three or four stops, each joined by a match-point." },
+        { "name": "The surprise station", "purpose": "The turn: somewhere the viewer didn't expect." },
+        { "name": "Wide on the lockup", "purpose": "The whole path, ending on the name." }
+      ],
+      "example": "A file-sharing app: follow one file from a designer's canvas, through a link, into a client's inbox, onto a printed poster on a wall.",
+      "pitfalls": ["Momentum must never drop", "Transitions need clever match-points, not dissolves"],
+      "build": { "score": 5, "how": ["illustration", "ui"], "note": "A continuous canvas pan or zoom; the hero technique for HyperFrames." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "camera", "protagonist": "object", "time": "real-time", "camera": "oner", "tone": "lyrical", "turn": "reveal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "cosmos-zoom", "code": "B2", "name": "The Zoom from Cosmos to Cursor", "family": "camera",
+      "what": "One continuous zoom across scales, from the universe to a single character (or back).",
+      "fits": { "products": ["infra", "platform", "data"], "tones": ["epic"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "Universe / planet", "purpose": "The largest scale." },
+        { "name": "City / room", "purpose": "Closing in." },
+        { "name": "Hand / screen", "purpose": "The human scale." },
+        { "name": "A single pixel or character", "purpose": "The payoff is the small end (the turn)." },
+        { "name": "Back out", "purpose": "Optional: the small thing, multiplied." }
+      ],
+      "example": "A payments API: from orbit to one city, one cafe, one card tap, one cent landing in a ledger.",
+      "pitfalls": ["The glowing globe is the infra cliche", "The payoff must be the small end, not the globe"],
+      "build": { "score": 3, "how": ["illustration", "data-viz"], "note": "Layered scale transforms; an infinite zoom is feasible in 2D." },
+      "overused": true, "ambition": 1,
+      "axes": { "family": "camera", "protagonist": "none", "time": "real-time", "camera": "zoom-scales", "tone": "epic", "turn": "reveal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "object-pov", "code": "B3", "name": "The Object's POV", "family": "camera",
+      "what": "The story as lived by a thing the product touches.",
+      "fits": { "products": ["hardware", "commerce", "productivity", "fintech", "any"], "tones": ["warm", "lyrical", "playful"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "Birth", "purpose": "The object comes into the world." },
+        { "name": "Neglect / peril", "purpose": "It is lost, forgotten, damaged." },
+        { "name": "Rescue", "purpose": "The turn: the product finds it." },
+        { "name": "Purpose fulfilled", "purpose": "It becomes what it was meant to be." }
+      ],
+      "example": "A photo-backup app: the life of one photo, taken at a wedding, buried in a camera roll of 40,000, nearly lost with a dropped phone, found and printed in an album.",
+      "pitfalls": ["Anthropomorphism turns saccharine", "Hold one POV rule strictly"],
+      "build": { "score": 5, "how": ["illustration", "typography"], "note": "The object as a character in an illustrated world; small title cards (\"Day 41\")." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "camera", "protagonist": "object", "time": "compressed", "camera": "cuts", "tone": "warm", "turn": "reversal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "split-sync", "code": "B4", "name": "The Split-Screen Sync", "family": "camera",
+      "what": "Two or more panels whose motions continue across the divide until they merge.",
+      "fits": { "products": ["collaboration", "automation", "fintech", "platform", "any"], "tones": ["epic", "premium", "bold"], "formats": ["launch", "brand", "social"] },
+      "beats": [
+        { "name": "Two worlds", "purpose": "Unrelated panels side by side." },
+        { "name": "First motion match", "purpose": "An action continues across the divide." },
+        { "name": "Faster matches", "purpose": "Rhythm builds." },
+        { "name": "The panels merge", "purpose": "The turn: the divide dissolves." },
+        { "name": "One frame", "purpose": "The unified image and the name." }
+      ],
+      "example": "A translation app: left a speaker in Tokyo, right a listener in Lagos; every gesture and word continues across the split until they share one frame.",
+      "pitfalls": ["Matches must be exact or it looks sloppy", "Needs a reason for the two sides"],
+      "build": { "score": 5, "how": ["ui", "illustration"], "note": "Frame-exact sync is trivial in code; that's the advantage." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "camera", "protagonist": "none", "time": "real-time", "camera": "split", "tone": "epic", "turn": "reveal", "visual_world": "ui-native" },
+      "seen_in": "Nike \"You Can't Stop Us\" (2020)"
+    },
+    {
+      "id": "static-frame", "code": "B5", "name": "The Static Camera, Changing World", "family": "camera",
+      "what": "A locked-off frame; everything changes inside it over time.",
+      "fits": { "products": ["automation", "productivity", "health", "any"], "tones": ["lyrical", "warm", "deadpan"], "formats": ["brand", "launch", "social"] },
+      "beats": [
+        { "name": "Establishing still", "purpose": "One frame, held." },
+        { "name": "Small changes accumulate", "purpose": "Time passes in the details." },
+        { "name": "The big change", "purpose": "The turn." },
+        { "name": "Calm again", "purpose": "The frame at rest; the name." }
+      ],
+      "example": "A home-energy app: a top-down view of one kitchen for a year; lights left on pile up as glowing dots until, one day, they start switching off by themselves.",
+      "pitfalls": ["Needs rhythm and one surprise or it's wallpaper"],
+      "build": { "score": 5, "how": ["illustration"], "note": "One composed frame with state changes over time." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "camera", "protagonist": "none", "time": "compressed", "camera": "locked-off", "tone": "lyrical", "turn": "reversal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "map-journey", "code": "B6", "name": "The Map / Journey", "family": "camera",
+      "what": "A dotted line across a map tells the story and resolves into a shape.",
+      "fits": { "products": ["commerce", "fintech", "collaboration", "consumer", "any"], "tones": ["warm", "playful"], "formats": ["launch", "explainer", "brand"] },
+      "beats": [
+        { "name": "Origin pin", "purpose": "Where it starts." },
+        { "name": "The route draws", "purpose": "Movement." },
+        { "name": "Stops", "purpose": "Vignettes at each pin." },
+        { "name": "Destination", "purpose": "Arrival." },
+        { "name": "The route revealed", "purpose": "The turn: zoomed out, the path is a shape or a word." }
+      ],
+      "example": "A delivery app: one courier's day as a route line; zoom out and a week of routes draws the city's name.",
+      "pitfalls": ["The travel-line cliche", "The reveal-shape must feel earned"],
+      "build": { "score": 5, "how": ["data-viz", "diagram"], "note": "SVG path draw, pins, a zoom-out." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "camera", "protagonist": "user", "time": "linear", "camera": "top-down", "tone": "warm", "turn": "reveal", "visual_world": "data-viz" }
+    },
+    {
+      "id": "mirror", "code": "B7", "name": "The Mirror / Symmetry", "family": "camera",
+      "what": "The frame is split into mirror worlds (old and new, you and future you) that diverge and converge.",
+      "fits": { "products": ["productivity", "health", "education", "fintech"], "tones": ["lyrical", "premium", "deadpan"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "Mirrored actions", "purpose": "Two identical lives." },
+        { "name": "One side diverges", "purpose": "A single different choice." },
+        { "name": "The gap widens", "purpose": "Consequences." },
+        { "name": "The sides converge", "purpose": "The turn: they meet again, or one crosses over." }
+      ],
+      "example": "A language app: two identical travellers; one practices five minutes a day; by the last frame one orders dinner and the other points at the menu.",
+      "pitfalls": ["A before/after in disguise unless the visual rule is strict"],
+      "build": { "score": 5, "how": ["illustration"], "note": "A mirrored composition, one side's timeline offset." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "camera", "protagonist": "user", "time": "linear", "camera": "split", "tone": "lyrical", "turn": "reversal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "day-in-the-life", "code": "C1", "name": "A Day in the Life at 100x", "family": "time",
+      "what": "A compressed day showing the product's effect in every micro-moment.",
+      "fits": { "products": ["consumer", "productivity", "automation"], "tones": ["warm"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "Dawn", "purpose": "The day begins." },
+        { "name": "Micro-moments at speed", "purpose": "The product in each." },
+        { "name": "One slow-motion beat", "purpose": "The moment it matters (the turn)." },
+        { "name": "Dusk", "purpose": "The day ends." }
+      ],
+      "example": "A fitness tracker: a hyperlapse commute, lunch, stairs, slowing only on the moment the runner beats yesterday's time.",
+      "pitfalls": ["The number-one LLM default", "Only with a strong twist: whose day? an object's? the least likely person's?"],
+      "build": { "score": 5, "how": ["ui", "illustration"], "note": "Speed ramps and time stamps." },
+      "overused": true, "ambition": 1,
+      "axes": { "family": "time", "protagonist": "user", "time": "compressed", "camera": "cuts", "tone": "warm", "turn": "reveal", "visual_world": "ui-native" }
+    },
+    {
+      "id": "year-timelapse", "code": "C2", "name": "The Time-lapse of a Year", "family": "time",
+      "what": "Twelve months in thirty seconds, with one moment where time stops.",
+      "fits": { "products": ["fintech", "health", "education", "data", "productivity"], "tones": ["lyrical", "warm"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "January", "purpose": "The starting state." },
+        { "name": "Months flicker", "purpose": "The problem accumulates (or is handled)." },
+        { "name": "The peak moment", "purpose": "Time stops here (the turn)." },
+        { "name": "Next January", "purpose": "The new baseline." }
+      ],
+      "example": "A savings app: a year as a jar on a windowsill, seasons changing outside, coins arriving on every payday until December, when it tips into a plane ticket.",
+      "pitfalls": ["Samey without the one moment where time stops"],
+      "build": { "score": 5, "how": ["data-viz", "illustration"], "note": "A calendar flip, a chart that grows, seasonal color shifts." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "time", "protagonist": "none", "time": "compressed", "camera": "locked-off", "tone": "lyrical", "turn": "reversal", "visual_world": "data-viz" }
+    },
+    {
+      "id": "countdown", "code": "C3", "name": "The Countdown", "family": "time",
+      "what": "Numbers ticking down structure the film, each number a beat.",
+      "fits": { "products": ["productivity", "devtool", "fintech", "platform", "any"], "tones": ["tense", "bold", "epic"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "The first number", "purpose": "Sets the clock and the stakes." },
+        { "name": "Each number a reason", "purpose": "Tension builds." },
+        { "name": "The count breaks", "purpose": "The turn: it stops early, jumps, or goes negative." },
+        { "name": "Zero", "purpose": "The release." }
+      ],
+      "example": "A CI service: \"minutes until the build finishes: 42... 41...\" and at 38 it cuts straight to 0: \"passed.\"",
+      "pitfalls": ["Predictable unless the count is subverted"],
+      "build": { "score": 5, "how": ["typography"], "note": "Big numerals, a clock, hard cuts on each tick." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "time", "protagonist": "user", "time": "linear", "camera": "cuts", "tone": "tense", "turn": "list-break", "visual_world": "typographic" },
+      "seen_in": "Figma Config 2024 opener"
+    },
+    {
+      "id": "rewind", "code": "C4", "name": "The Reverse (rewind)", "family": "time",
+      "what": "The story runs backwards from the outcome to a surprising origin.",
+      "fits": { "products": ["creative", "fintech", "devtool", "commerce", "any"], "tones": ["lyrical", "warm", "epic"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "The end state", "purpose": "The outcome, first." },
+        { "name": "Rewind through causes", "purpose": "Each step un-happens." },
+        { "name": "The surprising origin", "purpose": "The turn: the tiny first cause." },
+        { "name": "Hold", "purpose": "Stay on the origin." },
+        { "name": "The line", "purpose": "What connects them." }
+      ],
+      "example": "A design tool: a finished billboard un-prints, layers un-stack, colors drain, back to one pencil line on a napkin.",
+      "pitfalls": ["Backwards motion must stay legible; use strong readable actions"],
+      "build": { "score": 5, "how": ["illustration", "ui"], "note": "In code you can literally reverse the timeline." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "time", "protagonist": "object", "time": "reversed", "camera": "cuts", "tone": "lyrical", "turn": "reveal", "visual_world": "illustrated" },
+      "seen_in": "Guinness \"noitulovE\" (2005)"
+    },
+    {
+      "id": "story-loop", "code": "C5", "name": "The Loop That Tells a Story", "family": "time",
+      "what": "A seamless loop whose repetitions change a little each time until it breaks.",
+      "fits": { "products": ["automation", "consumer", "productivity", "any"], "tones": ["deadpan", "playful", "lyrical"], "formats": ["social", "brand"] },
+      "beats": [
+        { "name": "Loop A", "purpose": "The routine, once." },
+        { "name": "Loop A'", "purpose": "One thing changed." },
+        { "name": "Loop A''", "purpose": "It escalates." },
+        { "name": "Exit the loop", "purpose": "The turn: the loop breaks." }
+      ],
+      "example": "A reminders app: the same morning repeats (alarm, keys, door, back for the forgotten thing) until one loop the phone buzzes first and the door closes for good.",
+      "pitfalls": ["Too subtle on first watch; make each variation obvious"],
+      "build": { "score": 5, "how": ["abstract", "illustration"], "note": "One loop with per-iteration variables." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "time", "protagonist": "object", "time": "looped", "camera": "locked-off", "tone": "deadpan", "turn": "escalation-collapse", "visual_world": "abstract-material" }
+    },
+    {
+      "id": "real-time", "code": "C6", "name": "Real Time", "family": "time",
+      "what": "The task happens uncut, in exactly the time it takes, with the timer on screen.",
+      "fits": { "products": ["devtool", "ai", "productivity", "automation", "infra"], "tones": ["tense", "bold", "deadpan"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "Timer starts", "purpose": "The clock is the frame." },
+        { "name": "The whole task, uncut", "purpose": "No edits: proof." },
+        { "name": "Timer stops", "purpose": "The number is the headline (the turn)." },
+        { "name": "What's left", "purpose": "The time the viewer gets back." }
+      ],
+      "example": "A site builder: 00:00, a sentence typed, a published page at 00:08.4. \"The rest of this video is yours.\" Black.",
+      "pitfalls": ["Only works if the number is impressive and true"],
+      "build": { "score": 5, "how": ["ui", "typography"], "note": "Real UI, a running timer, no cuts." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "time", "protagonist": "product", "time": "real-time", "camera": "oner", "tone": "tense", "turn": "reframe-line", "visual_world": "ui-native" }
+    },
+    {
+      "id": "letter-from-future", "code": "C7", "name": "The Letter from the Future", "family": "time",
+      "what": "Future-you writes to present-you about the moment things changed.",
+      "fits": { "products": ["health", "education", "fintech", "productivity"], "tones": ["warm", "lyrical"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "A future date stamp", "purpose": "Where the letter comes from." },
+        { "name": "The struggle, remembered", "purpose": "Now seen from the other side." },
+        { "name": "The moment it changed", "purpose": "The turn." },
+        { "name": "Advice", "purpose": "The sign-off." }
+      ],
+      "example": "A language app: \"Dear January-me, it's August. I just argued with a taxi driver in Italian and won. Do the five minutes.\"",
+      "pitfalls": ["Sentimental; needs a precise voice and specific details"],
+      "build": { "score": 5, "how": ["typography", "paper"], "note": "Handwritten type on paper, small illustrated inserts." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "time", "protagonist": "user", "time": "future", "camera": "cuts", "tone": "warm", "turn": "reframe-line", "visual_world": "paper-craft" }
+    },
+    {
+      "id": "misdirect", "code": "D1", "name": "The Misdirect / Reveal", "family": "rhetoric",
+      "what": "The audience believes one thing; the turn reveals another and reframes everything.",
+      "fits": { "products": ["any", "consumer", "security", "ai", "fintech"], "tones": ["lyrical", "premium", "playful", "bold"], "formats": ["launch", "brand", "social"] },
+      "beats": [
+        { "name": "Confident setup", "purpose": "A film that looks like one genre." },
+        { "name": "Clues", "purpose": "Fair hints." },
+        { "name": "The reveal", "purpose": "The turn: it was something else." },
+        { "name": "Proof or rewind", "purpose": "Show how it fooled you." },
+        { "name": "The reframed line", "purpose": "The meaning, in one line." }
+      ],
+      "example": "A password manager: a lush perfume-ad about \"a name you whisper, a secret only you keep\"; the reveal: it's someone typing their dog's name into a login for the ninth time.",
+      "pitfalls": ["The misdirect must be fair", "The reveal must add meaning, not just a gotcha"],
+      "build": { "score": 4, "how": ["typography", "illustration"], "note": "A genre pastiche, then a hard switch of register." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "rhetoric", "protagonist": "object", "time": "linear", "camera": "cuts", "tone": "lyrical", "turn": "reveal", "visual_world": "pastiche" },
+      "seen_in": "Orange \"WoMen's Football\" (2023)"
+    },
+    {
+      "id": "list-breaks", "code": "D2", "name": "The List That Breaks", "family": "rhetoric",
+      "what": "A rhythmic list sets a pattern, then one item breaks it.",
+      "fits": { "products": ["any", "productivity", "saas", "consumer"], "tones": ["playful", "deadpan", "bold"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "Item, item, item", "purpose": "The rhythm is set." },
+        { "name": "The item that breaks", "purpose": "The turn." },
+        { "name": "The new list or the punchline", "purpose": "What the break means." }
+      ],
+      "example": "An inbox app: \"Archive. Reply. Archive. Reply. Archive. Reply. Archive... Lunch.\"",
+      "pitfalls": ["The break must be genuinely surprising and on-message"],
+      "build": { "score": 5, "how": ["typography"], "note": "Cut to the beat; the break lands on a musical gap." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "rhetoric", "protagonist": "none", "time": "linear", "camera": "cuts", "tone": "absurd", "turn": "list-break", "visual_world": "typographic" }
+    },
+    {
+      "id": "rule-of-three", "code": "D3", "name": "The Rule of Three, Subverted", "family": "rhetoric",
+      "what": "Two setups and a twisted third.",
+      "fits": { "products": ["any", "consumer"], "tones": ["playful"], "formats": ["social"] },
+      "beats": [
+        { "name": "One", "purpose": "A setup." },
+        { "name": "Two", "purpose": "The pattern confirmed." },
+        { "name": "Three, twisted", "purpose": "The turn and the punchline." }
+      ],
+      "example": "A photo editor: \"Fix the sky. Fix the light. Fix... your uncle.\"",
+      "pitfalls": ["A known formula; the third must fit the product truth"],
+      "build": { "score": 5, "how": ["illustration", "typography"], "note": "Three matched shots." },
+      "overused": false, "ambition": 1,
+      "axes": { "family": "rhetoric", "protagonist": "user", "time": "linear", "camera": "cuts", "tone": "absurd", "turn": "list-break", "visual_world": "illustrated" }
+    },
+    {
+      "id": "what-its-not", "code": "D4", "name": "The \"What It's Not\" Montage", "family": "rhetoric",
+      "what": "The product is defined by rejecting the alternatives, one by one.",
+      "fits": { "products": ["ai", "saas", "devtool", "security", "any"], "tones": ["deadpan", "bold", "serious"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "It's not...", "purpose": "Three to five rejections, each visualized." },
+        { "name": "It's...", "purpose": "The turn: the one true thing." },
+        { "name": "Proof", "purpose": "One real demo of it." }
+      ],
+      "example": "A note app: \"Not a second brain. Not a productivity system. Not a template marketplace. A blank page that opens in 80 ms.\"",
+      "pitfalls": ["Negative framing", "Knocking named competitors can backfire"],
+      "build": { "score": 5, "how": ["typography", "ui"], "note": "Crossed-out type, a hard cut to the true thing." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "rhetoric", "protagonist": "product", "time": "linear", "camera": "cuts", "tone": "deadpan", "turn": "reframe-line", "visual_world": "typographic" },
+      "seen_in": "Anthropic \"A Time and a Place\" (2026)"
+    },
+    {
+      "id": "mistake-corrected", "code": "D5", "name": "The Mistake That's Corrected", "family": "rhetoric",
+      "what": "The film gets it wrong on purpose, then corrects itself on screen, more than once.",
+      "fits": { "products": ["ai", "creative", "productivity", "data", "devtool"], "tones": ["playful", "deadpan"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "Confident wrong statement", "purpose": "A headline that's almost right." },
+        { "name": "Strike-through", "purpose": "A red pen or a glitch." },
+        { "name": "Correction", "purpose": "Closer." },
+        { "name": "Correction of the correction", "purpose": "The turn: the precise truth." },
+        { "name": "The truth", "purpose": "Held and circled." }
+      ],
+      "example": "A grammar tool: \"Write better emails\" is struck to \"write fewer emails\", struck to \"write the one email that gets a yes\", circled.",
+      "pitfalls": ["Can look like a real error if under-designed"],
+      "build": { "score": 5, "how": ["typography"], "note": "Strike-throughs as SVG strokes, editorial red." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "rhetoric", "protagonist": "none", "time": "linear", "camera": "locked-off", "tone": "deadpan", "turn": "reversal", "visual_world": "typographic" }
+    },
+    {
+      "id": "before-after", "code": "D6", "name": "The Before / After Split", "family": "rhetoric",
+      "what": "A direct comparison: the old way, the new way, the delta.",
+      "fits": { "products": ["any"], "tones": ["warm"], "formats": ["launch", "explainer"] },
+      "beats": [
+        { "name": "Before", "purpose": "The old way." },
+        { "name": "After", "purpose": "The new way." },
+        { "name": "The delta", "purpose": "The difference." }
+      ],
+      "example": "A spreadsheet tool: a 40-tab monster on the left, one clean view on the right.",
+      "pitfalls": ["The number-two LLM default and the heart of the cliche arc", "Only with a structural twist (split-sync, mirror, rewind)"],
+      "build": { "score": 5, "how": ["ui"], "note": "A wipe between two states." },
+      "overused": true, "ambition": 1,
+      "axes": { "family": "rhetoric", "protagonist": "user", "time": "linear", "camera": "split", "tone": "warm", "turn": "reveal", "visual_world": "ui-native" }
+    },
+    {
+      "id": "question-chain", "code": "D7", "name": "The Question Chain", "family": "rhetoric",
+      "what": "Every scene answers the last question and asks the next; the final answer is the product.",
+      "fits": { "products": ["education", "data", "infra", "any"], "tones": ["tense", "playful", "serious"], "formats": ["explainer", "launch"] },
+      "beats": [
+        { "name": "Question 1", "purpose": "A simple, curious question." },
+        { "name": "Answer / next question", "purpose": "Each answer opens the next door." },
+        { "name": "The deep question", "purpose": "The turn: the one nobody asks." },
+        { "name": "The final answer", "purpose": "The product." }
+      ],
+      "example": "A water-quality sensor: \"Where does tap water come from?\" \"A reservoir.\" \"Who checks it?\" \"Once a quarter, a lab.\" \"And the other 89 days?\"",
+      "pitfalls": ["Lecture-like; keep every answer visual"],
+      "build": { "score": 5, "how": ["diagram", "typography"], "note": "Each answer a diagram that becomes the next question's frame." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "rhetoric", "protagonist": "object", "time": "linear", "camera": "cuts", "tone": "tense", "turn": "reveal", "visual_world": "diagram" }
+    },
+    {
+      "id": "a-to-z", "code": "D8", "name": "A to Z", "family": "rhetoric",
+      "what": "An alphabetical sprint where each letter is a beat and Z is the punchline.",
+      "fits": { "products": ["platform", "consumer", "commerce", "any"], "tones": ["playful", "bold"], "formats": ["social", "brand"] },
+      "beats": [
+        { "name": "A...", "purpose": "The pattern." },
+        { "name": "The sprint", "purpose": "Rhythm changes, a slowdown on one letter." },
+        { "name": "Z", "purpose": "The punchline (the turn)." }
+      ],
+      "example": "A marketplace app: \"A is for Avocado slicer. B is for Bike (used, one careful owner)...\" to \"Z is for Zero trips to the store.\"",
+      "pitfalls": ["Long; best as a 20-30 s speed format"],
+      "build": { "score": 5, "how": ["typography", "illustration"], "note": "Letter-by-letter cuts on the beat." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "rhetoric", "protagonist": "none", "time": "compressed", "camera": "cuts", "tone": "absurd", "turn": "list-break", "visual_world": "typographic" }
+    },
+    {
+      "id": "one-number", "code": "D9", "name": "The One Number", "family": "rhetoric",
+      "what": "A single real statistic, built, unpacked and made emotional.",
+      "fits": { "products": ["data", "fintech", "health", "infra", "security"], "tones": ["serious", "tense", "premium"], "formats": ["explainer", "launch", "brand"] },
+      "beats": [
+        { "name": "The number, no context", "purpose": "A figure alone on screen." },
+        { "name": "What it's made of", "purpose": "It breaks into its parts." },
+        { "name": "Why it matters", "purpose": "The turn: the human cost." },
+        { "name": "The product's number", "purpose": "What changes it." }
+      ],
+      "example": "A security scanner: \"212 days\": the (sourced) average time to find a breach; each day a tile, then the tiles collapse to one.",
+      "pitfalls": ["A made-up stat kills trust: it must be sourced in the truth sheet"],
+      "build": { "score": 5, "how": ["data-viz", "typography"], "note": "Count-ups, the number as particles or tiles." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "rhetoric", "protagonist": "none", "time": "frozen", "camera": "locked-off", "tone": "tense", "turn": "reframe-line", "visual_world": "data-viz" }
+    },
+    {
+      "id": "escalation", "code": "D10", "name": "Escalation (and then...)", "family": "rhetoric",
+      "what": "Each beat raises the scale absurdly until it snaps back to something small.",
+      "fits": { "products": ["consumer", "productivity", "any"], "tones": ["playful", "bold"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "Small", "purpose": "One ordinary thing." },
+        { "name": "Bigger", "purpose": "Scale up." },
+        { "name": "Ridiculous", "purpose": "Keep going." },
+        { "name": "Cosmic", "purpose": "The peak." },
+        { "name": "Back to small", "purpose": "The turn: one crisp action collapses it." }
+      ],
+      "example": "A photo cleaner: one blurry screenshot, a folder, a phone that won't boot, a landslide of duplicates down Main Street, one tap: 12 photos.",
+      "pitfalls": ["The snap back must be crisp"],
+      "build": { "score": 5, "how": ["illustration"], "note": "Scale tweens are cheap in code." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "rhetoric", "protagonist": "problem", "time": "compressed", "camera": "zoom-scales", "tone": "absurd", "turn": "escalation-collapse", "visual_world": "illustrated" }
+    },
+    {
+      "id": "call-response", "code": "D11", "name": "Call and Response", "family": "rhetoric",
+      "what": "A rhythmic exchange between two voices, or text and image, accelerating to unison.",
+      "fits": { "products": ["ai", "automation", "consumer", "social"], "tones": ["bold", "playful", "epic"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "Call", "purpose": "A prompt." },
+        { "name": "Response", "purpose": "The product's answer, instantly." },
+        { "name": "Faster", "purpose": "The exchange accelerates." },
+        { "name": "Unison", "purpose": "The turn: both land together." }
+      ],
+      "example": "A voice assistant: \"Lights?\" click. \"Music?\" a beat drops. \"That thing I said I'd remember?\" a reminder pops. Faster. \"Done.\"",
+      "pitfalls": ["Monotony; vary the rhythm"],
+      "build": { "score": 5, "how": ["ui", "typography", "audio"], "note": "Cut to music; each response a UI state." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "rhetoric", "protagonist": "none", "time": "real-time", "camera": "cuts", "tone": "epic", "turn": "escalation-collapse", "visual_world": "ui-native" }
+    },
+    {
+      "id": "interrogation", "code": "D12", "name": "The Interrogation", "family": "rhetoric",
+      "what": "A tense Q&A (detective, auditor, courtroom) where the product is the alibi.",
+      "fits": { "products": ["security", "fintech", "data", "devtool"], "tones": ["tense", "deadpan"], "formats": ["launch", "social"] },
+      "beats": [
+        { "name": "The accusation", "purpose": "\"Where were you on the 14th?\"" },
+        { "name": "Evidence", "purpose": "The pressure mounts." },
+        { "name": "The alibi", "purpose": "The turn: the product's record." },
+        { "name": "Verdict", "purpose": "\"You're free to go.\"" }
+      ],
+      "example": "An audit-log tool: under a swinging lamp, \"who deleted the prod database?\"; the log slides across the table: timestamp, user, rollback. \"...Carry on.\"",
+      "pitfalls": ["Handle fear playfully, not threateningly"],
+      "build": { "score": 3, "how": ["illustration", "ui"], "note": "Noir illustration, hard light, the product's real record as evidence." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "rhetoric", "protagonist": "side-character", "time": "linear", "camera": "locked-off", "tone": "tense", "turn": "reveal", "visual_world": "pastiche" }
+    },
+    {
+      "id": "product-as-character", "code": "E1", "name": "The Product as a Character", "family": "character",
+      "what": "The product has a personality, a desire and a flaw.",
+      "fits": { "products": ["consumer", "education"], "tones": ["playful", "warm"], "formats": ["launch", "social", "brand"] },
+      "beats": [
+        { "name": "Meet the character", "purpose": "Its personality." },
+        { "name": "Its desire", "purpose": "What it wants." },
+        { "name": "The obstacle", "purpose": "What's in the way." },
+        { "name": "Its heroics", "purpose": "The turn." },
+        { "name": "A tiny victory", "purpose": "The close." }
+      ],
+      "example": "A sleep app as a grumpy nightlight that desperately wants its owner to put the phone down.",
+      "pitfalls": ["The friendly blob mascot is an LLM default", "Needs a real personality flaw", "Cheapens a serious product"],
+      "build": { "score": 3, "how": ["illustration"], "note": "Character animation; keep it to simple shape-based acting." },
+      "overused": true, "ambition": 1,
+      "axes": { "family": "character", "protagonist": "product", "time": "linear", "camera": "cuts", "tone": "warm", "turn": "reversal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "problem-villain", "code": "E2", "name": "The Problem as a Villain", "family": "character",
+      "what": "The problem is personified as a funny, specific villain.",
+      "fits": { "products": ["security", "productivity", "health", "consumer"], "tones": ["playful", "bold"], "formats": ["launch", "social", "explainer"] },
+      "beats": [
+        { "name": "The villain's reign", "purpose": "What it does to people." },
+        { "name": "Victims", "purpose": "Specific, relatable." },
+        { "name": "The hero appears", "purpose": "The turn." },
+        { "name": "Defeat", "purpose": "One capability ends it." },
+        { "name": "Epilogue", "purpose": "What the villain becomes." }
+      ],
+      "example": "A spam filter: \"The Prince\", a velvet-robed schemer mailing inheritance offers, whose empire shrinks one blocked message at a time until he's just a guy with a laptop.",
+      "pitfalls": ["Cartoon-germ ad territory; keep the villain funny and specific"],
+      "build": { "score": 4, "how": ["illustration"], "note": "Shape-based character, props from the product's world." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "character", "protagonist": "problem", "time": "linear", "camera": "cuts", "tone": "absurd", "turn": "reversal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "letter-to-someone", "code": "E3", "name": "The Letter to Someone", "family": "character",
+      "what": "A narrator addresses one specific person, with shared history and a confession.",
+      "fits": { "products": ["any", "collaboration", "health", "consumer"], "tones": ["warm", "lyrical"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "Dear ___", "purpose": "Who it's to." },
+        { "name": "Shared history", "purpose": "Specific memories." },
+        { "name": "Confession", "purpose": "The turn." },
+        { "name": "Promise", "purpose": "What changes." },
+        { "name": "Sign-off", "purpose": "The name." }
+      ],
+      "example": "A shared-calendar app: \"Dear Mum, sorry about the missed call on your birthday. And the other one. From now on, you're in the calendar, not the backlog.\"",
+      "pitfalls": ["Saccharine; specific details save it"],
+      "build": { "score": 5, "how": ["typography", "illustration"], "note": "Type-driven, with small illustrated memories." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "character", "protagonist": "side-character", "time": "compressed", "camera": "cuts", "tone": "warm", "turn": "reveal", "visual_world": "typographic" }
+    },
+    {
+      "id": "mockumentary", "code": "E4", "name": "The Documentary Interview / Mockumentary", "family": "character",
+      "what": "Talking heads recount a transformation, earnestly or deadpan.",
+      "fits": { "products": ["saas", "collaboration", "productivity"], "tones": ["deadpan", "playful"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "The skeptic", "purpose": "\"We were fine.\"" },
+        { "name": "We tried everything", "purpose": "The comedy of the old way." },
+        { "name": "The reluctant switch", "purpose": "The turn." },
+        { "name": "Conversion", "purpose": "Deadpan praise." },
+        { "name": "A candid last line", "purpose": "The laugh out." }
+      ],
+      "example": "An invoicing tool: a three-person agency deadpans, \"Our system was Priya remembering.\" Priya: \"I was a good system.\"",
+      "pitfalls": ["Needs faces: render as illustrated heads or audio-led with type lower thirds"],
+      "build": { "score": 3, "how": ["illustration", "typography", "audio"], "note": "Illustrated interviews or audio with typographic lower thirds." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "character", "protagonist": "user", "time": "linear", "camera": "locked-off", "tone": "deadpan", "turn": "reversal", "visual_world": "illustrated" },
+      "seen_in": "Slack \"So Yeah, We Tried Slack\" (2014)"
+    },
+    {
+      "id": "inner-monologue", "code": "E5", "name": "The Inner Monologue", "family": "character",
+      "what": "A calm exterior, a frantic interior: the user's thoughts spiral over a mundane action.",
+      "fits": { "products": ["consumer", "productivity", "fintech", "health"], "tones": ["playful", "deadpan"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "Calm exterior", "purpose": "A mundane moment." },
+        { "name": "The thought spiral", "purpose": "Escalating, hyper-specific thoughts." },
+        { "name": "The product moment", "purpose": "The turn: one action." },
+        { "name": "Interior silence", "purpose": "Peace." }
+      ],
+      "example": "A travel-docs app at airport security: smiling outside; inside \"passport? PASSPORT. Did I pack it. I touched it at 6 am. Did I put it back—\" a tap. \"...Lovely day.\"",
+      "pitfalls": ["Generic unless the thoughts are hyper-specific"],
+      "build": { "score": 5, "how": ["typography"], "note": "Kinetic type as thoughts over a still or simple scene." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "character", "protagonist": "user", "time": "real-time", "camera": "locked-off", "tone": "absurd", "turn": "escalation-collapse", "visual_world": "typographic" }
+    },
+    {
+      "id": "founder-monologue", "code": "E6", "name": "The Founder Monologue", "family": "character",
+      "what": "The maker talks straight to camera with attitude, walking through the world.",
+      "fits": { "products": ["consumer", "devtool", "commerce"], "tones": ["bold", "deadpan"], "formats": ["launch"] },
+      "beats": [
+        { "name": "Bold claim", "purpose": "The first line." },
+        { "name": "Why the old way is absurd", "purpose": "Attitude." },
+        { "name": "Demo gag", "purpose": "The turn." },
+        { "name": "The offer", "purpose": "The close." }
+      ],
+      "example": "A razor subscription: the founder walks a warehouse, one sight gag per sentence, ending on the URL.",
+      "pitfalls": ["Depends on charisma", "Needs real footage; without it, a text-to-camera voice (\"Hi. I'm the app.\")"],
+      "build": { "score": 1, "how": ["footage", "typography"], "note": "Pure code can only fake it as text-to-camera; buildable with supplied founder footage." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "character", "protagonist": "product", "time": "real-time", "camera": "oner", "tone": "deadpan", "turn": "reframe-line", "visual_world": "typographic" },
+      "needs": "footage",
+      "seen_in": "Dollar Shave Club (2012)"
+    },
+    {
+      "id": "skeptic-converted", "code": "E7", "name": "The Skeptic Converted", "family": "character",
+      "what": "The whole film follows the one person who refuses the product.",
+      "fits": { "products": ["legacy-replacement", "saas", "fintech", "education"], "tones": ["warm", "deadpan"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "Refusal", "purpose": "A lovable holdout." },
+        { "name": "Evidence piles up", "purpose": "Everyone else is fine." },
+        { "name": "A crack", "purpose": "The turn." },
+        { "name": "Conversion", "purpose": "Often silent." }
+      ],
+      "example": "A shared-docs tool: the office's fax-machine loyalist watches the team co-edit all year; in December he quietly asks, \"...how do I share this?\"",
+      "pitfalls": ["The skeptic must be lovable, not a straw man"],
+      "build": { "score": 3, "how": ["illustration"], "note": "Character animation across a few set pieces." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "character", "protagonist": "side-character", "time": "compressed", "camera": "cuts", "tone": "warm", "turn": "reversal", "visual_world": "illustrated" }
+    },
+    {
+      "id": "unexpected-protagonist", "code": "E8", "name": "The Unexpected Protagonist", "family": "character",
+      "what": "The story is told from the least likely participant's side: the accountant, the dog, the pen.",
+      "fits": { "products": ["any"], "tones": ["warm", "playful", "deadpan"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "X's world", "purpose": "Who we're following, and why they're unlikely." },
+        { "name": "X's pain", "purpose": "Caused by the user's problem." },
+        { "name": "X's relief", "purpose": "The turn: the product changes their day." },
+        { "name": "X's new life", "purpose": "The close." }
+      ],
+      "example": "A pet-care app told by the dog: every day at 5 pm the walk doesn't happen; then a buzz, a reminder, and the leash comes down.",
+      "pitfalls": ["Keep the product visible through the side character's eyes"],
+      "build": { "score": 4, "how": ["illustration"], "note": "Character-led illustration, POV framing." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "character", "protagonist": "side-character", "time": "linear", "camera": "cuts", "tone": "warm", "turn": "pov-swap", "visual_world": "illustrated" }
+    },
+    {
+      "id": "extended-metaphor", "code": "F1", "name": "The Single Extended Metaphor", "family": "metaphor",
+      "what": "One metaphor rendered physically and pushed as far as it will go.",
+      "fits": { "products": ["any"], "tones": ["warm", "lyrical", "playful", "premium"], "formats": ["launch", "brand", "explainer"] },
+      "beats": [
+        { "name": "Establish the metaphor", "purpose": "Readable in three seconds." },
+        { "name": "Three variations", "purpose": "Escalate it." },
+        { "name": "It resolves with the product", "purpose": "The turn." },
+        { "name": "The line", "purpose": "The close." }
+      ],
+      "example": "Noise-cancelling headphones: the city's noise is physical debris flying at a commuter; with the headphones on, it freezes mid-air and she walks through it.",
+      "pitfalls": ["Mixed metaphors", "A hostile second reading: ask what else it could mean"],
+      "build": { "score": 4, "how": ["illustration", "abstract"], "note": "Depends on the metaphor; favor ones built from shapes and type." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "metaphor", "protagonist": "object", "time": "linear", "camera": "cuts", "tone": "warm", "turn": "escalation-collapse", "visual_world": "illustrated" },
+      "seen_in": "Apple AirPods \"Bounce\" (2019)"
+    },
+    {
+      "id": "chain-reaction", "code": "F2", "name": "The Chain Reaction", "family": "metaphor",
+      "what": "A Rube Goldberg machine where each link is a real step of the product.",
+      "fits": { "products": ["automation", "platform", "devtool", "saas"], "tones": ["tense", "playful", "epic"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "First trigger", "purpose": "A small action starts it." },
+        { "name": "The chain", "purpose": "Each link is a real feature or step." },
+        { "name": "Near-failure", "purpose": "The turn: a link stalls; suspense." },
+        { "name": "Final payoff", "purpose": "The last domino lands." }
+      ],
+      "example": "An integration platform: a form submission tips a marble through a CRM funnel, a Slack bell rings, an invoice slides out of a slot.",
+      "pitfalls": ["Too long", "Every link must map to a real step"],
+      "build": { "score": 3, "how": ["abstract", "paper", "illustration"], "note": "GSAP-choreographed physics along a continuous pan; true physics needs care." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "metaphor", "protagonist": "product", "time": "real-time", "camera": "oner", "tone": "tense", "turn": "escalation-collapse", "visual_world": "abstract-material" },
+      "seen_in": "Honda \"Cog\" (2003)"
+    },
+    {
+      "id": "game-level", "code": "F3", "name": "The Game Level", "family": "metaphor",
+      "what": "The task as a specific video game: HUD, levels, a boss.",
+      "fits": { "products": ["productivity", "education", "consumer", "devtool"], "tones": ["playful", "epic", "bold"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "Title screen", "purpose": "The game grammar." },
+        { "name": "Level 1", "purpose": "The tutorial." },
+        { "name": "Difficulty rises", "purpose": "The problem." },
+        { "name": "The boss", "purpose": "The turn: the product is the power-up." },
+        { "name": "Level complete", "purpose": "High score." }
+      ],
+      "example": "A focus app as a block-stacking game: notifications fall faster and faster until focus mode clears four lines at once.",
+      "pitfalls": ["Generic retro pixels are overused: pick one specific game grammar"],
+      "build": { "score": 5, "how": ["illustration", "ui"], "note": "Sprites, a HUD, a score counter." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "metaphor", "protagonist": "user", "time": "linear", "camera": "locked-off", "tone": "epic", "turn": "escalation-collapse", "visual_world": "pastiche" }
+    },
+    {
+      "id": "miniature-world", "code": "F4", "name": "The Miniature / Diorama World", "family": "metaphor",
+      "what": "Everything built at tiny scale: tiny workers act out the story until a giant hand intervenes.",
+      "fits": { "products": ["any", "consumer", "platform", "commerce"], "tones": ["warm", "playful"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "Tilt-shift establishing", "purpose": "The tiny world." },
+        { "name": "Tiny people act out the story", "purpose": "The old way, in miniature." },
+        { "name": "The giant hand", "purpose": "The turn: the user intervenes." },
+        { "name": "The world is fixed", "purpose": "The close." }
+      ],
+      "example": "A warehouse-inventory app: tiny workers in a cardboard city hunt for one missing box; a giant phone light sweeps over and the shelves reorder themselves.",
+      "pitfalls": ["Expensive for real; in code stylize as paper-craft 2.5D"],
+      "build": { "score": 3, "how": ["paper", "illustration"], "note": "Paper-craft 2.5D with tilt-shift blur." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "metaphor", "protagonist": "side-character", "time": "linear", "camera": "top-down", "tone": "warm", "turn": "reveal", "visual_world": "paper-craft" }
+    },
+    {
+      "id": "graphic-system", "code": "F5", "name": "The Graphic System", "family": "metaphor",
+      "what": "A strict visual rule is the idea: one color, one shape, one icon, repeated with variations.",
+      "fits": { "products": ["hardware", "consumer", "any"], "tones": ["bold", "premium", "deadpan"], "formats": ["brand", "social"] },
+      "beats": [
+        { "name": "The rule, shown", "purpose": "One frame teaches it." },
+        { "name": "Variations", "purpose": "The rule applied in surprising places." },
+        { "name": "The strangest variation", "purpose": "The turn." },
+        { "name": "The lockup", "purpose": "The same end card every time." }
+      ],
+      "example": "A messaging app: black frames, white shapes, and the brand's one accent color appears only when a message is delivered.",
+      "pitfalls": ["Weak without a very strong, simple rule"],
+      "build": { "score": 5, "how": ["abstract", "typography"], "note": "The ideal code-built format." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "metaphor", "protagonist": "none", "time": "looped", "camera": "locked-off", "tone": "deadpan", "turn": "list-break", "visual_world": "abstract-material" },
+      "seen_in": "iPod \"Silhouettes\" (2003)"
+    },
+    {
+      "id": "cover-version", "code": "F6", "name": "The Cover Version of a Famous Ad", "family": "metaphor",
+      "what": "A shot-for-shot homage of a known ad or scene, with one substitution that makes the point.",
+      "fits": { "products": ["any", "devtool", "consumer"], "tones": ["playful", "epic", "bold"], "formats": ["launch", "brand"] },
+      "beats": [
+        { "name": "Recognizable opening", "purpose": "The viewer knows the source." },
+        { "name": "Faithful rhythm", "purpose": "It plays straight." },
+        { "name": "The substitution", "purpose": "The turn." },
+        { "name": "The homage line", "purpose": "The close." }
+      ],
+      "example": "A version-control tool remakes a famous manifesto ad: \"Here's to the ones who commit often...\" over portraits of history's great note-keepers.",
+      "pitfalls": ["Legal / IP risk", "Parody without insight is noise; needs a real reason to cover that ad"],
+      "build": { "score": 4, "how": ["typography", "illustration"], "note": "Recreate the source's type and rhythm, not its footage." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "metaphor", "protagonist": "product", "time": "linear", "camera": "cuts", "tone": "epic", "turn": "reveal", "visual_world": "pastiche" }
+    },
+    {
+      "id": "material-study", "code": "F7", "name": "The Material Study", "family": "metaphor",
+      "what": "A product quality expressed as the behavior of an abstract material.",
+      "fits": { "products": ["hardware", "infra", "security", "devtool", "any"], "tones": ["premium", "lyrical", "bold"], "formats": ["brand", "launch", "social"] },
+      "beats": [
+        { "name": "Material A behaves badly", "purpose": "Heavy, chaotic, brittle." },
+        { "name": "Material B behaves beautifully", "purpose": "The product's quality (the turn)." },
+        { "name": "Loop variations", "purpose": "Three studies of the quality." },
+        { "name": "Lockup", "purpose": "The name." }
+      ],
+      "example": "A database: tangled threads (queries) knot and snap; the new engine pulls them into one taut, humming strand.",
+      "pitfalls": ["Abstract, so it needs a clear rule to read"],
+      "build": { "score": 5, "how": ["abstract"], "note": "Shape physics, springs, morphs: the ideal code-built format." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "metaphor", "protagonist": "none", "time": "looped", "camera": "locked-off", "tone": "lyrical", "turn": "reversal", "visual_world": "abstract-material" },
+      "seen_in": "ManvsMachine for Nike Air Max (2017)"
+    },
+    {
+      "id": "parable", "code": "F8", "name": "The Parable / Fable", "family": "metaphor",
+      "what": "A short moral tale in a timeless world.",
+      "fits": { "products": ["health", "education", "any"], "tones": ["lyrical", "warm"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "Once there was...", "purpose": "The timeless world." },
+        { "name": "A flaw", "purpose": "What goes wrong." },
+        { "name": "A trial", "purpose": "The turn." },
+        { "name": "A lesson", "purpose": "What it teaches." },
+        { "name": "The world changes", "purpose": "The close." }
+      ],
+      "example": "A meditation app: \"Once, a monkey lived in a busy temple, jumping from bell to bell...\"",
+      "pitfalls": ["Slow; keep it under 60 s for a launch"],
+      "build": { "score": 4, "how": ["paper", "illustration"], "note": "Cut-paper or woodcut illustration, slow parallax." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "metaphor", "protagonist": "side-character", "time": "linear", "camera": "cuts", "tone": "lyrical", "turn": "reframe-line", "visual_world": "paper-craft" }
+    },
+    {
+      "id": "five-second", "code": "G1", "name": "The 5-Second Film", "family": "constraint",
+      "what": "An entire concept in five seconds: one image, one turn, the name.",
+      "fits": { "products": ["consumer", "social", "any"], "tones": ["playful", "bold"], "formats": ["social"] },
+      "beats": [
+        { "name": "One image", "purpose": "Instantly readable." },
+        { "name": "One turn", "purpose": "The surprise." },
+        { "name": "Name", "purpose": "Done." }
+      ],
+      "example": "A battery-saver app: a phone at 1%; a tap; it's 1% for the rest of the day (time-lapse clock). Name.",
+      "pitfalls": ["Needs a context or a distribution hook"],
+      "build": { "score": 5, "how": ["typography", "abstract"], "note": "One composed shot." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "constraint", "protagonist": "object", "time": "real-time", "camera": "locked-off", "tone": "absurd", "turn": "reveal", "visual_world": "abstract-material" }
+    },
+    {
+      "id": "manifesto", "code": "G2", "name": "The Typographic Manifesto", "family": "constraint",
+      "what": "Only words, set with intention, carry a belief.",
+      "fits": { "products": ["any", "ai", "devtool"], "tones": ["epic", "lyrical", "serious", "bold"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "Provocation", "purpose": "The first line picks a fight." },
+        { "name": "Belief lines", "purpose": "Concrete, specific, building." },
+        { "name": "The pivot", "purpose": "The turn." },
+        { "name": "The brand", "purpose": "The last word." }
+      ],
+      "example": "A code editor: \"Every tab is a thought you haven't finished. / Every setting is a decision you shouldn't have to make. / We removed 214 of them.\"",
+      "pitfalls": ["Platitudes: every line must be concrete and specific"],
+      "build": { "score": 5, "how": ["typography"], "note": "The core HyperFrames strength." },
+      "overused": false, "ambition": 2,
+      "axes": { "family": "constraint", "protagonist": "audience", "time": "linear", "camera": "cuts", "tone": "epic", "turn": "reframe-line", "visual_world": "typographic" },
+      "seen_in": "Apple \"Think Different\" (1997)"
+    },
+    {
+      "id": "made-with", "code": "G3", "name": "Made-With / Proof-as-Film", "family": "constraint",
+      "what": "The film is made from the product's own output or data; its existence is the proof.",
+      "fits": { "products": ["creative", "data", "ai", "hardware"], "tones": ["lyrical", "premium", "warm"], "formats": ["brand", "launch"] },
+      "beats": [
+        { "name": "The output, first", "purpose": "No explanation: just the work." },
+        { "name": "It builds", "purpose": "More of it, patterned." },
+        { "name": "The reveal of the source", "purpose": "The turn: it was all made with the product." },
+        { "name": "Made with ___", "purpose": "The end card." }
+      ],
+      "example": "A charting library: a 30-second film whose every frame is a chart rendered live by the library, ending \"every frame: 14 lines of code.\"",
+      "pitfalls": ["Privacy when using user data", "The output must be beautiful", "Must genuinely be the product's output"],
+      "build": { "score": 4, "how": ["data-viz", "ui"], "note": "Data-viz is native to code; needs the real output or data." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "constraint", "protagonist": "user", "time": "compressed", "camera": "cuts", "tone": "lyrical", "turn": "reveal", "visual_world": "data-viz" },
+      "seen_in": "Apple \"Shot on iPhone\" (2015-)"
+    },
+    {
+      "id": "data-letter", "code": "G4", "name": "The Data Letter", "family": "constraint",
+      "what": "Oddly specific aggregate usage facts, delivered as direct address.",
+      "fits": { "products": ["consumer", "social", "commerce", "data"], "tones": ["playful", "warm"], "formats": ["brand", "social"] },
+      "beats": [
+        { "name": "Dear the ___ people who...", "purpose": "A specific, funny fact." },
+        { "name": "Escalating letters", "purpose": "Three to five, stranger each time." },
+        { "name": "The one for you", "purpose": "The turn." },
+        { "name": "Brand sign-off", "purpose": "The close." }
+      ],
+      "example": "A recipe app: \"Dear the 3,112 people who searched 'pasta but fancy' at 11 pm: we see you.\"",
+      "pitfalls": ["Needs real data (sourced in the truth sheet) and respect for privacy"],
+      "build": { "score": 5, "how": ["typography"], "note": "Billboard-style type cards." },
+      "overused": false, "ambition": 3,
+      "axes": { "family": "constraint", "protagonist": "audience", "time": "frozen", "camera": "cuts", "tone": "absurd", "turn": "escalation-collapse", "visual_world": "typographic" },
+      "seen_in": "Spotify \"Thanks 2016, it's been weird\""
+    },
+    {
+      "id": "one-shape", "code": "G5", "name": "The One-Word / One-Color / One-Shape Film", "family": "constraint",
+      "what": "A self-imposed constraint the whole film respects, broken once at the climax.",
+      "fits": { "products": ["any", "hardware", "devtool"], "tones": ["bold", "premium", "lyrical"], "formats": ["brand", "launch", "social"] },
+      "beats": [
+        { "name": "Establish the constraint", "purpose": "One element, alone." },
+        { "name": "Exhaust its variations", "purpose": "It becomes everything." },
+        { "name": "Break it once", "purpose": "The turn." },
+        { "name": "The logo", "purpose": "The element becomes the mark." }
+      ],
+      "example": "A sound app built only from its waveform line: a skyline, a heartbeat, a mountain range, a flat line (the break: silence), then the logo.",
+      "pitfalls": ["Too clever; the break must mean something"],
+      "build": { "score": 5, "how": ["abstract", "typography"], "note": "One SVG element morphing: ideal for code." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "constraint", "protagonist": "none", "time": "linear", "camera": "oner", "tone": "lyrical", "turn": "list-break", "visual_world": "abstract-material" }
+    },
+    {
+      "id": "sound-first", "code": "G6", "name": "The Sound-First Film", "family": "constraint",
+      "what": "The soundtrack is built from the product's own sounds; the picture follows the sound.",
+      "fits": { "products": ["hardware", "creative", "consumer"], "tones": ["epic", "playful", "premium"], "formats": ["brand", "social"] },
+      "beats": [
+        { "name": "A single sound", "purpose": "One product sound, alone." },
+        { "name": "A rhythm forms", "purpose": "Sounds loop into a beat." },
+        { "name": "A melody", "purpose": "It becomes music." },
+        { "name": "Climax", "purpose": "The turn." },
+        { "name": "Silence", "purpose": "The name." }
+      ],
+      "example": "A mechanical keyboard: key clicks become the hi-hat, the spacebar the kick, and every cut is locked to them.",
+      "pitfalls": ["Needs strong sound design and real product sounds"],
+      "build": { "score": 3, "how": ["audio", "abstract"], "note": "Depends on audio assets; picture cuts locked to the sound." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "constraint", "protagonist": "product", "time": "real-time", "camera": "cuts", "tone": "epic", "turn": "escalation-collapse", "visual_world": "abstract-material" },
+      "needs": "product sounds",
+      "seen_in": "Teenage Engineering OP-1 field"
+    },
+    {
+      "id": "fake-ui-takeover", "code": "G7", "name": "The Fake UI Takeover", "family": "constraint",
+      "what": "The video pretends to be the viewer's own screen or feed until the product breaks the fourth wall.",
+      "fits": { "products": ["consumer", "social", "devtool", "saas"], "tones": ["playful", "bold"], "formats": ["social", "launch"] },
+      "beats": [
+        { "name": "It looks like the platform", "purpose": "A familiar UI (a feed, an ad, a desktop)." },
+        { "name": "Something breaks the fourth wall", "purpose": "The turn." },
+        { "name": "The product appears in the UI", "purpose": "It acts on the fake screen." },
+        { "name": "The joke closes", "purpose": "The name." }
+      ],
+      "example": "An ad blocker as a pre-roll: the \"Skip Ad\" button is replaced by the product's icon, which eats the ad you're watching.",
+      "pitfalls": ["Platform-specific", "Can annoy", "Don't imitate a platform's UI so closely it misleads"],
+      "build": { "score": 5, "how": ["ui"], "note": "A fake platform UI, a cursor, one interaction." },
+      "overused": false, "ambition": 4,
+      "axes": { "family": "constraint", "protagonist": "audience", "time": "real-time", "camera": "locked-off", "tone": "absurd", "turn": "reversal", "visual_world": "ui-native" }
+    }
+  ]
+}

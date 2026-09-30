@@ -461,7 +461,8 @@
         "texture": "grain",
         "icons": "none",
         "motif": "none",
-        "motion": "fade"
+        "motion": "fade",
+        "chart": "none"
       }
     },
     {
@@ -1283,10 +1284,11 @@
         "shadow": "soft",
         "shadowColor": "#6a5a44",
         "surface": "flat",
-        "texture": "paper",
+        "texture": "veining",
         "icons": "glyph",
         "motif": "none",
-        "motion": "fade"
+        "motion": "fade",
+        "chart": "none"
       }
     },
     {
