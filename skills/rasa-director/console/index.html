@@ -474,7 +474,8 @@
       var st = tmp.firstChild; box.appendChild(st);
       var fit = function () { st.style.transform = "scale(" + (box.clientWidth / 1600) + ")"; };
       fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box);
-      box.addEventListener("mouseenter", function () { st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); });
+      function play() { st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); }
+      box.addEventListener("mouseenter", play); box.addEventListener("click", play);
     }
     if (lazy && window.IntersectionObserver) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { paint(); io.disconnect(); } }); }, { rootMargin: "300px" }); io.observe(box); }
     else requestAnimationFrame(paint);
@@ -516,7 +517,7 @@
       holder.appendChild(h("div", { class: "actions" }, [useBtn,
         h("button", { class: "link", onclick: function () { local.galOpen = !local.galOpen; gal.classList.toggle("open", local.galOpen); if (local.galOpen) { fillGallery(); gal.scrollIntoView({ behavior: "smooth", block: "start" }); } }, text: "Browse all " + g.presets.length + " styles" }),
         d.dimensions ? h("button", { class: "link", onclick: function () { local.full = true; document.getElementById("main")._sig = null; render(); }, text: "Build one term by term" }) : null,
-        h("span", { class: "hint", text: "Hover a style to see how it moves" })]));
+        h("span", { class: "hint", text: "Hover or tap a style to see how it moves" })]));
       var barName = h("b", { text: (byId[local.presetSel] || {}).name || "" });
       holder.appendChild(gal);
       function fillGallery() {

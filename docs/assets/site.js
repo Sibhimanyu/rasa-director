@@ -115,7 +115,8 @@
       var b = document.createElement("b"); b.textContent = p.name; c.appendChild(b);
       var sm = document.createElement("small"); sm.textContent = (d.families.filter(function (f) { return f.id === p.family; })[0] || {}).name || p.family; c.appendChild(sm);
       var pr = document.createElement("p"); pr.textContent = p.what; c.appendChild(pr);
-      c.addEventListener("mouseenter", function () { var st = c._spec.firstChild; if (!st) return; st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); });
+      function play() { var st = c._spec.firstChild; if (!st) return; st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); }
+      c.addEventListener("mouseenter", play); c.addEventListener("click", play);
       grid.appendChild(c); cards.push(c); io.observe(c);
     });
     apply();
