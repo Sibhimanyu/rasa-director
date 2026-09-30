@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2 (2026-09-30)
+
+- **Update check**: a run starts with `update.mjs check`, which compares this copy with the latest release (at most once a day, a 2-second limit, silent offline) and, when there's a newer one, says so in one line with what's new. Say "update" and `update.mjs apply` updates it the way it was installed (Claude Code plugin, one-line installer, git clone or skills CLI). `RASA_DIRECTOR_AUTO_UPDATE=1` updates without asking; `RASA_DIRECTOR_NO_UPDATE_CHECK=1` turns it off. The skill now carries its version in `VERSION`. Versions before 0.4.2 have no check; update them once by hand (README, "Updating").
+- **Questions only in the console**: every question and its options go to the Director's Console in the browser, for every run. Chat gets one line pointing to it; no option lists in chat and no in-chat question tool. There is no chat-only mode; chat is the fallback only when the console cannot run at all.
+
 ## 0.4.1 (2026-09-30)
 
 - **Logo**: a lowercase r whose shoulder is an ease-out curve, landing on an amber keyframe. Mark, symbol, wordmark, Rasa Director and bilingual (ரசனை) lockups, light and reverse, in `docs/assets/logo/` (SVG, wordmarks outlined from Anek Latin / Anek Tamil; PNG icons at 1024/512/180). Used for the site favicon, apple-touch icon and nav, the console header and favicon, and the README title.

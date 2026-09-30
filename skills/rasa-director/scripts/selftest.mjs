@@ -315,6 +315,23 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   ok("console page script parses (every panel)", parses && /direction: function/.test(page) && /brand: function/.test(page) && /styleframes: function/.test(page));
 }
 
+// 10. updates: the skill's VERSION matches the plugin manifest; a newer release is reported with how
+//     to update; offline or disabled the check is silent and never fails the run
+{
+  const ver = fs.readFileSync(path.join(HERE, "..", "VERSION"), "utf8").trim();
+  const manifest = path.join(HERE, "..", "..", "..", ".claude-plugin", "plugin.json");
+  const pv = fs.existsSync(manifest) ? JSON.parse(fs.readFileSync(manifest, "utf8")).version : ver;
+  ok("VERSION matches .claude-plugin/plugin.json", ver === pv, `${ver} vs ${pv}`);
+  const uenv = { ...env, RASA_DIRECTOR_UPDATE_BASE: "http://127.0.0.1:9", RASA_DIRECTOR_AUTO_UPDATE: "" };
+  const u = (args, extra = {}) => spawnSync(process.execPath, [path.join(HERE, "update.mjs"), ...args], { encoding: "utf8", env: { ...uenv, ...extra }, cwd: TMP, timeout: 20000 });
+  const j = (r) => { try { return JSON.parse(r.stdout); } catch { return {}; } };
+  const sim = j(u(["check", "--latest", "99.0.0"]));
+  ok("update check: a newer release is reported with the way to update", sim.behind === true && sim.current === ver && !!sim.method && !!sim.command && /99\.0\.0/.test(sim.message || ""), JSON.stringify(sim));
+  const off = u(["check", "--force"]);
+  ok("update check: offline is silent and exits 0", off.status === 0 && j(off).checked === "offline" && j(off).behind === false, off.stderr);
+  ok("update check: RASA_DIRECTOR_NO_UPDATE_CHECK=1 skips it", j(u(["check"], { RASA_DIRECTOR_NO_UPDATE_CHECK: "1" })).checked === "skipped");
+}
+
 fs.rmSync(TMP, { recursive: true, force: true });
 console.log(failed ? `\n${failed} check(s) failed` : "\nall checks passed");
 process.exit(failed ? 1 : 0);

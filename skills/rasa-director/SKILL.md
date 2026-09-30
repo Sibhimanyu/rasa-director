@@ -8,7 +8,7 @@ description: >
   taxonomy of 30 dimensions (format, UI treatment, visual style, illustration, typography, color, shape,
   depth, motion language, transitions, camera, pacing…) compiled into an art-direction brief; many complete
   design directions shown as boards; or the project's own DESIGN.md as the look. Each decision is made by
-  eye or ear in a local Director's Console (or in chat); any step can be skipped with "you decide". Claude
+  eye or ear in a local Director's Console that opens in the browser; any step can be skipped with "you decide". Claude
   then designs and animates every frame (style frames, cards, scenes) from that direction through the
   matching HyperFrames workflow, and every built scene is checked against the motion contract. Use when the user wants to make a video and choose how it looks, moves and sounds, has a
   folder of clips to cut into a reel or edit, says
@@ -30,7 +30,7 @@ Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print 
 1. **One path, every step skippable.** Walk the steps in order. At every step the user may pick, say **"you decide"** (this step) or **"you decide the rest"** (every remaining step). Never ask who should do what; never split the flow into modes.
 2. **Intent in the request counts.** Anything the request already settles is not asked again ("you decide the look" skips Look only; a pasted script answers the script; "no voiceover" skips Voice). Each such answer gets a line in the plan's receipts.
 3. **Only the source is required:** what the video is about (a product URL, a topic, a script, a PR, a music track, footage). Everything else can be decided.
-4. **Show, don't ask.** Decisions are made on rendered previews of the user's own video (design directions on their words, motion-language swatches of their lines, style frames of their video, their scenes in the transitions menu, their hook line in the voice samples). Every step's options go to the **Director's Console** and, briefly, into chat with stills inline. The user can answer in either place.
+4. **Show, don't ask.** Decisions are made on rendered previews of the user's own video (design directions on their words, motion-language swatches of their lines, style frames of their video, their scenes in the transitions menu, their hook line in the voice samples). Every question and its options go to the **Director's Console**, always. Chat only points to it in one line; never list the options in chat and never ask through an in-chat question or multiple-choice tool (such as AskUserQuestion). If the user types an answer in chat anyway, accept it.
 5. **"You decide" never means the default.** Story and Motion skips sample wide with a tail constraint; Look skips rotate; the rest use sensible defaults. Every agent decision gets a one-line receipt: what was picked and the obvious option passed over.
 6. **One question per step**, recommended option first. "Go" or silence accepts the recommendation.
 7. **Render is never skipped by "you decide".** The workflow's own "preview first, or render?" gate always runs.
@@ -46,20 +46,22 @@ SKILL_DIR=$(for d in ~/.claude/skills/rasa-director ~/.agents/skills/rasa-direct
 [ -n "$SKILL_DIR" ] || SKILL_DIR=$(dirname "$(find ~/.claude/plugins/cache -path '*rasa-director*/skills/rasa-director/SKILL.md' 2>/dev/null | sort -V | tail -1)")
 RUN=".rasa-director/$(date +%Y%m%d-%H%M%S)"; mkdir -p "$RUN"; echo "SKILL_DIR=$SKILL_DIR RUN=$RUN"
 grep -qx '.rasa-director/' .gitignore 2>/dev/null || printf '\n.rasa-director/\n' >> .gitignore
+node $SKILL_DIR/scripts/update.mjs check
 npx --yes hyperframes --version && npx --yes hyperframes browser ensure >/dev/null && echo READY
 node $SKILL_DIR/scripts/console.mjs serve --run "$RUN" --open
 ```
 
 **Shell variables do not survive between tool calls.** Note the literal `SKILL_DIR` and `RUN` values and write them literally in every later command (below they appear as `$SKILL_DIR` / `$RUN`). Run everything from the workspace root.
 
-- The last command starts the Director's Console and opens it; give the user its URL in your first message. If they'd rather stay in chat ("no console"), skip every console command below.
+- The last command starts the Director's Console and opens it in the browser; give the user its URL in your first message. The console is where every question is asked, for every run; there is no chat-only mode. If the user can't find the page, run `serve --run "$RUN" --open` again (it reuses the running console and reopens the tab).
+- **Updates.** `update.mjs check` compares this copy with the latest release (at most once a day; silent offline; it never blocks the run). `behind: true` → one line before the step map, never a question: its `message`, the `whats_new` highlights, and "say **update** any time". When the user says update, run `node $SKILL_DIR/scripts/update.mjs apply` (it updates the way this copy was installed: plugin, installer, git clone or skills CLI). `auto_updated: true` (the user set `RASA_DIRECTOR_AUTO_UPDATE=1`) → say so in one line. After an update, re-read `$SKILL_DIR/SKILL.md` before continuing unless `restart: true` (a plugin: the new version loads in the next Claude Code session). Never update while a build or render is running.
 - No HyperFrames CLI → tell the user to install it (`npm i -g hyperframes`, or use `npx`); stop. Workflows install on demand with `npx hyperframes skills update <workflow>`.
 - `browser ensure` fails → previews still open as HTML but there are no stills and the motion check can't run; say so, never claim a check passed.
 - The user wants to change a video that already exists in `videos/` → **Revise** below.
 
 Then show the step map once:
 
-> Here's how we'll direct this, each step decided by eye (or ear) in the console at <URL> or right here. Say **"you decide"** on any step, or **"you decide the rest"**.
+> Here's how we'll direct this, each step decided by eye (or ear) in the console at <URL>. Say **"you decide"** on any step, or **"you decide the rest"**.
 > 1 Brief · 2 Brand · 3 Route · 4 Direction · 5 Story · 6 Scenes · 7 Look · 8 Motion · 9 Style frames · 10 Transitions · 11 Voice · 12 Music · 13 Storyboard · 14 Build & render
 >
 > (A footage reel runs: Brief · Brand · Route · Footage · Direction · Story · Look · Motion · Style frames · Cut · Music · Plan · Build & render.)
@@ -71,7 +73,7 @@ A local page (`console.mjs`, 127.0.0.1 only, token + session cookie) with one pa
 **For every step:**
 
 1. **Push** the step's full payload (a push replaces the step): write it to a file, then `node $SKILL_DIR/scripts/console.mjs push --run "$RUN" --step <step> --file "$RUN/<step>.json"`. Paths inside payloads are workspace-relative.
-2. **Say it in chat too:** the question in a line or two, the recommended option, stills inline.
+2. **Point to it in chat**, one line: what's waiting and your pick ("Next in the console: pick a direction. My pick is B, a Swiss grid launch film."). No option lists, no question tool.
 3. **Wait** with `run_in_background: true` so the user can also reply in chat: `node $SKILL_DIR/scripts/console.mjs wait --run "$RUN" --timeout 3000`. You're notified with one JSON action `{step, type, value, note}`. A chat answer → `console.mjs record --run "$RUN" --step <step> --type choose --value '<json>' --note "<their words>"`. Exit 2 = timeout (wait again); exit 3 = the console died (`serve` again, re-push). A late action for a settled step is a correction if it differs.
 4. **Act** on it (types: `submit`, `choose`, `adjust`, `more`, `approve`, `decide`, `decide-rest` on step `*`, `note`; see `references/console.md`).
 5. **Close** the step: `console.mjs push --run "$RUN" --step <step> --status done --data '{"decision":"<what + receipt>"}'` (or `--status skipped` for steps this route doesn't use), then push the next.
@@ -183,7 +185,7 @@ One motion language governs every scene; scenes differ only by `intensity` (set 
 Before anything moves, design **2–3 style frames**: stills of the video's key moments (the hook, a product or content beat, the close) at the video's aspect, in the chosen look and direction. They are how studios lock art direction before animation.
 
 - Write each as a standalone HTML file in `$RUN/styleframes/NN-<name>.html` (root sized to the aspect with `data-width`/`data-height`, the look's colors and fonts from its `frame.md`, including its "Font loading" rules), composed exactly as `DIRECTION.md` says: its UI treatment, illustration, composition, typography, color proportions, shape, stroke, shadow, texture and depth. Real copy from the scenes. No animation needed.
-- `node $SKILL_DIR/scripts/design.mjs stills --dir "$RUN/styleframes" --aspect <aspect>` → PNGs. Push `styleframes` with `images` and `captions`; show them in chat. `approve` → continue; a `note` → revise the frames (and, if it changes a decision, the direction) and re-push.
+- `node $SKILL_DIR/scripts/design.mjs stills --dir "$RUN/styleframes" --aspect <aspect>` → PNGs. Push `styleframes` with `images` and `captions`. `approve` → continue; a `note` → revise the frames (and, if it changes a decision, the direction) and re-push.
 - The approved frames go to the build as references: list them in the decisions (`"styleframes": [...]`) and tell the frame workers (and reel card authors) to match them.
 
 ## Step 10: Transitions
@@ -279,7 +281,7 @@ Show the current plan (BRIEF.md, STORYBOARD.md, frame.md, motion.md) as pre-fill
 ## Failure handling
 
 - A script exits non-zero → show its stderr, fix the input, re-run. Never hand-write an artifact a script owns.
-- The console won't start → carry on in chat. `console.mjs url --run "$RUN"` reprints the URL; `stop` ends it.
+- The console won't start → run `serve` again; still failing → show the error and fix it (a port in use: `--port 0`). Only if it cannot run at all (no browser on a remote machine), ask in chat, one question per message, in plain text, never through a question tool. `console.mjs url --run "$RUN"` reprints the URL; `stop` ends it.
 - Offline: previews and the motion check use the vendored GSAP; fonts, capture, voice samples, music and the workflows' TTS need the network.
 - A preview script exits 1 with "did not render" → the page hit a script error; open it in a browser and report the console error.
 

@@ -82,6 +82,19 @@ git clone https://github.com/Sibhimanyu/rasa-director.git
 ln -s "$PWD/rasa-director/skills/rasa-director" ~/.claude/skills/rasa-director
 ```
 
+### Updating
+
+Rasa checks for a new release when a run starts (at most once a day, silently offline) and tells you in one line; say **update** and Claude updates it the way you installed it. Set `RASA_DIRECTOR_AUTO_UPDATE=1` to update without asking, or `RASA_DIRECTOR_NO_UPDATE_CHECK=1` to turn the check off. By hand:
+
+| Installed with | Update |
+|---|---|
+| Claude Code plugin | `/plugin marketplace update rasa-director`, then `/plugin update rasa-director@rasa-director`; restart Claude Code |
+| skills CLI | `npx skills add Sibhimanyu/rasa-director --skill rasa-director` again |
+| one-line installer | run the installer again |
+| by hand | `git pull` in the checkout |
+
+Or run `node <skill dir>/scripts/update.mjs apply`, which works out which of these applies. Versions before 0.4.2 have no update check; update them once by hand.
+
 Check the install: `node ~/.claude/skills/rasa-director/scripts/selftest.mjs` (52 checks, about two and a half minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasa-director/`; run the same script from there.
 
 With the plugin install Claude Code namespaces the skill: invoke it as `/rasa-director:rasa-director` (or just describe the video you want; it triggers on video requests).

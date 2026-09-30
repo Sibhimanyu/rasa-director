@@ -68,5 +68,6 @@ done
 if ! [ -f "$HOME/.claude/skills/hyperframes/SKILL.md" ] && ! [ -f "$HOME/.agents/skills/hyperframes/SKILL.md" ]; then
   warn "HyperFrames skills not found. Install them with: npx hyperframes skills update"
 fi
+say "Rasa Director $(cat "$SKILL/VERSION" 2>/dev/null || echo "") installed"
 say "done. In Claude Code: /rasa-director make a launch sting for \"Ship it in an afternoon\""
 say "check your setup any time: node $SKILL/scripts/selftest.mjs"
