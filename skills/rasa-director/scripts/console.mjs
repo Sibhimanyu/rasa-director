@@ -31,7 +31,7 @@ const F = {
   consumed: path.join(RUN, "consumed.json"),
   console: path.join(RUN, "console.json"),
 };
-export const STEPS = ["brief", "route", "concept", "scenes", "look", "motion", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render"];
+export const STEPS = ["brief", "route", "footage", "concept", "scenes", "look", "motion", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render"];
 
 const readJSON = (p, d) => {
   try {

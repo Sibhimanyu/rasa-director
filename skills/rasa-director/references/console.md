@@ -39,11 +39,13 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 | Step | Fields |
 |---|---|
 | `brief` | `fields: {content, sub, destination, aspect, length_s, narration}` (prefill; `narration` true/false), `aspects` (default 16:9, 9:16, 1:1, 4:5) |
-| `route` | `options: [{id, label, why}]` (HyperFrames workflow ids) |
+| `route` | `options: [{id, label, why}]` (HyperFrames workflow ids, or `reel`) |
+| `footage` | `clips` (footage.json's clips from `reel.mjs scan`) → a card per clip: contact sheet, facts, transcript, include checkbox |
 | `concept` | `options: [{id, title, world, hook, rare}]` |
 | `scenes` | `scenes: [{title, on_screen, visual, voiceover, duration, transition_in, intensity, …}]` (scenes.json's list; extra fields pass through), `target_s`, `transition_default`, `narrated` → editable table + timeline strip |
 | `look` | `options: [{id, showcase, description}]` (showcase = the preset's `frame-showcase.html`, rendered live), `note_brand` |
 | `motion` | `tasting` (index.html from tasting.mjs), `cells` (tasting.json's `cells`: `{letter, id, name, oneLiner, parent?, adjust?}`), `adjectives` (the object `motion-md.mjs adjectives` prints, or a list of ids). The default selection is `recommended`. |
+| `reel` | `timeline`, `overlays`, `captions`, `clips: [{name, duration}]`, optional `edl` (reel.edl.json) and `video` (draft render) → the editable cut (references/reel.md) |
 | `transitions` | `menu` (index.html from transition-menu.mjs), `cells` (transitions.json's `cells`: `{letter, id, label, energy, duration_s}`), `recommended` |
 | `voice` | `options: [{id, title, mood, file, source}]` (output of voice.mjs), `recommended`, `unavailable` |
 | `storyboard` | `timeline` (timeline.json from scenes.mjs) → the timing strip; `sheet` (the workflow's storyboard.html, optional `sheet_width`/`sheet_height`) → the sheet plus an Approve button |
@@ -61,6 +63,8 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 |---|---|---|
 | `submit` | brief | `{content, sub, destination, aspect, length_s, narration}` |
 | `submit` | scenes | `{scenes: [...]}`: the full edited list, in order |
+| `submit` | footage | `{include: [clip ids]}` |
+| `submit` | reel | `{timeline, overlays, captions}`: the full edited cut |
 | `choose` | route | workflow id |
 | `choose` | transitions | the exact `transition_in` string (`cut`, `crossfade`, `push-slide LEFT`…) |
 | `choose` | voice | voice id or `"none"` |

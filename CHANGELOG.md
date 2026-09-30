@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 (2026-09-30)
+
+**Footage reels.** Point Rasa at a folder of raw clips and it cuts them into a reel or edit, with motion-graphics cards between clips and titles, lower thirds and captions on top.
+
+- `reel.mjs scan` examines every clip: length, size after phone rotation, fps, sound, a contact sheet and poster, shot changes, silences, and a word-level transcript.
+- `reel.mjs build` turns the cut (reel.json) into a HyperFrames composition: each used segment conformed to the reel's frame (cover with focus, letterbox, or blur-fill) at a constant frame rate, cards and overlays drawn in the chosen look and motion and sized to their requested length, clip transitions in the motion's own handoff (cut, dissolve, wipe), captions remapped through the cut, and a music bed that ducks under speech. It stages the look's fonts, runs `hyperframes lint` and `obey.mjs`, and renders.
+- Console: **Footage** (the clips, their contact sheets and transcripts) and **Cut** (the editable edit: in/out points, order, cards, overlays, captions, a draft to watch).
+- The landing page's tasting demos play three scenes; its copy covers whole videos and reels.
+- Self-test: 39 checks (CI installs FFmpeg).
+
 ## 0.2.0 (2026-09-30)
 
 **Entire videos.** Rasa Director now directs whole multi-scene films, not only single motion units: launch films, explainers, PR videos, brand reels and custom pieces, music videos, and footage with captions or overlay cards.

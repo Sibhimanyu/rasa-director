@@ -1,6 +1,6 @@
 # Rasa Director
 
-**Creative direction for entire videos made with Claude.** Launch films, explainers, PR videos, brand reels, music videos, footage with captions or overlays, and short motion graphics. Decide how the whole film tells its story, looks, moves, cuts and sounds, by eye and ear, before anything is built. You're the director, Rasa handles taste, [HyperFrames](https://hyperframes.heygen.com) shoots.
+**Creative direction for entire videos made with Claude.** Launch films, explainers, PR videos, brand reels, music videos, **reels cut from a folder of raw footage** (with motion-graphics cards between clips and titles, lower thirds and captions on top), captioned talking heads, and short motion graphics. Decide how the whole film tells its story, looks, moves, cuts and sounds, by eye and ear, before anything is built. You're the director, Rasa handles taste, [HyperFrames](https://hyperframes.heygen.com) shoots.
 
 *Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. Every AI video has the same one: the obvious story, a default look, and text that fades up and slides into place on the same ease-out curve in every scene. Rasa Director is a Claude Code skill that lets you choose a different one, then makes sure the build actually uses it.
 
@@ -15,7 +15,7 @@ You say `/rasa-director make a 45s launch film for tally.app`. Rasa Director ope
 | Step | You see | You decide |
 |---|---|---|
 | 1 Brief | a form | what the video is, the key line, where it plays (16:9, 9:16, 1:1, 4:5), length, voiceover or not |
-| 2 Route | the HyperFrames workflows that fit | launch film, explainer, PR video, music video, captions, overlay recut, custom |
+| 2 Route | the HyperFrames workflows that fit | launch film, explainer, PR video, music video, footage reel, captions, overlay recut, custom |
 | 3 Story | five pitches, at least two a model wouldn't usually produce | the idea and its arc |
 | 4 Scenes | the whole film as an editable scene table and timeline | every scene's on-screen text, voiceover line, length, transition, intensity |
 | 5 Look | HyperFrames frame presets, live | palette, type, layout (or your brand spec), remixed onto your brand |
@@ -26,11 +26,13 @@ You say `/rasa-director make a 45s launch film for tally.app`. Rasa Director ope
 | 10 Storyboard | the timeline, then the workflow's sketch of every scene in your look | approve, or "make scene 3 calmer" |
 | 11 Build & render | the plan, live build progress, proof snapshots, the final video | "build it", "preview first", "render" |
 
+**Footage reels** swap Scenes, Transitions and Voice for two steps of their own: **Footage** (every clip in your folder with a contact sheet, its length, format and sound, and a word-level transcript) and **Cut** (the edit as an editable list: clips with in and out points, cards between them, overlays on top, captions from what's said, and a draft render to watch). Rasa proposes the cut from your direction and the transcripts; you trim, reorder and retitle it; it builds and renders.
+
 Any step can be handed back with **"you decide"**, or everything after it with **"you decide the rest"**. That never means the generic default: the agent samples unusual options, rotates away from what it picked last time, and gives a one-line receipt for every choice. Answer in the console or in chat, whichever you like. Steps a route doesn't need (no scene list for a captions job) are skipped.
 
 ![Director's Console: the motion step](docs/img/console-motion.png)
 
-Then it hands the approved plan to the matching [HyperFrames](https://hyperframes.heygen.com) workflow (`product-launch-video`, `faceless-explainer`, `pr-to-video`, `general-video`, `music-to-video`, `talking-head-recut`, `embedded-captions`, or `motion-graphics` for a single short unit). Rasa pre-writes what that workflow reads (BRIEF.md, the storyboard and script in its exact format, frame.md, the music bed), so it asks nothing and re-decides nothing. The motion choice is locked in a binding `motion.md` (durations, eases, stagger, holds, banned patterns), written into frame.md and every frame worker's packet, and every built scene is checked in headless Chrome before the render question.
+Then it hands the approved plan to the matching [HyperFrames](https://hyperframes.heygen.com) workflow (`product-launch-video`, `faceless-explainer`, `pr-to-video`, `general-video`, `music-to-video`, `talking-head-recut`, `embedded-captions`, or `motion-graphics` for a single short unit). Footage reels are built by Rasa's own reel editor (`reel.mjs`) as a HyperFrames composition and rendered by HyperFrames. Rasa pre-writes what that workflow reads (BRIEF.md, the storyboard and script in its exact format, frame.md, the music bed), so it asks nothing and re-decides nothing. The motion choice is locked in a binding `motion.md` (durations, eases, stagger, holds, banned patterns), written into frame.md and every frame worker's packet, and every built scene is checked in headless Chrome before the render question.
 
 | Keyframe board | Music | Build |
 |---|---|---|
@@ -38,7 +40,7 @@ Then it hands the approved plan to the matching [HyperFrames](https://hyperframe
 
 ## Install
 
-Requirements: [Claude Code](https://claude.com/claude-code), Node.js ≥ 20, and the HyperFrames skills (`npx hyperframes skills update`). Chrome for previews and checks comes from `npx hyperframes browser ensure`. Voice samples and music use HyperFrames' media tools (the `heygen` CLI, signed in); without them the workflow's default voice is used and you can bring your own track or none.
+Requirements: [Claude Code](https://claude.com/claude-code), Node.js ≥ 20, the HyperFrames skills (`npx hyperframes skills update`), and FFmpeg for footage reels. Chrome for previews and checks comes from `npx hyperframes browser ensure`. Voice samples and music use HyperFrames' media tools (the `heygen` CLI, signed in); without them the workflow's default voice is used and you can bring your own track or none.
 
 **Claude Code plugin** (recommended)
 
@@ -66,7 +68,7 @@ git clone https://github.com/Sibhimanyu/rasa-director.git
 ln -s "$PWD/rasa-director/skills/rasa-director" ~/.claude/skills/rasa-director
 ```
 
-Check the install: `node ~/.claude/skills/rasa-director/scripts/selftest.mjs` (34 checks, about a minute, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasa-director/`; run the same script from there.
+Check the install: `node ~/.claude/skills/rasa-director/scripts/selftest.mjs` (39 checks, about a minute, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasa-director/`; run the same script from there.
 
 With the plugin install Claude Code namespaces the skill: invoke it as `/rasa-director:rasa-director` (or just describe the video you want; it triggers on video requests).
 
@@ -77,6 +79,7 @@ With the plugin install Claude Code namespaces the skill: invoke it as `/rasa-di
 /rasa-director a 60s explainer on how DNS works, vertical, no voiceover. You decide the look.
 /rasa-director turn PR #482 into a 30s changelog video
 /rasa-director a lyric video for song.mp3, you decide the rest
+/rasa-director cut ~/Footage/lisbon-trip into a 30s reel: best moments, a title card, captions
 /rasa-director add bold captions to interview.mp4 for Reels
 /rasa-director a 6s title sting for "Ship it in an afternoon"
 /rasa-director revise videos/tally-launch: calmer motion, swap the music
@@ -99,6 +102,8 @@ skills/rasa-director/
     transition-menu.mjs       two of your scenes handing off through every registry transition
     voice.mjs                 your hook line in 3 voices (HeyGen via media-use)
     music.mjs                 music candidates through HyperFrames media-use
+    reel.mjs                  footage reels: scan a folder (probe, contact sheets, shots, silences, transcripts);
+                              build the cut (segments, cards, overlays, captions, ducked music), lint, obey, render
     video.mjs                 entire videos: init, capture, write the plan into the project (BRIEF.md, frame.md +
                               motion contract, storyboard, script, music), inject into frame packets, audio-lock; revise
     handoff.mjs               single short units: the /motion-graphics project; revise mode
@@ -114,7 +119,7 @@ skills/rasa-director/
 - **The checker** (`obey.mjs`) loads each composition in headless Chrome with GSAP, walks every tween, samples its real start and end values, and flags off-scale durations, eases outside the set, implicit default eases, banned patterns (fade-up-slide in all its forms, bounce, overshoot, blur-in, scale-pop…), non-GSAP motion and short holds. "Could not run" is never reported as clean.
 - **Local only.** The console binds to 127.0.0.1, refuses foreign Host headers, and requires a per-session token (then an HttpOnly cookie) for every route; it serves files only from your workspace and installed skills, never its own token file, and refuses to run with your home directory as the root. Voice samples, music and site capture go through HyperFrames' own tools; nothing else leaves your machine.
 
-Details: [SKILL.md](skills/rasa-director/SKILL.md) · [entire videos](skills/rasa-director/references/video.md) · [console](skills/rasa-director/references/console.md) · [motion.md contract](skills/rasa-director/references/motion-md-contract.md) · [keyframe board](skills/rasa-director/references/board-format.md) · [handoff](skills/rasa-director/references/handoff.md) · [personalities](skills/rasa-director/references/personalities.md) · [design doc](docs/designs/motion-director.md)
+Details: [SKILL.md](skills/rasa-director/SKILL.md) · [entire videos](skills/rasa-director/references/video.md) · [footage reels](skills/rasa-director/references/reel.md) · [console](skills/rasa-director/references/console.md) · [motion.md contract](skills/rasa-director/references/motion-md-contract.md) · [keyframe board](skills/rasa-director/references/board-format.md) · [handoff](skills/rasa-director/references/handoff.md) · [personalities](skills/rasa-director/references/personalities.md) · [design doc](docs/designs/motion-director.md)
 
 ## Publishing notes (for the maintainer)
 
@@ -125,7 +130,7 @@ Details: [SKILL.md](skills/rasa-director/SKILL.md) · [entire videos](skills/ras
 ## Known limits
 
 - Previews are text-only: scenes are previewed with their words; the real product shots, logos and data enter at build.
-- Footage editing uses the HyperFrames footage workflows as they are (captions, overlay cards); Rasa directs their style. Cutting motion-graphics scenes into a sequence of your own clips goes through `general-video`; deeper footage tools are next.
+- Footage reels cut on word boundaries from Whisper transcripts and on detected shot changes; there's no automatic best-take or visual-content ranking beyond what Claude reads from the contact sheets and transcripts. Cards and overlays run at least their motion's minimum length (entrance, required hold, exit); a shorter request is lengthened with a warning.
 - HyperFrames' frame presets are designed at 16:9. At other aspects the look is judged again in the tasting cells, at the real aspect.
 - Previews use Google Fonts; offline they fall back to system fonts.
 - The checker verifies GSAP motion (motion.md requires GSAP builds).

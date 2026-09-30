@@ -119,11 +119,24 @@
   .timeline div b { display: block; color: var(--ink); font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
   .timeline div i { position: absolute; left: -1px; top: 0; bottom: 0; width: 3px; background: var(--accent); }
   .tl-meta { font: 500 12px/1 var(--mono); color: var(--ink-3); margin-bottom: 16px; }
+  .clips { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; max-width: 1200px; }
+  .clip { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .clip.bad { opacity: .6; }
+  .clip img { width: 100%; border-radius: 6px; display: block; background: #000; }
+  .clip .row { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+  .clip details p { font-size: 13px; color: var(--ink-2); margin-top: 6px; }
+  label.chk { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+  .inout { display: flex; gap: 6px; align-items: center; }
+  .inout input { width: 70px; }
+  .timeline div.card-seg { background: color-mix(in srgb, var(--accent) 22%, var(--panel-2)); }
+  .reel-preview { max-height: 420px; max-width: 100%; border-radius: 10px; background: #000; display: block; margin-bottom: 8px; }
+  h3.sub-h { font: 600 14px/1 var(--display, inherit); margin: 22px 0 4px; }
   table.scenes { width: 100%; max-width: 1200px; border-collapse: separate; border-spacing: 0 8px; }
   table.scenes th { text-align: left; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding: 0 6px; }
   table.scenes td { background: var(--panel); padding: 8px 6px; vertical-align: top; }
   table.scenes td:first-child { border-radius: 8px 0 0 8px; font: 500 12px/1 var(--mono); color: var(--ink-3); padding-top: 14px; }
   table.scenes td:last-child { border-radius: 0 8px 8px 0; white-space: nowrap; }
+  .toolbar select { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; }
   table.scenes input, table.scenes textarea, table.scenes select { width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: 13px; }
   table.scenes textarea { min-height: 52px; resize: vertical; }
   table.scenes .num { width: 70px; }
@@ -153,8 +166,8 @@
 (function () {
   var TOKEN = new URLSearchParams(location.search).get("t") || "";
   var STEPS = [
-    ["brief", "Brief"], ["route", "Route"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
-    ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
+    ["brief", "Brief"], ["route", "Route"], ["footage", "Footage"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
+    ["reel", "Cut"], ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
     ["plan", "Plan"], ["build", "Build"], ["render", "Render"]
   ];
   var S = { steps: {} }, viewing = null, followCurrent = true, local = {};
@@ -360,6 +373,105 @@
             h("button", { class: "btn small primary", onclick: function () { send("route", "choose", o.id); }, text: "Build it this way" })])
         ]);
       }))];
+    },
+    footage: function (d) {
+      var clips = d.clips || [];
+      if (!clips.length) return [empty("Every clip in your footage folder appears here: a contact sheet, its length, format, sound and what's said in it.")];
+      local.inc = local.inc || clips.filter(function (c) { return !c.error; }).map(function (c) { return c.id; });
+      var list = h("div", { class: "clips" }, clips.map(function (c) {
+        var on = local.inc.indexOf(c.id) !== -1;
+        var box = h("input", { type: "checkbox", "aria-label": "Use " + c.name, disabled: !!c.error });
+        box.checked = on && !c.error;
+        box.addEventListener("change", function () { var k = local.inc.indexOf(c.id); if (box.checked && k === -1) local.inc.push(c.id); if (!box.checked && k !== -1) local.inc.splice(k, 1); });
+        var facts = c.error ? c.error : [c.duration + "s", c.width + "×" + c.height, c.fps + " fps", c.has_audio ? (c.words ? c.words + " words" : "sound, no speech") : "no sound", (c.scenes || []).length ? c.scenes.length + " shot changes" : null].filter(Boolean).join(" · ");
+        return h("div", { class: "clip" + (c.error ? " bad" : "") }, [
+          c.sheet ? h("img", { src: fsUrl(c.sheet), alt: "Contact sheet of " + c.name, loading: "lazy" }) : null,
+          h("div", { class: "row" }, [h("label", { class: "chk" }, [box, h("b", { text: c.name })]), h("span", { class: "meta", text: facts })]),
+          c.text ? h("details", null, [h("summary", { text: "What's said" }), h("p", { text: c.text })]) : null
+        ]);
+      }));
+      return [list, h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () { send("footage", "submit", { include: local.inc.slice() }); }, text: "Use the ticked clips" })])];
+    },
+    reel: function (d) {
+      var src = d.timeline || [];
+      if (!src.length) return [empty("The cut appears here: every clip with its in and out points, the cards between them, overlays on top and captions, editable before the build.")];
+      local.cut = local.cut || { rows: JSON.parse(JSON.stringify(src)), ov: JSON.parse(JSON.stringify(d.overlays || [])), cap: JSON.parse(JSON.stringify(d.captions || { on: false, style: "bold" })) };
+      var C = local.cut, clips = d.clips || [];
+      var trans = d.transitions || ["auto", "cut", "dissolve", "wipe"];
+      var holder = h("div");
+      function len(r) { return r.type === "card" ? Number(r.duration) || 0 : Math.max(0, (Number(r.out) - Number(r.in || 0)) / (Number(r.rate) || 1)) || 0; }
+      function total() { return C.rows.reduce(function (a, r) { return a + len(r); }, 0); }
+      function strip() {
+        return h("div", { class: "timeline", role: "img", "aria-label": "Cut" }, C.rows.map(function (r, i) {
+          return h("div", { class: r.type === "card" ? "card-seg" : "", style: "flex:" + (len(r) || 0.1) + " 0 0", title: (r.label || r.clip || [].concat(r.text || "").join(" / ")) + " · " + len(r).toFixed(1) + "s" }, [i && r.type !== "card" && r.transition_in && r.transition_in !== "cut" ? h("i") : null, h("b", { text: (i + 1) + " " + (r.type === "card" ? "▣ " + [].concat(r.text || "").join(" / ") : (r.label || r.clip || "")) }), len(r).toFixed(1) + "s"]);
+        }));
+      }
+      function meta() { return C.rows.length + " items · " + total().toFixed(1) + "s before transitions" + (d.edl ? " · last build " + d.edl.total_s + "s" : ""); }
+      function refresh() { holder.querySelector(".timeline").replaceWith(strip()); holder.querySelector(".tl-meta").textContent = meta(); }
+      function inp(obj, key, el, label) { el.value = obj[key] == null ? "" : Array.isArray(obj[key]) ? obj[key].join(" | ") : obj[key]; el.setAttribute("aria-label", label); el.addEventListener("input", function () { obj[key] = el.value; refresh(); }); return el; }
+      function draw() {
+        holder.innerHTML = "";
+        if (d.video) holder.appendChild(h("video", { src: fsUrl(d.video), controls: true, preload: "metadata", class: "reel-preview" }));
+        holder.appendChild(strip());
+        holder.appendChild(h("div", { class: "tl-meta", text: meta() }));
+        var tbody = h("tbody");
+        C.rows.forEach(function (r, i) {
+          var n = "item " + (i + 1);
+          var what, timing, tr = h("span", { class: "meta", text: i ? "cut" : "opens" });
+          if (r.type === "card") {
+            what = h("div", null, [inp(r, "text", h("input", { placeholder: "Card text (| = next beat)" }), "card text " + n), inp(r, "sub", h("input", { placeholder: "Second line" }), "card second line " + n)]);
+            timing = h("div", null, [inp(r, "duration", h("input", { class: "num", inputmode: "decimal", placeholder: "sec" }), "card seconds " + n)]);
+          } else {
+            var sel = h("select", { "aria-label": "clip for " + n });
+            clips.forEach(function (c) { sel.appendChild(h("option", { value: c.name, text: c.name + " (" + c.duration + "s)" })); });
+            sel.value = r.clip; sel.addEventListener("change", function () { r.clip = sel.value; refresh(); });
+            what = h("div", null, [sel, inp(r, "label", h("input", { placeholder: "Label" }), "label " + n)]);
+            timing = h("div", { class: "inout" }, [inp(r, "in", h("input", { class: "num", inputmode: "decimal", placeholder: "in" }), "in point " + n), h("span", { text: "→" }), inp(r, "out", h("input", { class: "num", inputmode: "decimal", placeholder: "out" }), "out point " + n)]);
+            if (i) { tr = h("select", { "aria-label": "transition into " + n }); trans.forEach(function (t) { tr.appendChild(h("option", { value: t, text: t })); }); tr.value = r.transition_in || "auto"; tr.addEventListener("change", function () { r.transition_in = tr.value; refresh(); }); }
+          }
+          var mute = r.type === "card" ? h("span") : h("label", { class: "chk" }, [(function () { var b = h("input", { type: "checkbox", "aria-label": "mute " + n }); b.checked = !!r.mute; b.addEventListener("change", function () { r.mute = b.checked; }); return b; })(), h("span", { text: "mute" })]);
+          tbody.appendChild(h("tr", null, [
+            h("td", { text: String(i + 1).padStart(2, "0") }),
+            h("td", null, [h("span", { class: "tag", text: r.type === "card" ? "card" : "clip" })]),
+            h("td", null, [what]), h("td", null, [timing]), h("td", null, [tr]), h("td", null, [mute]),
+            h("td", null, [
+              h("button", { class: "iconbtn", "aria-label": "Move " + n + " up", disabled: i === 0, onclick: function () { C.rows.splice(i - 1, 0, C.rows.splice(i, 1)[0]); draw(); }, text: "↑" }),
+              h("button", { class: "iconbtn", "aria-label": "Move " + n + " down", disabled: i === C.rows.length - 1, onclick: function () { C.rows.splice(i + 1, 0, C.rows.splice(i, 1)[0]); draw(); }, text: "↓" }),
+              h("button", { class: "iconbtn", "aria-label": "Remove " + n, disabled: C.rows.length <= 1, onclick: function () { C.rows.splice(i, 1); draw(); }, text: "✕" })
+            ])
+          ]));
+        });
+        holder.appendChild(h("table", { class: "scenes" }, [h("thead", null, [h("tr", null, ["#", "", "Clip / card", "In → out / sec", "Transition in", "Sound", ""].map(function (x) { return h("th", { text: x }); }))]), tbody]));
+        holder.appendChild(h("div", { class: "toolbar" }, [
+          h("button", { class: "btn", onclick: function () { var c = clips[0] || { name: "", duration: 3 }; C.rows.push({ type: "clip", clip: c.name, in: 0, out: Math.min(3, c.duration || 3), transition_in: "auto" }); draw(); }, text: "+ Clip" }),
+          h("button", { class: "btn", onclick: function () { C.rows.push({ type: "card", text: "New card", sub: "", duration: 3 }); draw(); }, text: "+ Card between" })
+        ]));
+        var obody = h("tbody");
+        C.ov.forEach(function (o, i) {
+          var zone = h("select", { "aria-label": "overlay zone " + (i + 1) }); ["lower-third", "top", "center"].forEach(function (z) { zone.appendChild(h("option", { value: z, text: z })); }); zone.value = o.zone || "lower-third"; zone.addEventListener("change", function () { o.zone = zone.value; });
+          var sty = h("select", { "aria-label": "overlay style " + (i + 1) }); ["plate", "clear"].forEach(function (z) { sty.appendChild(h("option", { value: z, text: z })); }); sty.value = o.style || "plate"; sty.addEventListener("change", function () { o.style = sty.value; });
+          obody.appendChild(h("tr", null, [h("td", { text: String(i + 1).padStart(2, "0") }),
+            h("td", null, [inp(o, "text", h("input", { placeholder: "Overlay text" }), "overlay text " + (i + 1)), inp(o, "sub", h("input", { placeholder: "Second line" }), "overlay second line " + (i + 1))]),
+            h("td", null, [h("div", { class: "inout" }, [inp(o, "start", h("input", { class: "num", inputmode: "decimal", placeholder: "at s" }), "overlay start " + (i + 1)), h("span", { text: "for" }), inp(o, "duration", h("input", { class: "num", inputmode: "decimal", placeholder: "s" }), "overlay seconds " + (i + 1))])]),
+            h("td", null, [zone]), h("td", null, [sty]),
+            h("td", null, [h("button", { class: "iconbtn", "aria-label": "Remove overlay " + (i + 1), onclick: function () { C.ov.splice(i, 1); draw(); }, text: "✕" })])]));
+        });
+        holder.appendChild(h("h3", { class: "sub-h", text: "On top" }));
+        if (C.ov.length) holder.appendChild(h("table", { class: "scenes" }, [h("thead", null, [h("tr", null, ["#", "Overlay", "At (reel s) · for", "Zone", "Style", ""].map(function (x) { return h("th", { text: x }); }))]), obody]));
+        var capOn = h("input", { type: "checkbox", "aria-label": "Captions from what's said" }); capOn.checked = C.cap.on !== false && !!C.cap.on; capOn.addEventListener("change", function () { C.cap.on = capOn.checked; });
+        var capSty = h("select", { "aria-label": "Caption style" }); ["bold", "clean"].forEach(function (z) { capSty.appendChild(h("option", { value: z, text: z === "bold" ? "Bold, word by word" : "Clean, on a plate" })); }); capSty.value = C.cap.style || "bold"; capSty.addEventListener("change", function () { C.cap.style = capSty.value; });
+        holder.appendChild(h("div", { class: "toolbar" }, [
+          h("button", { class: "btn", onclick: function () { C.ov.push({ text: "Name", sub: "Role", zone: "lower-third", start: 1, duration: 3, style: "plate" }); draw(); }, text: "+ Overlay" }),
+          h("label", { class: "chk" }, [capOn, h("span", { text: "Captions from what's said" })]), capSty
+        ]));
+        holder.appendChild(h("div", { class: "toolbar" }, [h("button", { class: "btn primary", onclick: function () {
+          var rows = C.rows.map(function (r) { var o = Object.assign({}, r); ["in", "out", "duration", "rate"].forEach(function (k) { if (o[k] !== undefined && o[k] !== "") o[k] = Number(o[k]); }); if (o.type === "card" && typeof o.text === "string" && o.text.indexOf("|") !== -1) o.text = o.text.split("|").map(function (x) { return x.trim(); }).filter(Boolean); return o; });
+          var ov = C.ov.map(function (o) { return Object.assign({}, o, { start: Number(o.start), duration: Number(o.duration) }); });
+          send("reel", "submit", { timeline: rows, overlays: ov, captions: C.cap });
+        }, text: "Build this cut" })]));
+      }
+      draw();
+      return [holder];
     },
     scenes: function (d) {
       var src = d.scenes || [];

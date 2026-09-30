@@ -1,7 +1,7 @@
 {
   "name": "rasa-director",
-  "description": "Creative direction for entire videos made with Claude: launch films, explainers, PR videos, music videos, footage captions and motion graphics. Decide the story, scenes, look, motion, transitions, voice and music by eye in a Director's Console, then HyperFrames builds exactly that, checked before render.",
-  "version": "0.2.0",
+  "description": "Creative direction for entire videos made with Claude: launch films, explainers, PR videos, music videos, reels cut from your raw footage, captions and motion graphics. Decide the story, scenes, look, motion, transitions, voice and music by eye in a Director's Console, then HyperFrames builds exactly that, checked before render.",
+  "version": "0.3.0",
   "author": {
     "name": "Sibhimanyu",
     "url": "https://github.com/Sibhimanyu"
@@ -9,5 +9,5 @@
   "homepage": "https://sibhimanyu.github.io/rasa-director/",
   "repository": "https://github.com/Sibhimanyu/rasa-director",
   "license": "MIT",
-  "keywords": ["video", "launch-video", "explainer", "motion-graphics", "hyperframes", "gsap", "design", "skill"]
+  "keywords": ["video", "video-editing", "reels", "launch-video", "explainer", "motion-graphics", "hyperframes", "gsap", "design", "skill"]
 }

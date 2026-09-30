@@ -12,6 +12,7 @@ Rasa decides everything creative; the HyperFrames workflow builds. The workflows
 | `general-video` | all 11 | same; frames go to `compositions/frames/NN-*.html` | as above |
 | `music-to-video` | Brief, Route, Story, Look, Motion, Music (the track, required), Plan; Scenes/Transitions/Voice skipped (the workflow plans cuts from the beat grid; hard cuts) | BRIEF.md, frame.md (verbatim preset copy: its gate requires it), motion.md, DISPATCH.md, `assets/bgm.mp3` (converted with ffmpeg if needed) | DISPATCH to every frame worker (the contract lives there and in motion.md, not frame.md) · `obey` after verify · render gate |
 | `talking-head-recut` | Brief, Route, Look (overlay card style), Motion (optional: described in the style fields), Music (optional), Plan | BRIEF.md with the style fields (`footage`) | the chosen motion's feel goes into the `footage` style fields (no DISPATCH or obey: the workflow owns its overlay code) · render gate |
+| `reel` (Rasa's reel editor) | Brief, Route, Footage, Story, Look, Motion, Cut, Music, Plan | nothing: `reel.mjs build` writes the whole project (references/reel.md) | lint + obey + render run inside `reel.mjs build`; render gate in the console |
 | `embedded-captions` | Brief, Route, Look (caption identity), Plan | BRIEF.md with the style fields (`footage`) | render gate |
 | `motion-graphics` (single unit) | see SKILL.md "Single motion units" | `handoff.mjs` (references/handoff.md) | DISPATCH to every subagent · `obey` · render gate |
 
@@ -110,6 +111,7 @@ node $SKILL_DIR/scripts/obey.mjs --project videos/<name>                        
 - `audio-lock` copies the track to `assets/music-bed.<ext>` and points the `bgm` entry of `audio_meta.json` / `audio_engine_meta.json` at it (volume 0.12 under narration, 0.9 without), clearing `bgm_pending`.
 - `obey` checks every file in `compositions/frames/`; the assembled `index.html` and `compositions/captions.html` are reported as `skipped` (the workflow owns them). Exit 0 clean · 2 violations · 1 could not run.
 
-## Footage editing (current scope)
+## Footage editing
 
-Footage routes use the workflows as they are: Rasa directs the caption identity or overlay card style (Look, Motion) and pre-answers the style questions in BRIEF.md. Cutting motion-graphics scenes into a clip sequence or overlaying graphics across a general footage edit goes through `general-video` with the clips listed as `assets` and scenes whose `visual` names the clip and its in/out points.
+- **A folder of clips to cut** (reels, recaps, b-roll edits, cut-ins, graphics between and on top of clips): the `reel` route, `references/reel.md`.
+- **One continuous talking-head clip**: `embedded-captions` (plain captions) or `talking-head-recut` (designed overlay cards). Rasa directs their style (Look, Motion) and pre-answers their style questions in BRIEF.md.

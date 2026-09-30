@@ -2,13 +2,15 @@
 name: rasa-director
 description: >
   Rasa Director: creative direction for entire videos made with Claude and HyperFrames (launch films,
-  explainers, PR videos, brand reels, music videos, footage edits with captions or overlays, and short
+  explainers, PR videos, brand reels, music videos, reels cut from a folder of raw footage with
+  motion-graphics cards between clips and overlays/captions on top, captioned talking heads, and short
   motion graphics). Walks the user through every creative decision in order (brief, route, story, scene
   list and script, look, motion grammar, transitions, voice, music, storyboard), each by eye or ear on
   previews of their own content in a local Director's Console web page (or in chat); any step can be
   skipped with "you decide". Hands the approved plan to the matching HyperFrames workflow at its exact hook
   points, streams build progress and renders back to the console, and checks every built scene obeys the
-  motion contract. Use when the user wants to make a video and choose how it looks, moves and sounds, says
+  motion contract. Use when the user wants to make a video and choose how it looks, moves and sounds, has a
+  folder of clips to cut into a reel or edit, says
   "/rasa-director", "direct my video", "guide me through the style", "show me options first", "tasting
   menu", "storyboard first", or complains that AI video looks generic. Builds with HyperFrames
   (/hyperframes and its workflows); does not replace them.
@@ -56,6 +58,8 @@ Then show the step map once:
 
 > Here's how we'll direct this, each step decided by eye (or ear) in the console at <URL> or right here. Say **"you decide"** on any step, or **"you decide the rest"**.
 > 1 Brief · 2 Route · 3 Story · 4 Scenes · 5 Look · 6 Motion · 7 Transitions · 8 Voice · 9 Music · 10 Storyboard · 11 Build & render
+>
+> (A footage reel runs: Brief · Route · Footage · Story · Look · Motion · Cut · Music · Plan · Build & render.)
 
 ## The Director's Console
 
@@ -83,7 +87,8 @@ Pick the HyperFrames workflow that builds this video, using HyperFrames' own rou
 | a topic, article, notes or how-to told with invented visuals | `faceless-explainer` |
 | a GitHub pull request / code change | `pr-to-video` |
 | cut to a music track (lyric video, beat-synced promo) | `music-to-video` |
-| existing talking-head footage + plain captions | `embedded-captions` |
+| **a folder of raw clips** to cut together (reels, vlogs, event recaps, product b-roll edits), with cards between clips and titles, lower thirds or captions on top | `reel` (Rasa's own reel editor, rendered by HyperFrames) → **Footage reels** below |
+| one continuous talking-head clip + plain captions (no cutting) | `embedded-captions` |
 | existing talking-head / interview / podcast footage + designed overlay cards | `talking-head-recut` |
 | anything else: brand reel, montage, longer or custom multi-scene piece, footage remix | `general-video` |
 | one short unnarrated motion unit (a title, sting, stat hit, under ~10 s) | `motion-graphics` → **Single motion units** below |
@@ -99,6 +104,7 @@ node $SKILL_DIR/scripts/video.mjs init --route <route> --project <kebab-name> --
 - A failed or blocked capture is a **hard stop**: report the reason and ask for screenshots or a brief; never build from a partial capture. Show a couple of capture screenshots in the Story panel's context.
 - `pr-to-video`: resolve the project folder with that workflow's `scripts/project-dir.mjs --pr <ref>` and pass it as `--project-dir`; run its Step 1 fetch/ingest scripts (`fetch-pr.mjs`, `ingest.mjs`) before Story.
 - `music-to-video`: the track is the spine; ask for it (run Step 9 now). The workflow plans its cuts from the beat grid with hard cuts, so skip Scenes, Transitions and Voice (push them `--status skipped`).
+- `reel`: no `video.mjs init`/`capture`; go to **Footage reels** below.
 - Footage routes (`embedded-captions`, `talking-head-recut`): skip Story, Scenes, Transitions and Voice (push them `--status skipped`); Look becomes the caption identity / overlay style (see `references/video.md`).
 
 ## Step 3: Story
@@ -192,6 +198,29 @@ Read `~/.claude/skills/<route>/SKILL.md` and follow it on `videos/<name>` (insta
 7. **Check the motion** after the workflow's verify step (transitions verify, lint, check, snapshots) and before its render question: `node $SKILL_DIR/scripts/obey.mjs --project videos/<name>` (it checks every frame; the assembled index.html and captions belong to the workflow). Exit 2 → re-dispatch the failing frames' workers with the obey `--json` findings + DISPATCH.md, then re-run the workflow's verify and obey (at most 2 passes); leftovers go to the render gate as fix-or-waive (`obey.mjs waive --project … --rule … --target …`). Exit 1 = could not run: report it, never call it clean.
 8. **Render gate → console.** Push `render` with `images` (the contact sheet / snapshots), `studio` (the preview URL once running) and the question; `choose "preview"` → the workflow's preview; `choose "render"` → its render; a `note` → revise and re-verify. Deliver: push `render` with `videos` and `status: done`, log `render-gate` done, and give the workflow's render report plus one line: motion personality, obey status.
 
+## Footage reels (route `reel`)
+
+For a folder of raw clips the user wants cut together, with motion-graphics cards between clips and overlays or captions on top. Rasa's `reel.mjs` examines the footage, builds the cut as a HyperFrames composition (clip segments, cards and overlays drawn in the chosen look and motion, captions from the transcript, a music bed ducked under speech) and HyperFrames renders it. Formats: `references/reel.md`.
+
+1. **Brief** as usual (where it plays → aspect; reels are 9:16; length). **Route** `reel`.
+2. **Footage.** `node $SKILL_DIR/scripts/reel.mjs scan --footage "<folder>" --run "$RUN" [--lang <code>]`. It probes every clip (length, size after rotation, fps, sound), draws a contact sheet and poster per clip, finds shot changes and silences, and transcribes speech word by word with `hyperframes transcribe` (first run downloads the Whisper model; `--no-transcribe` skips it). **Look at every contact sheet** (Read the images) and read the transcripts before proposing anything. Push `footage` with `clips` (footage.json's `clips`); the user unticks clips to leave out (`submit` `{include:[ids]}`) or notes what matters.
+3. **Story** (short): what the reel is for and its shape (hook → middle → payoff), 3 options, from what the footage actually contains. Skip if the user already said how to cut it.
+4. **Look** and **Motion** as usual; run the tasting with the card and overlay words (`--scenes "<opening card> || <a lower third> || <closing card>"`). The motion governs every card, overlay and clip transition.
+5. **Cut.** Draft `$RUN/reel.json` from the user's direction and the scan:
+   - pick segments on **word boundaries** from the transcripts (in = a word's start − 0.1 s, out = its end + 0.15 s), drop silences and false starts, use shot changes as natural cut points; keep the hook in the first 2 s;
+   - cards (`type: "card"`) between clips for titles, chapter beats, the closing call to action; overlays (`overlays`, seconds on the reel's timeline) for names, places and callouts on top of clips; `captions.on` for speech; `mute: true` on b-roll whose sound would fight the music;
+   - `fit`: `cover` (default, crop with `focus`), `contain` (letterbox in the look's background) or `blur` (the clip over a blurred copy of itself, for 16:9 clips in a 9:16 reel); `rate` for speed changes; `transition_in`: `auto` (the motion's own handoff), `cut`, `dissolve`, `wipe`.
+   Push `reel` with `timeline`, `overlays`, `captions`, `clips` (`[{name, duration}]`) and, after a build, `edl` (reel.edl.json) and `video` (the draft render). The user edits in/out points, order, cards, overlays and captions there (`submit` → write it back into reel.json) or says it in chat.
+6. **Music** as usual (`reel.json` → `music: {path, volume, duck}`; it ducks under every clip that keeps its sound).
+7. **Plan** → `approve`, then **build a draft**:
+   ```bash
+   node $SKILL_DIR/scripts/reel.mjs build --reel "$RUN/reel.json" --project-dir videos/<name> --render --quality draft
+   ```
+   It stages each used segment (cropped to the reel's frame, constant fps, dense keyframes), writes `index.html` + `compositions/reel-*.html`, stages the look's fonts, runs `hyperframes lint` and `obey.mjs`, renders, and prints warnings (a card too short for the motion's holds is lengthened to its minimum). Read every warning to the user. lint or obey failing stops the render: fix reel.json (or waive in motion.md) and rebuild. Show the draft in `reel` (`video`) and `render`; iterate on notes by editing reel.json and rebuilding (unchanged segments are cached).
+8. **Render gate**: on approval, rebuild with `--render --quality delivery` and deliver `videos/<name>/renders/<title>.mp4`.
+
+A bespoke card (a product animation, a logo sting) can be built with `/motion-graphics` through **Single motion units** and dropped into the cut as `{"type": "card", "src": "videos/<unit>/compositions/index.html", "duration": N}` (copy any asset files it uses into the reel project at the same relative paths).
+
 ## Single motion units (route `motion-graphics`)
 
 For one short unnarrated unit (title, sting, stat hit, lower third): Brief → Story (optional) → Look → Motion (tasting with `--content "<headline>" [--sub "<line>"]`) → Key poses (optional keyframe board: `board.mjs`, `references/board-format.md`) → Music (optional) → Plan → `handoff.mjs --decisions "$RUN/decisions.json"` (format: `references/handoff.md`) → build through `/motion-graphics` with `DISPATCH.md` appended to every subagent, `obey.mjs` after verify, and the render gate in the console. Push the video-only steps (route, scenes, transitions, voice, storyboard) as `--status skipped`.
@@ -216,6 +245,7 @@ Show the current plan (BRIEF.md, STORYBOARD.md, frame.md, motion.md) as pre-fill
 | Need | Read |
 |---|---|
 | per-route integration: what Rasa pre-writes, hook points, scenes.json and video-decisions.json formats, footage routes | `references/video.md` |
+| footage reels: footage.json, reel.json, how cards/overlays/captions/music are built | `references/reel.md` |
 | console payloads per step, action types, security | `references/console.md` |
 | motion.md fields, tween classes, rules, banned patterns, adjectives, waivers | `references/motion-md-contract.md` |
 | the 10 personalities, feel vocabulary | `references/personalities.md` |
