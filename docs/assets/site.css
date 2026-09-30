@@ -158,12 +158,9 @@ html.js-motion [data-reveal="center"].is-in { clip-path: inset(-0.1em -0.1em -0.
 .fc-full { inset: 0; }
 .fs-foot { background: #1b1410; }
 .shot { position: absolute; inset: -4%; transform-origin: 60% 45%;
-  background:
-    radial-gradient(ellipse 60% 45% at 72% 30%, rgba(255,196,120,.85), transparent 60%),
-    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(90,40,30,.9), transparent 70%),
-    linear-gradient(180deg, #3b2a3f 0%, #7a4b3a 48%, #2a1c17 49%, #140e0c 100%); }
-.shot-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 51%; background: repeating-linear-gradient(100deg, rgba(255,255,255,.035) 0 2px, transparent 2px 38px), linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.55)); }
-.bokeh { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,214,150,.9), rgba(255,170,90,.25) 60%, transparent 70%); filter: blur(2px); }
+  background: linear-gradient(180deg, #2f2436 0%, #5c3b3a 30%, #8a5a40 47%, #2a1c17 49%, #140e0c 100%); }
+.shot-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 51%; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55)); }
+.bokeh { position: absolute; border-radius: 50%; background: #e9b77e; opacity: .55; filter: blur(3px); }
 .bokeh.b0 { width: 11%; aspect-ratio: 1; left: 62%; top: 18%; } .bokeh.b1 { width: 7%; aspect-ratio: 1; left: 80%; top: 30%; }
 .bokeh.b2 { width: 5%; aspect-ratio: 1; left: 12%; top: 22%; opacity: .7; } .bokeh.b3 { width: 9%; aspect-ratio: 1; left: 30%; top: 12%; opacity: .5; }
 .bokeh.b4 { width: 4%; aspect-ratio: 1; left: 88%; top: 12%; } .bokeh.b5 { width: 6%; aspect-ratio: 1; left: 47%; top: 34%; opacity: .6; }
