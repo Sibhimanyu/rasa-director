@@ -4,13 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RasanAI</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' role='img' aria-label='RasanAI'><title>RasanAI</title><rect width='100' height='100' rx='22' fill='%23161616'/><path d='M28 75V31M28 52C28 37 39 29 59 29' fill='none' stroke='%23ededed' stroke-width='12' stroke-linecap='round'/><path d='M67 19l10 10-10 10-10-10z' fill='%23eeb219'/></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' role='img' aria-label='RasanAI'><title>RasanAI</title><rect width='100' height='100' rx='22' fill='%231B1F5E'/><g transform='translate(22.94 13.72) scale(0.56)'><path d='M0 0H102V62L38 126L23.858 111.858L82 53.716V20H20V82H0Z' fill='%23F1F0EC'/><path d='M36 31L60 46L36 61Z' fill='%23F1F0EC' stroke='%23F1F0EC' stroke-width='3' stroke-linejoin='round'/></g></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
 <style>
   :root {
     --bg: #f6f5f1; --panel: #ffffff; --panel-2: #f1efe9; --line: #e6e3dc; --line-2: #d6d2c8; --ink: #16181d; --ink-2: #4f5461; --ink-3: #6b707a;
-    --accent: #1a2160; --accent-2: #2b3486; --accent-ink: #ffffff; --pick: #eeb219; --pick-soft: #fdf3d6; --ok: #1f7a4f; --ok-soft: #e3f5ec; --warn: #8a5a00; --err: #b3361f; --focus: #2b3486;
+    --accent: #1b1f5e; --accent-2: #2b3486; --accent-ink: #ffffff; --pick: #efb21a; --pick-soft: #fdf3d6; --ok: #1f7a4f; --ok-soft: #e3f5ec; --warn: #8a5a00; --err: #b3361f; --focus: #2b3486;
     --r: 14px; --display: "Anek Latin", "Avenir Next Condensed", sans-serif; --sans: "Mukta", "Avenir Next", ui-sans-serif, system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -297,8 +297,8 @@
   :root {
     --bg: #161616; --panel: #1e1e1e; --panel-2: #262626; --line: #2c2c2c; --line-2: #3a3a3a;
     --ink: #ededed; --ink-2: #b4b4b4; --ink-3: #8a8a8a;
-    --accent: #eeb219; --accent-2: #f5c542; --accent-ink: #1a1300; --pick: #ededed; --pick-soft: #2a2a2a;
-    --ok: #4cc38a; --ok-soft: #1c2b23; --warn: #e6b450; --err: #f07f6f; --focus: #eeb219;
+    --accent: #efb21a; --accent-2: #f5c542; --accent-ink: #1a1300; --pick: #ededed; --pick-soft: #2a2a2a;
+    --ok: #4cc38a; --ok-soft: #1c2b23; --warn: #e6b450; --err: #f07f6f; --focus: #efb21a;
     --display: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif; --sans: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
     --r: 10px;
   }
@@ -307,8 +307,8 @@
   ::selection { background: var(--accent); color: var(--accent-ink); }
   .top { position: sticky; top: 0; z-index: 20; background: rgba(22,22,22,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
   .top-in { max-width: 1180px; margin: 0 auto; height: 52px; display: flex; align-items: center; gap: 18px; padding: 0 24px; }
-  .wordmark { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; color: var(--ink); }
-  .wordmark svg { width: 18px; height: 18px; }
+  .wordmark { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 16px; color: var(--ink); }
+  .wordmark svg { width: 17px; height: 21px; margin-bottom: -5px; }
   .film-title { color: var(--ink-3); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .states { margin-left: auto; display: flex; gap: 16px; font-size: 13.5px; color: var(--ink-3); }
   .states span.now { color: var(--ink); font-weight: 600; }
@@ -456,7 +456,7 @@
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <span class="wordmark"><svg viewBox="18 16 62 68" aria-hidden="true"><path d="M28 75V31M28 52C28 37 39 29 59 29" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><path d="M67 19l10 10-10 10-10-10z" fill="#eeb219"/></svg>RasanAI</span>
+  <span class="wordmark"><svg viewBox="0 0 102 126" aria-hidden="true"><path d="M0 0H102V62L38 126L23.858 111.858L82 53.716V20H20V82H0Z" fill="currentColor"/><path d="M36 31L60 46L36 61Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>RasanAI</span>
   <span class="film-title" id="filmTitle"></span>
   <nav class="states" id="states" aria-label="Where the film is"></nav>
   <button class="link" id="justMake" title="Claude decides everything and stops only at the final review">Just make it</button>

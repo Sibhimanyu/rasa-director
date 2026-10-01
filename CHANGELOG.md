@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **New logo: ர, with a play button.** The mark is the Tamil letter ர (*ra*, the first letter of ரசனை), drawn as one heavy stroke on a grid (stroke 20, a 45° kick), with a play triangle in its counter. The wordmark is Montserrat; ரசனை is Mukta Malar, shaped with HarfBuzz; both are outlined. Colours: indigo `#1B1F5E`, turmeric `#EFB21A`, rice white `#F1F0EC`. In `docs/assets/logo/`: app-icon tiles (indigo, light, turmeric), the bare mark, horizontal and stacked bilingual lockups (light and reverse), wordmarks, and PNG icons at 1024/512/180/32. Used for the README title, the site favicon, apple-touch icon and footer, the console favicon and header.
+- **The site leads with the brand.** The nav carries the full lockup at about twice its old size, and the footer carries the stacked lockup with ரசனை.
+
 ## 1.1.0 (2026-10-01)
 
 - **Rasa Director is now RasanAI.** The name comes from the Tamil ரசனை (*rasanai*): taste, the refined appreciation of beauty. The skill is `/rasanai`, the plugin is `rasanai@rasanai`, the repository is `Sibhimanyu/rasanai` and the site is https://sibhimanyu.github.io/rasanai/. Nothing else changes: same flow, same 403 design systems, same checks.

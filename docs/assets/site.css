@@ -1,14 +1,14 @@
 /* RasanAI — site. Indigo, rice flour, turmeric. */
 :root {
-  --indigo: #1a2160;
+  --indigo: #1b1f5e;
   --indigo-deep: #11163f;
   --indigo-ink: #0c1030;
-  --rice: #f0f0f2;
+  --rice: #f1f0ec;
   --rice-2: #e4e5ea;
   --paper: #f7f6f2;
   --ink: #15151c;
   --ink-2: #3f4368;
-  --turmeric: #eeb219;
+  --turmeric: #efb21a;
   --leaf: #1e5a3c;
   --silk: #b3165a;
   --mist: #dfe3ee;
@@ -62,8 +62,8 @@ p { margin: 0 0 1em; }
 /* nav + hero */
 .hero { background: var(--indigo); color: var(--on-indigo); padding-bottom: clamp(56px, 7vw, 104px); }
 .nav { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; gap: 16px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; font: 700 1.12rem/1 var(--display); font-stretch: 90%; text-decoration: none; }
-.brand svg { width: 26px; height: 26px; color: var(--on-indigo); }
+.brand { display: inline-flex; align-items: center; text-decoration: none; }
+.brand img { display: block; height: clamp(36px, 3.2vw, 46px); width: auto; transform: translateY(17%); } /* the ர kick hangs like a descender: centre the cap height on the nav line */
 .nav-links { display: flex; align-items: center; gap: clamp(12px, 1.8vw, 26px); font-size: 0.95rem; }
 .nav-links a { color: var(--on-indigo-2); text-decoration: none; }
 .nav-links a:hover { color: #fff; text-decoration: underline; }
@@ -236,8 +236,8 @@ kbd { font: 500 0.82em/1 var(--mono); border: 1px solid currentColor; border-rad
 /* footer */
 .foot { background: var(--indigo-ink); color: var(--on-indigo-2); padding: clamp(56px, 6vw, 88px) 0; }
 .foot-row { display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: end; }
-.foot-big { font: 700 clamp(2.4rem, 5vw, 4.2rem)/0.92 var(--display); font-stretch: 86%; color: #fff; margin: 0; }
-.foot-big span { color: var(--turmeric); }
+.foot-big { margin: 0; line-height: 0; }
+.foot-big img { height: clamp(130px, 13vw, 196px); width: auto; }
 .foot a { color: var(--on-indigo); }
 .foot-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
 
@@ -352,10 +352,10 @@ kbd { font: 500 0.82em/1 var(--mono); border: 1px solid currentColor; border-rad
 .lib-try span { font: 500 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .7; white-space: nowrap; }
 .lib-try input, .lib-search { flex: 1; min-width: 0; background: transparent; border: 0; color: inherit; font: 500 1rem/1.2 var(--body); padding: 8px 6px; outline: none; }
 .lib-search { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 12px 20px; }
-.lib-try:focus-within, .lib-search:focus { border-color: #eeb219; }
+.lib-try:focus-within, .lib-search:focus { border-color: var(--turmeric); }
 .lib-fams { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 6px; }
 .lib-fams button { background: transparent; color: inherit; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 14px; font: 500 .9rem/1 var(--body); cursor: pointer; }
-.lib-fams button.on { background: #eeb219; color: #1a1300; border-color: #eeb219; }
+.lib-fams button.on { background: var(--turmeric); color: #1a1300; border-color: var(--turmeric); }
 .lib-count { font: 500 .78rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .65; margin: 10px 0 16px; }
 .lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
 .lib-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; overflow: hidden; }
