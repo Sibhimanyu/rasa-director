@@ -64,7 +64,7 @@ The four calls:
 
 | Step | Fields |
 |---|---|
-| `brief` | `fields: {length_s, kind, subject, aspect, destination, narration, brand_name?, use_brand?}` (the sentence, prefilled), `choices: {<field>: [values or {value, label}]}` (optional, narrows a field's menu), `captures: [{image, caption}]` (what Claude will use) → one editable sentence, Start and "Just make it" |
+| `brief` | `fields: {length_s, kind, subject, aspect, destination, narration, brand_name?, use_brand?}` (the sentence, prefilled), `choices: {<field>: [values or {value, label}]}` (optional, narrows a field's menu), `captures: [{image, caption}]` (what Claude will use), `needs_source: true` (or an empty `subject`) → a "What's the video about?" box above the sentence → one editable sentence, Start and "Just make it". Before the first push the page shows that box on its own. |
 | `films` | `films: [{id, angle: "Sure"\|"Bold"\|"Wild", title, logline, hook, why, preset (style id), music, frames?: [3 PNGs], beats?: [3 captions]}]`, `recommended`, `gallery` (presets.mjs gallery's presets.json), `headline`/`sub` (fallback words), `brand` (optional) → three live films, energy knob (Calmer · As is · Punchier), More like these, Mix two, Browse all styles, "Show in my brand" |
 | `animatic` | `scenes: [{id, title, line, visual, duration, thumb}]`, `music: {title, file, offset?, alternatives: [{id, title, mood, file}]}`, `voice: {name, alternatives: [{id, name}]}` (omit when silent), `audio` (optional, a mixed track instead of `music.file`), `angles: false` hides "Try another angle" → the player, chips (Music, Voice, Try another angle), notes, "Looks right, build it" / "Apply N notes" |
 | `build` | `scenes: [{id, title, duration, thumb, state: todo\|working\|done, frame}]`, `latest` (newest still) → the newest built still and the strip filling in; `log` also writes here (`log: [{t, level, msg}]`, `stages`) |
@@ -97,7 +97,7 @@ Other steps (Claude usually pushes these `--status done` with only a `decision`;
 
 | type | step | value |
 |---|---|---|
-| `submit` | brief | the sentence's fields: `{length_s, kind, subject, aspect, destination, narration, use_brand}` |
+| `submit` | brief | the sentence's fields: `{length_s, kind, subject, aspect, destination, narration, use_brand}`, plus `source` when the page asked what the video is about (from the brief, or `{source}` alone from a fresh console) |
 | `choose` | films | a film id |
 | `more` | films | `{near: film id, exclude: [film ids]}`: more films like the selected one |
 | `mix` | films | `{look: film id, story: film id}`: one film's style with another's story |

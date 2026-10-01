@@ -331,6 +331,9 @@
   .link { background: none; border: 0; color: var(--ink-2); text-decoration: none; cursor: pointer; }
   .link:hover { color: var(--ink); }
   /* brief */
+  .source-box { width: 100%; max-width: 900px; margin: 6px 0 4px; padding: 16px 18px; font: 400 19px/1.5 var(--body, inherit); color: var(--ink); background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px; resize: vertical; }
+  .source-box:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .source-row { margin-top: 18px; }
   .brief-sentence { font: 500 34px/1.4 var(--display); letter-spacing: -.015em; max-width: 900px; margin: 18px 0 30px; color: var(--ink); }
   .brief-sentence .pick { position: static; display: inline; background: none; box-shadow: none; padding: 0; border: 0; border-radius: 0; font: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-2); text-decoration-thickness: 2px; text-underline-offset: 7px; cursor: pointer; }
   .brief-sentence .pick:hover, .brief-sentence .pick.open { text-decoration-color: var(--accent); }
@@ -1229,7 +1232,7 @@
   function cmpVer(a, b) { var x = String(a).split("."), y = String(b).split("."); for (var i = 0; i < 3; i++) { var d = (+x[i] || 0) - (+y[i] || 0); if (d) return d; } return 0; }
   function isDone() { var r = S.steps.render || S.steps.final || {}; return r.status === "done"; }
   function asking() { return S.ask && !S.ask.answered ? S.ask : null; }
-  function waitingOnUser() { if (asking()) return true; var d = S.steps[S.current] || {}; return d.status === "awaiting" && (!d.sent || d.sent.type === "note"); }
+  function waitingOnUser() { if (asking() || freshSession()) return true; var d = S.steps[S.current] || {}; return d.status === "awaiting" && (!d.sent || d.sent.type === "note"); }
   function fmtT(t) { t = Math.max(0, t || 0); var m = Math.floor(t / 60), s = Math.floor(t % 60); return m + ":" + (s < 10 ? "0" : "") + s; }
   function openComments(step) { return (S.comments || []).filter(function (c) { return c.state === "open" && (!step || c.step === step); }); }
   function closeFloating() { [].forEach.call(document.querySelectorAll(".menu,.pop"), function (n) { n.remove(); }); }
@@ -1243,11 +1246,34 @@
   document.addEventListener("mousedown", function (e) { if (!e.target.closest(".menu,.pop,.pick,.chip2,.player,.scrub")) closeFloating(); });
 
   // --- Brief: Claude's understanding as one editable sentence -----------------------------------------
+  // what the video is about: the one thing RasanAI can't decide. Asked here, never in chat.
+  function sourceBox(onEnter) {
+    var ta = h("textarea", { class: "source-box", rows: 3, placeholder: "A product URL, a topic, a script, a GitHub PR, or the path to a music track or a folder of footage" });
+    ta.value = local.source || "";
+    ta.addEventListener("input", function () { local.source = ta.value; });
+    ta.addEventListener("keydown", function (e) { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); onEnter(); } });
+    setTimeout(function () { if (!ta.value) ta.focus(); }, 0);
+    return ta;
+  }
+  // before Claude has pushed anything: ask for the source right away, so the page never just says "Getting started"
+  function startScreen() {
+    var body = h("div");
+    body.appendChild(h("p", { class: "qsub", text: "Tell me what the video is about. I'll read it and come back with the brief." }));
+    var go = function () { var v = (local.source || "").trim(); if (!v) return toast("Paste a link, a topic or a path first."); send("brief", "submit", { source: v }, v); };
+    body.appendChild(sourceBox(go));
+    body.appendChild(h("div", { class: "source-row" }, [h("button", { class: "primary-btn", onclick: go, text: "Start" })]));
+    return { body: body, q: "What's the video about?", hint: "⌘↵ to start", primary: null, secondary: [] };
+  }
   function briefScreen(d) {
     var f = local.brief = local.brief || JSON.parse(JSON.stringify(d.fields || {}));
     var ch = d.choices || {};
     var body = h("div");
     body.appendChild(h("p", { class: "qsub", text: d.context || "Here's what I understood. Click any underlined part to change it." }));
+    var needSource = d.needs_source || !String(f.subject || "").trim();
+    if (needSource) {
+      body.appendChild(h("p", { class: "qsub", style: "margin-top:6px;color:var(--ink)", text: "What's the video about?" }));
+      body.appendChild(sourceBox(function () { var b = document.getElementById("primaryBtn"); if (b) b.click(); }));
+    }
     var sent = h("p", { class: "brief-sentence" });
     function part(key, label, opts, fmt) {
       var b = h("button", { class: "pick", type: "button", text: label });
@@ -1285,7 +1311,8 @@
       body.appendChild(h("p", { class: "qsub", text: "What I'll use" }));
       body.appendChild(h("div", { class: "thumbs" }, d.captures.map(function (c) { return h("figure", null, [h("img", { src: fsUrl(c.image || c), alt: c.caption || "" }), c.caption ? h("figcaption", { text: c.caption }) : null]); })));
     }
-    return { body: body, q: d.question || "What we're making", hint: "Change anything that's wrong, then start.", primary: { label: "Start", run: function () { send("brief", "submit", f); } }, secondary: [{ label: "Just make it", run: function () { send("brief", "submit", f); send("*", "decide-rest", null); } }] };
+    return { body: body, q: d.question || "What we're making", hint: "Change anything that's wrong, then start.", primary: { label: "Start", run: function () { if (!withSource()) return; send("brief", "submit", f); } }, secondary: [{ label: "Just make it", run: function () { if (!withSource()) return; send("brief", "submit", f); send("*", "decide-rest", null); } }] };
+    function withSource() { if (!needSource) return true; var v = (local.source || "").trim(); if (!v) { toast("Tell me what the video is about first."); return false; } f.source = v; if (!f.subject) f.subject = v.length > 60 ? v.slice(0, 57) + "…" : v; return true; }
   }
 
   // --- Films: three complete films (a style, live, + a story angle) ---------------------------------------
@@ -1589,8 +1616,9 @@
     if (res.primary && (wait || done)) box.appendChild(h("button", { class: "primary-btn", id: "primaryBtn", onclick: res.primary.run, text: res.primary.label }));
     return box;
   }
+  function freshSession() { return !Object.keys(S.steps || {}).some(function (k) { return S.steps[k] && S.steps[k].status; }) && !(S.activity || []).some(function (a) { return a.level !== "sys"; }); }
   function screenFor(step, d) {
-    if (!step || !S.steps[step]) return workingScreen();
+    if (!step || !S.steps[step]) return freshSession() ? startScreen() : workingScreen();
     var busy = !waitingOnUser() && d.status !== "done" && step !== "build" && !(step === "render" || step === "final");
     if (step === "brief") return d.status === "awaiting" ? briefScreen(d) : workingScreen();
     if (step === "films" || (step === "direction" && d.films)) return busy ? workingScreen() : filmsScreen(d);
