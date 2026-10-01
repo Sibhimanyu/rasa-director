@@ -1385,10 +1385,11 @@
   }
   function galleryOverlay(g) {
     closeFloating();
-    var ov = h("div", { class: "pop", style: "position:fixed;inset:5vh 5vw;width:auto;overflow:auto;padding:22px" });
+    // a modal: the page behind is dimmed so the header and the Tell Claude bar don't compete with the gallery
+    var ov = h("div", { class: "pop", role: "dialog", "aria-label": "Every style", style: "position:fixed;inset:5vh 5vw;width:auto;overflow:auto;padding:22px;z-index:60;box-shadow:0 0 0 100vmax rgba(0,0,0,.62),0 24px 60px rgba(0,0,0,.5)" });
     var search = h("input", { class: "gal-search", placeholder: "Search styles: shadows, retro, glass, doodle, luxury…" });
     var grid = h("div", { class: "gal-grid", style: "margin-top:14px" });
-    ov.appendChild(h("div", { style: "display:flex;gap:12px;align-items:center" }, [h("b", { text: "Every style", style: "font-size:18px" }), search, h("button", { class: "sec", onclick: function () { ov.remove(); }, text: "Close" })]));
+    ov.appendChild(h("div", { style: "display:flex;gap:12px;align-items:center" }, [h("b", { text: "Every style", style: "font-size:18px;white-space:nowrap" }), search, h("button", { class: "sec", onclick: function () { ov.remove(); }, text: "Close" })]));
     ov.appendChild(grid);
     g.presets.forEach(function (p) {
       var c = h("button", { type: "button", class: "choice mini", style: "text-align:left" }, [specimen(p, g, true), h("div", { class: "body" }, [h("h3", { text: p.name }), h("div", { class: "meta", text: p.family })])]);
