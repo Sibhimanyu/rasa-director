@@ -163,7 +163,7 @@
   .drawer.open { display: block; }
   .dim-row { display: grid; grid-template-columns: 190px 1fr; gap: 12px; align-items: center; padding: 7px 0; }
   .dim-row > span { font-size: 14px; color: var(--ink-2); }
-  .dim-row .chip.on { background: var(--ink); border-color: var(--ink); }
+  .dim-row .chip.on { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 
   /* style gallery */
   .spec { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--panel-2); border-bottom: 1px solid var(--line); }
@@ -209,7 +209,7 @@
   .frame .open { position: absolute; right: 8px; bottom: 8px; font: 500 11px/1 var(--mono); background: rgba(22,24,29,.75); color: #fff; padding: 6px 8px; border-radius: 6px; text-decoration: none; }
   .cellpick { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
   .cellpick button { border: 1.5px solid var(--line); background: var(--panel); border-radius: 10px; padding: 8px 12px; text-align: left; }
-  .cellpick button b { font: 600 12px/1 var(--mono); background: var(--ink); color: #fff; border-radius: 4px; padding: 2px 6px; margin-right: 8px; }
+  .cellpick button b { font: 600 12px/1 var(--mono); background: var(--ink); color: var(--bg); border-radius: 4px; padding: 2px 6px; margin-right: 8px; }
   .cellpick button.sel { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,33,96,.12); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip { border: 1px solid var(--line-2); background: var(--panel); border-radius: 99px; padding: 6px 13px; font-size: 13.5px; color: var(--ink-2); }
