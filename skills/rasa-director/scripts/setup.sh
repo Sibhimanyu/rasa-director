@@ -40,7 +40,8 @@ case "$BRIDGE" in
       esac
     elif [ -z "$(rasanai_dir)" ]; then
       # the skills CLI copied this folder alone: add RasanAI the same way, in the same scope
-      case "$BRIDGE" in "$HOME/.claude/skills/"*|"$HOME/.agents/skills/"*) G="--global" ;; *) G="" ;; esac
+      H=$(cd "$HOME" && pwd -P) # real paths on both sides (macOS: /tmp is /private/tmp)
+      case "$BRIDGE" in "$H/.claude/skills/"*|"$H/.agents/skills/"*|"$HOME/.claude/skills/"*|"$HOME/.agents/skills/"*) G="--global" ;; *) G="" ;; esac
       npx --yes skills add "$REPO" --skill rasanai --yes $G >/dev/null 2>&1 || note "could not add RasanAI; run: npx skills add $REPO --skill rasanai $G"
     fi ;;
 esac
