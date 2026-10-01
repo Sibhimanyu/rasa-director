@@ -417,6 +417,8 @@
   .versions { display: flex; gap: 8px; align-items: center; margin-top: 14px; font-size: 13.5px; color: var(--ink-3); }
   /* inline question (Claude needs your call) */
   .ask2 { margin-top: 10px; }
+  .statusline.asking { margin: 0 0 30px; padding: 18px 20px; background: var(--panel); border: 1px solid var(--accent); border-radius: 14px; }
+  .statusline.asking .ask2 { margin-top: 0; }
   .ask2 .opts2 { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
   .ask2 .opts2 button { background: var(--panel); border: 1px solid var(--line-2); color: var(--ink); border-radius: 12px; padding: 12px 14px; font: 500 14.5px/1.3 var(--sans); text-align: left; cursor: pointer; max-width: 460px; }
   .ask2 .opts2 button span { display: block; color: var(--ink-3); font-size: 13px; font-weight: 400; margin-top: 3px; }
@@ -1599,8 +1601,8 @@
     if (m.t !== lastReply) { lastReply = m.t; var r = document.getElementById("reply"); r.firstChild.innerHTML = ""; r.firstChild.appendChild(h("b", { text: "Claude" })); r.firstChild.appendChild(document.createTextNode(m.text)); r.classList.add("show"); clearTimeout(r._h); r._h = setTimeout(function () { r.classList.remove("show"); }, 14000); }
   }
   function statusLine(res) {
-    var box = h("div", { class: "statusline" });
     var Ak = asking();
+    var box = h("div", { class: "statusline" + (Ak ? " asking" : "") });
     if (Ak) {
       local.askSel = local.askFor === Ak.id ? local.askSel : Ak.recommended || ((Ak.options || [])[0] || {}).id; local.askFor = Ak.id;
       var wrap = h("div", { class: "ask2", style: "flex:1" }, [h("div", { class: "say needs" }, [h("b", { text: "Needs you: " }), Ak.question]), Ak.context ? h("div", { class: "qsub", style: "margin:4px 0 0", text: Ak.context }) : null]);
@@ -1645,9 +1647,13 @@
     loops.forEach(clearInterval); loops = []; stopPlayer(); closeFloating();
     var res = screenFor(step, d); main._res = res;
     main.innerHTML = "";
+    // a question from Claude goes on top of the screen, never under a tall animatic where it can't be seen
+    var Ak = asking();
+    if (Ak) main.appendChild(statusLine(res));
     main.appendChild(h("h1", { class: "q", text: res.q }));
     main.appendChild(res.body);
-    main.appendChild(statusLine(res));
+    if (!Ak) main.appendChild(statusLine(res));
+    if (Ak && main._askShown !== Ak.id) { main._askShown = Ak.id; window.scrollTo({ top: 0, behavior: "smooth" }); }
   }
 
   document.getElementById("justMake").addEventListener("click", function () { send("*", "decide-rest", null); toast("I'll decide everything and stop only at the final review."); });
