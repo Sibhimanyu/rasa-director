@@ -238,7 +238,8 @@
   .media video, .media img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #000; display: block; }
   .track { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
   .track audio { width: 100%; margin-top: 6px; }
-  .toast { position: fixed; right: 20px; bottom: 20px; background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 10px; max-width: 380px; transform: translateY(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility .25s; z-index: 30; }
+  /* above the Tell Claude bar (fixed at the bottom), dark text on the light ink colour so it reads on the dark page */
+  .toast { position: fixed; right: max(20px, calc((100vw - 992px) / 2)); bottom: 92px; background: var(--ink); color: var(--bg); font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,.45); padding: 12px 16px; border-radius: 10px; max-width: 380px; transform: translateY(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility .25s; z-index: 30; }
   .toast.show { transform: none; opacity: 1; visibility: visible; }
   .timeline { display: flex; height: 54px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); margin: 14px 0 6px; }
   .timeline div { position: relative; border-right: 2px solid var(--panel); background: var(--panel-2); padding: 6px 8px; font: 500 11px/1.25 var(--mono); color: var(--ink-2); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
