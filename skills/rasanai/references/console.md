@@ -6,8 +6,8 @@
 
 A dark, neutral review room: the film is the brightest thing on screen.
 
-- **Header**: the four states (Brief · Films · Animatic · Final), a one-line status ("Waiting for you: pick a film", or what Claude is doing now, with a moving bar), **Decisions** (the drawer) and **Tell Claude** (⌘K). Every step maps to one state: Brief = brief, brand, route, footage; Films = films, direction, look, concept, motion, transitions; Animatic = animatic, scenes, styleframes, storyboard, keyframes, voice, music, reel, plan, build; Final = render, final.
-- **The stage**: only the current call, with its `question` as the heading and one primary button. Brief is one editable sentence; Films are three live, animated style specimens (each drawn on the film's `hook`) with a story angle; Animatic is a player (key frames at their real durations, the music bed, a scene strip, a scrubber) where a click on the frame leaves a note; Build shows the newest built still and the strip filling in; Final is a video player with scene markers, notes, versions and what changed. Any other step (brand, footage, reel, voice, music…) shows its own panel on the same page.
+- **Header**: the five states (Brief · Story · Look · Animatic · Final), a one-line status ("Waiting for you: pick a film", or what Claude is doing now, with a moving bar), **Decisions** (the drawer) and **Tell Claude** (⌘K). Every step maps to one state: Brief = brief, brand, route, footage; Story = story, concept; Look = look, films, direction, motion, transitions; Animatic = animatic, scenes, styleframes, storyboard, keyframes, voice, music, reel, plan, build; Final = render, final.
+- **The stage**: only the current call, with its `question` as the heading and one primary button. Brief is one editable sentence; Story is three scripts (tabs, and the selected one as a timed table of on-screen lines, voiceover and visuals); Look is three live, animated style specimens drawn on the story's first line; Animatic is a player (key frames at their real durations, the music bed, a scene strip, a scrubber) where a click on the frame leaves a note; Build shows the newest built still and the strip filling in; Final is a video player with scene markers, notes, versions and what changed. Any other step (brand, footage, reel, voice, music…) shows its own panel on the same page.
 - **While Claude works**: the stage shows what it's doing (`session.activity`, newest first). Entries come from `activity`, `log`, every push, every answer the user sends, RasanAI's own scripts (`lib/report.mjs`, into the run named in `.rasanai/current`) and, in the plugin, a PreToolUse hook (`hooks/hooks.json` → `scripts/hook-activity.mjs`) that adds each command (by its description), write and edit while a run is active.
 - **Decisions** (drawer): every decided step's `decision` (Claude's craft calls with their reasons, and the user's picks), each changeable by telling Claude.
 - **Tell Claude** (⌘K) sends a `note` to the step on screen; the step's `thread` shows the conversation (Claude answers with `reply`). An `ask` card sits on top of the stage when Claude asks something that isn't a call.
@@ -60,12 +60,14 @@ Every panel except Build has a note box, "Send note" and "You decide this step".
 
 ## Per-step payloads
 
-The four calls:
+The five calls:
 
 | Step | Fields |
 |---|---|
 | `brief` | `fields: {length_s, kind, subject, aspect, destination, narration, brand_name?, use_brand?}` (the sentence, prefilled), `choices: {<field>: [values or {value, label}]}` (optional, narrows a field's menu), `captures: [{image, caption}]` (what Claude will use), `needs_source: true` (or an empty `subject`) → a "What's the video about?" box above the sentence → one editable sentence, Start and "Just make it". Before the first push the page shows that box on its own. |
-| `films` | `films: [{id, angle: "Sure"\|"Bold"\|"Wild", title, logline, hook, why, preset (style id), music, frames?: [3 PNGs], beats?: [3 captions]}]`, `recommended`, `gallery` (presets.mjs gallery's presets.json), `headline`/`sub` (fallback words), `brand` (optional) → three live films, energy knob (Calmer · As is · Punchier), More like these, Mix two, Browse all styles, "Show in my brand" |
+| `story` | `stories: [{id, angle: "Sure"\|"Bold"\|"Wild", title, logline, device, why, beats: [{name, duration_s, on_screen, vo, visual, turn?, value?}], last_line}]`, `recommended` → three tabs and the selected story as a script table (time, on screen, voiceover, what we see; the turn marked), "Three more stories" |
+| `look` | `styles: [{preset, name, why, rare?}]`, `recommended`, `hook` (the story's first line; every style is drawn on it), `sub`, `gallery` → three live style tiles, energy knob, More like these, Browse all styles (a style picked there is chosen directly) |
+| `films` (older single-step flow) | `films: [{id, angle: "Sure"\|"Bold"\|"Wild", title, logline, hook, why, preset (style id), music, frames?: [3 PNGs], beats?: [3 captions]}]`, `recommended`, `gallery` (presets.mjs gallery's presets.json), `headline`/`sub` (fallback words), `brand` (optional) → three live films, energy knob (Calmer · As is · Punchier), More like these, Mix two, Browse all styles, "Show in my brand" |
 | `animatic` | `scenes: [{id, title, line, visual, duration, thumb}]`, `music: {title, file, offset?, alternatives: [{id, title, mood, file}]}`, `voice: {name, alternatives: [{id, name}]}` (omit when silent), `audio` (optional, a mixed track instead of `music.file`), `angles: false` hides "Try another angle" → the player, chips (Music, Voice, Try another angle), notes, "Looks right, build it" / "Apply N notes" |
 | `build` | `scenes: [{id, title, duration, thumb, state: todo\|working\|done, frame}]`, `latest` (newest still) → the newest built still and the strip filling in; `log` also writes here (`log: [{t, level, msg}]`, `stages`) |
 | `render` / `final` | `video` (or `videos: [..]`, the newest last), `poster`, `scenes: [{id, title, start, thumb}]` (markers), `duration`, `version`, `versions: [{v, when}]`, `changes: [..]`, `studio` (preview URL), `images` (optional snapshots) → the player with markers, notes, versions; not done: "Render the final" / "Preview first"; done: "Download MP4" |
@@ -98,6 +100,10 @@ Other steps (Claude usually pushes these `--status done` with only a `decision`;
 | type | step | value |
 |---|---|---|
 | `submit` | brief | the sentence's fields: `{length_s, kind, subject, aspect, destination, narration, use_brand}`, plus `source` when the page asked what the video is about (from the brief, or `{source}` alone from a fresh console) |
+| `choose` | story | a story id |
+| `more` | story | `{near: story id, exclude: [story ids]}`: three more scripts |
+| `choose` | look | a style (preset) id, from a tile or Browse all |
+| `more`, `knob` | look | as for films |
 | `choose` | films | a film id |
 | `more` | films | `{near: film id, exclude: [film ids]}`: more films like the selected one |
 | `mix` | films | `{look: film id, story: film id}`: one film's style with another's story |

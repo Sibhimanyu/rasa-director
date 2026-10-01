@@ -7,20 +7,21 @@
 
 *Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. When thirty people make an AI video, they get thirty videos with different content and the same film: the obvious story, a default look, everything fading up on one ease, a 30-second music loop under a 45-second film, a whoosh on every cut and glowing text. RasanAI is a Claude Code skill that replaces every one of those defaults with a decision, and checks the build against it.
 
-![Films: three complete films, each a named style drawn live on its own hook line with a story angle](docs/img/console-films.jpg)
+![Story: three scripts as timed beats, with what's on screen, what's said and what we see](docs/img/console-story.jpg)
 
 **Website:** https://sibhimanyu.github.io/rasanai/
 
-## Four calls, and you see your film at every one
+## Five calls, and you see your film at every one
 
-You say `/rasanai make a 45s launch film for tally.app`. A **Director's Console** opens in your browser: a dark review room that shows what Claude is doing, live, and stops you only four times.
+You say `/rasanai make a 45s launch film for tally.app`. A **Director's Console** opens in your browser: a dark review room that shows what Claude is doing, live, and stops you only five times. The story and the look are separate calls: a script is judged as words and timing first, then the look is chosen to make that story strongest.
 
 | | You see | You do |
 |---|---|---|
 | **1 · Brief** | one sentence you can edit: "A 45-second launch film for Tally, 16:9 for the website, with voiceover, in Tally's own colours and type", and what Claude captured | fix a word, press Start, or **Just make it** |
-| **2 · Films** | three complete films, each a named design system drawn live and moving on the film's own opening line, with a story angle (Sure · Bold · Wild), a logline and its music | pick one; or "more like these", "mix two", an energy knob, browse all the styles |
-| **3 · Animatic** | the whole film rough: a key frame for every scene at its real length, with the real music edit and the voice | play it, click any moment to leave a note, swap the music or voice, then **Looks right, build it**. You watch it build, scene by scene |
-| **4 · Final** | the rendered film with scene markers, versions and what changed | click a moment to note it, apply notes, render, download |
+| **2 · Story** | three scripts (Sure · Bold · Wild) written by a dedicated script pass from your product's truth: a title, a logline and every beat with what's on screen, what's said and what we see | pick one, or tell Claude what to change in a line |
+| **3 · Look** | three design systems chosen for that story, each drawn live and moving on its own first line | pick one, or "more like these", an energy knob, browse all the styles |
+| **4 · Animatic** | the whole film rough: a key frame for every scene at its real length, with the real music edit and the voice | play it, click any moment to leave a note, swap the music or voice, then **Looks right, build it**. You watch it build, scene by scene |
+| **5 · Final** | the rendered film with scene markers, versions and what changed | click a moment to note it, apply notes, render, download |
 
 **Claude decides the craft**, the way a senior motion designer would, from a quantified playbook: the story device, the scenes and their timing, the motion language, transitions, the music edit, every sound effect, lighting and grade. Every call is in the **Decisions** drawer with its reason, and you can change any of it by telling Claude (⌘K).
 
@@ -111,7 +112,7 @@ With the plugin install Claude Code namespaces the skill: invoke it as `/rasanai
 
 ```
 skills/rasanai/
-  SKILL.md                    the flow the agent follows: Brief · Films · Animatic · Final
+  SKILL.md                    the flow the agent follows: Brief · Story · Look · Animatic · Final
   console/index.html          the Director's Console; console/presets.js draws any style live
   taxonomy/                   the vocabulary: 32 dimensions (dimensions/*.json), 66 story devices (devices.json),
                               403 styles in 20 families (presets/*.json), type pairings; schemas
@@ -129,7 +130,7 @@ skills/rasanai/
     memory.mjs, update.mjs, setup.sh, selftest.mjs
     lib/                      audio analysis, the DESIGN.md adapter, looks, direction, fonts, engine, common
     vendor/gsap.min.js        GSAP 3.14.2
-  references/                 craft (the playbook), vocabulary (film terms → code), story, sound, direction,
+  references/                 craft (the playbook), vocabulary (film terms → code), script (the writer's brief), story, sound, direction,
                               brand, video, reel, console, motion.md contract, board, handoff, personalities
 ```
 

@@ -4,9 +4,10 @@ description: >
   RasanAI: creative direction for entire videos made with Claude and HyperFrames (launch films,
   explainers, PR videos, brand films, music videos, reels cut from a folder of raw footage with
   motion-graphics cards between clips and overlays/captions on top, captioned talking heads, and short
-  motion graphics). The user makes four calls in a local Director's Console: confirm the brief, pick one of
-  three complete films (a named style from a library of 403 design systems, drawn live on their words, plus a
-  story angle), leave notes on a timed animatic with the music, and review the final. Claude decides all the craft
+  motion graphics). The user makes five calls in a local Director's Console: confirm the brief, pick one of
+  three scripts (written by a dedicated script pass from the product's truth), pick one of three looks for that
+  story (named styles from a library of 403 design systems, drawn live on its lines), leave notes on a timed
+  animatic with the music, and review the final. Claude decides all the craft
   (story devices, scenes, pacing, motion, transitions, music edit, sound design) from a quantified playbook,
   shows every call in a decisions drawer, and gates the film against AI-slop tells, a motion contract and a
   sound check before anything ships. Use when the user wants to make a video and choose how it looks, moves
@@ -25,24 +26,25 @@ Why it exists: when thirty people make an AI video, they get thirty videos with 
 
 Scripts are zero-dependency Node (≥ 20) in `<skill dir>/scripts/`. They print JSON; read it rather than redoing their work by hand.
 
-## The shape of a run: four calls
+## The shape of a run: five calls
 
-The user is interrupted **four times**, and each time sees their own film, never a form:
+The user is interrupted **five times**, and each time sees their own film, never a form. The story and the look are separate calls on purpose: a script is judged as words, beats and timing first, and the look is then chosen to make *that* story strongest.
 
 | # | The user sees | They do | Everything else Claude decides |
 |---|---|---|---|
 | 1 | **Brief**: one editable sentence ("A 45-second launch film for Tally, 16:9 for the website, with voiceover, in Tally's own colours and type") and what was captured | fix a word, press Start (or **Just make it**) | the route, the brand read, the capture |
-| 2 | **Films**: three complete films, each a named style drawn live on the film's own hook line, with a story angle (Sure · Bold · Wild), a logline and its music feel | pick one; or "more like these", "mix two", an energy knob, "browse all styles" | story devices, pitches, the style match, motion language, transitions |
-| 3 | **Animatic**: the whole film as timed key frames with the real music bed and the voice, scene strip, scrubber | play it; click any moment to leave a note; swap music or voice; **Looks right, build it** | the script, scenes, pacing, key frames, the music edit, sound design |
-| 4 | **Final**: the rendered film with scene markers, versions and what changed | click a moment to note it, apply notes, **Render the final**, download | the build, every check, the fixes |
+| 2 | **Story**: three scripts (Sure · Bold · Wild), each a title, a logline and the full script as timed beats: what's on screen, what's said, what we see | pick one, or tell Claude what to change in a line; "three more stories" | story devices, the truth sheet, the writing, the script checks |
+| 3 | **Look**: three design systems chosen for that story, each drawn live on its own lines | pick one; "more like these", an energy knob, "browse all styles" | the style match, motion language, transitions |
+| 4 | **Animatic**: the whole film as timed key frames with the real music bed and the voice, scene strip, scrubber | play it; click any moment to leave a note; swap music or voice; **Looks right, build it** | the script, scenes, pacing, key frames, the music edit, sound design |
+| 5 | **Final**: the rendered film with scene markers, versions and what changed | click a moment to note it, apply notes, **Render the final**, download | the build, every check, the fixes |
 
 Between calls the console shows the work live (Build is part of the Animatic state: scene by scene turning from key frame to finished). Everything Claude decided is listed in the **Decisions** drawer with a one-line reason; the user can change any of it by saying so (⌘K "Tell Claude", or a note).
 
 ## Hard rules
 
-1. **Four calls, and only four.** Ask only: the brief, the film, notes on the animatic, the final. Never ask which transition, ease, scene length, motion language, route, cut, music edit, SFX or font: those are craft, decided by `references/craft.md`, pushed `--status done` with a one-line reason. If a question needs expertise to answer, it isn't a question.
-2. **Claude's picks are the most ambitious ones.** Of the three films, recommend the most ambitious film that still tells the truth clearly (usually **Bold**); **Sure** is the safe floor, never the pick by habit. Every decision gets a receipt: what was picked and the obvious option passed over. "You decide" never means the default.
-3. **Everything goes through the Director's Console.** Every question, option and answer. Chat points to it in one line; never list options in chat, never use an in-chat question tool (AskUserQuestion). Questions that aren't one of the four calls (a failed capture, missing material, an ambiguity) use `console.mjs ask` (below). If the user types an answer in chat anyway, accept it.
+1. **Five calls, and only five.** Ask only: the brief, the story, the look, notes on the animatic, the final. Never ask which transition, ease, scene length, motion language, route, cut, music edit, SFX or font: those are craft, decided by `references/craft.md`, pushed `--status done` with a one-line reason. If a question needs expertise to answer, it isn't a question.
+2. **Claude's picks are the most ambitious ones.** Of the three stories, recommend the most ambitious one that still tells the truth clearly (usually **Bold**); **Sure** is the safe floor, never the pick by habit. Every decision gets a receipt: what was picked and the obvious option passed over. "You decide" never means the default.
+3. **Everything goes through the Director's Console.** Every question, option and answer. Chat points to it in one line; never list options in chat, never use an in-chat question tool (AskUserQuestion). Questions that aren't one of the five calls (a failed capture, missing material, an ambiguity) use `console.mjs ask` (below). If the user types an answer in chat anyway, accept it.
 4. **Intent in the request counts.** Anything the request settles is not asked ("no voiceover", a pasted script, "use the Swiss style", "just make it"). A request that says "you decide" / "just make it" skips to the Final, stopping only there.
 5. **Only the source is required**: what the video is about (a URL, a topic, a script, a PR, a track, footage). **If the request doesn't give it, ask in the console, not in chat**: push `brief` right after setup with `fields.subject` empty (the page shows a "What's the video about?" box above the sentence), then `wait`. Never end a turn with a question in chat and nothing waiting in the console.
 6. **No slop ships.** A film leaves only after `story.mjs check` (the story), `slop.mjs` (copy, look, motion, timing, sound tells), `obey.mjs` (the motion contract) and `sound.mjs check` (loudness, loops, SFX density) pass, or the user waives a finding at the Final. Never claim a check passed that didn't run.
@@ -94,7 +96,7 @@ A local page (`console.mjs`, 127.0.0.1 only, token + session cookie). Payload fi
 
 **Talking it through.** Any step can be discussed; it arrives as a `note`. Answer in the console: `node $SKILL_DIR/scripts/console.mjs reply --run "$RUN" --step <step> --message "<one to three sentences>"`. If they asked for a change, make it, re-push the step and say what changed.
 
-**Other questions** (not one of the four calls): `node $SKILL_DIR/scripts/console.mjs ask --run "$RUN" --question "…" --context "…" --options '[{"id":"a","label":"…","detail":"…"},…]' --recommended <id>`, then `wait`; the answer is `{type: "answer", value: {choice, text}}`. Never re-open an earlier step to ask it.
+**Other questions** (not one of the five calls): `node $SKILL_DIR/scripts/console.mjs ask --run "$RUN" --question "…" --context "…" --options '[{"id":"a","label":"…","detail":"…"},…]' --recommended <id>`, then `wait`; the answer is `{type: "answer", value: {choice, text}}`. Never re-open an earlier step to ask it.
 
 **Notes** on the Animatic and Final arrive one by one as `comment` actions (`{scene, t, x, y, scope, quick}` + the text) and collect on the page; don't act on each. When the user presses Apply you get `apply {ids}`: make all of them in one pass, touching only what they point at, then `console.mjs resolve --run "$RUN" --ids <ids> --note "<what changed>"` and re-push the step with `changes`. `decide-rest` (step `*`, "Just make it") → decide every remaining call yourself and stop only at the Final.
 
@@ -133,43 +135,49 @@ node $SKILL_DIR/scripts/memory.mjs recommend --step aspect        # a remembered
 - **Brand**: with a brand, `brand.mjs read --file <DESIGN.md>` for its roles, fonts and warnings; set `"brand": "<DESIGN.md>"` in `$RUN/decisions.json`. `use_brand: false` in the submitted brief → films are drawn in each style's own colours.
 - Answers: `submit <fields>` → write them into decisions.json; record `memory.mjs record --step aspect --value <WxH> --mode confirmed|auto`. Close `brief` with the sentence as the decision.
 
-## 2 · Films (three complete films: a style and a story each)
+## 2 · Story (three scripts, before any look)
 
-Each film is a **story device** (from the story engine) paired with a **design system** (from the style library) and a music feel. They are three different films, not three looks of one film.
-
-**The story** (full method: `references/story.md`):
+The story is written by its own pass, with its own brief: **`references/script.md`** (how a good video script goes: structures by length and format, hooks, beats, the turn, voiceover and on-screen lines, the end, a worked example, the self-check) on top of the story engine (`references/story.md`: the truth sheet, devices, the rubric). Do it as a dedicated step, not on the way to the look: dispatch a writer subagent with `references/script.md`, the truth sheet, the brief and the three devices as its whole prompt (or follow the file yourself), and judge the scripts as words and timing.
 
 ```bash
-node $SKILL_DIR/scripts/story.mjs truth --out "$RUN/truth.md" --product "<name>"      # fill it in: what really changes, for whom, the enemy, the product's own objects and words, proof, the cliché version
-node $SKILL_DIR/scripts/story.mjs pick --truth "$RUN/truth.md" --count 3 --recent <ids from memory.mjs recent --step concept --n 6> [--format launch|explainer|brand|social]
-# write $RUN/pitches.json: three pitches (Sure, Bold, Wild) from those devices, fused with the product's own material
-node $SKILL_DIR/scripts/story.mjs check --pitch "$RUN/pitches.json" --truth "$RUN/truth.md"   # exit 2 → rewrite what it names, re-check
+node $SKILL_DIR/scripts/story.mjs truth --out "$RUN/story/truth.md" --product "<name>"      # fill it in from the capture: what really changes, for whom, the enemy, the product's own objects and words, proof, the cliché version
+node $SKILL_DIR/scripts/story.mjs pick --truth "$RUN/story/truth.md" --count 3 --recent <ids from memory.mjs recent --step concept --n 6> [--format launch|explainer|brand|social]
+# the writer pass: $RUN/story/pitches.json, three scripts (Sure, Bold, Wild); every beat {name, duration_s, on_screen, vo, visual, value?, turn?}
+node $SKILL_DIR/scripts/story.mjs check --pitch "$RUN/story/pitches.json" --truth "$RUN/story/truth.md" --length <seconds> [--narrated]   # exit 2 → rewrite exactly what it names
 ```
 
-The truth sheet comes from the capture, not from guessing: real product words, real numbers, the real before and after. No invented UI labels, claims or figures.
+The truth sheet comes from the capture, not from guessing: real product words, real numbers, the real before and after. `check` runs the story gates (G1 distance from the cliché arc, G2 swap test, G3 clear by second 4, G4 honest demo, G5 buildable) and **G6 the script** (length, the hook beat, value by beat 2, reading time, voiceover pace and sentence length, on-screen lines that repeat the voice, stock copy, rhythm, the end hold). Nothing reaches the user until all three pass; two rewrites at most, then swap the device.
 
-**The style** (the library: 403 named design systems in 20 families, each a taxonomy stack, a recipe the console draws live, a motion contract and an exportable DESIGN.md):
+Push `story`: `stories: [{id, angle: "Sure"|"Bold"|"Wild", title, logline (≤ 12 words), device (its name), why (one line: why this story for this product), beats: [{name, duration_s, on_screen, vo, visual, turn?, value?}], last_line}]` and `recommended` (the most ambitious that works). The page shows the three as tabs and the selected one as a script table (time, on screen, voiceover, what we see), with the turn marked. No style yet: the story is judged on its own.
+
+Answers:
+- `choose <story id>` → record `memory.mjs record --step concept --value <device id> --mode confirmed`, close `story` with "<title> (<angle>): <logline>", and go to the Look.
+- A `note` ("make the hook shorter", "lose the voiceover in beat 3", "the museum one, but warmer") → rewrite those lines, re-run `check`, `reply` with what changed, re-push. `more {near, exclude}` → three new scripts from the next devices (`pick --exclude <shown>`); re-push.
+
+## 3 · Look (three design systems for that story)
+
+**The library:** 403 named design systems in 20 families, each a taxonomy stack, a recipe the console draws live, a motion contract and an exportable DESIGN.md.
 
 ```bash
 node $SKILL_DIR/scripts/presets.mjs suggest --decisions "$RUN/decisions.json" [--brand <DESIGN.md>] --count 8 --recent <memory.mjs recent --step style --n 6>
 node $SKILL_DIR/scripts/presets.mjs list --q "<what the story evokes>"      # search by name, feel, family, use
-node $SKILL_DIR/scripts/presets.mjs gallery --out "$RUN/styles" --headline "<the recommended film's hook>" [--brand <DESIGN.md>] --recommended <id1>,<id2>,<id3>
+node $SKILL_DIR/scripts/presets.mjs gallery --out "$RUN/styles" --headline "<the story's first on-screen line>" --sub "<its second line>" [--brand <DESIGN.md>] --recommended <id1>,<id2>,<id3>
 ```
 
-**Be the art director, not the ranking.** Match each story to the design system that makes *that* story strongest (a museum-label story wants an exhibition-wall system; a countdown wants a broadcast one). The three films differ in device, style family and music. Never the generic default (`passed_over`), never one of the user's recent styles, never the "Claude look" (cream, rust accent, italic serif) unless the brand is that.
+**Be the art director, not the ranking.** Pick the three systems that make *this* story strongest, read from its device, its world and its lines (a museum-label story wants an exhibition-wall or specimen-label system; a countdown wants a broadcast one; a receipt story wants paper). Three different families; never the generic default (`passed_over`), never one of the user's recent styles, never the "Claude look" (cream, rust accent, italic serif) unless the brand is that.
 
-Push `films`: `films: [{id, angle: "Sure"|"Bold"|"Wild", title, logline (≤ 12 words), hook (the film's first on-screen line; the style is drawn on it), why (one line: why this story in this style), preset (style id), music (a feel, e.g. "sparse piano and room tone, 72 bpm"), frames?, beats?}]`, `recommended` (the most ambitious that works), `gallery` ("$RUN/styles/presets.json"). Optional `frames` + `beats`: three sketch frames (opening, turn, close) as HTML in `$RUN/story/<id>/01–03.html` rendered with `design.mjs stills --dir "$RUN/story/<id>" --aspect <aspect>`, when a story's idea is visual and the specimen can't show it.
+Push `look`: `styles: [{preset, name, why (one line: why this look for this story), rare?}]`, `recommended`, `hook` (the story's first on-screen line; every style is drawn on it), `gallery` ("$RUN/styles/presets.json").
 
 Answers:
-- `choose <film id>` → `node $SKILL_DIR/scripts/presets.mjs pick --id <preset> --decisions "$RUN/decisions.json" [--brand <DESIGN.md>]` (merges the style's terms and sets the look), then `motion-md.mjs write --language <the style's motion-language> --out "$RUN/motion.md" --mode auto --reason "<why>"` and `direction.mjs compile --decisions "$RUN/decisions.json" --out "$RUN/direction"`. Push `motion`, `transitions` (baseline + signature, from craft.md) and `look` done with reasons. Record `memory.mjs record --step style --value <preset> --mode confirmed` and `--step concept --value <device id>`.
-- `more {near, exclude}` → new pitches or styles near the selected film; re-push. `mix {look, story}` → the story of one with the style of another; re-push with the mixed film first. `knob {name: "energy", value: calmer|as is|punchier}` → shift the style pick and pacing (calmer: slower motion language, fewer cuts; punchier: snappier, shorter shots); re-push. `swap {chip: "style", film, preset}` (from Browse all) → that film redrawn in that style; re-push.
-- Footage routes (`embedded-captions`, `talking-head-recut`): films are three caption / overlay identities on the footage; `music-to-video`: stories are three visual treatments of the track.
+- `choose <preset>` (a tile, or any style from Browse all) → `node $SKILL_DIR/scripts/presets.mjs pick --id <preset> --decisions "$RUN/decisions.json" [--brand <DESIGN.md>]` (merges the style's terms and sets the look), then `motion-md.mjs write --language <the style's motion-language> --out "$RUN/motion.md" --mode auto --reason "<why>"` and `direction.mjs compile --decisions "$RUN/decisions.json" --out "$RUN/direction"`. Push `motion` and `transitions` (baseline + signature, from craft.md) done with reasons, close `look`, and record `memory.mjs record --step style --value <preset> --mode confirmed`.
+- `more {near, exclude}` → three other systems near the selected one; re-push. `knob {name: "energy", value: calmer|as is|punchier}` → shift the pick (calmer: slower motion language; punchier: snappier) and re-push.
+- Footage routes (`embedded-captions`, `talking-head-recut`): the looks are three caption / overlay identities on the footage; `music-to-video`: the stories are three visual treatments of the track.
 
-## 3 · Animatic (the whole film, rough, with sound)
+## 4 · Animatic (the whole film, rough, with sound)
 
 The animatic is the film before animation: every scene's key frame at its real duration, with the real music bed and the voice, so pacing, story and sound are judged together. This is where the user shapes the film.
 
-1. **Script and scenes** (craft, `references/craft.md`): write `$RUN/scenes.json` (format: `references/video.md`): per scene `id`, `title`, on-screen text, `visual` (what we see), voiceover `line`, `duration`, `type`/`persuasion`/`beat` (launch films), `intensity`, `transition_in`. One job per scene; hook in the first 1.5–2 s in outcome language; text held at least 0.4 s per word + 0.6 s; no scene still for more than ~1 s; layouts vary; end card 1.5–3 s. Then `node $SKILL_DIR/scripts/scenes.mjs --scenes "$RUN/scenes.json" --route <route> --out "$RUN/plan"` (writes STORYBOARD.md, SCRIPT.md, timeline.json in the workflow's format; exit 1 lists problems: fix and re-run).
+1. **Scenes from the chosen script** (craft, `references/craft.md`): build `$RUN/scenes.json` (format: `references/video.md`) from the picked story's beats: one scene per beat (split a long beat into shots if it needs them), its `on_screen`, `visual`, `vo` as the voiceover `line` and `duration_s`, keeping the approved words; only timing changes later (the music fit). Per scene `id`, `title`, on-screen text, `visual` (what we see), voiceover `line`, `duration`, `type`/`persuasion`/`beat` (launch films), `intensity`, `transition_in`. One job per scene; hook in the first 1.5–2 s in outcome language; text held at least 0.4 s per word + 0.6 s; no scene still for more than ~1 s; layouts vary; end card 1.5–3 s. Then `node $SKILL_DIR/scripts/scenes.mjs --scenes "$RUN/scenes.json" --route <route> --out "$RUN/plan"` (writes STORYBOARD.md, SCRIPT.md, timeline.json in the workflow's format; exit 1 lists problems: fix and re-run).
 2. **Music** (`references/sound.md`): candidates long enough for the film, in the chosen film's feel, each analysed and fitted, then an edit that never loops audibly:
 
    ```bash
@@ -189,7 +197,7 @@ Answers:
 - `swap {chip: "music"|"voice", id}` → refit / re-voice and re-push. `more {what: "angle"}` → a new pitch from the next device (`story.mjs pick --exclude <used>`), a new animatic.
 - `approve` → close `animatic`, go to Build.
 
-## 3b · Build (inside the Animatic state; the user watches)
+## 4b · Build (inside the Animatic state; the user watches)
 
 Write `$RUN/video-decisions.json` (format: `references/video.md`; `direction` = `$RUN/direction`; `look` = `{frame, name}` from the picked style, or `{design_md, mode}` for the brand's own; `brand`/`brand_mode`; `music: {path: "$RUN/bed.wav", title}`; `keyframes: [{scene, image: "$RUN/frames/<id>.png"}]`, the approved key frames) and hand off:
 
@@ -206,7 +214,7 @@ It writes `BRIEF.md` (the workflow asks nothing), `frame.md` (the look + the mot
 5. **Gates** after the workflow's verify step, before its render: `node $SKILL_DIR/scripts/obey.mjs --project videos/<name>` (the motion contract, per frame) and `node $SKILL_DIR/scripts/slop.mjs --project videos/<name>` (the built compositions). Exit 2 → re-dispatch the failing frames with the findings + DISPATCH.md, re-verify (at most 2 passes); leftovers go to the Final as fix-or-waive (`obey.mjs waive …`). Exit 1 = could not run: report it, never call it clean.
 6. **Draft render** at the workflow's draft quality, then `node $SKILL_DIR/scripts/sound.mjs check --video <draft.mp4> --film <seconds> --sfx videos/<name>/index.html` (loudness, true peak, silent or quiet openings, abrupt endings, audible loops, music under the voice, SFX density) and `slop.mjs --project videos/<name> --video <draft.mp4>` (dead air, black open): fix and re-render on exit 2; loudness alone → `sound.mjs master` (fixes the mix without touching the picture).
 
-## 4 · Final
+## 5 · Final
 
 Push `render` with `video` (the draft), `poster`, `scenes: [{id, title, start, thumb}]` (markers), `version`, `versions: [{v, when}]`, and after a revision `changes` (plain lines). Unwaived gate findings go in `context`.
 
@@ -216,10 +224,10 @@ Push `render` with `video` (the draft), `poster`, `scenes: [{id, title, start, t
 
 ## Footage reels (route `reel`)
 
-Brief → **Footage** → Films → **Cut** (the reel's Animatic) → Build → Final. RasanAI's `reel.mjs` examines the footage, builds the cut as a HyperFrames composition (segments, Claude's cards and overlays, captions from the transcript, the music bed ducked under speech) and HyperFrames renders it. Formats: `references/reel.md`.
+Brief → **Footage** → Story → Look → **Cut** (the reel's Animatic) → Build → Final. RasanAI's `reel.mjs` examines the footage, builds the cut as a HyperFrames composition (segments, Claude's cards and overlays, captions from the transcript, the music bed ducked under speech) and HyperFrames renders it. Formats: `references/reel.md`.
 
 1. **Footage**: `node $SKILL_DIR/scripts/reel.mjs scan --footage "<folder>" --run "$RUN" [--lang <code>]` probes every clip, draws contact sheets, finds shot changes and silences, and transcribes speech word by word. **Look at every contact sheet** and read the transcripts. Push `footage` with `clips`; the user unticks clips to leave out (`submit {include:[ids]}`).
-2. **Films**: three cuts (what the reel is for and its shape: hook → middle → payoff), each with a card/overlay design system, from what the footage actually contains.
+2. **Story, then Look**: three cuts as scripts (what the reel is for, its shape from hook to payoff, the card and overlay lines), written from what the footage actually contains; then three card and overlay design systems for the picked cut.
 3. **Cut**: draft `$RUN/reel.json`: segments on word boundaries (in = a word's start − 0.1 s, out = its end + 0.15 s), silences and false starts dropped, shot changes as cut points, the hook in the first 2 s; cards between clips; overlays for names and callouts; `captions.on` for speech; `mute: true` on b-roll that fights the music; `fit` cover/contain/blur; music fitted with `sound.mjs fit` as above. Push `reel` with `timeline`, `overlays`, `captions`, `clips`, `edl` and a draft `video`; the user edits in/out points and cards there (`submit` → write back) or leaves notes.
 4. **Build**: `reel.mjs briefs --reel "$RUN/reel.json" --project-dir videos/<name>` writes a brief per card and overlay: design and animate each yourself from the direction (one subagent per card for several). Then `reel.mjs build --reel "$RUN/reel.json" --project-dir videos/<name> --render --quality draft` (lint + obey; refuses while a card is missing). Read every warning to the user.
 5. **Final**: as above; on approval rebuild with `--quality delivery`.
@@ -228,7 +236,7 @@ A bespoke card (a product animation, a logo sting) can be built through **Single
 
 ## Single units (route `motion-graphics`)
 
-One short unnarrated unit (title, sting, stat hit, lower third): Brief → Films (three styles on the headline; `story` optional) → Animatic (the key poses, optional keyframe board: `board.mjs`, `references/board-format.md`) → `handoff.mjs --decisions "$RUN/decisions.json"` (`references/handoff.md`) → build through `/motion-graphics` with `DISPATCH.md` appended to every subagent, `obey.mjs` + `slop.mjs` after verify → Final.
+One short unnarrated unit (title, sting, stat hit, lower third): Brief → Look (three styles on the headline; Story optional) → Animatic (the key poses, optional keyframe board: `board.mjs`, `references/board-format.md`) → `handoff.mjs --decisions "$RUN/decisions.json"` (`references/handoff.md`) → build through `/motion-graphics` with `DISPATCH.md` appended to every subagent, `obey.mjs` + `slop.mjs` after verify → Final.
 
 ## Design systems
 
@@ -240,7 +248,7 @@ Every style in the library is a complete design system: `node $SKILL_DIR/scripts
 
 ## Revise an existing video
 
-Push the current film to the Final (its render, markers from STORYBOARD.md) and take notes there. Notes that change the story or the style reopen the Films or Animatic in a new `$RUN` (scenes.json can be rebuilt from STORYBOARD.md), then `video.mjs write --project-dir videos/<name> --decisions … --revise` (it moves the built frames, audio and renders into `.superseded/<stamp>/` and rewrites the plan). A different aspect needs a new project. Single units revise with `handoff.mjs --revise --reopen <steps>`.
+Push the current film to the Final (its render, markers from STORYBOARD.md) and take notes there. Notes that change the story or the style reopen the Story or the Look or Animatic in a new `$RUN` (scenes.json can be rebuilt from STORYBOARD.md), then `video.mjs write --project-dir videos/<name> --decisions … --revise` (it moves the built frames, audio and renders into `.superseded/<stamp>/` and rewrites the plan). A different aspect needs a new project. Single units revise with `handoff.mjs --revise --reopen <steps>`.
 
 ## Failure handling
 
@@ -255,6 +263,7 @@ Push the current film to the Final (its render, markers from STORYBOARD.md) and 
 |---|---|
 | the craft Claude decides without asking: timing, motion, transitions, composition, camera, lighting, sound, story, anti-slop, quality gates | `references/craft.md` |
 | the working vocabulary: film, lens, lighting, grade, editing, animation and sound terms, each with an HTML/CSS/GSAP recipe | `references/vocabulary.md` |
+| writing the script: structures by length, hooks, beats, the turn, voiceover and on-screen lines, the end, the self-check (the writer pass's brief) | `references/script.md` |
 | the story engine: truth sheet, devices, Sure/Bold/Wild, the pitch rubric | `references/story.md`, `taxonomy/devices-SCHEMA.md` |
 | music choice, the edit-to-picture algorithm, SFX rules, VO pacing, mix targets | `references/sound.md` |
 | the style library: preset fields, recipes, layouts, the cookbook | `taxonomy/presets/SCHEMA.md` |

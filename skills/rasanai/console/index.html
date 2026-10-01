@@ -358,6 +358,23 @@
   .film .why { color: var(--ink-3); font-size: 13.5px; margin-top: 6px; }
   .film .style-name { color: var(--ink-3); font-size: 13px; margin-top: 6px; }
   .film .spec-missing { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; text-align: center; color: var(--ink-2); font-size: 18px; }
+  .story-tab { text-align: left; background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px; padding: 14px 16px; cursor: pointer; color: inherit; font: inherit; }
+  .story-tab:hover { border-color: var(--ink-3); }
+  .story-tab.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .story-tab h3 { margin: 0; }
+  .script { margin-top: 22px; }
+  .script-why { margin: 0 0 12px; }
+  .beats-table { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .brow { display: grid; grid-template-columns: 74px 1.1fr 1.3fr 1.4fr; gap: 16px; padding: 12px 16px; border-top: 1px solid var(--line); align-items: start; }
+  .brow:first-child { border-top: 0; }
+  .brow.head { background: var(--panel); font: 500 11px/1.4 var(--mono, ui-monospace, monospace); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .brow .tc { font: 500 12.5px/1.5 var(--mono, ui-monospace, monospace); color: var(--ink-3); }
+  .brow .os { font: 600 17px/1.35 var(--display); color: var(--ink); }
+  .brow .vo { font-size: 14.5px; line-height: 1.5; color: var(--ink-2); font-style: italic; }
+  .brow .vis { font-size: 13.5px; line-height: 1.5; color: var(--ink-3); }
+  .brow.turn { background: rgba(239,178,26,.06); }
+  .brow.turn .tc { color: var(--accent); }
+  @media (max-width: 760px) { .brow { grid-template-columns: 60px 1fr; } .brow .vo, .brow .vis { grid-column: 2; } .brow.head .vo, .brow.head span:nth-child(4) { display: none; } }
   .film .beats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
   .film .beats figure { margin: 0; }
   .film .beats img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px; display: block; background: var(--bg-2, #111); }
@@ -481,14 +498,15 @@
 (function () {
   var TOKEN = new URLSearchParams(location.search).get("t") || "";
   var STEPS = [
-    ["brief", "Brief"], ["brand", "Brand"], ["route", "Workflow"], ["footage", "Footage"], ["direction", "Style"], ["films", "Films"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
+    ["brief", "Brief"], ["brand", "Brand"], ["route", "Workflow"], ["footage", "Footage"], ["story", "Story"], ["direction", "Style"], ["films", "Films"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
     ["styleframes", "Key frames"], ["animatic", "Animatic"], ["reel", "Cut"], ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
     ["plan", "Plan"], ["build", "Build"], ["render", "Final"], ["final", "Final"]
   ];
-  // the four states of the film page; every step belongs to one of them
+  // the five states of the film page; every step belongs to one of them
   var STATES = [
     ["Brief", ["brief", "brand", "route", "footage"]],
-    ["Films", ["films", "direction", "look", "concept", "motion", "transitions"]],
+    ["Story", ["story", "concept"]],
+    ["Look", ["look", "films", "direction", "motion", "transitions"]],
     ["Animatic", ["animatic", "scenes", "styleframes", "storyboard", "keyframes", "voice", "music", "reel", "plan", "build"]],
     ["Final", ["render", "final"]]
   ];
@@ -1327,15 +1345,17 @@
     // play once, then again whenever the tile is hovered or focused (a timed loop left tiles caught mid-entrance)
     go(); var tile = box.closest(".film") || box; tile.addEventListener("mouseenter", go); tile.addEventListener("focus", go);
   }
-  function filmsScreen(d) {
-    var body = h("div", null, [h("p", { class: "qsub", text: d.context || "Three films I could make. Each is a complete style and a story angle; the first is my pick." })]);
-    var films = d.films || [];
+  function filmsScreen(d, mode) {
+    var look = mode === "look";
+    var body = h("div", null, [h("p", { class: "qsub", text: d.context || (look ? "Three looks for your story, each drawn on its own lines. The first is my pick." : "Three films I could make. Each is a complete style and a story angle; the first is my pick.") })]);
+    // a look is a style: the films screen draws it the same way, keyed by the style id
+    var films = look ? (d.styles || []).map(function (s) { return { id: s.preset || s.id, preset: s.preset || s.id, title: s.name || s.preset || s.id, angle: s.rare ? "Unusual" : "", why: s.why, hook: d.hook, music: "" }; }) : (d.films || []);
     if (!local.filmSel || !films.some(function (x) { return x.id === local.filmSel; })) local.filmSel = d.recommended || (films[0] || {}).id;
     var grid = h("div", { class: "films" });
     body.appendChild(grid);
     var ctl = h("div", { class: "controls" });
     body.appendChild(ctl);
-    var res = { body: body, q: d.question || "Pick a film", hint: "Hover a film to see it move · 1 · 2 · 3 to pick", primary: { label: "Make it", run: function () { send(S.current, "choose", local.filmSel); } }, secondary: [] };
+    var res = { body: body, q: d.question || (look ? "Pick a look" : "Pick a film"), hint: "Hover " + (look ? "a look" : "a film") + " to see it move · 1 · 2 · 3 to pick", primary: { label: "Make it", run: function () { send(S.current, "choose", local.filmSel); } }, secondary: [] };
     loadRenderer(function () {
       var go = function (g) {
         var byId = {}; ((g && g.presets) || []).forEach(function (p) { byId[p.id] = p; });
@@ -1352,8 +1372,8 @@
           tile.appendChild(h("div", { class: "meta2" }, [h("h3", { text: fm.title }), fm.angle ? h("span", { class: "angle", text: fm.angle }) : null]));
           if (fm.logline) tile.appendChild(h("p", { text: fm.logline }));
           if ((fm.frames || []).length) tile.appendChild(h("div", { class: "beats" }, fm.frames.slice(0, 3).map(function (src, k) { return h("figure", null, [h("img", { src: fsUrl(src), alt: "" }), (fm.beats || [])[k] ? h("figcaption", { text: fm.beats[k] }) : null]); })));
-          tile.appendChild(h("div", { class: "style-name", text: (p && p.name ? p.name : "") + (fm.music ? " · " + fm.music : "") }));
-          if (fm.why && (local.filmSel === fm.id || i === 0)) tile.appendChild(h("div", { class: "why", text: fm.why }));
+          if (!look) tile.appendChild(h("div", { class: "style-name", text: (p && p.name ? p.name : "") + (fm.music ? " · " + fm.music : "") }));
+          if (fm.why && (look || local.filmSel === fm.id || i === 0)) tile.appendChild(h("div", { class: "why", text: fm.why }));
           tile.addEventListener("click", function () { local.filmSel = fm.id; [].forEach.call(grid.children, function (c, k) { c.classList.toggle("on", films[k].id === fm.id); }); primaryLabel(); });
           tile.addEventListener("dblclick", function () { send(S.current, "choose", fm.id); });
           grid.appendChild(tile);
@@ -1368,13 +1388,13 @@
         function draw2() { [].forEach.call(seg.children, function (b) { b.classList.toggle("on", b.textContent === (local.energy || "As is")); }); }
         ctl.appendChild(h("span", { class: "qsub", style: "margin:0", text: "Energy" })); ctl.appendChild(seg);
         ctl.appendChild(h("button", { class: "sec", onclick: function () { send(S.current, "more", { near: local.filmSel, exclude: films.map(function (x) { return x.id; }) }); }, text: "More like these" }));
-        ctl.appendChild(h("button", { class: "sec", onclick: function (e) { mixMenu(e.currentTarget); }, text: "Mix two…" }));
-        if (g) ctl.appendChild(h("button", { class: "sec", onclick: function () { galleryOverlay(g); }, text: "Browse all " + g.presets.length + " styles" }));
+        if (!look) ctl.appendChild(h("button", { class: "sec", onclick: function (e) { mixMenu(e.currentTarget); }, text: "Mix two…" }));
+        if (g) ctl.appendChild(h("button", { class: "sec", onclick: function () { galleryOverlay(g, look); }, text: "Browse all " + g.presets.length + " styles" }));
         if (g && g.brand) ctl.appendChild(h("button", { class: "sec", onclick: function () { local.inBrand = local.inBrand === false; document.getElementById("main")._sig = null; render(true); }, text: local.inBrand === false ? "Show in my brand" : "Show their own colours" }));
       };
       if (d.gallery) loadGallery(d.gallery, go); else go(null);
     });
-    function primaryLabel() { var fm = films.filter(function (x) { return x.id === local.filmSel; })[0]; var b = document.getElementById("primaryBtn"); if (b && fm) b.textContent = "Make “" + fm.title + "”"; }
+    function primaryLabel() { var fm = films.filter(function (x) { return x.id === local.filmSel; })[0]; var b = document.getElementById("primaryBtn"); if (b && fm) b.textContent = (look ? "Use “" : "Make “") + fm.title + "”"; }
     function mixMenu(anchor) {
       closeFloating();
       var m = h("div", { class: "menu", style: "min-width:300px;padding:12px" });
@@ -1385,7 +1405,7 @@
     }
     return res;
   }
-  function galleryOverlay(g) {
+  function galleryOverlay(g, pickDirect) {
     closeFloating();
     // a modal: the page behind is dimmed so the header and the Tell Claude bar don't compete with the gallery
     var ov = h("div", { class: "pop", role: "dialog", "aria-label": "Every style", style: "position:fixed;inset:5vh 5vw;width:auto;overflow:auto;padding:22px;z-index:60;box-shadow:0 0 0 100vmax rgba(0,0,0,.62),0 24px 60px rgba(0,0,0,.5)" });
@@ -1396,11 +1416,63 @@
     g.presets.forEach(function (p) {
       var c = h("button", { type: "button", class: "choice mini", style: "text-align:left" }, [specimen(p, g, true), h("div", { class: "body" }, [h("h3", { text: p.name }), h("div", { class: "meta", text: p.family })])]);
       c._p = p;
-      c.addEventListener("click", function () { send(S.current, "swap", { chip: "style", film: local.filmSel, preset: p.id }); ov.remove(); toast("Asked Claude to redo that film in " + p.name + "."); });
+      c.addEventListener("click", function () {
+        if (pickDirect) { send(S.current, "choose", p.id); ov.remove(); toast("Using " + p.name + "."); return; }
+        send(S.current, "swap", { chip: "style", film: local.filmSel, preset: p.id }); ov.remove(); toast("Asked Claude to redo that film in " + p.name + ".");
+      });
       grid.appendChild(c);
     });
     search.addEventListener("input", function () { var q = search.value.toLowerCase(); [].forEach.call(grid.children, function (c) { var p = c._p; c.style.display = !q || [p.name, p.what, (p.aka || []).join(" "), p.family, (p.feels || []).join(" ")].join(" ").toLowerCase().indexOf(q) > -1 ? "" : "none"; }); });
     document.body.appendChild(ov); search.focus();
+  }
+
+  // --- Story: three scripts, judged as words and timing before any look touches them ----------------------------
+  function storyScreen(d) {
+    var stories = d.stories || [];
+    if (!local.storySel || !stories.some(function (x) { return x.id === local.storySel; })) local.storySel = d.recommended || (stories[0] || {}).id;
+    var body = h("div", null, [h("p", { class: "qsub", text: d.context || "Three stories I could tell, as scripts. Pick the one to make; the look comes next." })]);
+    var tabs = h("div", { class: "story-tabs films" });
+    var sheet = h("div", { class: "script" });
+    body.appendChild(tabs); body.appendChild(sheet);
+    function fmt(s) { return Math.floor(s / 60) + ":" + ("0" + Math.round(s % 60)).slice(-2); }
+    function draw() {
+      tabs.innerHTML = "";
+      stories.forEach(function (st) {
+        var on = st.id === local.storySel;
+        var b = h("button", { type: "button", class: "film story-tab" + (on ? " on" : ""), "aria-pressed": on ? "true" : "false" }, [
+          h("div", { class: "meta2" }, [h("h3", { text: st.title }), st.angle ? h("span", { class: "angle", text: st.angle }) : null]),
+          st.logline ? h("p", { text: st.logline }) : null,
+          st.device ? h("div", { class: "style-name", text: st.device }) : null
+        ]);
+        b.addEventListener("click", function () { local.storySel = st.id; draw(); primaryLabel(); });
+        tabs.appendChild(b);
+      });
+      var st = stories.filter(function (x) { return x.id === local.storySel; })[0];
+      sheet.innerHTML = "";
+      if (!st) return;
+      if (st.why) sheet.appendChild(h("p", { class: "why script-why", text: st.why }));
+      var t = 0, total = (st.beats || []).reduce(function (a, b) { return a + (Number(b.duration_s) || 0); }, 0);
+      var tbl = h("div", { class: "beats-table", role: "table", "aria-label": "Script of " + st.title });
+      tbl.appendChild(h("div", { class: "brow head", role: "row" }, [h("span", { text: "Time" }), h("span", { text: "On screen" }), h("span", { text: "Voiceover" }), h("span", { text: "What we see" })]));
+      (st.beats || []).forEach(function (b) {
+        var row = h("div", { class: "brow" + (b.turn ? " turn" : "") + (b.value ? " value" : ""), role: "row" }, [
+          h("span", { class: "tc", text: fmt(t) + (b.turn ? " · turn" : "") }),
+          h("span", { class: "os", text: b.on_screen || "—" }),
+          h("span", { class: "vo", text: b.vo || "" }),
+          h("span", { class: "vis", text: b.visual || "" })
+        ]);
+        t += Number(b.duration_s) || 0;
+        tbl.appendChild(row);
+      });
+      sheet.appendChild(tbl);
+      sheet.appendChild(h("p", { class: "qsub", style: "margin-top:12px", text: Math.round(total) + " s" + (st.last_line ? " · last line: " + st.last_line : "") }));
+    }
+    function primaryLabel() { var st = stories.filter(function (x) { return x.id === local.storySel; })[0]; var b = document.getElementById("primaryBtn"); if (b && st) b.textContent = "Use “" + st.title + "”"; }
+    draw();
+    var ctl = h("div", { class: "controls" }, [h("button", { class: "sec", onclick: function () { send(S.current, "more", { near: local.storySel, exclude: stories.map(function (x) { return x.id; }) }); }, text: "Three more stories" })]);
+    body.appendChild(ctl);
+    setTimeout(primaryLabel, 0);
+    return { body: body, q: d.question || "Pick a story", hint: "Tell me what to change in a line · 1 · 2 · 3 to switch", primary: { label: "Use this story", run: function () { send(S.current, "choose", local.storySel); } }, secondary: [] };
   }
 
   // --- Animatic: the whole film as a timed rough cut; click the frame to leave a note -----------------------
@@ -1625,6 +1697,8 @@
     if (!step || !S.steps[step]) return freshSession() ? startScreen() : workingScreen();
     var busy = !waitingOnUser() && d.status !== "done" && step !== "build" && !(step === "render" || step === "final");
     if (step === "brief") return d.status === "awaiting" ? briefScreen(d) : workingScreen();
+    if (step === "story") return busy ? workingScreen() : storyScreen(d);
+    if (step === "look" && d.styles) return busy ? workingScreen() : filmsScreen(d, "look");
     if (step === "films" || (step === "direction" && d.films)) return busy ? workingScreen() : filmsScreen(d);
     if (step === "animatic") return animaticScreen(d, step);
     if (step === "build") return buildScreen(d);

@@ -4,12 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RasanAI: AI video direction for Claude Code. Pick the film, Claude makes it.</title>
-<meta name="description" content="A Claude Code skill for entire videos. You make four calls in a local console: the brief, one of three complete films, notes on a timed animatic, the final. Claude decides the craft from a quantified playbook, lists every call with its reason, and checks the film for AI-video tells before you see it." />
+<meta name="description" content="A Claude Code skill for entire videos. You make five calls in a local console: the brief, one of three scripts, one of three looks for it, notes on a timed animatic, the final. Claude decides the craft from a quantified playbook, lists every call with its reason, and checks the film for AI-video tells before you see it." />
 <meta name="theme-color" content="#1B1F5E" />
 <meta name="author" content="Sibhimanyu" />
 <meta name="keywords" content="RasanAI, Rasanai, ரசனை, Rasa Director, Sibhimanyu, Claude Code skill, AI video, AI video generator, motion graphics, HyperFrames, launch video, explainer video" />
 <meta property="og:title" content="RasanAI: pick the film. Claude makes it." />
-<meta property="og:description" content="Four calls, three complete films, 403 design systems. Claude decides the story, motion, music edit and sound, and checks the film for AI-video tells." />
+<meta property="og:description" content="Five calls: brief, story, look, animatic, final. 403 design systems. Claude decides the story, motion, music edit and sound, and checks the film for AI-video tells." />
 <link rel="canonical" href="https://sibhimanyu.github.io/rasanai/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="RasanAI" />
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="RasanAI: Pick the film. Claude makes it." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="RasanAI: pick the film. Claude makes it." />
-<meta name="twitter:description" content="A Claude Code skill for AI-made videos: launch films, explainers, reels and motion graphics. Four calls, three complete films, 403 design systems." />
+<meta name="twitter:description" content="A Claude Code skill for AI-made videos: launch films, explainers, reels and motion graphics. Five calls: brief, story, look, animatic, final. 403 design systems." />
 <meta name="twitter:image" content="https://sibhimanyu.github.io/rasanai/img/social-card.jpg" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"RasanAI","alternateName":["Rasa Director","ரசனை"],"applicationCategory":"MultimediaApplication","operatingSystem":"macOS, Linux, Windows (Claude Code)","description":"A Claude Code skill that directs entire AI-made videos: launch films, explainers, PR videos, music videos, reels cut from your own footage and motion graphics, built with HyperFrames.","url":"https://sibhimanyu.github.io/rasanai/","downloadUrl":"https://github.com/Sibhimanyu/rasanai","codeRepository":"https://github.com/Sibhimanyu/rasanai","license":"https://opensource.org/licenses/MIT","image":"https://sibhimanyu.github.io/rasanai/img/social-card.jpg","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Sibhimanyu","url":"https://github.com/Sibhimanyu"}}
@@ -61,7 +61,7 @@
   <div class="wrap hero-head">
     <h1>Pick the film.<br /><em>Claude makes it.</em></h1>
     <div class="hero-side">
-      <p><strong>RasanAI</strong> is a Claude Code skill for entire videos: launch films, explainers, PR videos, music videos, reels cut from your own footage, motion graphics. You make four calls and see your film at each one. Claude makes every craft decision, lists each with its reason, and checks the film for AI-video tells before you see it.</p>
+      <p><strong>RasanAI</strong> is a Claude Code skill for entire videos: launch films, explainers, PR videos, music videos, reels cut from your own footage, motion graphics. You make five calls and see your film at each one. Claude makes every craft decision, lists each with its reason, and checks the film for AI-video tells before you see it.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#install">Install the skill <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost" href="https://github.com/Sibhimanyu/rasanai"><svg aria-hidden="true"><use href="#i-gh"/></svg> GitHub</a>
@@ -109,12 +109,12 @@
     </div>
   </section>
 
-  <!-- the four calls -->
+  <!-- the five calls -->
   <section class="section dark" id="flow">
     <div class="wrap">
       <p class="eyebrow">How it runs</p>
-      <h2 class="mega">Four calls. You see your film at every one.</h2>
-      <p class="lede narrow">You type <code>/rasanai make a 45s launch film for tally.app</code>. A Director's Console opens in your browser, shows what Claude is doing as it works, and stops you four times.</p>
+      <h2 class="mega">Five calls. You see your film at every one.</h2>
+      <p class="lede narrow">You type <code>/rasanai make a 45s launch film for tally.app</code>. A Director's Console opens in your browser, shows what Claude is doing as it works, and stops you five times. The story and the look are separate calls: the script is judged as words and timing first.</p>
 
       <ol class="calls">
         <li class="call">
@@ -129,15 +129,24 @@
         <li class="call">
           <div class="call-text">
             <p class="call-n">2</p>
-            <h3>Films</h3>
-            <p>Three complete films. Each is a named design system, drawn live and moving on the film's own opening line, with a story angle (Sure, Bold or Wild), a logline and its music feel.</p>
-            <p class="call-do"><b>Your call</b>Pick one, or ask for more like these, mix two, turn the energy up or down, or browse every style.</p>
+            <h3>Story</h3>
+            <p>Three scripts, Sure, Bold and Wild, written by a dedicated script pass from your product's truth. Each is a title, a logline and every beat: what's on screen, what's said, what we see. No style yet.</p>
+            <p class="call-do"><b>Your call</b>Pick one, or tell Claude what to change in a line.</p>
           </div>
-          <figure class="showcase"><img src="img/console-films.jpg" width="1440" height="900" loading="lazy" alt="The Films call: three film cards side by side, each a different design system animating its opening line, labelled Sure, Bold and Wild with a logline and a music feel" /></figure>
+          <figure class="showcase"><img src="img/console-story.jpg" width="1440" height="900" loading="lazy" alt="The Story call: three story tabs labelled Sure, Bold and Wild, and the selected story as a script table of timed beats with on-screen lines, voiceover and visuals, the turn highlighted" /></figure>
         </li>
         <li class="call">
           <div class="call-text">
             <p class="call-n">3</p>
+            <h3>Look</h3>
+            <p>Three design systems chosen for that story, each drawn live and moving on its own first line.</p>
+            <p class="call-do"><b>Your call</b>Pick one, ask for more like these, turn the energy up or down, or browse every style.</p>
+          </div>
+          <figure class="showcase"><img src="img/console-look.jpg" width="1440" height="900" loading="lazy" alt="The Look call: three style tiles drawing the story's first line, museum specimen label, museum wall text and archival documentary, each with one line on why it fits" /></figure>
+        </li>
+        <li class="call">
+          <div class="call-text">
+            <p class="call-n">4</p>
             <h3>Animatic</h3>
             <p>The whole film, rough: every scene's key frame at its real duration, with the real music edit and the voice.</p>
             <p class="call-do"><b>Your call</b>Play it and click any moment to leave a note. Then Claude builds it scene by scene while you watch.</p>
@@ -146,7 +155,7 @@
         </li>
         <li class="call">
           <div class="call-text">
-            <p class="call-n">4</p>
+            <p class="call-n">5</p>
             <h3>Final</h3>
             <p>The rendered film with scene markers, your notes, every version and what changed between them.</p>
             <p class="call-do"><b>Your call</b>Note a moment, apply the notes, render and download.</p>
@@ -184,7 +193,7 @@
   <!-- what makes the films different -->
   <section class="section" id="different">
     <div class="wrap">
-      <p class="eyebrow">Under the four calls</p>
+      <p class="eyebrow">Under the five calls</p>
       <h2 class="mega">What makes the films different.</h2>
       <div class="diffs">
         <article>
@@ -465,7 +474,7 @@ detail removed.
     <div class="wrap two">
       <h2>Questions</h2>
       <div>
-        <details><summary>What do I actually decide?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Four things: the brief (one sentence), which of three complete films to make, notes on the animatic, and the final. Everything else is craft, and Claude decides it. If a question would need expertise to answer, RasanAI doesn't ask it.</p></div></details>
+        <details><summary>What do I actually decide?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Five things: the brief (one sentence), which of three scripts to tell, which of three looks to make it in, notes on the animatic, and the final. Everything else is craft, and Claude decides it. If a question would need expertise to answer, RasanAI doesn't ask it.</p></div></details>
         <details><summary>Can I change what Claude decided?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Yes. Every call is in the Decisions drawer with its reason and the obvious option it passed over. Tell Claude (<kbd>⌘K</kbd>) or leave a note on a moment in the animatic or the final, and it changes only what the note points at.</p></div></details>
         <details><summary>Who actually animates the video?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Claude. The style specimens in the console are for choosing by eye. Claude designs the key frames, the scenes and the reel cards from the chosen film, HyperFrames renders them, and the gates confirm the motion, copy and sound before you see the result.</p></div></details>
         <details><summary>Do I need to know motion-design terms?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>No. You choose by watching and listening. Claude works in the terms, because they make the result precise: "simplified UI, grotesk, precise motion, UI-morph transitions" builds something very different from "make it modern".</p></div></details>

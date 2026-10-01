@@ -14,7 +14,7 @@
 //        -> three devices ("Sure", "Bold", "Wild") that differ on >= 5 of 7 axes, with different family,
 //           protagonist and visual world; each with beats, pitfalls, an example and native material to fuse
 //           with. Deterministic for a seed (default seed: product name + today's date).
-//   node story.mjs check --pitch <pitch.json | pitches.json> [--truth <truth.md|json>] [--footage]
+//   node story.mjs check --pitch <pitch.json | pitches.json> [--truth <truth.md|json>] [--footage] [--length <s>] [--narrated]
 //        -> the rubric: 5 pass/fail gates + the weighted 1-5 score (ship at >= 3.8, no dimension < 3).
 //           Exit 0 = ship, 2 = rewrite (reasons in the JSON), 1 = bad input.
 //   node story.mjs validate
@@ -426,7 +426,8 @@ if (cmd === "truth") {
   const pitches = Array.isArray(raw) ? raw : Array.isArray(raw.pitches) ? raw.pitches : [raw];
   const truth = loadTruth(args.truth);
   const footage = !!args.footage || !!(truth && truth.assets.some((a) => /footage|video of|founder on camera/i.test(a)));
-  const results = pitches.map((p, i) => checkPitch(p, i, truth, footage));
+  const opts = { length: Number(args.length) || 0, narrated: !!args.narrated };
+  const results = pitches.map((p, i) => checkPitch(p, i, truth, footage, opts));
   const portfolio = pitches.length > 1 ? checkPortfolio(pitches, results) : null;
   const ship = results.every((r) => r.verdict === "ship") && (!portfolio || portfolio.pass);
   out(pitches.length === 1 && !portfolio ? results[0] : { ok: ship, verdict: ship ? "ship" : "rewrite", pitches: results, portfolio });
@@ -461,7 +462,7 @@ if (cmd === "truth") {
 }
 
 // --- check -------------------------------------------------------------------------
-function checkPitch(p, idx, truth, footage) {
+function checkPitch(p, idx, truth, footage, opts = {}) {
   const name = p.id || p.title || `pitch ${idx + 1}`;
   const errors = [];
   const warnings = [];
@@ -594,6 +595,45 @@ function checkPitch(p, idx, truth, footage) {
   if (dev.build.score <= 2 && !footage) g5.push(`${dev.name} is buildability ${dev.build.score}/5 in code-built motion`);
   gate("G5", "Buildable in code-built motion graphics", g5, { device_build: `${dev.build.score}/5 (${dev.build.how.join(", ")})` });
 
+  // G6 the script itself (references/script.md): runs when the beats carry voiceover or a target length is given
+  let script = null;
+  const narrated = opts.narrated || beats.some((b) => String(b.vo || "").trim());
+  if (narrated || opts.length) {
+    const g6 = [];
+    const words = (s) => String(s || "").trim().split(/\s+/).filter(Boolean).length;
+    const nz = (s) => norm(s).replace(/-/g, " ").replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+    const BANNED = ["seamless", "unlock", "revolutioniz", "revolutionis", "game-changer", "game changer", "supercharge", "effortless", "cutting-edge", "cutting edge", "empower", "streamline", "the future of", "like never before", "next-level", "next level", "all-in-one", "say goodbye to", "harness the power", "elevate your", "reimagine"];
+    if (opts.length && Math.abs(lengthS - opts.length) > Math.max(2, opts.length * 0.1)) g6.push(`runs ${lengthS} s for a ${opts.length} s film (within ${Math.max(2, Math.round(opts.length * 0.1))} s)`);
+    if (Number(beats[0].duration_s) > 4) g6.push(`the hook beat runs ${beats[0].duration_s} s: land the hook in 1.5-2 s and move on by 4 s`);
+    const valueIdx = beats.findIndex((b) => b.value === true);
+    if (valueIdx > 1) g6.push(`the value lands in beat ${valueIdx + 1}: state what the viewer gets by beat 2, then prove it`);
+    else if (valueIdx < 0) warnings.push("mark the beat that states the value with value: true (it must be beat 1 or 2)");
+    const last = beats[beats.length - 1];
+    if (Number(last.duration_s) < 2) g6.push(`the end beat runs ${last.duration_s} s: hold the name and call to action 2-3 s`);
+    if (!String(last.on_screen || "").trim()) g6.push("the end beat has no on-screen line (the name and one call to action)");
+    let vo = 0;
+    beats.forEach((b, i) => {
+      const nm = `beat ${i + 1} "${b.name || ""}"`, os = String(b.on_screen || ""), v = String(b.vo || ""), d = Number(b.duration_s), ow = words(os), vw = words(v);
+      if (ow > 6) g6.push(`${nm}: ${ow} on-screen words (6 at most)`);
+      if (ow && d < 0.6 + 0.4 * ow) g6.push(`${nm}: ${ow} on-screen words need ${(0.6 + 0.4 * ow).toFixed(1)} s to read, it has ${d} s`);
+      if (vw && vw / d > 2.7) g6.push(`${nm}: ${vw} voiceover words in ${d} s (${(vw / d).toFixed(1)} words/s; keep it under 2.7)`);
+      v.split(/(?<=[.?!])\s+/).forEach((sen) => { if (words(sen) > 14) g6.push(`${nm}: a ${words(sen)}-word voiceover sentence (14 at most; say it aloud)`); });
+      if (ow >= 3 && v && nz(v).includes(nz(os))) g6.push(`${nm}: the on-screen line repeats the voiceover; make the screen add a word, a number or an image`);
+      const txt = `${os} ${v}`.toLowerCase();
+      const hit = BANNED.find((w) => txt.includes(w));
+      if (hit) g6.push(`${nm}: "${hit}" is stock launch copy; say the specific thing`);
+      if (/\bnot (just )?(a |an |the )?[\w' -]{1,30}[,;:.—–-]+\s*(it'?s|it is|but|this is)\b/i.test(txt)) g6.push(`${nm}: "not X, it's Y" is the signature AI line; state Y`);
+      if (/!/.test(txt)) g6.push(`${nm}: exclamation marks read as hype`);
+      if (/—/.test(os)) g6.push(`${nm}: an em dash in on-screen text`);
+      vo += vw;
+    });
+    if (narrated && vo > 2.5 * lengthS * 0.85) g6.push(`${vo} voiceover words for ${lengthS} s: leave music-only moments (about ${Math.round(2.5 * lengthS * 0.8)} words at most)`);
+    const ds = beats.map((b) => Number(b.duration_s)), mean = ds.reduce((a, b) => a + b, 0) / ds.length, cv = Math.sqrt(ds.reduce((a, b) => a + (b - mean) ** 2, 0) / ds.length) / mean;
+    if (ds.length >= 4 && cv < 0.15) g6.push(`every beat runs about ${mean.toFixed(1)} s: vary the rhythm (quick beats, then let the turn and the reveal breathe)`);
+    gate("G6", "The script holds up (references/script.md)", g6);
+    script = { narrated, vo_words: vo, words_per_s: Math.round((vo / lengthS) * 100) / 100, rhythm_cv: Math.round(cv * 100) / 100 };
+  }
+
   // scores: self-assessed, then adjusted by rule
   const self = Object.fromEntries(DIMS.map((k) => [k, Number(scores[k])]));
   const adj = { ...self };
@@ -637,6 +677,7 @@ function checkPitch(p, idx, truth, footage) {
     scores: { self, adjusted: adj, adjustments, weights: W, total, threshold: 3.8 },
     turn: turnIdx >= 0 ? { beat: turnIdx + 1, at_s: starts[turnIdx], at_pct: Math.round(turnAt * 100) } : null,
     length_s: lengthS,
+    script,
     sketch_frames: {
       opening: { beat: 1, at_s: 0, caption: beats[0].on_screen || beats[0].name },
       turn: turnIdx >= 0 ? { beat: turnIdx + 1, at_s: starts[turnIdx], caption: beats[turnIdx].on_screen || beats[turnIdx].name } : null,

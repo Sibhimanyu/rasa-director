@@ -233,7 +233,7 @@ A dolly (per-layer depth factors, parallax) feels spatial; a zoom (uniform scale
 
 ---
 
-## 8. Story (full playbook in `references/story.md`)
+## 8. Story (the concept engine in `references/story.md`; the writing in `references/script.md`)
 
 - **The cliché arc is banned as a default:** hook stat → problem montage → "Introducing X" → three features → CTA (the median launch video). Use it only when justified (a loved brand where craft is the message, offered as the "Sure" pitch with craft-forward execution), and say so in the reason. Even then, name one structural deviation the product justifies.
 - **One idea in one sentence** (a borrowed form, one metaphor, one rule about time or camera, an unexpected protagonist), built from the product's own material. Swap test: put a competitor's name in; the concept must break. Features appear inside the idea as evidence: at most 3, each demonstrated, never listed.

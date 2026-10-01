@@ -1,0 +1,149 @@
+# Script: how to write a video script that holds up
+
+This is the writer's brief. RasanAI's Story call runs it as its own pass, separate from the look: a script is judged as words, beats and timing before any style touches it. Hand this whole file, the truth sheet and the three devices from `story.mjs pick` to a writer subagent (or follow it yourself), and get back three scripts that pass `story.mjs check --length <s> [--narrated]`.
+
+A good script is not a description of a video. It is the film in words: every second accounted for, every line something the viewer hears or reads, every visual something you could point a camera at.
+
+## What you're given, what you return
+
+- **In:** the truth sheet (`$RUN/story/truth.md`: what really changes, for whom, the enemy, the product's own objects, formats and words, proof, the cliché version), the brief (length, format, where it plays, voiceover or not), and three devices (Sure, Bold, Wild) with their beats, pitfalls and `fuse_with` material.
+- **Out:** `$RUN/story/pitches.json`: three pitches in the format of `references/story.md` (Pitch JSON), where every beat also carries the script:
+
+```jsonc
+{ "name": "The receipt", "duration_s": 3.5,
+  "on_screen": "Receipt ink fades in a year.",   // what the viewer reads, 6 words at most (or "")
+  "vo": "",                                       // what the viewer hears; "" for music-only beats or unnarrated films
+  "visual": "Macro: thermal print bleaching to white, line by line, the total last.",
+  "sound": "paper rustle, then silence",          // optional: music or a causal sound this beat needs
+  "value": false, "turn": false }                 // value: the beat where the viewer learns what they get (beat 1 or 2)
+```
+
+The script is written once and travels: the Story card shows it, `scenes.json` is built from it, and the voice records its `vo` lines.
+
+## The eight passes
+
+Write in passes, not in one go. Each pass has one question.
+
+1. **The one sentence.** What does the viewer believe after the film that they didn't before? One sentence, in the viewer's words, no product name. If it needs "and", you have two films; pick one.
+2. **The spine.** Map the device's grammar onto the length (structures below). Mark the hook, the value beat, the proof, the turn and the end. Durations first, words second.
+3. **The hook.** Write five hooks, keep one (hook types below). It lands in 1.5 to 2 seconds and is either the outcome, the tension the viewer already feels, or the product doing its thing.
+4. **The visuals.** For every beat write the shot: what fills the frame, what moves, what changes. Concrete nouns from the truth sheet (the product's real objects, screens and words), never "dynamic visuals of…".
+5. **The words.** On-screen lines first (the film must read with the sound off), then voiceover that adds what the screen can't show. Read every line aloud.
+6. **The turn.** At 60 to 75% of the running time something reverses: the old way breaks, the scale flips, the joke pays off, the reveal lands. If nothing turns, it is a list.
+7. **The end.** The name, one call to action, a held frame of 2 to 3 seconds, and a last line that could stand alone as a post.
+8. **The cut.** Delete 20% of the words. Then check the timing against the rules below and run `story.mjs check`.
+
+## Structures by length
+
+Durations are guides; the device's own grammar wins where it is stronger. Shot changes inside a beat are fine; a beat is one idea.
+
+**15 s (social teaser, reel cutdown):** hook 0-1.5 · value 1.5-5 · one proof 5-11 · end 11-15. Three to four beats, no voiceover or one line.
+
+**30 s (launch, feature):** hook 0-2 · value 2-6 · proof 6-14 · proof or escalation 14-20 · turn 20-24 · end 24-30. Five or six beats, 50 voiceover words at most.
+
+**45 s (launch film):** hook 0-2 · value 2-7 · proof 7-16 · escalation 16-25 · turn 27-33 · payoff 33-40 · end 40-45. Six to eight beats, about 85 voiceover words.
+
+**60 s (launch, explainer):** cold open 0-3 · value 3-9 · three proofs 9-36, each carrying a change you can see · turn 38-46 · payoff 46-54 · end 54-60. Seven to nine beats, 110 to 140 voiceover words.
+
+**90 s (explainer):** the 60 s shape with a setup act (what's at stake, 8-12 s) before the first proof and a second turn or a demonstration in place of the third proof. Anything longer needs a character or a world.
+
+**Brand film (20-40 s):** no feature proof at all. Image, image, image, the turn as a change in the viewer's point of view, then the name. Voiceover, if any, reads like a short poem with a plain last line.
+
+**PR / changelog (30-60 s):** before (the problem in the code or the user's day) · the change (one diff or one screen) · after (what's different, shown, with the real number) · end. Each frame carries 19 voiceover words at most.
+
+**Footage reel:** the footage decides. Hook from the strongest 2 seconds of real footage, then the shape the footage supports (journey, before and after, a list of moments with a payoff). Cards carry the words; never write lines the footage contradicts.
+
+## Hooks that work
+
+Pick the hook from the truth sheet, not from this list. Each type with the shape it takes:
+
+- **The outcome, stated flat:** "Your books, balanced. Every month." (No setup, just the result.)
+- **The tension they already feel:** "April 14. 11:58 pm." (A moment the viewer has lived.)
+- **The true, surprising fact:** "Receipt ink fades in about a year." (Only if it's on the truth sheet.)
+- **The product doing its thing:** a phone snaps a receipt and the ledger fills in before the first second ends. No words.
+- **The borrowed format:** "Exhibit 14: the shoebox, c. 2024." (The device announces itself.)
+- **The direct address with a stake:** "You lose four hours a month to receipts." (A real number, with its source.)
+- **The reversal:** start on the end state, then rewind.
+
+Never open with: "Introducing…", "Meet…", "What if…?", "Tired of…?", "In today's world…", a logo, a company description, a question the viewer can answer "no" to, or a statistic without a stake.
+
+## Lines: on screen and in the ear
+
+**On-screen text**
+
+- 6 words at most per line, 1 to 4 is better. One line on screen at a time.
+- Each line stays still long enough to read: 0.6 s plus 0.4 s per word (four words: 2.2 s).
+- The film must read with the sound off: the on-screen lines alone tell the story.
+- It complements the voiceover, never repeats it. The voice says the sentence; the screen shows the word, the number or the image that sticks.
+- Sentence case, a full stop for weight, no exclamation marks, no em dashes.
+
+**Voiceover**
+
+- 2.3 to 2.7 words per second (2.0 to 2.3 for a calm, premium register). Total words at most 2.5 × seconds, and leave music-only moments: the cold open, the reveal and the last 2 to 3 seconds.
+- Sentences of 6 to 10 words, 14 at most. One idea each. Say every line aloud and time it; if you run out of breath, cut.
+- Spoken, not written: contractions, plain verbs, the product's own words. "It reads the receipt the moment you get it", not "Leveraging advanced OCR, it automatically processes receipts".
+- Every noun the voice names is on screen within a few frames of the word.
+- No hype vocabulary: seamless, unlock, effortless, revolutionize, supercharge, empower, streamline, cutting-edge, game-changer, the future of, like never before. No "not X, it's Y". No rhetorical questions in a row.
+- Voiceover is optional and often worse than none. If the film works with on-screen lines and music, write it that way and say so.
+
+**Visual lines**
+
+- Write the shot, not the adjective: "Macro on the receipt's total as the ink bleaches to white", not "a powerful image of fading receipts".
+- Use the product's real material: its screens, objects, numbers and words from the truth sheet. Never invent UI labels, claims or figures.
+- Say what moves and what changes. A beat where nothing changes for more than a second is dead air.
+- One spectacle beat per film. Restraint everywhere else makes it land.
+
+## The turn and the end
+
+- The turn is a reversal the viewer feels: the pile becomes a ledger, the countdown stops, the museum label names the old way as history. Mark it `"turn": true`; it lands at 60 to 75% of the running time.
+- Stillness before the turn (0.3 to 0.8 s) makes it hit.
+- The end beat: the name and one call to action (a URL, "available today"), held still 2 to 3 seconds, with the music's ending under it. The last line is plain and quotable. Never "Thanks for watching", never a wall of social icons.
+
+## A worked example (45 s, launch, Tally)
+
+**Default version (rejected):** "Tired of messy receipts? Introducing Tally. Scan receipts instantly. Track expenses effortlessly. Get tax-ready reports. Tally: the future of bookkeeping. Try it free today!" It fails the swap test (works for any expense app), opens on a stock question, lists three features in a row, uses four banned words and ends on an exclamation.
+
+**Written version (Bold: the museum device):**
+
+| s | Beat | On screen | Voiceover | Visual |
+|---|---|---|---|---|
+| 0-2.5 | Hook | Exhibit 14: the shoebox | | A gallery spotlight finds a shoebox of receipts on a plinth. Museum label slides in. |
+| 2.5-7 | Value | Retired, 2024. | "This is how people kept their books. Until this year." | The label's date ticks to 2024. |
+| 7-13 | Proof 1 | One tap. | "Tally reads every receipt the moment you get it." | A phone snaps a crumpled receipt; the amount flies into a ledger row. |
+| 13-20 | Proof 2 | Every month, balanced. | "And balances the month on its own." | Twelve months fill in, December last. |
+| 20-28 | Escalation | 1,284 receipts. 0 shoeboxes. | | The shoebox empties as receipts become ledger rows. (Number from the truth sheet.) |
+| 28-34 | Turn | | "Some things belong in a museum." | Pull back: the empty shoebox under glass, a visitor walks past. |
+| 34-40 | Payoff | Your books don't fade. | "Yours don't have to." | The ledger, calm, in Tally's own colours. |
+| 40-45 | End | Tally · tally.app | | Logo and URL, held still. The music lands its last chord. |
+
+About 45 voiceover words, music-only open and close, value by beat 2, the turn at 62%, every line short enough to read.
+
+## Self-check before `story.mjs check`
+
+- [ ] The one sentence is in the viewer's words, and the film proves it.
+- [ ] The hook lands by 2 s and the beat moves on by 4 s.
+- [ ] The value beat is beat 1 or 2 (`"value": true`).
+- [ ] With the sound off, the on-screen lines tell the story.
+- [ ] No line repeats another; no on-screen line repeats the voiceover.
+- [ ] Every number and UI word is on the truth sheet.
+- [ ] One turn, at 60 to 75%, with a breath before it.
+- [ ] Beat lengths vary; the turn and the reveal are the longest.
+- [ ] The end holds the name and one call to action for 2 to 3 s.
+- [ ] Read aloud at a calm pace, it fits the time with room to spare.
+- [ ] The three scripts would make three different films (device, protagonist, visual world, first image, last line).
+
+Then run the checker. G1 to G5 judge the story; G6 judges the script (length, hook, value, reading time, voiceover pace and sentence length, repeats, stock copy, rhythm, the end):
+
+```bash
+node $SKILL_DIR/scripts/story.mjs check --pitch "$RUN/story/pitches.json" --truth "$RUN/story/truth.md" --length <seconds> [--narrated]
+```
+
+Exit 2 → fix exactly what it names and run it again. Two rewrites at most, then replace the device (`story.mjs pick --exclude <id>`).
+
+## Rewrite moves, in order
+
+1. **More specific:** swap a general word for the product's own object or number ("expenses" → "the coffee receipt from Tuesday").
+2. **Fewer words:** cut adjectives, then cut the line that explains the image.
+3. **Sharper turn:** make the reversal visible in one image.
+4. **Stricter constraint:** one location, one object, one continuous move, no voiceover.
+5. **Different device:** when two rewrites haven't fixed it.

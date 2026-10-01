@@ -8,7 +8,9 @@ The engine is `scripts/story.mjs` over the catalog `taxonomy/devices.json` (66 d
 2. **Pick** → `story.mjs pick --truth "$RUN/story/truth.md" [--recent <ids>]` → three devices labelled Sure / Bold / Wild.
 3. **Pitch** → write one pitch per device in `$RUN/story/pitches.json`.
 4. **Check** → `story.mjs check --pitch "$RUN/story/pitches.json" --truth "$RUN/story/truth.md"`, then rewrite until it ships.
-5. **Show** → the three films in the console (SKILL.md "2 · Films": each pitch paired with a design system and drawn on its hook, with optional sketch frames), and take the user's feedback.
+5. **Show** → the three scripts in the console (SKILL.md "2 · Story": tabs plus a script table, no style yet; the look is chosen in the next call), and take the user's feedback.
+
+The writing itself (structures by length, hooks, voiceover and on-screen lines, the end, a worked example) is `references/script.md`, the writer pass's brief. This file is the concept engine around it.
 
 ## 1. The truth sheet (before any concept)
 
@@ -46,7 +48,7 @@ Fuse each device with its `fuse_with` material (or better material from the shee
 
 - **Title**: 2-4 words.
 - **Logline**: 12 words at most; the party retell ("It's the one where…") without those words.
-- **Beats**: 4-7 timed beats in the device's grammar. Every beat has `on_screen` (the only words the viewer reads, 7 or fewer) and `visual`. Mark the turn with `"turn": true`; it lands at **60-75%** of the running time.
+- **Beats**: 4-8 timed beats in the device's grammar, written as the script (`references/script.md`). Every beat has `on_screen` (the words the viewer reads, 6 or fewer), `vo` (the words the viewer hears, or "" for music-only beats and unnarrated films) and `visual`; mark the beat that states the value with `"value": true` (beat 1 or 2). Mark the turn with `"turn": true`; it lands at **60-75%** of the running time.
 - **Three sketch frames**: the opening (seconds 0-2, the most striking image), the turn, and the close. `check` returns them as `sketch_frames` (beat, time, caption); draw exactly those.
 - **Where the features live**: each must-show feature proves itself inside a beat (an exhibit, a chain link, a game level), never as a list.
 - **Signature image** (the poster frame) and **last line** (could stand alone as a GIF or a tweet).
@@ -65,7 +67,7 @@ Fuse each device with its `fuse_with` material (or better material from the shee
   "device": "rewind",                               // a device id or code; an array for a combination (first is primary)
   "twist": "",                                      // required when the device is overused: what makes it not the default
   "beats": [
-    { "name": "The pager", "on_screen": "02:14 · checkout-api down", "visual": "…", "duration_s": 4 },
+    { "name": "The pager", "on_screen": "02:14 · checkout-api down", "vo": "", "visual": "…", "duration_s": 4, "value": true },
     { "name": "Lintel reads it", "on_screen": "Lintel suggested a change", "visual": "…", "duration_s": 6, "turn": true },
     { "name": "…", "on_screen": "…", "visual": "…", "duration_s": 7, "maps_to": "cta" }   // optional: a default beat you know it is
   ],
@@ -89,8 +91,10 @@ Fuse each device with its `fuse_with` material (or better material from the shee
 ## 4. Check, then rewrite
 
 ```bash
-node $SKILL_DIR/scripts/story.mjs check --pitch "$RUN/story/pitches.json" --truth "$RUN/story/truth.md"
+node $SKILL_DIR/scripts/story.mjs check --pitch "$RUN/story/pitches.json" --truth "$RUN/story/truth.md" --length <seconds> [--narrated]
 ```
+
+With `--length` (or voiceover in the beats) it also runs **G6, the script** (`references/script.md`): the length within 10%, a hook beat of 4 s at most, the value by beat 2, on-screen lines of 6 words at most held 0.6 s + 0.4 s per word, voiceover under 2.7 words per second with sentences of 14 words at most and room for music-only moments, no on-screen line that repeats the voice, no stock copy, "not X, it's Y" or exclamation marks, varied beat lengths, and an end beat of 2 s or more with the name on screen.
 
 Exit 0 = ship; 2 = rewrite (reasons in the JSON); 1 = the pitch JSON is malformed. The five gates (fail any and the pitch is rewritten):
 

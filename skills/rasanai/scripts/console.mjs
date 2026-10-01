@@ -47,7 +47,7 @@ const F = {
   // the console's address (port + token), kept across restarts so an open tab reconnects by itself; removed only by `stop`
   address: path.join(RUN, "address.json"),
 };
-export const STEPS = ["brief", "brand", "route", "footage", "direction", "films", "concept", "scenes", "look", "motion", "styleframes", "animatic", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render", "final"];
+export const STEPS = ["brief", "brand", "route", "footage", "story", "direction", "films", "concept", "scenes", "look", "motion", "styleframes", "animatic", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render", "final"];
 
 const readJSON = (p, d) => {
   try {
@@ -71,12 +71,12 @@ function saveSession(s) {
   writeJSON(F.session, s);
 }
 // the live feed on the page: what Claude did, what it's doing, what the user answered
-const LABELS = { films: "the film", animatic: "the animatic", final: "the final cut", brief: "the brief", brand: "your brand", route: "the workflow", footage: "your footage", direction: "the direction", concept: "the story", scenes: "the scenes", look: "the look", motion: "the motion", styleframes: "the style frames", reel: "the cut", transitions: "transitions", voice: "the voice", music: "the music", keyframes: "key poses", storyboard: "the storyboard", plan: "the plan", build: "the build", render: "the render" };
+const LABELS = { story: "the story", films: "the film", animatic: "the animatic", final: "the final cut", brief: "the brief", brand: "your brand", route: "the workflow", footage: "your footage", direction: "the direction", concept: "the story", scenes: "the scenes", look: "the look", motion: "the motion", styleframes: "the style frames", reel: "the cut", transitions: "transitions", voice: "the voice", music: "the music", keyframes: "key poses", storyboard: "the storyboard", plan: "the plan", build: "the build", render: "the render" };
 // an option's human name ("The shoebox wins") for an id the user picked ("shoebox")
 function nameOf(s, step, value) {
   const d = s.steps[step] || {};
-  for (const pool of [d.options, d.cells, d.looks]) {
-    const hit = (pool || []).find((o) => o && o.id === value);
+  for (const pool of [d.options, d.cells, d.looks, d.stories, d.films, d.styles]) {
+    const hit = (pool || []).find((o) => o && (o.id === value || o.preset === value));
     if (hit) return hit.title || hit.label || hit.name || String(value);
   }
   return typeof value === "string" ? value : null;
