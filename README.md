@@ -34,6 +34,7 @@ You say `/rasanai make a 45s launch film for tally.app`. A **Director's Console*
 - **Music edited to picture.** Tracks long enough for the film, analysed with nothing but Node and FFmpeg (beats, bars, sections, a real ending), cut on bar lines so it never loops audibly, with the reveal and the logo on downbeats. Sound effects only for things you can see happen, on a budget. Mixed to −14 LUFS.
 - **An anti-slop gate.** Before anything reaches you, `slop.mjs` checks the copy ("seamless", "unlock", "not X, it's Y", em dashes), the look (neon glow text, purple-blue gradients, particle filler, corner timecodes, Inter everywhere), the motion (idle loops, everything entering the same way), the timing (unreadable text, uniform shot lengths, no end hold) and the sound (looping beds, whoosh per cut, loudness, dead air).
 - **A motion contract.** The chosen style's motion language becomes `motion.md`, and `obey.mjs` loads every built scene in headless Chrome and checks each tween against it.
+- **A crew, not one context.** Claude directs a crew of agents ([references/crew.md](skills/rasanai/references/crew.md)). Researchers read the product's site, help center, changelog and brand pages and collect its real screens. For a well-known brand, a precedent researcher downloads its past launch films for analysis and measures them shot by shot. With your permission, a scout reads the product's code on your computer: UI strings, design tokens, what shipped last week, earlier videos. A research lead turns all of it into one truth sheet and a claims ledger, so nothing on screen comes from memory. Three writers write the three scripts in parallel and an editor reads them like a hostile reader. A Motion Director scores the whole film, every shot and every seam with exact handoff numbers. One scene animator builds each scene at the same time as the others and looks at its own motion before handing it back. Critics with fresh eyes judge the frames, the motion, the facts and the film.
 - **Claude does the animating.** The style specimens exist so you can choose by eye. Claude designs every key frame and scene from the direction, through the matching [HyperFrames](https://hyperframes.heygen.com) workflow (`product-launch-video`, `faceless-explainer`, `pr-to-video`, `general-video`, `music-to-video`, `talking-head-recut`, `embedded-captions`, `motion-graphics`).
 
 **Footage reels** add **Footage** (every clip with a contact sheet and a word-level transcript) and **Cut** (the edit as an editable list: clips with in and out points, cards between them, overlays, captions). Claude drafts the cut and designs every card itself.
@@ -113,10 +114,16 @@ With the plugin install Claude Code namespaces the skill: invoke it as `/rasanai
 ```
 skills/rasanai/
   SKILL.md                    the flow the agent follows: Brief · Story · Look · Animatic · Final
+  agents/                     the crew's role briefs: researchers (product, brand, screens, precedent, local scout),
+                              research lead, script writer, script editor, Motion Director, frame designer,
+                              scene animator, critic
   console/index.html          the Director's Console; console/presets.js draws any style live
   taxonomy/                   the vocabulary: 32 dimensions (dimensions/*.json), 66 story devices (devices.json),
                               403 styles in 20 families (presets/*.json), type pairings; schemas
   scripts/
+    crew.mjs                  the crew: plan who works on a film, write each member's prompt, check its work,
+                              the score into STORYBOARD.md, motion strips to look at
+    research.mjs              find the product on this computer, inventory an approved folder, measure a film
     story.mjs                 truth sheet, three distinct story devices, the pitch rubric
     presets.mjs               the style library: validate, list, suggest, gallery, pick, stills, site
     design-system.mjs         any style as a complete DESIGN.md (export, export-all)
@@ -130,7 +137,7 @@ skills/rasanai/
     memory.mjs, update.mjs, setup.sh, selftest.mjs
     lib/                      audio analysis, the DESIGN.md adapter, looks, direction, fonts, engine, common
     vendor/gsap.min.js        GSAP 3.14.2
-  references/                 craft (the playbook), vocabulary (film terms → code), script (the writer's brief), story, sound, direction,
+  references/                 crew (the agents), craft (the playbook), vocabulary (film terms → code), script (the writer's brief), story, sound, direction,
                               brand, video, reel, console, motion.md contract, board, handoff, personalities
 ```
 
@@ -138,7 +145,7 @@ skills/rasanai/
 - **The checker** (`obey.mjs`) loads each composition in headless Chrome with GSAP, walks every tween, samples its real start and end values, and flags off-scale durations, eases outside the set, implicit default eases, banned patterns (fade-up-slide in all its forms, bounce, overshoot, blur-in, scale-pop…), non-GSAP motion and short holds. "Could not run" is never reported as clean.
 - **Local only.** The console binds to 127.0.0.1, refuses foreign Host headers, and requires a per-session token (then an HttpOnly cookie) for every route; it serves files only from your workspace and installed skills, never its own token file, and refuses to run with your home directory as the root. Voice samples, music and site capture go through HyperFrames' own tools; nothing else leaves your machine.
 
-Details: [SKILL.md](skills/rasanai/SKILL.md) · [craft](skills/rasanai/references/craft.md) · [vocabulary](skills/rasanai/references/vocabulary.md) · [story](skills/rasanai/references/story.md) · [sound](skills/rasanai/references/sound.md) · [styles](skills/rasanai/taxonomy/presets/SCHEMA.md) · [direction & taxonomy](skills/rasanai/references/direction.md) · [DESIGN.md](skills/rasanai/references/brand.md) · [entire videos](skills/rasanai/references/video.md) · [footage reels](skills/rasanai/references/reel.md) · [console](skills/rasanai/references/console.md) · [motion.md contract](skills/rasanai/references/motion-md-contract.md) · [keyframe board](skills/rasanai/references/board-format.md) · [handoff](skills/rasanai/references/handoff.md) · [personalities](skills/rasanai/references/personalities.md) · [design doc](docs/designs/motion-director.md)
+Details: [SKILL.md](skills/rasanai/SKILL.md) · [crew](skills/rasanai/references/crew.md) · [craft](skills/rasanai/references/craft.md) · [vocabulary](skills/rasanai/references/vocabulary.md) · [story](skills/rasanai/references/story.md) · [sound](skills/rasanai/references/sound.md) · [styles](skills/rasanai/taxonomy/presets/SCHEMA.md) · [direction & taxonomy](skills/rasanai/references/direction.md) · [DESIGN.md](skills/rasanai/references/brand.md) · [entire videos](skills/rasanai/references/video.md) · [footage reels](skills/rasanai/references/reel.md) · [console](skills/rasanai/references/console.md) · [motion.md contract](skills/rasanai/references/motion-md-contract.md) · [keyframe board](skills/rasanai/references/board-format.md) · [handoff](skills/rasanai/references/handoff.md) · [personalities](skills/rasanai/references/personalities.md) · [design doc](docs/designs/motion-director.md) · [crew design](docs/designs/crew.md)
 
 ## Publishing notes (for the maintainer)
 
@@ -151,6 +158,7 @@ Details: [SKILL.md](skills/rasanai/SKILL.md) · [craft](skills/rasanai/reference
 - Style specimens are previews drawn from tokens and text; the real frames (product shots, logos, data, illustration) are designed by Claude as key frames and at build time.
 - The DESIGN.md adapter reads the common formats but brand documents vary a lot; it reports what it couldn't find (fonts, an accent) and the brand board shows what it understood before anything is built.
 - Footage reels cut on word boundaries from Whisper transcripts and on detected shot changes; there's no automatic best-take or visual-content ranking beyond what Claude reads from the contact sheets and transcripts. Cards and overlays run at least their motion's minimum length (entrance, required hold, exit); a shorter request is lengthened with a warning.
+- The crew needs a harness that can run subagents (Claude Code's Agent tool). Without one, the Director follows the same role briefs itself, one at a time (`--lean`): same files and checks, slower and with less room per task. Reference films need `yt-dlp`; without it the precedent researcher works from stills and descriptions and says so.
 - Previews use Google Fonts; offline they fall back to system fonts.
 - The checker verifies GSAP motion (motion.md requires GSAP builds).
 - The hand-off to each workflow (plan files, packet injection, music lock) is tested on real projects; a complete rendered film through every workflow hasn't been run for each route yet.

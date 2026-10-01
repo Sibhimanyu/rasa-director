@@ -47,7 +47,7 @@ const F = {
   // the console's address (port + token), kept across restarts so an open tab reconnects by itself; removed only by `stop`
   address: path.join(RUN, "address.json"),
 };
-export const STEPS = ["brief", "brand", "route", "footage", "story", "direction", "films", "concept", "scenes", "look", "motion", "styleframes", "animatic", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render", "final"];
+export const STEPS = ["brief", "research", "brand", "route", "footage", "story", "direction", "films", "concept", "scenes", "look", "motion", "styleframes", "animatic", "reel", "transitions", "voice", "music", "keyframes", "storyboard", "plan", "build", "render", "final"];
 
 const readJSON = (p, d) => {
   try {

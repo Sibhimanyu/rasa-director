@@ -19,6 +19,7 @@
 // 11. story: the device catalog validates, pick is distinct and deterministic, the rubric ships a good pitch and rejects the cliché, G6 judges the script
 // 12. anti-slop: a project full of AI-video tells fails with fixes; a clean one passes
 // 13. sound: analyze/fit/render/check on a synthetic 120 BPM track, needs_longer, loop detection, SFX rules
+// 14. the crew: plan, prompt files, the score check, the score into STORYBOARD.md, local search + inventory, motion strips
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -557,6 +558,91 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   const why = (id) => (sx.skipped || []).find((s) => s.event === id)?.why || "";
   const inWin = (sx.cues || []).filter((q) => q.t >= 20 && q.t < 21).length;
   ok("sfx-plan: no sound for a fade, no whoosh on an ordinary cut, stagger keeps first+last, <= 3 per second, never ahead of the picture", /not a causal/.test(why("fade")) && /ordinary transition/.test(why("cut")) && /stagger/.test(why("l2")) && inWin <= 3 && (sx.cues || []).every((q) => q.start + (q.sync_point || 0) >= q.t - 0.001 && q.start + (q.sync_point || 0) <= q.t + 0.034), JSON.stringify(sx.skipped).slice(0, 400));
+}
+
+// 14. the crew: plan, prompt files, the score's checks, the score written into a storyboard, local search
+//     and inventory (no secrets), a motion strip of a composition
+{
+  const ws = path.join(TMP, "crew-ws");
+  const run = path.join(ws, ".rasanai", "r1");
+  fs.mkdirSync(run, { recursive: true });
+  const C = (a) => spawnSync(process.execPath, [path.join(HERE, "crew.mjs"), ...a], { encoding: "utf8", env, cwd: ws, timeout: 180000 });
+  const J2 = (r) => { try { return JSON.parse(r.stdout); } catch { return {}; } };
+  const plan = J2(C(["plan", "--run", run, "--route", "product-launch-video", "--subject", "Tally", "--url", "https://tally.example", "--public", "--scenes", "4", "--length", "20"]));
+  const roles = (plan.phases || []).flatMap((p) => p.members);
+  ok("crew: a public product gets the full desk, three writers, a score, an animator per scene and the critics", ["product-researcher", "brand-researcher", "screens-researcher", "precedent-researcher", "research-lead", "script-writer:Bold", "script-editor", "motion-director:score", "scene-animator:4", "motion-director:seams", "critic:film-1"].every((r) => roles.some((m) => m.startsWith(r))), JSON.stringify(roles));
+  const lean = J2(C(["plan", "--run", path.join(ws, ".rasanai", "r1"), "--route", "product-launch-video", "--subject", "Tally", "--scenes", "4", "--lean"]));
+  ok("crew: --lean drops the precedent, the writers' room and the extra critics", !(lean.phases || []).flatMap((p) => p.members).some((m) => /precedent|script-|critic:(motion|frames)/.test(m)), JSON.stringify(lean.phases && lean.phases.map((p) => p.members)));
+  C(["plan", "--run", run, "--route", "product-launch-video", "--subject", "Tally", "--public", "--scenes", "4", "--length", "20"]);
+  const br = J2(C(["brief", "--run", run, "--role", "brand-researcher"]));
+  const prompt = br.prompt ? fs.readFileSync(path.join(ws, br.prompt), "utf8") : "";
+  ok("crew: brief writes a self-contained prompt (crew rules, the role, inputs, outputs, its check)", /never ask the user/i.test(prompt) && /Role: brand researcher/.test(prompt) && /## Dispatch context/.test(prompt) && /research\/brand\/DESIGN\.md/.test(prompt) && /crew\.mjs" check/.test(prompt) && /run_in_background: true/.test(br.dispatch || "") && /Show off/.test(prompt), (br.prompt || "") + prompt.slice(-300));
+  const fail = C(["check", "--run", run, "--role", "brand-researcher"]);
+  ok("crew: check refuses missing work (exit 2, says what)", fail.status === 2 && /DESIGN\.md is missing/.test(fail.stdout), fail.stdout.slice(0, 200));
+  // a good score for 4 scenes, then the same score broken three ways
+  fs.writeFileSync(path.join(run, "scenes.json"), JSON.stringify({ message: "m", scenes: [3, 4, 2.5, 3].map((d, i) => ({ title: `S${i + 1}`, duration: d, visual: "v" })) }));
+  const H = { x: 960, y: 540, scale: 1, opacity: 1, direction: "left", speed: 400 };
+  const good = {
+    spine: "the receipt", motif: { what: "the total", scenes: [1, 2, 4] }, showreel: [{ scene: 2, t: 3.8, what: "the receipt folds into the ledger row" }, { scene: 3, t: 0.4, what: "the push-through reveal" }], rhythm: "fast-SLOW-fast-hold", signature: { seam: "2>3", technique: "push-through", why: "the reveal" },
+    video_direction: { palette: "p", motion_grammar: "g", holds: "h", negative: ["no drift"] },
+    scenes: [3, 4, 2.5, 3].map((d, i) => ({ n: i + 1, title: `S${i + 1}`, duration: d, energy: [2, 3, 5, 2][i], layout: ["full-bleed", "split", "centered", "asymmetric 60/40"][i], camera: "T1 lean-in",
+      shots: [{ t0: 0, t1: d / 2, on_screen: "a", moves: "rises", primary: "a" }, { t0: d / 2, t1: d, on_screen: "b", moves: "holds", primary: "b" }],
+      entrances: [{ element: "a", type: "cut-in" }, { element: "b", type: ["mask-rise", "type-on", "scale-from-origin", "draw-on"][i] }], events: [{ t: 0.5, what: "tap", sound: "tap" }] })),
+    seams: [{ from: 1, to: 2, kind: "shared-element", element: "receipt", out: H, in: H, why: "w" }, { from: 2, to: 3, kind: "signature", why: "w" }, { from: 3, to: 4, kind: "cut", why: "w" }],
+  };
+  fs.mkdirSync(path.join(run, "motion"), { recursive: true });
+  fs.writeFileSync(path.join(run, "motion", "score.md"), "# score\n");
+  const put = (s) => fs.writeFileSync(path.join(run, "motion", "score.json"), JSON.stringify(s));
+  put(good);
+  const g = C(["check", "--run", run, "--role", "motion-director", "--key", "score"]);
+  ok("crew: a complete score is accepted", g.status === 0, g.stdout.slice(0, 400));
+  const bad = JSON.parse(JSON.stringify(good));
+  delete bad.seams[0].in.speed;
+  bad.showreel = [];
+  bad.scenes[1].duration = 6;
+  bad.scenes.forEach((s) => (s.energy = 3));
+  put(bad);
+  const b = C(["check", "--run", run, "--role", "motion-director", "--key", "score"]);
+  ok("crew: the score check catches a half-stated handoff, a changed duration, a flat energy curve and no showreel moments", b.status === 2 && /in: missing speed/.test(b.stdout) && /scenes\.json says 4s/.test(b.stdout) && /no peak/.test(b.stdout) && /showreel names 0/.test(b.stdout), b.stdout.slice(0, 500));
+  put(good);
+  // the score into a storyboard written by scenes.mjs (parsed by the workflow's parser when installed), twice: same file
+  const proj = path.join(ws, "videos", "tally");
+  const sj = path.join(ws, "scenes-in.json");
+  fs.writeFileSync(sj, JSON.stringify({ title: "T", message: "m", aspect: "16:9", narration: false, scenes: [3, 4, 2.5, 3].map((d, i) => ({ title: `S${i + 1}`, on_screen: `Line ${i + 1}`, visual: "v", duration: d })) }));
+  const sc = node("scenes.mjs", ["--scenes", sj, "--route", "product-launch-video", "--out", proj]);
+  fs.writeFileSync(path.join(proj, "BRIEF.md"), "---\nworkflow: product-launch-video\n---\n\n## Customizations\n\n- x\n");
+  const s1 = C(["storyboard", "--run", run, "--project", proj]);
+  const t1 = fs.existsSync(path.join(proj, "STORYBOARD.md")) ? fs.readFileSync(path.join(proj, "STORYBOARD.md"), "utf8") : "";
+  C(["storyboard", "--run", run, "--project", proj]);
+  const t2 = fs.existsSync(path.join(proj, "STORYBOARD.md")) ? fs.readFileSync(path.join(proj, "STORYBOARD.md"), "utf8") : "";
+  ok("crew: storyboard writes the score as the visual design (video direction, shots, handoffs, transition_in), idempotent", sc.status === 0 && s1.status === 0 && t1 === t2 && /## Video direction/.test(t1) && /handoff_in: receipt · x 960/.test(t1) && /Scene 2 \(1\.5–3\.0s\)/.test(t1) && (t1.match(/^- transition_in: cut$/gm) || []).length === 4 && /Visual design \(done\)/.test(fs.readFileSync(path.join(proj, "BRIEF.md"), "utf8")), (s1.stderr || s1.stdout).slice(0, 300));
+  // local search finds the project by its git remote and package name; the inventory lists files, never secrets
+  const home2 = path.join(TMP, "fakehome");
+  const p1 = path.join(home2, "code", "tally-web");
+  fs.mkdirSync(path.join(p1, ".git"), { recursive: true });
+  fs.mkdirSync(path.join(p1, "src", "locales"), { recursive: true });
+  fs.mkdirSync(path.join(p1, "public"), { recursive: true });
+  fs.writeFileSync(path.join(p1, ".git", "config"), '[remote "origin"]\n\turl = git@github.com:acme/tally.git\n');
+  fs.writeFileSync(path.join(p1, "package.json"), JSON.stringify({ name: "web", scripts: { dev: "vite" }, devDependencies: { vite: "5" } }));
+  fs.writeFileSync(path.join(p1, "README.md"), "# Tally\n");
+  fs.writeFileSync(path.join(p1, "src", "locales", "en.json"), '{"cta":"Snap a receipt"}');
+  fs.writeFileSync(path.join(p1, "public", "logo.svg"), "<svg/>");
+  fs.writeFileSync(path.join(p1, ".env"), "KEY=secret");
+  fs.writeFileSync(path.join(p1, "tailwind.config.js"), "module.exports={}");
+  const Rs = (a) => spawnSync(process.execPath, [path.join(HERE, "research.mjs"), ...a], { encoding: "utf8", env, cwd: ws });
+  const lf = J2(Rs(["local-find", "--name", "Tally", "--roots", path.join(home2, "code")]));
+  ok("research: local-find matches a project by its git remote and README title", (lf.candidates || []).some((c) => c.dir.endsWith("tally-web") && c.why.includes("git remote") && c.why.includes("README title")), JSON.stringify(lf).slice(0, 300));
+  const invF = path.join(run, "research", "local", "inv.json");
+  Rs(["local-inventory", "--dir", p1, "--out", invF]);
+  const inv = fs.existsSync(invF) ? JSON.parse(fs.readFileSync(invF, "utf8")) : {};
+  ok("research: local-inventory lists strings, tokens, logos and dev scripts, and skips secrets", inv.strings && inv.strings.length === 1 && inv.tokens.length === 1 && inv.logos.length === 1 && inv.secrets_skipped === 1 && inv.dev_scripts && inv.dev_scripts.dev === "vite" && !JSON.stringify(inv).includes(".env"), JSON.stringify(inv).slice(0, 300));
+  if (!quick) {
+    const comp = path.join(proj, "compositions", "frames", "01-s1.html");
+    fs.mkdirSync(path.dirname(comp), { recursive: true });
+    fs.writeFileSync(comp, `<template><div id="root" data-composition-id="01-s1" data-start="0" data-duration="2" data-width="640" data-height="360" style="position:relative;width:640px;height:360px;background:#fff"><div id="box" style="position:absolute;left:40px;top:140px;width:80px;height:80px;background:#e33"></div></div><script>window.__timelines=window.__timelines||{};var tl=gsap.timeline({paused:true});tl.fromTo("#box",{x:0},{x:440,duration:2,ease:"none"});window.__timelines["01-s1"]=tl;</script></template>`);
+    const st = J2(C(["strip", "--file", comp, "--at", "0,1,2", "--out", path.join(run, "crew", "strip.png")]));
+    ok("crew: strip renders a composition at chosen times into a labelled sheet", st.ok && st.frames === 3 && fs.existsSync(path.join(run, "crew", "strip.png")), JSON.stringify(st).slice(0, 200));
+  }
 }
 
 fs.rmSync(TMP, { recursive: true, force: true });

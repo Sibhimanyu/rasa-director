@@ -64,7 +64,7 @@ The five calls:
 
 | Step | Fields |
 |---|---|
-| `brief` | `fields: {length_s, kind, subject, aspect, destination, narration, brand_name?, use_brand?}` (the sentence, prefilled), `choices: {<field>: [values or {value, label}]}` (optional, narrows a field's menu), `captures: [{image, caption}]` (what Claude will use), `needs_source: true` (or an empty `subject`) → a "What's the video about?" box above the sentence → one editable sentence, Start and "Just make it". Before the first push the page shows that box on its own. |
+| `brief` | `fields: {length_s, kind, subject, aspect, destination, narration, brand_name?, use_brand?}` (the sentence, prefilled), `choices: {<field>: [values or {value, label}]}` (optional, narrows a field's menu), `captures: [{image, caption}]` (what Claude will use), `findings: [{text, source}]` (the research's most useful facts, shown as "What I found" with their source), `needs_source: true` (or an empty `subject`) → a "What's the video about?" box above the sentence → one editable sentence, Start and "Just make it". Before the first push the page shows that box on its own. |
 | `story` | `stories: [{id, angle: "Sure"\|"Bold"\|"Wild", title, logline, device, why, beats: [{name, duration_s, on_screen, vo, visual, turn?, value?}], last_line}]`, `recommended` → three tabs and the selected story as a script table (time, on screen, voiceover, what we see; the turn marked), "Three more stories" |
 | `look` | `styles: [{preset, name, why, rare?}]`, `recommended`, `hook` (the story's first line; every style is drawn on it), `sub`, `gallery` → three live style tiles, energy knob, More like these, Browse all styles (a style picked there is chosen directly) |
 | `films` (older single-step flow) | `films: [{id, angle: "Sure"\|"Bold"\|"Wild", title, logline, hook, why, preset (style id), music, frames?: [3 PNGs], beats?: [3 captions]}]`, `recommended`, `gallery` (presets.mjs gallery's presets.json), `headline`/`sub` (fallback words), `brand` (optional) → three live films, energy knob (Calmer · As is · Punchier), More like these, Mix two, Browse all styles, "Show in my brand" |
@@ -77,6 +77,7 @@ Other steps (Claude usually pushes these `--status done` with only a `decision`;
 | Step | Fields |
 |---|---|
 | `brand` | `brand` (brand.mjs `read` summary: roles, fonts, modes, warnings), `board` (brand-board.html) |
+| `research` | drawer only: pushed `--status done` with a one-line `decision` (what the crew read and found) |
 | `route` | `options: [{id, label, why}]` (HyperFrames workflow ids, or `reel`) |
 | `footage` | `clips` (footage.json's clips from `reel.mjs scan`) → a card per clip: contact sheet, facts, transcript, include checkbox |
 | `reel` | `timeline`, `overlays`, `captions`, `clips: [{name, duration}]`, optional `edl` (reel.edl.json) and `video` (draft render) → the editable cut (references/reel.md) |

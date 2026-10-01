@@ -342,6 +342,10 @@
   .menu button { display: block; width: 100%; text-align: left; background: none; border: 0; color: var(--ink); font: 500 15px/1 var(--sans); padding: 10px 12px; border-radius: 8px; cursor: pointer; }
   .menu button:hover, .menu button.on { background: var(--line); }
   .menu input { width: 100%; background: var(--bg); border: 1px solid var(--line-2); color: var(--ink); border-radius: 8px; padding: 9px 10px; font: inherit; margin-top: 4px; }
+  .findings { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; max-width: 760px; }
+  .findings li { font-size: 14.5px; line-height: 1.45; color: var(--ink-2, var(--ink)); padding-left: 14px; border-left: 2px solid var(--line-2); }
+  .findings .src { margin-left: 8px; font-size: 12.5px; color: var(--ink-3); text-decoration: none; white-space: nowrap; }
+  .findings a.src:hover { color: var(--accent); }
   .thumbs { display: flex; gap: 12px; flex-wrap: wrap; }
   .thumbs figure { margin: 0; width: 170px; }
   .thumbs img { width: 170px; aspect-ratio: 16/10; object-fit: cover; border-radius: 8px; display: block; background: var(--panel); }
@@ -498,13 +502,13 @@
 (function () {
   var TOKEN = new URLSearchParams(location.search).get("t") || "";
   var STEPS = [
-    ["brief", "Brief"], ["brand", "Brand"], ["route", "Workflow"], ["footage", "Footage"], ["story", "Story"], ["direction", "Style"], ["films", "Films"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
+    ["brief", "Brief"], ["research", "Research"], ["brand", "Brand"], ["route", "Workflow"], ["footage", "Footage"], ["story", "Story"], ["direction", "Style"], ["films", "Films"], ["concept", "Story"], ["scenes", "Scenes"], ["look", "Look"], ["motion", "Motion"],
     ["styleframes", "Key frames"], ["animatic", "Animatic"], ["reel", "Cut"], ["transitions", "Transitions"], ["voice", "Voice"], ["music", "Music"], ["keyframes", "Key poses"], ["storyboard", "Storyboard"],
     ["plan", "Plan"], ["build", "Build"], ["render", "Final"], ["final", "Final"]
   ];
   // the five states of the film page; every step belongs to one of them
   var STATES = [
-    ["Brief", ["brief", "brand", "route", "footage"]],
+    ["Brief", ["brief", "research", "brand", "route", "footage"]],
     ["Story", ["story", "concept"]],
     ["Look", ["look", "films", "direction", "motion", "transitions"]],
     ["Animatic", ["animatic", "scenes", "styleframes", "storyboard", "keyframes", "voice", "music", "reel", "plan", "build"]],
@@ -1328,6 +1332,10 @@
     }
     draw();
     body.appendChild(sent);
+    if ((d.findings || []).length) {
+      body.appendChild(h("p", { class: "qsub", text: "What I found" }));
+      body.appendChild(h("ul", { class: "findings" }, d.findings.slice(0, 6).map(function (x) { var src = x.source || ""; return h("li", null, [h("span", { text: x.text || String(x) }), /^https?:/.test(src) ? h("a", { href: src, target: "_blank", rel: "noopener", class: "src", text: src.replace(/^https?:\/\/(www\.)?/, "").split("/")[0] }) : src ? h("span", { class: "src", text: src }) : null]); })));
+    }
     if ((d.captures || []).length) {
       body.appendChild(h("p", { class: "qsub", text: "What I'll use" }));
       body.appendChild(h("div", { class: "thumbs" }, d.captures.map(function (c) { return h("figure", null, [h("img", { src: fsUrl(c.image || c), alt: c.caption || "" }), c.caption ? h("figcaption", { text: c.caption }) : null]); })));
