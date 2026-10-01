@@ -158,4 +158,4 @@ Details: [SKILL.md](skills/rasanai/SKILL.md) · [craft](skills/rasanai/reference
 
 MIT. `skills/rasanai/scripts/vendor/gsap.min.js` is GSAP 3.14.2 under the [GSAP Standard License](https://gsap.com/standard-license).
 
-Built on [HyperFrames](https://hyperframes.heygen.com) and [Claude Code](https://claude.com/claude-code).
+RasanAI (ரசனை) is made by [Sibhimanyu](https://github.com/Sibhimanyu). Built on [HyperFrames](https://hyperframes.heygen.com) and [Claude Code](https://claude.com/claude-code).
