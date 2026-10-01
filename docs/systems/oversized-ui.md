@@ -28,7 +28,7 @@ components:
 
 # Oversized UI
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as giant UI, macro UI, big button graphics.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as giant UI, macro UI, big button graphics.
 
 ## Overview
 

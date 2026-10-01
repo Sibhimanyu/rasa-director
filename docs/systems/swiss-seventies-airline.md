@@ -26,7 +26,7 @@ components:
 
 # 70s airline modernism
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as Pan Am style, jet-age corporate, Swiss 70s airline, route-map modernism.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as Pan Am style, jet-age corporate, Swiss 70s airline, route-map modernism.
 
 ## Overview
 

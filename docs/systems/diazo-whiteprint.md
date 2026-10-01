@@ -26,7 +26,7 @@ components:
 
 # Diazo whiteprint
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as whiteprint, diazo print, bluelines, ammonia print, architect's print.
+A motion-graphics design system from RasanAI's style library (Print). Also known as whiteprint, diazo print, bluelines, ammonia print, architect's print.
 
 ## Overview
 

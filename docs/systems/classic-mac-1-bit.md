@@ -28,7 +28,7 @@ components:
 
 # Classic Mac 1-bit
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as System 1 Mac, 1984 Macintosh, black-and-white GUI, MacPaint style.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as System 1 Mac, 1984 Macintosh, black-and-white GUI, MacPaint style.
 
 ## Overview
 

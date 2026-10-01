@@ -26,7 +26,7 @@ components:
 
 # Architectural minimal
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as concrete minimal, brutalist-luxe, gallery architecture, Tadao Ando style.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as concrete minimal, brutalist-luxe, gallery architecture, Tadao Ando style.
 
 ## Overview
 

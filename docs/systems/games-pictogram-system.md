@@ -26,7 +26,7 @@ components:
 
 # Olympic-style pictogram system
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as Olympic pictograms, Games identity, sport pictogram system, multi-sport event graphics.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as Olympic pictograms, Games identity, sport pictogram system, multi-sport event graphics.
 
 ## Overview
 

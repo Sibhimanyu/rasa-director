@@ -26,7 +26,7 @@ components:
 
 # Isotype
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as Vienna method, Neurath pictograms, picture statistics, pictorial statistics, ISOTYPE chart.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as Vienna method, Neurath pictograms, picture statistics, pictorial statistics, ISOTYPE chart.
 
 ## Overview
 

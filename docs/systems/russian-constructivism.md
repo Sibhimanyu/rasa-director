@@ -26,7 +26,7 @@ components:
 
 # Constructivism
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as Russian constructivism, Soviet avant-garde, Rodchenko style, agitprop poster.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as Russian constructivism, Soviet avant-garde, Rodchenko style, agitprop poster.
 
 ## Overview
 

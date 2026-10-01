@@ -26,7 +26,7 @@ components:
 
 # Code diff view
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as side-by-side diff, pull request diff, git diff UI, code review view.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as side-by-side diff, pull request diff, git diff UI, code review view.
 
 ## Overview
 

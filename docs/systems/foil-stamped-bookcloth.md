@@ -26,7 +26,7 @@ components:
 
 # Foil-stamped bookcloth
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as hot foil stamping, gilt book cover, gold foil blocking, clothbound classic.
+A motion-graphics design system from RasanAI's style library (Print). Also known as hot foil stamping, gilt book cover, gold foil blocking, clothbound classic.
 
 ## Overview
 

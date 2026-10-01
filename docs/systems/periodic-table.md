@@ -26,7 +26,7 @@ components:
 
 # Periodic table
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as element tiles, periodic table grid, chemistry chart, element cell.
+A motion-graphics design system from RasanAI's style library (Science). Also known as element tiles, periodic table grid, chemistry chart, element cell.
 
 ## Overview
 

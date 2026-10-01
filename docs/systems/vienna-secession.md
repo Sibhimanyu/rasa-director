@@ -26,7 +26,7 @@ components:
 
 # Vienna Secession
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Secession style, Wiener Werkstätte, Ver Sacrum, Jugendstil Vienna, Klimt style.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Secession style, Wiener Werkstätte, Ver Sacrum, Jugendstil Vienna, Klimt style.
 
 ## Overview
 

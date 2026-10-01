@@ -26,7 +26,7 @@ components:
 
 # Art Nouveau
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Mucha style, Jugendstil, Liberty style, whiplash ornament, Belle Époque poster.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Mucha style, Jugendstil, Liberty style, whiplash ornament, Belle Époque poster.
 
 ## Overview
 

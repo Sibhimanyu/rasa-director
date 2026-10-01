@@ -26,7 +26,7 @@ components:
 
 # City pop
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Japanese city pop, Hiroshi Nagai style, 80s Japan album art, resort pop.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Japanese city pop, Hiroshi Nagai style, 80s Japan album art, resort pop.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Flat infographic
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as flat vector infographic, icon explainer, 2D infographic.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as flat vector infographic, icon explainer, 2D infographic.
 
 ## Overview
 

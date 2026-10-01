@@ -26,7 +26,7 @@ components:
 
 # Graphic standards manual
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as corporate identity manual, Vignelli style, NASA manual style, brand guidelines book.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as corporate identity manual, Vignelli style, NASA manual style, brand guidelines book.
 
 ## Overview
 

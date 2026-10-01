@@ -26,7 +26,7 @@ components:
 
 # Byzantine mosaic
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Byzantine gold mosaic, Ravenna mosaic, icon painting style, gold-ground mosaic.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Byzantine gold mosaic, Ravenna mosaic, icon painting style, gold-ground mosaic.
 
 ## Overview
 

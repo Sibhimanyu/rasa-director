@@ -26,7 +26,7 @@ components:
 
 # Chinese propaganda poster
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as revolutionary poster, Maoist poster style, red sun poster, socialist poster.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as revolutionary poster, Maoist poster style, red sun poster, socialist poster.
 
 ## Overview
 

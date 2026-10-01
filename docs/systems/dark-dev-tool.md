@@ -26,7 +26,7 @@ components:
 
 # Dark dev-tool
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as Linear style, Vercel aesthetic, developer dark mode, technical monochrome.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as Linear style, Vercel aesthetic, developer dark mode, technical monochrome.
 
 ## Overview
 

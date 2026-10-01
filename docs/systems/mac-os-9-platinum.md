@@ -28,7 +28,7 @@ components:
 
 # Mac OS 9 Platinum
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Platinum appearance, Mac OS 8, classic Mac OS, late-90s Mac desktop.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Platinum appearance, Mac OS 8, classic Mac OS, late-90s Mac desktop.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Vintage film titles
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as golden-age titles, classic Hollywood credits, sepia title card, old movie titles.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as golden-age titles, classic Hollywood credits, sepia title card, old movie titles.
 
 ## Overview
 

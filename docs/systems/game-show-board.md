@@ -28,7 +28,7 @@ components:
 
 # Game-show board
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as quiz show graphics, Jeopardy board look, game show tiles, prime-time quiz.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as quiz show graphics, Jeopardy board look, game show tiles, prime-time quiz.
 
 ## Overview
 

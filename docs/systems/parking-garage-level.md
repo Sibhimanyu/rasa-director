@@ -26,7 +26,7 @@ components:
 
 # Parking garage level graphics
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as car park wayfinding, parking level signage, supergraphics, garage level numbers, stencilled floor numbers.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as car park wayfinding, parking level signage, supergraphics, garage level numbers, stencilled floor numbers.
 
 ## Overview
 

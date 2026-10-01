@@ -26,7 +26,7 @@ components:
 
 # Oscilloscope trace
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as scope trace, phosphor oscilloscope, waveform display, bench scope.
+A motion-graphics design system from RasanAI's style library (Science). Also known as scope trace, phosphor oscilloscope, waveform display, bench scope.
 
 ## Overview
 

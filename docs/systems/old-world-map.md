@@ -26,7 +26,7 @@ components:
 
 # Old-world chart
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as antique map, sea chart, portolan chart, treasure map, cartographic engraving.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as antique map, sea chart, portolan chart, treasure map, cartographic engraving.
 
 ## Overview
 

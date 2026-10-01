@@ -26,7 +26,7 @@ components:
 
 # Academic explainer
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as scientific paper style, journal figure, lecture explainer.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as scientific paper style, journal figure, lecture explainer.
 
 ## Overview
 

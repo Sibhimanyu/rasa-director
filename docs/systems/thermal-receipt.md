@@ -26,7 +26,7 @@ components:
 
 # Thermal receipt
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as till receipt, POS receipt, receipt printer, thermal paper slip.
+A motion-graphics design system from RasanAI's style library (Print). Also known as till receipt, POS receipt, receipt printer, thermal paper slip.
 
 ## Overview
 

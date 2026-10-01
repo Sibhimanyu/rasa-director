@@ -28,7 +28,7 @@ components:
 
 # Explainer collage
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as Vox style, paper-cut explainer, mixed-media explainer.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as Vox style, paper-cut explainer, mixed-media explainer.
 
 ## Overview
 

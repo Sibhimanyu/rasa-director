@@ -28,7 +28,7 @@ components:
 
 # Y2K chrome
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as Y2K aesthetic, millennium chrome, cyber Y2K, chrome bubble.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as Y2K aesthetic, millennium chrome, cyber Y2K, chrome bubble.
 
 ## Overview
 

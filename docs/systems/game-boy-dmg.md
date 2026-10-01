@@ -26,7 +26,7 @@ components:
 
 # Game Boy green
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as DMG palette, 4-shade green, handheld pixel, pea-soup LCD.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as DMG palette, 4-shade green, handheld pixel, pea-soup LCD.
 
 ## Overview
 

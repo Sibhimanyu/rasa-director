@@ -26,7 +26,7 @@ components:
 
 # Ocean depth zones
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as bathymetric, deep sea, ocean zones, abyssal.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as bathymetric, deep sea, ocean zones, abyssal.
 
 ## Overview
 

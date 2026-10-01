@@ -26,7 +26,7 @@ components:
 
 # Type specimen
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as font specimen, foundry specimen, glyph showcase, specimen poster.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as font specimen, foundry specimen, glyph showcase, specimen poster.
 
 ## Overview
 

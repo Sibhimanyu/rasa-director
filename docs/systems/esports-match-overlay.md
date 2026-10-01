@@ -26,7 +26,7 @@ components:
 
 # Esports match overlay
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as esports tournament graphics, versus screen, team vs team overlay, match intro.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as esports tournament graphics, versus screen, team vs team overlay, match intro.
 
 ## Overview
 

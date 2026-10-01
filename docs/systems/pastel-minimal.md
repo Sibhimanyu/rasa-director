@@ -28,7 +28,7 @@ components:
 
 # Pastel minimal
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as soft pastel minimalism, sorbet minimal, baby pastel.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as soft pastel minimalism, sorbet minimal, baby pastel.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Modular synth patch
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Eurorack, patch cable diagram, modular synthesizer panel, synth module layout.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Eurorack, patch cable diagram, modular synthesizer panel, synth module layout.
 
 ## Overview
 

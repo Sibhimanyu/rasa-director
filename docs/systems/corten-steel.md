@@ -26,7 +26,7 @@ components:
 
 # Corten steel
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as weathering steel, rusted steel, corten, patina steel.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as weathering steel, rusted steel, corten, patina steel.
 
 ## Overview
 

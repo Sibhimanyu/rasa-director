@@ -28,7 +28,7 @@ components:
 
 # True-crime evidence board
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as conspiracy board, detective wall, investigation board, red string board.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as conspiracy board, detective wall, investigation board, red string board.
 
 ## Overview
 

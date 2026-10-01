@@ -28,7 +28,7 @@ components:
 
 # Neural node graph
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as AI agent graph, neural network visualization, knowledge graph glow, agent workflow.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as AI agent graph, neural network visualization, knowledge graph glow, agent workflow.
 
 ## Overview
 

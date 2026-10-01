@@ -26,7 +26,7 @@ components:
 
 # Swiss punk (New Wave)
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as New Wave typography, Weingart style, Swiss punk, post-modern typography.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as New Wave typography, Weingart style, Swiss punk, post-modern typography.
 
 ## Overview
 

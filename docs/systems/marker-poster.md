@@ -26,7 +26,7 @@ components:
 
 # Ink & marker
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as Sharpie style, marker drawing, felt-tip lettering, bold ink.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as Sharpie style, marker drawing, felt-tip lettering, bold ink.
 
 ## Overview
 

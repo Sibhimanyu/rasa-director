@@ -26,7 +26,7 @@ components:
 
 # Data noir
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as dark editorial data, noir infographic, black-and-red data, investigative data.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as dark editorial data, noir infographic, black-and-red data, investigative data.
 
 ## Overview
 

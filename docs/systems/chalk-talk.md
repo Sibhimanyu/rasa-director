@@ -26,7 +26,7 @@ components:
 
 # Chalk talk
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as chalkboard explainer, blackboard animation, lecture chalk.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as chalkboard explainer, blackboard animation, lecture chalk.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Glossy 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as candy 3D, glossy plastic render, shiny 3D, bubblegum 3D.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as candy 3D, glossy plastic render, shiny 3D, bubblegum 3D.
 
 ## Overview
 

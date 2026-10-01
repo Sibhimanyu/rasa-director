@@ -28,7 +28,7 @@ components:
 
 # Holographic iridescent
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as holo foil, iridescent gradient, pearlescent, oil-slick, hologram sticker.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as holo foil, iridescent gradient, pearlescent, oil-slick, hologram sticker.
 
 ## Overview
 

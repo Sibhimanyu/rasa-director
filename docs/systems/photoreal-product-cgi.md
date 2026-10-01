@@ -28,7 +28,7 @@ components:
 
 # Photoreal product CGI
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as product CGI, Apple-style product film, hero render, packshot CGI.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as product CGI, Apple-style product film, hero render, packshot CGI.
 
 ## Overview
 

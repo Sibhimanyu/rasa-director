@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 (2026-10-01)
+
+- **Rasa Director is now RasanAI.** The name comes from the Tamil ரசனை (*rasanai*): taste, the refined appreciation of beauty. The skill is `/rasanai`, the plugin is `rasanai@rasanai`, the repository is `Sibhimanyu/rasanai` and the site is https://sibhimanyu.github.io/rasanai/. Nothing else changes: same flow, same 403 design systems, same checks.
+- **Existing installs move over by themselves.** The next time Rasa Director loads, it updates to a small `rasa-director` bridge that installs RasanAI the way you installed Rasa Director (the plugin switches to `rasanai`, the installer and git checkouts gain a `rasanai` link, the skills CLI adds `rasanai`) and hands the request over. `~/.rasa-director` (your picks history, the private Node) moves to `~/.rasanai`, `RASA_DIRECTOR_*` settings keep working, and a video in progress resumes where it was. Tested from 1.0.0 for the plugin, the installer and a git checkout.
+- The installer accepts a full URL or path in `RASANAI_REPO` (forks, tests).
+
 ## 1.0.0 (2026-10-01)
 
 Rasa Director 1.0 rebuilds the product around one idea: when thirty people make an AI video, they get thirty videos with different content and the same film. Every default that makes that happen (the obvious story, the default look, one ease for everything, a looping music bed, a whoosh on every cut, glowing text) is now a decision, and the build is checked against it.

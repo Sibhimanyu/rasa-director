@@ -28,7 +28,7 @@ components:
 
 # Hi-fi tuner dial
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as 70s stereo receiver, FM tuning dial, silver-face receiver, analog radio scale.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as 70s stereo receiver, FM tuning dial, silver-face receiver, analog radio scale.
 
 ## Overview
 

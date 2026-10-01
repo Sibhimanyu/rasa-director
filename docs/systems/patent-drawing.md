@@ -26,7 +26,7 @@ components:
 
 # Patent drawing
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as patent illustration, patent figure, USPTO drawing, technical line drawing.
+A motion-graphics design system from RasanAI's style library (Science). Also known as patent illustration, patent figure, USPTO drawing, technical line drawing.
 
 ## Overview
 

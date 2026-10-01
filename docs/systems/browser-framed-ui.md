@@ -28,7 +28,7 @@ components:
 
 # Browser-framed UI
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as browser mockup, web app in chrome, website walkthrough.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as browser mockup, web app in chrome, website walkthrough.
 
 ## Overview
 

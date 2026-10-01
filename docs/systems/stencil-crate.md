@@ -26,7 +26,7 @@ components:
 
 # Stencil crate
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as shipping crate stencil, spray stencil, military stencil, cargo markings, crate lettering.
+A motion-graphics design system from RasanAI's style library (Print). Also known as shipping crate stencil, spray stencil, military stencil, cargo markings, crate lettering.
 
 ## Overview
 

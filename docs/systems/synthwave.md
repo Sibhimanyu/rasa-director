@@ -28,7 +28,7 @@ components:
 
 # Synthwave
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as outrun, retrowave, 80s neon, Miami vice neon.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as outrun, retrowave, 80s neon, Miami vice neon.
 
 ## Overview
 

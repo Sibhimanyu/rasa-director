@@ -28,7 +28,7 @@ components:
 
 # Chibi anime pop
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as chibi style, anime pop, cel-shaded cute, idol pop graphics.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as chibi style, anime pop, cel-shaded cute, idol pop graphics.
 
 ## Overview
 

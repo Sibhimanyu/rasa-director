@@ -26,7 +26,7 @@ components:
 
 # Phone messaging thread
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as text message UI, iMessage-style bubbles, SMS conversation, chat bubbles.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as text message UI, iMessage-style bubbles, SMS conversation, chat bubbles.
 
 ## Overview
 

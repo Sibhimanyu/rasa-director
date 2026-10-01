@@ -26,7 +26,7 @@ components:
 
 # Linocut
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as woodcut, block print, relief print, carved print.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as woodcut, block print, relief print, carved print.
 
 ## Overview
 

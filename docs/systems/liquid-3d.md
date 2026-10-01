@@ -28,7 +28,7 @@ components:
 
 # Liquid 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as fluid simulation, liquid render, splash 3D, gooey liquid.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as fluid simulation, liquid render, splash 3D, gooey liquid.
 
 ## Overview
 

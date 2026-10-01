@@ -26,7 +26,7 @@ components:
 
 # Horological precision
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as watch dial, chronograph UI, Swiss watch film, timepiece macro.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as watch dial, chronograph UI, Swiss watch film, timepiece macro.
 
 ## Overview
 

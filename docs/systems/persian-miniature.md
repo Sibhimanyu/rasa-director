@@ -26,7 +26,7 @@ components:
 
 # Persian miniature
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Persian manuscript, illuminated manuscript, Safavid miniature, Mughal miniature page.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Persian manuscript, illuminated manuscript, Safavid miniature, Mughal miniature page.
 
 ## Overview
 

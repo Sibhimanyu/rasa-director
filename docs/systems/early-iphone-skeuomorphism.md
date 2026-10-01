@@ -28,7 +28,7 @@ components:
 
 # Early iPhone skeuomorphism
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as iOS 6 style, skeuomorphic UI, rich UI, linen and leather.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as iOS 6 style, skeuomorphic UI, rich UI, linen and leather.
 
 ## Overview
 

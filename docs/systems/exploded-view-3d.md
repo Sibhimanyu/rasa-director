@@ -28,7 +28,7 @@ components:
 
 # Exploded view 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as exploded axonometric, exploded product view, teardown view, exploded interface.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as exploded axonometric, exploded product view, teardown view, exploded interface.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Technical minimalism
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as Teenage Engineering style, industrial product UI, Braun-tech, instrument panel minimal.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as Teenage Engineering style, industrial product UI, Braun-tech, instrument panel minimal.
 
 ## Overview
 

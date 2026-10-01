@@ -28,7 +28,7 @@ components:
 
 # Space-age retro-futurism
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as atompunk, Googie, Jetsons style, 50s tomorrowland.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as atompunk, Googie, Jetsons style, 50s tomorrowland.
 
 ## Overview
 

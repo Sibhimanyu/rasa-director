@@ -28,7 +28,7 @@ components:
 
 # Soft neo-brutalism
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as neubrutalism, playful brutalism, hard-shadow UI, Gumroad style.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as neubrutalism, playful brutalism, hard-shadow UI, Gumroad style.
 
 ## Overview
 

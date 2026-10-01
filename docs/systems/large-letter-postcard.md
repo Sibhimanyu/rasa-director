@@ -28,7 +28,7 @@ components:
 
 # Large-letter postcard
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as Greetings from postcard, linen postcard, Curt Teich postcard, vintage travel postcard.
+A motion-graphics design system from RasanAI's style library (Print). Also known as Greetings from postcard, linen postcard, Curt Teich postcard, vintage travel postcard.
 
 ## Overview
 

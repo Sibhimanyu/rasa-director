@@ -28,7 +28,7 @@ components:
 
 # Gamified UI
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as gamification style, Duolingo UI, streaks and XP, reward UI.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as gamification style, Duolingo UI, streaks and XP, reward UI.
 
 ## Overview
 

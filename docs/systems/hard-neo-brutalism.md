@@ -28,7 +28,7 @@ components:
 
 # Hard neo-brutalism
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as neubrutalism (square), brutalist cards, Figma neo-brutal, loud flat UI.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as neubrutalism (square), brutalist cards, Figma neo-brutal, loud flat UI.
 
 ## Overview
 

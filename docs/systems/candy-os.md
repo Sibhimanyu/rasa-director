@@ -28,7 +28,7 @@ components:
 
 # Candy desktop
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as cute OS, pastel desktop UI, playful windows, toy operating system.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as cute OS, pastel desktop UI, playful windows, toy operating system.
 
 ## Overview
 

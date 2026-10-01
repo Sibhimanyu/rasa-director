@@ -28,7 +28,7 @@ components:
 
 # Highway guide sign
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as interstate sign, freeway signage, Highway Gothic, motorway sign, green guide sign.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as interstate sign, freeway signage, Highway Gothic, motorway sign, green guide sign.
 
 ## Overview
 

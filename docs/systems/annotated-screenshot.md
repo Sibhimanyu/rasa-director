@@ -28,7 +28,7 @@ components:
 
 # Annotated screenshot
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as callout explainer, screenshot walkthrough, markup explainer.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as callout explainer, screenshot walkthrough, markup explainer.
 
 ## Overview
 

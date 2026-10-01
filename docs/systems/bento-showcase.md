@@ -26,7 +26,7 @@ components:
 
 # Bento showcase
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as bento grid, Apple bento, feature grid reveal.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as bento grid, Apple bento, feature grid reveal.
 
 ## Overview
 

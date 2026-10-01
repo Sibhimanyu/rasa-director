@@ -26,7 +26,7 @@ components:
 
 # Print Gocco pastel
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as Print Gocco, gocco print, Japanese mini screen print, pastel block print.
+A motion-graphics design system from RasanAI's style library (Print). Also known as Print Gocco, gocco print, Japanese mini screen print, pastel block print.
 
 ## Overview
 

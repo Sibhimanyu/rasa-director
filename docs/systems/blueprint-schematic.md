@@ -26,7 +26,7 @@ components:
 
 # Blueprint schematic
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as blueprint explainer, engineering drawing, cyanotype technical.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as blueprint explainer, engineering drawing, cyanotype technical.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Claymation 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as plasticine 3D, clay stop-motion, Aardman look, sculpted clay render, clay 3D.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as plasticine 3D, clay stop-motion, Aardman look, sculpted clay render, clay 3D.
 
 ## Overview
 

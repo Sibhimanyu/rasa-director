@@ -28,7 +28,7 @@ components:
 
 # Dark neumorphism
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as dark soft UI, night neumorphic, charcoal soft UI.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as dark soft UI, night neumorphic, charcoal soft UI.
 
 ## Overview
 

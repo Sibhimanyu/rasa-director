@@ -28,7 +28,7 @@ components:
 
 # Emoji pop
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as 3D emoji style, emoji UI, glossy emoji, reaction pop.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as 3D emoji style, emoji UI, glossy emoji, reaction pop.
 
 ## Overview
 

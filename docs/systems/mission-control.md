@@ -28,7 +28,7 @@ components:
 
 # Mission control
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as telemetry dashboard, ops center, flight console, control room UI.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as telemetry dashboard, ops center, flight console, control room UI.
 
 ## Overview
 

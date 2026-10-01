@@ -28,7 +28,7 @@ components:
 
 # 80s network ident
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as station ident, retro channel ident, 80s CGI ident, network promo.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as station ident, retro channel ident, 80s CGI ident, network promo.
 
 ## Overview
 

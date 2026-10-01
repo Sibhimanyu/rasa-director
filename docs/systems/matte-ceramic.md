@@ -28,7 +28,7 @@ components:
 
 # Matte ceramic
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as soft-touch ceramic, stoneware UI, matte clay objects, bisque.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as soft-touch ceramic, stoneware UI, matte clay objects, bisque.
 
 ## Overview
 

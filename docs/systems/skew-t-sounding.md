@@ -26,7 +26,7 @@ components:
 
 # Skew-T sounding
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as radiosonde plot, skew-T log-P, atmospheric sounding, weather balloon chart.
+A motion-graphics design system from RasanAI's style library (Science). Also known as radiosonde plot, skew-T log-P, atmospheric sounding, weather balloon chart.
 
 ## Overview
 

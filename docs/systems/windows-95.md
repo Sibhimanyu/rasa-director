@@ -28,7 +28,7 @@ components:
 
 # Windows 95
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as classic Windows UI, Win95 aesthetic, retro OS, beveled grey UI.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as classic Windows UI, Win95 aesthetic, retro OS, beveled grey UI.
 
 ## Overview
 

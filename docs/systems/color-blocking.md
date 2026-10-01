@@ -26,7 +26,7 @@ components:
 
 # Colour blocking
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as color block, flat colour fields, block colour UI, tonal blocking.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as color block, flat colour fields, block colour UI, tonal blocking.
 
 ## Overview
 

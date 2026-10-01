@@ -26,7 +26,7 @@ components:
 
 # Nordic soft
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as hygge, Scandi minimal, Scandinavian design, fog and oat.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as hygge, Scandi minimal, Scandinavian design, fog and oat.
 
 ## Overview
 

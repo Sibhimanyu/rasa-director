@@ -28,7 +28,7 @@ components:
 
 # Comic book
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as comic style, graphic novel, superhero comic, speech-bubble style.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as comic style, graphic novel, superhero comic, speech-bubble style.
 
 ## Overview
 

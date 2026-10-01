@@ -26,7 +26,7 @@ components:
 
 # Architectural monograph
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as architecture book, monograph layout, El Croquis style, concrete editorial.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as architecture book, monograph layout, El Croquis style, concrete editorial.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Lissitzky Proun
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Proun, El Lissitzky style, suprematist axonometric, Russian avant-garde architecture.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Proun, El Lissitzky style, suprematist axonometric, Russian avant-garde architecture.
 
 ## Overview
 

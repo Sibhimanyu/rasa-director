@@ -26,7 +26,7 @@ components:
 
 # Motorsport telemetry
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as F1 broadcast graphics, racing telemetry, speed HUD, timing tower.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as F1 broadcast graphics, racing telemetry, speed HUD, timing tower.
 
 ## Overview
 

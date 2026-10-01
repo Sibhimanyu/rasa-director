@@ -28,7 +28,7 @@ components:
 
 # Cinematic duotone
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as photo duotone, two-tone grade, duotone photography, gradient-map photos.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as photo duotone, two-tone grade, duotone photography, gradient-map photos.
 
 ## Overview
 

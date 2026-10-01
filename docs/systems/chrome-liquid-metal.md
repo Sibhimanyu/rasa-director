@@ -28,7 +28,7 @@ components:
 
 # Chrome liquid metal
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as chrome, liquid chrome, Y2K chrome, mercury, polished metal.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as chrome, liquid chrome, Y2K chrome, mercury, polished metal.
 
 ## Overview
 

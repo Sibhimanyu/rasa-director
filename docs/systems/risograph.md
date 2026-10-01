@@ -28,7 +28,7 @@ components:
 
 # Risograph
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as riso print, riso zine, two-colour riso, stencil duplicator print.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as riso print, riso zine, two-colour riso, stencil duplicator print.
 
 ## Overview
 

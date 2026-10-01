@@ -26,7 +26,7 @@ components:
 
 # Flight checklist
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as flight data file, Apollo checklist, mission procedures, space program manual, procedure card.
+A motion-graphics design system from RasanAI's style library (Science). Also known as flight data file, Apollo checklist, mission procedures, space program manual, procedure card.
 
 ## Overview
 

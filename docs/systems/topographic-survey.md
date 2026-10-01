@@ -26,7 +26,7 @@ components:
 
 # Topographic survey map
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as topo map, USGS quad, contour map, survey sheet, Ordnance Survey style.
+A motion-graphics design system from RasanAI's style library (Science). Also known as topo map, USGS quad, contour map, survey sheet, Ordnance Survey style.
 
 ## Overview
 

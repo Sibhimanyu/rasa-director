@@ -28,7 +28,7 @@ components:
 
 # Screenplay page
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as script format, typescript, Courier page, shooting script.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as script format, typescript, Courier page, shooting script.
 
 ## Overview
 

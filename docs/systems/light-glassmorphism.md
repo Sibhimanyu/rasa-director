@@ -28,7 +28,7 @@ components:
 
 # Glassmorphism (light)
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as frosted glass UI, glass cards, glassmorphic UI.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as frosted glass UI, glass cards, glassmorphic UI.
 
 ## Overview
 

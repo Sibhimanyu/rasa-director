@@ -26,7 +26,7 @@ components:
 
 # Volcanic basalt
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as basalt columns, lava rock, volcanic, Giant's Causeway.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as basalt columns, lava rock, volcanic, Giant's Causeway.
 
 ## Overview
 

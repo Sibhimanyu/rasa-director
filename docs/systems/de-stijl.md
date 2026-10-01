@@ -26,7 +26,7 @@ components:
 
 # De Stijl
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Neoplasticism, Mondrian style, Mondrian grid, Dutch modernism.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Neoplasticism, Mondrian style, Mondrian grid, Dutch modernism.
 
 ## Overview
 

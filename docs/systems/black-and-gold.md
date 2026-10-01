@@ -28,7 +28,7 @@ components:
 
 # Black and gold
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as noir gold, gold on black, gala luxury, premium dark gold.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as noir gold, gold on black, gala luxury, premium dark gold.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # VHS camcorder
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as VHS aesthetic, 90s home video, tape OSD, analog glitch.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as VHS aesthetic, 90s home video, tape OSD, analog glitch.
 
 ## Overview
 

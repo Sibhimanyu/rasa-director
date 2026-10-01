@@ -28,7 +28,7 @@ components:
 
 # Jewelry macro
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as diamond sparkle, fine jewellery film, platinum glint, gemstone macro.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as diamond sparkle, fine jewellery film, platinum glint, gemstone macro.
 
 ## Overview
 

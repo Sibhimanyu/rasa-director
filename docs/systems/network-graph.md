@@ -28,7 +28,7 @@ components:
 
 # Network graph
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as knowledge graph, node-link diagram, constellation graph.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as knowledge graph, node-link diagram, constellation graph.
 
 ## Overview
 

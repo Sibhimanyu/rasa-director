@@ -28,7 +28,7 @@ components:
 
 # Dymo label tape
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as Dymo labels, embossed label tape, label maker, punched plastic tape.
+A motion-graphics design system from RasanAI's style library (Print). Also known as Dymo labels, embossed label tape, label maker, punched plastic tape.
 
 ## Overview
 

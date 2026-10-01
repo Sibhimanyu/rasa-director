@@ -26,7 +26,7 @@ components:
 
 # Azulejo
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as azulejos, Portuguese tiles, Lisbon tiles, blue and white tiles, tin-glazed tilework.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as azulejos, Portuguese tiles, Lisbon tiles, blue and white tiles, tin-glazed tilework.
 
 ## Overview
 

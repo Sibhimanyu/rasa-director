@@ -26,7 +26,7 @@ components:
 
 # Sketchbook
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as pencil sketch, graphite sketch, concept sketch, designer's sketchbook.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as pencil sketch, graphite sketch, concept sketch, designer's sketchbook.
 
 ## Overview
 

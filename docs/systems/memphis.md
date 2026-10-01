@@ -28,7 +28,7 @@ components:
 
 # Memphis
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as Memphis design, Memphis Group, 80s Memphis, squiggle pattern.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as Memphis design, Memphis Group, 80s Memphis, squiggle pattern.
 
 ## Overview
 

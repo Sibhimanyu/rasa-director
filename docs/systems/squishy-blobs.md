@@ -28,7 +28,7 @@ components:
 
 # Squishy blobs
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as blobby shapes, organic pop, jelly blobs, gooey UI.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as blobby shapes, organic pop, jelly blobs, gooey UI.
 
 ## Overview
 

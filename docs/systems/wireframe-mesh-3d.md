@@ -26,7 +26,7 @@ components:
 
 # 3D wireframe mesh
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as wireframe render, mesh view, polygon wireframe, viewport look.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as wireframe render, mesh view, polygon wireframe, viewport look.
 
 ## Overview
 

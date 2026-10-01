@@ -26,7 +26,7 @@ components:
 
 # Magazine serif editorial
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as print editorial, magazine layout, feature spread, editorial serif.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as print editorial, magazine layout, feature spread, editorial serif.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Woodland moss
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as forest floor, moss green aesthetic, woodland, forest bathing.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as forest floor, moss green aesthetic, woodland, forest bathing.
 
 ## Overview
 

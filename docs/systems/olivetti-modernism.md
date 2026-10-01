@@ -26,7 +26,7 @@ components:
 
 # Olivetti modernism
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Italian corporate modernism, Pintori style, Olivetti poster, Milanese modernism.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Italian corporate modernism, Pintori style, Olivetti poster, Milanese modernism.
 
 ## Overview
 

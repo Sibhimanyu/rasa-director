@@ -28,7 +28,7 @@ components:
 
 # Bollywood hand-painted poster
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Bollywood poster art, hand-painted film hoarding, 70s Hindi film poster, filmi title art.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Bollywood poster art, hand-painted film hoarding, 70s Hindi film poster, filmi title art.
 
 ## Overview
 

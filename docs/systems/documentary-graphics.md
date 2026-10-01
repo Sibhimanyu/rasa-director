@@ -26,7 +26,7 @@ components:
 
 # Documentary graphics
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as doc lower thirds, Netflix documentary style, factual graphics, investigative doc.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as doc lower thirds, Netflix documentary style, factual graphics, investigative doc.
 
 ## Overview
 

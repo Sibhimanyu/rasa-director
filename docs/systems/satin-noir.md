@@ -28,7 +28,7 @@ components:
 
 # Satin noir
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as silk luxe, satin sheen, dark skincare luxe, liquid silk.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as silk luxe, satin sheen, dark skincare luxe, liquid silk.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Enamel street sign
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as Paris street sign, vitreous enamel plaque, street name plate, plaque de rue.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as Paris street sign, vitreous enamel plaque, street name plate, plaque de rue.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Hyperpop
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as hyperpop cover art, digicore, PC Music aesthetic, Y2K internet pop.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as hyperpop cover art, digicore, PC Music aesthetic, Y2K internet pop.
 
 ## Overview
 

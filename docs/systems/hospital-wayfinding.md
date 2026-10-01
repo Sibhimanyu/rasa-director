@@ -28,7 +28,7 @@ components:
 
 # Hospital wayfinding
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as healthcare signage, clinical wayfinding, colour-coded zones, NHS-style signs.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as healthcare signage, clinical wayfinding, colour-coded zones, NHS-style signs.
 
 ## Overview
 

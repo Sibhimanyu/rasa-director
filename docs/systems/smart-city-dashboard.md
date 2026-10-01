@@ -26,7 +26,7 @@ components:
 
 # Smart-city dashboard
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as urban data dashboard, city operations centre, digital twin UI, urban analytics display.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as urban data dashboard, city operations centre, digital twin UI, urban analytics display.
 
 ## Overview
 

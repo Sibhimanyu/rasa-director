@@ -28,7 +28,7 @@ components:
 
 # Dark neo-brutalism
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as neon neubrutalism, dark mode neo-brutal, night brutalism.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as neon neubrutalism, dark mode neo-brutal, night brutalism.
 
 ## Overview
 

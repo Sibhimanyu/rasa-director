@@ -26,7 +26,7 @@ components:
 
 # Construction hoarding
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as site hoarding, building-site graphics, developer hoarding, coming soon hoarding.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as site hoarding, building-site graphics, developer hoarding, coming soon hoarding.
 
 ## Overview
 

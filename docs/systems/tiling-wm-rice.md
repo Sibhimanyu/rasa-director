@@ -26,7 +26,7 @@ components:
 
 # Tiling window-manager rice
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as unixporn rice, i3 / Hyprland desktop, Gruvbox theme, tiling WM.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as unixporn rice, i3 / Hyprland desktop, Gruvbox theme, tiling WM.
 
 ## Overview
 

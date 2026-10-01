@@ -28,7 +28,7 @@ components:
 
 # Isometric city block
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as isometric city, city-builder style, SimCity style, isometric urban illustration.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as isometric city, city-builder style, SimCity style, isometric urban illustration.
 
 ## Overview
 

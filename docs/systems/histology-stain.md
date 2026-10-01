@@ -28,7 +28,7 @@ components:
 
 # Histology stain (H&E)
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as H&E stain, microscope slide, stained section, pathology slide, micrograph.
+A motion-graphics design system from RasanAI's style library (Science). Also known as H&E stain, microscope slide, stained section, pathology slide, micrograph.
 
 ## Overview
 

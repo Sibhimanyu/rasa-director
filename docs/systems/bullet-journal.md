@@ -26,7 +26,7 @@ components:
 
 # Bullet journal
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as bujo, dot-grid planner, stationery aesthetic, planner doodles.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as bujo, dot-grid planner, stationery aesthetic, planner doodles.
 
 ## Overview
 

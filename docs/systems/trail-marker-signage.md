@@ -28,7 +28,7 @@ components:
 
 # National park trail signage
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as trail signs, park trail markers, routed wood signs, trail blazes, hiking signage.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as trail signs, park trail markers, routed wood signs, trail blazes, hiking signage.
 
 ## Overview
 

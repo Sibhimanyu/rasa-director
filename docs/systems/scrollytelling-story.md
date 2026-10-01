@@ -28,7 +28,7 @@ components:
 
 # Scrollytelling story
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as vertical data story, Instagram explainer, mobile data narrative.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as vertical data story, Instagram explainer, mobile data narrative.
 
 ## Overview
 

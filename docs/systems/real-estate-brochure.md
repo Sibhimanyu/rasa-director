@@ -28,7 +28,7 @@ components:
 
 # Real-estate brochure
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as property brochure, development brochure, residential marketing, property listing design.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as property brochure, development brochure, residential marketing, property listing design.
 
 ## Overview
 

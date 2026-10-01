@@ -26,7 +26,7 @@ components:
 
 # Roots reggae print
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Rasta colours, sound system poster, reggae 45 label, roots and culture.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Rasta colours, sound system poster, reggae 45 label, roots and culture.
 
 ## Overview
 

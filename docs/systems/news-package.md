@@ -28,7 +28,7 @@ components:
 
 # Broadcast news package
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as news graphics, breaking news, news lower thirds, 24-hour news look.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as news graphics, breaking news, news lower thirds, 24-hour news look.
 
 ## Overview
 

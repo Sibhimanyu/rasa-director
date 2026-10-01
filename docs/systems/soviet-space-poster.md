@@ -26,7 +26,7 @@ components:
 
 # Soviet space poster
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Soviet cosmos poster, space race propaganda, cosmonaut poster, Soviet space age graphics.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Soviet cosmos poster, space race propaganda, cosmonaut poster, Soviet space age graphics.
 
 ## Overview
 

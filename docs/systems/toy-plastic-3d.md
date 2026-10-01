@@ -28,7 +28,7 @@ components:
 
 # Toy-like 3D
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as toy 3D, plastic toy style, vinyl toy 3D, chunky 3D UI.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as toy 3D, plastic toy style, vinyl toy 3D, chunky 3D UI.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Block-editor doc page
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Notion-style page, doc canvas, block editor, wiki page look.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Notion-style page, doc canvas, block editor, wiki page look.
 
 ## Overview
 

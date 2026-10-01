@@ -26,7 +26,7 @@ components:
 
 # Dutch Total Design
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Wim Crouwel style, Stedelijk poster, gridnik, Dutch grid modernism.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Wim Crouwel style, Stedelijk poster, gridnik, Dutch grid modernism.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Self-order kiosk
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as touchscreen kiosk UI, point-of-sale screen, self-checkout, ordering kiosk.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as touchscreen kiosk UI, point-of-sale screen, self-checkout, ordering kiosk.
 
 ## Overview
 

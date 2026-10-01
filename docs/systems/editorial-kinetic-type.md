@@ -26,7 +26,7 @@ components:
 
 # Editorial kinetic typography
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as big-type editorial, typographic statement, headline-led motion, type-only film.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as big-type editorial, typographic statement, headline-led motion, type-only film.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Organic biomorphic
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as blob shapes, fluid organic, biomorphic abstraction, pebble forms.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as blob shapes, fluid organic, biomorphic abstraction, pebble forms.
 
 ## Overview
 

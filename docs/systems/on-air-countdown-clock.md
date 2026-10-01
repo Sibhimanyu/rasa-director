@@ -26,7 +26,7 @@ components:
 
 # On-air countdown clock
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as broadcast countdown, studio clock, live countdown, going live timer.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as broadcast countdown, studio clock, live countdown, going live timer.
 
 ## Overview
 

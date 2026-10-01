@@ -28,7 +28,7 @@ components:
 
 # Screen print
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as silkscreen, gig poster, serigraph, rock poster print.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as silkscreen, gig poster, serigraph, rock poster print.
 
 ## Overview
 

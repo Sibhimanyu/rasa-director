@@ -26,7 +26,7 @@ components:
 
 # Amiga Workbench
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Workbench 1.3, AmigaOS, Amiga desktop, Topaz font.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Workbench 1.3, AmigaOS, Amiga desktop, Topaz font.
 
 ## Overview
 

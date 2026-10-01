@@ -28,7 +28,7 @@ components:
 
 # Cut-and-paste zine
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as punk zine, DIY zine, ransom-note collage, xerox zine.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as punk zine, DIY zine, ransom-note collage, xerox zine.
 
 ## Overview
 

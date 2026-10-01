@@ -26,7 +26,7 @@ components:
 
 # Public-broadcaster clean
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as BBC-style graphics, public service broadcast look, clean news explainer, reality check style.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as BBC-style graphics, public service broadcast look, clean news explainer, reality check style.
 
 ## Overview
 

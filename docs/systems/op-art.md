@@ -26,7 +26,7 @@ components:
 
 # Op art
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as optical art, Bridget Riley style, optical illusion graphics, hypnotic black and white.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as optical art, Bridget Riley style, optical illusion graphics, hypnotic black and white.
 
 ## Overview
 

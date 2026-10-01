@@ -28,7 +28,7 @@ components:
 
 # Techno-thriller screen graphics
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as hacker film UI, Mr. Robot style, cyber-thriller terminal, screen graphics.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as hacker film UI, Mr. Robot style, cyber-thriller terminal, screen graphics.
 
 ## Overview
 

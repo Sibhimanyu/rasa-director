@@ -26,7 +26,7 @@ components:
 
 # Symmetrical pastel
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as Wes Anderson style, storybook symmetry, pastel cinema, dollhouse framing.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as Wes Anderson style, storybook symmetry, pastel cinema, dollhouse framing.
 
 ## Overview
 

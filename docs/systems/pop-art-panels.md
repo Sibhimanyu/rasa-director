@@ -28,7 +28,7 @@ components:
 
 # Pop art
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as Lichtenstein style, Ben-Day dots, Warhol pop, halftone pop.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as Lichtenstein style, Ben-Day dots, Warhol pop, halftone pop.
 
 ## Overview
 

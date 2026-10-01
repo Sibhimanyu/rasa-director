@@ -28,7 +28,7 @@ components:
 
 # Media-player skin
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Winamp-style skin, 2000s MP3 player, skinned player UI, oscilloscope visualiser.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Winamp-style skin, 2000s MP3 player, skinned player UI, oscilloscope visualiser.
 
 ## Overview
 

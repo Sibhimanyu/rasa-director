@@ -26,7 +26,7 @@ components:
 
 # Offset press proof
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as CMYK press sheet, registration marks, printer's proof, crop marks and colour bars, make-ready sheet.
+A motion-graphics design system from RasanAI's style library (Print). Also known as CMYK press sheet, registration marks, printer's proof, crop marks and colour bars, make-ready sheet.
 
 ## Overview
 

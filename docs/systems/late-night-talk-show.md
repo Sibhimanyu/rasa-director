@@ -26,7 +26,7 @@ components:
 
 # Late-night talk show
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as late show graphics, talk show package, tonight show look, city skyline set.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as late show graphics, talk show package, tonight show look, city skyline set.
 
 ## Overview
 

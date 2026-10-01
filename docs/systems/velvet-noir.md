@@ -26,7 +26,7 @@ components:
 
 # Velvet jewel-tone
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as burgundy velvet, jewel tones, opera luxury, oxblood and gold.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as burgundy velvet, jewel tones, opera luxury, oxblood and gold.
 
 ## Overview
 

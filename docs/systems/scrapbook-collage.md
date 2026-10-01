@@ -28,7 +28,7 @@ components:
 
 # Scrapbook collage
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as scrapbook, journal collage, washi-tape collage, memory book.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as scrapbook, journal collage, washi-tape collage, memory book.
 
 ## Overview
 

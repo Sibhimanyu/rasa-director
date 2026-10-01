@@ -26,7 +26,7 @@ components:
 
 # Video-editor timeline
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as NLE timeline, editing timeline, editing suite UI, multitrack view.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as NLE timeline, editing timeline, editing suite UI, multitrack view.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Collider event display
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as particle detector display, CERN-style event display, particle tracks, detector cross-section.
+A motion-graphics design system from RasanAI's style library (Science). Also known as particle detector display, CERN-style event display, particle tracks, detector cross-section.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Polish poster school
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Polish film poster, Polska Szkoła Plakatu, Lenica style, Cieślewicz style.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Polish film poster, Polska Szkoła Plakatu, Lenica style, Cieślewicz style.
 
 ## Overview
 

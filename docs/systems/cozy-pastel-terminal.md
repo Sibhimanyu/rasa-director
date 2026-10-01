@@ -28,7 +28,7 @@ components:
 
 # Cozy pastel terminal
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as Catppuccin style, soft dev tool, pastel code editor, cozy CLI.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as Catppuccin style, soft dev tool, pastel code editor, cozy CLI.
 
 ## Overview
 

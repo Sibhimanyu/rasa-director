@@ -28,7 +28,7 @@ components:
 
 # AR overlay
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as augmented reality UI, in-world labels, tracked callouts, camera-feed UI.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as augmented reality UI, in-world labels, tracked callouts, camera-feed UI.
 
 ## Overview
 

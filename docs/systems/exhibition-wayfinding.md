@@ -26,7 +26,7 @@ components:
 
 # Exhibition & wayfinding
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as museum graphics, signage system, environmental graphics, gallery wayfinding.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as museum graphics, signage system, environmental graphics, gallery wayfinding.
 
 ## Overview
 

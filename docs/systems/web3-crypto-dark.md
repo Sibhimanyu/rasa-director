@@ -28,7 +28,7 @@ components:
 
 # Web3 crypto dark
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as crypto UI, DeFi aesthetic, web3 neon, wallet app style.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as crypto UI, DeFi aesthetic, web3 neon, wallet app style.
 
 ## Overview
 

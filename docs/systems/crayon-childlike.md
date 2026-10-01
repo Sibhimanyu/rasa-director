@@ -26,7 +26,7 @@ components:
 
 # Crayon childlike
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as kid's drawing, crayon drawing, naive art, fridge drawing.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as kid's drawing, crayon drawing, naive art, fridge drawing.
 
 ## Overview
 

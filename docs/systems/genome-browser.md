@@ -26,7 +26,7 @@ components:
 
 # Genome browser
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as genome track view, sequencing tracks, genomics viewer, DNA sequence browser.
+A motion-graphics design system from RasanAI's style library (Science). Also known as genome track view, sequencing tracks, genomics viewer, DNA sequence browser.
 
 ## Overview
 

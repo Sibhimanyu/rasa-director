@@ -26,7 +26,7 @@ components:
 
 # Grime pirate TV
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Channel U look, pirate radio grime, UK grime DVD, SMS shout-out ticker.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Channel U look, pirate radio grime, UK grime DVD, SMS shout-out ticker.
 
 ## Overview
 

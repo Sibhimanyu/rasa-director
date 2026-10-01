@@ -26,7 +26,7 @@ components:
 
 # Preschool TV
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as preschool graphics, toddler TV style, nursery bright, kids channel ident.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as preschool graphics, toddler TV style, nursery bright, kids channel ident.
 
 ## Overview
 

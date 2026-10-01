@@ -26,7 +26,7 @@ components:
 
 # Watercolour wash
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as watercolor flat, soft watercolour illustration, painterly wash, gouache flat.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as watercolor flat, soft watercolour illustration, painterly wash, gouache flat.
 
 ## Overview
 

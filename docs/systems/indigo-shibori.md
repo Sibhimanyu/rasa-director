@@ -26,7 +26,7 @@ components:
 
 # Indigo shibori
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as shibori, indigo dye, aizome, resist-dyed textile.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as shibori, indigo dye, aizome, resist-dyed textile.
 
 ## Overview
 

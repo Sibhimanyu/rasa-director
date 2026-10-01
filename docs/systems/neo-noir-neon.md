@@ -28,7 +28,7 @@ components:
 
 # Neo-noir neon
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as Drive style, neon noir, night-city cinema, pink neon titles.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as Drive style, neon noir, night-city cinema, pink neon titles.
 
 ## Overview
 

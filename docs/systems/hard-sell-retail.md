@@ -28,7 +28,7 @@ components:
 
 # Hard-sell retail
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as sale flyer, bargain tabloid, supermarket promo, price-shout graphics.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as sale flyer, bargain tabloid, supermarket promo, price-shout graphics.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Soft flow diagram
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as friendly flowchart, pastel diagram, soft whiteboard, rounded node diagram.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as friendly flowchart, pastel diagram, soft whiteboard, rounded node diagram.
 
 ## Overview
 

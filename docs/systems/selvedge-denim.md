@@ -26,7 +26,7 @@ components:
 
 # Selvedge denim
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as raw denim, indigo twill, workwear denim, copper stitch.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as raw denim, indigo twill, workwear denim, copper stitch.
 
 ## Overview
 

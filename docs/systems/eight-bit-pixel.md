@@ -28,7 +28,7 @@ components:
 
 # 8-bit pixel art
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as NES style, chiptune aesthetic, retro game, pixel game UI.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as NES style, chiptune aesthetic, retro game, pixel game UI.
 
 ## Overview
 

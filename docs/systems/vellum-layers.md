@@ -28,7 +28,7 @@ components:
 
 # Vellum layers
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as tracing paper, translucent paper, frosted paper collage, glassine.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as tracing paper, translucent paper, frosted paper collage, glassine.
 
 ## Overview
 

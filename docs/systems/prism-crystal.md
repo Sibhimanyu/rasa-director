@@ -28,7 +28,7 @@ components:
 
 # Prism crystal
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as crystal render, prismatic glass, dispersion, faceted crystal, rainbow refraction.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as crystal render, prismatic glass, dispersion, faceted crystal, rainbow refraction.
 
 ## Overview
 

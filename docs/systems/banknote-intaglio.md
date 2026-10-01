@@ -26,7 +26,7 @@ components:
 
 # Banknote intaglio
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as security printing, guilloché, engraved banknote, currency design, stock certificate.
+A motion-graphics design system from RasanAI's style library (Print). Also known as security printing, guilloché, engraved banknote, currency design, stock certificate.
 
 ## Overview
 

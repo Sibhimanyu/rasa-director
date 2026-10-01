@@ -1,4 +1,4 @@
-// Rasa Director site: a hero tile as a whole mini film in one motion personality.
+// RasanAI site: a hero tile as a whole mini film in one motion personality.
 // Four scenes (title, a footage shot with a lower third and captions, a product
 // shot with stats, an end card) joined by the personality's own transition, with
 // a scene label and a timeline strip. Text is choreographed by engine.js (MD);
@@ -34,7 +34,7 @@
 
   function build(tl, cell, p) {
     var E = p.easing;
-    var opening = cell.getAttribute("data-content") || "Rasa Director";
+    var opening = cell.getAttribute("data-content") || "RasanAI";
     cell.innerHTML = "";
     var stage = el("div", "film-stage", cell);
 

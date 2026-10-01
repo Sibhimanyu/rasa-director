@@ -26,7 +26,7 @@ components:
 
 # Maison sans
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as luxury blanding, fashion house wordmark, Futura fashion, logo-type luxury.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as luxury blanding, fashion house wordmark, Futura fashion, logo-type luxury.
 
 ## Overview
 

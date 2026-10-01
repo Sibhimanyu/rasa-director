@@ -26,7 +26,7 @@ components:
 
 # Museum wall text
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as gallery wall text, exhibition graphics, vinyl wall lettering, curatorial text panel.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as gallery wall text, exhibition graphics, vinyl wall lettering, curatorial text panel.
 
 ## Overview
 

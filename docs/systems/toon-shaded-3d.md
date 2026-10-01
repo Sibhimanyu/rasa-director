@@ -28,7 +28,7 @@ components:
 
 # Toon-shaded 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as cel-shaded 3D, toon shader, anime 3D, Borderlands style, Spider-Verse look.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as cel-shaded 3D, toon shader, anime 3D, Borderlands style, Spider-Verse look.
 
 ## Overview
 

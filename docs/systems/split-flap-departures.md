@@ -28,7 +28,7 @@ components:
 
 # Split-flap departure board
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as Solari board, flip board, departure board, station board, flap display.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as Solari board, flip board, departure board, station board, flap display.
 
 ## Overview
 

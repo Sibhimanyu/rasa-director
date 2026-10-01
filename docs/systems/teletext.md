@@ -26,7 +26,7 @@ components:
 
 # Teletext
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as Ceefax, videotex, mosaic graphics, TV text pages.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as Ceefax, videotex, mosaic graphics, TV text pages.
 
 ## Overview
 

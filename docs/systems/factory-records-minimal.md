@@ -26,7 +26,7 @@ components:
 
 # Factory Records minimal
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Peter Saville, post-punk sleeve, Manchester minimal, Unknown Pleasures lines.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Peter Saville, post-punk sleeve, Manchester minimal, Unknown Pleasures lines.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Dark gradient SaaS
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as Linear style, Linear-core, dark mode SaaS hero.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as Linear style, Linear-core, dark mode SaaS hero.
 
 ## Overview
 

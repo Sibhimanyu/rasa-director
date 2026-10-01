@@ -26,7 +26,7 @@ components:
 
 # Live-stream overlay
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as Twitch overlay, streamer overlay, stream chat graphics, live stream alerts.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as Twitch overlay, streamer overlay, stream chat graphics, live stream alerts.
 
 ## Overview
 

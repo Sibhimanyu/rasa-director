@@ -26,7 +26,7 @@ components:
 
 # Minimal arthouse
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as A24 style, indie film titles, arthouse minimal, festival film look.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as A24 style, indie film titles, arthouse minimal, festival film look.
 
 ## Overview
 

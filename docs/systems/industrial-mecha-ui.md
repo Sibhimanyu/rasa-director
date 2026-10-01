@@ -28,7 +28,7 @@ components:
 
 # Industrial mecha UI
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as mecha interface, Evangelion UI, hazard-stripe UI, industrial sci-fi.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as mecha interface, Evangelion UI, hazard-stripe UI, industrial sci-fi.
 
 ## Overview
 

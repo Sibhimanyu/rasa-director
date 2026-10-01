@@ -26,7 +26,7 @@ components:
 
 # Berlin techno poster
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as club night poster, techno flyer, warehouse rave timetable, industrial club graphics.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as club night poster, techno flyer, warehouse rave timetable, industrial club graphics.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Ink brush (sumi-e)
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as sumi-e, Japanese ink wash, brush calligraphy, ink wash painting.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as sumi-e, Japanese ink wash, brush calligraphy, ink wash painting.
 
 ## Overview
 

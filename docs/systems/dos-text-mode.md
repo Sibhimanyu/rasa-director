@@ -28,7 +28,7 @@ components:
 
 # DOS text mode
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as BIOS blue screen, Norton Commander, MS-DOS UI, ANSI text mode.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as BIOS blue screen, Norton Commander, MS-DOS UI, ANSI text mode.
 
 ## Overview
 

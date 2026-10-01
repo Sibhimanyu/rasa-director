@@ -26,7 +26,7 @@ components:
 
 # Terrazzo
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as terrazzo pattern, speckled stone, venetian terrazzo, chip aggregate.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as terrazzo pattern, speckled stone, venetian terrazzo, chip aggregate.
 
 ## Overview
 

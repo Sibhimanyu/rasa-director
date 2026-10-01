@@ -26,7 +26,7 @@ components:
 
 # Spectroscopy
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as prism spectrum, spectral lines, light dispersion, spectrograph, optics bench.
+A motion-graphics design system from RasanAI's style library (Science). Also known as prism spectrum, spectral lines, light dispersion, spectrograph, optics bench.
 
 ## Overview
 

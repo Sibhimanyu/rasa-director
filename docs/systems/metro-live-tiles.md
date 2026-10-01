@@ -26,7 +26,7 @@ components:
 
 # Metro live tiles
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Windows Phone Metro, Modern UI, Windows 8 Start screen, live tiles.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Windows Phone Metro, Modern UI, Windows 8 Start screen, live tiles.
 
 ## Overview
 

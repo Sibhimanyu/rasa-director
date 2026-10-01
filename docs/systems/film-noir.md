@@ -26,7 +26,7 @@ components:
 
 # Film noir
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as noir, black-and-white thriller, venetian-blind shadows, hard-boiled.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as noir, black-and-white thriller, venetian-blind shadows, hard-boiled.
 
 ## Overview
 

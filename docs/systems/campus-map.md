@@ -28,7 +28,7 @@ components:
 
 # Illustrated campus map
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as campus map, visitor map, site map, park map, friendly illustrated map.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as campus map, visitor map, site map, park map, friendly illustrated map.
 
 ## Overview
 

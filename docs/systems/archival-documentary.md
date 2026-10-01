@@ -28,7 +28,7 @@ components:
 
 # Archival documentary
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as Ken Burns effect, historical documentary, archive collage, old photo montage.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as Ken Burns effect, historical documentary, archive collage, old photo montage.
 
 ## Overview
 

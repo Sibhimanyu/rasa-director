@@ -28,7 +28,7 @@ components:
 
 # Kids edutainment
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as kids education animation, preschool learning style, educational cartoon UI, classroom explainer.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as kids education animation, preschool learning style, educational cartoon UI, classroom explainer.
 
 ## Overview
 

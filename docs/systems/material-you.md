@@ -26,7 +26,7 @@ components:
 
 # Material You
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as Material 3, M3 expressive, tonal UI, dynamic color UI.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as Material 3, M3 expressive, tonal UI, dynamic color UI.
 
 ## Overview
 

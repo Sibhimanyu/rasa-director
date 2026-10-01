@@ -26,7 +26,7 @@ components:
 
 # Cassette J-card
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as mixtape J-card, tape inlay, cassette insert, home-dubbed mixtape.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as mixtape J-card, tape inlay, cassette insert, home-dubbed mixtape.
 
 ## Overview
 

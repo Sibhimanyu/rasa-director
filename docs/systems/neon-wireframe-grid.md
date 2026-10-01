@@ -28,7 +28,7 @@ components:
 
 # Neon wireframe grid
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as Tron style, light-cycle grid, neon grid, vector grid world.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as Tron style, light-cycle grid, neon grid, vector grid world.
 
 ## Overview
 

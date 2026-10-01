@@ -28,7 +28,7 @@ components:
 
 # Isometric process
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as isometric explainer, extruded infographic, 3D-ish flow.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as isometric explainer, extruded infographic, 3D-ish flow.
 
 ## Overview
 

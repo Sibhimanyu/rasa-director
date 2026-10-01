@@ -26,7 +26,7 @@ components:
 
 # Bauhaus
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as Bauhaus geometric, primary geometry, Bauhaus poster, modernist primaries.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as Bauhaus geometric, primary geometry, Bauhaus poster, modernist primaries.
 
 ## Overview
 

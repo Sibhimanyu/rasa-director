@@ -1,4 +1,4 @@
-// Copied from skills/rasa-director/personalities/*.json (the 10 motion personalities the tasting menu plays).
+// Copied from skills/rasanai/personalities/*.json (the 10 motion personalities the tasting menu plays).
 window.RASA_PERSONALITIES = {
  "brutalist-step": {
   "id": "brutalist-step",

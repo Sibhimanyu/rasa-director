@@ -26,7 +26,7 @@ components:
 
 # Racecard form guide
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as horse racing graphics, form guide, runners and riders, racing post style.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as horse racing graphics, form guide, runners and riders, racing post style.
 
 ## Overview
 

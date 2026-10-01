@@ -28,7 +28,7 @@ components:
 
 # Vinyl record sleeve
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as LP sleeve, 12-inch record, album jacket, vinyl mock-up, record release.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as LP sleeve, 12-inch record, album jacket, vinyl mock-up, record release.
 
 ## Overview
 

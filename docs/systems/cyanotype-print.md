@@ -26,7 +26,7 @@ components:
 
 # Cyanotype
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as sun print, blueprint photogram, Anna Atkins, Prussian blue print.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as sun print, blueprint photogram, Anna Atkins, Prussian blue print.
 
 ## Overview
 

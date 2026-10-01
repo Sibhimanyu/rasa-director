@@ -26,7 +26,7 @@ components:
 
 # Spirit duplicator ditto
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as ditto sheet, spirit duplicator, mimeograph, school worksheet, purple ditto.
+A motion-graphics design system from RasanAI's style library (Print). Also known as ditto sheet, spirit duplicator, mimeograph, school worksheet, purple ditto.
 
 ## Overview
 

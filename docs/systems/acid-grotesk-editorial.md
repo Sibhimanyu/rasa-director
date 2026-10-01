@@ -26,7 +26,7 @@ components:
 
 # Contemporary grotesk editorial
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as design-magazine style, new grotesk editorial, studio portfolio look, acid lime editorial.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as design-magazine style, new grotesk editorial, studio portfolio look, acid lime editorial.
 
 ## Overview
 

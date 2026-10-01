@@ -28,7 +28,7 @@ components:
 
 # Node canvas
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as workflow builder, automation canvas, n8n / Zapier style.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as workflow builder, automation canvas, n8n / Zapier style.
 
 ## Overview
 

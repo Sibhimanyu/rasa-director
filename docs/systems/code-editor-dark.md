@@ -28,7 +28,7 @@ components:
 
 # Code editor dark theme
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as IDE aesthetic, Dracula theme, syntax-highlighted code, dev-mode UI.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as IDE aesthetic, Dracula theme, syntax-highlighted code, dev-mode UI.
 
 ## Overview
 

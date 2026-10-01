@@ -28,7 +28,7 @@ components:
 
 # Terminal product demo
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as CLI demo, Vercel style, Warp style dev tool.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as CLI demo, Vercel style, Warp style dev tool.
 
 ## Overview
 

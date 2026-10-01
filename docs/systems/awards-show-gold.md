@@ -26,7 +26,7 @@ components:
 
 # Awards-show gold
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as award ceremony graphics, red carpet look, Oscars style, winner reveal.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as award ceremony graphics, red carpet look, Oscars style, winner reveal.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Anti-design
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as ugly design, maximalist anti-design, clashing web, deliberately bad design.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as ugly design, maximalist anti-design, clashing web, deliberately bad design.
 
 ## Overview
 

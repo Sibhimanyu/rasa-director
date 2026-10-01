@@ -28,7 +28,7 @@ components:
 
 # Japandi oak & linen
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as Japandi, Scandi-Japanese, oak and linen, calm Nordic interior.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as Japandi, Scandi-Japanese, oak and linen, calm Nordic interior.
 
 ## Overview
 

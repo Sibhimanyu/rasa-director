@@ -26,7 +26,7 @@ components:
 
 # Warm minimalism
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as japandi, earthy minimal, organic modern, terracotta minimal.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as japandi, earthy minimal, organic modern, terracotta minimal.
 
 ## Overview
 

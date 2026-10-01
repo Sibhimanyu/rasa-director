@@ -26,7 +26,7 @@ components:
 
 # Lab notebook
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as laboratory notebook, research notebook, engineer's notebook, graph-paper notes.
+A motion-graphics design system from RasanAI's style library (Science). Also known as laboratory notebook, research notebook, engineer's notebook, graph-paper notes.
 
 ## Overview
 

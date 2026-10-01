@@ -28,7 +28,7 @@ components:
 
 # Dark ops dashboard
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as NOC dashboard, dark analytics, control room.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as NOC dashboard, dark analytics, control room.
 
 ## Overview
 

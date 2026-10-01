@@ -28,7 +28,7 @@ components:
 
 # 90s rave flyer
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as acid house flyer, rave graphics, 90s club flyer, acid smiley.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as acid house flyer, rave graphics, 90s club flyer, acid smiley.
 
 ## Overview
 

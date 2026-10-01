@@ -26,7 +26,7 @@ components:
 
 # Ukiyo-e woodblock
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Japanese woodblock print, Hiroshige style, Hokusai style, floating world print, bokashi gradient.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Japanese woodblock print, Hiroshige style, Hokusai style, floating world print, bokashi gradient.
 
 ## Overview
 

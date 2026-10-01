@@ -28,7 +28,7 @@ components:
 
 # Frutiger Aero
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as Aero, Vista era, Windows 7 glass, eco-tech glossy.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as Aero, Vista era, Windows 7 glass, eco-tech glossy.
 
 ## Overview
 

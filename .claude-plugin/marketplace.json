@@ -1,14 +1,14 @@
 {
   "$schema": "https://code.claude.com/schemas/marketplace.json",
-  "name": "rasa-director",
-  "description": "Rasa Director: pick one of three complete films, notes on a timed animatic, a final you review by clicking on moments. Claude designs and animates it through HyperFrames.",
+  "name": "rasanai",
+  "description": "RasanAI: pick one of three complete films, notes on a timed animatic, a final you review by clicking on moments. Claude designs and animates it through HyperFrames.",
   "owner": {
     "name": "Sibhimanyu",
     "url": "https://github.com/Sibhimanyu"
   },
   "plugins": [
     {
-      "name": "rasa-director",
+      "name": "rasanai",
       "source": "./",
       "description": "Pick the film, Claude makes it: 403 design systems, real story devices, music edited to picture, an anti-slop gate. Built on HyperFrames.",
       "category": "design",
@@ -18,6 +18,14 @@
         "motion-graphics",
         "hyperframes"
       ]
+    },
+    {
+      "name": "rasa-director",
+      "source": "./",
+      "strict": false,
+      "version": "1.1.0",
+      "description": "Rasa Director is now RasanAI. This entry keeps installs from before the rename updating: it moves them to the rasanai plugin.",
+      "category": "design"
     }
   ]
 }

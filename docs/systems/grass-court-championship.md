@@ -26,7 +26,7 @@ components:
 
 # Grass-court championship
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as Wimbledon style graphics, tennis broadcast graphics, tournament draw, heritage sport graphics.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as Wimbledon style graphics, tennis broadcast graphics, tournament draw, heritage sport graphics.
 
 ## Overview
 

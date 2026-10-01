@@ -26,7 +26,7 @@ components:
 
 # Data journalism
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as FT style, NYT Upshot look, The Pudding, newsroom graphics.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as FT style, NYT Upshot look, The Pudding, newsroom graphics.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Dot-matrix printout
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as continuous feed paper, green bar paper, tractor feed printout, line printer, computer printout.
+A motion-graphics design system from RasanAI's style library (Print). Also known as continuous feed paper, green bar paper, tractor feed printout, line printer, computer printout.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # National park poster
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as WPA poster, vintage park poster, screen-printed landscape, travel poster.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as WPA poster, vintage park poster, screen-printed landscape, travel poster.
 
 ## Overview
 

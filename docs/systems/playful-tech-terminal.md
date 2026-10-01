@@ -28,7 +28,7 @@ components:
 
 # Playful tech
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as friendly dev tool, cute terminal, playful developer brand, candy CLI.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as friendly dev tool, cute terminal, playful developer brand, candy CLI.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Acid graphics
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as acid design, new acid, rave graphics, post-Y2K acid.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as acid design, new acid, rave graphics, post-Y2K acid.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Developer docs
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as docs-style explainer, API reference look, GitHub docs.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as docs-style explainer, API reference look, GitHub docs.
 
 ## Overview
 

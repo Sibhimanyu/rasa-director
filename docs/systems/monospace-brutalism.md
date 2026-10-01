@@ -28,7 +28,7 @@ components:
 
 # Monospace brutalism
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as terminal brutalism, dev brutalism, mono brutalist, hacker-zine UI.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as terminal brutalism, dev brutalism, mono brutalist, hacker-zine UI.
 
 ## Overview
 

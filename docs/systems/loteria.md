@@ -28,7 +28,7 @@ components:
 
 # Lotería cards
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Mexican lotería, Mexican folk print, lotería mexicana, papel picado palette.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Mexican lotería, Mexican folk print, lotería mexicana, papel picado palette.
 
 ## Overview
 

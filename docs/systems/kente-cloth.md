@@ -26,7 +26,7 @@ components:
 
 # Kente cloth
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as kente, Asante kente, Ewe kente, strip-woven cloth, West African textile.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as kente, Asante kente, Ewe kente, strip-woven cloth, West African textile.
 
 ## Overview
 

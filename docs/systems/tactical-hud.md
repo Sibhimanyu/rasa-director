@@ -26,7 +26,7 @@ components:
 
 # Tactical HUD
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as military HUD, night-vision overlay, targeting HUD, drone feed UI, aviation HUD.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as military HUD, night-vision overlay, targeting HUD, drone feed UI, aviation HUD.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Duotone
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as two-colour graphic, Spotify duotone, duotone punch, two-ink.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as two-colour graphic, Spotify duotone, duotone punch, two-ink.
 
 ## Overview
 

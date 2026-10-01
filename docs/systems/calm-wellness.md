@@ -28,7 +28,7 @@ components:
 
 # Calm wellness
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as meditation app style, mindful UI, breathwork aesthetic, spa minimal.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as meditation app style, mindful UI, breathwork aesthetic, spa minimal.
 
 ## Overview
 

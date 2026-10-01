@@ -26,7 +26,7 @@ components:
 
 # Béton brut formwork
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as board-formed concrete, béton brut, raw concrete poster, brutalist architecture type.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as board-formed concrete, béton brut, raw concrete poster, brutalist architecture type.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Point-cloud 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as LiDAR scan look, particle sculpture, 3D scan visualization, dot-matrix 3D.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as LiDAR scan look, particle sculpture, 3D scan visualization, dot-matrix 3D.
 
 ## Overview
 

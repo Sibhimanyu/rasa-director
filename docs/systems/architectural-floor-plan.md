@@ -26,7 +26,7 @@ components:
 
 # Architectural floor plan
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as floor plan, architectural plan, plan drawing, you-are-here plan, space plan.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as floor plan, architectural plan, plan drawing, you-are-here plan, space plan.
 
 ## Overview
 

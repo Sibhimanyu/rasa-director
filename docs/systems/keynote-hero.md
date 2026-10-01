@@ -28,7 +28,7 @@ components:
 
 # Keynote hero
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as Apple keynote style, dark stage product reveal, hero device shot.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as Apple keynote style, dark stage product reveal, hero device shot.
 
 ## Overview
 

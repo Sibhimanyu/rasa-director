@@ -28,7 +28,7 @@ components:
 
 # Long-shadow flat
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as long shadow design, flat long shadow, 2013 flat design, diagonal shadow icons.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as long shadow design, flat long shadow, 2013 flat design, diagonal shadow icons.
 
 ## Overview
 

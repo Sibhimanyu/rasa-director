@@ -28,7 +28,7 @@ components:
 
 # Green-screen CRT terminal
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as phosphor terminal, hacker green, VT100, matrix terminal.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as phosphor terminal, hacker green, VT100, matrix terminal.
 
 ## Overview
 

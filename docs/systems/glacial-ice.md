@@ -28,7 +28,7 @@ components:
 
 # Glacial ice
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as arctic blue, glacier, polar minimal, frozen.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as arctic blue, glacier, polar minimal, frozen.
 
 ## Overview
 

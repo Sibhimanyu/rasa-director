@@ -28,7 +28,7 @@ components:
 
 # Biotech clean
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as lab clean, medtech minimal, life-science UI, molecular clean.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as lab clean, medtech minimal, life-science UI, molecular clean.
 
 ## Overview
 

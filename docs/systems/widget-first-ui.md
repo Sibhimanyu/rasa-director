@@ -26,7 +26,7 @@ components:
 
 # Widget-first UI
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as iOS widgets, home-screen widgets, glanceable UI.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as iOS widgets, home-screen widgets, glanceable UI.
 
 ## Overview
 

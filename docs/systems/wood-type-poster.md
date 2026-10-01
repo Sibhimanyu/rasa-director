@@ -26,7 +26,7 @@ components:
 
 # Wood type poster
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as wood type, playbill poster, Hamilton wood type, circus poster type, letterpress poster.
+A motion-graphics design system from RasanAI's style library (Print). Also known as wood type, playbill poster, Hamilton wood type, circus poster type, letterpress poster.
 
 ## Overview
 

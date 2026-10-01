@@ -26,7 +26,7 @@ components:
 
 # Autumn leaf fall
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as autumn palette, fall foliage, leaf litter, harvest season.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as autumn palette, fall foliage, leaf litter, harvest season.
 
 ## Overview
 

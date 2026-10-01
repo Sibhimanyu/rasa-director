@@ -26,7 +26,7 @@ components:
 
 # Festival line-up poster
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as festival bill, line-up poster, summer festival key art, music festival poster.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as festival bill, line-up poster, summer festival key art, music festival poster.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Confetti party
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as celebration graphics, party pop, festive confetti, launch-day celebration.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as celebration graphics, party pop, festive confetti, launch-day celebration.
 
 ## Overview
 

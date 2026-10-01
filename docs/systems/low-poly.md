@@ -28,7 +28,7 @@ components:
 
 # Low poly
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as low-poly 3D, faceted 3D, polygon art, flat-shaded 3D.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as low-poly 3D, faceted 3D, polygon art, flat-shaded 3D.
 
 ## Overview
 

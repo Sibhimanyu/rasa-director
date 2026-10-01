@@ -26,7 +26,7 @@ components:
 
 # Ticket stub
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as admit one ticket, raffle ticket, cinema ticket, roll ticket, perforated stub.
+A motion-graphics design system from RasanAI's style library (Print). Also known as admit one ticket, raffle ticket, cinema ticket, roll ticket, perforated stub.
 
 ## Overview
 

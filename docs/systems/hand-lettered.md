@@ -26,7 +26,7 @@ components:
 
 # Hand-lettered script
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as hand lettering, brush script, sign-painter script, calligraphic lettering.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as hand lettering, brush script, sign-painter script, calligraphic lettering.
 
 ## Overview
 

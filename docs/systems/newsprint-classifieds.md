@@ -26,7 +26,7 @@ components:
 
 # Newsprint classifieds
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as classified ads, want ads, small ads page, personals column.
+A motion-graphics design system from RasanAI's style library (Print). Also known as classified ads, want ads, small ads page, personals column.
 
 ## Overview
 

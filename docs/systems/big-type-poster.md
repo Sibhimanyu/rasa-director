@@ -26,7 +26,7 @@ components:
 
 # Oversized type
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as big type, giant typography, type-as-image, billboard type.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as big type, giant typography, type-as-image, billboard type.
 
 ## Overview
 

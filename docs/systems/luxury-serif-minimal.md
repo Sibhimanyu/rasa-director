@@ -26,7 +26,7 @@ components:
 
 # Luxury serif minimal
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as ivory serif, boutique minimal, understated serif, hairline luxury.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as ivory serif, boutique minimal, understated serif, hairline luxury.
 
 ## Overview
 

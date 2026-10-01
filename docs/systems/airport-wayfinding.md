@@ -26,7 +26,7 @@ components:
 
 # Airport wayfinding
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as airport signage, Schiphol-style signs, Frutiger signage, yellow sign system, terminal signage.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as airport signage, Schiphol-style signs, Frutiger signage, yellow sign system, terminal signage.
 
 ## Overview
 

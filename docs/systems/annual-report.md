@@ -26,7 +26,7 @@ components:
 
 # Annual report
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as corporate report, impact report, financial editorial, report design.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as corporate report, impact report, financial editorial, report design.
 
 ## Overview
 

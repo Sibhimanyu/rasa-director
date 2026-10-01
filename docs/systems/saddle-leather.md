@@ -28,7 +28,7 @@ components:
 
 # Saddle leather & stitch
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as tooled leather, leathercraft, saddle stitch, heritage workshop.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as tooled leather, leathercraft, saddle stitch, heritage workshop.
 
 ## Overview
 

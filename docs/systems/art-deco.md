@@ -26,7 +26,7 @@ components:
 
 # Art deco
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as deco, Gatsby style, 1920s glamour, streamline deco.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as deco, Gatsby style, 1920s glamour, streamline deco.
 
 ## Overview
 

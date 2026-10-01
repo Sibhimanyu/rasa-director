@@ -28,7 +28,7 @@ components:
 
 # Celadon glaze
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as celadon ceramic, glazed stoneware, reactive glaze, pottery glaze.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as celadon ceramic, glazed stoneware, reactive glaze, pottery glaze.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Blind deboss
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as blind emboss, debossed stationery, blind embossing, tone-on-tone letterpress.
+A motion-graphics design system from RasanAI's style library (Print). Also known as blind emboss, debossed stationery, blind embossing, tone-on-tone letterpress.
 
 ## Overview
 

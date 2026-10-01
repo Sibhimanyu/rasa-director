@@ -26,7 +26,7 @@ components:
 
 # Travertine stone
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as travertine, honed stone, Roman travertine, limestone minimal.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as travertine, honed stone, Roman travertine, limestone minimal.
 
 ## Overview
 

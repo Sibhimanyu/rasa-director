@@ -26,7 +26,7 @@ components:
 
 # Italian Futurism
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Futurist typography, parole in libertà, words in freedom, Depero style, Marinetti poster.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Futurist typography, parole in libertà, words in freedom, Depero style, Marinetti poster.
 
 ## Overview
 

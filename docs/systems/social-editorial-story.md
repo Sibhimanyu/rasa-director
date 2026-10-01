@@ -26,7 +26,7 @@ components:
 
 # Social-first editorial
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as magazine stories, vertical editorial, Instagram editorial, digital cover story.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as magazine stories, vertical editorial, Instagram editorial, digital cover story.
 
 ## Overview
 

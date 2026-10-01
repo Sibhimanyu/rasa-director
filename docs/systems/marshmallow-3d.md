@@ -28,7 +28,7 @@ components:
 
 # Marshmallow 3D flat
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as squishy UI, puffy bento, soft-serve 3D, pillow tiles.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as squishy UI, puffy bento, soft-serve 3D, pillow tiles.
 
 ## Overview
 

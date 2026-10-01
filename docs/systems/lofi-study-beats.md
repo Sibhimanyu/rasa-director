@@ -28,7 +28,7 @@ components:
 
 # Lo-fi study beats
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as lofi hip hop radio, chillhop, beats to relax to, study girl aesthetic.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as lofi hip hop radio, chillhop, beats to relax to, study girl aesthetic.
 
 ## Overview
 

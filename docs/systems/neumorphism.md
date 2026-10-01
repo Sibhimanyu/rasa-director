@@ -28,7 +28,7 @@ components:
 
 # Neumorphism
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as soft UI, neo-skeuomorphism, neumorphic UI, extruded UI.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as soft UI, neo-skeuomorphism, neumorphic UI, extruded UI.
 
 ## Overview
 

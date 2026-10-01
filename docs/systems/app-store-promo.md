@@ -28,7 +28,7 @@ components:
 
 # App Store promo
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as device-bound mobile, phone mockup promo, app preview video.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as device-bound mobile, phone mockup promo, app preview video.
 
 ## Overview
 

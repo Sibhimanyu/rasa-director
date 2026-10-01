@@ -28,7 +28,7 @@ components:
 
 # Indian truck art
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Horn OK Please, lorry art, South Asian truck art, hand-painted truck, desi kitsch.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Horn OK Please, lorry art, South Asian truck art, hand-painted truck, desi kitsch.
 
 ## Overview
 

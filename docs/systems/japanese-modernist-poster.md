@@ -26,7 +26,7 @@ components:
 
 # Japanese modernist poster
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Tokyo 1964 style, Kamekura poster, Tanaka Ikko style, Japanese Swiss, Nihon modernism.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Tokyo 1964 style, Kamekura poster, Tanaka Ikko style, Japanese Swiss, Nihon modernism.
 
 ## Overview
 

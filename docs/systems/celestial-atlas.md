@@ -26,7 +26,7 @@ components:
 
 # Celestial atlas
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as star chart, star atlas, constellation map, uranography, antique sky map.
+A motion-graphics design system from RasanAI's style library (Science). Also known as star chart, star atlas, constellation map, uranography, antique sky map.
 
 ## Overview
 

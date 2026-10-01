@@ -28,7 +28,7 @@ components:
 
 # Die-cut stickers
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as sticker style, sticker illustration, white-border stickers, peel-and-stick.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as sticker style, sticker illustration, white-border stickers, peel-and-stick.
 
 ## Overview
 

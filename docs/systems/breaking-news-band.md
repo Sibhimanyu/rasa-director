@@ -26,7 +26,7 @@ components:
 
 # Breaking-news band
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as breaking news lower third, news ticker, rolling news, news crawl.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as breaking news lower third, news ticker, rolling news, news crawl.
 
 ## Overview
 

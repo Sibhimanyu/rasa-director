@@ -28,7 +28,7 @@ components:
 
 # Tour-dates map
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as world tour poster, tour itinerary graphic, tour merch back print, band tour map.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as world tour poster, tour itinerary graphic, tour merch back print, band tour map.
 
 ## Overview
 

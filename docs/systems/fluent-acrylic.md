@@ -28,7 +28,7 @@ components:
 
 # Fluent acrylic
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as Windows 11 Mica, Fluent Design, acrylic material, noise glass windows.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as Windows 11 Mica, Fluent Design, acrylic material, noise glass windows.
 
 ## Overview
 

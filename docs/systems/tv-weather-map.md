@@ -28,7 +28,7 @@ components:
 
 # TV weather map
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as weather forecast graphics, weather presenter map, forecast map, met office style.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as weather forecast graphics, weather presenter map, forecast map, met office style.
 
 ## Overview
 

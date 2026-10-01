@@ -28,7 +28,7 @@ components:
 
 # BeOS yellow tab
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as BeOS, Haiku OS, yellow tab windows, BeOS R5.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as BeOS, Haiku OS, yellow tab windows, BeOS R5.
 
 ## Overview
 

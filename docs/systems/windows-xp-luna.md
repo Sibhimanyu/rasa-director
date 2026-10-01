@@ -28,7 +28,7 @@ components:
 
 # Windows XP Luna
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as Windows XP, Luna theme, Bliss era, 2000s desktop.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as Windows XP, Luna theme, Bliss era, 2000s desktop.
 
 ## Overview
 

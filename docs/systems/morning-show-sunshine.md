@@ -28,7 +28,7 @@ components:
 
 # Morning-show sunshine
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as breakfast TV graphics, morning show package, daytime TV look, coming up rundown.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as breakfast TV graphics, morning show package, daytime TV look, coming up rundown.
 
 ## Overview
 

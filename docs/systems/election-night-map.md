@@ -28,7 +28,7 @@ components:
 
 # Election-night map
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as election results map, results night graphics, red and blue map, decision desk.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as election results map, results night graphics, red and blue map, decision desk.
 
 ## Overview
 

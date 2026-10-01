@@ -28,7 +28,7 @@ components:
 
 # Saturday-morning cartoon
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as cartoon style, cartoon network style, TV cartoon graphics, toon.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as cartoon style, cartoon network style, TV cartoon graphics, toon.
 
 ## Overview
 

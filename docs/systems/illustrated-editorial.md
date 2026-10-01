@@ -26,7 +26,7 @@ components:
 
 # Illustrated editorial
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as spot illustration, New Yorker style, conceptual editorial illustration, grainy vector editorial.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as spot illustration, New Yorker style, conceptual editorial illustration, grainy vector editorial.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Editorial UI
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as magazine interface, serif UI, print-inspired product design, editorial web.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as magazine interface, serif UI, print-inspired product design, editorial web.
 
 ## Overview
 

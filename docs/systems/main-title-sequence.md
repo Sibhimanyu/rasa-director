@@ -26,7 +26,7 @@ components:
 
 # Main title sequence
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as opening titles, film credits, prestige TV titles, title card.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as opening titles, film credits, prestige TV titles, title card.
 
 ## Overview
 

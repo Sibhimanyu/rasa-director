@@ -26,7 +26,7 @@ components:
 
 # Wirephoto halftone
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as wirephoto, newspaper halftone photo, coarse halftone, photo engraving, press photo.
+A motion-graphics design system from RasanAI's style library (Print). Also known as wirephoto, newspaper halftone photo, coarse halftone, photo engraving, press photo.
 
 ## Overview
 

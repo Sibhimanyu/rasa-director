@@ -28,7 +28,7 @@ components:
 
 # Football matchday package
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as Premier League graphics style, football broadcast package, league table graphics, matchday graphics.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as Premier League graphics style, football broadcast package, league table graphics, matchday graphics.
 
 ## Overview
 

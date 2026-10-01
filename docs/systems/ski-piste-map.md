@@ -28,7 +28,7 @@ components:
 
 # Ski resort piste map
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as piste map, trail map, ski resort map, mountain resort graphics.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as piste map, trail map, ski resort map, mountain resort graphics.
 
 ## Overview
 

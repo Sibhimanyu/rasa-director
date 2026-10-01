@@ -28,7 +28,7 @@ components:
 
 # Rainbow glitter
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as Lisa Frank style, 90s sparkle, glitter pop, trapper-keeper rainbow.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as Lisa Frank style, 90s sparkle, glitter pop, trapper-keeper rainbow.
 
 ## Overview
 

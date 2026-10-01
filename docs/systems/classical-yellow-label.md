@@ -26,7 +26,7 @@ components:
 
 # Classical yellow label
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Deutsche Grammophon style, yellow cartouche, classical record label, concert season brochure.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Deutsche Grammophon style, yellow cartouche, classical record label, concert season brochure.
 
 ## Overview
 

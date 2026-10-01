@@ -28,7 +28,7 @@ components:
 
 # Perfume-ad noir
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as fragrance ad, parfum noir, dark beauty luxe, scent film.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as fragrance ad, parfum noir, dark beauty luxe, scent film.
 
 ## Overview
 

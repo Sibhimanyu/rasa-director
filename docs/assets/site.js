@@ -1,4 +1,4 @@
-// Rasa Director site: live motion-language swatch films (engine.js + film.js),
+// RasanAI site: live motion-language swatch films (engine.js + film.js),
 // the opening-title input, pause motion, copy buttons. Vanilla, no build step.
 (function () {
   "use strict";
@@ -48,7 +48,7 @@
     input.addEventListener("input", function () {
       clearTimeout(t);
       t = setTimeout(function () {
-        var v = input.value.replace(/\s+/g, " ").trim() || "Rasa Director";
+        var v = input.value.replace(/\s+/g, " ").trim() || "RasanAI";
         cells.forEach(function (c) { if (c.el.hasAttribute("data-try")) { c.el.setAttribute("data-content", v); build(c); } });
       }, 220);
     });

@@ -28,7 +28,7 @@ components:
 
 # Architectural massing diagram
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as massing model, BIG-style diagram, architecture concept diagram, volumetric diagram, white model.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as massing model, BIG-style diagram, architecture concept diagram, volumetric diagram, white model.
 
 ## Overview
 

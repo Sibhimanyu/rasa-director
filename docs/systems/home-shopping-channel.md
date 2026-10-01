@@ -28,7 +28,7 @@ components:
 
 # Home-shopping channel
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as shopping TV graphics, teleshopping, QVC style, call now price graphic.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as shopping TV graphics, teleshopping, QVC style, call now price graphic.
 
 ## Overview
 

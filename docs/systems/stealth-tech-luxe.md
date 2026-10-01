@@ -28,7 +28,7 @@ components:
 
 # Stealth tech luxe
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as premium hardware, anodised aluminium, Bang & Olufsen style, matte black tech.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as premium hardware, anodised aluminium, Bang & Olufsen style, matte black tech.
 
 ## Overview
 

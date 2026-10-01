@@ -26,7 +26,7 @@ components:
 
 # Radiology viewer (MRI)
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as MRI scan, DICOM viewer, medical imaging, fMRI heat map, CT scan.
+A motion-graphics design system from RasanAI's style library (Science). Also known as MRI scan, DICOM viewer, medical imaging, fMRI heat map, CT scan.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Blue Note jazz sleeve
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as Reid Miles cover, Blue Note Records sleeve, hard bop LP, 50s jazz album cover.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as Reid Miles cover, Blue Note Records sleeve, hard bop LP, 50s jazz album cover.
 
 ## Overview
 

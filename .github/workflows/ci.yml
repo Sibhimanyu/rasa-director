@@ -14,10 +14,10 @@ jobs:
       - name: FFmpeg (footage reels)
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - name: Syntax
-        run: for f in skills/rasa-director/scripts/*.mjs skills/rasa-director/scripts/lib/*.mjs; do node --check "$f"; done
+        run: for f in skills/rasanai/scripts/*.mjs skills/rasanai/scripts/lib/*.mjs; do node --check "$f"; done
       - name: Manifests
         run: node -e 'for (const f of [".claude-plugin/plugin.json",".claude-plugin/marketplace.json"]) JSON.parse(require("fs").readFileSync(f,"utf8"))'
       - name: Self-test (headless Chrome from the runner)
         env:
-          RASA_DIRECTOR_CHROME: /usr/bin/google-chrome
-        run: node skills/rasa-director/scripts/selftest.mjs
+          RASANAI_CHROME: /usr/bin/google-chrome
+        run: node skills/rasanai/scripts/selftest.mjs

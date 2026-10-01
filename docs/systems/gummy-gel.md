@@ -28,7 +28,7 @@ components:
 
 # Gummy gel
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as jelly 3D, gel UI, translucent candy, gummy bear material.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as jelly 3D, gel UI, translucent candy, gummy bear material.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Felt & stitch
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as felt craft, embroidered patch, stitched fabric, needlework style.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as felt craft, embroidered patch, stitched fabric, needlework style.
 
 ## Overview
 

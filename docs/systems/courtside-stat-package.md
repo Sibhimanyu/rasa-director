@@ -26,7 +26,7 @@ components:
 
 # Courtside stat package
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as basketball broadcast graphics, NBA on ESPN look, player stat card, stat bug.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as basketball broadcast graphics, NBA on ESPN look, player stat card, stat bug.
 
 ## Overview
 

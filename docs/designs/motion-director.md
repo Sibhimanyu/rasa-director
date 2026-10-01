@@ -7,7 +7,7 @@ Status: APPROVED
 Mode: Builder
 
 
-> **Renamed (2026-09-30):** this design shipped as **Rasa Director** (`skills/rasa-director`, `/rasa-director`; briefly called Rasa Motion). The body below keeps its original motion-director wording as a record; the Director's Console and the Music step were added after it (see the README and `references/console.md`).
+> **Renamed (2026-09-30):** this design shipped as **RasanAI** (`skills/rasanai`, `/rasanai`; briefly called RasanAI Motion). The body below keeps its original motion-director wording as a record; the Director's Console and the Music step were added after it (see the README and `references/console.md`).
 
 ## Problem Statement
 

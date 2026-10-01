@@ -26,7 +26,7 @@ components:
 
 # Web 1.0 homepage
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as GeoCities, 90s personal homepage, under construction web, old internet.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as GeoCities, 90s personal homepage, under construction web, old internet.
 
 ## Overview
 

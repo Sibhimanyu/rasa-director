@@ -28,7 +28,7 @@ components:
 
 # Spot-colour swatch book
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as swatch fan, colour chip book, spot colour guide, ink formula guide.
+A motion-graphics design system from RasanAI's style library (Print). Also known as swatch fan, colour chip book, spot colour guide, ink formula guide.
 
 ## Overview
 

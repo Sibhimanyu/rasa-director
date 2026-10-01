@@ -26,7 +26,7 @@ components:
 
 # Financial terminal
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as Bloomberg terminal look, ticker terminal, market data screen.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as Bloomberg terminal look, ticker terminal, market data screen.
 
 ## Overview
 

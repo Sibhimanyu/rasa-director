@@ -26,7 +26,7 @@ components:
 
 # Heritage railway nameboard
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as station nameboard, heritage railway signage, painted station sign, lined-out signwriting, green and cream railway livery.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as station nameboard, heritage railway signage, painted station sign, lined-out signwriting, green and cream railway livery.
 
 ## Overview
 

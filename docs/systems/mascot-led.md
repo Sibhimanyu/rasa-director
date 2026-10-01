@@ -28,7 +28,7 @@ components:
 
 # Mascot-led
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as brand mascot style, character-led brand, Duolingo-style mascot, friendly mascot.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as brand mascot style, character-led brand, Duolingo-style mascot, friendly mascot.
 
 ## Overview
 

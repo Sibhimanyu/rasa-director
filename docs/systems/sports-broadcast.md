@@ -28,7 +28,7 @@ components:
 
 # Sports broadcast
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as sports graphics package, matchday graphics, scorebug style, ESPN look.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as sports graphics package, matchday graphics, scorebug style, ESPN look.
 
 ## Overview
 

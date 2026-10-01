@@ -28,7 +28,7 @@ components:
 
 # Voxel 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as voxel art, MagicaVoxel style, blocky 3D, Minecraft style, cube world.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as voxel art, MagicaVoxel style, blocky 3D, Minecraft style, cube world.
 
 ## Overview
 

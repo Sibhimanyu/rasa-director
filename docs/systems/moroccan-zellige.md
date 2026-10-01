@@ -28,7 +28,7 @@ components:
 
 # Moroccan zellige
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as zellij, Moorish tilework, Islamic geometric tiles, Fez tile mosaic.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as zellij, Moorish tilework, Islamic geometric tiles, Fez tile mosaic.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Ulm functionalism
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Braun design, Dieter Rams style, HfG Ulm, less but better, German functionalism.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Braun design, Dieter Rams style, HfG Ulm, less but better, German functionalism.
 
 ## Overview
 

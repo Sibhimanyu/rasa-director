@@ -28,7 +28,7 @@ components:
 
 # Tilt-shift diorama
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as miniature world, 3D diorama, tiny planet scene, miniature faking.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as miniature world, 3D diorama, tiny planet scene, miniature faking.
 
 ## Overview
 

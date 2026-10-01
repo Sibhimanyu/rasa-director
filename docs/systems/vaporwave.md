@@ -28,7 +28,7 @@ components:
 
 # Vaporwave
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as A E S T H E T I C, vapor, mallsoft, Windows-95 pastel irony.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as A E S T H E T I C, vapor, mallsoft, Windows-95 pastel irony.
 
 ## Overview
 

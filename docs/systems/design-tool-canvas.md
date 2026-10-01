@@ -26,7 +26,7 @@ components:
 
 # Design-tool canvas
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Figma-style canvas, design file view, multiplayer canvas, artboard view.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Figma-style canvas, design file view, multiplayer canvas, artboard view.
 
 ## Overview
 

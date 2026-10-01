@@ -28,7 +28,7 @@ components:
 
 # 2 Tone ska
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as two-tone, ska revival graphics, rude boy style, black-and-white ska.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as two-tone, ska revival graphics, rude boy style, black-and-white ska.
 
 ## Overview
 

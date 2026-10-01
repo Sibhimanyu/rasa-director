@@ -26,7 +26,7 @@ components:
 
 # Spreadsheet grid
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Excel look, spreadsheet UI, cell grid, worksheet style.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Excel look, spreadsheet UI, cell grid, worksheet style.
 
 ## Overview
 

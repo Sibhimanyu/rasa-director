@@ -26,7 +26,7 @@ components:
 
 # Dada photomontage
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Dada collage, Hannah Höch style, Berlin Dada, cut-up montage, anti-art collage.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Dada collage, Hannah Höch style, Berlin Dada, cut-up montage, anti-art collage.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Component spec close-up
 
-A motion-graphics design system from Rasa Director's style library (Product & UI). Also known as isolated-component UI, design-system reel, component macro.
+A motion-graphics design system from RasanAI's style library (Product & UI). Also known as isolated-component UI, design-system reel, component macro.
 
 ## Overview
 

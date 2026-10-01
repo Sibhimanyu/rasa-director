@@ -26,7 +26,7 @@ components:
 
 # K-pop comeback teaser
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as comeback scheduler, K-pop teaser poster, concept photo teaser, idol album rollout.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as comeback scheduler, K-pop teaser poster, concept photo teaser, idol album rollout.
 
 ## Overview
 

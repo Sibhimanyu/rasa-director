@@ -26,7 +26,7 @@ components:
 
 # Circuit board (PCB)
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as PCB aesthetic, electronic circuit, motherboard style, silicon traces.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as PCB aesthetic, electronic circuit, motherboard style, silicon traces.
 
 ## Overview
 

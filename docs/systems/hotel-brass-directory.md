@@ -26,7 +26,7 @@ components:
 
 # Hotel brass signage
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as hotel wayfinding, grand hotel directory, brass plaque signage, lobby directory, hospitality signage.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as hotel wayfinding, grand hotel directory, brass plaque signage, lobby directory, hospitality signage.
 
 ## Overview
 

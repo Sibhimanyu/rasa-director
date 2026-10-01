@@ -28,7 +28,7 @@ components:
 
 # Champagne
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as champagne gold, blush gold, celebration luxe, sparkling ivory.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as champagne gold, blush gold, celebration luxe, sparkling ivory.
 
 ## Overview
 

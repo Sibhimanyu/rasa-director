@@ -26,7 +26,7 @@ components:
 
 # Deconstructed editorial
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as grunge typography, David Carson style, Ray Gun layout, anti-grid.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as grunge typography, David Carson style, Ray Gun layout, anti-grid.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Stadium jumbotron
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as arena big screen, crowd prompt graphics, scoreboard hype, LED screen graphics.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as arena big screen, crowd prompt graphics, scoreboard hype, LED screen graphics.
 
 ## Overview
 

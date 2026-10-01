@@ -28,7 +28,7 @@ components:
 
 # AI aurora gradient
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as aurora UI, AI glow, gradient orb, mesh glow, Gemini gradient.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as aurora UI, AI glow, gradient orb, mesh glow, Gemini gradient.
 
 ## Overview
 

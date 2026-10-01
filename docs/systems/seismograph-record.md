@@ -26,7 +26,7 @@ components:
 
 # Seismograph record
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as seismogram, helicorder, drum recorder, earthquake trace.
+A motion-graphics design system from RasanAI's style library (Science). Also known as seismogram, helicorder, drum recorder, earthquake trace.
 
 ## Overview
 

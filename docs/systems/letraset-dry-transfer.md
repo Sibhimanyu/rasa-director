@@ -26,7 +26,7 @@ components:
 
 # Letraset dry transfer
 
-A motion-graphics design system from Rasa Director's style library (Print). Also known as Letraset, rub-down lettering, instant lettering, transfer type, dry transfer type.
+A motion-graphics design system from RasanAI's style library (Print). Also known as Letraset, rub-down lettering, instant lettering, transfer type, dry transfer type.
 
 ## Overview
 

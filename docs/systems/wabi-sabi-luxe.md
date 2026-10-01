@@ -26,7 +26,7 @@ components:
 
 # Wabi-sabi luxe
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as Japandi luxury, Kinfolk minimal, imperfect luxury, plaster and ink.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as Japandi luxury, Kinfolk minimal, imperfect luxury, plaster and ink.
 
 ## Overview
 

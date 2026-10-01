@@ -28,7 +28,7 @@ components:
 
 # Kawaii
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as cute Japanese style, kawaii UI, sanrio-style, cutesy pastel.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as cute Japanese style, kawaii UI, sanrio-style, cutesy pastel.
 
 ## Overview
 

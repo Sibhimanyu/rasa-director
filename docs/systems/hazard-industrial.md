@@ -26,7 +26,7 @@ components:
 
 # Industrial hazard
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as caution graphics, safety-stripe aesthetic, industrial signage, warning label design.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as caution graphics, safety-stripe aesthetic, industrial signage, warning label design.
 
 ## Overview
 

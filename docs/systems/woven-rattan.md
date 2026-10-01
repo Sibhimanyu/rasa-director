@@ -28,7 +28,7 @@ components:
 
 # Woven rattan
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as cane webbing, rattan boho, wicker, seventies cane.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as cane webbing, rattan boho, wicker, seventies cane.
 
 ## Overview
 

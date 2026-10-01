@@ -26,7 +26,7 @@ components:
 
 # Whiteboard explainer
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as whiteboard animation, sketch explainer, VideoScribe style.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as whiteboard animation, sketch explainer, VideoScribe style.
 
 ## Overview
 

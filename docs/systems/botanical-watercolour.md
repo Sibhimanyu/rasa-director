@@ -28,7 +28,7 @@ components:
 
 # Botanical watercolour plate
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as botanical illustration, watercolour botanical, flora plate, herbal watercolour.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as botanical illustration, watercolour botanical, flora plate, herbal watercolour.
 
 ## Overview
 

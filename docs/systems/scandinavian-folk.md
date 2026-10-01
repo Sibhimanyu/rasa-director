@@ -26,7 +26,7 @@ components:
 
 # Scandinavian folk art
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as Dala horse style, rosemaling, Nordic folk, Swedish folk pattern, kurbits.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as Dala horse style, rosemaling, Nordic folk, Swedish folk pattern, kurbits.
 
 ## Overview
 

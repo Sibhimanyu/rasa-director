@@ -26,7 +26,7 @@ components:
 
 # Smartwatch face
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as watch complications, wearable UI, watch face design, OLED watch face.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as watch complications, wearable UI, watch face design, OLED watch face.
 
 ## Overview
 

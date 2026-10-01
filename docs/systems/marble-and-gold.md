@@ -28,7 +28,7 @@ components:
 
 # Marble and gold
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as marble luxe, Carrara and brass, hotel lobby luxe, stone and gilt.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as marble luxe, Carrara and brass, hotel lobby luxe, stone and gilt.
 
 ## Overview
 

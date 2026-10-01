@@ -28,7 +28,7 @@ components:
 
 # Systems diagram
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as architecture diagram, technical explainer, box-and-arrow.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as architecture diagram, technical explainer, box-and-arrow.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Arcade game
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as 8-bit arcade, game HUD, retro game UI, pixel arcade.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as 8-bit arcade, game HUD, retro game UI, pixel arcade.
 
 ## Overview
 

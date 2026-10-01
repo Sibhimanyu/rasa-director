@@ -28,7 +28,7 @@ components:
 
 # Grainy pastel gradient
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as noise gradient, grainy mesh gradient, gradient grain, soft mesh.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as noise gradient, grainy mesh gradient, gradient grain, soft mesh.
 
 ## Overview
 

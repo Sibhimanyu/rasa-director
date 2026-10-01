@@ -26,7 +26,7 @@ components:
 
 # Metric count-up
 
-A motion-graphics design system from Rasa Director's style library (Data & explainers). Also known as stat reveal, number ticker, big number.
+A motion-graphics design system from RasanAI's style library (Data & explainers). Also known as stat reveal, number ticker, big number.
 
 ## Overview
 

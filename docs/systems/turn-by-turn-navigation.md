@@ -28,7 +28,7 @@ components:
 
 # Turn-by-turn navigation
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as sat-nav UI, maps navigation screen, GPS directions, night-mode map.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as sat-nav UI, maps navigation screen, GPS directions, night-mode map.
 
 ## Overview
 

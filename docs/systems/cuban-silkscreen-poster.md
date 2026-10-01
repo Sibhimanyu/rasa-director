@@ -26,7 +26,7 @@ components:
 
 # Cuban silkscreen poster
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as ICAIC film poster, Cuban poster art, Havana silkscreen, Cuban film poster.
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as ICAIC film poster, Cuban poster art, Havana silkscreen, Cuban film poster.
 
 ## Overview
 

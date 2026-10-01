@@ -26,7 +26,7 @@ components:
 
 # Luxury automotive reveal
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as supercar reveal, EV launch film, spec-sheet luxe, grand tourer.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as supercar reveal, EV launch film, spec-sheet luxe, grand tourer.
 
 ## Overview
 

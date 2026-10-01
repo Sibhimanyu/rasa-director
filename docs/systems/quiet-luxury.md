@@ -28,7 +28,7 @@ components:
 
 # Quiet luxury
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as old money, stealth wealth, beige luxury, understated luxury.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as old money, stealth wealth, beige luxury, understated luxury.
 
 ## Overview
 

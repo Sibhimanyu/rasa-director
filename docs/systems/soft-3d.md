@@ -28,7 +28,7 @@ components:
 
 # Soft 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as soft 3D UI, C4D pastel, Blender soft render, 3D objects + 2D UI.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as soft 3D UI, C4D pastel, Blender soft render, 3D objects + 2D UI.
 
 ## Overview
 

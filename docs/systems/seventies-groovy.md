@@ -28,7 +28,7 @@ components:
 
 # 70s groovy
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as groovy retro, 70s psychedelic type, disco era, hippie retro.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as groovy retro, 70s psychedelic type, disco era, hippie retro.
 
 ## Overview
 

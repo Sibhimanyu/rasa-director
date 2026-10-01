@@ -26,7 +26,7 @@ components:
 
 # Geologic time scale
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as stratigraphic chart, deep time chart, geological timeline, strata column.
+A motion-graphics design system from RasanAI's style library (Science). Also known as stratigraphic chart, deep time chart, geological timeline, strata column.
 
 ## Overview
 

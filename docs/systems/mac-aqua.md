@@ -28,7 +28,7 @@ components:
 
 # Mac OS X Aqua
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as Aqua UI, gel buttons, lickable UI, early OS X.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as Aqua UI, gel buttons, lickable UI, early OS X.
 
 ## Overview
 

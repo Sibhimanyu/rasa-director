@@ -26,7 +26,7 @@ components:
 
 # High-contrast monochrome
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as black and white graphic, stark mono, noir graphic, one-colour graphic.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as black and white graphic, stark mono, noir graphic, one-colour graphic.
 
 ## Overview
 

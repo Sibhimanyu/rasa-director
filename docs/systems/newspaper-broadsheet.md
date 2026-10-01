@@ -26,7 +26,7 @@ components:
 
 # Newspaper broadsheet
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as newsprint, front page, gazette style, headline press.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as newsprint, front page, gazette style, headline press.
 
 ## Overview
 

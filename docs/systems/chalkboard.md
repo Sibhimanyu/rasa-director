@@ -26,7 +26,7 @@ components:
 
 # Chalkboard
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as blackboard chalk, classroom chalk, chalk art, chalk menu board.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as blackboard chalk, classroom chalk, chalk art, chalk menu board.
 
 ## Overview
 

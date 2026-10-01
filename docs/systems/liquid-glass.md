@@ -28,7 +28,7 @@ components:
 
 # Liquid glass
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as iOS 26 glass, Apple liquid glass, refractive glass UI, lensing glass.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as iOS 26 glass, Apple liquid glass, refractive glass UI, lensing glass.
 
 ## Overview
 

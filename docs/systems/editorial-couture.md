@@ -28,7 +28,7 @@ components:
 
 # Editorial couture
 
-A motion-graphics design system from Rasa Director's style library (Luxury & restrained). Also known as Vogue editorial, couture magazine, fashion editorial collage, haute editorial.
+A motion-graphics design system from RasanAI's style library (Luxury & restrained). Also known as Vogue editorial, couture magazine, fashion editorial collage, haute editorial.
 
 ## Overview
 

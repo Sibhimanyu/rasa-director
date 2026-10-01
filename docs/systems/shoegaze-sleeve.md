@@ -26,7 +26,7 @@ components:
 
 # Shoegaze sleeve
 
-A motion-graphics design system from Rasa Director's style library (Music & scene). Also known as dream pop cover, Loveless-style blur, 4AD-era sleeve, shoegaze album art.
+A motion-graphics design system from RasanAI's style library (Music & scene). Also known as dream pop cover, Loveless-style blur, 4AD-era sleeve, shoegaze album art.
 
 ## Overview
 

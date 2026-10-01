@@ -28,7 +28,7 @@ components:
 
 # Art-direction moodboard
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as mood board, inspiration board, creative direction board, lookbook board.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as mood board, inspiration board, creative direction board, lookbook board.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Engineering drawing
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as orthographic drawing, technical drawing, CAD drawing sheet, drafting sheet, ISO drawing.
+A motion-graphics design system from RasanAI's style library (Science). Also known as orthographic drawing, technical drawing, CAD drawing sheet, drafting sheet, ISO drawing.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Paper-cut shadow box
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as layered paper-cut, shadow box art, papercraft diorama, cut-paper depth, 2.5D paper layers.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as layered paper-cut, shadow box art, papercraft diorama, cut-paper depth, 2.5D paper layers.
 
 ## Overview
 

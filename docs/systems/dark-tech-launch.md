@@ -28,7 +28,7 @@ components:
 
 # Dark atmospheric tech launch
 
-A motion-graphics design system from Rasa Director's style library (Cinematic & atmospheric). Also known as keynote reveal, Apple event style, black product reveal, dark launch film.
+A motion-graphics design system from RasanAI's style library (Cinematic & atmospheric). Also known as keynote reveal, Apple event style, black product reveal, dark launch film.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Raw web brutalism
 
-A motion-graphics design system from Rasa Director's style library (Bold & graphic). Also known as brutalist web design, anti-design web, HTML brutalism, default-browser aesthetic.
+A motion-graphics design system from RasanAI's style library (Bold & graphic). Also known as brutalist web design, anti-design web, HTML brutalism, default-browser aesthetic.
 
 ## Overview
 

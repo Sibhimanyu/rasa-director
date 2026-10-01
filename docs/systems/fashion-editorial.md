@@ -26,7 +26,7 @@ components:
 
 # Fashion editorial
 
-A motion-graphics design system from Rasa Director's style library (Editorial & print). Also known as Didone fashion, Vogue style, high-fashion layout, luxury magazine.
+A motion-graphics design system from RasanAI's style library (Editorial & print). Also known as Didone fashion, Vogue style, high-fashion layout, luxury magazine.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Concrete brutalist 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as concrete render, brutalist architecture 3D, raw concrete, monolith render.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as concrete render, brutalist architecture 3D, raw concrete, monolith render.
 
 ## Overview
 

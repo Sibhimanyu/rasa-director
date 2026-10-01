@@ -28,7 +28,7 @@ components:
 
 # Pressed soft UI
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as inset neumorphism, debossed UI, engraved soft UI, carved panels.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as inset neumorphism, debossed UI, engraved soft UI, carved panels.
 
 ## Overview
 

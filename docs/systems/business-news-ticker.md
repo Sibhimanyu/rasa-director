@@ -26,7 +26,7 @@ components:
 
 # Business-news ticker
 
-A motion-graphics design system from Rasa Director's style library (Broadcast). Also known as markets TV graphics, Bloomberg TV look, CNBC style, stock ticker lower third.
+A motion-graphics design system from RasanAI's style library (Broadcast). Also known as markets TV graphics, Bloomberg TV look, CNBC style, stock ticker lower third.
 
 ## Overview
 

@@ -26,7 +26,7 @@ components:
 
 # Metro line diagram
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as transit diagram, Beck-style map, Vignelli subway diagram, in-car line strip, tube map style.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as transit diagram, Beck-style map, Vignelli subway diagram, in-car line strip, tube map style.
 
 ## Overview
 

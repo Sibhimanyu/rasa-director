@@ -1,19 +1,19 @@
 <h1><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo/rasa-director-lockup-reverse.svg" />
-  <img src="docs/assets/logo/rasa-director-lockup.svg" alt="Rasa Director" height="56" />
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo/rasanai-lockup-reverse.svg" />
+  <img src="docs/assets/logo/rasanai-lockup.svg" alt="RasanAI" height="56" />
 </picture></h1>
 
 **Pick the film. Claude makes it.** Launch films, explainers, PR videos, brand films, music videos, reels cut from a folder of your own footage, captioned talking heads, and short motion graphics.
 
-*Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. When thirty people make an AI video, they get thirty videos with different content and the same film: the obvious story, a default look, everything fading up on one ease, a 30-second music loop under a 45-second film, a whoosh on every cut and glowing text. Rasa Director is a Claude Code skill that replaces every one of those defaults with a decision, and checks the build against it.
+*Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. When thirty people make an AI video, they get thirty videos with different content and the same film: the obvious story, a default look, everything fading up on one ease, a 30-second music loop under a 45-second film, a whoosh on every cut and glowing text. RasanAI is a Claude Code skill that replaces every one of those defaults with a decision, and checks the build against it.
 
 ![Films: three complete films, each a named style drawn live on its own hook line with a story angle](docs/img/console-films.jpg)
 
-**Website:** https://sibhimanyu.github.io/rasa-director/
+**Website:** https://sibhimanyu.github.io/rasanai/
 
 ## Four calls, and you see your film at every one
 
-You say `/rasa-director make a 45s launch film for tally.app`. A **Director's Console** opens in your browser: a dark review room that shows what Claude is doing, live, and stops you only four times.
+You say `/rasanai make a 45s launch film for tally.app`. A **Director's Console** opens in your browser: a dark review room that shows what Claude is doing, live, and stops you only four times.
 
 | | You see | You do |
 |---|---|---|
@@ -37,76 +37,80 @@ You say `/rasa-director make a 45s launch film for tally.app`. A **Director's Co
 
 **Footage reels** add **Footage** (every clip with a contact sheet and a word-level transcript) and **Cut** (the edit as an editable list: clips with in and out points, cards between them, overlays, captions). Claude drafts the cut and designs every card itself.
 
-**Bring your DESIGN.md.** Rasa reads the common shapes (design.md spec frontmatter with oklch colors, impeccable, gstack, Stitch-style prose, CSS custom properties, token tables), assigns every color a role, maps platform fonts to shipped equivalents and draws all three films in your brand. [An example](docs/examples/DESIGN.md).
+**Bring your DESIGN.md.** RasanAI reads the common shapes (design.md spec frontmatter with oklch colors, impeccable, gstack, Stitch-style prose, CSS custom properties, token tables), assigns every color a role, maps platform fonts to shipped equivalents and draws all three films in your brand. [An example](docs/examples/DESIGN.md).
 
 ![The final: the rendered film with scene markers, notes and versions](docs/img/console-final.jpg)
 
 ## Install
 
-Requirements: [Claude Code](https://claude.com/claude-code), Node.js ≥ 20 (if you don't have it, Rasa finds or fetches a private copy on first run), the HyperFrames skills (`npx hyperframes skills update`), and FFmpeg for footage reels. Chrome for previews and checks comes from `npx hyperframes browser ensure`. Voice samples and music use HyperFrames' media tools (the `heygen` CLI, signed in); without them the workflow's default voice is used and you can bring your own track or none.
+Requirements: [Claude Code](https://claude.com/claude-code), Node.js ≥ 20 (if you don't have it, RasanAI finds or fetches a private copy on first run), the HyperFrames skills (`npx hyperframes skills update`), and FFmpeg for footage reels. Chrome for previews and checks comes from `npx hyperframes browser ensure`. Voice samples and music use HyperFrames' media tools (the `heygen` CLI, signed in); without them the workflow's default voice is used and you can bring your own track or none.
 
 **Claude Code plugin** (recommended)
 
 ```
-/plugin marketplace add Sibhimanyu/rasa-director
-/plugin install rasa-director@rasa-director
+/plugin marketplace add Sibhimanyu/rasanai
+/plugin install rasanai@rasanai
 ```
 
 **skills CLI**
 
 ```bash
-npx skills add Sibhimanyu/rasa-director --skill rasa-director
+npx skills add Sibhimanyu/rasanai --skill rasanai
 ```
 
-**One-line installer** (links `~/.claude/skills/rasa-director` to a checkout in `~/.rasa-director/src`; run again to update, `--uninstall` to remove)
+**One-line installer** (links `~/.claude/skills/rasanai` to a checkout in `~/.rasanai/src`; run again to update, `--uninstall` to remove)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasa-director/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Sibhimanyu/rasanai/master/install.sh | bash
 ```
 
 **By hand**
 
 ```bash
-git clone https://github.com/Sibhimanyu/rasa-director.git
-ln -s "$PWD/rasa-director/skills/rasa-director" ~/.claude/skills/rasa-director
+git clone https://github.com/Sibhimanyu/rasanai.git
+ln -s "$PWD/rasanai/skills/rasanai" ~/.claude/skills/rasanai
 ```
+
+### Coming from Rasa Director
+
+RasanAI was called Rasa Director up to 1.0. You don't need to do anything: the next time it loads, it installs RasanAI the way you installed Rasa Director, moves your history to `~/.rasanai` and hands over. Use `/rasanai` from then on (with the plugin, restart Claude Code once to see it).
 
 ### Updating
 
-From 0.6.1, Rasa updates itself: every time the skill loads it checks for a new release (2 seconds at most, silently offline), installs it the way you installed Rasa, and carries on with the new version in the same run, telling you in one line what's new. Set `RASA_DIRECTOR_AUTO_UPDATE=0` to be told instead, or `RASA_DIRECTOR_NO_UPDATE_CHECK=1` to turn the check off. A git checkout only updates itself on `master`. By hand:
+From 0.6.1, RasanAI updates itself: every time the skill loads it checks for a new release (2 seconds at most, silently offline), installs it the way you installed RasanAI, and carries on with the new version in the same run, telling you in one line what's new. Set `RASANAI_AUTO_UPDATE=0` to be told instead, or `RASANAI_NO_UPDATE_CHECK=1` to turn the check off. A git checkout only updates itself on `master`. By hand:
 
 | Installed with | Update |
 |---|---|
-| Claude Code plugin | `/plugin marketplace update rasa-director`, then `/plugin update rasa-director@rasa-director`; restart Claude Code |
-| skills CLI | `npx skills add Sibhimanyu/rasa-director --skill rasa-director` again |
+| Claude Code plugin | `/plugin marketplace update rasanai`, then `/plugin update rasanai@rasanai`; restart Claude Code |
+| skills CLI | `npx skills add Sibhimanyu/rasanai --skill rasanai` again |
 | one-line installer | run the installer again |
 | by hand | `git pull` in the checkout |
 
 Or run `node <skill dir>/scripts/update.mjs apply`, which works out which of these applies. Versions before 0.6.1 don't update themselves (0.4.2–0.6.0 only tell you); update them once by hand and they stay current from then on.
 
-Check the install: `node ~/.claude/skills/rasa-director/scripts/selftest.mjs` (84 checks, a few minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasa-director/`; run the same script from there.
+Check the install: `node ~/.claude/skills/rasanai/scripts/selftest.mjs` (85 checks, a few minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasanai/`; run the same script from there.
 
-With the plugin install Claude Code namespaces the skill: invoke it as `/rasa-director:rasa-director` (or just describe the video you want; it triggers on video requests).
+With the plugin install Claude Code namespaces the skill: invoke it as `/rasanai:rasanai` (or just describe the video you want; it triggers on video requests).
 
 ## Use
 
 ```
-/rasa-director make a 45s launch film for https://tally.app
-/rasa-director a 60s explainer on how DNS works, vertical, no voiceover. Just make it.
-/rasa-director turn PR #482 into a 30s changelog video
-/rasa-director a lyric video for song.mp3, you decide the rest
-/rasa-director cut ~/Footage/lisbon-trip into a 30s reel: best moments, a title card, captions
-/rasa-director add bold captions to interview.mp4 for Reels
-/rasa-director a 6s title sting for "Ship it in an afternoon", neo-brutalist, springy
-/rasa-director a product film for our app using our DESIGN.md, like these references: ref1.png ref2.png
-/rasa-director revise videos/tally-launch: calmer motion, swap the music
-/rasa-director export the Swiss grid style as a DESIGN.md
+/rasanai make a 45s launch film for https://tally.app
+/rasanai a 60s explainer on how DNS works, vertical, no voiceover. Just make it.
+/rasanai turn PR #482 into a 30s changelog video
+/rasanai a lyric video for song.mp3, you decide the rest
+/rasanai cut ~/Footage/lisbon-trip into a 30s reel: best moments, a title card, captions
+/rasanai add bold captions to interview.mp4 for Reels
+/rasanai a 6s title sting for "Ship it in an afternoon", neo-brutalist, springy
+/rasanai a product film for our app using our DESIGN.md, like these references: ref1.png ref2.png
+/rasanai revise videos/tally-launch: calmer motion, swap the music
+/rasanai export the Swiss grid style as a DESIGN.md
 ```
 
 ## How it works
 
 ```
-skills/rasa-director/
+skills/rasanai/
   SKILL.md                    the flow the agent follows: Brief · Films · Animatic · Final
   console/index.html          the Director's Console; console/presets.js draws any style live
   taxonomy/                   the vocabulary: 32 dimensions (dimensions/*.json), 66 story devices (devices.json),
@@ -133,7 +137,7 @@ skills/rasa-director/
 - **The checker** (`obey.mjs`) loads each composition in headless Chrome with GSAP, walks every tween, samples its real start and end values, and flags off-scale durations, eases outside the set, implicit default eases, banned patterns (fade-up-slide in all its forms, bounce, overshoot, blur-in, scale-pop…), non-GSAP motion and short holds. "Could not run" is never reported as clean.
 - **Local only.** The console binds to 127.0.0.1, refuses foreign Host headers, and requires a per-session token (then an HttpOnly cookie) for every route; it serves files only from your workspace and installed skills, never its own token file, and refuses to run with your home directory as the root. Voice samples, music and site capture go through HyperFrames' own tools; nothing else leaves your machine.
 
-Details: [SKILL.md](skills/rasa-director/SKILL.md) · [craft](skills/rasa-director/references/craft.md) · [vocabulary](skills/rasa-director/references/vocabulary.md) · [story](skills/rasa-director/references/story.md) · [sound](skills/rasa-director/references/sound.md) · [styles](skills/rasa-director/taxonomy/presets/SCHEMA.md) · [direction & taxonomy](skills/rasa-director/references/direction.md) · [DESIGN.md](skills/rasa-director/references/brand.md) · [entire videos](skills/rasa-director/references/video.md) · [footage reels](skills/rasa-director/references/reel.md) · [console](skills/rasa-director/references/console.md) · [motion.md contract](skills/rasa-director/references/motion-md-contract.md) · [keyframe board](skills/rasa-director/references/board-format.md) · [handoff](skills/rasa-director/references/handoff.md) · [personalities](skills/rasa-director/references/personalities.md) · [design doc](docs/designs/motion-director.md)
+Details: [SKILL.md](skills/rasanai/SKILL.md) · [craft](skills/rasanai/references/craft.md) · [vocabulary](skills/rasanai/references/vocabulary.md) · [story](skills/rasanai/references/story.md) · [sound](skills/rasanai/references/sound.md) · [styles](skills/rasanai/taxonomy/presets/SCHEMA.md) · [direction & taxonomy](skills/rasanai/references/direction.md) · [DESIGN.md](skills/rasanai/references/brand.md) · [entire videos](skills/rasanai/references/video.md) · [footage reels](skills/rasanai/references/reel.md) · [console](skills/rasanai/references/console.md) · [motion.md contract](skills/rasanai/references/motion-md-contract.md) · [keyframe board](skills/rasanai/references/board-format.md) · [handoff](skills/rasanai/references/handoff.md) · [personalities](skills/rasanai/references/personalities.md) · [design doc](docs/designs/motion-director.md)
 
 ## Publishing notes (for the maintainer)
 
@@ -152,6 +156,6 @@ Details: [SKILL.md](skills/rasa-director/SKILL.md) · [craft](skills/rasa-direct
 
 ## License
 
-MIT. `skills/rasa-director/scripts/vendor/gsap.min.js` is GSAP 3.14.2 under the [GSAP Standard License](https://gsap.com/standard-license).
+MIT. `skills/rasanai/scripts/vendor/gsap.min.js` is GSAP 3.14.2 under the [GSAP Standard License](https://gsap.com/standard-license).
 
 Built on [HyperFrames](https://hyperframes.heygen.com) and [Claude Code](https://claude.com/claude-code).

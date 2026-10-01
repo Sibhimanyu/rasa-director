@@ -26,7 +26,7 @@ components:
 
 # Mid-century modern
 
-A motion-graphics design system from Rasa Director's style library (Retro & eras). Also known as 60s modern, atomic age, Saul Bass era, MCM.
+A motion-graphics design system from RasanAI's style library (Retro & eras). Also known as 60s modern, atomic age, Saul Bass era, MCM.
 
 ## Overview
 

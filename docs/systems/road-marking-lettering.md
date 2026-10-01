@@ -26,7 +26,7 @@ components:
 
 # Road-marking lettering
 
-A motion-graphics design system from Rasa Director's style library (Place & wayfinding). Also known as road markings, street paint type, thermoplastic lettering, painted road text, lane lettering.
+A motion-graphics design system from RasanAI's style library (Place & wayfinding). Also known as road markings, street paint type, thermoplastic lettering, painted road text, lane lettering.
 
 ## Overview
 

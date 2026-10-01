@@ -26,7 +26,7 @@ components:
 
 # Calm biometric rings
 
-A motion-graphics design system from Rasa Director's style library (Soft & tactile). Also known as wellness tracker UI, ring metrics, sleep score UI, readiness rings.
+A motion-graphics design system from RasanAI's style library (Soft & tactile). Also known as wellness tracker UI, ring metrics, sleep score UI, readiness rings.
 
 ## Overview
 

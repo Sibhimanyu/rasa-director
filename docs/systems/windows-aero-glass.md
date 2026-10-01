@@ -28,7 +28,7 @@ components:
 
 # Windows Aero glass
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as Windows 7 Aero, Aero Glass, Vista glass UI, Aero theme.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as Windows 7 Aero, Aero Glass, Vista glass UI, Aero theme.
 
 ## Overview
 

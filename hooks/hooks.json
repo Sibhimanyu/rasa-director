@@ -1,10 +1,10 @@
 {
-  "description": "Rasa Director: while a Rasa run is active in the workspace, show each action Claude takes in the Director's Console live feed. Does nothing in other projects.",
+  "description": "RasanAI: while a RasanAI run is active in the workspace, show each action Claude takes in the Director's Console live feed. Does nothing in other projects.",
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Bash|Write|Edit|MultiEdit|Read|WebFetch|Task|Agent",
-        "hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/rasa-director/scripts/hook-activity.mjs\"", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/rasanai/scripts/hook-activity.mjs\"", "timeout": 5 }]
       }
     ]
   }

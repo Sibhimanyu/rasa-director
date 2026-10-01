@@ -26,7 +26,7 @@ components:
 
 # Hand-drawn wireframe
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as Balsamiq style, sketchy UI, napkin wireframe, lo-fi mockup.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as Balsamiq style, sketchy UI, napkin wireframe, lo-fi mockup.
 
 ## Overview
 

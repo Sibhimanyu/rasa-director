@@ -28,7 +28,7 @@ components:
 
 # Surreal 3D
 
-A motion-graphics design system from Rasa Director's style library (3D & materials). Also known as dreamy 3D, surreal render, pastel dreamscape, 3D dreamworld.
+A motion-graphics design system from RasanAI's style library (3D & materials). Also known as dreamy 3D, surreal render, pastel dreamscape, 3D dreamworld.
 
 ## Overview
 

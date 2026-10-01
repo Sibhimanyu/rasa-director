@@ -26,7 +26,7 @@ components:
 
 # Thermal imaging
 
-A motion-graphics design system from Rasa Director's style library (Science). Also known as infrared camera, ironbow thermography, heat camera, IR imaging.
+A motion-graphics design system from RasanAI's style library (Science). Also known as infrared camera, ironbow thermography, heat camera, IR imaging.
 
 ## Overview
 

@@ -28,7 +28,7 @@ components:
 
 # Desert sandstone
 
-A motion-graphics design system from Rasa Director's style library (Nature & material). Also known as canyon country, red rock desert, southwest sandstone, desert modern.
+A motion-graphics design system from RasanAI's style library (Nature & material). Also known as canyon country, red rock desert, southwest sandstone, desert modern.
 
 ## Overview
 

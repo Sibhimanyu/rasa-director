@@ -28,7 +28,7 @@ components:
 
 # Lock-screen notifications
 
-A motion-graphics design system from Rasa Director's style library (Interface). Also known as notification stack, push notifications, phone lock screen, toast stack.
+A motion-graphics design system from RasanAI's style library (Interface). Also known as notification stack, push notifications, phone lock screen, toast stack.
 
 ## Overview
 

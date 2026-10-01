@@ -28,7 +28,7 @@ components:
 
 # Cyberpunk neon
 
-A motion-graphics design system from Rasa Director's style library (Futuristic & tech). Also known as cyberpunk, Cyberpunk 2077 UI, cyber-deck, Night City, netrunner UI.
+A motion-graphics design system from RasanAI's style library (Futuristic & tech). Also known as cyberpunk, Cyberpunk 2077 UI, cyber-deck, Night City, netrunner UI.
 
 ## Overview
 

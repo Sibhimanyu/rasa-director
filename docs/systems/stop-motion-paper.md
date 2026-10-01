@@ -28,7 +28,7 @@ components:
 
 # Stop-motion paper
 
-A motion-graphics design system from Rasa Director's style library (Handmade & printed). Also known as cut-out animation, stop-motion cutout, Terry Gilliam style, paper puppets.
+A motion-graphics design system from RasanAI's style library (Handmade & printed). Also known as cut-out animation, stop-motion cutout, Terry Gilliam style, paper puppets.
 
 ## Overview
 

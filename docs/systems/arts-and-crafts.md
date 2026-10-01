@@ -26,7 +26,7 @@ components:
 
 # Arts and Crafts
 
-A motion-graphics design system from Rasa Director's style library (Heritage). Also known as William Morris style, Kelmscott Press, Arts & Crafts movement, Morris & Co..
+A motion-graphics design system from RasanAI's style library (Heritage). Also known as William Morris style, Kelmscott Press, Arts & Crafts movement, Morris & Co..
 
 ## Overview
 

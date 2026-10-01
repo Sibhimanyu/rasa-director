@@ -26,7 +26,7 @@ components:
 
 # Activity book
 
-A motion-graphics design system from Rasa Director's style library (Playful & pop). Also known as kids magazine, puzzle book style, activity page, children's magazine layout.
+A motion-graphics design system from RasanAI's style library (Playful & pop). Also known as kids magazine, puzzle book style, activity page, children's magazine layout.
 
 ## Overview
 
