@@ -3,7 +3,7 @@
   <img src="docs/assets/logo/rasanai-lockup.svg" alt="RasanAI" height="56" />
 </picture></h1>
 
-**Pick the film. Claude makes it.** Launch films, explainers, PR videos, brand films, music videos, reels cut from a folder of your own footage, captioned talking heads, and short motion graphics.
+**Pick the film. Claude makes it.** RasanAI is an AI video director for Claude Code, built on HyperFrames: launch films, explainers, PR videos, brand films, music videos, reels cut from a folder of your own footage, captioned talking heads, and short motion graphics.
 
 *Rasa* (रस) is the feeling a work leaves in its audience; *rasanai* (ரசனை) is the Tamil word for the taste to choose it. When thirty people make an AI video, they get thirty videos with different content and the same film: the obvious story, a default look, everything fading up on one ease, a 30-second music loop under a 45-second film, a whoosh on every cut and glowing text. RasanAI is a Claude Code skill that replaces every one of those defaults with a decision, and checks the build against it.
 
