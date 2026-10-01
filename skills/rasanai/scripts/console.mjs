@@ -161,6 +161,8 @@ if (cmd === "push") {
   const base = args.merge || onlyDecision ? prev : {};
   const next = { ...base, ...data, status: args.status || data.status || (args.step === "build" ? "working" : "awaiting"), updated: now() };
   delete next.sent;
+  // closing a step the user answered keeps who made the call, so the Decisions drawer credits them, not Claude
+  if (next.status === "done" && !data.by && prev.sent && !["decide", "decide-rest", "note"].includes(prev.sent.type)) next.by = "user";
   // the step's discussion survives a re-push (Claude revising the options is the answer to it)
   if (prev.thread && !data.thread) next.thread = prev.thread;
   if (args.step === "build" && !args.merge) {
