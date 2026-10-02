@@ -214,3 +214,5 @@ Start from the style's real references, then reach for the layout and fields tha
 **Light type**: `"fonts": { "display": "Cormorant Garamond", "displayWeight": 300, "body": "Inter", "bodyWeight": 300 }`.
 
 Tips: effects are a finish, not the style: one or two usually do it, and three is the limit. `density: "airy"` suits luxury and calm styles; `dense` suits Swiss, data, HUD and newsroom styles. Two presets that differ only in `effects`, `iconSet`, `density` or `chrome` count as distinct to the validator, but make them genuinely different looks, not the same look with a filter.
+
+Specimens: `console/presets.js` draws every preset in CSS. The 20 styles of the `dimensional` family are then replaced by a real 3D specimen from `console/presets3d.js` (`RasaPresets3D.has(preset)` / `mount(stage, preset, opts)`), rendered by Rasan3D from the same `recipe.palette`, fonts and brand overrides; the CSS specimen stays where WebGL is unavailable. `presets.mjs stills` and `presets.mjs site` include them.

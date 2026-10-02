@@ -85,11 +85,17 @@
   var preview = matchMedia("(max-width: 700px)").matches ? 6 : 12;
   var more = document.getElementById("lib-more");
   document.head.insertAdjacentHTML("beforeend", "<style>" + RasaPresets.css + "</style>");
+  if (window.RasaPresets3D) RasaPresets3D.base = "assets/three/";
   function fit(c) { var st = c._spec.firstChild; if (st) st.style.transform = "scale(" + (c._spec.clientWidth / 1600) + ")"; }
   function paint(c) {
     var tmp = document.createElement("div");
-    tmp.innerHTML = RasaPresets.render(c._p, { headline: words.value || "Tax season. Again.", sub: "Every receipt, booked in one tap." });
+    var o = { headline: words.value || "Tax season. Again.", sub: "Every receipt, booked in one tap." };
+    tmp.innerHTML = RasaPresets.render(c._p, o);
+    if (c._h3 && c._h3.destroy) c._h3.destroy();
+    c._h3 = null;
     c._spec.innerHTML = ""; c._spec.appendChild(tmp.firstChild); fit(c); c._painted = true;
+    // the 3D family is drawn live by Rasan3D (assets/presets3d.js); the CSS specimen stays if it can't
+    if (window.RasaPresets3D && RasaPresets3D.has(c._p)) { try { c._h3 = RasaPresets3D.mount(c._spec.firstChild, c._p, o); } catch (e) { c._h3 = null; } }
   }
   var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && !e.target._painted) paint(e.target); }); }, { rootMargin: "400px" });
   function apply() {
@@ -132,7 +138,7 @@
       var pr = document.createElement("p"); pr.textContent = p.what; c.appendChild(pr);
       var file = files ? files[p.id] : p.id + ".md";
       if (file) c.appendChild(dl(p, file));
-      function play() { var st = c._spec.firstChild; if (!st) return; st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); }
+      function play() { var st = c._spec.firstChild; if (!st) return; st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); if (c._h3 && c._h3.play) c._h3.play(); }
       c.addEventListener("mouseenter", play); c.addEventListener("click", play);
       grid.appendChild(c); cards.push(c); io.observe(c);
     });

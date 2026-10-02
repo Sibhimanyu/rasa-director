@@ -24,7 +24,7 @@ function copyDir(src, dst) {
 export function install(destRoot) {
   const dst = path.join(destRoot, "assets", "three");
   // the runtime file itself decides (a fix without a version bump still reaches the project)
-  const same = exists(path.join(dst, "rasan3d.js")) && fs.readFileSync(path.join(dst, "rasan3d.js"), "utf8") === fs.readFileSync(path.join(STAGE, "rasan3d.js"), "utf8");
+  const same = ["rasan3d.js", "rasan-music.js"].every((f) => exists(path.join(dst, f)) && fs.readFileSync(path.join(dst, f), "utf8") === fs.readFileSync(path.join(STAGE, f), "utf8"));
   const updated = !same || !exists(path.join(dst, "three.core.min.js"));
   if (updated) {
     fs.rmSync(dst, { recursive: true, force: true });

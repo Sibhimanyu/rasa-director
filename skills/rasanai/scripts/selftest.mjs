@@ -22,6 +22,8 @@
 // 14. the crew: plan, prompt files, the score check, the score into STORYBOARD.md, local search + inventory, motion strips
 // 15. 3D: the Rasan3D runtime installs, a scaffolded scene builds, is seek-safe and passes the gate; planted
 //     nondeterminism, a linear drift and an ease outside motion.md are caught; strips and key frames wait for the build
+// 16. the 3D styles of the style library mount real Rasan3D canvases (presets3d.js); the console serves the runtime safely
+// 17. lyric videos: the treatment gate and the crew's song route, lyrics.mjs (check, audio, align when whisper is there), the RasanMusic runtime in a page, the film finish (grade, blur)
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -127,6 +129,16 @@ if (url) {
   ok("console refuses files outside allowed roots", esc === 403, `got ${esc}`);
   const tokFile = await fetch(`${u.origin}/fs/abs${run}/console.json`, { headers: { cookie } }).then((r) => r.status).catch(() => 0);
   ok("console never serves its own token file", tokFile === 403, `got ${tokFile}`);
+  // the real-3D specimens: presets3d.js and the Rasan3D runtime are served (cookie only), nothing outside stage3d/ is
+  const p3 = await fetch(`${u.origin}/presets3d.js`, { headers: { cookie } });
+  const r3 = await fetch(`${u.origin}/three/rasan3d.js`, { headers: { cookie } });
+  const r3body = r3.status === 200 ? await r3.text() : "";
+  const trav = await fetch(`${u.origin}/three/%2e%2e/SKILL.md`, { headers: { cookie } }).then((r) => r.status).catch(() => 0);
+  const trav2 = await fetch(`${u.origin}/three/..%2fSKILL.md`, { headers: { cookie } }).then((r) => r.status).catch(() => 0);
+  const tmpl = await fetch(`${u.origin}/three/templates/`, { headers: { cookie } }).then((r) => r.status).catch(() => 0);
+  const raw = await fetch(`${u.origin}/three/../SKILL.md`, { headers: { cookie } }).then((r) => r.status).catch(() => 0);
+  const nock = await fetch(`${u.origin}/three/rasan3d.js`).then((r) => r.status).catch(() => 0);
+  ok("console serves /presets3d.js and /three/rasan3d.js (cookie only), refuses /three/../SKILL.md and templates/", p3.status === 200 && r3.status === 200 && /javascript/.test(r3.headers.get("content-type") || "") && /Rasan3D/.test(r3body) && nock === 403 && [trav, trav2, raw, tmpl].every((c) => c >= 400), `presets3d ${p3.status}, runtime ${r3.status}, no cookie ${nock}, traversal ${trav}/${trav2}/${raw}, templates ${tmpl}`);
   // a range request on an empty file and a null body must not take the server down
   fs.mkdirSync(path.join(TMP, "media"), { recursive: true });
   fs.writeFileSync(path.join(TMP, "media", "empty.mp4"), "");
@@ -698,6 +710,268 @@ if (!quick) {
   const ds = node("design.mjs", ["stills", "--dir", kf]);
   const png = path.join(kf, "4.png");
   ok("3d: a key frame drawn in 3D renders with design.mjs stills", ds.status === 0 && fs.existsSync(png) && fs.statSync(png).size > 20000, (ds.stderr || ds.stdout).slice(0, 300));
+}
+
+// 16. 3D specimens in the style library: presets.js + presets3d.js mount real Rasan3D scenes
+if (!quick) {
+  const { serve } = await import("./lib/stage3d.mjs");
+  const { launch } = await import("./lib/cdp.mjs");
+  const SK = path.join(HERE, "..");
+  const srv = await serve(SK);
+  const b = await launch({ width: 1000, height: 600, timeoutMs: 180000 });
+  try {
+    const lib = JSON.parse(fs.readFileSync(path.join(SK, "taxonomy", "presets", "dimensional.json"), "utf8")).presets;
+    const pick = ["glass-3d", "point-cloud-3d"].map((id) => lib.find((p) => p.id === id));
+    const sheet = path.join(SK, `.selftest-3d-${process.pid}.html`);
+    fs.writeFileSync(sheet, `<!doctype html><html><head><meta charset="utf-8"><script src="/console/presets.js"></script><script src="/console/presets3d.js"></script></head><body style="margin:0"><div id="o"></div><script>
+window.__errs=[];addEventListener("error",function(e){window.__errs.push(String(e.message))});addEventListener("unhandledrejection",function(e){window.__errs.push("rejection: "+(e.reason&&e.reason.message||e.reason))});
+var d=${JSON.stringify(pick)};RasaPresets3D.base="/stage3d/";document.head.insertAdjacentHTML("beforeend","<style>"+RasaPresets.css+"</style>");RasaPresets.loadFonts(d);
+d.forEach(function(p){var w=document.createElement("div");w.style.cssText="width:400px;height:225px;overflow:hidden";w.innerHTML='<div style="width:1600px;height:900px;transform:scale(.25);transform-origin:0 0">'+RasaPresets.render(p,{headline:"Tax season. Again."})+'</div>';document.getElementById("o").appendChild(w);RasaPresets3D.mount(w.querySelector(".rp-stage"),p,{headline:"Tax season. Again."})});
+window.__ready=Promise.all([RasaPresets3D.whenAll(),document.fonts.ready]).then(function(){return true});
+</script></body></html>`);
+    await b.open(`${srv.url}/${path.basename(sheet)}`);
+    await b.eval("window.__ready", { await: true });
+    const r = await b.eval(`(function(){return [].map.call(document.querySelectorAll(".rp-stage"),function(st){var c=st.querySelector("canvas");if(!c)return{canvas:false};
+      var t=document.createElement("canvas");t.width=64;t.height=36;var x=t.getContext("2d");x.drawImage(c,0,0,64,36);var px=x.getImageData(0,0,64,36).data,n=px.length/4,m=[0,0,0],i,k;
+      for(i=0;i<px.length;i+=4)for(k=0;k<3;k++)m[k]+=px[i+k]/n;var v=0;for(i=0;i<px.length;i+=4)for(k=0;k<3;k++)v+=Math.pow(px[i+k]-m[k],2)/(n*3);return{canvas:true,variance:Math.round(v)}});})()`);
+    const errs = await b.eval("window.__errs");
+    const exc = (b.logs || []).filter((l) => l.startsWith("exception"));
+    ok("3d specimens: glass-3d and point-cloud-3d mount real canvases that are not blank, no page exceptions", r.length === 2 && r.every((x) => x.canvas && x.variance > 40) && !errs.length && !exc.length, JSON.stringify(r) + " " + errs.join("; ") + exc.join("; ") + (b.logs || []).slice(0, 3).join("; "));
+    fs.rmSync(sheet, { force: true });
+  } finally {
+    await b.close();
+    await srv.close();
+    for (const f of fs.readdirSync(SK)) if (f.startsWith(".selftest-3d-")) fs.rmSync(path.join(SK, f), { force: true });
+  }
+}
+
+// 17. lyric videos: the treatment gate and the crew's song route, word timings and the music runtime, the film finish
+{
+  const ws = path.join(TMP, "lyr-ws");
+  const run = path.join(ws, ".rasanai", "r1");
+  const lyd = path.join(ws, "fx");
+  for (const d of [path.join(run, "music"), path.join(run, "story"), lyd]) fs.mkdirSync(d, { recursive: true });
+  const J = (r) => { try { return JSON.parse(r.stdout); } catch { return {}; } };
+  const C = (a) => spawnSync(process.execPath, [path.join(HERE, "crew.mjs"), ...a], { encoding: "utf8", env, cwd: ws, timeout: 180000 });
+  const T = (a) => spawnSync(process.execPath, [path.join(HERE, "treatment.mjs"), ...a], { encoding: "utf8", env, cwd: ws, timeout: 60000 });
+  const words = (text, s, e) => text.split(" ").map((w, i, a) => ({ w, start: +(s + ((e - s) * i) / a.length).toFixed(2), end: +(s + ((e - s) * (i + 1)) / a.length).toFixed(2), conf: 0.9 }));
+  const SONG = [["Wake up in the static", 1, 3.5], ["Count the cost of every sheep", 11, 14], ["Paper walls are thinning out", 16, 20], ["Burn it all down", 26, 30], ["Ash is just a rough draft", 42, 46], ["Burn it all down", 54, 58], ["Quiet after the smoke", 60.2, 63]];
+  const lyr = { source: "fixture", lines: SONG.map(([t, s, e], i) => ({ i, text: t, start: s, end: e, words: words(t, s, e) })) };
+  const beats = Array.from({ length: 129 }, (_, i) => i * 0.5);
+  const aud = { duration: 64, bpm: 120, beat_period: 0.5, beats, downbeats: beats.filter((_, i) => i % 4 === 0), sections: [["intro", 0, 8], ["verse", 8, 24], ["chorus", 24, 40], ["verse", 40, 52], ["chorus", 52, 60], ["outro", 60, 64]].map(([name, start, end]) => ({ name, start, end })), fps: 100, onsets: { kick: beats.map((t) => [t, 0.8]) } };
+  const F = (n, o) => { const f = path.join(lyd, n); fs.writeFileSync(f, JSON.stringify(o)); return f; };
+  const lf = F("lyrics.json", lyr), af = F("audio.json", aud);
+  fs.writeFileSync(path.join(run, "music", "lyrics.json"), JSON.stringify(lyr));
+  fs.writeFileSync(path.join(run, "music", "audio.json"), JSON.stringify(aud));
+
+  // the plan: three treatment writers, no script writers or editor
+  const plan = J(C(["plan", "--run", run, "--route", "music-to-video", "--subject", "Song", "--length", "64"]));
+  const mem = (plan.phases || []).flatMap((p) => p.members).map((m) => m.replace(/ \(.*$/, ""));
+  ok("crew: music-to-video plans three treatment writers and no script writer or editor", ["treatment-writer:Sure", "treatment-writer:Bold", "treatment-writer:Wild"].every((m) => mem.includes(m)) && !mem.some((m) => /script-/.test(m)), JSON.stringify(mem));
+  const br = J(C(["brief", "--run", run, "--role", "treatment-writer", "--key", "Bold"]));
+  const prompt = br.prompt ? fs.readFileSync(path.join(ws, br.prompt), "utf8") : "";
+  ok("crew: a treatment writer's brief lists the lyrics, the audio, the playbook, the skeleton command and its two outputs", /music\/lyrics\.json/.test(prompt) && /music\/audio\.json/.test(prompt) && /lyric-video\.md/.test(prompt) && /treatment\.mjs" skeleton/.test(prompt) && /treatment-Bold\.json/.test(prompt) && /TREATMENT-Bold\.md/.test(prompt), prompt.slice(0, 200));
+
+  // the treatment gate: a skeleton, filled, passes; each planted fault is refused
+  const skf = path.join(lyd, "skeleton.json");
+  const sk = J(T(["skeleton", "--lyrics", lf, "--audio", af, "--label", "Bold", "--out", skf]));
+  const skel = JSON.parse(fs.readFileSync(skf, "utf8"));
+  const unfilled = T(["check", "--treatment", skf, "--lyrics", lf, "--audio", af]);
+  ok("treatment: skeleton lays out a plate per section (hooks apart, starts on downbeats) and an unfilled one is refused", sk.plates === 6 && sk.hooks === 2 && skel.plates.every((p) => aud.downbeats.includes(p.start)) && unfilled.status === 2, JSON.stringify(sk) + unfilled.status);
+  const PL = [
+    ["Static", "weather-station printout", "2d", 2, "light", "A paper strip chart of static scrolls under a pen; the orange pen trace wakes into the first sung word and holds it like a tuning mark.", "The words are the pen trace itself, drawn as it sings.", "Wake up: the pen jumps from flat line to a letterform"],
+    ["The ledger", "tax form", "2d", 3, "dark", "A tax form fills in by itself: each sheep is a line item, the sum column grows, a rubber stamp lands on every count and the spark rides the totals line.", "Words are typed into the form's boxes as they are sung.", "Count the cost: the sheep become a column of line items | Paper walls: the form's margins thin into tracing paper"],
+    ["Fuse", "fuse wire diagram", "3d", 5, "dark", "A wiring diagram lifts into depth: a fuse wire runs through the frame as the camera follows the spark along it, sparks shedding to the beat on every kick.", "Each word is a wire label that lights when sung.", "Burn it all down: the fuse is lit and the first wire burns through"],
+    ["Seed packet", "seed packet label", "2d", 3, "light", "A seed packet with a drawn label sits on bone paper; ash sifts into it and the spark becomes the sun printed on the front, the packet crinkling as it opens.", "The line is printed on the packet and the planting date.", "Ash is a rough draft: the ash turns into the seed inside the packet"],
+    ["Fuse again", "fuse wire diagram", "hybrid", 5, "dark", "The wiring diagram again, but the camera now sits inside the wire, the fuse shortens past the lens and the whole frame detonates into white paper on the last beat.", "Wire labels light word by word, larger and faster than the first time.", "Burn it all down: the fuse is already short, the wire runs into the camera and detonates"],
+    ["Placard", "museum placard", "2d", 1, "light", "A small museum placard on a wall beside a charred wire, tiny type, a gallery's soft shadow, the last word printed after the last note and the spark gone out.", "The line is the placard's text, set in engraved caps.", "Quiet after the smoke: the placard reads the film as an artefact"],
+  ];
+  const fill = (sk0) => {
+    const t = JSON.parse(JSON.stringify(sk0));
+    t.song = { title: "Fixture", artist: "Nobody" };
+    t.concept = { title: "The Burn Chart", text: "A deadpan field manual of one orange spark: it writes the first lyric, rides a form's totals, burns as a fuse and ends as a museum placard, every line a pun on the document it is printed in.", pun_engine: "Each lyric line is read as an instruction printed on a different technical document, then carried out literally." };
+    t.style_bible = { palette: { ground: "#0A0A0B", paper: "#EEE9DF", neutrals: ["#5E5B57"], accent: { name: "ember", hex: "#FF4D12", used_for: "the spark and the sung word, nothing else" }, rare: null }, type: [{ role: "voice", family: "Space Grotesk", use: "the lyrics" }, { role: "machine", family: "JetBrains Mono", use: "labels" }], signal: "spark", tone: "Deadpan: a safety manual that is on fire and never says so.", banned: ["neon glow", "particle storms", "centred subtitles"] };
+    t.motifs = [{ id: "spark", name: "the spark", description: "A single orange point that writes, rides and burns through every document" }, { id: "paper", name: "the paper", description: "The bone sheet each document is printed on, which tears and chars" }];
+    t.recurring_idioms = [{ idiom: "fuse wire diagram", why: "the hook; each return runs closer and shorter" }];
+    t.show_off = "The fuse leaves the diagram, runs through the camera and detonates the page on the last beat; the placard at the end hangs on the same wall.";
+    t.plates.forEach((p, i) => {
+      const [title, idiom, space, energy, ground, visual, integ, ideas] = PL[i];
+      Object.assign(p, { title, idiom, space, energy, ground, visual, lyric_integration: integ, motifs: i === 1 || i === 3 ? ["spark", "paper"] : ["spark"] });
+      const id = ideas.split(" | ");
+      p.lines.forEach((l, k) => { l.idea = id[k] || id[0]; });
+      if (i === 2) p.lines[0].change = "baseline: the fuse is lit";
+      if (i === 4) { p.change = "the fuse is shorter and the camera is inside the wire"; p.lines[0].change = "the fuse is shorter, the camera inside the wire, detonates"; }
+    });
+    return t;
+  };
+  const filled = fill(skel);
+  const tf = F("treatment-Bold.json", filled);
+  const good = T(["check", "--treatment", tf, "--lyrics", lf, "--audio", af]);
+  ok("treatment: a filled skeleton passes check (exit 0)", good.status === 0, good.stdout.slice(0, 600));
+  const mutants = [
+    ["a dropped lyric line", (t) => { t.plates[1].lines.pop(); }, /not in any plate/],
+    ["a third plate in the same idiom", (t) => { t.plates[0].idiom = t.plates[1].idiom = t.plates[3].idiom = "tax form"; }, /used in 3 plates/],
+    ["a hook return with no change", (t) => { delete t.plates[4].lines[0].change; }, /occurrence 2 of 2/],
+    ["a second hue", (t) => { t.style_bible.palette.neutrals.push("#2255FF"); }, /second hue/],
+    ["an off-grid cut", (t) => { t.plates[2].start = 26.3; t.plates[1].end = 26.3; }, /off the beat grid/],
+    ["no 3D in a song over 60 s", (t) => { t.plates.forEach((p) => (p.space = "2d")); }, /3d or hybrid plate/],
+  ];
+  const miss = [];
+  for (const [name, mut, re] of mutants) {
+    const t = JSON.parse(JSON.stringify(filled));
+    mut(t);
+    const r = T(["check", "--treatment", F("mut.json", t), "--lyrics", lf, "--audio", af]);
+    if (!(r.status === 2 && re.test(r.stdout))) miss.push(`${name}: exit ${r.status} ${r.stdout.slice(0, 160)}`);
+  }
+  ok(`treatment: ${mutants.length} planted faults are each refused with exit 2 (dropped line, third idiom, hook with no change, second hue, off-grid cut, no 3D over 60 s)`, !miss.length, miss.join(" | "));
+  const scf = path.join(lyd, "scenes.json");
+  const sc = T(["scenes", "--treatment", tf, "--lyrics", lf, "--out", scf]);
+  const scj = fs.existsSync(scf) ? JSON.parse(fs.readFileSync(scf, "utf8")) : { scenes: [] };
+  const s2 = scj.scenes[2] || {};
+  ok("treatment: scenes carries each plate's id, idiom, space, energy, window, lines and motifs, with the plate's duration", sc.status === 0 && scj.scenes.length === 6 && s2.plate === "plate-3" && s2.idiom === "fuse wire diagram" && s2.space === "3d" && s2.energy === 5 && s2.start === 26 && s2.end === 42 && s2.duration === 16 && JSON.stringify(s2.lines) === "[3]" && s2.motifs.includes("spark"), sc.stdout.slice(0, 200) + JSON.stringify(s2).slice(0, 300));
+
+  // crew check for treatment writers
+  const ck = () => C(["check", "--run", run, "--role", "treatment-writer", "--key", "Bold"]);
+  fs.writeFileSync(path.join(run, "story", "treatment-Bold.json"), JSON.stringify(filled));
+  const noMd = ck();
+  ok("crew: check treatment-writer refuses a missing TREATMENT .md (exit 2)", noMd.status === 2 && /TREATMENT-Bold\.md/.test(noMd.stdout), noMd.stdout.slice(0, 300));
+  const md = "# The Burn Chart\n\n" + "A deadpan field manual of one orange spark across six documents. ".repeat(8);
+  fs.writeFileSync(path.join(run, "story", "TREATMENT-Bold.md"), md);
+  fs.writeFileSync(path.join(run, "story", "treatment-Bold.json"), JSON.stringify(skel));
+  const badT = ck();
+  ok("crew: check treatment-writer refuses a treatment that fails treatment.mjs check (exit 2)", badT.status === 2 && /rewrite/.test(badT.stdout), badT.stdout.slice(0, 300));
+  fs.writeFileSync(path.join(run, "story", "treatment-Bold.json"), JSON.stringify(filled));
+  const goodT = ck();
+  ok("crew: check treatment-writer accepts a valid treatment with its words (exit 0)", goodT.status === 0, goodT.stdout.slice(0, 300));
+
+  // a lyric run: the scene animator's brief carries the plate's words and lyric_video; the score may not contradict the plates
+  fs.writeFileSync(path.join(run, "story", "chosen-treatment.json"), JSON.stringify(filled));
+  fs.copyFileSync(scf, path.join(run, "scenes.json"));
+  const pj = path.join(ws, "videos", "song");
+  fs.mkdirSync(path.join(pj, "compositions", "frames"), { recursive: true });
+  const ab = J(C(["brief", "--run", run, "--role", "scene-animator", "--key", "3", "--project", pj]));
+  const ap = ab.prompt ? fs.readFileSync(path.join(ws, ab.prompt), "utf8") : "";
+  ok("crew: a lyric run's scene-animator brief carries the plate's words, lyric_video and the karaoke rules", /\*\*lyric_video\*\*: true/.test(ap) && /Your plate's words/.test(ap) && /"Burn"|"Burn it all down"|\["Burn"/.test(ap) && /gsapWords/.test(ap), JSON.stringify([/\*\*lyric_video\*\*: true/.test(ap), /Your plate's words/.test(ap), /"Burn"/.test(ap), /gsapWords/.test(ap), ab.ok, ab.error]));
+  const H = { x: 960, y: 540, scale: 1, opacity: 1, direction: "left", speed: 400 };
+  const spaceOf = (t, i) => (i === 2 ? "3d" : "2d");
+  const score = (mut) => {
+    const s = {
+      spine: "the orange spark", motif: { what: "the spark", scenes: [1, 2, 3, 4, 5, 6] }, showreel: [{ scene: 3, t: 1, what: "the fuse runs through the lens" }, { scene: 5, t: 1, what: "the detonation" }], rhythm: "slow-fast", signature: { seam: "2>3", technique: "push-through", why: "w" },
+      video_direction: { palette: "p", motion_grammar: "g", holds: "h", negative: ["no drift"] }, depth: { plan: "the fuse goes deep in 3 and 5" },
+      scenes: PL.map((p, i) => ({ n: i + 1, title: p[0], duration: skel.plates[i].end - skel.plates[i].start, energy: p[3], layout: ["full-bleed", "split", "centered", "asymmetric 60/40", "full-bleed", "split"][i], camera: "T1", space: p[2],
+        ...(p[2] !== "2d" ? { camera3d: { lens_mm: 50, fstop: 2.8, moves: [{ t0: 0, t1: 1, move: "locked" }, { t0: 1, t1: 6, move: "arc", ease: "power3.inOut" }] }, light: "key upper-left", materials: "wire" } : {}),
+        shots: [{ t0: 0, t1: 4, on_screen: "a", moves: "rises", primary: "a" }], entrances: [{ element: "a", type: "cut-in" }], events: [] })),
+      seams: [1, 2, 3, 4, 5].map((n) => ({ from: n, to: n + 1, kind: "cut", why: "w" })),
+    };
+    mut(s);
+    return s;
+  };
+  fs.mkdirSync(path.join(run, "motion"), { recursive: true });
+  fs.writeFileSync(path.join(run, "motion", "score.md"), "# score\n");
+  const putScore = (s) => fs.writeFileSync(path.join(run, "motion", "score.json"), JSON.stringify(s));
+  const warnsOf = () => J(C(["check", "--run", run, "--role", "motion-director", "--key", "score"])).warnings || [];
+  putScore(score(() => {}));
+  const w0 = warnsOf().filter((w) => /plate/.test(w));
+  putScore(score((s) => { s.scenes[2].space = "2d"; delete s.scenes[2].camera3d; s.scenes[3].energy = 1; }));
+  const w1 = warnsOf();
+  ok("crew: checkScore stays quiet when the score follows the plates and warns when it changes a plate's space or energy", !w0.length && w1.some((w) => /scene 3 \(plate plate-3\).*space "3d".*"2d"/.test(w)) && w1.some((w) => /scene 4 \(plate plate-4\).*energy is 3.*says 1/.test(w)), JSON.stringify([w0, w1]).slice(0, 500));
+
+  // word timings: check reports the right median; audio finds the tempo and the downbeats of a click track; align runs when it can
+  const Lx = (starts) => ({ lines: [{ i: 0, text: "one two three four five", words: starts.slice(0, 5).map((t, k) => ({ w: ["one", "two", "three", "four", "five"][k], start: t, end: t + 0.3 })) }, { i: 1, text: "six seven eight nine", words: starts.slice(5).map((t, k) => ({ w: ["six", "seven", "eight", "nine"][k], start: t, end: t + 0.3 })) }] });
+  const truthS = [1, 1.5, 2, 2.5, 3, 4, 4.5, 5, 5.5];
+  const errMs = [20, 40, 50, 60, 60, 60, 70, 90, 250];
+  const lc = J(node("lyrics.mjs", ["check", "--lyrics", F("got.json", Lx(truthS.map((t, k) => +(t + errMs[k] / 1000).toFixed(3)))), "--truth", F("truth.json", Lx(truthS))], { cwd: ws }));
+  ok("lyrics: check matches the words in order and reports the right median start error (60 ms of 9 words, worst 250 ms)", lc.matched === 9 && lc.start_error_ms?.median === 60 && lc.worst?.[0]?.err_ms === 250 && lc.within_80ms === 0.78, JSON.stringify(lc).slice(0, 300));
+  const click = path.join(lyd, "click.wav");
+  spawnSync("ffmpeg", ["-loglevel", "error", "-y", "-f", "lavfi", "-i", "aevalsrc='gte(t\\,0.3)*(0.6*sin(2*PI*55*t)*exp(-25*mod(t-0.3\\,0.5))*if(lt(mod(t-0.3\\,2)\\,0.5)\\,1\\,0.55)+0.15*sin(2*PI*3000*t)*exp(-200*mod(t-0.3\\,0.25)))':s=44100:d=24", click]);
+  const au = node("lyrics.mjs", ["audio", "--track", click, "--no-stems", "--out", path.join(lyd, "click.json")], { cwd: ws });
+  const cj = fs.existsSync(path.join(lyd, "click.json")) ? JSON.parse(fs.readFileSync(path.join(lyd, "click.json"), "utf8")) : {};
+  const dgap = (cj.downbeats || []).slice(1).map((t, i) => t - cj.downbeats[i]);
+  ok("lyrics: audio finds 120 BPM, beats on the kicks and a downbeat every 2 s on the accent", au.status === 0 && Math.abs(cj.bpm - 120) < 1 && cj.beats?.length >= 46 && Math.abs(cj.beats[0] - 0.3) < 0.04 && Math.abs(cj.downbeats?.[0] - 0.3) < 0.05 && dgap.length > 8 && dgap.every((g) => Math.abs(g - 2) < 0.06) && cj.onsets?.kick?.length >= 40 && cj.rms?.length > 2000, au.stderr.slice(0, 200) + JSON.stringify({ bpm: cj.bpm, d: cj.downbeats?.slice(0, 3) }));
+  const wh = J(node("lyrics.mjs", ["models"], { cwd: ws }));
+  const canAlign = !!wh.whisper && (wh.models || []).length > 0 && spawnSync("say", ["-v", "?"], { encoding: "utf8" }).status === 0;
+  if (canAlign) {
+    const sp = path.join(lyd, "say.aiff");
+    spawnSync("say", ["-o", sp, "Wake up in the static. Count the cost of every sheep."]);
+    spawnSync("ffmpeg", ["-loglevel", "error", "-y", "-i", sp, "-ar", "44100", path.join(lyd, "say.wav")]);
+    fs.writeFileSync(path.join(lyd, "say.txt"), "Wake up in the static\nCount the cost of every sheep\n");
+    const al = node("lyrics.mjs", ["align", "--track", path.join(lyd, "say.wav"), "--lyrics", path.join(lyd, "say.txt"), "--no-stems", "--out", path.join(lyd, "say.json")], { cwd: ws });
+    const sj2 = fs.existsSync(path.join(lyd, "say.json")) ? JSON.parse(fs.readFileSync(path.join(lyd, "say.json"), "utf8")) : { lines: [] };
+    const ws2 = sj2.lines.flatMap((l) => l.words);
+    ok("lyrics: align times the words of a spoken track to the user's text (2 lines, 11 words, in order, inside the clip)", al.status === 0 && sj2.lines.length === 2 && ws2.length === 11 && ws2.every((w, k) => w.end > w.start && (k === 0 || w.start >= ws2[k - 1].start)) && ws2[0].start < 1 && ws2[10].end < 6, al.stderr.slice(0, 300));
+  } else ok("lyrics: align not run here (needs whisper-cli with a model and a speech sample from macOS say); models lists what is installed", wh.whisper !== undefined && Array.isArray(wh.models));
+
+  // the music runtime in a page: install ships it, get() is by text (straight or curly quotes), gsapWords starts each word on its sung start
+  {
+    const { install } = await import("./lib/stage3d.mjs");
+    const { serve } = await import("./lib/stage3d.mjs");
+    const { launch } = await import("./lib/cdp.mjs");
+    const proj = path.join(TMP, "lyr-page");
+    fs.mkdirSync(proj, { recursive: true });
+    install(proj);
+    ok("stage3d install ships rasan-music.js beside rasan3d.js", fs.existsSync(path.join(proj, "assets", "three", "rasan-music.js")) && fs.existsSync(path.join(proj, "assets", "three", "rasan3d.js")));
+    const LY = { lines: [{ i: 0, text: "I’m upping my “P(doom)”", start: 10, end: 12.2, words: [{ w: "I’m", start: 10, end: 10.4 }, { w: "upping", start: 10.5, end: 10.9 }, { w: "my", start: 11, end: 11.2 }, { w: "“P(doom)”", start: 11.5, end: 12.2 }] }, { i: 1, text: "Burn it all down", start: 20, end: 22, words: words("Burn it all down", 20, 22) }] };
+    fs.writeFileSync(path.join(proj, "index.html"), `<!doctype html><html><head><meta charset="utf-8"></head><body><div id="l">${LY.lines[0].words.map((w, k) => `<span class="w" id="w${k}">${w.w}</span>`).join(" ")}</div>
+<script src="/__rasanai/gsap.min.js"></script><script src="assets/three/rasan-music.js"></script><script>
+RasanMusic.load(${JSON.stringify(LY)}, ${JSON.stringify(aud)});
+var A = RasanMusic.lyrics.get("I'm upping my \\"P(doom)\\""), B = RasanMusic.lyrics.get("i’m UPPING"), nth = RasanMusic.lyrics.get("burn it", 0), miss = false;
+try { RasanMusic.lyrics.get("no such line"); } catch (e) { miss = true; }
+var tl = gsap.timeline({ paused: true });
+var starts = RasanMusic.gsapWords(tl, A, document.querySelectorAll("#l .w"), { from: { opacity: 0 }, to: { opacity: 1 }, duration: 0.3, ease: "none" });
+var kids = tl.getChildren().map(function (c) { return [+c.startTime().toFixed(3), +c.duration().toFixed(3)]; });
+var op = function (t) { tl.seek(t, false); return [0, 1, 2, 3].map(function (k) { return +getComputedStyle(document.getElementById("w" + k)).opacity; }); };
+var before = op(10.25), mid = op(10.6), after = op(12.5), W = A.words[3];
+window.__r = { same: A === B, i: A.i, nth: nth.i, miss: miss, starts: starts, kids: kids, before: before, mid: mid, after: after,
+  prog: [RasanMusic.wordProgress(W, 11.4), RasanMusic.wordProgress(W, 11.85), RasanMusic.wordProgress(W, 12.4)],
+  beat: [RasanMusic.audio.lastBeatBefore(9.9), RasanMusic.audio.lastDownbeatBefore(25.9), RasanMusic.audio.beatAt(1.25)], line: RasanMusic.lyrics.lineAt(20.5).i };
+</script></body></html>`);
+    const srv = await serve(proj);
+    const b = await launch({ width: 400, height: 200, timeoutMs: 60000 });
+    try {
+      await b.open(`${srv.url}/index.html`);
+      const r = await b.eval("window.__r");
+      const exc = (b.logs || []).filter((l) => l.startsWith("exception"));
+      ok("music runtime: get() finds a line by its text across straight and curly quotes (and throws for a missing one)", r && r.same && r.i === 0 && r.nth === 1 && r.miss, JSON.stringify(r) + exc.join(";"));
+      ok("music runtime: gsapWords tweens each word at its sung start with the duration given; before it a word is hidden", r && JSON.stringify(r.starts) === "[10,10.5,11,11.5]" && JSON.stringify(r.kids) === "[[10,0.3],[10.5,0.3],[11,0.3],[11.5,0.3]]" && r.before[0] > 0.8 && r.before[1] === 0 && r.mid[1] > 0.3 && r.mid[2] === 0 && r.after.every((o) => o === 1), JSON.stringify(r));
+      ok("music runtime: wordProgress runs 0..1 over the word, and beat and downbeat lookups snap to the grid", r && r.prog[0] === 0 && Math.abs(r.prog[1] - 0.5) < 0.01 && r.prog[2] === 1 && r.beat[0] === 9.5 && r.beat[1] === 24 && Math.abs(r.beat[2] - 2.5) < 1e-9 && r.line === 1, JSON.stringify(r.prog) + JSON.stringify(r.beat));
+    } finally {
+      await b.close();
+      await srv.close();
+    }
+  }
+
+  // the film finish: the grade leaves a flat patch at the centre within 1 level and adds grain; blur averages sub-frames
+  {
+    const flat = path.join(lyd, "flat.mp4");
+    spawnSync("ffmpeg", ["-loglevel", "error", "-y", "-f", "lavfi", "-i", "color=c=0x3366cc:s=160x90:r=30:d=1", "-vf", "scale=out_color_matrix=bt709:out_range=limited,format=yuv420p", "-c:v", "libx264", "-crf", "12", "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-color_range", "tv", flat]);
+    const graded = path.join(lyd, "graded.mp4");
+    const g = node("finish.mjs", ["grade", "--in", flat, "--out", graded, "--probe", "60,25,40,40"], { cwd: ws });
+    const gj = J(g);
+    const grainStd = (f) => {
+      const r = spawnSync("ffmpeg", ["-loglevel", "error", "-i", f, "-vf", "crop=40:40:60:25,format=gray", "-frames:v", "1", "-f", "rawvideo", "-"], { maxBuffer: 1 << 24 });
+      const a = [...r.stdout];
+      const m = a.reduce((x, y) => x + y, 0) / a.length;
+      return Math.sqrt(a.reduce((x, y) => x + (y - m) ** 2, 0) / a.length);
+    };
+    const sb = grainStd(flat), sa = grainStd(graded);
+    ok("finish: grade keeps a flat colour patch at the centre within 1 level and adds grain", g.status === 0 && gj.probe?.delta?.every((d) => Math.abs(d) <= 1) && gj.input_frames === gj.frames && sa > sb + 0.6, (g.stderr || "").slice(0, 200) + JSON.stringify({ probe: gj.probe, sb, sa }));
+    if (!quick) {
+      const bp = path.join(lyd, "blur-proj");
+      fs.mkdirSync(bp, { recursive: true });
+      fs.copyFileSync(path.join(HERE, "vendor", "gsap.min.js"), path.join(bp, "gsap.min.js"));
+      fs.writeFileSync(path.join(bp, "hyperframes.json"), "{}");
+      fs.writeFileSync(path.join(bp, "index.html"), `<!doctype html><html><head><meta charset="utf-8"><script src="gsap.min.js"></script></head><body style="margin:0;background:#111"><div id="root" data-composition-id="main" data-start="0" data-duration="1" data-width="320" data-height="180" style="position:relative;width:320px;height:180px;background:#111;overflow:hidden"><div id="b" style="position:absolute;left:0;top:70px;width:40px;height:40px;background:#f60"></div></div><script>window.__timelines=window.__timelines||{};var tl=gsap.timeline({paused:true});tl.to("#b",{x:260,duration:1,ease:"none"},0);window.__timelines["main"]=tl;</script></body></html>`);
+      const t0 = Date.now();
+      const bl = node("finish.mjs", ["blur", "--project", bp, "--out", path.join(lyd, "blur.mp4"), "--samples", "8"], { cwd: ws });
+      const bj = J(bl);
+      let partial = 0;
+      if (bl.status === 0) {
+        const raw = spawnSync("ffmpeg", ["-loglevel", "error", "-i", path.join(lyd, "blur.mp4"), "-vf", "select=eq(n\\,15),crop=320:2:0:90,format=rgb24", "-frames:v", "1", "-f", "rawvideo", "-"], { maxBuffer: 1 << 24 }).stdout;
+        for (let x = 0; x < 320 * 3; x += 3) if (raw[x] > 40 && raw[x] < 215) partial++;
+      }
+      ok(`finish: blur averages sub-frames (8 samples): 30 frames out, a moving card smeared into soft edges (${Math.round((Date.now() - t0) / 1000)} s)`, bl.status === 0 && bj.frames?.expected === 30 && bj.frames?.got === 30 && partial >= 3, (bl.stderr || "").slice(0, 300) + bl.stdout.slice(0, 200) + partial);
+    }
+  }
 }
 
 fs.rmSync(TMP, { recursive: true, force: true });

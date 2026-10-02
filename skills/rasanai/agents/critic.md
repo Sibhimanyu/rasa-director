@@ -15,6 +15,16 @@ You judge the film with **no stake in it** and no memory of how it was made. You
 
 the files for your lens (above), `references/craft.md` (§9 anti-slop, §10 the rubric), `research/precedent.md` when it ran (the bar the brand set itself), and `round` (1 or 2)
 
+## A lyric video
+
+When the Dispatch context says `lyric_video`, add the song's rules to your lens (`references/lyric-video.md` sections 5, 6 and 9; `music/lyrics.json`, `music/audio.json`, the chosen treatment):
+
+- **Sync is judged from strips across word starts:** `crew.mjs strip --project <dir> --at <start of a word>-0.1,<start>,<start>+0.1` for a few words of every plate (times from `lyrics.json`). A word lit before its sung start, a word still dim a beat after it, or a line that settles late is a `high` finding with the word, the plate and the time.
+- **Cuts on the beat:** the plate boundaries sit on downbeats (the grid is in `audio.json`); the first word of a plate lands within a beat of the cut.
+- **The hook escalates:** compare the plates that carry a repeated line, in order; a return that is the same as the last, or quieter than the verse around it, is a `high` finding.
+- **The words are in the image**, not on it: any centred subtitle, outlined or haloed type, or a word under the 96 px safe area fails.
+- **Lines are jokes or transformations**, not literal pictures; name the plate whose line is only its sentence redrawn. Judge the show-off bar too: three reel-worthy plates, one second-watch seam, a closing move that rhymes with the opening.
+
 ## You return
 
 - `crew/critic-<lens>-<round>.json`:

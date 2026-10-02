@@ -630,8 +630,20 @@
     if (loadRenderer.q) return loadRenderer.q.push(cb);
     loadRenderer.q = [cb];
     var s = document.createElement("script"); s.src = "/presets.js";
-    s.onload = function () { document.head.insertAdjacentHTML("beforeend", "<style>" + window.RasaPresets.css + "</style>"); loadRenderer.q.forEach(function (f) { f(); }); };
+    s.onload = function () {
+      document.head.insertAdjacentHTML("beforeend", "<style>" + window.RasaPresets.css + "</style>");
+      // the 3D family is drawn by Rasan3D (presets3d.js); without it the CSS specimens stay
+      var s3 = document.createElement("script"); s3.src = "/presets3d.js";
+      var done = function () { if (window.RasaPresets3D) window.RasaPresets3D.base = "/three/"; loadRenderer.q.forEach(function (f) { f(); }); };
+      s3.onload = done; s3.onerror = done;
+      document.head.appendChild(s3);
+    };
     document.head.appendChild(s);
+  }
+  // mount the real-3D specimen into a stage when the style is in the 3D family; returns its handle or null
+  function mount3d(st, p, opts) {
+    if (!(window.RasaPresets3D && window.RasaPresets3D.has(p))) return null;
+    try { return window.RasaPresets3D.mount(st, p, opts); } catch (e) { return null; }
   }
   var GALLERIES = {};
   function loadGallery(file, cb) {
@@ -652,7 +664,8 @@
       var st = tmp.firstChild; box.appendChild(st);
       var fit = function () { st.style.transform = "scale(" + (box.clientWidth / 1600) + ")"; };
       fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box);
-      function play() { st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); }
+      var h3 = mount3d(st, p, { headline: g.headline, sub: g.sub, brand: local.inBrand === false ? null : g.brand });
+      function play() { st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); if (h3 && h3.play) h3.play(); }
       box.addEventListener("mouseenter", play); box.addEventListener("click", play);
     }
     if (lazy && window.IntersectionObserver) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { paint(); io.disconnect(); } }); }, { rootMargin: "300px" }); io.observe(box); }
@@ -1349,9 +1362,9 @@
   function loopSpecimen(box) {
     // replay the style's entrance every few seconds so each tile reads as a moving film, not a poster
     var st = box.querySelector(".rp-stage"); if (!st) return;
-    var go = function () { if (!document.body.contains(st)) return; st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); };
+    var go = function (ev) { if (!document.body.contains(st)) { if (box._h3 && box._h3.destroy) { box._h3.destroy(); box._h3 = null; } return; } st.classList.remove("play"); void st.offsetWidth; st.classList.add("play"); if (ev && box._h3 && box._h3.play) box._h3.play(); };
     // play once, then again whenever the tile is hovered or focused (a timed loop left tiles caught mid-entrance)
-    go(); var tile = box.closest(".film") || box; tile.addEventListener("mouseenter", go); tile.addEventListener("focus", go);
+    go(null); var tile = box.closest(".film") || box; tile.addEventListener("mouseenter", go); tile.addEventListener("focus", go);
   }
   function filmsScreen(d, mode) {
     var look = mode === "look";
@@ -1367,12 +1380,13 @@
     loadRenderer(function () {
       var go = function (g) {
         var byId = {}; ((g && g.presets) || []).forEach(function (p) { byId[p.id] = p; });
+        [].forEach.call(grid.querySelectorAll(".spec"), function (b) { if (b._h3 && b._h3.destroy) b._h3.destroy(); });
         grid.innerHTML = "";
         films.forEach(function (fm, i) {
           var p = byId[fm.preset] || fm.style || null;
           var tile = h("button", { type: "button", class: "film" + (local.filmSel === fm.id ? " on" : ""), "aria-pressed": local.filmSel === fm.id ? "true" : "false" });
           var box = h("div", { class: "spec" });
-          if (p) { var tmp = document.createElement("div"); tmp.innerHTML = window.RasaPresets.render(p, { headline: fm.hook || (g && g.headline) || d.headline || "Your film starts here", sub: (g && g.sub) || d.sub || "", brand: local.inBrand === false ? null : (g && g.brand) || d.brand }); box.appendChild(tmp.firstChild); }
+          if (p) { var tmp = document.createElement("div"); tmp.innerHTML = window.RasaPresets.render(p, { headline: fm.hook || (g && g.headline) || d.headline || "Your film starts here", sub: (g && g.sub) || d.sub || "", brand: local.inBrand === false ? null : (g && g.brand) || d.brand }); box.appendChild(tmp.firstChild); box._p = p; box._o = { headline: fm.hook || (g && g.headline) || d.headline || "Your film starts here", sub: (g && g.sub) || d.sub || "", brand: local.inBrand === false ? null : (g && g.brand) || d.brand }; }
           else if (fm.image) box.appendChild(h("img", { src: fsUrl(fm.image), alt: "", style: "width:100%;height:100%;object-fit:cover" }));
           else if ((fm.frames || [])[0]) box.appendChild(h("img", { src: fsUrl(fm.frames[0]), alt: "", style: "width:100%;height:100%;object-fit:cover" }));
           else box.appendChild(h("div", { class: "spec-missing", text: fm.hook || fm.title || "" }));
@@ -1385,7 +1399,7 @@
           tile.addEventListener("click", function () { local.filmSel = fm.id; [].forEach.call(grid.children, function (c, k) { c.classList.toggle("on", films[k].id === fm.id); }); primaryLabel(); });
           tile.addEventListener("dblclick", function () { send(S.current, "choose", fm.id); });
           grid.appendChild(tile);
-          requestAnimationFrame(function () { var st = box.querySelector(".rp-stage"); if (st) { var fit = function () { st.style.transform = "scale(" + box.clientWidth / 1600 + ")"; }; fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box); loopSpecimen(box); } });
+          requestAnimationFrame(function () { var st = box.querySelector(".rp-stage"); if (st) { var fit = function () { st.style.transform = "scale(" + box.clientWidth / 1600 + ")"; }; fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box); if (box._p) box._h3 = mount3d(st, box._p, box._o); loopSpecimen(box); } });
         });
         primaryLabel();
         ctl.innerHTML = "";

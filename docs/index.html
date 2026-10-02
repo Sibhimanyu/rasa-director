@@ -110,6 +110,8 @@
         <li><s>Scenes that each look fine and never flow</s><span>One motion score for the whole film, every seam designed on both sides</span></li>
         <li><s>The safe, forgettable default</s><span>A crew pushed to show off, and critics that fail competent-but-safe work</span></li>
         <li><s>Everything flat, or a three.js demo spinning in a void</s><span>Real 3D where depth earns it, planned like a 3D lead and joined to the 2D frame by frame</span></li>
+        <li><s>A lyric video that is a gradient with subtitles on it</s><span>Every word timed to the voice, every line a pun or a transformation, every cut on a downbeat</span></li>
+        <li><s>A render that looks like a screen recording</s><span>Real motion blur on every scene and one grade across the film, so cuts do not change the texture</span></li>
       </ul>
     </div>
   </section>
@@ -407,6 +409,24 @@ detail removed.
     </div>
   </section>
 
+  <!-- lyric videos and the finish -->
+  <section class="section" id="songs">
+    <div class="wrap">
+      <p class="eyebrow">Songs and the finish</p>
+      <h2 class="mega">Every word on its note.</h2>
+      <div class="two lead-row">
+        <p class="lede">Give RasanAI a track and its lyrics and it times every word to the voice, then reads the music: tempo, downbeats, sections, kick hits. Three writers each pitch one treatment: a single concept, a palette with one owned accent, a signal that runs through the whole film and a plate for every lyric section, each in its own instrument. A line never becomes a picture of itself. It becomes a pun or a transformation.</p>
+        <p>A gate checks the treatment before you see it: every line used once, no idiom more than twice, one accent hue, cuts on the beat grid, a hook that climbs each time it returns, depth where a long film needs it. Then each plate's animator lights every word on its sung start through <b>RasanMusic</b>, a small runtime that reads the timings as functions of time. Measured on one song against a hand-corrected truth: a median word-start error of 50 to 60 ms, 250 to 280 ms at the 90th percentile.</p>
+      </div>
+      <ul class="ticks">
+        <li><b>The finish.</b> The delivery render gets real motion blur on every scene, 2D included: sub-frames are rendered and averaged over a shutter window, up to 32 samples.</li>
+        <li><b>One grade.</b> Grain, halation, vignette and an optional LUT, the same on every scene. Flat brand colours at the centre of the frame stay within a level.</li>
+        <li><b>The cost, stated.</b> About 3 times a normal render at 8 samples and 10 to 12 times at 32. Drafts skip it.</li>
+        <li><b>3D in the style library.</b> The 20 styles of the 3D and materials family above are drawn as live Rasan3D scenes, not CSS imitations.</li>
+      </ul>
+    </div>
+  </section>
+
   <!-- every kind of video -->
   <section class="section">
     <div class="wrap">
@@ -418,7 +438,7 @@ detail removed.
         <div><b>Explainer</b><span class="mono">faceless-explainer</span><p>A topic, article or how-to, told with invented visuals.</p></div>
         <div><b>PR video</b><span class="mono">pr-to-video</span><p>A pull request as a changelog film, code excerpts and all.</p></div>
         <div><b>Custom piece</b><span class="mono">general-video</span><p>Brand films, montages, anything multi-scene.</p></div>
-        <div><b>Music video</b><span class="mono">music-to-video</span><p>Cut to a track's beat grid; lyric videos.</p></div>
+        <div><b>Music video</b><span class="mono">music-to-video</span><p>Cut to a track's beat grid; lyric videos with every word timed to the voice.</p></div>
         <div><b>Footage reel</b><span class="mono">reel</span><p>A folder of your clips, cut together with cards and captions.</p></div>
         <div><b>Captions &amp; overlays</b><span class="mono">embedded-captions · talking-head-recut</span><p>A talking-head clip, captioned or recut with designed cards.</p></div>
         <div><b>Motion graphics</b><span class="mono">motion-graphics</span><p>A title, sting, stat hit or lower third.</p></div>
@@ -498,7 +518,7 @@ detail removed.
         <div class="cmd"><code><span class="p">&gt; </span>/rasanai cut ~/Footage/lisbon into a 30s reel with a title card and captions</code><button class="copy" type="button" data-copy="/rasanai cut ~/Footage/lisbon into a 30s reel with a title card and captions" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
         <div class="cmd"><code><span class="p">&gt; </span>/rasanai export the Swiss grid style as a DESIGN.md</code><button class="copy" type="button" data-copy="/rasanai export the Swiss grid style as a DESIGN.md" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
       </div>
-      <p class="note">RasanAI updates itself when the skill loads. Check the install with <code>node ~/.claude/skills/rasanai/scripts/selftest.mjs</code> (105 checks, no network needed).</p>
+      <p class="note">RasanAI updates itself when the skill loads. Check the install with <code>node ~/.claude/skills/rasanai/scripts/selftest.mjs</code> (127 checks, no network needed).</p>
     </div>
   </section>
 
@@ -534,6 +554,7 @@ detail removed.
 <script src="assets/engine.js"></script>
 <script src="assets/film.js"></script>
 <script src="assets/presets.js"></script>
+<script src="assets/presets3d.js"></script>
 <script src="assets/personalities.js"></script>
 <script src="assets/site.js"></script>
 </body>

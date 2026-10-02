@@ -78,6 +78,7 @@ const ROLES = {
   "local-scout": { desk: "research", tier: "fast", desc: (p, k) => `Reading the local project${k ? ` ${k}` : ""} you approved` },
   "research-lead": { desk: "research", tier: "inherit", desc: () => "Merging the research into one truth sheet" },
   "script-writer": { desk: "story", tier: "inherit", desc: (p, k) => `Writing the ${k || ""} script`.replace("  ", " ") },
+  "treatment-writer": { desk: "story", tier: "inherit", desc: (p, k) => `Writing the ${k || ""} treatment for the song`.replace("  ", " ") },
   "script-editor": { desk: "story", tier: "inherit", desc: () => "Editing the three scripts like a hostile reader" },
   "motion-director": { desk: "motion", tier: "inherit", desc: (p, k) => (k === "seams" ? "Checking every cut and building the signature transition" : "Scoring how the whole film moves") },
   "frame-designer": { desk: "art", tier: "inherit", desc: (p, k) => `Designing key frames ${k || ""}`.trim() },
@@ -87,7 +88,7 @@ const ROLES = {
 
 // ---------------------------------------------------------------- plan
 const STORY_ROUTES = new Set(["product-launch-video", "faceless-explainer", "pr-to-video", "general-video", "reel", "music-to-video"]);
-const SCENE_ROUTES = new Set(["product-launch-video", "faceless-explainer", "pr-to-video", "general-video"]);
+const SCENE_ROUTES = new Set(["product-launch-video", "faceless-explainer", "pr-to-video", "general-video", "music-to-video"]);
 
 function planCrew(p) {
   const d = (role, key = null, extra = {}) => ({ role, key, tier: ROLES[role].tier, background: true, description: ROLES[role].desc(p, key), ...extra });
@@ -103,7 +104,10 @@ function planCrew(p) {
     if (!lean) research.push(d("precedent-researcher"));
   } else if (p.route === "pr-to-video") {
     research.push(d("product-researcher"));
-  } else if (p.subject && ["reel", "music-to-video", "talking-head-recut", "embedded-captions"].includes(p.route) && p.public) {
+  } else if (p.route === "music-to-video") {
+    // a song: precedent (the artist's and genre's visual conventions) only when the artist/brand has a public face
+    if (p.public && !lean) research.push(d("precedent-researcher", null, { mode: "music" }));
+  } else if (p.subject && ["reel", "talking-head-recut", "embedded-captions"].includes(p.route) && p.public) {
     research.push(d("brand-researcher"));
   }
   for (const dir of p.local) research.push(d("local-scout", path.basename(dir), { approved_paths: [dir], may_run: !!p.may_run }));
@@ -111,12 +115,15 @@ function planCrew(p) {
     phases.push({ phase: "research", when: "right after the brief is pushed, while the user reads it", dispatch: research, then: "research-lead once every member above is accepted" });
     phases.push({ phase: "research-lead", when: "after the research desk", dispatch: [d("research-lead")], then: "story.mjs pick on the truth sheet" });
   }
-  if (STORY_ROUTES.has(p.route) && !lean) {
+  if (p.route === "music-to-video") {
+    // lyrics.mjs align + audio come first (music/lyrics.json, music/audio.json); three treatments replace three scripts
+    phases.push({ phase: "treatments", when: "after lyrics.mjs align + audio have written music/lyrics.json and music/audio.json (and the precedent, when it ran)", dispatch: ["Sure", "Bold", "Wild"].map((k) => d("treatment-writer", k)), then: "treatment.mjs check on each (crew.mjs check --role treatment-writer), then push story from the three TREATMENT-<label>.md; the chosen one is copied to story/chosen-treatment.json" });
+  } else if (STORY_ROUTES.has(p.route) && !lean) {
     phases.push({ phase: "story", when: "after story.mjs pick", dispatch: ["Sure", "Bold", "Wild"].map((k) => d("script-writer", k)), then: "crew.mjs pitches, story.mjs check, then the editor" });
     phases.push({ phase: "story-edit", when: "after the three pitches pass story.mjs check", dispatch: [d("script-editor")], then: "route its notes back to the writers (one round), then push story" });
   }
   if (SCENE_ROUTES.has(p.route) || p.route === "motion-graphics") {
-    phases.push({ phase: "score", when: "after the look is picked and the music is fitted (scenes.json has final durations)", dispatch: [d("motion-director", "score")], then: "crew.mjs check, then the frame designers" });
+    phases.push({ phase: "score", when: p.route === "music-to-video" ? "after treatment.mjs scenes wrote scenes.json (plates against the real track; durations are the plate windows)" : "after the look is picked and the music is fitted (scenes.json has final durations)", dispatch: [d("motion-director", "score")], then: "crew.mjs check, then the frame designers" });
     const groups = [];
     if (N) {
       const per = lean ? N : Math.max(2, Math.ceil(N / 5));
@@ -167,6 +174,9 @@ function brief(run) {
   const f = b.fields || b;
   return { length_s: f.length_s, kind: f.kind, aspect: f.aspect, narrated: f.narration !== false, destination: f.destination, subject: f.subject };
 }
+// a lyric video: the music-to-video route, or a run that has word timings
+const LYR = (run, P) => (P && P.route === "music-to-video") || exists(R(run, "music", "lyrics.json"));
+const chosenTreatment = (run) => jsonMaybe(R(run, "story", "chosen-treatment.json"));
 const scenesOf = (run) => {
   const s = jsonMaybe(R(run, "scenes.json"));
   return s && Array.isArray(s.scenes) ? s.scenes : [];
@@ -211,6 +221,7 @@ function contextFor(run, role, key, plan) {
       break;
     case "precedent-researcher":
       Object.assign(ctx, { subject: P.subject, kind: B.kind, brand_known: !!P.public, length_s: B.length_s });
+      if (P.route === "music-to-video") ctx.focus = "the artist's and the genre's music and lyric videos: their visual conventions, shot by shot, to honour or break on purpose (not launch films)";
       O(research("films") + "/"); O(research("precedent.md"));
       break;
     case "local-scout": {
@@ -236,6 +247,16 @@ function contextFor(run, role, key, plan) {
       O(R(run, "story", `pitch-${key}.json`));
       break;
     }
+    case "treatment-writer": {
+      if (!key) die("treatment-writer needs --key Sure|Bold|Wild");
+      const conceit = { sure: "the film as an obvious-in-hindsight format for this song", bold: "a strong formal conceit (a document, an instrument, a place) with a signal running through it", wild: "the treatment a studio would put on its reel: the form itself is the joke" }[String(key).toLowerCase()];
+      Object.assign(ctx, { label: key, conceit: conceit || "(Sure, Bold or Wild)", brief: B });
+      const skel = R(run, "story", `treatment-${key}.json`);
+      for (const [l, p] of [["lyrics (word timings)", R(run, "music", "lyrics.json")], ["audio (beats, downbeats, sections, onsets)", R(run, "music", "audio.json")], ["briefing", research("BRIEFING.md")], ["precedent", research("precedent.md")], ["writer's brief", path.join(SKILL_DIR, "references", "lyric-video.md")], ["lyrics and the music runtime", path.join(SKILL_DIR, "references", "lyrics.md")], ["2D, 3D or hybrid", path.join(SKILL_DIR, "references", "3d.md")], ["vocabulary", path.join(SKILL_DIR, "references", "vocabulary.md")]]) I(l, p);
+      ctx.skeleton = `node "${path.join(SKILL_DIR, "scripts", "treatment.mjs")}" skeleton --lyrics ${rel(R(run, "music", "lyrics.json"))} --audio ${rel(R(run, "music", "audio.json"))} --label ${key} --out ${rel(skel)}`;
+      O(skel); O(R(run, "story", `TREATMENT-${key}.md`));
+      break;
+    }
     case "script-editor":
       for (const [l, p] of [["pitches", R(run, "story", "pitches.json")], ["check", R(run, "story", "check.json")], ["truth", R(run, "story", "truth.md")], ["claims", research("claims.json")], ["briefing", research("BRIEFING.md")], ["precedent", research("precedent.md")], ["rubric", path.join(SKILL_DIR, "references", "script.md")], ["story rules", path.join(SKILL_DIR, "references", "story.md")], ["craft", path.join(SKILL_DIR, "references", "craft.md")]]) I(l, p);
       O(R(run, "story", "edit-notes.json"));
@@ -243,6 +264,10 @@ function contextFor(run, role, key, plan) {
     case "motion-director":
       Object.assign(ctx, { pass: key === "seams" ? "seams" : "score", length_s: B.length_s, aspect: B.aspect });
       for (const [l, p] of [["script", R(run, "story", "chosen.json")], ["scenes", R(run, "scenes.json")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["motion.md", R(run, "motion.md")], ["music plan", R(run, "music", "plan.json")], ["screens", research("screens.md")], ["assets", research("assets.json")], ["brand", research("brand.md")], ["precedent", research("precedent.md")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["vocabulary", path.join(SKILL_DIR, "references", "vocabulary.md")], ["3d playbook", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
+      if (LYR(run, P)) {
+        ctx.lyric_video = true;
+        for (const [l, p] of [["chosen treatment (spine, motifs, plates: space, energy, idiom)", R(run, "story", "chosen-treatment.json")], ["treatment in words", R(run, "story", "chosen-treatment.md")], ["lyrics (word timings)", R(run, "music", "lyrics.json")], ["audio (downbeats, onsets)", R(run, "music", "audio.json")], ["lyric-video playbook", path.join(SKILL_DIR, "references", "lyric-video.md")], ["lyrics and the music runtime", path.join(SKILL_DIR, "references", "lyrics.md")]]) I(l, p);
+      }
       if (key === "seams") {
         if (!pj) die("the seam pass needs --project <videos/name>");
         Object.assign(ctx, { project: rel(pj) });
@@ -256,6 +281,7 @@ function contextFor(run, role, key, plan) {
       const [a, b] = String(key || "").split("-").map(Number);
       Object.assign(ctx, { scenes: a && b ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : key, aspect: B.aspect });
       for (const [l, p] of [["score", R(run, "motion", "score.json")], ["score.md", R(run, "motion", "score.md")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["scenes", R(run, "scenes.json")], ["screens", research("screens.json")], ["ui kit", research("screens.md")], ["assets", research("assets.json")], ["logo", research("brand", "assets")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["3d playbook (for scenes the score puts in 3D)", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
+      if (LYR(run, P)) I("chosen treatment (the style bible is the look)", R(run, "story", "chosen-treatment.json"));
       for (const n of ctx.scenes || []) { O(R(run, "frames", `${n}.html`)); O(R(run, "frames", `${n}.png`)); O(R(run, "frames", `${n}.md`)); }
       break;
     }
@@ -267,6 +293,11 @@ function contextFor(run, role, key, plan) {
       const sc3 = ((jsonMaybe(R(run, "motion", "score.json")) || {}).scenes || []).find((x) => Number(x.n) === n) || {};
       Object.assign(ctx, { scene: n, project: rel(pj), space: sc3.space || "2d" });
       if (is3d(sc3)) I("3d playbook", path.join(SKILL_DIR, "references", "3d.md"));
+      if (LYR(run, P)) {
+        ctx.lyric_video = true;
+        ctx.sync = "sync every word of this scene's lines to its sung start with RasanMusic.gsapWords / RasanMusic.wordProgress (references/lyrics.md); never ahead of the voice";
+        for (const [l, p] of [["lyrics (word timings)", R(run, "music", "lyrics.json")], ["audio (beats, onsets, envelopes)", R(run, "music", "audio.json")], ["lyrics and the music runtime", path.join(SKILL_DIR, "references", "lyrics.md")], ["lyric-video playbook (karaoke rules)", path.join(SKILL_DIR, "references", "lyric-video.md")], ["chosen treatment (style bible, motifs, this plate)", R(run, "story", "chosen-treatment.json")]]) I(l, p);
+      }
       for (const [l, p] of [["technical role", path.join(packets, "_role.md")], ["frame packet", packet ? path.join(packets, packet) : null], ["DISPATCH.md", path.join(pj, "DISPATCH.md")], ["frame.md", path.join(pj, "frame.md")], ["motion.md", path.join(pj, "motion.md")], ["key frame", path.join(pj, "assets", "keyframes", `${n}.png`)], ["key frame note", R(run, "frames", `${n}.md`)], ["score", R(run, "motion", "score.json")], ["ui kit", research("screens.md")], ["brand motion", research("brand.md")], ["assets", research("assets.json")]]) I(l, p);
       O(`${rel(path.join(pj, "compositions", "frames"))}/${packet ? packet.replace(/\.md$/, ".html") : `${String(n).padStart(2, "0")}-*.html`}`);
       O(R(run, "crew", "animators", `${n}.md`)); O(R(run, "crew", "animators", `${n}-overview.png`)); O(R(run, "crew", "animators", `${n}-move.png`));
@@ -284,6 +315,7 @@ function contextFor(run, role, key, plan) {
         grounding: [["project", pj], ["claims", research("claims.json")], ["truth", R(run, "story", "truth.md")], ["screens", research("screens.json")]],
       }[lens];
       if (!byLens) die(`unknown critic lens "${lens}" (frames, motion, film, grounding)`);
+      if (LYR(run, P)) { ctx.lyric_video = true; common.push(["lyrics (word timings)", R(run, "music", "lyrics.json")], ["audio (downbeats)", R(run, "music", "audio.json")], ["chosen treatment", R(run, "story", "chosen-treatment.json")], ["lyric-video playbook", path.join(SKILL_DIR, "references", "lyric-video.md")]); }
       for (const [l, p] of [...byLens, ...common]) I(l, p);
       O(R(run, "crew", `critic-${lens}-${Number(round) || 1}.json`));
       break;
@@ -323,6 +355,7 @@ const DARES = {
   seams: "Show off at the seams. A cut that merely doesn't pop is the minimum. Make the signature transition the best two seconds of the film, and make the continuity seams so clean the viewer only notices them on the second watch. Where 2D meets 3D, the frames on both sides must match to the pixel and the colour: that exact match is the trick people rewind to see.",
   "scene-animator": "Show off. This scene is going on your reel. Your first version will be the safe one (things fade and slide in, the UI appears, the text types; in 3D, an object turning in a void under a flat light): throw that instinct out and build the shot another motion designer would freeze-frame to work out how you did it, inside motion.md and the anti-slop rules. If your scene has depth, brag with it: a lens chosen for a reason, light that agrees with itself, a camera move that lands, motion blur on the fast frames, a seam that matches the 2D scene to the pixel. Then look at your strips and ask whether it's reel-worthy. If it's only fine, it isn't done.",
   "frame-designer": "Show off. Each still should be good enough to be the poster for the film. Competent and centred is the default you're here to beat. For scenes the score puts in 3D, draw the key frame in real 3D (Rasan3D, references/3d.md): the lens, the light and the material are the poster.",
+  "treatment-writer": "Show off. Two other writers are pitching treatments of this song against you, and the user will pick one. Write the one that wins the room, not the one that merely passes treatment.mjs check: a concept the user can say in a sentence, a signal that runs through every plate, lines that become puns and transformations (never pictures of the sentence), three plates a motion designer would cut into their reel, a hook that escalates, and one seam that only pays off on the second watch. If a plate's idea is just the lyric restated, you are not done.",
   "script-writer": "Show off. Two other writers are pitching against you. Write the script that wins the room, with at least one moment only motion could tell, not the one that merely passes the checks.",
   critic: "Be the push. Competent is a fail: Claude's unpushed default is clean, tidy and forgettable, and you are the reason it doesn't ship. Score ambition honestly and, wherever the work played it safe, say exactly how it could have shown off: in 2D, and in space (a scene that should have had depth, a 3D shot that looks like the three.js demo, a 2D-to-3D seam that pops).",
 };
@@ -370,6 +403,15 @@ function promptFor(run, role, key, plan) {
       }
     }
   }
+  if (role === "scene-animator" && LYR(run, plan)) {
+    const sc = scenesOf(run)[Number(key) - 1];
+    const L = jsonMaybe(R(run, "music", "lyrics.json"));
+    if (sc && L && Array.isArray(L.lines) && Array.isArray(sc.lines)) {
+      const rows = sc.lines.map((i) => L.lines[i]).filter(Boolean).map((l) => ({ text: l.text, start: l.start, end: l.end, words: (l.words || []).map((w) => [w.w, w.start, w.end]) }));
+      extra += `\n\n## Your plate's words (absolute song seconds; the scene starts at ${sc.start}s)\n\n\`\`\`json\n${JSON.stringify({ plate: sc.plate, start: sc.start, end: sc.end, idiom: sc.idiom, space: sc.space, energy: sc.energy, lines: rows }, null, 2)}\n\`\`\`\n\nKaraoke rules: every word appears or lights on its sung \`start\` and completes by its \`end\`; nothing ahead of the voice (a dim anticipation up to 0.4 s is fine); look words up through RasanMusic (\`gsapWords\`, \`wordProgress\`), never hard-coded times; words are part of the image, not a subtitle; safe area 96 px. Read references/lyrics.md for the calls and references/lyric-video.md section 5.`;
+    }
+  }
+  if (role === "treatment-writer") extra += `\n\n## Start from the skeleton\n\nRun this first (it lays out the plates, starts snapped to downbeats), then fill it in:\n\n\`${ctx.skeleton}\``;
   if (role === "motion-director" && key !== "seams") {
     const vocab = readMaybe(path.join(SKILL_DIR, "references", "vocabulary.md"));
     if (vocab) extra += "\n\n(Read `references/vocabulary.md` in full: it is the motion vocabulary your score names techniques from.)";
@@ -416,6 +458,23 @@ function checkScore(run) {
   const scenes = scenesOf(run);
   const N = scenes.length || (score.scenes || []).length;
   const S = Array.isArray(score.scenes) ? score.scenes : [];
+  // a lyric video: the chosen treatment fixes each plate's space, energy and window; the score may not contradict them
+  const tr = chosenTreatment(run);
+  if (tr && Array.isArray(tr.plates)) {
+    const plates = tr.plates.slice().sort((a, b) => a.start - b.start);
+    const sig = (tr.style_bible || {}).signal;
+    const sigId = sig && typeof sig === "object" ? sig.id || sig.name : sig;
+    const sigMotif = (tr.motifs || []).find((m) => m && m.id === sigId) || {};
+    const words = `${sigId || ""} ${sigMotif.name || ""}`.toLowerCase().split(/[^a-z]+/).filter((w) => w.length >= 4);
+    if (words.length && String(score.spine || "").trim() && !words.some((w) => String(score.spine).toLowerCase().includes(w))) W.push(`the spine doesn't name the treatment's signal ("${sigId}"): in a lyric video the spine is the signal that runs through every plate`);
+    if (plates.length && plates.length !== S.length) W.push(`the treatment has ${plates.length} plates and the score ${S.length} scenes (one scene per plate)`);
+    plates.forEach((pl, i) => {
+      const sc = S[i];
+      if (!sc) return;
+      if (pl.space && sc.space && pl.space !== sc.space) W.push(`scene ${i + 1} (plate ${pl.id}): the treatment says space "${pl.space}" and the score says "${sc.space}" (the plate's space is fixed)`);
+      if (pl.energy != null && sc.energy != null && Math.abs(Number(pl.energy) - Number(sc.energy)) > 1) W.push(`scene ${i + 1} (plate ${pl.id}): the treatment's energy is ${pl.energy} and the score says ${sc.energy} (the plate's energy is fixed; score inside it)`);
+    });
+  }
   if (!String(score.spine || "").trim()) P.push("no spine: name the one device that threads the film");
   const reel = Array.isArray(score.showreel) ? score.showreel.filter((m) => m && String(m.what || "").trim() && Number(m.scene) >= 1) : [];
   if (reel.length < Math.min(2, N || 2)) P.push(`showreel names ${reel.length} moments: name 2 to 4 a motion designer would cut into their reel (if you can't, the score isn't ambitious enough yet)`);
@@ -654,6 +713,25 @@ function checkRole(run, role, key) {
       const r = spawnSync(process.execPath, [path.join(SKILL_DIR, "scripts", "story.mjs"), ...ca], { encoding: "utf8", env: { ...process.env, RASANAI_QUIET: "1" } });
       if (r.status === 2) P.push("story.mjs check says rewrite (run it and fix what it names)");
       else if (r.status !== 0) P.push(`story.mjs check could not read the pitch: ${(r.stderr || "").trim().split("\n")[0]}`);
+      break;
+    }
+    case "treatment-writer": {
+      const f = R(run, "story", `treatment-${key}.json`);
+      const t = jsonMaybe(f);
+      if (t === null) { P.push(`story/treatment-${key}.json is missing`); break; }
+      if (t === undefined) { P.push(`story/treatment-${key}.json is not valid JSON`); break; }
+      for (const [l, pp] of [["lyrics", R(run, "music", "lyrics.json")], ["audio", R(run, "music", "audio.json")]]) if (!exists(pp)) P.push(`music/${path.basename(pp)} is missing (lyrics.mjs align / audio first)`);
+      if (P.length) break;
+      const md = readMaybe(R(run, "story", `TREATMENT-${key}.md`));
+      if (md.trim().length < 400) P.push(`story/TREATMENT-${key}.md is ${md.trim() ? "too thin" : "missing"} (the treatment in words for the user: concept, style bible, motifs, each plate, the energy curve, the dare)`);
+      const r = spawnSync(process.execPath, [path.join(SKILL_DIR, "scripts", "treatment.mjs"), "check", "--treatment", f, "--lyrics", R(run, "music", "lyrics.json"), "--audio", R(run, "music", "audio.json")], { encoding: "utf8", env: { ...process.env, RASANAI_QUIET: "1" } });
+      let j = null;
+      try { j = JSON.parse(r.stdout); } catch {}
+      if (r.status === 2) {
+        const probs = j && Array.isArray(j.problems) ? j.problems : [];
+        P.push(`treatment.mjs check says rewrite${probs.length ? `: ${probs.length} problem(s), first: ${typeof probs[0] === "string" ? probs[0] : JSON.stringify(probs[0])}` : " (run it and fix what it names)"}`);
+      } else if (r.status !== 0) P.push(`treatment.mjs check could not read the treatment: ${(r.stderr || r.stdout || "").trim().split("\n")[0]}`);
+      else if (j && Array.isArray(j.warnings)) for (const w of j.warnings.slice(0, 5)) W.push(typeof w === "string" ? w : JSON.stringify(w));
       break;
     }
     case "script-editor": {

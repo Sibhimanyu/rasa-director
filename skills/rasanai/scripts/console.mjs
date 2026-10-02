@@ -374,7 +374,7 @@ function serve() {
     const send = (code, body, type = "application/json", extra = {}) => {
       if (res.headersSent) return res.end();
       res.writeHead(code, { "content-type": type, "cache-control": "no-store", "x-content-type-options": "nosniff", ...extra });
-      res.end(typeof body === "string" ? body : JSON.stringify(body));
+      res.end(typeof body === "string" || Buffer.isBuffer(body) ? body : JSON.stringify(body));
     };
     // DNS-rebinding guard: only our own host names
     const host = String(req.headers.host || "");
@@ -388,6 +388,21 @@ function serve() {
     if (!hasCookie(req)) return send(403, { error: "open the console URL first" });
     // the style-preset renderer (the gallery draws hundreds of styles in the page)
     if (u.pathname === "/presets.js") return send(200, fs.readFileSync(path.join(SKILL_DIR, "console", "presets.js"), "utf8"), "text/javascript");
+    // the real-3D specimens (Rasan3D draws the 3D family live); three.js and its addons are served from the skill's stage3d folder only
+    if (u.pathname === "/presets3d.js") {
+      const f3 = path.join(SKILL_DIR, "console", "presets3d.js");
+      return fs.existsSync(f3) ? send(200, fs.readFileSync(f3, "utf8"), "text/javascript") : send(404, "no presets3d.js", "text/plain");
+    }
+    if (u.pathname.startsWith("/three/")) {
+      let rel;
+      try { rel = decodeURIComponent(u.pathname.slice(7)); } catch { return send(400, "bad path", "text/plain"); }
+      const root3 = path.join(SKILL_DIR, "stage3d"), f3 = path.resolve(root3, rel);
+      if (!rel || rel.includes("\0") || !f3.startsWith(root3 + path.sep) || f3.startsWith(path.join(root3, "templates") + path.sep)) return send(404, "not found", "text/plain");
+      let real3;
+      try { real3 = fs.realpathSync(f3); if (!real3.startsWith(fs.realpathSync(root3) + path.sep) || !fs.statSync(real3).isFile()) return send(404, "not found", "text/plain"); } catch { return send(404, "not found", "text/plain"); }
+      const type3 = /\.m?js$/i.test(real3) ? "text/javascript" : /\.json$/i.test(real3) ? "application/json" : "text/plain; charset=utf-8";
+      return send(200, fs.readFileSync(real3), type3);
+    }
 
     if (u.pathname === "/api/state") return send(200, session());
     if (u.pathname === "/api/events") {

@@ -1,6 +1,6 @@
 # The crew: RasanAI's agents
 
-A film is too much work, and too many kinds of work, for one context. Researching a product properly takes dozens of page reads. A script is better written by someone with nothing else on their mind. Eight scenes animated well take eight full attentions. A critic who watched the film being made can't see it fresh. So RasanAI runs a **crew**: one Director and twelve roles, each with a brief (`agents/<role>.md`), inputs and outputs on disk, and a check that decides when its work is accepted.
+A film is too much work, and too many kinds of work, for one context. Researching a product properly takes dozens of page reads. A script is better written by someone with nothing else on their mind. Eight scenes animated well take eight full attentions. A critic who watched the film being made can't see it fresh. So RasanAI runs a **crew**: one Director and thirteen roles, each with a brief (`agents/<role>.md`), inputs and outputs on disk, and a check that decides when its work is accepted.
 
 The roles exist where one of three things is true, and nowhere else:
 
@@ -21,6 +21,7 @@ Everything deterministic stays a script (`story.mjs check`, `sound.mjs fit`, `ob
 | | `local-scout`: the product's code on this computer, **with the user's permission** | during the Brief | 1 per approved folder | fast is fine |
 | | `research-lead`: one truth sheet, one claims ledger, one brand, one asset kit, a one-page briefing | after the desk | 1 | session |
 | Writers' room | `script-writer`: one script around one device | Story | 3 (Sure, Bold, Wild) | session |
+| | `treatment-writer`: one treatment of a song (concept, style bible, motifs, a plate per lyric section, every line an idea) | Story, `music-to-video` only | 3 (Sure, Bold, Wild), instead of the script writers | session |
 | | `script-editor`: the hostile reader; line edits, verdicts, a recommendation | Story | 1 | session |
 | Motion | `motion-director`: the score (spine, motif, energy, the depth plan, every shot in 2D or 3D, every seam), then the seam pass | Animatic, then Build | 1, twice | session |
 | Art | `frame-designer`: the key frames, from the score, in the look, with the real product | Animatic | 1 per 2 scenes (5 at most) | session |
@@ -36,8 +37,10 @@ Brief ── push brief ──────────────────�
    └─ local-find → (console ask: may I read these folders?) ─┐
    └─ research desk, in parallel, in the background ─────────┴─→ research-lead
 Story ── story.mjs pick → 3 writers in parallel → pitches → story.mjs check → editor → 1 rewrite round → push story
+Story (a song) ── lyrics.mjs align + audio → 3 treatment writers in parallel → treatment.mjs check each → push story; the pick is story/chosen-treatment.json
 Look ─── Director art-directs from the briefing (brand verdict, house grammar) → push look
-Animatic ─ scenes + music fit → Motion Director (score) → frame designers in parallel → frames critic → push animatic
+Look (a song) ─ none: the chosen treatment's style bible is the look (DIRECTION.md); frame.md is the nearest preset
+Animatic ─ scenes (treatment.mjs scenes for a song: one per plate, the real track untouched) + music fit → Motion Director (score) → frame designers in parallel → frames critic → push animatic
 Build ── video.mjs write → crew.mjs storyboard (score → STORYBOARD.md) → frame-packets + inject
          → scene animators in parallel → assemble → Motion Director (seam pass) → motion + grounding critics
          → fixes routed to each scene's animator (2 rounds at most) → draft render → film critic
@@ -101,6 +104,8 @@ Earlier videos about the same product are in that list too. They show what was a
 $RUN/research/       product.md · product.claims.json · brand.md · brand/DESIGN.md · brand/assets/ · screens.json · screens.md · screens/
                      precedent.md · films/<slug>/{film.json,sheet.jpg} · local.md · local.claims.json · local/ · claims.json · assets.json · BRIEFING.md
 $RUN/story/          truth.md · picks.json (story.mjs pick's output) · pitch-<Sure|Bold|Wild>.json · pitches.json · check.json · edit-notes.json · chosen.json
+                     songs: treatment-<Sure|Bold|Wild>.json · TREATMENT-<label>.md · chosen-treatment.json · chosen-treatment.md
+$RUN/music/          lyrics.json (word timings) · audio.json (beats, downbeats, sections, onsets) · plan.json · LICENSES.json
 $RUN/motion/         score.json · score.md
 $RUN/frames/         <n>.html · <n>.png · <n>.md
 $RUN/crew/           plan.json · ledger.jsonl · prompts/ · scratch/ · animators/<n>.md + strips · seams-report.md · critic-<lens>-<round>.json
@@ -123,3 +128,7 @@ node $SKILL_DIR/scripts/crew.mjs strip --file <draft.mp4> --at 0,2,4.5 --out <sh
 ```
 
 A strip at 12 to 15 fps across a move shows its ease (the spacing between frames), its overlap, whether it lands, and whether anything pops at a seam. Strips of a 3D scene (`--file` on a composition that uses Rasan3D) wait for the 3D build and show its real motion blur; `stage3d.mjs stills` renders single frames of one.
+
+## Lyric videos in the crew
+
+For a song (`music-to-video`) the writers' room is three `treatment-writer`s and there is no script editor. `crew.mjs plan --route music-to-video` plans: the precedent researcher when `--public` (the artist's and genre's visual conventions, to honour or break), three treatment writers, then the Motion Director's score, key frames, one scene animator per plate, the seam pass and the critics. A writer's work is accepted when `crew.mjs check --role treatment-writer --key <label>` passes: that runs `treatment.mjs check` with `music/lyrics.json` and `music/audio.json` and requires `story/TREATMENT-<label>.md`. The treatment writers' dare is the same push as everyone's: win the pitch against two other writers. Downstream, scene animators and critics get the word timings and sync every word with `RasanMusic` (`references/lyrics.md`); the Motion Director scores inside the plates' fixed space, energy and durations, with the hook plates as one escalating set; the critic judges sync from strips across word starts (`agents/*.md`, "A lyric video"). The format and craft are in `references/lyric-video.md`.

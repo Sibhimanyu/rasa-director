@@ -11,13 +11,15 @@
 //   node presets.mjs pick --id <id> --decisions d.json [--brand DESIGN.md] [--out <dir>]
 //        -> merges the preset's terms into decisions.json and writes its frame.md (the look) for the build
 //   node presets.mjs stills --out <dir> [--ids a,b] [--headline "…"] -> PNG contact sheets for review
-//   node presets.mjs site --out <docs/assets>        -> presets.json + presets.js for the website's live library
+//   node presets.mjs site --out <docs/assets>        -> presets.json + presets.js + presets3d.js + three/ (the Rasan3D runtime) for the website's live library
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs, die, readJSON, writeFile, chromeScreenshot } from "./lib/common.mjs";
 import { loadTaxonomy } from "./lib/taxonomy.mjs";
 import { track } from "./lib/report.mjs";
+import { serve, STAGE } from "./lib/stage3d.mjs";
+import { launch } from "./lib/cdp.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DIR = path.join(HERE, "..", "taxonomy", "presets");
@@ -281,6 +283,20 @@ if (cmd === "validate") {
   const fams = [...new Map(all.map((p) => [p.family, { id: p.family, name: p.familyName }])).values()];
   writeFile(path.join(out, "presets.json"), JSON.stringify({ presets: all.map(({ file, familyName, ...p }) => p), families: fams }) + "\n");
   fs.copyFileSync(path.join(HERE, "..", "console", "presets.js"), path.join(out, "presets.js"));
+  // the 3D family is drawn live by Rasan3D: presets3d.js plus the runtime it loads (no templates/)
+  const p3 = path.join(HERE, "..", "console", "presets3d.js");
+  if (fs.existsSync(p3)) fs.copyFileSync(p3, path.join(out, "presets3d.js"));
+  const three = path.join(out, "three");
+  fs.rmSync(three, { recursive: true, force: true });
+  const cp = (src, dst) => {
+    fs.mkdirSync(dst, { recursive: true });
+    for (const e of fs.readdirSync(src, { withFileTypes: true })) {
+      if (e.name === "templates") continue;
+      if (e.isDirectory()) cp(path.join(src, e.name), path.join(dst, e.name));
+      else fs.copyFileSync(path.join(src, e.name), path.join(dst, e.name));
+    }
+  };
+  cp(STAGE, three);
   console.log(JSON.stringify({ ok: true, presets: all.length, families: fams.length, out: path.relative(process.cwd(), out) }, null, 2));
 } else if (cmd === "stills") {
   if (!args.out) die("--out <dir> required");
@@ -289,18 +305,40 @@ if (cmd === "validate") {
   if (args.family) all = all.filter((p) => p.family === args.family);
   const out = path.resolve(String(args.out));
   fs.mkdirSync(out, { recursive: true });
-  const js = fs.readFileSync(path.join(HERE, "..", "console", "presets.js"), "utf8");
+  const SKILL = path.join(HERE, "..");
+  const js = fs.readFileSync(path.join(SKILL, "console", "presets.js"), "utf8");
+  const p3 = path.join(SKILL, "console", "presets3d.js");
+  const js3 = fs.existsSync(p3) ? fs.readFileSync(p3, "utf8") : "";
   const per = 12, files = [];
-  for (let i = 0; i < all.length; i += per) {
-    const chunk = all.slice(i, i + per), n = files.length + 1;
-    const html = `<!doctype html><html><head><meta charset="utf-8"><script>${js}</script></head><body style="margin:0;background:#1b1b1f"><div id="o" style="display:grid;grid-template-columns:repeat(4,400px);gap:14px;padding:14px"></div><script>
+  // sheets are served over http (the 3D specimens fetch three.js and fonts), from the skill folder so ./stage3d is reachable
+  const srv = await serve(SKILL);
+  const tmpDir = fs.mkdtempSync(path.join(SKILL, ".sheets-"));
+  try {
+    for (let i = 0; i < all.length; i += per) {
+      const chunk = all.slice(i, i + per), n = files.length + 1, rows = Math.ceil(chunk.length / 4);
+      const html = `<!doctype html><html><head><meta charset="utf-8"><script>${js}</script>${js3 ? `<script>${js3}</script>` : ""}</head><body style="margin:0;background:#1b1b1f"><div id="o" style="display:grid;grid-template-columns:repeat(4,400px);gap:14px;padding:14px"></div><script>
 var d=${JSON.stringify(chunk)};RasaPresets.loadFonts(d);document.head.insertAdjacentHTML("beforeend",'<style>'+RasaPresets.css+'</style>');
-d.forEach(function(p){var e=document.createElement("div");e.style.cssText="width:400px";e.innerHTML='<div style="width:400px;height:225px;overflow:hidden"><div style="width:1600px;height:900px;transform:scale(.25);transform-origin:0 0">'+RasaPresets.render(p,{headline:${JSON.stringify(String(args.headline || "Tax season. Again."))}})+'</div></div><div style="font:600 13px system-ui;color:#ddd;padding:6px 2px">'+p.name+' <span style="color:#888">· '+p.family+'</span></div>';document.getElementById("o").appendChild(e)});
+if(window.RasaPresets3D)RasaPresets3D.base=${JSON.stringify(srv.url + "/stage3d/")};
+var H=${JSON.stringify(String(args.headline || "Tax season. Again."))};
+d.forEach(function(p){var e=document.createElement("div");e.style.cssText="width:400px";e.innerHTML='<div style="width:400px;height:225px;overflow:hidden"><div class="sc" style="width:1600px;height:900px;transform:scale(.25);transform-origin:0 0">'+RasaPresets.render(p,{headline:H})+'</div></div><div style="font:600 13px system-ui;color:#ddd;padding:6px 2px">'+p.name+' <span style="color:#888">· '+p.family+'</span></div>';document.getElementById("o").appendChild(e);
+ if(window.RasaPresets3D&&RasaPresets3D.has(p))RasaPresets3D.mount(e.querySelector(".rp-stage"),p,{headline:H})});
+window.__sheetReady=Promise.all([window.RasaPresets3D?RasaPresets3D.whenAll():0,document.fonts?document.fonts.ready:0]);
 </script></body></html>`;
-    const f = path.join(out, `sheet-${String(n).padStart(2, "0")}.html`);
-    fs.writeFileSync(f, html);
-    chromeScreenshot(`file://${f}`, f.replace(/\.html$/, ".png"), 1670, 14 + Math.ceil(chunk.length / 4) * 270, 9000);
-    files.push(path.relative(process.cwd(), f.replace(/\.html$/, ".png")));
+      const f = path.join(out, `sheet-${String(n).padStart(2, "0")}.html`);
+      fs.writeFileSync(f, html);
+      const tmpName = path.basename(tmpDir) + `/sheet-${n}.html`;
+      fs.writeFileSync(path.join(SKILL, tmpName), html);
+      const b = await launch({ width: 1670, height: 14 + rows * 270, timeoutMs: 120000 });
+      try {
+        await b.open(`${srv.url}/${tmpName}`);
+        await b.eval("window.__sheetReady.then(function(){ return true; })", { await: true });
+        fs.writeFileSync(f.replace(/\.html$/, ".png"), await b.screenshot());
+      } finally { await b.close(); }
+      files.push(path.relative(process.cwd(), f.replace(/\.html$/, ".png")));
+    }
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+    await srv.close();
   }
   console.log(JSON.stringify({ ok: true, sheets: files }, null, 2));
 } else {

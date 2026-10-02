@@ -6,7 +6,7 @@
 //   node video.mjs init    --route <route> --project <kebab-name> [--aspect 16:9] [--workspace .] [--project-dir <dir>]
 //   node video.mjs capture --project-dir <dir> (--url <https://...> | --no-capture --title "..." --text-file <brief.txt>)
 //   node video.mjs write   --project-dir <dir> --decisions <video-decisions.json> [--revise]
-//   node video.mjs inject  --project-dir <dir>        (after the workflow's frame-packets.mjs, before dispatching frame workers)
+//   node video.mjs inject  --project-dir <dir> [--runtime]  (after the workflow's frame-packets.mjs, before dispatching frame workers)
 //   node video.mjs audio-lock --project-dir <dir> --music <file>   (after audio.mjs fetch-sfx, before assemble-index)
 import fs from "node:fs";
 import path from "node:path";
@@ -111,7 +111,7 @@ if (cmd === "init") {
   // scenes the score puts in 3D get the Rasan3D runtime in the project (assets/three/)
   const sb = fs.existsSync(path.join(dir, "STORYBOARD.md")) ? fs.readFileSync(path.join(dir, "STORYBOARD.md"), "utf8") : "";
   let three = null;
-  if (/^- space: (3d|hybrid)\b/m.test(sb)) {
+  if (args.runtime || /^- space: (3d|hybrid)\b/m.test(sb)) {
     const { install } = await import("./lib/stage3d.mjs");
     three = install(dir);
   }

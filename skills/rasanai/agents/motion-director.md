@@ -19,6 +19,18 @@ You work in two passes. The **score pass** happens before the animatic. The **se
 - the craft: `references/craft.md` (§2 timing, §3 motion, §4 transitions, §6 camera; the floor, never the ceiling) and `references/vocabulary.md` (the named techniques with HTML/CSS/GSAP recipes)
 - for the seam pass: the built project `videos/<name>` and its `STORYBOARD.md`
 
+## A lyric video's score
+
+When the Dispatch context says `lyric_video`, the plates are decided and you score how they move. You also get the chosen treatment (`story/chosen-treatment.json`, and its words), `music/lyrics.json`, `music/audio.json` and `references/lyric-video.md`.
+
+- **Spine = the style bible's signal** (the one object that travels through every plate); **motifs = the treatment's**, each changing when it returns. `score.motif.scenes` lists the plates that carry them.
+- **Fixed by the plates, not yours to change:** each scene's `space`, `energy` and duration (the plate window); `crew.mjs check` warns when the score contradicts a plate's space or energy. Your work is what happens inside: shots on the beat grid, the camera, the 3D legs where the plate is `3d` or `hybrid`.
+- **Hook plates are one escalating set.** Score every return of a repeated line together, from the `change` fields: the same device each time and a bigger or stranger move; the third return is where the pattern breaks. Write the curve in `score.md` before the shots.
+- **Karaoke rules in every shot:** every word lands on its sung start, never ahead of the voice; an accent on each kick and snare onset the picture can afford; held notes held. Name the words that carry a hit as events (`t=` the word's start).
+- **Cuts on the last beat before a line:** each plate boundary is a downbeat, and the incoming plate's first word lands one beat or less after it; seams are designed pairs (`flat-to-depth` / `camera-through` into a 3D plate, a calm plate before a loud one).
+- **Check `low_confidence` before you lock hook words.** `lyrics.mjs align` lists the words whose time was inferred (`music/lyrics.json` has each word's `conf`). A word that carries a hit, a reveal or a hook return with `conf` under 0.5 is moved to a neighbour that was heard, or the Director is told to listen to it first; never score a hit on a word nobody checked.
+- Showreel moments come from the treatment's `show_off` and its named moves; at least one sits on a hook plate.
+
 ## Score pass: you return
 
 - `motion/score.json` (format below), checked by `crew.mjs check --role motion-director`

@@ -16,7 +16,7 @@ RasanAI decides everything creative; the HyperFrames workflow builds. The workfl
 | `embedded-captions` | Brief, Brand, Route, Direction, Look (caption identity), Plan | BRIEF.md with the style fields (`footage`) | render gate |
 | `motion-graphics` (single unit) | see SKILL.md "Single motion units" | `handoff.mjs` (references/handoff.md) | DISPATCH to every subagent · `obey` · render gate |
 
-`scenes.mjs` accepts the four story routes. `video.mjs init` runs `npx hyperframes init --skill=<route>` for every route except the footage routes, where it only creates the folder (their workflows set the project up from the footage).
+`scenes.mjs` accepts the four story routes; for `music-to-video` the scenes come from the chosen treatment instead (`treatment.mjs scenes --treatment story/chosen-treatment.json --lyrics music/lyrics.json --out scenes.json`: one scene per plate, durations from the plate windows, each carrying `plate`, `idiom`, `space`, `energy`, `start`, `end`, `lines` (indices into lyrics.json), `motifs`, `ground`; `references/lyric-video.md`). The track is not fitted or cut; the plates are cut to it. `video.mjs init` runs `npx hyperframes init --skill=<route>` for every route except the footage routes, where it only creates the folder (their workflows set the project up from the footage).
 
 ## scenes.json (input to scenes.mjs; also the Scenes panel's payload)
 
@@ -110,7 +110,10 @@ Everything a frame worker must honour is written **inside** its `## Frame N — 
 node $SKILL_DIR/scripts/video.mjs inject --project-dir videos/<name>                                  # after frame-packets.mjs
 node $SKILL_DIR/scripts/video.mjs audio-lock --project-dir videos/<name> --music videos/<name>/assets/music-bed.<ext>   # after fetch-sfx
 node $SKILL_DIR/scripts/obey.mjs --project videos/<name>                                              # after verify, before render
+node $SKILL_DIR/scripts/finish.mjs all --project videos/<name> --out <final.mp4>                      # the delivery render only: film-wide motion blur + one grade (references/finish.md); drafts use the workflow's render
 ```
+
+The finish replaces the workflow's own delivery render for the final: it renders the project itself (oversampled), so run it after the gates. Rasan3D scenes then set `motionBlur: false` (a whip-speed 3D move keeps shutter 0.25): `references/3d.md` §4.
 
 - `inject` upserts the contract into every `.hyperframes/frame-packets/NN.md` (not `_*`), refusing any packet that would pass the workflow's 48,000-byte cap. Re-running is safe.
 - `audio-lock` copies the track to `assets/music-bed.<ext>` and points the `bgm` entry of `audio_meta.json` / `audio_engine_meta.json` at it (volume 0.12 under narration, 0.9 without), clearing `bgm_pending`.

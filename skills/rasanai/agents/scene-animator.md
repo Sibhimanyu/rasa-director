@@ -52,6 +52,20 @@ Your scene lives in real space: build it with Rasan3D (`references/3d.md`, read 
 5. **Look at it**: `stage3d.mjs stills` at the landings, `crew.mjs strip` at 15 fps across the camera move (it shows the real motion blur), and compare the seam frames with the neighbour's. Then `stage3d.mjs check --file <your file>` until it exits 0.
 6. **Brag with the space.** Parallax that proves the depth, a rack focus that moves the eye, layers that separate and settle a few frames apart, a shadow that lands a frame after the object. Never the three.js demo: no spin in a void, no constant-speed orbit, no torus knot, no glow on everything.
 
+## A lyric video's scene (a plate)
+
+When the Dispatch context says `lyric_video`, your scene is a **plate** of a song and the words are part of the picture. You also get `music/lyrics.json` and `music/audio.json`, your plate's lines with their word timings (below the context), the chosen treatment (its style bible and your plate's idiom, space, energy and motifs) and `references/lyric-video.md`; `references/lyrics.md` has the music runtime calls.
+
+- **Load, then sync.** `RasanMusic.load(LYRICS, AUDIO)` before the timeline is built (the runtime is `assets/three/rasan-music.js`), find a line with `RasanMusic.lyrics.get('text of it')`, then `RasanMusic.gsapWords(tl, line, wordEls, {from, to, duration})` with `duration` a value from motion.md's duration scale (the tween still starts on the word's sung start). Sync every word with that or `RasanMusic.wordProgress`: a word appears or lights on its sung `start` and completes by its `end`; look words up through the timings, never by times typed into the scene. Nothing runs ahead of the voice (a dim anticipation of up to 0.4 s is fine; a highlight never is). Held notes get held type; fast words compress.
+- **Hits on the beat**: sub-cuts on `audio.json` beats and downbeats, accents on its kick and snare onsets; the scene's first and last frames sit on the plate's window (the cut is on a downbeat).
+- **The idiom is the instrument**: build the plate's named object or document (the treatment's `idiom`), with the line's `idea` as its joke or transformation, never a literal picture of the sentence. The words are written, typed, stamped, engraved: no subtitle laid over a background, no outline or halo, 96 px safe area.
+- **The signal and the motifs** appear as the treatment says; a motif returns changed. On a hook plate your `change` is the escalation: do exactly what it names, no more and no less, so the set of hook plates climbs.
+- Look at your strips across word starts (`crew.mjs strip` with `--at` the first word starts of two or three lines) to see each word land on its time.
+
+## Finishing with blur
+
+If the delivery render goes through `finish.mjs all` (it does for every Final; drafts skip it), the film gets one shutter on every scene: a Rasan3D scene sets `motionBlur: false`, except a whip-speed 3D move (above about 3 000 px/s on screen), which keeps `motionBlur: { shutter: 0.25 }`. In a 2D scene design a true whip with a stretch (`scaleX`) so its leading edge is not a hard rectangle (`references/finish.md`). The Director flips the flag at delivery; build the scene with the blur on so drafts read right.
+
 ## Never
 
 - Never idle motion (breathing, floating, pulsing, drifting) to fill time. Stillness is a choice.

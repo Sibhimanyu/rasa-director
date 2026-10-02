@@ -1,0 +1,93 @@
+# Finish: film-wide motion blur and one grade
+
+`scripts/finish.mjs` is the last step of a delivery render. It does two things to the whole film, whatever made each scene (DOM, GSAP, CSS, Lottie, Three, Rasan3D):
+
+1. **Blur**: real motion blur on every scene. HyperFrames renders at fps x samples (the oversampled render), then ffmpeg averages each frame's sub-frames across a shutter window centred on the frame time. Today only Rasan3D scenes blur (inside the stage); this makes a 2D card whip, a type slide and a 3D orbit all share one 180 degree shutter.
+2. **Grade**: per-frame film grain, halation, vignette, optional bloom and LUT, the same on every scene so cuts do not change the film's texture.
+
+Drafts skip it. Use it for the delivery render, after the gates pass.
+
+## Commands
+
+```bash
+# blur only
+node scripts/finish.mjs blur  --project <dir> --out film.mp4 [--fps 30] [--shutter 0.5] [--samples 8|auto] [--quality draft|delivery]
+# grade only (any mp4)
+node scripts/finish.mjs grade --in in.mp4 --out film.mp4 [--grain 0.03] [--halation 0.2] [--vignette 0.2] [--bloom 0] [--lut look.cube] [--probe x,y,w,h]
+# both in one ffmpeg pass (one encode, no intermediate generation loss): the delivery command
+node scripts/finish.mjs all   --project <dir> --out film.mp4 --samples 8 --grain 0.03 --halation 0.2 --vignette 0.2
+# brand-colour drift report for the current grade settings
+node scripts/finish.mjs patch-test --grain 0.03 --halation 0.2 --vignette 0.2
+```
+
+Extras: `--composition <file>` (render a file other than index.html), `--workers n`, `--crf 18` (delivery x264 CRF; `--quality draft` uses CRF 20, veryfast), `--seed n` (grain seed), `--keep` (keep the temp oversampled render). Every command prints JSON: frame counts (expected vs got), seconds per stage, size in KB, the window used.
+
+## Blur: how the window is aligned
+
+Sub-frame k is a point sample at time k / (fps x N). Output frame n sits at t = n / fps = sub-frame n x N. The window is M sub-frame intervals wide, M = round(shutter x N) rounded to an even number (min 2), so it is centred exactly on a sub-frame: it averages sub-frames n x N - M/2 ... n x N + M/2, the two end taps at half weight (a true box filter of the sub-frame signal, symmetric about t). Shutter 0.5, N = 8 gives M = 4: five taps, weights 0.5 1 1 1 0.5. The first and last frames clone their edge sub-frame so every window is full. In ffmpeg: `tpad` (clone P = M/2 each side), `tmix` with those weights, `trim` M frames, `select` every Nth, re-timestamp at fps. Audio is copied untouched from the oversampled render; video is x264, BT.709 tagged.
+
+Checked: sub-frame 8n of the oversampled render is pixel-identical to the normal render's frame n (so the grid is right), and the blurred card's centroid sits within 1 to 2 px of the sharp frame's centroid at the fastest frames (n = 38, 40: 1165.8 vs 1167.1, 1738.3 vs 1740.6). Frame count out equals frame count expected (90 of 90, 225 of 225); audio kept.
+
+### Limits and trade-offs
+
+- **HyperFrames renders at most 240 fps**, so one pass gives samples x fps <= 240 (8 at 30 fps). More samples come from phase-shifted passes (next section): `--samples 16|24|32` at 30 fps is 2, 3, 4 passes (at most 4: 32 at 30 fps). A count that is not a multiple of the per-pass count rounds up (12 becomes 16).
+- **Steps, not a smooth streak, at whip speed with one pass.** The streak is made of N+1 discrete copies spaced speed / (fps x N) apart: 8 samples at 30 fps is 1/240 s, so 10 000 px/s leaves ~42 px gaps (visible 5-band staircase on a 300 px card, but centred and with no double image), 3 000 px/s leaves 12 px (reads as a streak), typical UI motion under 1 500 px/s is smooth. Shortening the shutter does not help (spacing does not change). Use `--samples 32` for a whip (below). Gap with 32 samples at 30 fps is 1/960 s, 10 px at 10 000 px/s.
+- `shutter` is the fraction of a frame (0.5 = 180 degrees, the default; 0.35 for crisper, 0.75 for dreamier). The effective value (M/N) is reported.
+- `--samples auto`: one extra draft render at the base fps, then the mean frame-to-frame luma difference (`signalstats` YDIF, cuts above 20 ignored) picks 4 / 6 / 8 by its 95th percentile (< 0.5, < 2, else 8). Measured: the whip test reads 8.7 (picks 8); hfdemo read 1.3 at its 95th percentile with the draft pre-pass and 7.7 at the maximum (a scene change); the p95 rule picks 6 for it (the run reported above used an older max-based rule and rendered 8). The render is a single fps for the whole film, so auto picks one count per film, not per shot, and a calm film renders fewer sub-frames (6 instead of 8 is a quarter less) at the price of the draft pre-pass (about one normal render). For a short film just pass `--samples 8`.
+
+### More than 240 sub-frames per second: phase-shifted passes
+
+HyperFrames has no time-offset or frame-range option (checked `render --help` and the sub-composition docs), and it snaps its own seek time to the render-fps grid. So pass k (k = 0 .. K-1) renders a temporary copy of the project (top-level entries symlinked, only `index.html` rewritten) with a small script at the top of `<head>` that wraps every GSAP timeline registered in `window.__timelines` (the host's, every sub-composition's, and Rasan3D's clock tween) so its `seek/time/totalTime` get `+ k / (R x K)` seconds, applied after HyperFrames' snap. R = fps x per-pass samples. The passes are then interleaved with ffmpeg `interleave` (pass k frame i is sub-frame i x K + k, time (i x K + k) / (R x K)) into one stream at R x K and averaged exactly as before. Verified: a +0.1 s shift makes frame n show frame n+3.
+
+What is NOT shifted: CSS keyframe / WAAPI / Lottie / Anime animations, video and audio elements. Those still sample on the 240 fps grid in every pass, so a pass with only those moving gives duplicated sub-frames (no harm, no extra smoothness). GSAP-driven motion, the common case, and Rasan3D scenes are shifted.
+
+Measured on the whip test (card at about 10 000 px/s, 1080p): 32 samples = 4 passes, window 16 sub-frames, 17 taps. The streak is a continuous ramp (R values 16 31 40 51 68 ... 254 ... 62 47 32, no plateaus), centroids 1165.8 / 1738.7 / 1883.1 at frames 38 / 40 / 42 against the sharp frames' 1167.1 / 1740.6 / 1884.0, 90 of 90 frames, audio kept. hfdemo (sub-compositions plus a 3D scene) at 16 samples renders 225 of 225 frames with no judder or doubling.
+
+Cost: render time is K x the single-pass oversampled render, and tmix gets longer. Whip test: 4 passes 45 s + 20 s mix, against 9-11 s + 1.3 s for 8 samples. hfdemo at 16: 47 s render + 10 s mix (single pass 26.5 s + a few s). Multiplier against a normal render: about 3x per pass of 8 samples, so 16 is about 5 to 6x, 32 about 10 to 12x, before the grade. `--samples auto` now picks 4 / 6 / cap / 2 x cap / 4 x cap by the pre-pass p95 (< 0.5, < 2, < 4, < 8, else), but HyperFrames cannot render a frame range, so it is one count for the whole film: a film with one whip pays for 32 samples everywhere. For a mostly calm film with a few whips, prefer `--samples 8` for the film and render the whip scene alone at 32 if it matters.
+
+## Grade: what each part is
+
+Applied in this order (post.ts order, grain last so it sits on top), all in RGB at the source size:
+
+| Part | Method | Notes |
+|---|---|---|
+| LUT | `lut3d`, tetrahedral | optional `--lut look.cube`; place the film's look here |
+| Halation | luma threshold at 80%, two blurs (5 and 22 px at 1080p), tinted (1, 0.18, 0.04), added | only highlights glow; `--halation 0.2`; midtones get exactly 0 |
+| Bloom | same, threshold 65%, white, 14 and 48 px | `--bloom 0` default (off); 0.2 to 0.4 for a dreamy look |
+| Vignette | multiply by post.ts's mask `smoothstep(0.95, 0.25, len)`, mixed by `--vignette` | the centre 25% of the radius is untouched |
+| Grain | two scales (per-pixel 0.6 and 2x2 cells 0.4), one monochrome value on R, G, B, new every frame, seeded; amplitude x (0.55 + 1.2 l (1 - l)), so stronger in the midtones | `--grain 0.03`; post.ts's default is 0.055 (pdoom is a dark, gritty film); amplitude is calibrated to the ffmpeg build's measured noise |
+
+Colour handling: BT.709 limited in, gbrp full-range work, BT.709 limited out. Vignette multiplies in encoded (gamma) values, not linear light as post.ts does, so the falloff is a little steeper at the same setting. Grain is clamped (no wrap), zero-mean.
+
+### Brand colours do not move
+
+`patch-test` renders flat patches, grades them, and measures the mean over a 60x60 area for 12 frames. With the defaults (grain 0.03, halation 0.2, vignette 0.2):
+
+| patch | before | after | delta |
+|---|---|---|---|
+| blue #3a6ea5 (centre) | 55, 109, 163 | 55, 109, 163 | 0, 0, 0 |
+| red #c8392b (centre) | 198, 56, 41 | 198, 56, 41 | 0, 0, 0 |
+| green #3f9a5a (centre) | 63, 153, 87 | 63, 153, 87 | 0, 0, 0 |
+| blue near the corner | 55, 109, 163 | 51, 103, 155 | -4, -6, -8 (vignette, by design) |
+
+Grain measured on flat grey (126): mean 125.99, std 1.50 levels at grain 0.03 (target 1.35 plus 8-bit rounding), frame to frame different. Anything inside the central ~25% radius keeps its colour; toward the corners the vignette darkens by up to `vignette x 0.59`. Keep key brand colours (logo, CTA) out of the extreme corners, or set `--vignette 0`. `grade --probe x,y,w,h` reports the same before/after delta for any rectangle of a real film.
+
+## Cost (measured, 1080p, 30 fps, a busy shared machine)
+
+| project | normal render | oversampled render (x8) | blur mix + encode | grade (grain+halation+vignette) | `all` total |
+|---|---|---|---|---|---|
+| 3 s test (2 DOM/GSAP tweens, audio) | 11 s (mostly start-up) | 9-11 s (static frames are de-duplicated) | 1.3 s | ~8 s (90 frames) | 22 s |
+| hfdemo, 7.5 s, DOM + 3D scene | 10.7 s | 26.5 s (2.5x) | 27.8 s with grade | included | 64 s with `auto` (54 s with `--samples 8`) |
+
+Rules of thumb: the oversampled render costs 2 to 3x a normal render (HyperFrames reuses unchanged frames, so calm films cost less than 8x), the grade is the heavy ffmpeg part (grain: about 10 frames per second at 1080p, i.e. a 3 minute film at 30 fps spends about 9 minutes in the grade; `--grain 0` takes it to seconds), size grows with grain (a 3 s clip: 0.2 MB without grain, 5 MB with grain 0.03 at CRF 18; grain 0.05 at CRF 18 is 12 MB). Total, plan for about 5 to 6x a normal render for a short film. Use `--quality draft` only to preview the finish.
+
+## Rasan3D scenes and the finish
+
+Rasan3D blurs inside its own stage: it renders up to 24 sub-frames per frame (adaptive to the on-screen travel of the scene) across `motionBlur.shutter` of `1/fps`, where fps is the stage option (30), not the render rate. At the 240 fps oversampled render the stage still blurs each sub-frame over a full 180 degree shutter. The finish then averages 5 of those sub-frames over another shutter, so the two convolve: effective blur is about twice as wide (shutter 0.5 + 0.5 is a 360 degree look) and the 3D render does 8x the sampling work for it.
+
+Recommendation:
+
+- Finishing with blur: set `motionBlur: false` in the 3D scenes (`Rasan3D.stage({ motionBlur: false })`). The film then has one shutter on every scene, 2D and 3D alike, and the 3D scenes render faster. Anti-aliasing and depth of field are separate (they stay on).
+- Exception, a fast 3D move (on-screen travel above ~3 000 px/s, a whip orbit, a dolly through the text): the finish's 5 taps would step. Keep the stage's own blur but halve its shutter (`motionBlur: { shutter: 0.25 }`) and pass `--shutter 0.25`, or accept the double width as a stylistic choice. Both together are not broken, just wider and slower.
+- Drafts (no finish): leave Rasan3D's default blur on.
+- That the stage's blur is still active under oversampling follows from `samplesFor` and `fps` in `stage3d/rasan3d.js`; the combined look was not rendered separately.
