@@ -385,3 +385,29 @@ Rules and numbers in full: `references/sound.md`.
 | Mickey-Mousing | A sound for every motion. | A smell: sound at most the causal events, leave ≥ ⅓ unsounded. |
 | LUFS | Integrated loudness. | −14 LUFS ±1 for web and social; true peak ≤ −1 dBTP on the encoded file. |
 | See and say | Voice and picture naming the same thing at the same time. | Each noun the voice says is on screen within ±6 frames. |
+
+## 11. Real 3D (Rasan3D)
+
+Recipes for scenes the score puts in `3d` or `hybrid`. API, numbers and rules: `references/3d.md`. Camera keys are `[t, value, ease]`; world units are metres.
+
+| Term | What it is | Recipe |
+|---|---|---|
+| Flat-to-depth | The 2D scene's last frame is the 3D scene's first; then the flat thing lifts into space. | `const g = k.layout({ at: 0, distance: D })`; the object (`k.panel` with the same screenshot, unlit face) at the outgoing element's exact px rect (`g.userData.pxPerUnit`); hold 0.1–0.3 s, then a camera arc of 20–35° plus a 0.3–0.8 m crane on `power3.inOut`. |
+| Depth-to-flat | The 3D move lands exactly on the next 2D scene's first frame. | Lay the object out with `k.layout({ at: <end> })`; the camera's last key is that pose; hold 2+ frames before the cut. |
+| Camera-through | One camera move crosses the cut. | Scene N flies into an opening (a screen, a window, a letter's counter) on a wide lens (24–35 mm); scene N+1 opens moving the same direction at the same speed; cut at peak speed under motion blur. |
+| Exploded view | The real UI separated into its layers in depth. | Each layer a `k.panel` with its real screenshot, z offsets 0.05–0.3 m, separated in 0.6–1 s on the film's move ease, staggered 60–100 ms from the back; arc the camera 20–30°; close back as the line lands. |
+| Orbit / arc (3D) | The camera circles the subject. | `camera.pos: k.orbit({ center, radius, height, from: -15, to: 25, t0, t1, ease: "power2.inOut" })`, 15–60° per shot, eased, then held. Never a constant-speed 360°. |
+| Crane / pedestal | The camera rises or falls. | Raise `pos.y` and `target.y` together 0.3–1.5 m over 1.2–2.5 s on `power3.inOut`; reveals scale or arrival. |
+| Push-in (3D dolly) | The camera moves toward the subject. | `pos` along the view axis 10–30% of the distance; near objects grow faster than far ones (parallax). |
+| Dolly zoom | The subject holds its size while the background stretches. | Move `pos` back 40–80% while `lens` goes 35 → 85 mm (or the reverse), both on the same ease and window; once per film. |
+| Rack focus | Focus moves from one plane to another. | `fstop: 1.8–2.8`, `focus: [[t0, d1], [t1, d2, "power2.inOut"]]` over 0.4–0.8 s; the eye follows the sharp plane. |
+| Motion blur (3D) | Streaks on fast motion, like a real shutter. | On by default (`motionBlur: { shutter: 0.5 }`, a 180° shutter); samples adapt to how far things travel. Keep it on for whips and fly-throughs. |
+| Depth of field (3D) | Real lens blur in front of and behind the focus. | `camera.fstop`: 2–2.8 for a product hero, 4–5.6 for a readable UI slab; focus defaults to the target. |
+| Extruded logo | The official mark as a physical object. | `await k.svgUrl("assets/logo.svg", { width, depth: 2–6% of width, material })`; one key light; lands on the music's hit, its shadow settling a frame later. |
+| Extruded type | Real 3D type in the brand's font. | `await k.extrudeText("Word", { font: "assets/fonts/<brand>.ttf", size, depth: 0.2–0.35 × size, material })`; display only (never body text). |
+| Type in space | Flat type sitting on a surface in the world. | `k.text({...})` as a texture on a plane or a `k.panel` face; nothing under ~48 px on screen. |
+| Point cloud resolve | Points that assemble into the object. | `k.surfacePoints(mesh, 20000–80000, seed)`; each point from a seeded scatter to its surface position on `expo.out`, staggered from the centre; the solid mesh fades in under the last 10%. |
+| Pinned label | A 2D label riding on a 3D point. | `onDraw(t, k)`: `const p = k.toScreen(point)`; set the DOM element's transform to `p.x, p.y`; hide it when `!p.visible`. |
+| Shadow catcher | A shadow on the 2D ground under a 3D object. | `k.ground({ y })`: transparent, only the shadow; the key light's `dir` sets where it falls; agree with any 2D shadows. |
+| Light rig | One motivated key and what supports it. | `k.rig("three-point" \| "top-soft" \| "rim" \| "low-key" \| "window", { key, rim, dir })`. |
+

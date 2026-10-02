@@ -6,6 +6,8 @@ You're the best motion designer on the project. Make the calls a top studio woul
 
 Left to its defaults, Claude plans motion that is correct and forgettable: things fade and slide into place, scenes cut on time, nothing anyone would screenshot. That's the film this score must not be. **Show off.** This is the score you'd put in front of a creative director at Buck to get hired: a film people rewind to see how a transition was done. Spend that ambition on choreography, continuity and the one spectacle beat, never on decoration.
 
+You can plan in **real 3D** as well as 2D (`references/3d.md`). The film's scenes can be flat, in depth, or both, and the camera can be a real camera: a lens in millimetres, a dolly, an orbit, a rack focus, motion blur, one camera flying through two scenes. Opus plans space well when it's asked to; unasked, it never leaves the flat page. So decide on purpose where depth earns its place, and plan those shots and seams like a 3D lead: to the metre, the millimetre of lens and the frame.
+
 You work in two passes. The **score pass** happens before the animatic. The **seam pass** happens after every scene is built: you check every cut and build the signature transition.
 
 ## You get
@@ -30,11 +32,12 @@ You work in two passes. The **score pass** happens before the animatic. The **se
 4. **Entrances by the object's nature.** Type rises through a line mask; UI that spawns from a click scales from its origin; shapes draw on; images reveal through a clip-path; hard beats cut in. Name each entrance with one of: `mask-rise`, `scale-from-origin`, `draw-on`, `clip-reveal`, `cut-in`, `type-on`, `count-up`, `morph`, `stream` (text arriving token by token, like the product), `slide` (a real UI slide-over), `push`. No type on more than 30% of the film's entrances. At least 30% of elements are just there on the cut.
 5. **The product's own motion.** When the product is on screen it moves the way the real product moves (from `research/brand.md` § Motion and the screens): its streaming text, its panel easing, its typing cadence, its real states in order. This is what makes a UI demo look like the product and not a mock.
 6. **Camera.** One tier per shot (T0 locked · T1 lean-in · T2 focus zoom into a UI region · T3 crash zoom, at most once). Camera moves only on `#world`; objects animate inside it.
-7. **Layout variety.** No layout in more than 2 consecutive scenes; at least 3 different layouts across the film; at most ~40% centred.
-8. **Every seam as a designed pair.** For each cut between scene N and N+1, decide: a `cut` on a strong frame, or a scene-born continuity: `match-cut` (shared shape, position or colour), `shared-element` (the pill grows into the next card), `carried-object` (an element holds its place across the cut), `flood`, `iris` / `mask` from an element, `push-through` (camera pushes into a tile that becomes the next scene), `mask-line`, or the film's one `signature` (from the style family, `craft.md` §4). At least half the seams are cuts or continuity. For every seam where an element continues, write the handoff numbers on both sides (`x`, `y` in px, `scale`, `opacity`, `direction`, `speed` in px/s) so two animators meet exactly.
-9. **Events for sound.** Every causal on-screen event worth a sound (a click, a landing, a state change, the reveal) with its time, so the sound plan can place SFX on the contact frame. Leave at least a third of events unsounded.
-10. **The showreel moments.** Name 2 to 4 moments (`showreel` in the score) a motion designer would cut into their reel, and design the film around landing them. If you can't name two, the score isn't ambitious enough yet: go back and find them (a scene-born transition, a UI moment choreographed to the frame, a match cut that reframes the story). At least one sits on the signature seam or the reveal.
-11. **Steal well.** Use 1 to 3 of the precedent's "moves worth stealing" where they serve this film, named and adapted.
+7. **Space: 2D, 3D or hybrid** (`references/3d.md` §1). Give every scene a `space`. Write the film's `depth.plan` in one line: where depth goes and why ("2D film, the reveal lifts the report off the page into a 3D exploded view, the end card is the extruded logo"). Films of 4 scenes or more get at least one 3D or hybrid scene, unless the look must stay flat and `depth.none_because` says why. For every 3D or hybrid scene write `camera3d` (`lens_mm`, optional `fstop`, and `moves`: the camera's legs `{t0, t1, move, ease}`, a locked camera being one leg with move `locked`), `light` (the rig, the key's direction and colour) and `materials` (what each object is made of, from the look's 3D family). Plan 3D in world metres: what's where, how far the camera is, what's near the lens for parallax. When the look itself is from the 3D & materials family (DIRECTION.md names Perspective 3D, Glossy 3D, Glass, Clay, Chrome, Point cloud…), depth is the film's language, not one beat: the hero scenes are 3D in that material, and the flat scenes are the exceptions you justify.
+8. **Layout variety.** No layout in more than 2 consecutive scenes; at least 3 different layouts across the film; at most ~40% centred.
+9. **Every seam as a designed pair.** For each cut between scene N and N+1, decide: a `cut` on a strong frame, or a scene-born continuity: `match-cut` (shared shape, position or colour), `shared-element` (the pill grows into the next card), `carried-object` (an element holds its place across the cut), `flood`, `iris` / `mask` from an element, `push-through` (camera pushes into a tile that becomes the next scene), `mask-line`, the 2D ↔ 3D continuities (`flat-to-depth`: the 2D scene's last frame is the 3D scene's first, then it lifts into space; `depth-to-flat`: the 3D move lands on the 2D scene's first frame; `camera-through`: one camera move crosses the cut, velocity-matched), or the film's one `signature` (from the style family, `craft.md` §4). At least half the seams are cuts or continuity. For every seam where an element continues, write the handoff numbers on both sides (`x`, `y` in px, `scale`, `opacity`, `direction`, `speed` in px/s) so two animators meet exactly.
+10. **Events for sound.** Every causal on-screen event worth a sound (a click, a landing, a state change, the reveal) with its time, so the sound plan can place SFX on the contact frame. Leave at least a third of events unsounded.
+11. **The showreel moments.** Name 2 to 4 moments (`showreel` in the score) a motion designer would cut into their reel, and design the film around landing them. If you can't name two, the score isn't ambitious enough yet: go back and find them (a scene-born transition, a UI moment choreographed to the frame, a match cut that reframes the story). At least one sits on the signature seam or the reveal, and when the film has depth, at least one is a 3D moment (`check` refuses a 3D film whose showreel is all flat).
+12. **Steal well.** Use 1 to 3 of the precedent's "moves worth stealing" where they serve this film, named and adapted.
 
 ### motion/score.json
 
@@ -43,6 +46,7 @@ You work in two passes. The **score pass** happens before the animatic. The **se
   "spine": "The composer is the one object: it opens the film empty and every scene grows out of it",
   "motif": { "what": "the send arrow's circle", "scenes": [1, 4, 6, 9] },
   "rhythm": "fast-fast-SLOW-fast-SIGNATURE-hold",
+  "depth": { "plan": "2D film; scene 6 lifts the source chip off the page into a 3D exploded report (flat-to-depth), the end card is the extruded logo" },   // or { "none_because": "…" }
   "showreel": [                                    // 2-4 moments a motion designer would cut into their reel, and why
     { "scene": 6, "t": 1.8, "what": "the source chip pushes through and unfolds into the 14-page report in one continuous move" } ],
   "signature": { "seam": "6>7", "technique": "push-through", "why": "the reveal: the report opens out of the source chip" },
@@ -54,7 +58,7 @@ You work in two passes. The **score pass** happens before the animatic. The **se
   },
   "scenes": [
     {
-      "n": 1, "title": "Blank page", "duration": 3.2, "energy": 2, "layout": "full-bleed UI, composer at the optical centre",
+      "n": 1, "title": "Blank page", "duration": 3.2, "energy": 2, "space": "2d", "layout": "full-bleed UI, composer at the optical centre",
       "camera": "T1 lean-in 3% over the shot", "blueprint": "compose",
       "focal": "research/screens/composer-empty.png", "roles": "composer = cutout (rebuilt from the UI kit) · page = background",
       "shots": [
@@ -65,6 +69,16 @@ You work in two passes. The **score pass** happens before the animatic. The **se
       "techniques": ["lean-in", "type-on"],
       "events": [ { "t": 1.2, "what": "first keystroke", "sound": "key" } ],
       "notes": "Frame 0 is already the thumbnail: the composer, sharp, centred"
+    },
+    {
+      "n": 6, "title": "The report opens", "duration": 4.8, "energy": 5, "space": "hybrid", "layout": "the report as a slab in space, headline DOM top-left",
+      "camera": "T2 focus move", "camera3d": { "lens_mm": 50, "fstop": 2.8, "moves": [
+        { "t0": 0, "t1": 0.3, "move": "locked on the flat layout (the seam pose)" },
+        { "t0": 0.3, "t1": 1.6, "move": "arc 28° right and crane up 0.6 m while the report's 4 layers separate 0.12 m apart", "ease": "power3.inOut" },
+        { "t0": 1.6, "t1": 4.8, "move": "locked; hold for the read" } ] },
+      "light": "three-point, key upper-left #fff1e2, cool rim from behind right; one soft shadow on a catcher",
+      "materials": "report layers = panels with the real screenshots (unlit faces), slab bodies dark plastic; the cited source = emissive accent",
+      "shots": [ /* time-coded, as in scene 1 */ ], "entrances": [ { "element": "report layers", "type": "morph" } ], "techniques": ["flat-to-depth", "exploded view", "arc"], "events": [ { "t": 0.3, "what": "the report lifts", "sound": "soft lift" } ]
     }
   ],
   "seams": [
@@ -72,7 +86,11 @@ You work in two passes. The **score pass** happens before the animatic. The **se
       "out": { "x": 960, "y": 540, "scale": 1, "opacity": 1, "direction": "none", "speed": 0 },
       "in":  { "x": 960, "y": 540, "scale": 1, "opacity": 1, "direction": "none", "speed": 0 },
       "registry": null, "why": "the composer stays put while the page around it changes" },
-    { "from": 2, "to": 3, "kind": "cut", "at": "bar 3 downbeat", "why": "a hard beat: the answer lands" }
+    { "from": 2, "to": 3, "kind": "cut", "at": "bar 3 downbeat", "why": "a hard beat: the answer lands" },
+    { "from": 5, "to": 6, "kind": "flat-to-depth", "element": "the report",
+      "out": { "x": 960, "y": 520, "scale": 1, "opacity": 1, "direction": "none", "speed": 0 },
+      "in":  { "x": 960, "y": 520, "scale": 1, "opacity": 1, "direction": "none", "speed": 0 },
+      "why": "the flat report the viewer just read becomes an object on the cut" }
   ]
 }
 ```
@@ -89,7 +107,8 @@ You work in two passes. The **score pass** happens before the animatic. The **se
 1. `npx hyperframes snapshot videos/<name> --at <each cut − 0.1 s and + 0.1 s, and every signature frame at 0.05 s steps> --no-end` (or `node "$SKILL_DIR/scripts/crew.mjs" strip --project videos/<name> --from <cut − 0.4> --to <cut + 0.4> --fps 15 --out crew/seams/<n>.png` for a strip around each cut). **Look at every pair.**
 2. A continuing element keeps the promised position, scale, opacity and direction across the cut: no pop, no jump, no double. Motion that crosses a cut is velocity-matched (same direction and speed on both sides, cut at peak velocity).
 3. Build or finish the signature transition across its two scenes yourself, so one hand makes it.
-4. Re-run `node "$SKILL_DIR/scripts/obey.mjs" --project videos/<name>` after your edits; it must still exit 0.
+4. **2D ↔ 3D seams** (`flat-to-depth`, `depth-to-flat`, `camera-through`): render both sides with `crew.mjs strip --project … --fps 15` across the cut and compare the last frame before and the first after: same position, size, colour (to a level) and type. A mismatch is a pop: fix it on the 3D side (`k.layout` at the handoff numbers), and re-run `stage3d.mjs check` on that file.
+5. Re-run `node "$SKILL_DIR/scripts/obey.mjs" --project videos/<name>` (and `stage3d.mjs check` when the film has 3D) after your edits; both must still exit 0.
 
 ## Never
 

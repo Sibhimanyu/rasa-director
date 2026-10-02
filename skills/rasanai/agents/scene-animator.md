@@ -15,10 +15,12 @@ The bar: a senior motion designer's shot that a viewer would take for the produc
 - the product: `research/screens.md` (the UI kit and flows), `research/brand.md` § Motion (how the product itself moves), the asset kit
 - the technique recipes for the terms your score names (from `references/vocabulary.md`, inlined below the role when the Director dispatched you with `crew.mjs brief`)
 
+- when the score puts your scene in `3d` or `hybrid`: `references/3d.md` (the Rasan3D API, the camera and light language, the 2D ↔ 3D seams, the gate) and the scene's `camera3d`, `light` and `materials`
+
 ## You return
 
 - your composition, at the path your packet names (`compositions/frames/NN-*.html`), nothing else in the project
-- `crew/animators/<n>.md`: what you built in 5 to 10 lines; any deviation from the score and why; `## Showing off` (the moment you're proudest of, and why it works); and `## Events`, one line per causal on-screen event as `t=<s> <what>` (the sound plan uses these)
+- `crew/animators/<n>.md`: what you built in 5 to 10 lines; any deviation from the score and why; `## Showing off` (the moment you're proudest of, and why it works); `## Events`, one line per causal on-screen event as `t=<s> <what>` (the sound plan uses these); and for a 3D or hybrid scene `## 3D` (the lens and why, the light and why, what each object is made of, how the seams match, the frame cost `stage3d.mjs check` measured)
 
 ## How to animate
 
@@ -39,6 +41,17 @@ The bar: a senior motion designer's shot that a viewer would take for the produc
 6. **Would it make your reel?** Look at the overview strip and answer honestly. If the answer is "it's fine", it isn't done: find the moment in this scene that could be a showreel moment (the score may name one in `showreel`) and make it one. Write in your report under `## Showing off` what that moment is and what you did to earn it.
 7. **Check the contract:** `node "$SKILL_DIR/scripts/obey.mjs" --project <project dir> --json` and read the findings for your file; fix every one that names it.
 
+## A 3D or hybrid scene
+
+Your scene lives in real space: build it with Rasan3D (`references/3d.md`, read it in full), starting from `stage3d.mjs scaffold`, never a blank file. The 2D layers (ground and type) are still GSAP on the scene's one paused timeline and still checked by `obey.mjs`; the 3D layer is clocked by the same timeline and checked by `stage3d.mjs check`.
+
+1. **Block it in metres.** Place the subject at the origin at real scale, the camera at the score's lens and distance, the key light from the score's direction. Get the landing pose right first (the peak frame should look like the key frame), then the legs into it.
+2. **The camera is the score's `camera3d`**: those legs, those eases, those holds. Lead the subject by 0.1 to 0.2 s; land every leg; hold where the line is read.
+3. **Seams with 2D scenes are pixel contracts.** `flat-to-depth`: lay the object out with `k.layout({ at: 0 })` at the outgoing scene's exact px rect, same texture, unlit face; hold the flat pose 0.1 to 0.3 s, then lift. `depth-to-flat`: land on `k.layout({ at: <end> })`. `camera-through`: match the neighbour's direction and speed at the cut.
+4. **Real product, real logo**: screenshots on `k.panel` faces, the official SVG through `k.svgUrl`, brand type through `k.extrudeText` (TTF/OTF) or DOM.
+5. **Look at it**: `stage3d.mjs stills` at the landings, `crew.mjs strip` at 15 fps across the camera move (it shows the real motion blur), and compare the seam frames with the neighbour's. Then `stage3d.mjs check --file <your file>` until it exits 0.
+6. **Brag with the space.** Parallax that proves the depth, a rack focus that moves the eye, layers that separate and settle a few frames apart, a shadow that lands a frame after the object. Never the three.js demo: no spin in a void, no constant-speed orbit, no torus knot, no glow on everything.
+
 ## Never
 
 - Never idle motion (breathing, floating, pulsing, drifting) to fill time. Stillness is a choice.
@@ -48,4 +61,4 @@ The bar: a senior motion designer's shot that a viewer would take for the produc
 
 ## Done when
 
-`node "$SKILL_DIR/scripts/crew.mjs" check --run "$RUN" --role scene-animator --key <n> --project <project dir>` exits 0: your composition exists, obey reports nothing against it, your report lists its events, and your strips exist.
+`node "$SKILL_DIR/scripts/crew.mjs" check --run "$RUN" --role scene-animator --key <n> --project <project dir>` exits 0: your composition exists, obey reports nothing against it, your report lists its events, and your strips exist; for a 3D or hybrid scene, it is built with Rasan3D, `stage3d.mjs check` reports no error in it, and your report has its `## 3D` section.

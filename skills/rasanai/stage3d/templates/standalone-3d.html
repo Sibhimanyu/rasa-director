@@ -1,0 +1,48 @@
+<!doctype html>
+<!--
+  {{FRAME_ID}}: a key frame drawn in 3D (Rasan3D), standalone. The still is the scene's peak (PEAK below):
+  the same build() and pose() the animator will animate, so the approved frame and the built scene match.
+  Render it with design.mjs stills (it waits for the 3D build). Reference: references/3d.md.
+-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    html, body { margin: 0; background: {{CANVAS}}; }
+    #root { position: relative; width: {{W}}px; height: {{H}}px; overflow: hidden; background: {{CANVAS}}; }
+    #gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #ui { position: absolute; inset: 0; }
+    #line { position: absolute; left: 160px; top: 168px; font: 700 88px/1.02 sans-serif; letter-spacing: -0.02em; color: {{INK}}; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+</head>
+<body>
+  <div id="root" data-width="{{W}}" data-height="{{H}}">
+    <canvas id="gl"></canvas>
+    <div id="ui"><div id="line">The line this shot lands.</div></div>
+  </div>
+  <script src="assets/three/rasan3d.js"></script>
+  <script>
+    const D = {{DURATION}}, PEAK = D * 0.7, W = {{W}}, H = {{H}};
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = window.__timelines || {};
+    window.__timelines["{{FRAME_ID}}"] = tl;
+    Rasan3D.stage({
+      id: "{{FRAME_ID}}", canvas: "#gl", timeline: tl, duration: D, width: W, height: H,
+      camera: { pos: [[0, [3.2, 2.1, 7.4]]], target: [[0, [0.2, 0.15, 0]]], lens: [[0, 40]], fstop: 2.8 },
+      environment: "studio", post: { bloom: { strength: 0.35, threshold: 1.2 }, grain: 0.025, vignette: 0.18 },
+      async build(k) {
+        k.rig("three-point", { key: "#fff1e2", dir: [-0.55, 0.85, 0.65] });
+        k.ground({ y: -2.2 });
+        const face = k.text({ text: "Real UI goes here", size: 54, weight: 600, color: "{{INK}}", width: 1100, height: 660, background: "#1a1c22", align: "center" });
+        const panel = k.panel({ width: 4.4, height: 2.64, depth: 0.12, radius: 0.18, texture: face });
+        panel.rotation.set(0.12, -0.42, 0);
+        k.scene.add(panel);
+        return { panel };
+      },
+      pose(t, k) {},
+    });
+    tl.seek(PEAK);
+  </script>
+</body>
+</html>

@@ -127,7 +127,7 @@ Everything obeys `motion.md` (the style's motion language: eases, duration scale
   | Style family | Signature |
   |---|---|
   | Editorial, Swiss, print | mask wipe; color-field push |
-  | Product depth, 3D, device | zoom-through |
+  | Product depth, 3D, device | zoom-through; in real 3D, `camera-through` (one camera move crosses the cut) or `flat-to-depth` (`references/3d.md` §6) |
   | Bold, pop, neo-brutalist | hard color-block wipe; flash frame |
   | Acid, cyber, glitch | glitch cut, 4–8 frames (only if the concept is glitch) |
   | Collage, paper, zine | paper tear; cut-out slide |
@@ -204,7 +204,7 @@ At least 3 clear sizes in the system, display at least 2.5× the body, at least 
 | T2 focus zoom | screen-studio zoom into a UI region | 1.3–2.5× so the action fills ≥ 60% of the width, 0.6–0.9 s `power3.inOut`, then hold locked | each UI beat; back to 1× before the next target or the cut |
 | T3 crash zoom | impact punch-in | 1.5–2× in 0.15–0.25 s `expo.in`, optional 1–2 frame flash | once per film, on the spectacle beat |
 
-A dolly (per-layer depth factors, parallax) feels spatial; a zoom (uniform scale) feels flat and graphic. Choose by style. When the style has depth, use 3 planes (background ×0.2, content ×1, foreground ×3–6) and at most one heavily blurred foreground occluder (20–30 px) that actually passes in front of the content.
+A dolly (per-layer depth factors, parallax) feels spatial; a zoom (uniform scale) feels flat and graphic. Choose by style. When the scene needs real space (an object to turn, layers in depth, a camera that travels, a flat card that becomes an object), build it in real 3D with Rasan3D: a lens in mm, camera legs that land, one motivated key light, true motion blur and depth of field (`references/3d.md`). The camera language above still holds there; the tiers become real camera moves. When the style has depth, use 3 planes (background ×0.2, content ×1, foreground ×3–6) and at most one heavily blurred foreground occluder (20–30 px) that actually passes in front of the content.
 
 **Lighting is a design tool, even in flat graphics.** Every scene has one named, motivated source with a direction and a color ("key from upper-left, warm #ffd9a8; cool rim from behind right"), and every gradient, highlight, rim and shadow agrees with it. Flat-graphic styles have no light model, but their shadows still share one direction. Pick the light from the taxonomy's `lighting` dimension (the style's pick, or Claude's from the style when unpicked) and build it with the recipes in `references/vocabulary.md`: a key is a directional gradient overlay at 8–18% soft-light, a rim a 1–2 px inner highlight on the far edge, a specular sweep one pass of 0.4–0.8 s at a landing. Glow or bloom at most once per film, on one hero element, for 2 s or less, motivated by a source or a "power on" beat; never on body text or UI chrome.
 
@@ -255,6 +255,7 @@ Every tell is a default left in place, uniformity, an effect without a cause, or
 | Extended heavy grotesk plus an italic-serif "accent word" | The style's own pairing; one emphasis device, once. |
 | Orange / cream / electric blue / black with hard switches | The style's palette; full-bleed switches only in its own colors. |
 | Particle galaxy or torus, 3D cube-grid wave, truchet tiles [particles] | One element from the story that moves for a reason. |
+| The three.js demo: a lone object spinning in a void, a constant-speed orbit, flat light with no rim or shadow, a torus knot, rainbow normals, a neon grid floor [stage3d: linear-drift, never-rests, stock-primitive, placeholder-material] | The product or the film's own object, blocked at real scale, one motivated key, a lens chosen for the shot, camera legs that land and hold (`references/3d.md`). |
 | "Name." lockup with a colored period | The brand's own lockup. |
 | Centered text on a soft gradient or blurred-blob background [centered-everything] | Anchor to the grid; a flat field or the style's surface; asymmetric layouts. |
 | The post-purple "Claude look": cream ground, rust accent, italic serif with a highlighted word, tracked eyebrows, ticker bars | Not a fallback palette. Italic or highlighted emphasis once per film at most; no ticker unless the idea is literally a feed. |
@@ -343,16 +344,16 @@ Run these before the render question, in order. Never report a gate as passed if
 
 1. **Grounding pass.** List every visible string, number, price, name and logo in the built film with its source (the capture, a screenshot, the brief, the truth sheet's native words and proof). Anything without a source is removed or replaced with a sourced one; an open question goes to the console (`console.mjs ask`), never into the film. Also check for leaked labels and placeholders.
 2. **Look at the frames yourself.** Render stills at frame 0; mid-scene (60–70% into each scene); mid-transition (each seam's midpoint); 0.1 s before and 0.2 s after every cut; and the final frame. **Read the PNGs.** Check: the focal point is obvious (squint test); type sizes and safe areas; no text collisions, clipping, widows or typos; contrast; one accent; layout variety across the sheet; no pop across cuts (continuing elements keep position, scale, opacity and direction); nothing from the Anti-slop tables. Without this loop the output is confident garbage.
-3. **Automated checks.** `node scripts/obey.mjs --project videos/<name>` (the motion contract); `node scripts/slop.mjs --project videos/<name> [--video <render.mp4>]` (these tells, reading time, dead air, black opening, loudness); the sound checks in `references/sound.md` (loudness, true peak, SFX budget, sync, tail). Fix every error; only the user can waive one.
+3. **Automated checks.** `node scripts/obey.mjs --project videos/<name>` (the motion contract); `node scripts/stage3d.mjs check --project videos/<name>` (every 3D scene: seek-safe, not blank, eased on the contract, blurred where it moves, comes to rest, renderable); `node scripts/slop.mjs --project videos/<name> [--video <render.mp4>]` (these tells, reading time, dead air, black opening, loudness); the sound checks in `references/sound.md` (loudness, true peak, SFX budget, sync, tail). Fix every error; only the user can waive one.
 4. **Clean-context critic.** Dispatch the crew's critic (`agents/critic.md`, lenses `frames`, `motion`, `grounding`, `film`; `crew.mjs brief --role critic --key <lens>-<round>`), a subagent with no conversation history. Give it only the stills and contact sheet, the draft render if there is one, `DIRECTION.md`, the film's one-sentence message and this rubric. It **defaults to reject** and scores 1–10:
    - **Design:** composition, hierarchy, type, color discipline, layout variety.
    - **Readability:** at phone size, reading time, contrast.
    - **Narrative:** hook in 2 s or less, value before evidence, the turn, the device clear by second 4, the ending.
    - **Brand:** real product, exact colors and fonts, the grounding pass holds.
-   - **Motion and sound:** eases by role, no idle motion, cut sync, SFX causality.
+   - **Motion and sound:** eases by role, no idle motion, cut sync, SFX causality; in 3D, lens, light and camera legs that land, and 2D ↔ 3D seams that match.
 
    It returns the 3–5 worst problems, each with a timestamp or frame number and an exact fix ("the card lands 6 frames early; delay it to frame 44"). Ship when every score is 8 or more. At most 2 fix passes; anything left goes to the render gate as fix-or-waive.
-5. **Report the gates** in the render-gate message: obey, slop and sound status, the critic's scores, and any waivers.
+5. **Report the gates** in the render-gate message: obey, stage3d, slop and sound status, the critic's scores, and any waivers.
 
 ---
 

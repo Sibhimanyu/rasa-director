@@ -175,12 +175,19 @@ if (cmd === "looks") {
   const files = fs.readdirSync(dir).filter((f) => f.endsWith(".html")).sort();
   if (!files.length) die(`no .html style frames in ${args.dir}`);
   const [AW, AH] = normalizeAspect(args.aspect || "16:9").split("x").map(Number);
-  const out = files.map((f) => {
+  const out = [], problems = [];
+  for (const f of files) {
     const t = fs.readFileSync(path.join(dir, f), "utf8");
     const w = Number((t.match(/data-width="(\d+)"/) || [])[1]) || AW, h = Number((t.match(/data-height="(\d+)"/) || [])[1]) || AH;
     const png = path.join(dir, f.replace(/\.html$/, ".png"));
-    chromeScreenshot(`file://${path.join(dir, f)}`, png, w, h, 5000);
-    return path.relative(process.cwd(), png);
-  });
-  console.log(JSON.stringify({ ok: true, images: out }, null, 2));
+    if (/Rasan3D\.stage\s*\(/.test(t)) {
+      // a key frame drawn in 3D: wait for the scene to build before capturing it
+      const { pageStill } = await import("./lib/stage3d.mjs");
+      const r = await pageStill(path.join(dir, f), png, w, h);
+      for (const e of r.errors || []) problems.push(`${f}: ${e}`);
+    } else chromeScreenshot(`file://${path.join(dir, f)}`, png, w, h, 5000);
+    out.push(path.relative(process.cwd(), png));
+  }
+  console.log(JSON.stringify({ ok: !problems.length, images: out, ...(problems.length ? { problems } : {}) }, null, 2));
+  if (problems.length) process.exit(2);
 } else die("usage: design.mjs looks|pick|stills (see the header)");

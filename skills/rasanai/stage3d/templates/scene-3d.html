@@ -1,0 +1,97 @@
+<template>
+  <!--
+    {{FRAME_ID}}: a hybrid 2D + 3D scene (Rasan3D). Three layers, back to front:
+      #r3-{{FRAME_ID}}-ground   2D: the frame's ground (a clip), and anything the 3D world flies over
+      #r3-{{FRAME_ID}}-gl       3D: the Rasan3D canvas (transparent where nothing is drawn)
+      #r3-{{FRAME_ID}}-ui       2D: type, labels and callouts, crisp, animated with GSAP as usual
+    Element ids are r3-<frame_id>-<name>: unique across parallel frames, and they start with a letter so they work as
+    CSS selectors (a frame id like 04-reveal starts with a digit).
+    The paused GSAP timeline is the clock for both: 2D tweens go on it, and the 3D stage draws from its time.
+    Replace the placeholder world below with the score's shots. Eases here are placeholders: use motion.md's.
+    Reference: references/3d.md (camera, light, materials, the 2D <-> 3D seams, the gate).
+  -->
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #r3-{{FRAME_ID}}-ground { position: absolute; inset: 0; background: {{CANVAS}}; }
+    #r3-{{FRAME_ID}}-gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #r3-{{FRAME_ID}}-ui { position: absolute; inset: 0; pointer-events: none; }
+    #r3-{{FRAME_ID}}-line { position: absolute; left: 160px; top: 168px; overflow: hidden; }
+    #r3-{{FRAME_ID}}-line span { display: block; font: 700 88px/1.02 sans-serif; letter-spacing: -0.02em; color: {{INK}}; }
+    #r3-{{FRAME_ID}}-pin { position: absolute; left: 0; top: 0; font: 600 22px/1 sans-serif; color: {{INK}}; white-space: nowrap; }
+    #r3-{{FRAME_ID}}-pin i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: {{ACCENT}}; margin-right: 12px; vertical-align: 1px; }
+  </style>
+
+  <div id="root" data-composition-id="{{FRAME_ID}}" data-width="{{W}}" data-height="{{H}}" data-duration="{{DURATION}}">
+    <div id="r3-{{FRAME_ID}}-ground" class="clip" data-start="0" data-duration="{{DURATION}}" data-track-index="0"></div>
+    <canvas id="r3-{{FRAME_ID}}-gl" class="clip" data-start="0" data-duration="{{DURATION}}" data-track-index="1"></canvas>
+    <div id="r3-{{FRAME_ID}}-ui" class="clip" data-start="0" data-duration="{{DURATION}}" data-track-index="2">
+      <div id="r3-{{FRAME_ID}}-line"><span>The line this shot lands.</span></div>
+      <div id="r3-{{FRAME_ID}}-pin"><i></i>a label pinned to a point in 3D</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="assets/three/rasan3d.js"></script>
+  <script>
+    const FID = "{{FRAME_ID}}", D = {{DURATION}}, W = {{W}}, H = {{H}};
+    const $ = (name) => document.getElementById(`r3-${FID}-${name}`);
+    const tl = gsap.timeline({ paused: true });
+
+    // ---- 2D: type on the GSAP timeline, eased by motion.md (the motion contract checks these)
+    tl.fromTo($("line").querySelector("span"), { yPercent: 105 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, D * 0.55);
+
+    window.__timelines[FID] = tl;
+
+    // ---- 3D: the stage draws from tl's time on every seek
+    Rasan3D.stage({
+      id: FID, canvas: $("gl"), timeline: tl, duration: D, width: W, height: H, fps: 30,
+      // camera keys: [t, value, ease arriving at that key]. Lens in mm (full frame); roll in degrees.
+      camera: {
+        pos: [[0, [0, 0, 12]], [D * 0.15, [0, 0, 12]], [D * 0.55, [3.2, 2.1, 7.4], "power3.inOut"]],
+        target: [[0, [0, 0, 0]], [D * 0.55, [0.2, 0.15, 0], "power3.inOut"]],
+        lens: [[0, 50], [D * 0.55, 40, "power3.inOut"]],
+        roll: [[0, 0]],
+        fstop: 2.8, // real depth of field around the focus distance (default: the target)
+      },
+      motionBlur: { shutter: 0.5 }, // a 180° shutter; samples adapt to how far things travel
+      environment: "studio", toneMapping: "neutral", exposure: 1,
+      post: { bloom: { strength: 0.35 }, grain: 0.02 }, // grain and bloom touch only what the 3D layer draws
+
+      async build(k) {
+        const { THREE } = k;
+        k.rig("three-point", { key: "#fff1e2", dir: [-0.55, 0.85, 0.65], shadowSize: 6 });
+        k.ground({ y: -2.2 }); // a shadow catcher: the 2D ground shows through, the shadow lands on it
+
+        // The 2D <-> 3D seam: a group in composition pixels on the plane the camera sees at t = 0.
+        // Laid out here, the panel covers exactly these pixels at the start, so this scene can open on the
+        // previous (2D) scene's last frame and then pull the same object into depth.
+        const flat = k.layout({ at: 0, distance: 12 });
+        const face = k.text({ text: "Real UI goes here\n(k.image('assets/…png'))", size: 54, weight: 600, color: "{{INK}}", width: 1100, height: 660, background: "#1a1c22", align: "center", valign: "middle", lineHeight: 1.3 });
+        const ppu = flat.userData.pxPerUnit; // pixels per world unit at that plane
+        const panel = k.panel({ width: 1100 / ppu, height: 660 / ppu, depth: 0.12, radius: 0.18, texture: face });
+        panel.position.set(0, 0, 0);
+        k.scene.add(panel);
+
+        const marker = new THREE.Mesh(new THREE.SphereGeometry(0.07, 32, 16), k.material("emissive", { color: "{{ACCENT}}", intensity: 3 }));
+        marker.position.set(1.9, 1.05, 0.2);
+        k.scene.add(marker);
+        return { panel, marker };
+      },
+
+      // pose(t): set every animated property from t alone (seek-safe; the gate re-renders out of order)
+      pose(t, k) {
+        const { panel } = k.objects;
+        panel.rotation.y = k.at(t, [[D * 0.15, 0], [D * 0.55, -0.42, "power3.inOut"]]);
+        panel.rotation.x = k.at(t, [[D * 0.15, 0], [D * 0.55, 0.12, "power3.inOut"]]);
+      },
+
+      // after each frame: pin 2D to 3D (labels, leader lines) from the same pose
+      onDraw(t, k) {
+        const p = k.toScreen(k.objects.marker.position);
+        const el = $("pin");
+        el.style.transform = `translate(${(p.x + 18).toFixed(1)}px, ${(p.y - 11).toFixed(1)}px)`;
+        el.style.opacity = String(k.prog(t, D * 0.6, D * 0.72, "power2.out"));
+      },
+    });
+  </script>
+</template>

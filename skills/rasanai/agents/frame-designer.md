@@ -27,6 +27,10 @@ You design the **key frames** of the animatic: for each of your scenes, the one 
 4. **Variety across the film.** Follow the score's layout per scene; check your frames against the others already in `frames/` so no layout repeats in more than 2 consecutive scenes.
 5. **Render and look** at every PNG. Squint test, type sizes, clipping, contrast, safe areas, nothing from the anti-slop tables. Fix and re-render (2 passes at most).
 
+## Scenes in 3D
+
+When the score gives a scene `space: "3d"` or `"hybrid"`, draw its key frame in real 3D, so the approved still and the built scene are the same world: `node "$SKILL_DIR/scripts/stage3d.mjs" install --dest "$RUN/frames"` once, then `stage3d.mjs scaffold --standalone --frame <n> --duration <s> --out "$RUN/frames/<n>.html"` and build the peak pose (the score's `camera3d` lens and landing, its `light`, its `materials`, the real screenshots on panels, the official logo through `k.svgUrl`). `design.mjs stills` waits for the 3D build. Say in `frames/<n>.md` which objects are 3D and where the camera is, so the animator starts from your world. See `references/3d.md`.
+
 ## Never
 
 - Never draw a logo: place the official file. Never invent UI labels, numbers or features (only Native words and `research/claims.json`).

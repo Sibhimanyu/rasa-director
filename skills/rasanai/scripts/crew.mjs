@@ -242,7 +242,7 @@ function contextFor(run, role, key, plan) {
       break;
     case "motion-director":
       Object.assign(ctx, { pass: key === "seams" ? "seams" : "score", length_s: B.length_s, aspect: B.aspect });
-      for (const [l, p] of [["script", R(run, "story", "chosen.json")], ["scenes", R(run, "scenes.json")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["motion.md", R(run, "motion.md")], ["music plan", R(run, "music", "plan.json")], ["screens", research("screens.md")], ["assets", research("assets.json")], ["brand", research("brand.md")], ["precedent", research("precedent.md")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["vocabulary", path.join(SKILL_DIR, "references", "vocabulary.md")]]) I(l, p);
+      for (const [l, p] of [["script", R(run, "story", "chosen.json")], ["scenes", R(run, "scenes.json")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["motion.md", R(run, "motion.md")], ["music plan", R(run, "music", "plan.json")], ["screens", research("screens.md")], ["assets", research("assets.json")], ["brand", research("brand.md")], ["precedent", research("precedent.md")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["vocabulary", path.join(SKILL_DIR, "references", "vocabulary.md")], ["3d playbook", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
       if (key === "seams") {
         if (!pj) die("the seam pass needs --project <videos/name>");
         Object.assign(ctx, { project: rel(pj) });
@@ -255,7 +255,7 @@ function contextFor(run, role, key, plan) {
     case "frame-designer": {
       const [a, b] = String(key || "").split("-").map(Number);
       Object.assign(ctx, { scenes: a && b ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : key, aspect: B.aspect });
-      for (const [l, p] of [["score", R(run, "motion", "score.json")], ["score.md", R(run, "motion", "score.md")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["scenes", R(run, "scenes.json")], ["screens", research("screens.json")], ["ui kit", research("screens.md")], ["assets", research("assets.json")], ["logo", research("brand", "assets")], ["craft", path.join(SKILL_DIR, "references", "craft.md")]]) I(l, p);
+      for (const [l, p] of [["score", R(run, "motion", "score.json")], ["score.md", R(run, "motion", "score.md")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["scenes", R(run, "scenes.json")], ["screens", research("screens.json")], ["ui kit", research("screens.md")], ["assets", research("assets.json")], ["logo", research("brand", "assets")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["3d playbook (for scenes the score puts in 3D)", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
       for (const n of ctx.scenes || []) { O(R(run, "frames", `${n}.html`)); O(R(run, "frames", `${n}.png`)); O(R(run, "frames", `${n}.md`)); }
       break;
     }
@@ -264,7 +264,9 @@ function contextFor(run, role, key, plan) {
       const n = Number(key);
       const packets = path.join(pj, ".hyperframes", "frame-packets");
       const packet = exists(packets) ? fs.readdirSync(packets).find((f) => new RegExp(`^0*${n}[-_.]`).test(f) && f.endsWith(".md")) : null;
-      Object.assign(ctx, { scene: n, project: rel(pj) });
+      const sc3 = ((jsonMaybe(R(run, "motion", "score.json")) || {}).scenes || []).find((x) => Number(x.n) === n) || {};
+      Object.assign(ctx, { scene: n, project: rel(pj), space: sc3.space || "2d" });
+      if (is3d(sc3)) I("3d playbook", path.join(SKILL_DIR, "references", "3d.md"));
       for (const [l, p] of [["technical role", path.join(packets, "_role.md")], ["frame packet", packet ? path.join(packets, packet) : null], ["DISPATCH.md", path.join(pj, "DISPATCH.md")], ["frame.md", path.join(pj, "frame.md")], ["motion.md", path.join(pj, "motion.md")], ["key frame", path.join(pj, "assets", "keyframes", `${n}.png`)], ["key frame note", R(run, "frames", `${n}.md`)], ["score", R(run, "motion", "score.json")], ["ui kit", research("screens.md")], ["brand motion", research("brand.md")], ["assets", research("assets.json")]]) I(l, p);
       O(`${rel(path.join(pj, "compositions", "frames"))}/${packet ? packet.replace(/\.md$/, ".html") : `${String(n).padStart(2, "0")}-*.html`}`);
       O(R(run, "crew", "animators", `${n}.md`)); O(R(run, "crew", "animators", `${n}-overview.png`)); O(R(run, "crew", "animators", `${n}-move.png`));
@@ -274,7 +276,7 @@ function contextFor(run, role, key, plan) {
       const [lens, round] = String(key || "film-1").split("-");
       Object.assign(ctx, { lens, round: Number(round) || 1 });
       if (pj) ctx.project = rel(pj);
-      const common = [["craft", path.join(SKILL_DIR, "references", "craft.md")], ["precedent", research("precedent.md")], ["direction", R(run, "direction", "DIRECTION.md")]];
+      const common = [["craft", path.join(SKILL_DIR, "references", "craft.md")], ["3d playbook", path.join(SKILL_DIR, "references", "3d.md")], ["precedent", research("precedent.md")], ["direction", R(run, "direction", "DIRECTION.md")]];
       const byLens = {
         frames: [["key frames", R(run, "frames")], ["scenes", R(run, "scenes.json")], ["score", R(run, "motion", "score.md")], ["screens", research("screens.json")]],
         motion: [["score", R(run, "motion", "score.json")], ["project", pj], ["motion.md", pj && path.join(pj, "motion.md")]],
@@ -317,12 +319,12 @@ function vocabularyFor(terms) {
 // Claude does its best motion work when it's told to show off. Every creative prompt ends on that ask: the last
 // thing a member reads, after the inputs, so it isn't lost under them.
 const DARES = {
-  "motion-director": "Show off. Don't score the safe film you'd make by default: score the one a top studio would put on its reel, with 2 to 4 moments people rewind to see how they were done, landed by choreography and continuity, not by effects. The critics will reject a competent score that nobody would remember.",
-  seams: "Show off at the seams. A cut that merely doesn't pop is the minimum. Make the signature transition the best two seconds of the film, and make the continuity seams so clean the viewer only notices them on the second watch.",
-  "scene-animator": "Show off. This scene is going on your reel. Your first version will be the safe one (things fade and slide in, the UI appears, the text types): throw that instinct out and build the shot another motion designer would freeze-frame to work out how you did it, inside motion.md and the anti-slop rules. Then look at your strips and ask whether it's reel-worthy. If it's only fine, it isn't done.",
-  "frame-designer": "Show off. Each still should be good enough to be the poster for the film. Competent and centred is the default you're here to beat.",
+  "motion-director": "Show off. Don't score the safe film you'd make by default: score the one a top studio would put on its reel, with 2 to 4 moments people rewind to see how they were done, landed by choreography and continuity, not by effects. You can plan in real 3D as well as 2D, and Opus is genuinely good at it: blocking a scene in metres, choosing a lens for a reason, lighting it with one motivated key, flying one camera through two scenes, lifting a flat card into depth on the exact frame of the cut. Use that. Decide where depth earns its place (the reveal, the signature seam, the moment the product becomes an object) and plan those seams to the pixel and the frame. Prove you can plan transitions and space better than the default ever would. The critics will reject a competent score that nobody would remember.",
+  seams: "Show off at the seams. A cut that merely doesn't pop is the minimum. Make the signature transition the best two seconds of the film, and make the continuity seams so clean the viewer only notices them on the second watch. Where 2D meets 3D, the frames on both sides must match to the pixel and the colour: that exact match is the trick people rewind to see.",
+  "scene-animator": "Show off. This scene is going on your reel. Your first version will be the safe one (things fade and slide in, the UI appears, the text types; in 3D, an object turning in a void under a flat light): throw that instinct out and build the shot another motion designer would freeze-frame to work out how you did it, inside motion.md and the anti-slop rules. If your scene has depth, brag with it: a lens chosen for a reason, light that agrees with itself, a camera move that lands, motion blur on the fast frames, a seam that matches the 2D scene to the pixel. Then look at your strips and ask whether it's reel-worthy. If it's only fine, it isn't done.",
+  "frame-designer": "Show off. Each still should be good enough to be the poster for the film. Competent and centred is the default you're here to beat. For scenes the score puts in 3D, draw the key frame in real 3D (Rasan3D, references/3d.md): the lens, the light and the material are the poster.",
   "script-writer": "Show off. Two other writers are pitching against you. Write the script that wins the room, with at least one moment only motion could tell, not the one that merely passes the checks.",
-  critic: "Be the push. Competent is a fail: Claude's unpushed default is clean, tidy and forgettable, and you are the reason it doesn't ship. Score ambition honestly and, wherever the work played it safe, say exactly how it could have shown off.",
+  critic: "Be the push. Competent is a fail: Claude's unpushed default is clean, tidy and forgettable, and you are the reason it doesn't ship. Score ambition honestly and, wherever the work played it safe, say exactly how it could have shown off: in 2D, and in space (a scene that should have had depth, a 3D shot that looks like the three.js demo, a 2D-to-3D seam that pops).",
 };
 
 function promptFor(run, role, key, plan) {
@@ -359,6 +361,13 @@ function promptFor(run, role, key, plan) {
       const terms = [...(sc ? sc.techniques || [] : []), ...seams.map((s) => s.kind), ...((sc && sc.entrances) || []).map((e) => e.type), sc && sc.camera ? String(sc.camera).replace(/^T\d\s*/, "") : ""].filter(Boolean);
       const vocab = vocabularyFor(terms);
       if (vocab) extra += `\n\n## Technique recipes (from references/vocabulary.md)\n\n${vocab}`;
+      if (is3d(sc)) {
+        const pj2 = projectDir(run);
+        const pk = pj2 && exists(path.join(pj2, ".hyperframes", "frame-packets")) ? fs.readdirSync(path.join(pj2, ".hyperframes", "frame-packets")).find((f) => new RegExp(`^0*${n}[-_.]`).test(f) && f.endsWith(".md")) : null;
+        const fid = pk ? pk.replace(/\.md$/, "") : `<frame_id>`;
+        const S3 = `node "${path.join(SKILL_DIR, "scripts", "stage3d.mjs")}"`;
+        extra += `\n\n## Your scene is ${sc.space === "3d" ? "3D" : "hybrid 2D + 3D"}\n\nRead \`references/3d.md\` in full before you write a line: it is the API, the camera and light language, the 2D ↔ 3D seams and the gate. Build it with Rasan3D, from the template, never from a blank file:\n\n\`\`\`bash\n${S3} install --project "${ctx.project}"\n${S3} scaffold --project "${ctx.project}" --frame ${fid} --duration ${sc.duration} --canvas "<frame.md canvas>" --ink "<ink>" --accent "<accent>"\n${S3} stills --file ${ctx.project}/compositions/frames/${fid}.html --at <the peak and each landing> --out ${rel(R(run, "crew", "animators", `${n}-3d`))}\n${S3} check --project "${ctx.project}" --file ${ctx.project}/compositions/frames/${fid}.html\n\`\`\`\n\nThe score's \`camera3d\` (lens and legs), \`light\` and \`materials\` are your brief. Your seams with 2D neighbours are pixel contracts (flat-to-depth / depth-to-flat: \`k.layout\` at the handoff numbers). Strips (\`crew.mjs strip\`) of this file wait for the 3D build and show the real motion blur. Report a \`## 3D\` section: the lens and why, the light and why, what each object is made of, how the seams match, and the frame cost the gate measured.`;
+      }
     }
   }
   if (role === "motion-director" && key !== "seams") {
@@ -391,8 +400,11 @@ function claimsProblems(file, min, label) {
   return p;
 }
 const ENTRANCES = ["mask-rise", "scale-from-origin", "draw-on", "clip-reveal", "cut-in", "type-on", "count-up", "morph", "stream", "slide", "push"];
-const SEAM_KINDS = ["cut", "match-cut", "shared-element", "carried-object", "flood", "iris", "mask", "push-through", "mask-line", "signature", "whip", "zoom-through", "smash-cut", "dissolve"];
-const CONTINUITY = new Set(["match-cut", "shared-element", "carried-object", "flood", "iris", "mask", "push-through", "mask-line"]);
+const SEAM_KINDS = ["cut", "match-cut", "shared-element", "carried-object", "flood", "iris", "mask", "push-through", "mask-line", "flat-to-depth", "depth-to-flat", "camera-through", "signature", "whip", "zoom-through", "smash-cut", "dissolve"];
+const CONTINUITY = new Set(["match-cut", "shared-element", "carried-object", "flood", "iris", "mask", "push-through", "mask-line", "flat-to-depth", "depth-to-flat", "camera-through"]);
+// 2D <-> 3D: every scene has a space; 3D and hybrid scenes are built with Rasan3D (references/3d.md)
+const SPACES = ["2d", "3d", "hybrid"];
+const is3d = (s) => s && (s.space === "3d" || s.space === "hybrid");
 const HANDOFF = ["x", "y", "scale", "opacity", "direction", "speed"];
 
 function checkScore(run) {
@@ -432,6 +444,20 @@ function checkScore(run) {
         if (!String(sh.primary || "").trim()) W.push(`scene ${n} shot ${j + 1}: no primary mover named`);
       });
     }
+    if (!SPACES.includes(s.space)) P.push(`scene ${n}: space must be "2d", "3d" or "hybrid" (where does this scene live: flat, in depth, or both?)`);
+    if (is3d(s)) {
+      const c = s.camera3d || {};
+      if (!(Number(c.lens_mm) > 0)) P.push(`scene ${n} (${s.space}): camera3d.lens_mm (the focal length, full frame) is missing`);
+      const legs = Array.isArray(c.moves) ? c.moves : [];
+      if (!legs.length) P.push(`scene ${n} (${s.space}): camera3d.moves needs the camera's legs [{t0, t1, move, ease}] (a locked camera is one leg: move "locked")`);
+      legs.forEach((l, j) => {
+        if (!(Number(l.t1) > Number(l.t0)) || !String(l.move || "").trim()) P.push(`scene ${n} camera leg ${j + 1}: needs t0 < t1 and a move`);
+        if (String(l.move || "") !== "locked" && !String(l.ease || "").trim()) P.push(`scene ${n} camera leg ${j + 1}: needs a named ease (motion.md's)`);
+        if (/^(none|linear)$/i.test(String(l.ease || ""))) P.push(`scene ${n} camera leg ${j + 1}: a constant-speed camera is the screensaver look: ease it and land it`);
+      });
+      if (!String(s.light || "").trim()) P.push(`scene ${n} (${s.space}): light is missing (the rig, the key's direction and colour: "rim, key upper-left #fff1e2, warm rim from behind right")`);
+      if (!String(s.materials || "").trim()) P.push(`scene ${n} (${s.space}): materials is missing (what each object is made of, from the look's 3D family)`);
+    }
     if (!String(s.layout || "").trim()) P.push(`scene ${n}: no layout`);
     if (!String(s.camera || "").trim()) P.push(`scene ${n}: no camera tier`);
     if (/^\s*T3/i.test(String(s.camera || ""))) t3++;
@@ -443,6 +469,12 @@ function checkScore(run) {
     for (const ev of s.events || []) if (!(Number(ev.t) >= 0 && (!(dur > 0) || Number(ev.t) <= dur + 0.05))) P.push(`scene ${n}: event "${ev.what}" at ${ev.t}s is outside the scene`);
   }
   if (t3 > 1) P.push(`${t3} crash zooms (T3): at most one per film`);
+  // the depth plan: where 3D goes and why (or why not)
+  const deep = S.filter(is3d);
+  const dp = score.depth || {};
+  if (!String(dp.plan || "").trim() && !String(dp.none_because || "").trim()) P.push('depth: say where 3D goes in this film and why (depth.plan), or why it stays flat (depth.none_because)');
+  if (N >= 4 && !deep.length && !String(dp.none_because || "").trim()) P.push(`no 3D or hybrid scene in a ${N}-scene film: give the reveal or the signature seam real space (references/3d.md §1), or say in depth.none_because why this look must stay flat`);
+  if (deep.length && !reel.some((m) => is3d(S[Number(m.scene) - 1]))) P.push("the film has 3D but none of its showreel moments is in a 3D or hybrid scene: the depth should be one of the moments people rewind");
   const animated = entr.filter((e) => e !== "cut-in");
   if (animated.length >= 6) {
     const counts = {};
@@ -477,6 +509,9 @@ function checkScore(run) {
       }
     }
     if (!String(s.why || "").trim()) W.push(`${id}: no reason given`);
+    const A = S[Number(s.from) - 1], B = S[Number(s.to) - 1];
+    if (A && B && (is3d(A) !== is3d(B)) && s.kind === "cut") W.push(`${id}: a hard cut between a 2D and a 3D scene; flat-to-depth, depth-to-flat or a shared element would carry the viewer across (references/3d.md §6)`);
+    if (["flat-to-depth", "depth-to-flat", "camera-through"].includes(s.kind) && A && B && !is3d(A) && !is3d(B)) P.push(`${id}: ${s.kind} needs a 3D or hybrid scene on at least one side`);
   });
   if (score.signature && score.signature.seam && !seams.some((s) => `${s.from}>${s.to}` === String(score.signature.seam))) P.push(`signature.seam "${score.signature.seam}" is not one of the seams`);
   const sigs = sig || (score.signature && score.signature.seam ? 1 : 0);
@@ -676,6 +711,24 @@ function checkRole(run, role, key) {
         if (so.length < 40) P.push(`crew/animators/${n}.md needs "## Showing off": the moment in this scene that would make your reel, and what you did to earn it`);
       }
       for (const s of ["overview", "move"]) if (!exists(R(run, "crew", "animators", `${n}-${s}.png`))) P.push(`no ${s} strip (crew/animators/${n}-${s}.png): look at your motion`);
+      const sc3 = ((jsonMaybe(R(run, "motion", "score.json")) || {}).scenes || []).find((x) => Number(x.n) === n);
+      if (is3d(sc3)) {
+        const html = readMaybe(path.join(dir, file));
+        if (!/Rasan3D\.stage\s*\(/.test(html)) P.push(`the score puts scene ${n} in ${sc3.space}, but ${file} has no Rasan3D stage (build it from stage3d.mjs scaffold; references/3d.md)`);
+        else {
+          const g = spawnSync(process.execPath, [path.join(SKILL_DIR, "scripts", "stage3d.mjs"), "check", "--project", pj, "--file", path.join(dir, file), "--json"], { encoding: "utf8", env: { ...process.env, RASANAI_QUIET: "1" }, timeout: 300000 });
+          let gj = null;
+          try { gj = JSON.parse(g.stdout); } catch {}
+          if (!gj) P.push("stage3d.mjs check could not run on the scene");
+          else {
+            const ge = (gj.findings || []).filter((x) => x.severity === "error");
+            if (ge.length) P.push(`stage3d.mjs check: ${ge.length} error(s) in ${file} (first: ${ge[0].rule}${ge[0].track ? " on " + ge[0].track : ""}: ${ge[0].message})`);
+            if ((gj.could_not_run || []).length) P.push(`stage3d.mjs check could not run: ${gj.could_not_run[0]}`);
+          }
+        }
+        const d3 = report ? (report.split(/^##\s+3D\b/mi)[1] || "").split(/^##\s/m)[0].trim() : "";
+        if (d3.length < 60) P.push(`crew/animators/${n}.md needs a "## 3D" section: the lens and why, the light and why, the materials, how the seams match, the frame cost`);
+      }
       const r = spawnSync(process.execPath, [path.join(SKILL_DIR, "scripts", "obey.mjs"), "--project", pj, "--json"], { encoding: "utf8", env: { ...process.env, RASANAI_QUIET: "1" } });
       let j = null;
       try { j = JSON.parse(r.stdout); } catch {}
@@ -716,7 +769,7 @@ const VD = "<!-- rasanai:video-direction -->", VDEND = "<!-- /rasanai:video-dire
 function scoreIntoStoryboard(sbText, score) {
   const fmt = (h) => (h ? `${h.element ? h.element + " · " : ""}x ${h.x} · y ${h.y} · scale ${h.scale} · opacity ${h.opacity} · direction ${h.direction} · speed ${h.speed} px/s` : null);
   const vd = score.video_direction || {};
-  const vdBlock = `${VD}\n## Video direction\n\n- palette system: ${vd.palette || ""}\n- motion grammar + reveal model: ${vd.motion_grammar || ""}\n- rhythm / held-frame allocation: ${score.rhythm ? score.rhythm + "; " : ""}${vd.holds || ""}\n- spine: ${score.spine || ""}${score.motif ? `\n- motif: ${score.motif.what} (frames ${(score.motif.scenes || []).join(", ")})` : ""}${score.signature ? `\n- signature: ${score.signature.technique} at ${score.signature.seam} (${score.signature.why || ""})` : ""}${(score.showreel || []).length ? `\n- showreel moments (land these; they are why the film exists): ${score.showreel.map((m) => `frame ${m.scene}${m.t != null ? ` at ${m.t}s` : ""}: ${m.what}`).join("; ")}` : ""}\n- negative list: ${(vd.negative || []).join("; ")}; no slideshow (front-load then freeze), no screensaver (everything floating)\n\nScored by RasanAI's Motion Director (motion/score.json): the shot sequences, handoffs and transitions below are the approved visual design. Do not rewrite them.\n${VDEND}\n`;
+  const vdBlock = `${VD}\n## Video direction\n\n- palette system: ${vd.palette || ""}\n- motion grammar + reveal model: ${vd.motion_grammar || ""}\n- rhythm / held-frame allocation: ${score.rhythm ? score.rhythm + "; " : ""}${vd.holds || ""}\n- spine: ${score.spine || ""}${score.depth && (score.depth.plan || score.depth.none_because) ? `\n- depth (2D / 3D): ${score.depth.plan || `flat: ${score.depth.none_because}`}` : ""}${score.motif ? `\n- motif: ${score.motif.what} (frames ${(score.motif.scenes || []).join(", ")})` : ""}${score.signature ? `\n- signature: ${score.signature.technique} at ${score.signature.seam} (${score.signature.why || ""})` : ""}${(score.showreel || []).length ? `\n- showreel moments (land these; they are why the film exists): ${score.showreel.map((m) => `frame ${m.scene}${m.t != null ? ` at ${m.t}s` : ""}: ${m.what}`).join("; ")}` : ""}\n- negative list: ${(vd.negative || []).join("; ")}; no slideshow (front-load then freeze), no screensaver (everything floating)\n\nScored by RasanAI's Motion Director (motion/score.json): the shot sequences, handoffs and transitions below are the approved visual design. Do not rewrite them.\n${VDEND}\n`;
   let t = sbText.replace(new RegExp(`${VD}[\\s\\S]*?${VDEND}\\n*`, "g"), "").replace(new RegExp(`\\n?${MARK}[\\s\\S]*?${END}\\n?`, "g"), "\n");
   // the video direction goes right before the first frame
   const first = t.search(/^## Frame 1 — /m);
@@ -746,6 +799,10 @@ function scoreIntoStoryboard(sbText, score) {
       sin && (sin.element || CONTINUITY.has(sin.kind)) ? `- handoff_in: ${fmt({ element: sin.element, ...(sin.in || {}) })} (${sin.kind} from frame ${n - 1})` : null,
       sout && (sout.element || CONTINUITY.has(sout.kind)) ? `- handoff_out: ${fmt({ element: sout.element, ...(sout.out || {}) })} (${sout.kind} into frame ${n + 1})` : null,
       `- camera: ${s.camera}`,
+      `- space: ${s.space || "2d"}${is3d(s) ? " (build with Rasan3D: references/3d.md)" : ""}`,
+      is3d(s) && s.camera3d ? `- camera3d: ${s.camera3d.lens_mm} mm${s.camera3d.fstop ? ` f/${s.camera3d.fstop}` : ""}; ${(s.camera3d.moves || []).map((l) => `${Number(l.t0).toFixed(1)}–${Number(l.t1).toFixed(1)}s ${l.move}${l.ease ? ` (${l.ease})` : ""}`).join("; ")}` : null,
+      is3d(s) && s.light ? `- light: ${s.light}` : null,
+      is3d(s) && s.materials ? `- materials: ${s.materials}` : null,
       `- energy: ${s.energy}/5`,
       "",
       ...(s.shots || []).map((sh, j) => `Scene ${j + 1} (${Number(sh.t0).toFixed(1)}–${Number(sh.t1).toFixed(1)}s): ${sh.on_screen}. ${sh.moves}${sh.primary ? ` (primary: ${sh.primary})` : ""}${j === 0 ? ` — ${s.layout}` : ""}`),
@@ -958,7 +1015,15 @@ if (cmd === "plan") {
   else if (args.file && args.file !== true) {
     const f = path.resolve(String(args.file));
     if (!exists(f)) die(`not found: ${f}`);
-    res = /\.(mp4|mov|webm|m4v|mkv)$/i.test(f) ? videoAt(f, T, dir) : renderCompositionAt(f, T, dir);
+    if (/\.(mp4|mov|webm|m4v|mkv)$/i.test(f)) res = videoAt(f, T, dir);
+    else if (/Rasan3D\.stage\s*\(|assets\/three\/rasan3d\.js/.test(fs.readFileSync(f, "utf8"))) {
+      // a 3D scene builds asynchronously: render it in one browser that waits for the build, with its real motion blur
+      const { stills } = await import("./lib/stage3d.mjs");
+      const r = await stills(f, T, dir, str(args.quality) || "final");
+      const bad = (r.ready.stages || []).filter((x) => x.error);
+      if (bad.length) die(`the 3D scene failed to build: ${bad.map((x) => `${x.id}: ${x.error}`).join("; ")}`);
+      res = { files: r.files, W: r.W, H: r.H };
+    } else res = renderCompositionAt(f, T, dir);
   } else die("--file <composition.html | video> or --project <dir>");
   sheet(res.files, res.W, res.H, outPng, Number(args.cols) || 6);
   if (!exists(outPng)) die("the sheet did not render");

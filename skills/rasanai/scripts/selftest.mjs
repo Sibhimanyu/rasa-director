@@ -20,6 +20,8 @@
 // 12. anti-slop: a project full of AI-video tells fails with fixes; a clean one passes
 // 13. sound: analyze/fit/render/check on a synthetic 120 BPM track, needs_longer, loop detection, SFX rules
 // 14. the crew: plan, prompt files, the score check, the score into STORYBOARD.md, local search + inventory, motion strips
+// 15. 3D: the Rasan3D runtime installs, a scaffolded scene builds, is seek-safe and passes the gate; planted
+//     nondeterminism, a linear drift and an ease outside motion.md are caught; strips and key frames wait for the build
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -585,7 +587,10 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   const good = {
     spine: "the receipt", motif: { what: "the total", scenes: [1, 2, 4] }, showreel: [{ scene: 2, t: 3.8, what: "the receipt folds into the ledger row" }, { scene: 3, t: 0.4, what: "the push-through reveal" }], rhythm: "fast-SLOW-fast-hold", signature: { seam: "2>3", technique: "push-through", why: "the reveal" },
     video_direction: { palette: "p", motion_grammar: "g", holds: "h", negative: ["no drift"] },
+    depth: { plan: "2D film; the reveal (scene 3) lifts the ledger into depth" },
     scenes: [3, 4, 2.5, 3].map((d, i) => ({ n: i + 1, title: `S${i + 1}`, duration: d, energy: [2, 3, 5, 2][i], layout: ["full-bleed", "split", "centered", "asymmetric 60/40"][i], camera: "T1 lean-in",
+      space: i === 2 ? "hybrid" : "2d",
+      ...(i === 2 ? { camera3d: { lens_mm: 50, fstop: 2.8, moves: [{ t0: 0, t1: 0.3, move: "locked" }, { t0: 0.3, t1: 1.6, move: "arc 28° right", ease: "power3.inOut" }] }, light: "three-point, key upper-left", materials: "ledger = panel with the real screenshot" } : {}),
       shots: [{ t0: 0, t1: d / 2, on_screen: "a", moves: "rises", primary: "a" }, { t0: d / 2, t1: d, on_screen: "b", moves: "holds", primary: "b" }],
       entrances: [{ element: "a", type: "cut-in" }, { element: "b", type: ["mask-rise", "type-on", "scale-from-origin", "draw-on"][i] }], events: [{ t: 0.5, what: "tap", sound: "tap" }] })),
     seams: [{ from: 1, to: 2, kind: "shared-element", element: "receipt", out: H, in: H, why: "w" }, { from: 2, to: 3, kind: "signature", why: "w" }, { from: 3, to: 4, kind: "cut", why: "w" }],
@@ -604,6 +609,22 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   put(bad);
   const b = C(["check", "--run", run, "--role", "motion-director", "--key", "score"]);
   ok("crew: the score check catches a half-stated handoff, a changed duration, a flat energy curve and no showreel moments", b.status === 2 && /in: missing speed/.test(b.stdout) && /scenes\.json says 4s/.test(b.stdout) && /no peak/.test(b.stdout) && /showreel names 0/.test(b.stdout), b.stdout.slice(0, 500));
+  // space: a 4-scene film with no depth (and no reason) is refused; a 3D scene without its camera, light and materials too
+  const flat = JSON.parse(JSON.stringify(good));
+  flat.scenes.forEach((x) => { x.space = "2d"; delete x.camera3d; delete x.light; delete x.materials; });
+  delete flat.depth;
+  put(flat);
+  const fl = C(["check", "--run", run, "--role", "motion-director", "--key", "score"]);
+  ok("crew: a 4-scene score with no depth plan and no 3D scene is refused (the push into space)", fl.status === 2 && /depth: say where 3D goes/.test(fl.stdout) && /no 3D or hybrid scene/.test(fl.stdout), fl.stdout.slice(0, 400));
+  flat.depth = { none_because: "a strict Swiss print style: depth would break the grid" };
+  put(flat);
+  ok("crew: a flat film is accepted when depth.none_because says why", C(["check", "--run", run, "--role", "motion-director", "--key", "score"]).status === 0);
+  const no3 = JSON.parse(JSON.stringify(good));
+  delete no3.scenes[2].camera3d; delete no3.scenes[2].light;
+  no3.showreel = [{ scene: 1, t: 1, what: "a" }, { scene: 2, t: 1, what: "b" }];
+  put(no3);
+  const n3 = C(["check", "--run", run, "--role", "motion-director", "--key", "score"]);
+  ok("crew: a 3D scene needs its lens, camera legs and light, and a 3D film needs a 3D showreel moment", n3.status === 2 && /camera3d\.lens_mm/.test(n3.stdout) && /light is missing/.test(n3.stdout) && /none of its showreel moments is in a 3D/.test(n3.stdout), n3.stdout.slice(0, 500));
   put(good);
   // the score into a storyboard written by scenes.mjs (parsed by the workflow's parser when installed), twice: same file
   const proj = path.join(ws, "videos", "tally");
@@ -616,6 +637,7 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   C(["storyboard", "--run", run, "--project", proj]);
   const t2 = fs.existsSync(path.join(proj, "STORYBOARD.md")) ? fs.readFileSync(path.join(proj, "STORYBOARD.md"), "utf8") : "";
   ok("crew: storyboard writes the score as the visual design (video direction, shots, handoffs, transition_in), idempotent", sc.status === 0 && s1.status === 0 && t1 === t2 && /## Video direction/.test(t1) && /handoff_in: receipt · x 960/.test(t1) && /Scene 2 \(1\.5–3\.0s\)/.test(t1) && (t1.match(/^- transition_in: cut$/gm) || []).length === 4 && /Visual design \(done\)/.test(fs.readFileSync(path.join(proj, "BRIEF.md"), "utf8")), (s1.stderr || s1.stdout).slice(0, 300));
+  ok("crew: storyboard carries each scene's space, and a 3D scene's lens, camera legs, light and materials", /^- space: hybrid \(build with Rasan3D/m.test(t1) && /^- camera3d: 50 mm f\/2\.8; 0\.0–0\.3s locked; 0\.3–1\.6s arc 28° right \(power3\.inOut\)/m.test(t1) && /^- light: three-point/m.test(t1) && (t1.match(/^- space: 2d$/gm) || []).length === 3 && /depth \(2D \/ 3D\): 2D film/.test(t1), t1.slice(0, 400));
   // local search finds the project by its git remote and package name; the inventory lists files, never secrets
   const home2 = path.join(TMP, "fakehome");
   const p1 = path.join(home2, "code", "tally-web");
@@ -643,6 +665,39 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
     const st = J2(C(["strip", "--file", comp, "--at", "0,1,2", "--out", path.join(run, "crew", "strip.png")]));
     ok("crew: strip renders a composition at chosen times into a labelled sheet", st.ok && st.frames === 3 && fs.existsSync(path.join(run, "crew", "strip.png")), JSON.stringify(st).slice(0, 200));
   }
+}
+
+// 15. 3D
+if (!quick) {
+  const proj = path.join(TMP, "three-proj");
+  fs.mkdirSync(path.join(proj, "compositions", "frames"), { recursive: true });
+  fs.writeFileSync(path.join(proj, "hyperframes.json"), "{}");
+  const S3 = (a) => spawnSync(process.execPath, [path.join(HERE, "stage3d.mjs"), ...a], { encoding: "utf8", env, cwd: TMP, timeout: 300000 });
+  const J3 = (r) => { try { return JSON.parse(r.stdout); } catch { return {}; } };
+  const sc = J3(S3(["scaffold", "--project", proj, "--frame", "02-depth", "--duration", "3"]));
+  const file = path.join(proj, "compositions", "frames", "02-depth.html");
+  ok("3d: scaffold writes a HyperFrames frame (one template, r3- ids, the runtime path) and installs the runtime", sc.ok && /^<template>/.test(fs.readFileSync(file, "utf8")) && /id="r3-02-depth-gl"/.test(fs.readFileSync(file, "utf8")) && fs.existsSync(path.join(proj, "assets", "three", "rasan3d.js")) && fs.existsSync(path.join(proj, "assets", "three", "three.core.min.js")) && fs.existsSync(path.join(proj, "assets", "three", "addons", "loaders", "GLTFLoader.js")), JSON.stringify(sc).slice(0, 200));
+  const clean = J3(S3(["check", "--project", proj, "--json"]));
+  ok("3d: the scaffolded scene builds, renders the same pixels for the same time, and passes the gate", clean.status === "clean" && clean.files && clean.files[0].stages[0] && clean.files[0].stages[0].deterministic === true, JSON.stringify(clean).slice(0, 500));
+  // planted: Math.random in pose (not seek-safe), a constant-speed spin, an ease outside motion.md
+  const bad = fs.readFileSync(file, "utf8").replace("pose(t, k) {", "pose(t, k) {\n        k.objects.marker.position.x = 1.9 + Math.random() * 0.4;\n        k.objects.marker.rotation.y = k.at(t, [[0, 0], [3, 6, \"none\"]]);").replace(/02-depth/g, "03-bad");
+  fs.writeFileSync(path.join(proj, "compositions", "frames", "03-bad.html"), bad);
+  fs.writeFileSync(path.join(proj, "motion.md"), '---\neasing: {"enter":"expo.out","exit":"power2.in","move":"expo.inOut"}\n---\n');
+  const r = S3(["check", "--project", proj, "--file", path.join(proj, "compositions", "frames", "03-bad.html"), "--json"]);
+  const bj = J3(r);
+  const rules = (bj.findings || []).map((f) => f.rule);
+  ok("3d: the gate catches nondeterminism, a linear drift and an ease outside motion.md (exit 2)", r.status === 2 && rules.includes("not-seek-safe") && rules.includes("nondeterministic-random") && rules.includes("linear-drift") && rules.includes("ease-outside-set"), JSON.stringify(rules));
+  fs.rmSync(path.join(proj, "motion.md"));
+  const st = spawnSync(process.execPath, [path.join(HERE, "crew.mjs"), "strip", "--file", file, "--at", "0,1.5,2.9", "--out", path.join(TMP, "three-strip.png")], { encoding: "utf8", env, cwd: TMP, timeout: 300000 });
+  const sj = J3(st);
+  ok("3d: a strip of a 3D scene waits for the build and renders every frame", sj.ok && sj.frames === 3 && fs.existsSync(path.join(TMP, "three-strip.png")), (st.stderr || st.stdout).slice(0, 300));
+  const kf = path.join(TMP, "frames3d");
+  fs.mkdirSync(kf, { recursive: true });
+  S3(["install", "--dest", kf]);
+  S3(["scaffold", "--standalone", "--frame", "4", "--duration", "4", "--out", path.join(kf, "4.html")]);
+  const ds = node("design.mjs", ["stills", "--dir", kf]);
+  const png = path.join(kf, "4.png");
+  ok("3d: a key frame drawn in 3D renders with design.mjs stills", ds.status === 0 && fs.existsSync(png) && fs.statSync(png).size > 20000, (ds.stderr || ds.stdout).slice(0, 300));
 }
 
 fs.rmSync(TMP, { recursive: true, force: true });

@@ -108,7 +108,14 @@ if (cmd === "init") {
     done.push(f);
   }
   if (!done.length) die("no frame packets found to inject");
-  console.log(JSON.stringify({ ok: true, injected: done, direction: !!dirSection }, null, 2));
+  // scenes the score puts in 3D get the Rasan3D runtime in the project (assets/three/)
+  const sb = fs.existsSync(path.join(dir, "STORYBOARD.md")) ? fs.readFileSync(path.join(dir, "STORYBOARD.md"), "utf8") : "";
+  let three = null;
+  if (/^- space: (3d|hybrid)\b/m.test(sb)) {
+    const { install } = await import("./lib/stage3d.mjs");
+    three = install(dir);
+  }
+  console.log(JSON.stringify({ ok: true, injected: done, direction: !!dirSection, ...(three ? { three: { runtime: path.relative(process.cwd(), three.dir), script: three.script } } : {}) }, null, 2));
 } else if (cmd === "audio-lock") {
   const dir = projectDir();
   if (!args.music) die("--music <file> required");

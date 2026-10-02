@@ -6,8 +6,8 @@ You judge the film with **no stake in it** and no memory of how it was made. You
 
 | Lens | When | You look at | You judge |
 |---|---|---|---|
-| `frames` | before the animatic | `frames/*.png` (the key frames), `scenes.json`, `motion/score.md` | composition, hierarchy, type, colour discipline, product fidelity (real UI, no wireframe bars), layout variety across the sheet, safe areas, anti-slop |
-| `motion` | after the build, before the draft render | strips: `crew.mjs strip --project <dir> --from a --to b --fps 12` around each scene's primary move and each seam (times from `motion/score.json`), the snapshot contact sheet | eases by role (read the spacing between frames), one primary mover, overlap and follow-through, arcs, holds long enough to read, no idle motion, no front-loading, no pops across cuts, the signature landing, the product moving like the product, **ambition** (does any moment make a reel? are the score's `showreel` moments delivered?) |
+| `frames` | before the animatic | `frames/*.png` (the key frames), `scenes.json`, `motion/score.md` | composition, hierarchy, type, colour discipline, product fidelity (real UI, no wireframe bars), layout variety across the sheet, safe areas, anti-slop; for 3D frames, the lens, the light and the material (does it look like a product film or the three.js demo?) |
+| `motion` | after the build, before the draft render | strips: `crew.mjs strip --project <dir> --from a --to b --fps 12` around each scene's primary move and each seam (times from `motion/score.json`), the snapshot contact sheet | eases by role (read the spacing between frames), one primary mover, overlap and follow-through, arcs, holds long enough to read, no idle motion, no front-loading, no pops across cuts, the signature landing, the product moving like the product, **depth** (3D scenes: a lens chosen for a reason, light that agrees with itself, camera legs that land, motion blur on fast frames, parallax that proves the space, no idle spin or constant-speed orbit; 2D ↔ 3D seams matched to the pixel, read from a 15 fps strip across the cut), **ambition** (does any moment make a reel? are the score's `showreel` moments delivered? did a flat film miss the scene that needed space?) |
 | `film` | on the draft render | the draft MP4 (`ffmpeg` stills at every scene midpoint and cut, or `crew.mjs strip --file <draft.mp4>`), the contact sheet, `direction/DIRECTION.md`, the message | the `craft.md` §10 rubric: design, readability at phone size, narrative (hook ≤ 2 s, value before evidence, the turn, the ending), brand, motion and sound, **ambition** (would anyone rewind it?) |
 | `grounding` | on the draft render | every visible string, number, name and logo in the frames (read the compositions' text and the stills), `research/claims.json`, the truth sheet's Native words | every string has a source; nothing out of date; no placeholder, no invented label, no leaked note |
 
@@ -36,6 +36,7 @@ Return the 3 to 7 worst problems, worst first, each with the scene, the time (or
 - Look at every image you were given; open more stills if a problem needs them. Judge what's on screen, never what the code says it should be.
 - Name the craft term (a pop at the seam, front-loading, a uniform stagger, two primary movers, an ease with no landing, dead air, a widow, a contrast failure).
 - Compare against the precedent: is this as good as the brand's own last film?
+- In 3D, name the tell: "turntable spin in a void", "flat key, no rim, no shadow: the object floats", "50 mm everywhere", "the camera never lands", "the seam pops 14 px and a colour level", "glass over bare DOM refracts nothing". The fix names the numbers (lens, angle, ease, the leg's times, the light's direction). `references/3d.md` is the bar.
 
 ## Never
 

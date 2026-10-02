@@ -22,9 +22,9 @@ Everything deterministic stays a script (`story.mjs check`, `sound.mjs fit`, `ob
 | | `research-lead`: one truth sheet, one claims ledger, one brand, one asset kit, a one-page briefing | after the desk | 1 | session |
 | Writers' room | `script-writer`: one script around one device | Story | 3 (Sure, Bold, Wild) | session |
 | | `script-editor`: the hostile reader; line edits, verdicts, a recommendation | Story | 1 | session |
-| Motion | `motion-director`: the score (spine, motif, energy, every shot, every seam), then the seam pass | Animatic, then Build | 1, twice | session |
+| Motion | `motion-director`: the score (spine, motif, energy, the depth plan, every shot in 2D or 3D, every seam), then the seam pass | Animatic, then Build | 1, twice | session |
 | Art | `frame-designer`: the key frames, from the score, in the look, with the real product | Animatic | 1 per 2 scenes (5 at most) | session |
-| Animation | `scene-animator`: one scene, built toward its key frame, its seams exact, its motion seen and fixed | Build | 1 per scene | session |
+| Animation | `scene-animator`: one scene (2D, 3D or hybrid), built toward its key frame, its seams exact, its motion seen and fixed | Build | 1 per scene | session |
 | Review | `critic`: lenses `frames`, `motion`, `film`, `grounding`; default reject | Animatic, Build, Final | 1 per lens and round | session |
 
 "Session" means the Director's own model: creative and judging work is never downgraded. "Fast is fine" means a faster model may run it when the harness lets you choose (in Claude Code: `model: "sonnet"` on the Agent call).
@@ -68,8 +68,9 @@ Claude does its best motion work when it's told to show off; left unpushed it pr
 
 - Every creative brief says it (`agents/_crew.md` rule 8 and each role), and `crew.mjs brief` ends every creative prompt with the ask, the last thing the member reads.
 - The Motion Director must name 2 to 4 **showreel moments** (`showreel` in the score; `check` refuses a score without them), and they go into STORYBOARD.md's Video direction so every animator sees them.
-- Every animator reports `## Showing off`: the moment in its scene that would make a reel, and what it did to earn it (`check` refuses the report without it).
-- The critics score **ambition** on frames, motion and film, and a competent-but-safe film fails.
+- The score plans **space** too (`references/3d.md`): every scene is `2d`, `3d` or `hybrid`, the film has a one-line depth plan, and a film of 4 scenes or more gets at least one 3D or hybrid scene unless the look must stay flat and the score says why. When the film has depth, one of its showreel moments is a 3D one. 3D scenes come with their lens, camera legs, light and materials, and their 2D neighbours meet them in pixel-exact seams (`flat-to-depth`, `depth-to-flat`, `camera-through`). Opus plans space and transitions well when it's asked to, and unasked it stays on the flat page, so the score is asked.
+- Every animator reports `## Showing off`: the moment in its scene that would make a reel, and what it did to earn it (`check` refuses the report without it). A 3D scene's animator also reports `## 3D` (lens, light, materials, the seams, the frame cost), and `check` runs the 3D gate on its file.
+- The critics score **ambition** on frames, motion and film, and a competent-but-safe film fails, including a flat film that missed the scene that needed space, and a 3D shot that looks like the three.js demo.
 - When you send findings back, lead with the push, not just the fix list: "The critic found this competent and safe (ambition 5). Fix these, and show what you can actually do with this scene: <the showreel moment it should land>."
 
 Showing off means craft: choreography timed to the frame, invisible seams, product interactions more real than the real thing, one spectacle beat. It never means more effects; glow, particles and bounce are still slop, and the gates still reject them.
@@ -121,4 +122,4 @@ node $SKILL_DIR/scripts/crew.mjs strip --project videos/<name> --from 11.6 --to 
 node $SKILL_DIR/scripts/crew.mjs strip --file <draft.mp4> --at 0,2,4.5 --out <sheet.png>                                          # a render
 ```
 
-A strip at 12 to 15 fps across a move shows its ease (the spacing between frames), its overlap, whether it lands, and whether anything pops at a seam.
+A strip at 12 to 15 fps across a move shows its ease (the spacing between frames), its overlap, whether it lands, and whether anything pops at a seam. Strips of a 3D scene (`--file` on a composition that uses Rasan3D) wait for the 3D build and show its real motion blur; `stage3d.mjs stills` renders single frames of one.
