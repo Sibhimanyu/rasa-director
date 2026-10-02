@@ -109,6 +109,7 @@
         <li><s>A film about the product, from memory</s><span>Research first: its real screens, words, brand and past launch films, every fact sourced</span></li>
         <li><s>Scenes that each look fine and never flow</s><span>One motion score for the whole film, every seam designed on both sides</span></li>
         <li><s>The safe, forgettable default</s><span>A crew pushed to show off, and critics that fail competent-but-safe work</span></li>
+        <li><s>Everything flat, or a three.js demo spinning in a void</s><span>Real 3D where depth earns it, planned like a 3D lead and joined to the 2D frame by frame</span></li>
       </ul>
     </div>
   </section>
@@ -383,10 +384,26 @@ detail removed.
       <ol class="loop">
         <li><b>Research</b><span>Product, brand, real screens, past films, and your local code with permission; merged into one truth sheet</span></li>
         <li><b>Writers' room</b><span>Three writers, one script each, and an editor who reads like a hostile client</span></li>
-        <li><b>Motion score</b><span>Every shot, every seam with exact handoff numbers, 2 to 4 showreel moments</span></li>
+        <li><b>Motion score</b><span>Every shot in 2D or real 3D, every seam with exact handoff numbers, 2 to 4 showreel moments</span></li>
         <li><b>Animators</b><span>One per scene, in parallel, building toward the approved key frame</span></li>
         <li><b>Critics</b><span>Fresh eyes on frames, motion, facts and film; competent but safe is a fail</span></li>
       </ol>
+    </div>
+  </section>
+
+  <!-- real 3D -->
+  <section class="section" id="depth">
+    <div class="wrap">
+      <p class="eyebrow">Real 3D</p>
+      <h2 class="mega">Flat, in depth, or both.</h2>
+      <div class="two lead-row">
+        <p class="lede">Every scene in the score is 2D, 3D or a hybrid of both. The Motion Director decides where depth earns its place: the lens in millimetres, camera moves that land, one motivated key light, materials from the look. The seams between flat and deep are planned to the pixel, so a card you were just reading lifts off the page on the cut.</p>
+        <p>3D scenes run on <b>Rasan3D</b>, a three.js runtime clocked by the scene's own timeline. Every frame averages several renders, which gives real motion blur, depth of field and anti-aliasing. Real screenshots keep their exact colours on UI slabs, the official logo and brand type can be extruded, and a 3D gate checks every scene before it ships: same frame for the same time, nothing blank, eased on the motion contract, blurred where it moves, at rest at least once.</p>
+      </div>
+      <div class="shots two-up">
+        <figure class="showcase"><img src="img/3d-seam-flat.jpg" width="1600" height="900" loading="lazy" alt="The last 2D frame: the RasanAI story screen, flat" /><figcaption><b>The last 2D frame.</b> The story screen, flat, exactly where the 3D scene picks it up.</figcaption></figure>
+        <figure class="showcase"><img src="img/3d-layers.jpg" width="1600" height="900" loading="lazy" alt="The same screen in 3D: its layers separated in depth, the picked card lifted toward the lens with a label pinned to it" /><figcaption><b>A second later, in 3D.</b> The page separates into its layers and the camera arcs to the picked card.</figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -432,11 +449,12 @@ detail removed.
       <div>
         <p class="eyebrow">The checks</p>
         <h2>Checked before you see it.</h2>
-        <p class="lede">A film ships only after four gates pass: the story rubric, the anti-slop gate, the motion contract and the sound check. Then critics who never saw it being made judge it fresh. The motion check walks every tween of every scene in a real browser and compares it with the contract.</p>
+        <p class="lede">A film ships only after five gates pass: the story rubric, the anti-slop gate, the motion contract, the 3D gate and the sound check. Then critics who never saw it being made judge it fresh. The motion check walks every tween of every scene in a real browser and compares it with the contract.</p>
         <ul class="ticks">
           <li><b>Durations</b> on the language's scale, <b>eases</b> from its set, written explicitly, never the GSAP default.</li>
           <li><b>Banned moves</b> caught in every form, including the generic fade-up-slide.</li>
           <li><b>Holds</b> long enough to read; <b>GSAP only</b>, seekable, deterministic.</li>
+          <li><b>3D scenes</b> render the same pixels for the same time, are never blank, ease every key on the contract, blur their fast moves and come to rest.</li>
           <li><b>Sound</b> at −14 LUFS, no audible loop, effects within budget, no dead air.</li>
           <li><b>Critics</b> score the frames, the motion, the facts and the film, ambition included, with an exact fix for each problem.</li>
           <li>Failures go back to the scene's animator, at most twice; anything left is yours to fix or waive at the Final. A check that couldn't run is never reported as a pass.</li>
@@ -480,7 +498,7 @@ detail removed.
         <div class="cmd"><code><span class="p">&gt; </span>/rasanai cut ~/Footage/lisbon into a 30s reel with a title card and captions</code><button class="copy" type="button" data-copy="/rasanai cut ~/Footage/lisbon into a 30s reel with a title card and captions" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
         <div class="cmd"><code><span class="p">&gt; </span>/rasanai export the Swiss grid style as a DESIGN.md</code><button class="copy" type="button" data-copy="/rasanai export the Swiss grid style as a DESIGN.md" aria-label="Copy"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
       </div>
-      <p class="note">RasanAI updates itself when the skill loads. Check the install with <code>node ~/.claude/skills/rasanai/scripts/selftest.mjs</code> (85 checks, no network needed).</p>
+      <p class="note">RasanAI updates itself when the skill loads. Check the install with <code>node ~/.claude/skills/rasanai/scripts/selftest.mjs</code> (105 checks, no network needed).</p>
     </div>
   </section>
 

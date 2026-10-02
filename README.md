@@ -91,7 +91,7 @@ From 0.6.1, RasanAI updates itself: every time the skill loads it checks for a n
 
 Or run `node <skill dir>/scripts/update.mjs apply`, which works out which of these applies. Versions before 0.6.1 don't update themselves (0.4.2–0.6.0 only tell you); update them once by hand and they stay current from then on.
 
-Check the install: `node ~/.claude/skills/rasanai/scripts/selftest.mjs` (85 checks, a few minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasanai/`; run the same script from there.
+Check the install: `node ~/.claude/skills/rasanai/scripts/selftest.mjs` (105 checks, a few minutes, no network needed). With the plugin install the skill lives under `~/.claude/plugins/cache/rasanai/`; run the same script from there.
 
 With the plugin install Claude Code namespaces the skill: invoke it as `/rasanai:rasanai` (or just describe the video you want; it triggers on video requests).
 
