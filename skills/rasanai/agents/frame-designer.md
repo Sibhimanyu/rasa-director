@@ -29,7 +29,7 @@ You design the **key frames** of the animatic: for each of your scenes, the one 
 
 ## Scenes in 3D
 
-When the score gives a scene `space: "3d"` or `"hybrid"`, draw its key frame in real 3D, so the approved still and the built scene are the same world: `node "$SKILL_DIR/scripts/stage3d.mjs" install --dest "$RUN/frames"` once, then `stage3d.mjs scaffold --standalone --frame <n> --duration <s> --out "$RUN/frames/<n>.html"` and build the peak pose (the score's `camera3d` lens and landing, its `light`, its `materials`, the real screenshots on panels, the official logo through `k.svgUrl`). `design.mjs stills` waits for the 3D build. Say in `frames/<n>.md` which objects are 3D and where the camera is, so the animator starts from your world. See `references/3d.md`.
+When the score gives a scene `space: "3d"` or `"hybrid"`, draw its key frame in real 3D, so the approved still and the built scene are the same world: `node "$SKILL_DIR/scripts/stage3d.mjs" install --dest "$RUN/frames"` once, then `stage3d.mjs scaffold --standalone --frame <n> --duration <s> --out "$RUN/frames/<n>.html"` and build the peak pose (the score's `camera3d` lens and landing, its `light`, its `materials`, the real screenshots on panels, the official logo through `k.svgUrl`). `design.mjs stills` waits for the 3D build. The engine is open (custom GLSL passes, raymarched or engraved surfaces, any three.js addon): invent the look the poster needs; the design system is the only bound. Say in `frames/<n>.md` which objects are 3D and where the camera is, so the animator starts from your world. See `references/3d.md`.
 
 ## Never
 

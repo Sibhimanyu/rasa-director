@@ -1,0 +1,50 @@
+---
+id: "spielberg-oner-reveal"
+name: "Spielberg oner: one take, many framings, the reveal held back by the reaction"
+space: "both"
+family: "cinematic"
+references: ["Jaws (1975), the 2 min 45 s beach shot", "Raiders of the Lost Ark (1981), the bar", "Close Encounters of the Third Kind (1977)", "Hook (1991)", "Jurassic Park (1993)", "Munich (2005)"]
+timing: {"frame_rate":"24 fps source","holds_ms":[800,2500],"durations_ms":[14000,40000],"framing_changes":"3 to 9 distinct compositions in one take (Hook: nine in 35 s; Close Encounters: eight with one dolly back and some pans and tilts)","note":"the 14 to 20 s design length is a derivation for a motion-graphics scene; sources only say oners run 'as long as 2 minutes or more'"}
+eases: {"key":"power2.inOut","notes":"every leg of the camera eases in and out and rests on a composed frame; 'expo.out' only for a whip or a reveal slam. A rack focus is power2.inOut over 0.6 to 0.9 s."}
+camera: {"lens_mm":[28,35,50],"moves":["one dolly (in or out) carrying the blocking","small pans and tilts that follow the actor","rack focus between two planes","a late push or truck to the reveal","pull-back or rise to the closing wide"],"rules":["the camera moves because someone in the frame moves","each hold is a composed frame, a 'shot' in an edited sequence: wide, medium, close-up, insert","the viewer should not feel a cut missing","the reveal comes after the reaction: hold on the person looking, then move to what they see","blocking changes the framing as much as the camera does"]}
+recipe_2d: "HyperFrames GSAP: one wide world (about 3600 x 1900 px of layout) on #world, framed 1920x1080, with four stations: A wide (scale 1), B close on the speaker (scale 1.7, origin on the face), C the second plane (scale 1.4, origin at the object), D wide again. The camera is the only thing that cuts the shot into 'shots'. Legs: tl.to('#world',{x:-120,y:-60,scale:1.7,transformOrigin:'1040px 420px',duration:1.6,ease:'power2.inOut'},3.4); hold 1.2 s; rack to the second plane by crossfading blur between layers: tl.to('.plane-fg',{filter:'blur(9px)',duration:0.7,ease:'power2.inOut'},6.6).to('.plane-bg',{filter:'blur(0px)',duration:0.7,ease:'power2.inOut'},6.6) (blur layers, never the whole frame); then a truck to the reveal: tl.to('#world',{x:-900,y:-120,scale:1.4,duration:1.5,ease:'power2.inOut'},8.0); then pull back: tl.to('#world',{x:-300,y:0,scale:1,duration:2.0,ease:'power2.inOut'},11.2). The camera starts each leg 0.1 to 0.2 s after the subject's own move. Per-layer depth: far x 0.2, content 1, near 3 on the x/y/scale deltas so every leg has parallax."
+recipe_3d: "Rasan3D (metres). Subject A at [0,0,0], the thing revealed at [4,1.4,-3], figures walk on cue. fstop 2.8, motionBlur default. camera: { pos:[[0,[0.5,1.5,7.5]],[3.5,[0.5,1.5,7.5]],[6.0,[0.3,1.5,3.2],'power2.inOut'],[8.0,[0.3,1.5,3.2]],[11.0,[3.0,1.5,2.5],'power2.inOut'],[13.0,[3.0,1.5,2.5]],[16.5,[3.5,3.0,6.5],'power2.inOut'],[18,[3.5,3.0,6.5]]], target:[[0,[0,1.2,0]],[3.5,[0,1.2,0]],[6.0,[0,1.4,0],'power2.inOut'],[8.0,[0,1.4,0]],[11.0,[4,1.4,-3],'power2.inOut'],[13.0,[4,1.4,-3]],[16.5,[2,1.0,-1],'power2.inOut'],[18,[2,1.0,-1]]], lens:[[0,35],[6.0,50,'power2.inOut'],[11.0,35,'power2.inOut'],[18,35]], focus:[[0,7.5],[3.5,7.5],[6.0,3.2,'power2.inOut'],[8.4,3.2],[9.2,7.2,'power2.inOut'],[11,5.6,'power2.inOut'],[13,5.6],[16.5,7.9,'power2.inOut'],[18,7.9]] }. Focus keys are numeric all the way (a number cannot be interpolated to 'target'). Distances: 7.5 = |[0.5,1.5,7.5]-[0,1.2,0]|; 3.2 = |[0.3,1.5,3.2]-[0,1.4,0]|; 7.2 = |[0.3,1.5,3.2]-[4,1.4,-3]| (the rack at 8.4 to 9.2 happens while the camera starts its 8 to 11 s truck, so it is approximate); 5.6 = |[3.0,1.5,2.5]-[4,1.4,-3]|; 7.9 = |[3.5,3.0,6.5]-[2,1.0,-1]|. Recompute focus for any change of blocking (focus value = distance from the key's pos to the thing it holds)."
+pitfalls: ["a continuous move with no resting frames is a 'tracking shot', not this: the Spielberg oner changes between static, composed frames (icantunseethatmovie)","a move with no motive: every dolly leg needs an actor's step or a line starting it","reveal on the same frame the subject looks: hold the reaction first (studiobinder on Jurassic Park: hold 'just long enough so that the audience leans in')","blocking left static: all the framing change comes from the camera, so it feels like a virtual camera sweep","focus keys that interpolate to or from the string 'target': keep them numeric, and recompute when the camera moves","a rack focus with fstop 8: no visible separation; use f/2 to 2.8","a closing pull-back that never rests (the gate warns never-rests)"]
+instruct: {"all":"Write the shot as a list of composed frames with a time and a size (wide, medium, close, insert, second plane, reveal, wide), then say which character move causes each camera leg; specify holds and a rest on every frame.","claude":"Ask for a table first: t, size, camera pos/target, lens, who moves, what the viewer learns. Then build the keys from the table. Claude does well with the table-first approach and tends to fold two legs into one if the table is skipped. Ask it to check the 0.1 to 0.2 s lead of the camera over the actor on every leg.","gpt":"GPT-family output tends to produce one long glide with a constant ease. Require 'each leg lands and holds at least 0.8 s', 'ease power2.inOut', 'no continuous orbit', and a numbered list of the framings."}
+sources: ["https://www.studiobinder.com/blog/jurassic-park-cinematography/", "https://icantunseethatmovie.com/2016/06/01/the-spielberg-oner/", "https://viewinder.com/spielberg-oner/", "https://vashivisuals.com/jaws-the-longest-shot-you-never-noticed/"]
+---
+## What it is
+
+The Spielberg oner is a scene in one shot built from several setups: the camera and the actors reframe the shot so that it moves between a wide, a medium and a close-up without cutting. I Can't Unsee That Movie's summary: "Shifts between static frames rather than maintaining continuous camera movement", "alternates between a wide, a medium, and a close-up", "subtle precision" so viewers often do not realise it was a single take. It is also the grammar of his reveal: hold on a face, then show what the face sees. For RasanAI it is the model for one long scene that carries an explainer, a product tour or a narrative beat without a cut.
+
+## The defining traits (numbers)
+
+- **Length.** Typically "as long as 2 minutes or more" (I Can't Unsee That Movie). The longest single shot in Jaws runs 2 min 45 s (Vashi Visuals; the source does not say which scene, so treat the identification as unverified).
+- **Density.** Viewinder counts: Raiders' bar scene delivers four standard angles (master, single, single reverse, insert) in one take; Close Encounters packs eight framings into "one dolly back and some pans and tilts"; Hook compresses nine compositions into 35 seconds.
+- **Average shot length.** Jurassic Park averages 6.6 s per shot (StudioBinder), longer than most adventure films, achieved through blocking and staging.
+- **Reaction before reveal.** StudioBinder: Spielberg "holds on character reactions just long enough so that the audience leans in", frames dinosaurs in parts (leg, head, eye) and shoots 1.85:1 for vertical emphasis.
+- **Staging tools.** Actor blocking, dolly moves with pans and tilts, re-framing, sound design (Viewinder).
+- **Lens.** None of the fetched sources gives a lens. The 28 to 50 mm range in the entry is a design derivation (wide enough for blocking depth, normal enough for the close).
+
+## How to build it
+
+**Plan the framings first.** Write the beats as a table: time, size, what the viewer learns, who moved. Example for 18 s: 0 s wide establishing (two characters, an object far in the room); 3.5 to 6 s dolly in to a medium close on the speaker; 6 to 8 s hold, the line lands; 8.4 to 9.2 s rack focus to the object at the back; 11 s truck and turn to the object (the reveal); 14 to 18 s pull back and rise to a closing wide that shows the whole consequence.
+
+**2D.** The world is one large layout and the camera is a path through it (the `camera journey (oner)` recipe in `vocabulary.md`: stations, `power3.inOut` sweeps of 0.6 to 1.2 s, rests of 1.5 to 2.5 s). Use `power2.inOut` legs of 1.5 to 2.0 s for the Spielberg softness. The rack focus is a blur crossfade between planes, never over the whole frame. Content in each station resolves in the camera's hold (text types in, a number counts) so the viewer reads on the rest, not on the move. Keep a motivated lead: the camera starts 0.1 to 0.2 s after the on-screen action begins.
+
+**3D.** The keys in `recipe_3d` are a worked 18 s oner. Each pair of key times (arrive at one, leave at the next) is a hold. Use `fstop 2.8` so the rack focus reads. Block actors in a staging group moved from `pose(t)` with the same `k.at` keys. Seams: the oner is a good host for `camera-through` out of its last frame (the pull-back ends on a wide that the next scene can push into).
+
+## What makes a cheap imitation
+
+- A steady glide that never rests. Spielberg's oner reads as edited cinema, which needs resting frames.
+- Reveal with no setup: the object is shown by a whip pan or a cut-like move rather than by holding a reaction.
+- The camera leads the actors. The move starts after the cause.
+- All framings are the same size. Without wide, medium and close in one take, the shot has no sequence.
+- Rack focus with no depth difference between the two planes.
+
+## Sources
+
+- https://www.studiobinder.com/blog/jurassic-park-cinematography/ : 6.6 s average shot length, reaction holds, partial-dinosaur framing, 1.85:1 (the page does not include a shot-by-shot oner breakdown).
+- https://icantunseethatmovie.com/2016/06/01/the-spielberg-oner/ : the definition of the oner, wide-medium-close without cutting, 2 min or more.
+- https://viewinder.com/spielberg-oner/ : Raiders bar, Close Encounters, Hook (nine compositions in 35 s), Munich.
+- https://vashivisuals.com/jaws-the-longest-shot-you-never-noticed/ : the 2 min 45 s figure and the five techniques (scene not named there).

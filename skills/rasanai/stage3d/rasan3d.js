@@ -43,6 +43,7 @@
       threeP = import(BASE + "three.module.min.js").then(function (T) {
         // HyperFrames' three adapter waits on THREE.DefaultLoadingManager before it calls a frame ready
         if (!window.THREE) window.THREE = T;
+        if (window.Rasan3DLib) window.Rasan3DLib.THREE = T;
         return T;
       });
     }
@@ -52,6 +53,57 @@
   function addon(rel) {
     if (!addonCache[rel]) addonCache[rel] = import(BASE + "addons/" + rel);
     return addonCache[rel];
+  }
+
+  // ------------------------------------------------------------------ the GLSL library (glsl.js, next to this file)
+  // glsl.js sets window.Rasan3DLib = { glsl, tube, instanceField }. It is read synchronously (so Rasan3D.glsl is
+  // there for top-level scene code), with an async script tag as the fallback where sync XHR is unavailable.
+  function mergeLib() {
+    var lib = window.Rasan3DLib;
+    if (!lib || !window.Rasan3D) return !!lib;
+    var R = window.Rasan3D;
+    if (window.THREE && !lib.THREE) lib.THREE = window.THREE;
+    Object.keys(lib).forEach(function (k) { if (R[k] === undefined) R[k] = lib[k]; });
+    return true;
+  }
+  function loadLibSync() {
+    if (window.Rasan3DLib) return true;
+    try {
+      var x = new XMLHttpRequest();
+      x.open("GET", BASE + "glsl.js", false);
+      x.send();
+      if ((x.status === 200 || (x.status === 0 && x.responseText)) && x.responseText) {
+        var s = document.createElement("script");
+        s.text = x.responseText + "\n//# sourceURL=" + BASE + "glsl.js";
+        (document.head || document.documentElement).appendChild(s);
+        s.parentNode && s.parentNode.removeChild(s);
+      }
+    } catch (e) { /* async fallback below */ }
+    return !!window.Rasan3DLib;
+  }
+  var libP = null;
+  function loadLib() {
+    if (!libP) {
+      libP = loadLibSync() ? Promise.resolve(true) : new Promise(function (res) {
+        var s = document.createElement("script");
+        s.src = BASE + "glsl.js";
+        s.onload = function () { res(true); };
+        s.onerror = function () { res(false); };
+        (document.head || document.documentElement).appendChild(s);
+      });
+    }
+    return libP.then(function () { return mergeLib(); });
+  }
+  // `#include <r3/noise>` anywhere in a shader string pulls in Rasan3D.glsl.noise (each chunk once, nested chunks too)
+  function glslInclude(src, seen) {
+    seen = seen || {};
+    return String(src).replace(/#include\s*<r3\/(\w+)>/g, function (m, n) {
+      if (seen[n]) return "";
+      seen[n] = 1;
+      var lib = (window.Rasan3D && window.Rasan3D.glsl) || {};
+      if (lib[n] == null) throw new Error("#include <r3/" + n + ">: no such chunk in Rasan3D.glsl (have: " + Object.keys(lib).join(", ") + ")");
+      return glslInclude(lib[n], seen);
+    });
   }
 
   // ------------------------------------------------------------------ time, eases, keys
@@ -149,6 +201,11 @@
     renderer.shadowMap.type = T.PCFSoftShadowMap;
     renderer.setPixelRatio(1);
     renderer.autoClear = false;
+    // a pass whose shader fails to link must say why (the info log), not render black
+    renderer.debug.onShaderError = function (gl, program, vs, fs) {
+      var log = (gl.getProgramInfoLog(program) || "") + " " + (gl.getShaderInfoLog(fs) || "") + " " + (gl.getShaderInfoLog(vs) || "");
+      throw new Error("shader failed to compile: " + log.replace(/\s+/g, " ").trim().slice(0, 900));
+    };
     shared = { T: T, renderer: renderer, canvas: canvas, w: 0, h: 0, rts: null, post: makePost(T), envs: {} };
     return shared;
   }
@@ -184,6 +241,10 @@
       return new T.ShaderMaterial(Object.assign({ vertexShader: V, fragmentShader: frag, uniforms: uniforms, depthTest: false, depthWrite: false, toneMapped: false }, extra || {}));
     }
     var weigh = mat("uniform sampler2D tSrc; uniform float weight; varying vec2 vUv; void main(){ gl_FragColor = texture2D(tSrc, vUv) * weight; }", { tSrc: { value: null }, weight: { value: 1 } }, { blending: T.CustomBlending, blendEquation: T.AddEquation, blendSrc: T.OneFactor, blendDst: T.OneFactor, blendSrcAlpha: T.OneFactor, blendDstAlpha: T.OneFactor, transparent: true });
+    var copy = mat("uniform sampler2D tSrc; varying vec2 vUv; void main(){ gl_FragColor = texture2D(tSrc, vUv); }", { tSrc: { value: null } });
+    // depth texture (0..1) -> view-space distance along the camera axis (1e6 where nothing was drawn)
+    var lin = mat("uniform sampler2D tDepth; uniform float near; uniform float far; varying vec2 vUv; void main(){ float d = texture2D(tDepth, vUv).r;" +
+      " float z = d >= 1.0 ? 1.0e6 : 2.0 * near * far / (far + near - (d * 2.0 - 1.0) * (far - near)); gl_FragColor = vec4(z, 0.0, 0.0, 1.0); }", { tDepth: { value: null }, near: { value: 0.05 }, far: { value: 400 } });
     var bright = mat(
       "uniform sampler2D tSrc; uniform float threshold; uniform float knee; varying vec2 vUv;" +
         "void main(){ vec4 c = texture2D(tSrc, vUv); vec3 rgb = c.a > 0.0 ? c.rgb : vec3(0.0); float l = max(rgb.r, max(rgb.g, rgb.b));" +
@@ -225,7 +286,7 @@
       bloom: { value: 0 }, bloomRadius: { value: 0.5 }, halation: { value: 0 }, grain: { value: 0 }, vignette: { value: 0 }, ca: { value: 0 },
       seed: { value: 0 }, res: { value: new T.Vector2(1, 1) }, saturation: { value: 1 }, lift: { value: new T.Vector3(0, 0, 0) }, gain: { value: new T.Vector3(1, 1, 1) },
     });
-    return { cam: cam, scene: scene, quad: quad, weigh: weigh, bright: bright, blur: blur, fin: fin };
+    return { cam: cam, scene: scene, quad: quad, weigh: weigh, copy: copy, lin: lin, bright: bright, blur: blur, fin: fin };
   }
   function pass(S, material, target, clear) {
     var r = S.renderer;
@@ -238,6 +299,11 @@
   // Tone mapping happens inside each lit material (as three.js does on screen), not over the finished frame:
   // unlit UI faces and screenshots (toneMapped: false) keep their exact colours, so a flat 3D frame can match the
   // 2D scene it continues, and emissive accents keep their HDR value, which is what lets only them bloom.
+  function toneGlsl(T, tone, exposure) {
+    var fn = TONE_FN[tone] == null ? TONE_FN.neutral : TONE_FN[tone];
+    var pars = T.ShaderChunk.tonemapping_pars_fragment.replace(/#ifndef saturate[\s\S]*?#endif/, "").replace(/uniform float toneMappingExposure;/, "const float toneMappingExposure = 1.0;");
+    return pars + "\nvec3 r3Tone(vec3 c){ c *= " + Number(exposure).toFixed(4) + "; " + (fn ? "return " + fn + "(c);" : "return c;") + " }\n";
+  }
   var TONE_FN = { neutral: "NeutralToneMapping", agx: "AgXToneMapping", aces: "ACESFilmicToneMapping", none: "" };
   function toneMapMaterials(T, scene, tone, exposure) {
     var fn = TONE_FN[tone] == null ? TONE_FN.neutral : TONE_FN[tone];
@@ -592,7 +658,8 @@
 
   Stage.prototype._init = function () {
     var self = this, o = this.opts;
-    return loadThree().then(function (T) {
+    return Promise.all([loadThree(), loadLib()]).then(function (res) {
+      var T = res[0];
       var S = getShared(T);
       self.T = T;
       self.S = S;
@@ -609,6 +676,7 @@
       self.scene.add(self.camera);
       if (o.background) self.scene.background = color(T, o.background);
       if (o.fog) self.scene.fog = new T.Fog(color(T, o.fog.color || o.background || "#000000"), o.fog.near || 10, o.fog.far || 60);
+      self._graphInit();
       var kit = (self.k = {
         THREE: T, T: T, stage: self, scene: self.scene, camera: self.camera, R3: api,
         material: function (kind, mo) { return material(T, kind, mo); },
@@ -629,6 +697,22 @@
         pxPlane: function (group, po) { return self.pxPlane(group, po); },
         toScreen: function (v) { return self.toScreen(v); },
         track: function (name, keys) { return self.track(name, keys); },
+        // the open kit: render graph, simulation, DOM in 3D, the GLSL library
+        pass: function (name, po) { return self.pass(name, po); },
+        target: function (name, to) { return self.target(name, to); },
+        targetTexture: function (name) { return self.targetTexture(name); },
+        view: function (name, vo) { return self.view(name, vo); },
+        simulate: function (name, so) { var sim = makeSim(kit, name, so); self.G.sims.push(sim); return sim; },
+        gpuSimulate: function (name, so) {
+          var sim = makeGpuSim(self, name, so);
+          self.G.sims.push(sim);
+          self._pending.push(addon("misc/GPUComputationRenderer.js").then(function (m) { sim.build(m); }));
+          return sim;
+        },
+        pinDom: function (el, po) { return self.pinDom(el, po); },
+        include: glslInclude,
+        hash: function (i, seed) { var h = Math.imul((i | 0) ^ Math.imul((seed || 0) | 0, 0x9e3779b1), 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16; return (h >>> 0) / 4294967296; },
+        glsl: api.glsl, tube: api.tube, instanceField: api.instanceField,
         objects: null,
       });
       var envP = o.environment === false || o.environment === "none" ? Promise.resolve(null) : environment(S, (o.environment && o.environment.preset) || o.environment || "studio");
@@ -642,6 +726,12 @@
         return Promise.resolve(o.build ? o.build(kit) : null);
       }).then(function (objects) {
         kit.objects = objects || {};
+        // the render graph: registered after build (and after the objects exist), in build order
+        return o.graph ? o.graph(kit) : null;
+      }).then(function () {
+        // GPU simulations wait for their compute module; their state is created before the first pose
+        return Promise.all(self._pending);
+      }).then(function () {
         return document.fonts && document.fonts.ready ? document.fonts.ready : null;
       }).then(function () {
         // textures queued through three's loaders must finish before the first frame
@@ -663,7 +753,7 @@
     var c = this.opts.camera || {};
     this.camKeys = c;
     var self = this;
-    ["pos", "target", "lens", "roll", "focus"].forEach(function (k) { if (c[k] != null) self.track("camera." + k, c[k]); });
+    ["pos", "target", "lens", "roll", "focus", "fstop", "aperture", "shift"].forEach(function (k) { if (c[k] != null) self.track("camera." + k, c[k]); });
   };
   Stage.prototype._applyCamera = function (t) {
     var T = this.T, c = this.camKeys || {}, cam = this.camera;
@@ -677,9 +767,22 @@
     var mm = at(t, c.lens);
     cam.fov = lens(mm || 50, this.aspect);
     cam.updateProjectionMatrix();
+    // lens shift (a tilt-shift / view-camera rise): [x, y] in fractions of the frame, keyable; verticals stay vertical
+    var sh = at(t, c.shift);
+    if (sh && (sh[0] || sh[1])) {
+      var PE = cam.projectionMatrix.elements;
+      PE[8] += 2 * (sh[0] || 0); PE[9] += 2 * (sh[1] || 0); // + raises the frame (content moves down), like a view camera's rise
+      cam.projectionMatrixInverse.copy(cam.projectionMatrix).invert();
+    }
     cam.updateMatrixWorld(true);
-    var f = at(t, c.focus);
-    this._focus = f === "target" || f == null ? cam.position.distanceTo(new T.Vector3(q[0], q[1], q[2])) : Number(f);
+    // focus keys may mix "target" and numbers: "target" is this sample's distance to the target, resolved before interpolating
+    var dT = cam.position.distanceTo(new T.Vector3(q[0], q[1], q[2]));
+    var fk = c.focus;
+    if (Array.isArray(fk) && Array.isArray(fk[0])) fk = fk.map(function (k) { return k[1] === "target" ? [k[0], dT, k[2]] : k; });
+    var f = at(t, fk);
+    this._focus = f === "target" || f == null ? dT : Number(f);
+    this._fstop = typeof c.fstop === "number" ? c.fstop : at(t, c.fstop);
+    this._aperture = typeof c.aperture === "number" ? c.aperture : at(t, c.aperture);
     this._mm = mm || 50;
   };
   Stage.prototype._pose = function (t) {
@@ -756,20 +859,432 @@
     return { x: ((p.x + 1) / 2) * this.width, y: ((1 - p.y) / 2) * this.height, z: p.z, visible: p.z > -1 && p.z < 1 };
   };
 
+  // ------------------------------------------------------------------ the render graph
+  // passes (scene: inside the sample loop; post: on the accumulated frame), named render targets, views of other
+  // scenes, function-valued uniforms. Nothing here runs for a stage that registers none: its frames are unchanged.
+  function lazyRT(S, key, make) {
+    if (!S.rts[key]) S.rts[key] = make();
+    return S.rts[key];
+  }
+  function colorRT(T, w, h, extra) {
+    return new T.WebGLRenderTarget(w, h, Object.assign({ type: T.HalfFloatType, format: T.RGBAFormat, colorSpace: T.LinearSRGBColorSpace, depthBuffer: false }, extra || {}));
+  }
+  var PASS_VERT = "varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }";
+  function passPrelude(kind, tone) {
+    var s = "#define saturate(a) clamp( a, 0.0, 1.0 )\n" + (tone || "") + "uniform float uTime; uniform float uFrame; uniform vec2 uRes; uniform vec3 uCamPos; uniform mat4 uCamMatrixWorld; uniform mat4 uViewInv; uniform mat4 uView; uniform mat4 uProjInv; uniform mat4 uProj; uniform mat4 uViewProj; uniform float uNear; uniform float uFar;\n";
+    s += kind === "scene" ? "uniform sampler2D uSceneColor; uniform sampler2D uSceneDepth;\n" : "uniform sampler2D uSrc; uniform sampler2D uDepth;\n";
+    s += "varying vec2 vUv;\n" +
+      "vec3 r3Fwd(){ return -normalize(uCamMatrixWorld[2].xyz); }\n" +
+      "vec3 rayDir(vec2 uv){ vec4 v = uProjInv * vec4(uv * 2.0 - 1.0, 1.0, 1.0); return normalize((uCamMatrixWorld * vec4(v.xyz / v.w, 0.0)).xyz); }\n" +
+      "float r3Depth(vec3 p){ vec4 c = uProj * uView * vec4(p, 1.0); return clamp(c.z / c.w * 0.5 + 0.5, 0.0, 1.0); }\n" +
+      "float r3Z(vec3 p){ return -(uView * vec4(p, 1.0)).z; }\n";
+    s += kind === "scene"
+      ? "vec4 r3Scene(vec2 uv){ return texture2D(uSceneColor, uv); }\n" +
+        "float r3SceneZ(vec2 uv){ return texture2D(uSceneDepth, uv).r; }\n" +
+        "float r3SceneT(vec2 uv, vec3 rd){ return texture2D(uSceneDepth, uv).r / max(dot(rd, r3Fwd()), 1e-4); }\n"
+      : "vec4 r3Src(vec2 uv){ return texture2D(uSrc, uv); }\n" +
+        "float r3SceneZ(vec2 uv){ return texture2D(uDepth, uv).r; }\n";
+    return s;
+  }
+  // a uniform value: numbers, 2-4 element arrays (vectors), colours ("#rrggbb"), textures and three objects as they are
+  function setUniform(T, u, v) {
+    if (v == null) return;
+    if (Array.isArray(v) && v.length >= 2 && v.length <= 4 && typeof v[0] === "number") {
+      var C = [null, null, T.Vector2, T.Vector3, T.Vector4][v.length];
+      if (!(u.value instanceof C)) u.value = new C();
+      u.value.fromArray(v);
+    } else if (typeof v === "string") {
+      if (!(u.value instanceof T.Color)) u.value = new T.Color();
+      u.value.set(v);
+    } else u.value = v;
+  }
+  var HASH_GLSL = "float r3Hash(vec2 p){ vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }\n";
+
+  Stage.prototype._graphInit = function () {
+    this.G = { passes: [], scene: [], post: [], targets: {}, views: [], sims: [], pins: [], useDepth: false };
+    this._pending = [];
+    this._sid = 0;
+  };
+  // k.target(name, { w, h, scale, type: "half" | "float" | "byte", depth, samples, filter })
+  Stage.prototype.target = function (name, o) {
+    o = o || {};
+    var T = this.T, G = this.G;
+    if (G.targets[name]) return G.targets[name].rt;
+    var sc = o.scale == null ? 1 : o.scale;
+    var w = Math.max(1, Math.round(o.w != null ? o.w : this.width * this.dpr * sc)), h = Math.max(1, Math.round(o.h != null ? o.h : this.height * this.dpr * sc));
+    var type = o.type === "float" ? T.FloatType : o.type === "byte" ? T.UnsignedByteType : T.HalfFloatType;
+    var f = o.filter === "nearest" ? T.NearestFilter : T.LinearFilter;
+    var rt = colorRT(T, w, h, { type: type, depthBuffer: !!o.depth, samples: o.samples || 0, minFilter: f, magFilter: f });
+    rt.texture.name = "r3target:" + name;
+    G.targets[name] = { name: name, rt: rt, w: w, h: h, cleared: -1 };
+    return rt;
+  };
+  Stage.prototype.targetTexture = function (name) {
+    var t = this.G.targets[name];
+    if (!t) throw new Error('k.targetTexture("' + name + '"): no such target (create it with k.target first)');
+    return t.rt.texture;
+  };
+  Stage.prototype._tgt = function (name) {
+    var t = this.G.targets[name];
+    if (!t) throw new Error('no render target "' + name + '" (k.target("' + name + '", { w, h }) first)');
+    return t;
+  };
+  // k.pass(name, { frag, uniforms, at: "scene" | "post", depth, blend: "replace" | "over" | "add" | "min-depth", target })
+  Stage.prototype.pass = function (name, o) {
+    o = o || {};
+    var T = this.T, G = this.G;
+    var at = o.at || "scene";
+    if (at !== "scene" && at !== "post") throw new Error('k.pass("' + name + '"): at must be "scene" or "post"');
+    if (!o.frag) throw new Error('k.pass("' + name + '"): frag (GLSL3 fragment source) required');
+    var blend = o.blend || (at === "post" ? "replace" : o.depth ? "min-depth" : "over");
+    if (["replace", "over", "add", "min-depth"].indexOf(blend) < 0) throw new Error('k.pass("' + name + '"): blend must be replace | over | add | min-depth');
+    var frag = glslInclude(o.frag);
+    var depth = blend === "min-depth" || !!o.depth;
+    // depth compositing needs the pass to write gl_FragDepth (r3Depth(worldPos) gives the value)
+    var writesDepth = /gl_FragDepth/.test(frag);
+    var p = {
+      name: name, at: at, blend: blend, depth: depth && writesDepth, wantsDepth: depth, writesDepth: writesDepth, frag: frag, user: o.uniforms || {}, target: o.target || null,
+      usesColor: /uSceneColor|r3Scene\b/.test(frag), usesDepth: /uSceneDepth|r3SceneT|r3SceneZ/.test(frag), usesPostDepth: /\buDepth\b|r3SceneZ/.test(frag),
+      tnames: [], mat: null,
+    };
+    var re = /uTarget_(\w+)/g, m;
+    while ((m = re.exec(frag))) if (p.tnames.indexOf(m[1]) < 0) p.tnames.push(m[1]);
+    var uniforms = {
+      uTime: { value: 0 }, uFrame: { value: 0 }, uRes: { value: new T.Vector2(1, 1) }, uCamPos: { value: new T.Vector3() }, uCamMatrixWorld: { value: new T.Matrix4() }, uViewInv: { value: new T.Matrix4() },
+      uView: { value: new T.Matrix4() }, uViewProj: { value: new T.Matrix4() }, uProjInv: { value: new T.Matrix4() }, uProj: { value: new T.Matrix4() }, uNear: { value: 0.05 }, uFar: { value: 400 },
+      uSceneColor: { value: null }, uSceneDepth: { value: null }, uSrc: { value: null }, uDepth: { value: null },
+    };
+    var decl = "";
+    p.tnames.forEach(function (n) { uniforms["uTarget_" + n] = { value: null }; decl += "uniform sampler2D uTarget_" + n + ";\n"; });
+    Object.keys(p.user).forEach(function (k) { var v = p.user[k]; if (v && typeof v === "object" && !Array.isArray(v) && "value" in v && !v.isTexture && !v.isVector3 && !v.isColor) uniforms[k] = v; else if (!(k in uniforms)) uniforms[k] = { value: null }; });
+    var blendOpts = blend === "replace" ? { blending: T.NoBlending }
+      : blend === "add" ? { blending: T.CustomBlending, blendEquation: T.AddEquation, blendSrc: T.OneFactor, blendDst: T.OneFactor, blendSrcAlpha: T.OneFactor, blendDstAlpha: T.OneFactor }
+      : { blending: T.CustomBlending, blendEquation: T.AddEquation, blendSrc: T.OneFactor, blendDst: T.OneMinusSrcAlphaFactor, blendSrcAlpha: T.OneFactor, blendDstAlpha: T.OneMinusSrcAlphaFactor };
+    p.mat = new T.ShaderMaterial(Object.assign({
+      name: "r3pass:" + name, vertexShader: PASS_VERT, fragmentShader: passPrelude(at, toneGlsl(T, this.opts.toneMapping || "neutral", this.opts.exposure == null ? 1 : this.opts.exposure)) + decl + "#line 1\n" + frag, uniforms: uniforms,
+      depthTest: p.depth, depthWrite: p.depth, transparent: true, toneMapped: false,
+    }, blendOpts));
+    G.passes.push(p);
+    (at === "scene" ? G.scene : G.post).push(p);
+    if (at === "scene" || p.usesPostDepth) G.useDepth = true;
+    return p;
+  };
+  Stage.prototype._passBuiltins = function (p, t, cam, W, H) {
+    var u = p.mat.uniforms;
+    u.uTime.value = t;
+    u.uFrame.value = frameIdx(t, this.fps);
+    u.uRes.value.set(W, H);
+    u.uCamPos.value.setFromMatrixPosition(cam.matrixWorld);
+    u.uCamMatrixWorld.value.copy(cam.matrixWorld);
+    u.uViewInv.value.copy(cam.matrixWorld);
+    u.uView.value.copy(cam.matrixWorldInverse);
+    u.uProjInv.value.copy(cam.projectionMatrixInverse);
+    u.uProj.value.copy(cam.projectionMatrix);
+    u.uViewProj.value.multiplyMatrices(cam.projectionMatrix, cam.matrixWorldInverse);
+    u.uNear.value = cam.near; u.uFar.value = cam.far;
+    var self = this, T = this.T;
+    p.tnames.forEach(function (n) { u["uTarget_" + n].value = self._tgt(n).rt.texture; });
+    var user = p.user;
+    for (var k in user) {
+      var v = user[k];
+      if (v && typeof v === "object" && !Array.isArray(v) && "value" in v && !v.isTexture && !v.isVector3 && !v.isColor) {
+        if (typeof v.value === "function") setUniform(T, u[k], v.value(t, self.k));
+        continue;
+      }
+      setUniform(T, u[k], typeof v === "function" ? v(t, self.k) : v);
+    }
+  };
+  Stage.prototype._linearDepth = function (srt, dst, cam) {
+    var S = this.S, L = S.post.lin;
+    L.uniforms.tDepth.value = srt.depthTexture;
+    L.uniforms.near.value = cam.near; L.uniforms.far.value = cam.far;
+    pass(S, L, dst, false);
+  };
+  Stage.prototype._depthRTs = function (W, H) {
+    var T = this.T, S = this.S;
+    var sampleD = lazyRT(S, "sampleD", function () {
+      var rt = colorRT(T, W, H, { depthBuffer: true });
+      var dt = new T.DepthTexture(W, H, T.FloatType);
+      dt.format = T.DepthFormat;
+      rt.depthTexture = dt;
+      return rt;
+    });
+    var depthLin = lazyRT(S, "depthLin", function () { return colorRT(T, W, H, { type: T.FloatType, minFilter: T.NearestFilter, magFilter: T.NearestFilter }); });
+    var sceneColor = lazyRT(S, "sceneColor", function () { return colorRT(T, W, H); });
+    return { sampleD: sampleD, depthLin: depthLin, sceneColor: sceneColor };
+  };
+  Stage.prototype._runScenePass = function (p, srt, ti, cam, W, H) {
+    var S = this.S, r = S.renderer, rts = S.rts;
+    if (p.usesColor) { S.post.copy.uniforms.tSrc.value = srt.texture; pass(S, S.post.copy, rts.sceneColor, false); }
+    if (p.usesDepth) this._linearDepth(srt, rts.depthLin, cam);
+    var u = p.mat.uniforms;
+    u.uSceneColor.value = rts.sceneColor.texture;
+    u.uSceneDepth.value = rts.depthLin.texture;
+    this._passBuiltins(p, ti, cam, W, H);
+    if (p.target) {
+      var tg = this._tgt(p.target);
+      if (tg.cleared !== this._sid) { tg.cleared = this._sid; r.setRenderTarget(tg.rt); r.setClearColor(0x000000, 0); r.clear(true, true, true); }
+      pass(S, p.mat, tg.rt, false);
+    } else pass(S, p.mat, srt, false);
+  };
+  // post passes chain on the accumulated frame; returns the texture the final grade should read
+  Stage.prototype._runPost = function (accumTex, t, cam, W, H, lastSrt) {
+    var S = this.S, rts = S.rts, T = this.T, G = this.G;
+    if (G.post.length === 0) return accumTex;
+    if (lastSrt && lastSrt.depthTexture && G.post.some(function (p) { return p.usesPostDepth; })) this._linearDepth(lastSrt, rts.depthLin, cam);
+    var cur = accumTex, flip = 0;
+    for (var i = 0; i < G.post.length; i++) {
+      var p = G.post[i], u = p.mat.uniforms;
+      u.uSrc.value = cur;
+      u.uDepth.value = rts.depthLin ? rts.depthLin.texture : null;
+      this._passBuiltins(p, t, cam, W, H);
+      var dst;
+      if (p.target) dst = this._tgt(p.target).rt;
+      else dst = flip ? lazyRT(S, "ppB", function () { return colorRT(T, W, H); }) : lazyRT(S, "ppA", function () { return colorRT(T, W, H); });
+      pass(S, p.mat, dst, false);
+      if (!p.target) { cur = dst.texture; flip ^= 1; }
+    }
+    return cur;
+  };
+  // k.view(name, { scene, camera, target, hide, pose(t, k), environment }): a second world rendered into a target every sample
+  Stage.prototype.view = function (name, o) {
+    o = o || {};
+    if (!o.scene || !o.camera) throw new Error('k.view("' + name + '"): scene and camera required');
+    var tn = o.target || name;
+    if (!this.G.targets[tn]) this.target(tn, { depth: true, samples: 4 });
+    var tg = this._tgt(tn);
+    if (!tg.rt.depthBuffer) tg.rt.depthBuffer = true;
+    var v = { name: name, scene: o.scene, camera: o.camera, target: tg, hide: o.hide ? [].concat(o.hide) : [], pose: o.pose || null, environment: o.environment !== false, tone: false };
+    this.G.views.push(v);
+    return v;
+  };
+  Stage.prototype._runViews = function (ti) {
+    var S = this.S, r = S.renderer, G = this.G, o = this.opts, self = this;
+    for (var i = 0; i < G.views.length; i++) {
+      var v = G.views[i];
+      if (v.environment && !v.scene.environment && this.scene.environment) { v.scene.environment = this.scene.environment; v.scene.environmentIntensity = this.scene.environmentIntensity; }
+      toneMapMaterials(this.T, v.scene, o.toneMapping || "neutral", o.exposure == null ? 1 : o.exposure);
+      if (v.pose) v.pose(ti, this.k);
+      v.scene.updateMatrixWorld(true);
+      var prev = v.hide.map(function (h) { var p = h.visible; h.visible = false; return p; });
+      var bg = v.scene.background;
+      r.setRenderTarget(v.target.rt);
+      r.setClearColor(bg && bg.isColor ? bg : 0x000000, bg && bg.isColor ? 1 : 0);
+      r.clear(true, true, true);
+      r.render(v.scene, v.camera);
+      v.hide.forEach(function (h, j) { h.visible = prev[j]; });
+    }
+  };
+
+  // ------------------------------------------------------------------ deterministic simulation
+  // k.simulate(name, { init(state, k), step(state, dt, t, k), dt, checkpointEvery }) -> { at(t) }
+  // The state at time t is the fixed-step integration from 0: step N runs at t = N*dt. Checkpoints (a clone of the
+  // state every checkpointEvery seconds) are written as the integration passes them, so a seek restarts from the
+  // nearest one at or before t, never from 0 twice; a cursor continues forward for the common sequential reads.
+  // The fraction of a step between N*dt and t is integrated on a throwaway clone, so any t gives a smooth state.
+  function cloneState(s) { return typeof structuredClone === "function" ? structuredClone(s) : JSON.parse(JSON.stringify(s)); }
+  function makeSim(kit, name, o) {
+    if (!o || typeof o.step !== "function") throw new Error('k.simulate("' + name + '"): step(state, dt, t, k) required');
+    var dt = o.dt || 1 / 120;
+    var K = Math.max(1, Math.round((o.checkpointEvery == null ? 0.5 : o.checkpointEvery) / dt));
+    var cps = {}, cursor = null, cn = -1, stats = { steps: 0, restores: 0 };
+    function adv(s, n, h) { var r = o.step(s, h == null ? dt : h, n * dt, kit); return r !== undefined ? r : s; }
+    function fresh() { var s = {}; var r = o.init ? o.init(s, kit) : undefined; return r !== undefined ? r : s; }
+    function stateAt(N) {
+      var base = Math.floor(N / K) * K;
+      if (!cursor || cn > N || cn < base) {
+        if (!(base in cps)) {
+          var hi = -1;
+          for (var key in cps) { var kn = Number(key); if (kn < base && kn > hi) hi = kn; }
+          var s = hi < 0 ? fresh() : cloneState(cps[hi]), n = hi < 0 ? 0 : hi;
+          if (hi < 0) cps[0] = cloneState(s);
+          while (n < base) { s = adv(s, n); n++; stats.steps++; if (n % K === 0) cps[n] = cloneState(s); }
+          if (!(base in cps)) cps[base] = cloneState(s);
+        }
+        cursor = cloneState(cps[base]); cn = base; stats.restores++;
+      }
+      while (cn < N) { cursor = adv(cursor, cn); cn++; stats.steps++; if (cn % K === 0 && !(cn in cps)) cps[cn] = cloneState(cursor); }
+      return cursor;
+    }
+    return {
+      name: name, dt: dt, stats: stats,
+      // the state at time t: treat it as read-only
+      at: function (t) {
+        t = Math.max(0, t || 0);
+        var N = Math.floor(t / dt + 1e-9), rem = t - N * dt;
+        var s = stateAt(N);
+        if (rem > 1e-9 && o.partial !== false) { var c = cloneState(s); return adv(c, N, rem) || c; }
+        return s;
+      },
+      reset: function () { cps = {}; cursor = null; cn = -1; },
+    };
+  }
+  // k.gpuSimulate(name, { size, fields, init, step, dt, checkpointEvery, uniforms, seed }) -> { at(t) }
+  // State lives in float textures, one per field (default one field "state", sampler tState; "pos" -> tPos).
+  // init/step are GLSL fragment sources (GPUComputationRenderer conventions: vec2 uv = gl_FragCoord.xy / resolution.xy;
+  // gl_FragColor = new state). Available: uDt, uTime (= step*dt), uStep, uSeed, r3Hash(vec2), every field's sampler.
+  // For several fields give init and step as objects keyed by field. State is quantised to dt (use a small dt).
+  // Seeking back restores the nearest checkpoint (a stored texture copy per field every checkpointEvery seconds).
+  function makeGpuSim(stage, name, o) {
+    var T = stage.T, S = stage.S, kit = stage.k;
+    var size = o.size || 64, sx = Array.isArray(size) ? size[0] : size, sy = Array.isArray(size) ? size[1] : size;
+    var fields = o.fields || ["state"];
+    var dt = o.dt || 1 / 240, K = Math.max(1, Math.round((o.checkpointEvery == null ? 0.5 : o.checkpointEvery) / dt));
+    var cap = function (f) { return f.charAt(0).toUpperCase() + f.slice(1); };
+    var src = function (spec, f) { var v = typeof spec === "string" ? spec : spec && spec[f]; if (v == null) throw new Error('k.gpuSimulate("' + name + '"): no ' + 'shader for field "' + f + '"'); return glslInclude(v); };
+    var PRE = "uniform float uDt; uniform float uTime; uniform float uStep; uniform float uSeed;\n" + HASH_GLSL;
+    var sim = { name: name, size: [sx, sy], fields: fields, dt: dt, ready: false, stats: { steps: 0, restores: 0 } };
+    var gpu, vars = {}, cps = {}, cn = -1;
+    function evalUser(v, t) {
+      var us = o.uniforms || {};
+      for (var k in us) { var val = typeof us[k] === "function" ? us[k](t, kit) : us[k]; setUniform(T, v.material.uniforms[k], val); }
+    }
+    function stepOnce(n) {
+      fields.forEach(function (f) {
+        var u = vars[f].material.uniforms;
+        u.uDt.value = dt; u.uTime.value = n * dt; u.uStep.value = n; u.uSeed.value = o.seed || 1;
+        evalUser(vars[f], n * dt);
+      });
+      gpu.compute();
+      sim.stats.steps++;
+    }
+    function save(n) {
+      var c = {};
+      fields.forEach(function (f) { c[f] = gpu.createRenderTarget(sx, sy); gpu.renderTexture(gpu.getCurrentRenderTarget(vars[f]).texture, c[f]); });
+      cps[n] = c;
+    }
+    function restore(n) {
+      fields.forEach(function (f) { gpu.renderTexture(cps[n][f].texture, gpu.getCurrentRenderTarget(vars[f])); });
+      sim.stats.restores++;
+    }
+    sim.build = function (mod) {
+      gpu = new mod.GPUComputationRenderer(sx, sy, S.renderer);
+      gpu.setDataType(T.FloatType);
+      var all = [];
+      fields.forEach(function (f) {
+        var v = gpu.addVariable("t" + cap(f), PRE + src(o.step, f), gpu.createTexture());
+        ["uDt", "uTime", "uStep", "uSeed"].forEach(function (k) { v.material.uniforms[k] = { value: 0 }; });
+        Object.keys(o.uniforms || {}).forEach(function (k) { v.material.uniforms[k] = { value: null }; });
+        vars[f] = v; all.push(v);
+      });
+      fields.forEach(function (f) { gpu.setVariableDependencies(vars[f], all); });
+      var err = gpu.init();
+      if (err) throw new Error('k.gpuSimulate("' + name + '"): ' + err);
+      fields.forEach(function (f) {
+        var m = gpu.createShaderMaterial(PRE + src(o.init, f), { uDt: { value: dt }, uTime: { value: 0 }, uStep: { value: 0 }, uSeed: { value: o.seed || 1 } });
+        all.forEach(function (v) { m.uniforms[v.name] = { value: null }; });
+        gpu.doRenderTarget(m, vars[f].renderTargets[0]);
+        gpu.doRenderTarget(m, vars[f].renderTargets[1]);
+        m.dispose();
+      });
+      gpu.currentTextureIndex = 0;
+      save(0); cn = 0;
+      sim.ready = true;
+    };
+    sim.at = function (t) {
+      if (!sim.ready) throw new Error('k.gpuSimulate("' + name + '").at() before the scene finished building (call it from pose(), not build())');
+      t = Math.max(0, t || 0);
+      var N = Math.floor(t / dt + 1e-9);
+      if (N < cn) { var base = Math.floor(N / K) * K; restore(base); cn = base; }
+      while (cn < N) { stepOnce(cn); cn++; if (cn % K === 0 && !(cn in cps)) save(cn); }
+      var textures = {};
+      fields.forEach(function (f) { textures[f] = gpu.getCurrentRenderTarget(vars[f]).texture; });
+      return { texture: textures[fields[0]], textures: textures, size: sim.size, step: N, time: N * dt };
+    };
+    return sim;
+  }
+
+  // ------------------------------------------------------------------ DOM in 3D
+  // k.pinDom(el, { at: Object3D | [x,y,z], width, height (world units), face: "camera" | "object", px: [w, h], offset, backface })
+  // The element keeps its own CSS size (px); every draw sets transform: matrix3d(...) so that rectangle lands exactly on the
+  // width x height rectangle in the 3D view (a true perspective map). Hidden while any corner is behind the camera.
+  Stage.prototype.pinDom = function (el, o) {
+    el = resolveEl(el);
+    if (!el) throw new Error("k.pinDom: element not found");
+    o = o || {};
+    if (o.at == null || !o.width) throw new Error("k.pinDom needs { at, width } (world units)");
+    var st = el.style;
+    st.position = "absolute"; st.left = "0px"; st.top = "0px"; st.margin = "0"; st.transformOrigin = "0 0"; st.willChange = "transform"; st.pointerEvents = "none";
+    if (o.px) { st.width = o.px[0] + "px"; st.height = o.px[1] + "px"; }
+    var pin = { el: el, o: o };
+    this.G.pins.push(pin);
+    if (this.ready) this._syncPins();
+    return pin;
+  };
+  Stage.prototype._syncPins = function () {
+    var G = this.G;
+    if (!G || !G.pins.length) return;
+    var T = this.T, cam = this.camera, W = this.width, H = this.height;
+    cam.updateMatrixWorld(true);
+    cam.matrixWorldInverse.copy(cam.matrixWorld).invert();
+    var vp = new T.Matrix4().multiplyMatrices(cam.projectionMatrix, cam.matrixWorldInverse);
+    for (var i = 0; i < G.pins.length; i++) {
+      var pin = G.pins[i], o = pin.o, el = pin.el, at = o.at;
+      var C = new T.Vector3(), R = new T.Vector3(1, 0, 0), U = new T.Vector3(0, 1, 0), N = new T.Vector3();
+      var obj = at && at.isObject3D ? at : null;
+      if (obj) { obj.updateWorldMatrix(true, false); C.setFromMatrixPosition(obj.matrixWorld); } else C.set(at[0], at[1], at[2]);
+      if (o.face === "object") {
+        if (obj) { var m = obj.matrixWorld; R.setFromMatrixColumn(m, 0).normalize(); U.setFromMatrixColumn(m, 1).normalize(); }
+        else if (o.rotation) { var q = new T.Quaternion().setFromEuler(new T.Euler(o.rotation[0], o.rotation[1], o.rotation[2])); R.applyQuaternion(q); U.applyQuaternion(q); }
+      } else { R.setFromMatrixColumn(cam.matrixWorld, 0).normalize(); U.setFromMatrixColumn(cam.matrixWorld, 1).normalize(); }
+      N.crossVectors(R, U);
+      if (o.offset) C.addScaledVector(R, o.offset[0] || 0).addScaledVector(U, o.offset[1] || 0).addScaledVector(N, o.offset[2] || 0);
+      var pw = (o.px && o.px[0]) || el.offsetWidth || 100, ph = (o.px && o.px[1]) || el.offsetHeight || 100;
+      var wv = o.width, hv = o.height || (wv * ph) / pw;
+      var corners = [[-1, 1], [1, 1], [1, -1], [-1, -1]], P = [], ok = true;
+      for (var c = 0; c < 4; c++) {
+        var v = new T.Vector4().copy(C.clone().addScaledVector(R, (corners[c][0] * wv) / 2).addScaledVector(U, (corners[c][1] * hv) / 2)).setW(1);
+        v.applyMatrix4(vp);
+        if (v.w <= cam.near * 0.5) { ok = false; break; }
+        P.push([(v.x / v.w * 0.5 + 0.5) * W, (0.5 - (v.y / v.w) * 0.5) * H]);
+      }
+      var signed = 0;
+      if (ok) { for (var j = 0; j < 4; j++) { var a = P[j], b = P[(j + 1) % 4]; signed += a[0] * b[1] - b[0] * a[1]; } }
+      if (!ok || (o.backface === "hide" && signed < 0) || o.visible === false) { el.style.visibility = "hidden"; continue; }
+      // the unit square -> the projected quad (Heckbert), then scaled to the element's px box
+      var x0 = P[0][0], y0 = P[0][1], x1 = P[1][0], y1 = P[1][1], x2 = P[2][0], y2 = P[2][1], x3 = P[3][0], y3 = P[3][1];
+      var dx1 = x1 - x2, dx2 = x3 - x2, dx3 = x0 - x1 + x2 - x3, dy1 = y1 - y2, dy2 = y3 - y2, dy3 = y0 - y1 + y2 - y3;
+      var g = 0, h = 0, det = dx1 * dy2 - dx2 * dy1;
+      if (Math.abs(dx3) > 1e-9 || Math.abs(dy3) > 1e-9) { g = (dx3 * dy2 - dx2 * dy3) / det; h = (dx1 * dy3 - dx3 * dy1) / det; }
+      var A = x1 - x0 + g * x1, B = x3 - x0 + h * x3, D = y1 - y0 + g * y1, E = y3 - y0 + h * y3;
+      var f = function (n) { return Number(n.toPrecision(12)); };
+      el.style.transform = "matrix3d(" + [A / pw, D / pw, 0, g / pw, B / ph, E / ph, 0, h / ph, 0, 0, 1, 0, x0, y0, 0, 1].map(f).join(",") + ")";
+      el.style.visibility = "";
+    }
+  };
+
   // screen-space travel of the scene across the shutter, from bounding-box corners of what's visible
   Stage.prototype._travel = function (t, half) {
     var T = this.T, self = this;
-    var meshes = [];
-    this.scene.traverseVisible(function (o) { if (o.isMesh && o.geometry && meshes.length < 64 && o.name !== "ground") meshes.push(o); });
+    var meshes = [], skipped = false;
+    this.scene.traverseVisible(function (o) { if (o.isMesh && o.geometry && meshes.length < 64 && o.name !== "ground" ) { if (o.field || (o.userData && o.userData.r3NoTravel)) skipped = true; else meshes.push(o); } });
+    var probes = [];
+    if (skipped || (this.G && this.G.scene.length)) {
+      // a raymarched world has no meshes to measure: probe fixed points around where the camera looks
+      var tg = at(t, (this.camKeys || {}).target) || [0, 0, 0], rad = Math.max(1, this._focus || 10) * 0.35;
+      for (var pi = 0; pi < 8; pi++) probes.push(new T.Vector3(tg[0] + (pi & 1 ? rad : -rad), tg[1] + (pi & 2 ? rad : -rad), tg[2] + (pi & 4 ? rad : -rad)));
+    }
     var corners = function () {
       var out = [];
+      probes.forEach(function (v) { out.push(v.clone().project(self.camera)); });
       meshes.forEach(function (m) {
         if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
         var b = m.geometry.boundingBox;
-        for (var i = 0; i < 8; i++) {
-          var v = new T.Vector3(i & 1 ? b.max.x : b.min.x, i & 2 ? b.max.y : b.min.y, i & 4 ? b.max.z : b.min.z).applyMatrix4(m.matrixWorld).project(self.camera);
-          out.push(v);
+        // an InstancedMesh: a few real instance transforms (its base box says nothing about where the instances are)
+        var mats = [m.matrixWorld];
+        if (m.isInstancedMesh && m.count > 0) {
+          mats = [];
+          for (var q = 0; q < Math.min(4, m.count); q++) {
+            var im = new T.Matrix4();
+            m.getMatrixAt(Math.floor((q * m.count) / Math.min(4, m.count)), im);
+            mats.push(new T.Matrix4().multiplyMatrices(m.matrixWorld, im));
+          }
         }
+        mats.forEach(function (mw) {
+          for (var i = 0; i < 8; i++) {
+            out.push(new T.Vector3(i & 1 ? b.max.x : b.min.x, i & 2 ? b.max.y : b.min.y, i & 4 ? b.max.z : b.min.z).applyMatrix4(mw).project(self.camera));
+          }
+        });
       });
       return out;
     };
@@ -798,7 +1313,9 @@
     }
     if (dof) n = Math.max(n, q.dofSamples);
     if (this.opts.antialias !== false) n = Math.max(n, quality() === "final" ? 4 : 1);
-    return Math.max(1, Math.min(q.maxSamples, n));
+    if (this.G && this.G.useDepth) n = Math.max(n, 2);
+    var cap = this.opts.maxSamples ? Math.min(q.maxSamples, this.opts.maxSamples) : q.maxSamples;
+    return Math.max(1, Math.min(cap, n));
   };
 
   // draw the frame at local time t into this stage's canvas
@@ -817,11 +1334,12 @@
       var mb = o.motionBlur === false ? null : o.motionBlur || { shutter: 0.5 };
       var shutter = mb ? (mb.shutter == null ? 0.5 : mb.shutter) / this.fps : 0;
       var c = this.camKeys || {};
-      var fstop = c.fstop, apertureR = c.aperture;
+      
       r.setRenderTarget(rts.accum);
       r.setClearColor(0x000000, 0);
       r.clear(true, true, true);
       var bg = this.scene.background;
+      var G = this.G, useD = !!(G && G.useDepth), D = useD ? this._depthRTs(W, H) : null, lastSrt = null;
       for (var i = 0; i < n; i++) {
         var ti = n > 1 && shutter > 0 ? t + shutter * ((i + 0.5) / n - 0.5) : t;
         this._pose(ti);
@@ -829,6 +1347,7 @@
         if (n > 1) {
           // aperture: shift the eye on a disc and shear the frustum so the focus plane stays put
           var ndcX = 0, ndcY = 0;
+          var fstop = this._fstop, apertureR = this._aperture;
           if (fstop || apertureR) {
             var R = apertureR != null ? apertureR : ((this._mm / 1000) / (2 * fstop)) * (o.unitsPerMeter || 1);
             var u1 = halton(i + 1, 5), u2 = halton(i + 1, 7);
@@ -847,12 +1366,15 @@
           P[8] -= ndcX; P[9] -= ndcY;
           cam.projectionMatrixInverse.copy(cam.projectionMatrix).invert();
         }
-        var srt = n > 1 ? rts.sample1 : rts.sample;
+        var srt = useD ? D.sampleD : n > 1 ? rts.sample1 : rts.sample;
+        if (G) { this._sid++; if (G.views.length) this._runViews(ti); }
         r.setRenderTarget(srt);
         var bgc = bg && bg.isColor ? bg : null;
         r.setClearColor(bgc || 0x000000, bgc ? 1 : 0);
         r.clear(true, true, true);
         r.render(this.scene, cam);
+        if (G && G.scene.length) for (var pi = 0; pi < G.scene.length; pi++) this._runScenePass(G.scene[pi], srt, ti, cam, W, H);
+        lastSrt = srt;
         S.post.weigh.uniforms.tSrc.value = srt.texture;
         S.post.weigh.uniforms.weight.value = 1 / n;
         pass(S, S.post.weigh, rts.accum, false);
@@ -861,15 +1383,16 @@
       this._pose(t);
       this.camera.updateProjectionMatrix();
       // post
+      var finalTex = G && G.post.length ? this._runPost(rts.accum.texture, t, this.camera, W, H, lastSrt) : rts.accum.texture;
       var P2 = o.post || {};
       var bloom = P2.bloom ? (typeof P2.bloom === "number" ? { strength: P2.bloom } : P2.bloom) : null;
       var halation = P2.halation || 0;
       var fin = S.post.fin.uniforms;
       if (bloom || halation) {
-        S.post.bright.uniforms.tSrc.value = rts.accum.texture;
+        S.post.bright.uniforms.tSrc.value = finalTex;
         S.post.bright.uniforms.threshold.value = bloom && bloom.threshold != null ? bloom.threshold : 1.15;
         S.post.bright.uniforms.knee.value = bloom && bloom.knee != null ? bloom.knee : 0.1;
-        var src = rts.accum.texture;
+        var src = finalTex;
         for (var lv = 0; lv < rts.chain.length; lv++) {
           var pair = rts.chain[lv];
           if (lv === 0) pass(S, S.post.bright, pair[0], true);
@@ -879,7 +1402,7 @@
           src = pair[0].texture;
         }
       }
-      fin.tSrc.value = rts.accum.texture;
+      fin.tSrc.value = finalTex;
       fin.tB0.value = rts.chain[0][0].texture; fin.tB1.value = rts.chain[1][0].texture; fin.tB2.value = rts.chain[2][0].texture; fin.tB3.value = rts.chain[3][0].texture;
       fin.bloom.value = bloom ? (bloom.strength == null ? 0.6 : bloom.strength) : 0;
       fin.bloomRadius.value = bloom && bloom.radius != null ? bloom.radius : 0.5;
@@ -899,6 +1422,7 @@
       x.setTransform(1, 0, 0, 1, 0, 0);
       x.clearRect(0, 0, this.canvas.width, this.canvas.height);
       x.drawImage(S.canvas, 0, 0, W, H, 0, 0, this.canvas.width, this.canvas.height);
+      if (G && G.pins.length) this._syncPins();
       if (o.onDraw) o.onDraw(t, this.k);
       this.lastT = t;
       this.stats.draws++;
@@ -918,15 +1442,18 @@
       tracks: this.tracks, camera: !!o.camera, motionBlur: o.motionBlur === false ? false : o.motionBlur || { shutter: 0.5 },
       dof: !!(o.camera && (o.camera.fstop || o.camera.aperture)), post: o.post || {}, toneMapping: o.toneMapping || "neutral",
       environment: o.environment === false ? "none" : (o.environment && o.environment.preset) || o.environment || "studio",
-      background: o.background || "transparent", stats: this.stats, error: this.error, declared: o.declare || null,
+      background: o.background || "transparent",
+      graph: this.G ? { passes: this.G.passes.map(function (p) { return { name: p.name, at: p.at, blend: p.blend, depth: p.depth }; }), targets: Object.keys(this.G.targets), views: this.G.views.map(function (v) { return v.name; }), sims: this.G.sims.map(function (v) { return v.name; }), pins: this.G.pins.length } : null,
+      stats: this.stats, error: this.error, declared: o.declare || null,
     };
   };
 
   var api = {
     version: VERSION, three: THREE_VERSION, base: BASE,
     stage: function (opts) { return new Stage(opts); },
-    loadThree: loadThree, addon: addon,
+    loadThree: loadThree, addon: addon, include: glslInclude,
     at: at, keys: at, prog: prog, ease: ease, lens: lens, orbit: orbit, rng: mulberry32, frameIdx: frameIdx, halton: halton,
   };
   window.Rasan3D = api;
+  loadLib(); // glsl.js next to this file: Rasan3D.glsl, Rasan3D.tube, Rasan3D.instanceField
 })();

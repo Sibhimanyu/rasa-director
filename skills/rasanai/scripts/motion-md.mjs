@@ -7,6 +7,9 @@
 //   node motion-md.mjs write --personality editorial-mask [--adjust slower,calmer] \
 //        --out <dir>/motion.md [--mode confirmed|auto] [--reason "..."] [--emit-personality <file.json>]
 //   node motion-md.mjs write --language snappy --out <dir>/motion.md   (a motion-language term from the taxonomy)
+//   node motion-md.mjs write --design-system <run>/design/<label> --out <dir>/motion.md [--reason "..."]
+//        (a bespoke system: its blend.json motion_contract, on the nearest motion language, binds the film;
+//         the system's "## Motion and camera" section is the guidance the animators read)
 //   node motion-md.mjs adjectives          -> list supported adjustments
 //   node motion-md.mjs show --file motion.md
 import fs from "node:fs";
@@ -14,6 +17,8 @@ import { parseArgs, die, getPersonality, writeFrontmatterDoc, readFrontmatterDoc
 import "./lib/motion-lang.mjs"; // registers motion-language terms ("lang-snappy") with getPersonality
 import { ADJUST, applyAdjustments } from "./lib/adjust.mjs";
 import { track } from "./lib/report.mjs";
+import path from "node:path";
+import { loadSystem } from "./lib/system.mjs";
 export { applyAdjustments };
 
 function motionMd(p, { mode, reason }) {
@@ -64,7 +69,34 @@ ${reason ? `\n## Why this personality\n\n${reason}\n` : ""}`;
 const args = parseArgs();
 const cmd = args._[0];
 track(cmd === "write" ? "Writing the motion rules (motion.md)" : null, cmd === "write" ? "Motion rules written" : null);
+// a bespoke system's contract laid over its nearest motion language (numbers from blend.json, notes from DESIGN.md)
+function systemPersonality(dir) {
+  const S = loadSystem(dir);
+  if (!S.blend || !S.md) die(`${dir} is not a design system (DESIGN.md and blend.json)`);
+  const mc = S.blend.motion_contract || {};
+  const lang = String(mc.language || (S.blend.stack || {})["motion-language"] || "smooth").replace(/^lang-/, "");
+  const p = JSON.parse(JSON.stringify(getPersonality(`lang-${lang}`)));
+  if (Array.isArray(mc.scale_ms) && mc.scale_ms.length >= 4) { p.tempo.scale_ms = mc.scale_ms.map(Number); p.demo.enter_ms = p.tempo.scale_ms[2]; p.demo.move_ms = p.tempo.scale_ms[3] || p.demo.move_ms; p.demo.exit_ms = p.tempo.scale_ms[1]; }
+  if (mc.easing) for (const k of ["enter", "exit", "move"]) if (mc.easing[k]) p.easing[k] = mc.easing[k];
+  if (mc.stagger_ms) p.stagger.each_ms = Number(mc.stagger_ms);
+  if (mc.hold_ms) { p.holds.min_ms = Number(mc.hold_ms); p.demo.hold_ms = Math.max(p.demo.hold_ms, Number(mc.hold_ms)); }
+  if (Array.isArray(mc.banned) && mc.banned.length) p.banned = [...new Set([...p.banned, ...mc.banned])];
+  const name = (S.blend.name || path.basename(dir));
+  p.id = `system-${path.basename(dir).toLowerCase()}`; p.name = name; p.language = lang;
+  p.oneLiner = S.blend.one_line || p.oneLiner;
+  const sec = (S.md.match(/^##\s+Motion and camera[^\n]*\n([\s\S]*?)(?=\n##\s|(?![\s\S]))/mi) || [])[1];
+  p.builder_notes = `**Bespoke motion language: ${name}** (on ${lang}). ${p.oneLiner}\n\n${(sec || "").trim()}`;
+  return p;
+}
+
 if (cmd === "write") {
+  if (args["design-system"]) {
+    const p = applyAdjustments(systemPersonality(String(args["design-system"])), String(args.adjust || "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean));
+    if (!args.out) die("--out required");
+    writeFile(args.out, motionMd(p, { mode: args.mode || "confirmed", reason: args.reason }));
+    console.log(JSON.stringify({ wrote: args.out, personality: p.id, easing: p.easing, scale_ms: p.tempo.scale_ms, from: String(args["design-system"]) }, null, 2));
+    process.exit(0);
+  }
   if (args.language && !args.personality) args.personality = `lang-${String(args.language).replace(/^lang-/, "")}`;
   if (!args.personality) die("--personality <swatch id> or --language <motion-language term> required");
   if (!args.out) die("--out required");

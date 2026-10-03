@@ -4,6 +4,8 @@
 // `npx hyperframes render`. Prints JSON. Method and costs: references/finish.md.
 //
 //   node finish.mjs blur  --project <dir> --out <mp4> [--fps 30] [--shutter 0.5] [--samples 4..32|auto]  (above 8 at 30 fps: phase-shifted passes, see finish.md)
+//                         [--sharp "t0-t1,t2-t3" | --sharp-scenes 3,5]   (no blur on these: stepped / on-twos scenes keep their steps; also any scene
+//                          whose frame root or index clip carries data-finish-blur="off" is left sharp automatically; --no-auto-sharp turns that off)
 //                         [--quality draft|delivery] [--crf 18] [--composition <file>] [--workers n] [--keep]
 //   node finish.mjs grade --in <mp4> --out <mp4> [--grain 0.03] [--halation 0.2] [--vignette 0.2]
 //                         [--bloom 0] [--lut <cube>] [--seed 1] [--probe x,y,w,h]
@@ -14,6 +16,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { parseArgs, die } from "./lib/common.mjs";
+import { sharpRanges as sharpRangesOf, graphWithSharp } from "./lib/sharp.mjs";
 
 const args = parseArgs();
 const cmd = args._[0];
@@ -304,7 +307,9 @@ function blurRender(tmpDir) {
   const { M, effShutter, chain } = blurChain({ N, shutter, fps });
   // interleave: pass k frame i is sub-frame i*K + k at time (i*K+k) / (R*K)
   const pre = passes === 1 ? "[0:v]" : files.map((_, k) => `[${k}:v]setpts=(N*${passes}+${k})/(${R * passes}*TB)[p${k}]`).join(";") + ";" + files.map((_, k) => `[p${k}]`).join("") + `interleave=nb_inputs=${passes},`;
-    return { over: files[0], files, passes, graphIn: (passes === 1 ? "[0:v]" : pre) + chain, fps, N, M, effShutter, chain, renderSeconds, preSeconds, motion, notes, quality };
+  const ranges = sharpRangesOf(project, args);
+  if (ranges.length) notes.push(`sharp (not blurred): ${ranges.map((r) => `${r[2]} ${r[0]}-${r[1]}s`).join(", ")}`);
+    return { over: files[0], files, passes, sharp: ranges, graphIn: graphWithSharp(passes === 1 ? "[0:v]" : pre, chain, { N, fps, ranges }), fps, N, M, effShutter, chain, renderSeconds, preSeconds, motion, notes, quality };
 }
 
 function report(extra) {
@@ -341,6 +346,7 @@ if (cmd === "blur" || cmd === "all") {
   const o = probe(out);
   report({
     ok: true, command: cmd, out, fps: b.fps, samples: b.N,
+    sharp: b.sharp && b.sharp.length ? b.sharp.map((r) => ({ from_s: r[0], to_s: r[1], why: r[2] })) : undefined,
     window: { subframes: b.M, shutter_requested: clamp(num(args.shutter, 0.5), 0.05, 1), shutter_effective: b.effShutter, taps: b.M ? b.M + 1 : 1, note: "centred on each frame time; end taps half weight" },
     frames: { expected: expectFrames, got: o.frames }, audio: o.hasAudio,
     auto: b.motion ? { motion: b.motion, pre_pass_seconds: b.preSeconds } : undefined,

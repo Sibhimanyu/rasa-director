@@ -7,6 +7,12 @@
 //        [--headline "..."] [--sub "..."] [--brand DESIGN.md [--mode light|dark]] [--ground light|dark] [--seed s] [--recent style,ids] [--stills]
 //        -> <dir>/index.html (the board grid), <dir>/looks.json, <dir>/<A..>/frame.md (+ board.png with --stills)
 //   node design.mjs stills --dir <folder> [--aspect 16:9]   -> PNG stills of Claude's style frames (one .html per key frame)
+//   node design.mjs check-system --dir <run>/design/<label> [--brand DESIGN.md] [--offline]   -> the gate for ONE bespoke design system (exit 0 / 2)
+//   node design.mjs check-systems --run <run> [--brand DESIGN.md] [--offline]                   -> the gate for all three + that they differ
+//   node design.mjs look-payload --run <run> [--recommended sure|bold|wild] [--hook "<first line>"] [--sub "..."] [--out <file>]
+//        -> the console's Look payload {styles:[{id,name,blend,why,style:{recipe,three?}}], recommended, hook}: exactly the three bespoke systems
+//   node design.mjs choose-system --run <run> --label Sure|Bold|Wild --decisions <decisions.json> [--mode light|dark] [--preset <id>]
+//        -> (--preset: a lyric video's technical frame.md, the gate wants a preset verbatim)  design/<label>/DESIGN.md becomes the film's look: <run>/look/{DESIGN.md,frame.md}, decisions.look + picks + design_system
 //   node design.mjs pick --looks <dir>/looks.json --id B --decisions <decisions.json>
 //        -> merges the look's terms (visual style, typography) into decisions.json and prints its frame.md
 import fs from "node:fs";
@@ -15,12 +21,14 @@ import { parseArgs, die, readJSON, writeFile, esc, normalizeAspect, chromeScreen
 import { generateLooks, lookAsBrand } from "./lib/looks.mjs";
 import { readDesignMd, toFrameMd, contrast } from "./lib/design-md.mjs";
 import { track } from "./lib/report.mjs";
+import { checkSystemFull, checkSystems, firstLine, lookPayload, chooseSystem, LABELS } from "./lib/system.mjs";
+import { libraryIds } from "./library.mjs";
 
 const args = parseArgs();
 const cmd = args._[0];
 track(
-  { looks: `Designing ${args.count || 6} looks${args.brand ? " in your brand" : ""}`, pick: "Applying the look you picked", stills: "Rendering the style frames as stills" }[cmd],
-  { looks: "Looks ready: palette, type and layout for each", pick: "Look applied: its frame.md is the video's design system", stills: "Style frames rendered" }[cmd]
+  { looks: `Designing ${args.count || 6} looks${args.brand ? " in your brand" : ""}`, pick: "Applying the look you picked", stills: "Rendering the style frames as stills", "choose-system": "Making your pick the film's look" }[cmd],
+  { looks: "Looks ready: palette, type and layout for each", pick: "Look applied: its frame.md is the video's design system", stills: "Style frames rendered", "choose-system": "Your look is set: its frame.md is the video's design system" }[cmd]
 );
 
 function fontLinks(looks) {
@@ -190,4 +198,28 @@ if (cmd === "looks") {
   }
   console.log(JSON.stringify({ ok: !problems.length, images: out, ...(problems.length ? { problems } : {}) }, null, 2));
   if (problems.length) process.exit(2);
-} else die("usage: design.mjs looks|pick|stills (see the header)");
+} else if (cmd === "check-system") {
+  if (!args.dir) die("--dir <run>/design/<label> required");
+  const r = await checkSystemFull(path.resolve(String(args.dir)), { hook: args.hook && args.hook !== true ? String(args.hook) : undefined, libraryIds: libraryIds(), brand: args.brand && args.brand !== true ? String(args.brand) : null, offline: !!args.offline, label: args.label && args.label !== true ? String(args.label) : undefined, mode: args.mode });
+  console.log(JSON.stringify({ ok: !r.P.length, problems: r.P, warnings: r.W, system: r.info }, null, 2));
+  process.exit(r.P.length ? 2 : 0);
+} else if (cmd === "check-systems") {
+  if (!args.run) die("--run <run dir> required");
+  const run = path.resolve(String(args.run));
+  const dirs = LABELS.map((l) => path.join(run, "design", l)).filter((d) => fs.existsSync(d));
+  if (dirs.length !== 3) die(`the design desk makes exactly three systems (Sure, Bold, Wild); found ${dirs.length} in ${args.run}/design`);
+  const r = await checkSystems(dirs, { hook: args.hook && args.hook !== true ? String(args.hook) : firstLine(run), libraryIds: libraryIds(), brand: args.brand && args.brand !== true ? String(args.brand) : null, offline: !!args.offline });
+  console.log(JSON.stringify({ ok: !r.P.length, problems: r.P, warnings: r.W, pairs: r.pairs, systems: r.systems }, null, 2));
+  process.exit(r.P.length ? 2 : 0);
+} else if (cmd === "look-payload") {
+  if (!args.run) die("--run <run dir> required");
+  const pl = lookPayload(path.resolve(String(args.run)), { recommended: args.recommended, hook: args.hook && args.hook !== true ? String(args.hook) : "", sub: args.sub && args.sub !== true ? String(args.sub) : "" });
+  if (pl.styles.length !== 3) die(`the Look step shows exactly the three bespoke systems; ${pl.styles.length} are ready in ${args.run}/design`);
+  if (args.out) writeFile(path.resolve(String(args.out)), JSON.stringify(pl, null, 2) + "\n");
+  console.log(JSON.stringify(pl, null, 2));
+} else if (cmd === "choose-system") {
+  if (!args.run || !args.label || !args.decisions) die("--run <run dir> --label Sure|Bold|Wild --decisions <decisions.json> required");
+  const label = LABELS.find((l) => l.toLowerCase() === String(args.label).toLowerCase());
+  if (!label) die("--label must be Sure, Bold or Wild");
+  try { console.log(JSON.stringify(chooseSystem(path.resolve(String(args.run)), label, String(args.decisions), { mode: args.mode }), null, 2)); } catch (e) { die(e.message); }
+} else die("usage: design.mjs looks|pick|stills|check-system|check-systems|look-payload|choose-system (see the header)");

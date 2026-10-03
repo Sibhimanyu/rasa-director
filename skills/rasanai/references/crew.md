@@ -20,6 +20,8 @@ Everything deterministic stays a script (`story.mjs check`, `sound.mjs fit`, `ob
 | | `precedent-researcher`: the brand's past launch films and the category's best, measured shot by shot | during the Brief (public brands) | 1 | session |
 | | `local-scout`: the product's code on this computer, **with the user's permission** | during the Brief | 1 per approved folder | fast is fine |
 | | `research-lead`: one truth sheet, one claims ledger, one brand, one asset kit, a one-page briefing | after the desk | 1 | session |
+| Design | `design-researcher`: the subject's own visual world, its category's clichés, 8 to 12 library references that fit (`research/design.md`, `design-refs.json`) | during the Brief, parallel with research | 1 | session |
+| | `design-system-designer`: ONE bespoke design system for the chosen story, blended from 2 to 4 library references (`design/<label>/DESIGN.md`, `recipe.json`, `blend.json`); with a brand, Sure is the brand extended | after the story is chosen (Look) | 3 (Sure, Bold, Wild); a lyric video: 1, from the chosen treatment | session |
 | Writers' room | `script-writer`: one script around one device | Story | 3 (Sure, Bold, Wild) | session |
 | | `treatment-writer`: one treatment of a song (concept, style bible, motifs, a plate per lyric section, every line an idea) | Story, `music-to-video` only | 3 (Sure, Bold, Wild), instead of the script writers | session |
 | | `script-editor`: the hostile reader; line edits, verdicts, a recommendation | Story | 1 | session |
@@ -28,7 +30,7 @@ Everything deterministic stays a script (`story.mjs check`, `sound.mjs fit`, `ob
 | Animation | `scene-animator`: one scene (2D, 3D or hybrid), built toward its key frame, its seams exact, its motion seen and fixed | Build | 1 per scene | session |
 | Review | `critic`: lenses `frames`, `motion`, `film`, `grounding`; default reject | Animatic, Build, Final | 1 per lens and round | session |
 
-"Session" means the Director's own model: creative and judging work is never downgraded. "Fast is fine" means a faster model may run it when the harness lets you choose (in Claude Code: `model: "sonnet"` on the Agent call).
+Model column: see `models.md` (the prompt each member gets adapts to the model that runs it; `crew.mjs plan --model <id>`). The design desk is described in `design-desk.md`. "Session" means the Director's own model: creative and judging work is never downgraded. "Fast is fine" means a faster model may run it when the harness lets you choose (in Claude Code: `model: "sonnet"` on the Agent call).
 
 ## The flow, against the five calls
 

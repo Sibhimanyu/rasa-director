@@ -167,20 +167,15 @@
 
   /* style gallery */
   .spec { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+  .look-stage { margin: 4px 0 22px; border-radius: 14px; border: 1px solid var(--line-2, var(--line)); box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  .spec.spec-live .spec-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .spec.spec-live .spec-frame { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #101418; pointer-events: none; transition: opacity .35s ease; }
   .spec > .rp-stage { position: absolute; left: 0; top: 0; }
   .brand-toggle { margin: -6px 0 14px; }
-  .gallery { display: none; margin-top: 26px; border-top: 1px solid var(--line); padding-top: 18px; }
-  .gallery.open { display: block; }
-  .gal-head { display: grid; gap: 12px; margin-bottom: 14px; }
-  .gal-search { width: 100%; border: 1px solid var(--line-2); border-radius: 999px; padding: 11px 18px; font-size: 15px; background: var(--panel); }
-  .gal-search:focus { border-color: var(--accent); outline: none; }
-  .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
   .choice.mini .body { padding: 9px 11px 11px; gap: 2px; }
   .choice.mini h2 { font-size: 15px; }
   .choice.mini .meta { font-size: 10px; }
   .choice.mini .tick { width: 22px; height: 22px; font-size: 12px; top: 8px; right: 8px; }
-  .gal-bar { position: sticky; bottom: 12px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
-  .gal-bar .btn.primary { background: #fff; color: var(--ink); border-color: #fff; }
 
   /* shared panel parts (the step panels below use these) */
   .grid { display: grid; gap: 14px; }
@@ -468,11 +463,9 @@
   .reply div b { display: block; font-size: 12px; color: var(--ink-3); font-weight: 500; margin-bottom: 4px; }
   /* old panels on the dark surface */
   .card, .choice, .clip, details.dim, .opt, .track, table.scenes td, .formula, .stage, .log, .cellpick button { background: var(--panel); }
-  .gal-bar { background: var(--panel-2); color: var(--ink); }
-  .gal-bar .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .btn { background: var(--panel-2); color: var(--ink); border-color: var(--line-2); }
   .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-  .field input, .field textarea, .field select, table.scenes input, table.scenes textarea, table.scenes select, .gal-search, .toolbar select { background: var(--bg); color: var(--ink); border-color: var(--line-2); }
+  .field input, .field textarea, .field select, table.scenes input, table.scenes textarea, table.scenes select, .toolbar select { background: var(--bg); color: var(--ink); border-color: var(--line-2); }
   .pick { background: var(--ink); color: var(--bg); }
   .tag.rec { background: var(--ink); color: var(--bg); }
   .choice.on { box-shadow: none; }
@@ -681,7 +674,7 @@
       var rec = d.recommended || (sugg[0] || {}).id;
       if (!local.presetSel || !byId[local.presetSel]) local.presetSel = rec;
       var cards = [];
-      function select(id) { local.presetSel = id; cards.forEach(function (c) { var on = c._id === id; c.classList.toggle("on", on); c.setAttribute("aria-checked", on ? "true" : "false"); }); useBtn.textContent = "Use " + byId[id].name; barName.textContent = byId[id].name; }
+      function select(id) { local.presetSel = id; cards.forEach(function (c) { var on = c._id === id; c.classList.toggle("on", on); c.setAttribute("aria-checked", on ? "true" : "false"); }); useBtn.textContent = "Use " + byId[id].name; }
       function card(p, small, badge, why) {
         var c = h("div", { class: "choice" + (small ? " mini" : "") + (local.presetSel === p.id ? " on" : ""), role: "radio", tabindex: "0", "aria-checked": local.presetSel === p.id ? "true" : "false" }, [
           h("span", { class: "tick", "aria-hidden": "true", text: "✓" }),
@@ -704,38 +697,9 @@
       sugg.slice(0, 3).forEach(function (s, i) { top.appendChild(card(byId[s.id], false, i === 0 ? "Claude's pick" : s.rare ? "The unusual one" : null, s.why)); });
       holder.appendChild(top);
       var useBtn = h("button", { class: "btn primary big", onclick: function () { send("direction", "choose", local.presetSel); }, text: "Use " + (byId[local.presetSel] || {}).name });
-      var gal = h("div", { class: "gallery" + (local.galOpen ? " open" : "") });
       holder.appendChild(h("div", { class: "actions" }, [useBtn,
-        h("button", { class: "link", onclick: function () { local.galOpen = !local.galOpen; gal.classList.toggle("open", local.galOpen); if (local.galOpen) { fillGallery(); gal.scrollIntoView({ behavior: "smooth", block: "start" }); } }, text: "Browse all " + g.presets.length + " styles" }),
         d.dimensions ? h("button", { class: "link", onclick: function () { local.full = true; document.getElementById("main")._sig = null; render(); }, text: "Build one term by term" }) : null,
         h("span", { class: "hint", text: "Hover or tap a style to see how it moves" })]));
-      var barName = h("b", { text: (byId[local.presetSel] || {}).name || "" });
-      holder.appendChild(gal);
-      function fillGallery() {
-        if (gal._filled) return; gal._filled = true;
-        local.fam = local.fam || "all"; local.q = local.q || "";
-        var famRow = h("div", { class: "chips" }), grid = h("div", { class: "gal-grid" }), count = h("span", { class: "meta" });
-        var search = h("input", { class: "gal-search", placeholder: "Search styles: shadows, retro, luxury, glass, doodle…", "aria-label": "Search styles", value: local.q });
-        function apply() {
-          var q = local.q.toLowerCase(), n = 0;
-          [].forEach.call(grid.children, function (el) {
-            var p = byId[el._id], hay = [p.name, p.what, (p.aka || []).join(" "), (p.feels || []).join(" "), (p.use || []).join(" "), p.family].join(" ").toLowerCase();
-            var show = (local.fam === "all" || p.family === local.fam) && (!q || hay.indexOf(q) > -1);
-            el.style.display = show ? "" : "none"; if (show) n++;
-          });
-          count.textContent = n + " of " + g.presets.length + " styles";
-          [].forEach.call(famRow.children, function (b) { b.classList.toggle("on", b._fam === local.fam); });
-        }
-        [{ id: "all", name: "All" }].concat(g.families).forEach(function (f) { var b = h("button", { class: "chip", onclick: function () { local.fam = f.id; apply(); }, text: f.name }); b._fam = f.id; famRow.appendChild(b); });
-        search.addEventListener("input", function () { local.q = search.value; apply(); });
-        g.presets.forEach(function (p) { grid.appendChild(card(p, true)); });
-        gal.appendChild(h("div", { class: "gal-head" }, [h("div", { class: "eyebrow", text: "Every style" }), search, famRow, count]));
-        gal.appendChild(grid);
-        gal.appendChild(h("div", { class: "gal-bar" }, [h("span", null, ["Selected: ", barName]), h("button", { class: "btn primary", onclick: function () { send("direction", "choose", local.presetSel); }, text: "Use this style" })]));
-        apply();
-      }
-      if (Q.get("gallery")) { local.galOpen = true; gal.classList.add("open"); } // ?gallery=1 opens it (stills for the docs)
-      if (local.galOpen) fillGallery();
     }
     return [holder];
   }
@@ -1366,27 +1330,71 @@
     // play once, then again whenever the tile is hovered or focused (a timed loop left tiles caught mid-entrance)
     go(null); var tile = box.closest(".film") || box; tile.addEventListener("mouseenter", go); tile.addEventListener("focus", go);
   }
+  // a bespoke system drawn by its own page: specimen.png is the poster until the page (fonts, 3D) is ready, then the page itself,
+  // sandboxed, scaled to the tile, resting on its final frame; hovering plays its window.__specimen.tl from 0
+  function specimenTile(box, tile, fm) {
+    box.classList.add("spec-live");
+    var poster = fm.poster ? h("img", { class: "spec-poster", src: fsUrl(fm.poster), alt: "" }) : h("div", { class: "spec-missing", text: fm.hook || fm.title || "" });
+    box.appendChild(poster);
+    var ifr = h("iframe", { class: "spec-frame", src: fsUrl(fm.specimen), title: fm.title + " specimen", width: 1600, height: 900, tabindex: "-1", "aria-hidden": "true", sandbox: "allow-scripts allow-same-origin" });
+    ifr.style.opacity = "0";
+    var fit = function () { ifr.style.transform = "scale(" + box.clientWidth / 1600 + ")"; };
+    fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box);
+    box.appendChild(ifr);
+    var tries = 0;
+    ifr.addEventListener("load", function () {
+      var win = ifr.contentWindow, doc;
+      try { doc = ifr.contentDocument; } catch (e) { doc = null; }
+      if (!doc || !doc.querySelector("[data-width]")) { ifr.remove(); return; }   // not a specimen page: keep the poster
+      var ready = function () {
+        var sp = win.__specimen;
+        if (!sp && ++tries < 40) return setTimeout(ready, 150);
+        Promise.race([doc.fonts ? doc.fonts.ready : Promise.resolve(), new Promise(function (r) { setTimeout(r, 4000); })]).then(function () {
+          setTimeout(function () { ifr.style.opacity = "1"; if (poster.classList) poster.classList.add("done"); }, 250);
+        });
+      };
+      ready();
+    });
+    var play = function () { try { var sp = ifr.contentWindow.__specimen; if (sp && sp.tl) sp.tl.restart(); } catch (e) {} };
+    tile.addEventListener("mouseenter", play); tile.addEventListener("focus", play);
+    return play;
+  }
   function filmsScreen(d, mode) {
     var look = mode === "look";
-    var body = h("div", null, [h("p", { class: "qsub", text: d.context || (look ? "Three looks for your story, each drawn on its own lines. The first is my pick." : "Three films I could make. Each is a complete style and a story angle; the first is my pick.") })]);
+    var body = h("div", null, [h("p", { class: "qsub", text: d.context || (look ? "Three design systems made for your story, each drawn live on its own first line. The first is my pick." : "Three films I could make. Each is a complete style and a story angle; the first is my pick.") })]);
     // a look is a style: the films screen draws it the same way, keyed by the style id
-    var films = look ? (d.styles || []).map(function (s) { return { id: s.preset || s.id, preset: s.preset || s.id, title: s.name || s.preset || s.id, angle: s.rare ? "Unusual" : "", why: s.why, hook: d.hook, music: "" }; }) : (d.films || []);
+    // a look is a bespoke design system the design desk made for this story: its recipe travels with it (no library to browse)
+    var films = look ? (d.styles || []).map(function (s) { return { id: s.id || s.preset, preset: s.preset || s.id, style: s.style || null, specimen: s.specimen || "", poster: s.poster || "", title: s.name || s.preset || s.id, angle: s.label || (s.rare ? "Unusual" : ""), logline: s.blend || "", refs: (s.references || []).map(function (r) { return String(r).replace(/-/g, " "); }).join(" · "), why: s.why, hook: d.hook, music: "" }; }) : (d.films || []);
     if (!local.filmSel || !films.some(function (x) { return x.id === local.filmSel; })) local.filmSel = d.recommended || (films[0] || {}).id;
     var grid = h("div", { class: "films" });
+    // the chosen system, big: its own page at near full size (plays on hover and once when it changes)
+    var stage = look && films.some(function (x) { return x.specimen; }) ? h("div", { class: "look-stage spec" }) : null;
+    var drawStage = function () {
+      if (!stage) return;
+      var fm = films.filter(function (x) { return x.id === local.filmSel; })[0];
+      stage.innerHTML = "";
+      if (!fm || !fm.specimen) { stage.style.display = "none"; return; }
+      stage.style.display = "";
+      var play = specimenTile(stage, stage, fm);
+      setTimeout(play, 900);
+    };
+    if (stage) body.appendChild(stage);
     body.appendChild(grid);
     var ctl = h("div", { class: "controls" });
     body.appendChild(ctl);
-    var res = { body: body, q: d.question || (look ? "Pick a look" : "Pick a film"), hint: "Hover " + (look ? "a look" : "a film") + " to see it move · 1 · 2 · 3 to pick", primary: { label: "Make it", run: function () { send(S.current, "choose", local.filmSel); } }, secondary: [] };
+    var res = { body: body, q: d.question || (look ? "Pick the look for your film" : "Pick a film"), hint: "Hover " + (look ? "a look" : "a film") + " to see it move · 1 · 2 · 3 to pick", primary: { label: "Make it", run: function () { send(S.current, "choose", local.filmSel); } }, secondary: [] };
     loadRenderer(function () {
       var go = function (g) {
         var byId = {}; ((g && g.presets) || []).forEach(function (p) { byId[p.id] = p; });
+        if (look && window.RasaPresets.loadFonts) window.RasaPresets.loadFonts(films.map(function (x) { return x.style; }).filter(Boolean));
         [].forEach.call(grid.querySelectorAll(".spec"), function (b) { if (b._h3 && b._h3.destroy) b._h3.destroy(); });
         grid.innerHTML = "";
         films.forEach(function (fm, i) {
-          var p = byId[fm.preset] || fm.style || null;
+          var p = (look ? fm.style : byId[fm.preset]) || fm.style || null;
           var tile = h("button", { type: "button", class: "film" + (local.filmSel === fm.id ? " on" : ""), "aria-pressed": local.filmSel === fm.id ? "true" : "false" });
           var box = h("div", { class: "spec" });
-          if (p) { var tmp = document.createElement("div"); tmp.innerHTML = window.RasaPresets.render(p, { headline: fm.hook || (g && g.headline) || d.headline || "Your film starts here", sub: (g && g.sub) || d.sub || "", brand: local.inBrand === false ? null : (g && g.brand) || d.brand }); box.appendChild(tmp.firstChild); box._p = p; box._o = { headline: fm.hook || (g && g.headline) || d.headline || "Your film starts here", sub: (g && g.sub) || d.sub || "", brand: local.inBrand === false ? null : (g && g.brand) || d.brand }; }
+          if (look && fm.specimen) { specimenTile(box, tile, fm); }
+          else if (p) { var tmp = document.createElement("div"); tmp.innerHTML = window.RasaPresets.render(p, { headline: fm.hook || (g && g.headline) || d.headline || "Your film starts here", sub: (g && g.sub) || d.sub || "", brand: look ? null : local.inBrand === false ? null : (g && g.brand) || d.brand }); box.appendChild(tmp.firstChild); box._p = p; box._o = { headline: fm.hook || (g && g.headline) || d.headline || "Your film starts here", sub: (g && g.sub) || d.sub || "", brand: local.inBrand === false ? null : (g && g.brand) || d.brand }; }
           else if (fm.image) box.appendChild(h("img", { src: fsUrl(fm.image), alt: "", style: "width:100%;height:100%;object-fit:cover" }));
           else if ((fm.frames || [])[0]) box.appendChild(h("img", { src: fsUrl(fm.frames[0]), alt: "", style: "width:100%;height:100%;object-fit:cover" }));
           else box.appendChild(h("div", { class: "spec-missing", text: fm.hook || fm.title || "" }));
@@ -1395,13 +1403,14 @@
           if (fm.logline) tile.appendChild(h("p", { text: fm.logline }));
           if ((fm.frames || []).length) tile.appendChild(h("div", { class: "beats" }, fm.frames.slice(0, 3).map(function (src, k) { return h("figure", null, [h("img", { src: fsUrl(src), alt: "" }), (fm.beats || [])[k] ? h("figcaption", { text: fm.beats[k] }) : null]); })));
           if (!look) tile.appendChild(h("div", { class: "style-name", text: (p && p.name ? p.name : "") + (fm.music ? " · " + fm.music : "") }));
+          else if (fm.refs) tile.appendChild(h("div", { class: "style-name", text: "Blended from " + fm.refs }));
           if (fm.why && (look || local.filmSel === fm.id || i === 0)) tile.appendChild(h("div", { class: "why", text: fm.why }));
-          tile.addEventListener("click", function () { local.filmSel = fm.id; [].forEach.call(grid.children, function (c, k) { c.classList.toggle("on", films[k].id === fm.id); }); primaryLabel(); });
+          tile.addEventListener("click", function () { local.filmSel = fm.id; [].forEach.call(grid.children, function (c, k) { c.classList.toggle("on", films[k].id === fm.id); }); primaryLabel(); drawStage(); });
           tile.addEventListener("dblclick", function () { send(S.current, "choose", fm.id); });
           grid.appendChild(tile);
-          requestAnimationFrame(function () { var st = box.querySelector(".rp-stage"); if (st) { var fit = function () { st.style.transform = "scale(" + box.clientWidth / 1600 + ")"; }; fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box); if (box._p) box._h3 = mount3d(st, box._p, box._o); loopSpecimen(box); } });
+          if (!(look && fm.specimen)) requestAnimationFrame(function () { var st = box.querySelector(".rp-stage"); if (st) { var fit = function () { st.style.transform = "scale(" + box.clientWidth / 1600 + ")"; }; fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(box); if (box._p) box._h3 = mount3d(st, box._p, box._o); loopSpecimen(box); } });
         });
-        primaryLabel();
+        primaryLabel(); drawStage();
         ctl.innerHTML = "";
         var seg = h("div", { class: "seg", role: "group", "aria-label": "Energy" }, ["Calmer", "As is", "Punchier"].map(function (lab) {
           var on = (local.energy || "As is") === lab;
@@ -1409,10 +1418,9 @@
         }));
         function draw2() { [].forEach.call(seg.children, function (b) { b.classList.toggle("on", b.textContent === (local.energy || "As is")); }); }
         ctl.appendChild(h("span", { class: "qsub", style: "margin:0", text: "Energy" })); ctl.appendChild(seg);
-        ctl.appendChild(h("button", { class: "sec", onclick: function () { send(S.current, "more", { near: local.filmSel, exclude: films.map(function (x) { return x.id; }) }); }, text: "More like these" }));
+        ctl.appendChild(h("button", { class: "sec", onclick: function () { send(S.current, "more", { near: local.filmSel, exclude: films.map(function (x) { return x.id; }) }); toast(look ? "Asked the design desk for new blends near that one." : "Asked Claude for more like these."); }, text: look ? "New blends near this one" : "More like these" }));
         if (!look) ctl.appendChild(h("button", { class: "sec", onclick: function (e) { mixMenu(e.currentTarget); }, text: "Mix two…" }));
-        if (g) ctl.appendChild(h("button", { class: "sec", onclick: function () { galleryOverlay(g, look); }, text: "Browse all " + g.presets.length + " styles" }));
-        if (g && g.brand) ctl.appendChild(h("button", { class: "sec", onclick: function () { local.inBrand = local.inBrand === false; document.getElementById("main")._sig = null; render(true); }, text: local.inBrand === false ? "Show in my brand" : "Show their own colours" }));
+                if (!look && g && g.brand) ctl.appendChild(h("button", { class: "sec", onclick: function () { local.inBrand = local.inBrand === false; document.getElementById("main")._sig = null; render(true); }, text: local.inBrand === false ? "Show in my brand" : "Show their own colours" }));
       };
       if (d.gallery) loadGallery(d.gallery, go); else go(null);
     });
@@ -1427,27 +1435,6 @@
     }
     return res;
   }
-  function galleryOverlay(g, pickDirect) {
-    closeFloating();
-    // a modal: the page behind is dimmed so the header and the Tell Claude bar don't compete with the gallery
-    var ov = h("div", { class: "pop", role: "dialog", "aria-label": "Every style", style: "position:fixed;inset:5vh 5vw;width:auto;overflow:auto;padding:22px;z-index:60;box-shadow:0 0 0 100vmax rgba(0,0,0,.62),0 24px 60px rgba(0,0,0,.5)" });
-    var search = h("input", { class: "gal-search", placeholder: "Search styles: shadows, retro, glass, doodle, luxury…" });
-    var grid = h("div", { class: "gal-grid", style: "margin-top:14px" });
-    ov.appendChild(h("div", { style: "display:flex;gap:12px;align-items:center" }, [h("b", { text: "Every style", style: "font-size:18px;white-space:nowrap" }), search, h("button", { class: "sec", onclick: function () { ov.remove(); }, text: "Close" })]));
-    ov.appendChild(grid);
-    g.presets.forEach(function (p) {
-      var c = h("button", { type: "button", class: "choice mini", style: "text-align:left" }, [specimen(p, g, true), h("div", { class: "body" }, [h("h3", { text: p.name }), h("div", { class: "meta", text: p.family })])]);
-      c._p = p;
-      c.addEventListener("click", function () {
-        if (pickDirect) { send(S.current, "choose", p.id); ov.remove(); toast("Using " + p.name + "."); return; }
-        send(S.current, "swap", { chip: "style", film: local.filmSel, preset: p.id }); ov.remove(); toast("Asked Claude to redo that film in " + p.name + ".");
-      });
-      grid.appendChild(c);
-    });
-    search.addEventListener("input", function () { var q = search.value.toLowerCase(); [].forEach.call(grid.children, function (c) { var p = c._p; c.style.display = !q || [p.name, p.what, (p.aka || []).join(" "), p.family, (p.feels || []).join(" ")].join(" ").toLowerCase().indexOf(q) > -1 ? "" : "none"; }); });
-    document.body.appendChild(ov); search.focus();
-  }
-
   // --- Story: three scripts, judged as words and timing before any look touches them ----------------------------
   function storyScreen(d) {
     var stories = d.stories || [];

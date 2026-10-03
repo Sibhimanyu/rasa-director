@@ -45,6 +45,18 @@ Measured on the whip test (card at about 10 000 px/s, 1080p): 32 samples = 4 pas
 
 Cost: render time is K x the single-pass oversampled render, and tmix gets longer. Whip test: 4 passes 45 s + 20 s mix, against 9-11 s + 1.3 s for 8 samples. hfdemo at 16: 47 s render + 10 s mix (single pass 26.5 s + a few s). Multiplier against a normal render: about 3x per pass of 8 samples, so 16 is about 5 to 6x, 32 about 10 to 12x, before the grade. `--samples auto` now picks 4 / 6 / cap / 2 x cap / 4 x cap by the pre-pass p95 (< 0.5, < 2, < 4, < 8, else), but HyperFrames cannot render a frame range, so it is one count for the whole film: a film with one whip pays for 32 samples everywhere. For a mostly calm film with a few whips, prefer `--samples 8` for the film and render the whip scene alone at 32 if it matters.
 
+## Stepped scenes stay sharp (per-scene blur opt-out)
+
+Motion blur averages sub-frames, which smears a look whose whole character is that it does not move between frames: animation on twos or threes, cel and stop-motion looks, stepped (`steps(n)`) eases, datamosh, pixel-art. Averaging a stepped scene turns each step into a cross-dissolve and the look is gone. Such a scene opts out and is rendered **without averaging**: each of its frames is the centre sub-frame of the oversampled render (sub-frame n x N, pixel-identical to the normal render's frame n), so its steps stay hard while the rest of the film is blurred and graded.
+
+Three ways to say it, any of which works:
+
+- on the scene's frame root: `<div data-composition-id="..." data-finish-blur="off" ...>` in `compositions/frames/<scene>.html` (the animator sets it when the score's technique is stepped or on twos);
+- on the scene's clip in `index.html`: `data-finish-blur="off"`;
+- a list flag: `--sharp "12.0-16.5,30-33"` (seconds) or `--sharp-scenes 3,5` (1-based clip order in index.html). `--no-auto-sharp` ignores the markup attributes.
+
+The report lists the windows under `sharp`. The grade (grain, halation, vignette) still applies to every scene, so cuts do not change the film's texture. Implementation: the blurred stream and the centre sub-frames are split from the same oversampled input and the sharp windows are laid over the blurred film with `overlay=enable='between(t,a,b)'`.
+
 ## Grade: what each part is
 
 Applied in this order (post.ts order, grain last so it sits on top), all in RGB at the source size:

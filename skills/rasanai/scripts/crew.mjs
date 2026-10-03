@@ -4,9 +4,10 @@
 // the work only when its artifact checks out. Roles: agents/*.md. The system: references/crew.md.
 //
 //   node crew.mjs plan --run <run> --route <route> --subject "<name>" [--mode product|topic] [--url <url>] [--public]
-//        [--local "<dir>,<dir>"] [--may-run] [--scenes N] [--length s] [--project videos/<name>] [--lean]
+//        [--local "<dir>,<dir>"] [--may-run] [--scenes N] [--length s] [--project videos/<name>] [--lean] [--model <id>]
 //        -> <run>/crew/plan.json: every phase, who's dispatched in it (role, key, model tier, description)
-//   node crew.mjs brief --run <run> --role <role> [--key <k>] [--project <dir>] [--set k=v,...]
+//   node crew.mjs brief --run <run> --role <role> [--key <k>] [--project <dir>] [--set k=v,...] [--model <id>]
+//   node crew.mjs model [--model <id>] [--kv]   -> the model and harness, its profile, strengths and pitfalls (--kv: MODEL= / HARNESS= lines)
 //        -> <run>/crew/prompts/<role>[-<key>].md, the whole prompt (dispatch it as "Read <file> and do the job")
 //   node crew.mjs check --run <run> --role <role> [--key <k>] [--project <dir>]
 //        -> exit 0 accepted · 2 problems (listed) · 1 could not check
@@ -27,6 +28,9 @@ import { readDesignMd } from "./lib/design-md.mjs";
 import { findSkill } from "./lib/hyperframes.mjs";
 import { upsertMarked } from "./lib/install.mjs";
 import { track } from "./lib/report.mjs";
+import { detectModel, profileFor, adapt, tierFor, dispatchFor } from "./lib/models.mjs";
+import { libraryIds } from "./library.mjs";
+import { checkSystemFull, checkSystems, firstLine } from "./lib/system.mjs";
 
 const args = parseArgs();
 const cmd = args._[0];
@@ -35,6 +39,8 @@ track(
   { plan: "Crew planned", strip: "Motion strip ready", storyboard: "Score written into the storyboard" }[cmd]
 );
 const AGENTS = path.join(SKILL_DIR, "agents");
+// the model that runs the members: --model, else what plan recorded, else what the harness reports. The prompts adapt to it.
+const modelOf = (plan) => { const d = detectModel(); const id = (args.model && args.model !== true ? String(args.model) : null) || (plan && plan.model) || d.model; return profileFor(id, d.harness); };
 const WS = process.cwd();
 // paths are shown relative to the workspace; real paths, so /var and /private/var (or any symlink) agree
 const real = (p) => {
@@ -76,6 +82,8 @@ const ROLES = {
   "screens-researcher": { desk: "research", tier: "fast", desc: (p) => `Collecting real screens of ${p.subject || "the product"}` },
   "precedent-researcher": { desk: "research", tier: "inherit", desc: (p) => `Studying ${p.subject || "the brand"}'s past launch films shot by shot` },
   "local-scout": { desk: "research", tier: "fast", desc: (p, k) => `Reading the local project${k ? ` ${k}` : ""} you approved` },
+  "design-researcher": { desk: "design", tier: "inherit", desc: (p) => `Researching ${p.subject || "the subject"}'s visual world and the library references that fit` },
+  "design-system-designer": { desk: "design", tier: "inherit", desc: (p, k) => `Designing the ${k || ""} design system for this story`.replace("  ", " ") },
   "research-lead": { desk: "research", tier: "inherit", desc: () => "Merging the research into one truth sheet" },
   "script-writer": { desk: "story", tier: "inherit", desc: (p, k) => `Writing the ${k || ""} script`.replace("  ", " ") },
   "treatment-writer": { desk: "story", tier: "inherit", desc: (p, k) => `Writing the ${k || ""} treatment for the song`.replace("  ", " ") },
@@ -111,6 +119,8 @@ function planCrew(p) {
     research.push(d("brand-researcher"));
   }
   for (const dir of p.local) research.push(d("local-scout", path.basename(dir), { approved_paths: [dir], may_run: !!p.may_run }));
+  // the design desk: the subject's visual world is researched during the Brief, in parallel with the research desk
+  phases.push({ phase: "design-research", when: "right after the brief is pushed, in parallel with the research members (it needs only the subject)", dispatch: [d("design-researcher")], then: "design.mjs / crew.mjs check; the design-system designers wait for it and for the chosen story" });
   if (research.length) {
     phases.push({ phase: "research", when: "right after the brief is pushed, while the user reads it", dispatch: research, then: "research-lead once every member above is accepted" });
     phases.push({ phase: "research-lead", when: "after the research desk", dispatch: [d("research-lead")], then: "story.mjs pick on the truth sheet" });
@@ -121,6 +131,12 @@ function planCrew(p) {
   } else if (STORY_ROUTES.has(p.route) && !lean) {
     phases.push({ phase: "story", when: "after story.mjs pick", dispatch: ["Sure", "Bold", "Wild"].map((k) => d("script-writer", k)), then: "crew.mjs pitches, story.mjs check, then the editor" });
     phases.push({ phase: "story-edit", when: "after the three pitches pass story.mjs check", dispatch: [d("script-editor")], then: "route its notes back to the writers (one round), then push story" });
+  }
+  // three bespoke design systems for the chosen story (a lyric video: one, from the chosen treatment's style bible)
+  if (p.route === "music-to-video") {
+    phases.push({ phase: "design-system", when: "after the treatment is chosen (the Look step is the treatment's style bible, built out by the desk)", dispatch: [d("design-system-designer", "<chosen label>", { mode: "bible" })], then: "design.mjs check-system, then design.mjs choose-system for that label; no Look picker" });
+  } else {
+    phases.push({ phase: "design-systems", when: p.route === "reel" || ["talking-head-recut", "embedded-captions"].includes(p.route) ? "after the cut (reel) or the brief (footage routes): three card / overlay / caption identities" : "after the story is chosen (story/chosen.json) and design-research is accepted", dispatch: ["Sure", "Bold", "Wild"].map((k) => d("design-system-designer", k)), then: "design.mjs check-systems (each valid and the three distinct), then design.mjs look-payload and push the Look" });
   }
   if (SCENE_ROUTES.has(p.route) || p.route === "motion-graphics") {
     phases.push({ phase: "score", when: p.route === "music-to-video" ? "after treatment.mjs scenes wrote scenes.json (plates against the real track; durations are the plate windows)" : "after the look is picked and the music is fitted (scenes.json has final durations)", dispatch: [d("motion-director", "score")], then: "crew.mjs check, then the frame designers" });
@@ -232,6 +248,27 @@ function contextFor(run, role, key, plan) {
       O(research("local.md")); O(research("local.claims.json")); O(research("local", "assets") + "/");
       break;
     }
+    case "design-researcher":
+      Object.assign(ctx, { subject: P.subject, url: P.url || null, kind: B.kind, mode: P.mode || "product", length_s: B.length_s, route: P.route });
+      I("capture", capture); I("workspace_design_md", dsn ? path.resolve(dsn) : null); I("brand notes (if the brand researcher is done)", research("brand.md")); I("product notes (if done)", research("product.md"));
+      I("library index (library.mjs search / show)", path.join(SKILL_DIR, "library", "index.json")); I("the desk's guide", path.join(SKILL_DIR, "references", "design-desk.md"));
+      ctx.library = `node "${path.join(SKILL_DIR, "scripts", "library.mjs")}" search --q "<words>" [--space 3d] [--kind <kind>] | show <id> | index`;
+      O(research("design.md")); O(research("design-refs.json"));
+      break;
+    case "design-system-designer": {
+      if (!key) die("design-system-designer needs --key Sure|Bold|Wild (a lyric video: the chosen treatment's label)");
+      const lyr = LYR(run, P);
+      const stance = { sure: "Sure: the system that is most faithful to the subject's own visual world and the story, polished to a studio's standard. With a brand DESIGN.md, Sure IS the brand extended for motion (its colours, its type; you add the motion contract, the camera and the film's components).", bold: "Bold: push it. Keep the subject's world but break its category's conventions in palette, type and layout; a different display face and a different layout from the obvious. With a brand, keep the brand recognisable (its accent or its type) and push everything around it.", wild: "Wild: the system a top studio would put on its reel. One idea that no template has (an unexpected material, an era, a medium, a vernacular), still legible and on-brief for this story. With a brand, the brand's most distinctive trait carried into an unexpected world." }[String(key).toLowerCase()];
+      Object.assign(ctx, { label: key, stance: lyr ? "the chosen treatment's style bible, built out as a complete design system (palette, type roles, signal motif, tone and bans are fixed by the treatment; you add everything a build needs)" : stance || "(Sure, Bold or Wild)", subject: P.subject, brief: B, depth: "decide from the story's visuals: where a beat wants real space (a reveal, the product as an object, a flat-to-depth seam) write a 3D camera grammar and a recipe.three hint" });
+      if (lyr) ctx.lyric_video = true;
+      const treat = key && jsonMaybe(R(run, "story", `treatment-${key}.json`));
+      for (const [l, p] of [["design research", research("design.md")], ["design references (ids)", research("design-refs.json")], ["chosen story", R(run, "story", "chosen.json")], ["chosen treatment", R(run, "story", "chosen-treatment.json")], ["treatment in words", R(run, "story", `TREATMENT-${key}.md`)], ["truth", R(run, "story", "truth.md")], ["briefing", research("BRIEFING.md")], ["brand notes", research("brand.md")], ["brand DESIGN.md (research)", research("brand", "DESIGN.md")], ["workspace DESIGN.md", dsn ? path.resolve(dsn) : null], ["screens", research("screens.md")], ["precedent", research("precedent.md")], ["the desk's guide (formats, example)", path.join(SKILL_DIR, "references", "design-desk.md")], ["motion vocabulary", path.join(SKILL_DIR, "references", "vocabulary.md")], ["3D playbook (camera and light grammar)", path.join(SKILL_DIR, "references", "3d.md")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["library", path.join(SKILL_DIR, "library")], ["the specimen renderer's vocabulary", path.join(SKILL_DIR, "scripts", "lib", "vocab.mjs")]]) I(l, p);
+      if (treat) ctx.treatment_label = key;
+      ctx.library = `node "${path.join(SKILL_DIR, "scripts", "library.mjs")}" search --q "<words>" [--space 3d] | show <id> --full`;
+      ctx.gate = `node "${path.join(SKILL_DIR, "scripts", "design.mjs")}" check-system --dir ${rel(R(run, "design", key))}`;
+      O(R(run, "design", key, "DESIGN.md")); O(R(run, "design", key, "recipe.json")); O(R(run, "design", key, "blend.json"));
+      break;
+    }
     case "research-lead":
       Object.assign(ctx, { subject: P.subject, brief: B });
       for (const f of ["product.md", "product.claims.json", "brand.md", "brand/DESIGN.md", "screens.md", "screens.json", "precedent.md", "local.md", "local.claims.json"]) I(f, research(f));
@@ -263,7 +300,7 @@ function contextFor(run, role, key, plan) {
       break;
     case "motion-director":
       Object.assign(ctx, { pass: key === "seams" ? "seams" : "score", length_s: B.length_s, aspect: B.aspect });
-      for (const [l, p] of [["script", R(run, "story", "chosen.json")], ["scenes", R(run, "scenes.json")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["motion.md", R(run, "motion.md")], ["music plan", R(run, "music", "plan.json")], ["screens", research("screens.md")], ["assets", research("assets.json")], ["brand", research("brand.md")], ["precedent", research("precedent.md")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["vocabulary", path.join(SKILL_DIR, "references", "vocabulary.md")], ["3d playbook", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
+      for (const [l, p] of [["script", R(run, "story", "chosen.json")], ["scenes", R(run, "scenes.json")], ["frame.md", lookFrame(run)], ["design system (its Motion and camera section binds the motion)", R(run, "look", "DESIGN.md")], ["direction", R(run, "direction", "DIRECTION.md")], ["motion.md", R(run, "motion.md")], ["music plan", R(run, "music", "plan.json")], ["screens", research("screens.md")], ["assets", research("assets.json")], ["brand", research("brand.md")], ["precedent", research("precedent.md")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["vocabulary", path.join(SKILL_DIR, "references", "vocabulary.md")], ["3d playbook", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
       if (LYR(run, P)) {
         ctx.lyric_video = true;
         for (const [l, p] of [["chosen treatment (spine, motifs, plates: space, energy, idiom)", R(run, "story", "chosen-treatment.json")], ["treatment in words", R(run, "story", "chosen-treatment.md")], ["lyrics (word timings)", R(run, "music", "lyrics.json")], ["audio (downbeats, onsets)", R(run, "music", "audio.json")], ["lyric-video playbook", path.join(SKILL_DIR, "references", "lyric-video.md")], ["lyrics and the music runtime", path.join(SKILL_DIR, "references", "lyrics.md")]]) I(l, p);
@@ -280,7 +317,7 @@ function contextFor(run, role, key, plan) {
     case "frame-designer": {
       const [a, b] = String(key || "").split("-").map(Number);
       Object.assign(ctx, { scenes: a && b ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : key, aspect: B.aspect });
-      for (const [l, p] of [["score", R(run, "motion", "score.json")], ["score.md", R(run, "motion", "score.md")], ["frame.md", lookFrame(run)], ["direction", R(run, "direction", "DIRECTION.md")], ["scenes", R(run, "scenes.json")], ["screens", research("screens.json")], ["ui kit", research("screens.md")], ["assets", research("assets.json")], ["logo", research("brand", "assets")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["3d playbook (for scenes the score puts in 3D)", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
+      for (const [l, p] of [["score", R(run, "motion", "score.json")], ["score.md", R(run, "motion", "score.md")], ["frame.md", lookFrame(run)], ["design system (its Motion and camera section binds the motion)", R(run, "look", "DESIGN.md")], ["direction", R(run, "direction", "DIRECTION.md")], ["scenes", R(run, "scenes.json")], ["screens", research("screens.json")], ["ui kit", research("screens.md")], ["assets", research("assets.json")], ["logo", research("brand", "assets")], ["craft", path.join(SKILL_DIR, "references", "craft.md")], ["3d playbook (for scenes the score puts in 3D)", path.join(SKILL_DIR, "references", "3d.md")]]) I(l, p);
       if (LYR(run, P)) I("chosen treatment (the style bible is the look)", R(run, "story", "chosen-treatment.json"));
       for (const n of ctx.scenes || []) { O(R(run, "frames", `${n}.html`)); O(R(run, "frames", `${n}.png`)); O(R(run, "frames", `${n}.md`)); }
       break;
@@ -298,7 +335,7 @@ function contextFor(run, role, key, plan) {
         ctx.sync = "sync every word of this scene's lines to its sung start with RasanMusic.gsapWords / RasanMusic.wordProgress (references/lyrics.md); never ahead of the voice";
         for (const [l, p] of [["lyrics (word timings)", R(run, "music", "lyrics.json")], ["audio (beats, onsets, envelopes)", R(run, "music", "audio.json")], ["lyrics and the music runtime", path.join(SKILL_DIR, "references", "lyrics.md")], ["lyric-video playbook (karaoke rules)", path.join(SKILL_DIR, "references", "lyric-video.md")], ["chosen treatment (style bible, motifs, this plate)", R(run, "story", "chosen-treatment.json")]]) I(l, p);
       }
-      for (const [l, p] of [["technical role", path.join(packets, "_role.md")], ["frame packet", packet ? path.join(packets, packet) : null], ["DISPATCH.md", path.join(pj, "DISPATCH.md")], ["frame.md", path.join(pj, "frame.md")], ["motion.md", path.join(pj, "motion.md")], ["key frame", path.join(pj, "assets", "keyframes", `${n}.png`)], ["key frame note", R(run, "frames", `${n}.md`)], ["score", R(run, "motion", "score.json")], ["ui kit", research("screens.md")], ["brand motion", research("brand.md")], ["assets", research("assets.json")]]) I(l, p);
+      for (const [l, p] of [["technical role", path.join(packets, "_role.md")], ["frame packet", packet ? path.join(packets, packet) : null], ["DISPATCH.md", path.join(pj, "DISPATCH.md")], ["frame.md", path.join(pj, "frame.md")], ["design system (its Motion and camera section binds the motion)", R(run, "look", "DESIGN.md")], ["motion.md", path.join(pj, "motion.md")], ["key frame", path.join(pj, "assets", "keyframes", `${n}.png`)], ["key frame note", R(run, "frames", `${n}.md`)], ["score", R(run, "motion", "score.json")], ["ui kit", research("screens.md")], ["brand motion", research("brand.md")], ["assets", research("assets.json")]]) I(l, p);
       O(`${rel(path.join(pj, "compositions", "frames"))}/${packet ? packet.replace(/\.md$/, ".html") : `${String(n).padStart(2, "0")}-*.html`}`);
       O(R(run, "crew", "animators", `${n}.md`)); O(R(run, "crew", "animators", `${n}-overview.png`)); O(R(run, "crew", "animators", `${n}-move.png`));
       break;
@@ -351,13 +388,15 @@ function vocabularyFor(terms) {
 // Claude does its best motion work when it's told to show off. Every creative prompt ends on that ask: the last
 // thing a member reads, after the inputs, so it isn't lost under them.
 const DARES = {
-  "motion-director": "Show off. Don't score the safe film you'd make by default: score the one a top studio would put on its reel, with 2 to 4 moments people rewind to see how they were done, landed by choreography and continuity, not by effects. You can plan in real 3D as well as 2D, and Opus is genuinely good at it: blocking a scene in metres, choosing a lens for a reason, lighting it with one motivated key, flying one camera through two scenes, lifting a flat card into depth on the exact frame of the cut. Use that. Decide where depth earns its place (the reveal, the signature seam, the moment the product becomes an object) and plan those seams to the pixel and the frame. Prove you can plan transitions and space better than the default ever would. The critics will reject a competent score that nobody would remember.",
+  "motion-director": "Show off. Don't score the safe film you'd make by default: score the one a top studio would put on its reel, with 2 to 4 moments people rewind to see how they were done, landed by choreography and continuity, not by effects. You can plan in real 3D as well as 2D, and Opus is genuinely good at it. Rasan3D is an open engine (a render graph with your own GLSL passes, raymarched SDF worlds composited by depth, deterministic simulations, DOM pinned in 3D, every three.js addon, raw three.js), so don't pick from a menu: invent the technique each shot needs, and write it into the shot (engraved hatching along a wire, an endless instanced field, a portal, a simulated swarm). The design system (DESIGN.md, frame.md, the treatment's style bible) bounds the look; nothing else does. If a taste rule is the one thing standing between you and the shot, override it in the score (score.intent, a rule id and your reason of 12+ characters). Plan a scene in metres, choose a lens for a reason, light it with one motivated key, flying one camera through two scenes, lifting a flat card into depth on the exact frame of the cut. Use that. Decide where depth earns its place (the reveal, the signature seam, the moment the product becomes an object) and plan those seams to the pixel and the frame. Prove you can plan transitions and space better than the default ever would. The critics will reject a competent score that nobody would remember.",
   seams: "Show off at the seams. A cut that merely doesn't pop is the minimum. Make the signature transition the best two seconds of the film, and make the continuity seams so clean the viewer only notices them on the second watch. Where 2D meets 3D, the frames on both sides must match to the pixel and the colour: that exact match is the trick people rewind to see.",
-  "scene-animator": "Show off. This scene is going on your reel. Your first version will be the safe one (things fade and slide in, the UI appears, the text types; in 3D, an object turning in a void under a flat light): throw that instinct out and build the shot another motion designer would freeze-frame to work out how you did it, inside motion.md and the anti-slop rules. If your scene has depth, brag with it: a lens chosen for a reason, light that agrees with itself, a camera move that lands, motion blur on the fast frames, a seam that matches the 2D scene to the pixel. Then look at your strips and ask whether it's reel-worthy. If it's only fine, it isn't done.",
-  "frame-designer": "Show off. Each still should be good enough to be the poster for the film. Competent and centred is the default you're here to beat. For scenes the score puts in 3D, draw the key frame in real 3D (Rasan3D, references/3d.md): the lens, the light and the material are the poster.",
+  "scene-animator": "Show off. This scene is going on your reel. Your first version will be the safe one (things fade and slide in, the UI appears, the text types; in 3D, an object turning in a void under a flat light): throw that instinct out and build the shot another motion designer would freeze-frame to work out how you did it, inside motion.md and the anti-slop rules. You are the inventor, not a picker: if the shot needs a technique no preset gives (a raymarched world, an engraved or stippled shading, a simulation, a custom post pass, a portal, a card pinned in 3D), write it yourself in GLSL or raw three.js (references/3d.md); the design system is the only bound on the look. If the gate warns on something you did on purpose, declare it (declare.intent, a rule id and your reason of 12+ characters). If your scene has depth, brag with it: a lens chosen for a reason, light that agrees with itself, a camera move that lands, motion blur on the fast frames, a seam that matches the 2D scene to the pixel. Then look at your strips and ask whether it's reel-worthy. If it's only fine, it isn't done.",
+  "frame-designer": "Show off. Each still should be good enough to be the poster for the film. Competent and centred is the default you're here to beat. For scenes the score puts in 3D, draw the key frame in real 3D (Rasan3D, references/3d.md): the lens, the light and the material are the poster. Invent the look the shot needs (a custom shader, an engraved or raymarched surface) rather than picking a preset; the design system is the only bound.",
   "treatment-writer": "Show off. Two other writers are pitching treatments of this song against you, and the user will pick one. Write the one that wins the room, not the one that merely passes treatment.mjs check: a concept the user can say in a sentence, a signal that runs through every plate, lines that become puns and transformations (never pictures of the sentence), three plates a motion designer would cut into their reel, a hook that escalates, and one seam that only pays off on the second watch. If a plate's idea is just the lyric restated, you are not done.",
   "script-writer": "Show off. Two other writers are pitching against you. Write the script that wins the room, with at least one moment only motion could tell, not the one that merely passes the checks.",
-  critic: "Be the push. Competent is a fail: Claude's unpushed default is clean, tidy and forgettable, and you are the reason it doesn't ship. Score ambition honestly and, wherever the work played it safe, say exactly how it could have shown off: in 2D, and in space (a scene that should have had depth, a 3D shot that looks like the three.js demo, a 2D-to-3D seam that pops).",
+  "design-researcher": "Show off. The generic version of this job returns the category's own look and a list of famous styles. Return the subject's visual world as only someone who went looking would know it: the real materials, places, eras and printed things around this product or topic, the clichés a lazy design pass would reach for (named, so the desk avoids them), and a shortlist of library references chosen because they are surprising and right for THIS subject, not because they are famous. If two of your references would make an obvious blend, replace one.",
+  "design-system-designer": "Show off. This is the pitch: the user sees three systems for their story, and yours is drawn live on their own first line. Don't hand in the tasteful default (a neutral ground, one accent, a grotesk, a rounded card): build the system a top studio would present, one a motion designer could animate for a year and never repeat. Blend 2 to 4 references so the result is something no single reference is, put the subject's own visual world in it (its materials, its places, its printed things), choose a display face with a point of view, and write the motion and camera language as precisely as a director's note (durations, holds, eases by name, the camera's lens and moves). The gate rejects a generic or near-duplicate system; the user rejects a forgettable one.",
+  critic: "Be the push. Competent is a fail: Claude's unpushed default is clean, tidy and forgettable, and you are the reason it doesn't ship. Score ambition honestly and, wherever the work played it safe, say exactly how it could have shown off: in 2D, and in space (a scene that should have had depth, a 3D shot that looks like the three.js demo or a preset where the shot called for an invented technique, a 2D-to-3D seam that pops). Read the gate's declared intents: an intent is a claim, so check it holds on screen.",
 };
 
 function promptFor(run, role, key, plan) {
@@ -417,8 +456,9 @@ function promptFor(run, role, key, plan) {
     if (vocab) extra += "\n\n(Read `references/vocabulary.md` in full: it is the motion vocabulary your score names techniques from.)";
   }
   const dare = DARES[role === "motion-director" && key === "seams" ? "seams" : role];
-  if (dare) extra += `\n\n## Before you start\n\n${dare}`;
-  return { text: `${shared}\n\n---\n\n${roleText}\n\n---\n\n${lines.join("\n")}${extra}\n`, ctx, inputs, outputs };
+  const base = `${shared}\n\n---\n\n${roleText}\n\n---\n\n${lines.join("\n")}${extra}\n`;
+  // the prompt adapts to the model that runs the member (same goal and bar; different wording and scaffolding)
+  return { text: adapt({ role, text: base, dare, profile: modelOf(plan) }), ctx, inputs, outputs };
 }
 
 // ---------------------------------------------------------------- checks
@@ -449,6 +489,10 @@ const SPACES = ["2d", "3d", "hybrid"];
 const is3d = (s) => s && (s.space === "3d" || s.space === "hybrid");
 const HANDOFF = ["x", "y", "scale", "opacity", "direction", "speed"];
 
+// Taste rules in the score are overridable: a reason of 12+ characters in score.intent["<rule>"] (film-wide) or
+// scene.intent["<rule>"] (one scene) turns the rule into a note. Structural rules (missing fields, durations,
+// seam handoffs, the numbers that make a seam renderable) are not overridable.
+const MIN_INTENT = 12;
 function checkScore(run) {
   const P = [], W = [];
   const score = jsonMaybe(R(run, "motion", "score.json"));
@@ -458,6 +502,9 @@ function checkScore(run) {
   const scenes = scenesOf(run);
   const N = scenes.length || (score.scenes || []).length;
   const S = Array.isArray(score.scenes) ? score.scenes : [];
+  const why = (rule, sc) => { const r = (sc && sc.intent && sc.intent[rule]) || (score.intent && score.intent[rule]); return typeof r === "string" && r.trim().length >= MIN_INTENT ? r.trim() : null; };
+  // a taste rule: an error unless the score states its intent; the message says how to override it
+  const T = (rule, msg, sc) => { const r = why(rule, sc); if (r) W.push(`intent "${rule}" (${sc ? "scene " + sc.n : "film"}): ${r}`); else P.push(`${msg} [override: ${sc ? `scenes[${sc.n - 1}]` : "score"}.intent["${rule}"] = "<why this is the shot, 12+ characters>"]`); };
   // a lyric video: the chosen treatment fixes each plate's space, energy and window; the score may not contradict them
   const tr = chosenTreatment(run);
   if (tr && Array.isArray(tr.plates)) {
@@ -512,7 +559,7 @@ function checkScore(run) {
       legs.forEach((l, j) => {
         if (!(Number(l.t1) > Number(l.t0)) || !String(l.move || "").trim()) P.push(`scene ${n} camera leg ${j + 1}: needs t0 < t1 and a move`);
         if (String(l.move || "") !== "locked" && !String(l.ease || "").trim()) P.push(`scene ${n} camera leg ${j + 1}: needs a named ease (motion.md's)`);
-        if (/^(none|linear)$/i.test(String(l.ease || ""))) P.push(`scene ${n} camera leg ${j + 1}: a constant-speed camera is the screensaver look: ease it and land it`);
+        if (/^(none|linear)$/i.test(String(l.ease || ""))) T("linear-drift", `scene ${n} camera leg ${j + 1}: a constant-speed camera is the screensaver look: ease it and land it`, s);
       });
       if (!String(s.light || "").trim()) P.push(`scene ${n} (${s.space}): light is missing (the rig, the key's direction and colour: "rim, key upper-left #fff1e2, warm rim from behind right")`);
       if (!String(s.materials || "").trim()) P.push(`scene ${n} (${s.space}): materials is missing (what each object is made of, from the look's 3D family)`);
@@ -527,29 +574,29 @@ function checkScore(run) {
     }
     for (const ev of s.events || []) if (!(Number(ev.t) >= 0 && (!(dur > 0) || Number(ev.t) <= dur + 0.05))) P.push(`scene ${n}: event "${ev.what}" at ${ev.t}s is outside the scene`);
   }
-  if (t3 > 1) P.push(`${t3} crash zooms (T3): at most one per film`);
+  if (t3 > 1) T("crash-zooms", `${t3} crash zooms (T3): at most one per film`);
   // the depth plan: where 3D goes and why (or why not)
   const deep = S.filter(is3d);
   const dp = score.depth || {};
   if (!String(dp.plan || "").trim() && !String(dp.none_because || "").trim()) P.push('depth: say where 3D goes in this film and why (depth.plan), or why it stays flat (depth.none_because)');
-  if (N >= 4 && !deep.length && !String(dp.none_because || "").trim()) P.push(`no 3D or hybrid scene in a ${N}-scene film: give the reveal or the signature seam real space (references/3d.md §1), or say in depth.none_because why this look must stay flat`);
-  if (deep.length && !reel.some((m) => is3d(S[Number(m.scene) - 1]))) P.push("the film has 3D but none of its showreel moments is in a 3D or hybrid scene: the depth should be one of the moments people rewind");
+  if (N >= 4 && !deep.length && !String(dp.none_because || "").trim()) T("no-3d", `no 3D or hybrid scene in a ${N}-scene film: give the reveal or the signature seam real space (references/3d.md §1), or say in depth.none_because why this look must stay flat`);
+  if (deep.length && !reel.some((m) => is3d(S[Number(m.scene) - 1]))) T("depth-not-in-reel", "the film has 3D but none of its showreel moments is in a 3D or hybrid scene: the depth should be one of the moments people rewind");
   const animated = entr.filter((e) => e !== "cut-in");
   if (animated.length >= 6) {
     const counts = {};
     for (const e of animated) counts[e] = (counts[e] || 0) + 1;
-    for (const [e, c] of Object.entries(counts)) if (c / animated.length > 0.3) P.push(`"${e}" is ${Math.round((c / animated.length) * 100)}% of the animated entrances (30% at most: entrances by the object's nature)`);
+    for (const [e, c] of Object.entries(counts)) if (c / animated.length > 0.3) T("entrance-share", `"${e}" is ${Math.round((c / animated.length) * 100)}% of the animated entrances (30% at most: entrances by the object's nature)`);
   }
   if (entr.length >= 6 && entr.filter((e) => e === "cut-in").length / entr.length < 0.15) W.push("under 15% of elements are simply there on the cut (aim for 30%)");
   if (N >= 4) {
     const en = S.map((s) => Number(s.energy));
-    if (!en.some((e) => e >= 5)) P.push("no peak: one scene at energy 5");
-    if (!en.some((e) => e <= 2)) P.push("no calm stretch: one scene at energy 2 or less");
+    if (!en.some((e) => e >= 5)) T("no-peak", "no peak: one scene at energy 5");
+    if (!en.some((e) => e <= 2)) T("no-calm", "no calm stretch: one scene at energy 2 or less");
   }
   const lay = S.map((s) => String(s.layout || "").toLowerCase().split(/[,;(]/)[0].trim());
-  for (let i = 2; i < lay.length; i++) if (lay[i] && lay[i] === lay[i - 1] && lay[i] === lay[i - 2]) P.push(`scenes ${i - 1}-${i + 1} share the layout "${lay[i]}" (no layout in more than 2 consecutive scenes)`);
+  for (let i = 2; i < lay.length; i++) if (lay[i] && lay[i] === lay[i - 1] && lay[i] === lay[i - 2]) T("layout-repeat", `scenes ${i - 1}-${i + 1} share the layout "${lay[i]}" (no layout in more than 2 consecutive scenes)`);
   if (N >= 5 && new Set(lay.filter(Boolean)).size < 3) W.push("fewer than 3 different layouts across the film");
-  if (N >= 5 && (!score.motif || (score.motif.scenes || []).length < 3)) P.push("the motif must appear in at least 3 scenes (motif.scenes)");
+  if (N >= 5 && (!score.motif || (score.motif.scenes || []).length < 3)) T("motif-spread", "the motif must appear in at least 3 scenes (motif.scenes)");
   const seams = Array.isArray(score.seams) ? score.seams : [];
   if (seams.length !== Math.max(0, N - 1)) P.push(`${seams.length} seams for ${N} scenes (need ${Math.max(0, N - 1)}: one per cut)`);
   let sig = 0, plain = 0;
@@ -576,12 +623,12 @@ function checkScore(run) {
   const sigs = sig || (score.signature && score.signature.seam ? 1 : 0);
   const maxSig = length > 60 ? 2 : 1;
   if (N >= 3 && sigs === 0) W.push("no signature transition named");
-  if (sig > maxSig) P.push(`${sig} signature seams (${maxSig} at most for a ${Math.round(length)} s film)`);
-  if (seams.length && plain / seams.length < 0.5) P.push(`only ${Math.round((plain / seams.length) * 100)}% of seams are cuts or scene-born continuity (at least 50%)`);
+  if (sig > maxSig) T("signature-count", `${sig} signature seams (${maxSig} at most for a ${Math.round(length)} s film)`);
+  if (seams.length && plain / seams.length < 0.5) T("seam-mix", `only ${Math.round((plain / seams.length) * 100)}% of seams are cuts or scene-born continuity (at least 50%)`);
   return { P, W };
 }
 
-function checkRole(run, role, key) {
+async function checkRole(run, role, key) {
   const P = [], W = [];
   const research = (f) => R(run, "research", f);
   const pj = projectDir(run);
@@ -667,8 +714,47 @@ function checkRole(run, role, key) {
       }
       break;
     }
-    case "research-lead": {
-      const truth = R(run, "story", "truth.md");
+    case "design-researcher": {
+      const md = readMaybe(research("design.md"));
+      if (!md) { P.push("research/design.md is missing"); break; }
+      P.push(...sections(md, ["The subject's visual world", "Clichés to avoid", "Audience", "Materials, places, eras", "Library references", "Sources"]));
+      const urls = new Set(md.match(URL_RE) || []);
+      if (urls.size < 3) P.push(`only ${urls.size} source URLs in design.md (at least 3: the subject's own visual culture, not the library)`);
+      const rf = jsonMaybe(research("design-refs.json"));
+      if (rf === null) { P.push("research/design-refs.json is missing"); break; }
+      if (rf === undefined) { P.push("research/design-refs.json is not valid JSON"); break; }
+      const ids = libraryIds();
+      const refs = Array.isArray(rf) ? rf : rf.references || [];
+      if (refs.length < 8) P.push(`design-refs.json shortlists ${refs.length} library references (8 to 12)`);
+      if (refs.length > 12) W.push(`design-refs.json shortlists ${refs.length} references (8 to 12: a shortlist, not the shelf)`);
+      for (const r of refs) {
+        if (!r || !r.id) { P.push("a reference has no id"); continue; }
+        if (!ids.has(r.id)) P.push(`reference "${r.id}" is not in the library (library.mjs search --q ...)`);
+        if (!String(r.why || "").trim()) P.push(`reference "${r.id}" needs a why (what in it fits THIS subject)`);
+      }
+      if (new Set(refs.map((r) => r && r.id)).size !== refs.length) P.push("design-refs.json repeats a reference");
+      const w = !Array.isArray(rf) && rf.world;
+      if (!w || !Array.isArray(w.cliches_to_avoid) || w.cliches_to_avoid.length < 3) P.push("design-refs.json needs world.cliches_to_avoid (at least 3 of the category's clichés)");
+      if (w && (!Array.isArray(w.materials) || !w.materials.length)) P.push("design-refs.json world.materials is empty");
+      const idx = (() => { try { return JSON.parse(fs.readFileSync(path.join(SKILL_DIR, "library", "index.json"), "utf8")); } catch { return null; } })();
+      if (idx && idx.motion && idx.motion.length && !refs.some((r) => r && idx.motion.some((m) => m.id === r.id))) W.push("no library/motion reference in the shortlist (the designers need a motion and camera language too)");
+      break;
+    }
+    case "design-system-designer": {
+      if (!key) { P.push("design-system-designer needs --key"); break; }
+      const dir = R(run, "design", key);
+      const dec = jsonMaybe(R(run, "decisions.json")) || {};
+      const brandPath = dec.use_brand !== false && dec.brand && exists(path.resolve(String(dec.brand))) ? path.resolve(String(dec.brand)) : null;
+      const r = await checkSystemFull(dir, { hook: firstLine(run), libraryIds: libraryIds(), brand: brandPath, label: key, offline: !!process.env.RASANAI_OFFLINE });
+      P.push(...r.P); W.push(...r.W);
+      // against the siblings that already exist: three systems that are one system fail the later one
+      for (const other of ["Sure", "Bold", "Wild"].filter((l) => l !== key && exists(R(run, "design", l, "DESIGN.md")))) {
+        const pr = await checkSystems([dir, R(run, "design", other)], { libraryIds: libraryIds(), offline: true, hook: firstLine(run) });
+        for (const m of pr.P) if (/too alike|exactly the same|same layout recoloured/.test(m)) P.push(m);
+      }
+      break;
+    }
+    case "research-lead": { truth = R(run, "story", "truth.md");
       if (!readMaybe(truth)) { P.push("story/truth.md is missing"); break; }
       if (/<[a-z][^>]{3,}>/i.test(readMaybe(truth).replace(/<!--[\s\S]*?-->/g, ""))) P.push("story/truth.md still has <placeholders>");
       const r = spawnSync(process.execPath, [path.join(SKILL_DIR, "scripts", "story.mjs"), "pick", "--truth", truth, "--count", "3"], { encoding: "utf8", env: { ...process.env, RASANAI_QUIET: "1" } });
@@ -924,7 +1010,7 @@ function renderCompositionAt(file, T, dir) {
   html = /<head[^>]*>/i.test(html) ? html.replace(/<head[^>]*>/i, (m) => m + head) : head + html;
   const files = [];
   for (const t of T) {
-    const seek = `<script>(function(){var T=${t};function go(){var L=window.__timelines||{};Object.keys(L).forEach(function(k){try{L[k].pause();L[k].seek(T,false);}catch(e){}});document.querySelectorAll('[data-start][data-duration]').forEach(function(el){if(el.hasAttribute('data-composition-id'))return;var s=parseFloat(el.getAttribute('data-start')),d=parseFloat(el.getAttribute('data-duration'));if(isFinite(s)&&isFinite(d))el.style.visibility=(T>=s&&T<s+d)?'':'hidden';});}window.addEventListener('load',function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){go();setTimeout(go,30);});});})();</script>`;
+    const seek = `<script>(function(){var T=${t};function go(){var L=window.__timelines||{};if(window.__specimen&&window.__specimen.tl){try{window.__specimen.tl.pause();window.__specimen.tl.seek(T,false);}catch(e){}}Object.keys(L).forEach(function(k){try{L[k].pause();L[k].seek(T,false);}catch(e){}});document.querySelectorAll('[data-start][data-duration]').forEach(function(el){if(el.hasAttribute('data-composition-id'))return;var s=parseFloat(el.getAttribute('data-start')),d=parseFloat(el.getAttribute('data-duration'));if(isFinite(s)&&isFinite(d))el.style.visibility=(T>=s&&T<s+d)?'':'hidden';});}window.addEventListener('load',function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){go();setTimeout(go,30);});});})();</script>`;
     const page = /<\/body>/i.test(html) ? html.replace(/<\/body>/i, seek + "</body>") : html + seek;
     // the temp page sits in the project root so project-relative asset paths resolve
     const tmp = path.join(root, `.rasanai-strip-${process.pid}-${files.length}.html`);
@@ -986,17 +1072,20 @@ if (cmd === "plan") {
     url: str(args.url) || null, public: !!args.public, local: str(args.local).split(",").map((s) => s.trim()).filter(Boolean).map((s) => path.resolve(s.replace(/^~(?=\/|$)/, os.homedir()))),
     may_run: !!args["may-run"], scenes: Number(args.scenes) || null, length: Number(args.length) || null, project: args.project && args.project !== true ? rel(String(args.project)) : null, lean: !!args.lean,
     focus: str(args.focus) || null, features: str(args.features) || null,
+    model: args.model && args.model !== true ? String(args.model) : null,
   };
   for (const d of p.local) if (!exists(d)) die(`approved folder not found: ${d}`);
   const prev = jsonMaybe(R(run, "crew", "plan.json")) || {};
   // re-planning later (scene count known, the project made) keeps what was planned before
-  for (const k of ["subject", "url", "project", "focus", "features"]) if (!p[k] && prev[k]) p[k] = prev[k];
+  for (const k of ["subject", "url", "project", "focus", "features", "model"]) if (!p[k] && prev[k]) p[k] = prev[k];
+  if (!p.model) p.model = detectModel().model;
   if (!p.local.length && prev.local && prev.local.length) { p.local = prev.local; p.may_run = prev.may_run; }
   if (!args.public && prev.public) p.public = true;
   p.phases = planCrew(p);
   writeFile(R(run, "crew", "plan.json"), JSON.stringify(p, null, 2));
   const count = p.phases.reduce((a, ph) => a + ph.dispatch.length, 0);
-  out({ ok: true, plan: rel(R(run, "crew", "plan.json")), dispatches: count, phases: p.phases.map((ph) => ({ phase: ph.phase, when: ph.when, members: ph.dispatch.map((x) => `${x.role}${x.key ? ":" + x.key : ""} (${x.tier})`), then: ph.then })), next: "For each member: crew.mjs brief, then dispatch it in the background with the prompt file; accept it with crew.mjs check." });
+  const prof = modelOf(p);
+  out({ ok: true, plan: rel(R(run, "crew", "plan.json")), model: p.model, harness: prof.harness, dispatches: count, phases: p.phases.map((ph) => ({ phase: ph.phase, when: ph.when, members: ph.dispatch.map((x) => `${x.role}${x.key ? ":" + x.key : ""} (${x.tier})`), then: ph.then })), next: "For each member: crew.mjs brief, then dispatch it in the background with the prompt file; accept it with crew.mjs check." });
 } else if (cmd === "brief") {
   const run = runDir();
   const role = str(args.role);
@@ -1008,19 +1097,24 @@ if (cmd === "plan") {
   writeFile(f, text);
   fs.mkdirSync(path.resolve(WS, ctx.scratch), { recursive: true });
   ledger(run, { event: "brief", role, key });
-  const tier = ROLES[role].tier;
+  const prof = modelOf(plan), T = tierFor(role, prof);
   out({
     ok: true, role, key, prompt: rel(f), bytes: Buffer.byteLength(text),
-    description: ROLES[role].desc(plan, key), model: tier === "fast" ? "a faster model is fine (e.g. sonnet)" : "the session's model (don't downgrade)",
+    description: ROLES[role].desc(plan, key), model: T.fast && T.model ? `a faster model is fine (${T.model})` : "the session's model (don't downgrade)", profile: prof.key, tier_ok: T.ok,
+    ...(T.ok ? {} : { warning: T.note }),
     missing_inputs: inputs.filter((i) => i.path && !i.exists).map((i) => i.label), outputs,
-    dispatch: `Agent(description: "${ROLES[role].desc(plan, key)}", prompt: "Read ${rel(f)} in full, then do the job it describes. Your Dispatch context is at its end.", run_in_background: true${tier === "fast" ? ', model: "sonnet"' : ""})`,
+    dispatch: dispatchFor(prof, { desc: ROLES[role].desc(plan, key), file: rel(f), role }),
   });
+} else if (cmd === "model") {
+  const d = detectModel(), prof = modelOf(null);
+  if (args.kv) { console.log(`MODEL=${prof.id}\nHARNESS=${prof.harness}`); process.exit(0); }
+  out({ ok: true, model: prof.id, harness: prof.harness, source: args.model && args.model !== true ? "--model" : d.source, profile: prof.key, family: prof.family, tier: prof.tier, strengths: prof.strengths, pitfalls: prof.pitfalls });
 } else if (cmd === "check") {
   const run = runDir();
   const role = str(args.role);
   if (!ROLES[role]) die(`--role must be one of ${Object.keys(ROLES).join(", ")}`);
   const key = args.key && args.key !== true ? String(args.key) : null;
-  const { P, W } = checkRole(run, role, key);
+  const { P, W } = await checkRole(run, role, key);
   ledger(run, { event: P.length ? "fail" : "ok", role, key, problems: P.length ? P.slice(0, 20) : undefined });
   out({ ok: !P.length, role, key, problems: P, warnings: W }, P.length ? 2 : 0);
 } else if (cmd === "status") {

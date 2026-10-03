@@ -1,0 +1,7139 @@
+{
+ "generated": "2026-10-03T10:49:14.283Z",
+ "fragments": [
+  "M.json"
+ ],
+ "systems": [
+  {
+   "id": "banknote-guilloche",
+   "name": "Banknote and guilloche (security print, intaglio, rainbow printing)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/banknote-guilloche.md",
+   "era": "Engine-turning machines from the 1500s-1600s; applied to banknote and certificate security through the 19th and 20th centuries; Faberge enamel over guilloche from the 1880s",
+   "space": "both",
+   "tags": [
+    "print",
+    "guilloche",
+    "banknote",
+    "security-print",
+    "intaglio",
+    "microprint",
+    "rainbow-print",
+    "geometry",
+    "ornament",
+    "material",
+    "security",
+    "rainbow",
+    "printing"
+   ],
+   "good_for": [
+    "money, trust, finance, certificates, authenticity, anti-counterfeit and verification stories",
+    "formal documents, diplomas, share certificates, seals",
+    "ornamental geometry as a motion device (the machine draws it)"
+   ],
+   "not_for": [
+    "casual, playful, startup consumer",
+    "photography-led stories"
+   ],
+   "blends_with": [
+    "engraving-etching",
+    "blueprint-technical-drawing",
+    "cyanotype"
+   ],
+   "clashes_with": [
+    "risograph-print",
+    "gummy-inflatable-and-plastic-toy-3d"
+   ],
+   "palette": {
+    "paper": "#e3e8e2",
+    "ink": "#385447",
+    "ink_light": "#6e9984",
+    "black": "#0b0b08",
+    "accent": "#a8322d",
+    "tint": "#aab4ae"
+   },
+   "motion_language": "mechanical, geometrically exact"
+  },
+  {
+   "id": "bauhaus-in-3d",
+   "name": "Bauhaus in 3D (primary solids, Schlemmer stage)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/bauhaus-in-3d.md",
+   "era": "1919-1933, Weimar / Dessau; stage work 1922-1929",
+   "space": "both",
+   "tags": [
+    "bauhaus",
+    "primary-colours",
+    "geometry",
+    "solids",
+    "stage",
+    "matte",
+    "3d",
+    "material",
+    "primary",
+    "schlemmer"
+   ],
+   "good_for": [
+    "education, design, architecture, culture",
+    "structured explainers",
+    "assembling a system from parts"
+   ],
+   "not_for": [
+    "organic, handmade or luxurious subjects",
+    "dark moody pieces"
+   ],
+   "blends_with": [
+    "concrete-brutalist-3d",
+    "blueprint-technical-drawing",
+    "screenprint"
+   ],
+   "clashes_with": [
+    "gummy-inflatable-and-plastic-toy-3d",
+    "chrome-liquid-metal-cgi"
+   ],
+   "palette": {
+    "canvas": "#f8efd2",
+    "red": "#d62718",
+    "yellow": "#f4c20d",
+    "blue": "#1b4f9c",
+    "ink": "#141414",
+    "faded_print_red": "#a76769"
+   },
+   "motion_language": "mechanical, choreographed, geometric"
+  },
+  {
+   "id": "blueprint-technical-drawing",
+   "name": "Blueprint and technical drawing (cyanotype white-line, ISO drafting)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/blueprint-technical-drawing.md",
+   "era": "cyanotype 1842 (Herschel); blueprints dominant to the 1940s; ISO drafting conventions 20th century",
+   "space": "both",
+   "tags": [
+    "blueprint",
+    "cyanotype",
+    "technical-drawing",
+    "wireframe",
+    "iso-128",
+    "title-block",
+    "dimension-lines",
+    "engineering",
+    "white-line",
+    "schematic",
+    "material",
+    "technical",
+    "drawing",
+    "white",
+    "line",
+    "iso",
+    "drafting"
+   ],
+   "good_for": [
+    "engineering, hardware, architecture, infrastructure",
+    "how-it-works explainers, patents, specs",
+    "process and system diagrams, 'built' narratives"
+   ],
+   "not_for": [
+    "warm lifestyle",
+    "playful consumer",
+    "photo-led emotional stories"
+   ],
+   "blends_with": [
+    "cyanotype",
+    "engraving-etching",
+    "concrete-brutalist-3d",
+    "banknote-guilloche"
+   ],
+   "clashes_with": [
+    "y2k-chrome",
+    "frutiger-aero",
+    "vaporwave-and-web-nostalgia"
+   ],
+   "palette": {
+    "canvas": "#0b3880",
+    "canvas_deep": "#152449",
+    "line": "#f4f8fb",
+    "line_dim": "rgba(244,248,251,.45)",
+    "grid": "rgba(244,248,251,.12)",
+    "accent": "#ffd84a"
+   },
+   "motion_language": "drawn, measured, deliberate"
+  },
+  {
+   "id": "chrome-liquid-metal-cgi",
+   "name": "Chrome and liquid metal CGI",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/chrome-liquid-metal-cgi.md",
+   "era": "1976 environment mapping; T-1000 1991; Y2K chrome type ~1998-2003; 2020s revival",
+   "space": "3d",
+   "tags": [
+    "chrome",
+    "metal",
+    "reflection",
+    "liquid",
+    "mercury",
+    "environment",
+    "3d",
+    "material",
+    "cgi"
+   ],
+   "good_for": [
+    "precision, power, futurism, crypto/AI-as-metal (use sparingly), music and fashion",
+    "logos and one-word title objects"
+   ],
+   "not_for": [
+    "warm, human, handmade subjects",
+    "dense information"
+   ],
+   "blends_with": [
+    "glass-product-cgi",
+    "bauhaus-in-3d"
+   ],
+   "clashes_with": [
+    "risograph-print",
+    "paper-cut-and-papercraft",
+    "claymation-and-soft-clay"
+   ],
+   "palette": {
+    "canvas": "#05060a",
+    "chrome_high": "#f4f7ff",
+    "chrome_mid": "#8b8d8d",
+    "chrome_low": "#1a1b1b",
+    "reflected_sky": "#b3cbe1",
+    "accent": "#ff3d2e"
+   },
+   "motion_language": "slow, heavy, liquid"
+  },
+  {
+   "id": "claymation-and-soft-clay",
+   "name": "Claymation and soft clay",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/claymation-and-soft-clay.md",
+   "era": "Plasticine 1897 (Harbutt); Aardman from 1972; Laika 2000s; soft-clay 3D 2015+",
+   "space": "3d",
+   "tags": [
+    "clay",
+    "plasticine",
+    "stop-motion",
+    "handmade",
+    "soft",
+    "tactile",
+    "on-twos",
+    "material",
+    "claymation"
+   ],
+   "good_for": [
+    "warmth, humour, craft, kids, human-scale stories",
+    "simple characters and objects with personality",
+    "anti-corporate explainers"
+   ],
+   "not_for": [
+    "precision or speed",
+    "luxury minimalism",
+    "dense data"
+   ],
+   "blends_with": [
+    "paper-cut-and-papercraft",
+    "gummy-inflatable-and-plastic-toy-3d"
+   ],
+   "clashes_with": [
+    "chrome-liquid-metal-cgi",
+    "blueprint-technical-drawing",
+    "concrete-brutalist-3d"
+   ],
+   "palette": {
+    "canvas": "#efe6d8",
+    "clay_red": "#bc3339",
+    "clay_pink": "#d4409a",
+    "clay_yellow": "#c99d12",
+    "clay_cool": "#b3c0c6",
+    "ink": "#27231e"
+   },
+   "motion_language": "stepped, 12 changes per second, tactile"
+  },
+  {
+   "id": "concrete-brutalist-3d",
+   "name": "Concrete and Brutalist architecture (béton brut)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/concrete-brutalist-3d.md",
+   "era": "1950s-early 1980s architecture; Ando 1970s onward; web and film revival 2010s",
+   "space": "3d",
+   "tags": [
+    "concrete",
+    "brutalism",
+    "monumental",
+    "architecture",
+    "light",
+    "shadow",
+    "3d",
+    "material",
+    "brutalist",
+    "ton",
+    "brut"
+   ],
+   "good_for": [
+    "infrastructure, strong institutions, security, solidity",
+    "manifesto and architecture-minded brand films",
+    "dramatic one-word reveals"
+   ],
+   "not_for": [
+    "warm consumer, kids",
+    "playful tone",
+    "colourful data viz"
+   ],
+   "blends_with": [
+    "bauhaus-in-3d",
+    "blueprint-technical-drawing",
+    "engraving-etching"
+   ],
+   "clashes_with": [
+    "gummy-inflatable-and-plastic-toy-3d",
+    "chrome-liquid-metal-cgi",
+    "claymation-and-soft-clay"
+   ],
+   "palette": {
+    "canvas": "#7c7b7f",
+    "concrete_dark": "#383534",
+    "concrete_light": "#a7acb4",
+    "sky": "#dfe3e7",
+    "accent": "#d94a1e"
+   },
+   "motion_language": "slow, heavy, monumental"
+  },
+  {
+   "id": "cyanotype",
+   "name": "Cyanotype (Prussian blue sun prints, Atkins botanical photograms)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/cyanotype.md",
+   "era": "Invented by Sir John Herschel, 1842; Anna Atkins, Photographs of British Algae, 1843-1853; later the engineer's blueprint",
+   "space": "both",
+   "tags": [
+    "photographic",
+    "cyanotype",
+    "prussian-blue",
+    "botanical",
+    "photogram",
+    "handmade",
+    "blueprint",
+    "monochrome",
+    "material",
+    "prussian",
+    "blue",
+    "sun",
+    "prints",
+    "atkins",
+    "photograms"
+   ],
+   "good_for": [
+    "nature, science, climate, archives, craft, slow stories",
+    "blueprint and technical-drawing blends",
+    "a quiet, handmade, sun-lit register for a single idea"
+   ],
+   "not_for": [
+    "fast tech, fintech, neon, party",
+    "multi-colour brand systems (the medium has one colour)"
+   ],
+   "blends_with": [
+    "engraving-etching",
+    "blueprint-technical-drawing",
+    "paper-cut-and-papercraft"
+   ],
+   "clashes_with": [
+    "screenprint",
+    "risograph-print"
+   ],
+   "palette": {
+    "canvas": "#0b3880",
+    "canvas_muted": "#59659b",
+    "ink": "#cdd9e8",
+    "accent": "#99bfe9",
+    "deep": "#152449"
+   },
+   "motion_language": "exposure and wash"
+  },
+  {
+   "id": "engraving-etching",
+   "name": "Engraving and etching (burin line, cross-hatch, stipple)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/engraving-etching.md",
+   "era": "Line engraving c.1470-1530 golden age (Durer); stipple from c.1505 (Campagnola); wood-engraved illustration at industrial scale in the 1860s-70s (Dore); still the vocabulary of banknotes, stamps and the illustrated treatise",
+   "space": "both",
+   "tags": [
+    "print",
+    "engraving",
+    "etching",
+    "hatching",
+    "stipple",
+    "intaglio",
+    "treatise",
+    "npr",
+    "monochrome",
+    "material",
+    "burin",
+    "line",
+    "cross",
+    "hatch"
+   ],
+   "good_for": [
+    "treatise, science, history, finance (banknote-adjacent), philosophy, long-form serious stories",
+    "visual puns and metaphors drawn as plates",
+    "anything that should feel authoritative and hand-made at once"
+   ],
+   "not_for": [
+    "bright consumer product",
+    "kids",
+    "fast UI demos"
+   ],
+   "blends_with": [
+    "banknote-guilloche",
+    "cyanotype",
+    "blueprint-technical-drawing",
+    "concrete-brutalist-3d"
+   ],
+   "clashes_with": [
+    "glass-product-cgi",
+    "risograph-print",
+    "gummy-inflatable-and-plastic-toy-3d"
+   ],
+   "palette": {
+    "canvas": "#e5d4b8",
+    "ink": "#2e2b29",
+    "accent": "#ff4d12",
+    "graphite": "#797167",
+    "bone_film": "#eee9df",
+    "ink_film": "#0a0a0b"
+   },
+   "motion_language": "drawn, plotted, revealed line by line"
+  },
+  {
+   "id": "glass-product-cgi",
+   "name": "Glass and frosted glass (product CGI and UI glass)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/glass-product-cgi.md",
+   "era": "Vista Aero 2006, Big Sur 2020, 'glassmorphism' coined 2020, Liquid Glass 2025",
+   "space": "3d",
+   "tags": [
+    "glass",
+    "transmission",
+    "refraction",
+    "frosted",
+    "translucent",
+    "product",
+    "3d",
+    "material",
+    "cgi"
+   ],
+   "good_for": [
+    "OS, device and fintech product films",
+    "clarity, transparency, trust, premium consumer tech",
+    "logos and numerals as physical objects"
+   ],
+   "not_for": [
+    "gritty or analogue subjects",
+    "anything printed or handmade in feel",
+    "type-heavy explainers"
+   ],
+   "blends_with": [
+    "chrome-liquid-metal-cgi",
+    "frutiger-aero",
+    "y2k-chrome"
+   ],
+   "clashes_with": [
+    "risograph-print",
+    "newspaper-broadsheet",
+    "bollywood-hand-painted"
+   ],
+   "palette": {
+    "canvas": "#0e1116",
+    "glass_tint": "#dbe9f4",
+    "key_light": "#ffffff",
+    "accent": "#5cc8ff"
+   },
+   "motion_language": "slow, weighty, liquid"
+  },
+  {
+   "id": "gummy-inflatable-and-plastic-toy-3d",
+   "name": "Gummy, inflatable and plastic toy 3D",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/gummy-inflatable-and-plastic-toy-3d.md",
+   "era": "Gummy candy 1920s; Memphis 1981-1987; Koons Balloon Dog 1994-2000; inflatable 3D type 2020s",
+   "space": "3d",
+   "tags": [
+    "gummy",
+    "inflatable",
+    "balloon",
+    "plastic",
+    "toy",
+    "playful",
+    "3d",
+    "material"
+   ],
+   "good_for": [
+    "consumer, youth, fun, food, playful brands",
+    "kids, games, social",
+    "friendly tech"
+   ],
+   "not_for": [
+    "serious, financial, security, institutional",
+    "luxury restraint"
+   ],
+   "blends_with": [
+    "claymation-and-soft-clay",
+    "glass-product-cgi"
+   ],
+   "clashes_with": [
+    "concrete-brutalist-3d",
+    "engraving-etching",
+    "blueprint-technical-drawing"
+   ],
+   "palette": {
+    "canvas": "#fff1f5",
+    "pink": "#ff5fa2",
+    "yellow": "#ffd21f",
+    "blue": "#1a41f2",
+    "blue_deep": "#060fbe",
+    "mint": "#5fe3c0",
+    "ink": "#1a1a2e"
+   },
+   "motion_language": "bouncy, soft, springy"
+  },
+  {
+   "id": "paper-cut-and-papercraft",
+   "name": "Paper cut and papercraft (layered shadow boxes, jianzhi, kirigami, papel picado)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/paper-cut-and-papercraft.md",
+   "era": "Paper cutting after paper's invention (oldest surviving cut-out: a 6th-century symmetrical circle from Xinjiang); Chinese jianzhi, Japanese kirie, Mexican papel picado, Polish wycinanki; the term kirigami popularised in the US by Florence Temko's 1962 book; the layered shadow box is a contemporary craft form",
+   "space": "both",
+   "tags": [
+    "paper",
+    "papercut",
+    "kirigami",
+    "shadow-box",
+    "layered",
+    "craft",
+    "handmade",
+    "parallax",
+    "stop-motion",
+    "material",
+    "cut",
+    "papercraft",
+    "shadow",
+    "boxes",
+    "jianzhi",
+    "papel",
+    "picado"
+   ],
+   "good_for": [
+    "children, families, storybooks, craft, culture, nature",
+    "festival and heritage stories (papel picado, jianzhi)",
+    "explaining a layered system (layers of a stack, a map, the atmosphere) in a warm way",
+    "any story where handmade warmth beats polish"
+   ],
+   "not_for": [
+    "tech precision, data-dense UIs",
+    "dark, cinematic horror",
+    "luxury minimalism"
+   ],
+   "blends_with": [
+    "risograph-print",
+    "screenprint",
+    "cyanotype",
+    "claymation-and-soft-clay"
+   ],
+   "clashes_with": [
+    "glass-product-cgi",
+    "chrome-liquid-metal-cgi",
+    "banknote-guilloche"
+   ],
+   "palette": {
+    "layer_far": "#1f2a44",
+    "layer_mid": "#3b5b8c",
+    "layer_near": "#e8c07a",
+    "layer_front": "#f3ead8",
+    "accent": "#d94b3a",
+    "wycinanki_paper": "#fbf4d7",
+    "wycinanki_black": "#0d0c09",
+    "wycinanki_red": "#bf5764",
+    "wycinanki_indigo": "#4e477a"
+   },
+   "motion_language": "layered parallax, stop-motion on twos, assembled by hand"
+  },
+  {
+   "id": "risograph-print",
+   "name": "Risograph print (drum duplicator, soy ink, overprint)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/risograph-print.md",
+   "era": "Riso Kagaku digital duplicators from 1980 (Japan); zine, poster and small-press culture from the 2000s on",
+   "space": "both",
+   "tags": [
+    "print",
+    "riso",
+    "overprint",
+    "grain",
+    "zine",
+    "flat-colour",
+    "handmade",
+    "material",
+    "risograph",
+    "drum",
+    "duplicator",
+    "soy",
+    "ink"
+   ],
+   "good_for": [
+    "zines, culture, indie music, events, small brands",
+    "explainers that want a human, handmade, risograph-lab voice",
+    "anything with two or three brand colours that can overprint"
+   ],
+   "not_for": [
+    "luxury, finance, precision engineering",
+    "photographic realism",
+    "dense UI walkthroughs"
+   ],
+   "blends_with": [
+    "screenprint",
+    "paper-cut-and-papercraft",
+    "cyanotype"
+   ],
+   "clashes_with": [
+    "glass-product-cgi",
+    "chrome-liquid-metal-cgi",
+    "engraving-etching"
+   ],
+   "palette": {
+    "canvas": "#f4efe4",
+    "ink": "#3d5588",
+    "accent": "#ff48b0",
+    "accent2": "#ffe800",
+    "overprint": "#0078bf"
+   },
+   "motion_language": "printed, mechanical, stepped"
+  },
+  {
+   "id": "screenprint",
+   "name": "Screenprint (serigraph, gig poster, Warhol-style spot colour and halftone)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/screenprint.md",
+   "era": "Commercial screen printing from 1911; serigraphy as an art term from the 1930s; Warhol 1962-1987; hand-pulled gig posters from the late 1990s on",
+   "space": "both",
+   "tags": [
+    "print",
+    "screenprint",
+    "serigraph",
+    "poster",
+    "spot-colour",
+    "halftone",
+    "pop-art",
+    "gig-poster",
+    "material",
+    "gig",
+    "warhol",
+    "spot",
+    "colour"
+   ],
+   "good_for": [
+    "music, events, nightlife, culture",
+    "bold, loud brand statements",
+    "repetition and variation as a device (the same face in 6 colourways)"
+   ],
+   "not_for": [
+    "quiet luxury",
+    "dense data or small text",
+    "hyper-real product shots"
+   ],
+   "blends_with": [
+    "risograph-print",
+    "paper-cut-and-papercraft",
+    "bauhaus-in-3d",
+    "engraving-etching"
+   ],
+   "clashes_with": [
+    "glass-product-cgi",
+    "chrome-liquid-metal-cgi",
+    "cyanotype"
+   ],
+   "palette": {
+    "canvas": "#efe8d8",
+    "ink": "#1f1c16",
+    "accent": "#c1795a",
+    "accent2": "#cfa57c",
+    "accent3": "#2857ab",
+    "accent_hot": "#e8402a"
+   },
+   "motion_language": "pulled, slapped, layered"
+  },
+  {
+   "id": "art-brut-outsider-and-naive-folk-graphic",
+   "name": "Art brut, outsider and naive folk graphic",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/art-brut-outsider-and-naive-folk-graphic.md",
+   "era": "1920s-1960s European roots (Prinzhorn 1922, Dubuffet 1940s-48); naive painting 1880s onward; Hlebine school c.1930",
+   "space": "both",
+   "tags": [
+    "movement",
+    "art",
+    "brut",
+    "outsider",
+    "naive",
+    "folk",
+    "graphic"
+   ],
+   "good_for": [
+    "children's, community, social-impact, mental-health, grassroots and artisanal brands",
+    "stories about human authenticity against polish",
+    "music and zine culture"
+   ],
+   "not_for": [
+    "enterprise SaaS",
+    "luxury precision",
+    "any subject where the maker's ethics depend on seriousness (be careful with mental-health framing)"
+   ],
+   "blends_with": [
+    "punk-xerox-zine",
+    "mexican-loteria",
+    "indian-truck-art",
+    "scandinavian-modern-design",
+    "paper-cut-and-papercraft"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "y2k-chrome"
+   ],
+   "palette": {
+    "ground": "#f1e7cf",
+    "black": "#16130f",
+    "red": "#c9302c",
+    "blue": "#2548a8",
+    "white": "#fbf8ef",
+    "green": "#4c8a3a",
+    "yellow": "#f0c419"
+   },
+   "motion_language": "hand-drawn, boiling, wonky"
+  },
+  {
+   "id": "art-deco",
+   "name": "Art Deco",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/art-deco.md",
+   "era": "1910s-1939 (named after Paris 1925); revived 1980s and in 2010s luxury branding",
+   "space": "both",
+   "tags": [
+    "movement",
+    "art",
+    "deco"
+   ],
+   "good_for": [
+    "luxury, hospitality, jewellery, cocktails, cinema, finance with heritage",
+    "period pieces (1920s-30s), cities, travel, transport, architecture"
+   ],
+   "not_for": [
+    "warm indie or craft, kids, anything that needs a casual tone"
+   ],
+   "blends_with": [
+    "art-nouveau",
+    "polish-poster-school",
+    "mid-century-modern",
+    "soviet-space-age"
+   ],
+   "clashes_with": [
+    "punk-xerox-zine",
+    "brutalist-web"
+   ],
+   "palette": {
+    "canvas": "#0e1a2b",
+    "ink": "#f3e7c9",
+    "metal": "#ab6c2b",
+    "metal_hi": "#ceb791",
+    "metal_shade": "#552c14",
+    "steel": "#a4a6a7",
+    "steel_shade": "#293134",
+    "accent": "#0f6e6a",
+    "accent_2": "#a3262a"
+   },
+   "motion_language": "ceremonial, precise, symmetric"
+  },
+  {
+   "id": "art-nouveau",
+   "name": "Art Nouveau",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/art-nouveau.md",
+   "era": "c. 1890-1910, Paris, Brussels, Vienna, Glasgow, Prague",
+   "space": "both",
+   "tags": [
+    "movement",
+    "art",
+    "nouveau"
+   ],
+   "good_for": [
+    "botanical, wellness, tea, perfume, patisserie, opera and theatre",
+    "heritage, craft, fashion with romantic tone",
+    "stories of growth and organic systems"
+   ],
+   "not_for": [
+    "technical, industrial, data-heavy, high-speed or aggressive tones"
+   ],
+   "blends_with": [
+    "psychedelic-poster",
+    "art-deco",
+    "victorian-letterpress-wood-type",
+    "japanese-modern-tanaka-kamekura"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "ulm-braun-functionalism",
+    "brutalist-web"
+   ],
+   "palette": {
+    "canvas": "#e8dcc1",
+    "moss": "#7c7e6b",
+    "ochre": "#a19670",
+    "slate": "#4f5f65",
+    "ink": "#2b2a1f",
+    "rose": "#c97b6b",
+    "verdigris": "#3d7a6a"
+   },
+   "motion_language": "growing, flowing, organic"
+  },
+  {
+   "id": "arts-and-crafts-morris",
+   "name": "Arts and Crafts (William Morris and the Kelmscott book)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/arts-and-crafts-morris.md",
+   "era": "c.1880-1920, Britain (Morris 1834-1896; Kelmscott Press 1891-1898)",
+   "space": "both",
+   "tags": [
+    "movement",
+    "arts",
+    "crafts",
+    "william",
+    "morris",
+    "kelmscott",
+    "book"
+   ],
+   "good_for": [
+    "craft, heritage, food, books, nature, slow-made products",
+    "anti-industrial manifestos",
+    "literary and editorial films"
+   ],
+   "not_for": [
+    "fintech, devtools, anything that must feel instant or cold"
+   ],
+   "blends_with": [
+    "victorian-letterpress-wood-type",
+    "art-nouveau",
+    "japanese-modern-tanaka-kamekura"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "y2k-chrome",
+    "metabolism-architecture",
+    "brutalist-web"
+   ],
+   "palette": {
+    "canvas": "#efe6d2",
+    "ink": "#1d1a16",
+    "accent": "#8f1d1d",
+    "indigo": "#26406b",
+    "leaf": "#5c6b3a",
+    "madder": "#a8402e",
+    "gold": "#b8903a"
+   },
+   "motion_language": "unhurried, hand-made, organic growth"
+  },
+  {
+   "id": "bauhaus",
+   "name": "Bauhaus",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/bauhaus.md",
+   "era": "1919-1933, Weimar, Dessau, Berlin",
+   "space": "both",
+   "tags": [
+    "movement",
+    "bauhaus"
+   ],
+   "good_for": [
+    "education, architecture, design tools",
+    "manifesto or explainer with a point of view",
+    "hardware and furniture",
+    "opening titles that must feel constructed"
+   ],
+   "not_for": [
+    "warm nostalgia",
+    "luxury",
+    "organic or wellness"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "de-stijl",
+    "constructivism",
+    "ulm-braun-functionalism",
+    "dutch-total-design"
+   ],
+   "clashes_with": [
+    "memphis-milano",
+    "postmodern-emigre",
+    "art-nouveau"
+   ],
+   "palette": {
+    "canvas": "#f8f0d5",
+    "ink": "#413938",
+    "red": "#b5352a",
+    "yellow": "#f7cf0d",
+    "blue": "#1f4e9c"
+   },
+   "motion_language": "constructive: parts assemble into a composition, then type locks to them"
+  },
+  {
+   "id": "brutalist-web",
+   "name": "Brutalist web design",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/brutalist-web.md",
+   "era": "c.2014-present; borrowed from 1950s British architectural brutalism",
+   "space": "both",
+   "tags": [
+    "movement",
+    "brutalist",
+    "web",
+    "design"
+   ],
+   "good_for": [
+    "developer tools, indie labels, art and fashion drops, zines",
+    "anything whose message is that it refuses polish"
+   ],
+   "not_for": [
+    "wellness, kids, luxury, anything that needs to feel reassuring"
+   ],
+   "blends_with": [
+    "punk-xerox-zine",
+    "terminal-crt",
+    "swiss-international",
+    "new-wave-weingart",
+    "concrete-brutalist-3d"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "y2k-chrome"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#000000",
+    "link": "#0000ee",
+    "visited": "#551a8b",
+    "accent": "#ff0000",
+    "mid": "#c0c0c0",
+    "concrete": "#83837e",
+    "concrete_light": "#bfb9ad",
+    "concrete_dark": "#413d36"
+   },
+   "motion_language": "abrupt, mechanical, honest"
+  },
+  {
+   "id": "constructivism",
+   "name": "Russian Constructivism",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/constructivism.md",
+   "era": "1915-1934, Russia and early USSR",
+   "space": "both",
+   "tags": [
+    "movement",
+    "russian",
+    "constructivism"
+   ],
+   "good_for": [
+    "manifestos, campaigns, calls to action",
+    "sports, labour, protest, launches with an enemy to beat",
+    "music with aggressive tempo"
+   ],
+   "not_for": [
+    "calm wellness",
+    "luxury",
+    "children"
+   ],
+   "blends_with": [
+    "bauhaus",
+    "polish-poster-school",
+    "de-stijl",
+    "soviet-space-age"
+   ],
+   "clashes_with": [
+    "memphis-milano",
+    "push-pin-studios"
+   ],
+   "palette": {
+    "canvas": "#e1dbca",
+    "ink": "#272322",
+    "red": "#d20e0c",
+    "paper_shadow": "#d0c4b6",
+    "mid": "#73645a",
+    "cold_alt": "#467c81",
+    "ochre_alt": "#cf8625"
+   },
+   "motion_language": "urgent, diagonal, mechanical"
+  },
+  {
+   "id": "cuban-ospaal-poster",
+   "name": "Cuban revolutionary poster: OSPAAAL, ICAIC and Tricontinental",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/cuban-ospaal-poster.md",
+   "era": "1960s-1980s, Havana",
+   "space": "both",
+   "tags": [
+    "movement",
+    "cuban",
+    "revolutionary",
+    "poster",
+    "ospaaal",
+    "icaic",
+    "tricontinental"
+   ],
+   "good_for": [
+    "campaigns, causes, solidarity, politics, cinema and culture programmes",
+    "short punchy brand statements",
+    "a single big symbol per scene"
+   ],
+   "not_for": [
+    "dense data, SaaS dashboards",
+    "luxury tone"
+   ],
+   "blends_with": [
+    "polish-poster-school",
+    "japanese-sixties-graphic-yokoo-poster",
+    "constructivism",
+    "risograph-culture"
+   ],
+   "clashes_with": [
+    "scandinavian-modern-design"
+   ],
+   "palette": {
+    "paper": "#f2ead6",
+    "black": "#111111",
+    "red": "#d9262b",
+    "orange": "#f08a24",
+    "blue": "#1c4fa0",
+    "green": "#2e8f4e",
+    "yellow": "#f6c928",
+    "magenta": "#c4237f"
+   },
+   "motion_language": "emblematic, punchy, witty"
+  },
+  {
+   "id": "dada-photomontage",
+   "name": "Dada and Berlin photomontage",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/dada-photomontage.md",
+   "era": "1916-1925, Zurich, Berlin, Cologne, Paris, New York",
+   "space": "both",
+   "tags": [
+    "movement",
+    "dada",
+    "berlin",
+    "photomontage"
+   ],
+   "good_for": [
+    "protest, satire, political and cultural commentary",
+    "anti-ad, music videos, punk-adjacent brands",
+    "editorial films about disruption"
+   ],
+   "not_for": [
+    "luxury, healthcare, finance trust films",
+    "anything clean or corporate"
+   ],
+   "blends_with": [
+    "punk-xerox-zine",
+    "constructivism",
+    "futurism-italian",
+    "vorticism-and-english-modernism"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "vienna-secession",
+    "mid-century-modern"
+   ],
+   "palette": {
+    "canvas": "#e8dfc9",
+    "ink": "#151515",
+    "accent": "#c4271c",
+    "paper2": "#cfc3a6",
+    "grey": "#7d7a72"
+   },
+   "motion_language": "cut, stutter, jump, no tweening between states"
+  },
+  {
+   "id": "data-journalism-isotype-neurath",
+   "name": "Isotype and the historical statistical-graphics canon: Neurath, Arntz, Playfair, Minard, Nightingale",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/data-journalism-isotype-neurath.md",
+   "era": "1786 Playfair; 1850s Nightingale; 1869 Minard; 1925-1934 Vienna Isotype",
+   "space": "both",
+   "tags": [
+    "movement",
+    "isotype",
+    "historical",
+    "statistical",
+    "graphics",
+    "canon",
+    "neurath",
+    "arntz",
+    "playfair",
+    "minard",
+    "nightingale"
+   ],
+   "good_for": [
+    "explainers, data journalism, public information, impact reports, science",
+    "any film that needs numbers understood by anyone"
+   ],
+   "not_for": [
+    "emotional brand mood films with no numbers",
+    "dense financial terminals"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "scandinavian-modern-design",
+    "constructivism",
+    "newspaper-broadsheet"
+   ],
+   "clashes_with": [
+    "vaporwave-and-anti-design-net-art"
+   ],
+   "palette": {
+    "paper": "#f5f0e1",
+    "black": "#1a1a1a",
+    "blue": "#2a5db0",
+    "green": "#3e9b4f",
+    "yellow": "#f2c230",
+    "red": "#d62f26",
+    "brown": "#7a4b2a"
+   },
+   "motion_language": "counting, accumulating, unit by unit"
+  },
+  {
+   "id": "de-stijl",
+   "name": "De Stijl (Neoplasticism)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/de-stijl.md",
+   "era": "1917-1931, the Netherlands",
+   "space": "both",
+   "tags": [
+    "movement",
+    "stijl",
+    "neoplasticism"
+   ],
+   "good_for": [
+    "layout-driven explainers",
+    "architecture, furniture, UI-structure stories",
+    "modular systems, dashboards of blocks"
+   ],
+   "not_for": [
+    "organic, emotional storytelling",
+    "photographic work",
+    "warm consumer"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "bauhaus",
+    "constructivism",
+    "dutch-total-design"
+   ],
+   "clashes_with": [
+    "postmodern-emigre",
+    "push-pin-studios"
+   ],
+   "palette": {
+    "canvas": "#e7e7e6",
+    "ink": "#2a2d2e",
+    "red": "#da2a21",
+    "yellow": "#ddba53",
+    "blue": "#123b58",
+    "grey": "#a2a5a1",
+    "doesburg_blue": "#28356c"
+   },
+   "motion_language": "orthogonal, balancing, modular"
+  },
+  {
+   "id": "dutch-total-design",
+   "name": "Dutch modernism: Total Design and Wim Crouwel",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/dutch-total-design.md",
+   "era": "1963-1980s, Amsterdam",
+   "space": "both",
+   "tags": [
+    "movement",
+    "dutch",
+    "modernism",
+    "total",
+    "design",
+    "wim",
+    "crouwel"
+   ],
+   "good_for": [
+    "museums, architecture, systems and data films, transport, civic identities",
+    "work that must show an organising principle"
+   ],
+   "not_for": [
+    "handmade warmth, nostalgia, chaos, children"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "experimental-jetset",
+    "terminal-crt",
+    "airport-wayfinding"
+   ],
+   "clashes_with": [
+    "psychedelic-poster",
+    "victorian-letterpress-wood-type",
+    "memphis-milano"
+   ],
+   "palette": {
+    "canvas": "#f4f1ea",
+    "ink": "#111111",
+    "accent": "#e8362b",
+    "signal_blue": "#0b4fa0",
+    "signal_yellow": "#f6c500"
+   },
+   "motion_language": "systematic, geometric, calm"
+  },
+  {
+   "id": "experimental-jetset",
+   "name": "Experimental Jetset (Amsterdam, post-Crouwel Dutch modernism)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/experimental-jetset.md",
+   "era": "1997-present, Amsterdam",
+   "space": "both",
+   "tags": [
+    "movement",
+    "experimental",
+    "jetset",
+    "amsterdam",
+    "post",
+    "crouwel",
+    "dutch",
+    "modernism"
+   ],
+   "good_for": [
+    "museums, culture, music, publishers, brands that want one strong rule instead of decoration"
+   ],
+   "not_for": [
+    "glossy tech, luxury, anything needing warmth or texture"
+   ],
+   "blends_with": [
+    "dutch-total-design",
+    "swiss-international",
+    "punk-xerox-zine",
+    "new-wave-weingart"
+   ],
+   "clashes_with": [
+    "art-nouveau",
+    "memphis-milano",
+    "frutiger-aero"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#000000",
+    "red": "#e30613",
+    "blue": "#0057b8",
+    "paper": "#f2efe6"
+   },
+   "motion_language": "responsive, rule-based, flat"
+  },
+  {
+   "id": "futurism-italian",
+   "name": "Italian Futurism (parole in liberta and Depero)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/futurism-italian.md",
+   "era": "1909-c.1944, Milan, Rome, Rovereto",
+   "space": "both",
+   "tags": [
+    "movement",
+    "italian",
+    "futurism",
+    "parole",
+    "liberta",
+    "depero"
+   ],
+   "good_for": [
+    "music, sports, transport, energy, launches with raw velocity",
+    "manifestos",
+    "retro-futurist title sequences"
+   ],
+   "not_for": [
+    "calm wellness, finance with trust cues, heritage warmth",
+    "projects that cannot take the political baggage (see below)"
+   ],
+   "blends_with": [
+    "constructivism",
+    "vorticism-and-english-modernism",
+    "dada-photomontage",
+    "punk-xerox-zine"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "vienna-secession",
+    "japanese-modern-tanaka-kamekura"
+   ],
+   "palette": {
+    "canvas": "#f1e9d6",
+    "ink": "#111111",
+    "red": "#d4281f",
+    "yellow": "#f2b705",
+    "blue": "#1b4fa0",
+    "green": "#2f7d4f"
+   },
+   "motion_language": "speed, collision, simultaneity"
+  },
+  {
+   "id": "international-typographic-corporate-identity",
+   "name": "Corporate identity programmes (Rand, Beall, Aicher era)",
+   "kind": "brand-system",
+   "domain": "movements",
+   "path": "systems/movements/international-typographic-corporate-identity.md",
+   "era": "1930s-1970s, USA and West Germany",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "corporate",
+    "identity",
+    "programmes",
+    "rand",
+    "beall",
+    "aicher"
+   ],
+   "good_for": [
+    "B2B, technology, airlines, public institutions",
+    "brand films that must prove consistency",
+    "rebrand reveals and identity guidelines"
+   ],
+   "not_for": [
+    "subcultures, punk, handmade craft stories",
+    "anything where one-off expression beats consistency"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "ulm-braun-functionalism",
+    "mid-century-modern",
+    "japanese-modern-tanaka-kamekura",
+    "braun-dieter-rams-lineage"
+   ],
+   "clashes_with": [
+    "psychedelic-poster",
+    "dada-photomontage",
+    "victorian-letterpress-wood-type"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#111111",
+    "beall_paper": "#f3eddf",
+    "beall_red": "#d0222b",
+    "beall_blue": "#2c56af",
+    "beall_ink": "#514a46",
+    "brand_blue": "#1f6fb6",
+    "lufthansa_yellow": "#ffad00",
+    "munich_sky": "#4fb3e6",
+    "munich_green": "#7cc242",
+    "signal_orange": "#ee7c1c"
+   },
+   "motion_language": "systematic: the same few moves everywhere"
+  },
+  {
+   "id": "japanese-modern-tanaka-kamekura",
+   "name": "Japanese Modern (Yusaku Kamekura, Ikko Tanaka)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/japanese-modern-tanaka-kamekura.md",
+   "era": "1950s-1990s, Tokyo and Osaka",
+   "space": "both",
+   "tags": [
+    "movement",
+    "japanese",
+    "modern",
+    "yusaku",
+    "kamekura",
+    "ikko",
+    "tanaka"
+   ],
+   "good_for": [
+    "retail and lifestyle brands (Muji-like calm)",
+    "sport, culture, theatre posters",
+    "Japan-related stories, minimal product launches, olympics-like identity systems"
+   ],
+   "not_for": [
+    "dense, noisy, hype consumer promos",
+    "anything that needs ornament or crowd energy"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "mid-century-modern",
+    "ulm-braun-functionalism",
+    "art-nouveau",
+    "muji",
+    "japanese-sixties-graphic-yokoo-poster"
+   ],
+   "clashes_with": [
+    "punk-xerox-zine",
+    "psychedelic-poster"
+   ],
+   "palette": {
+    "canvas": "#edecea",
+    "ink": "#0d0c0e",
+    "vermilion": "#b74835",
+    "indigo": "#335478",
+    "indigo_light": "#466a86",
+    "hinomaru": "#d7141a",
+    "gold": "#c9a227",
+    "kraft": "#b08a5a",
+    "pink": "#e8467c"
+   },
+   "motion_language": "quiet, exact, with long holds"
+  },
+  {
+   "id": "japanese-sixties-graphic-yokoo-poster",
+   "name": "Japanese sixties graphic design: Yokoo, Awazu and the psychedelic poster",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/japanese-sixties-graphic-yokoo-poster.md",
+   "era": "1960s-early 1970s, Tokyo",
+   "space": "both",
+   "tags": [
+    "movement",
+    "japanese",
+    "sixties",
+    "graphic",
+    "design",
+    "yokoo",
+    "awazu",
+    "psychedelic",
+    "poster"
+   ],
+   "good_for": [
+    "music, festival, fashion, youth culture, theatre",
+    "campaigns that want a loud pop collage",
+    "Japan-set stories, irony about modernity"
+   ],
+   "not_for": [
+    "calm product UI explainers",
+    "finance or healthcare trust messaging",
+    "quiet luxury"
+   ],
+   "blends_with": [
+    "ukiyo-e-and-japonisme",
+    "psychedelic-poster",
+    "cuban-ospaal-poster",
+    "push-pin-studios",
+    "dada-photomontage",
+    "japanese-modern-tanaka-kamekura",
+    "spider-verse-stepped-halftone"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "scandinavian-modern-design",
+    "ulm-braun-functionalism"
+   ],
+   "palette": {
+    "black": "#05060a",
+    "pink": "#d4618a",
+    "cyan_blue": "#2181ab",
+    "red": "#c03434",
+    "gold": "#cf9140",
+    "halftone_grey": "#9ba0a4",
+    "paper": "#d8d6d8",
+    "fluoro_pink_proposed": "#ff2d8a",
+    "fluoro_orange_proposed": "#ff6a13"
+   },
+   "motion_language": "collage mashup that behaves like a flashing printed sheet"
+  },
+  {
+   "id": "memphis-milano",
+   "name": "Memphis (Memphis Milano)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/memphis-milano.md",
+   "era": "1980-1988, Milan; pop-culture peak mid-1980s to mid-1990s",
+   "space": "both",
+   "tags": [
+    "movement",
+    "memphis",
+    "milano"
+   ],
+   "good_for": [
+    "youth brands, music, fashion, creative tools",
+    "playful consumer launches",
+    "retro-80s tone"
+   ],
+   "not_for": [
+    "finance, security, enterprise reliability",
+    "serious documentary"
+   ],
+   "blends_with": [
+    "push-pin-studios",
+    "postmodern-emigre",
+    "gummy-inflatable-and-plastic-toy-3d"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "de-stijl",
+    "bauhaus",
+    "constructivism"
+   ],
+   "palette": {
+    "canvas": "#e0d9cd",
+    "ink": "#22160b",
+    "red": "#e42a25",
+    "sage": "#8ba693",
+    "wood": "#ab7f58",
+    "pink": "#f26aa8",
+    "teal": "#14b8a6",
+    "yellow": "#ffd400",
+    "blue": "#2b5fd9"
+   },
+   "motion_language": "bouncy, collided, toy-like"
+  },
+  {
+   "id": "metabolism-architecture",
+   "name": "Metabolism (Japanese megastructure architecture)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/metabolism-architecture.md",
+   "era": "1959-1972 peak, Tokyo and Osaka; built legacy to 1970s",
+   "space": "both",
+   "tags": [
+    "movement",
+    "metabolism",
+    "japanese",
+    "megastructure",
+    "architecture"
+   ],
+   "good_for": [
+    "infrastructure, platforms, modular products, systems that grow by adding units",
+    "urban, housing and real-estate explainers",
+    "upgrade and replacement narratives"
+   ],
+   "not_for": [
+    "warm handmade consumer brands",
+    "anything that must feel soft or organic-curvy"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "blueprint-technical-drawing",
+    "brutalist-web",
+    "soviet-space-age"
+   ],
+   "clashes_with": [
+    "art-nouveau",
+    "victorian-letterpress-wood-type",
+    "arts-and-crafts-morris"
+   ],
+   "palette": {
+    "canvas": "#d9d6cf",
+    "ink": "#2b2a28",
+    "accent": "#d4421e",
+    "signal": "#f2f0ea",
+    "steel": "#9aa0a3"
+   },
+   "motion_language": "constructive and incremental: things are added, swapped, replaced; nothing dissolves"
+  },
+  {
+   "id": "mid-century-modern",
+   "name": "Mid-Century Modern",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/mid-century-modern.md",
+   "era": "1945-1970s, USA, Scandinavia, Brazil; revived from the late 1990s",
+   "space": "both",
+   "tags": [
+    "movement",
+    "mid",
+    "century",
+    "modern"
+   ],
+   "good_for": [
+    "home, furniture, architecture, design-led product, education, aviation and travel nostalgia",
+    "friendly modernism for tech and services that want warmth"
+   ],
+   "not_for": [
+    "hard-edged cyber, brutal, punk or gothic subjects"
+   ],
+   "blends_with": [
+    "art-deco",
+    "japanese-modern-tanaka-kamekura",
+    "ulm-braun-functionalism",
+    "swiss-international",
+    "scandinavian-modern-design"
+   ],
+   "clashes_with": [
+    "punk-xerox-zine",
+    "psychedelic-poster"
+   ],
+   "palette": {
+    "canvas": "#dad5ce",
+    "paper_warm": "#f1e8d4",
+    "ink": "#22211f",
+    "walnut": "#6c4926",
+    "plywood": "#a67436",
+    "mustard": "#d9a021",
+    "teal": "#2f7f86",
+    "tomato": "#d9482b",
+    "olive": "#7b7a3a"
+   },
+   "motion_language": "friendly, geometric, measured"
+  },
+  {
+   "id": "new-wave-weingart",
+   "name": "New Wave / Swiss Punk typography (Weingart, Basel)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/new-wave-weingart.md",
+   "era": "late 1960s-1980s, Basel",
+   "space": "both",
+   "tags": [
+    "movement",
+    "new",
+    "wave",
+    "swiss",
+    "punk",
+    "typography",
+    "weingart",
+    "basel"
+   ],
+   "good_for": [
+    "cultural institutions, music, design-school or editorial identities",
+    "type-led film titles that want intellectual friction"
+   ],
+   "not_for": [
+    "tasks needing instant legibility, children, health or finance reassurance"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "punk-xerox-zine",
+    "risograph-culture",
+    "postmodern-emigre",
+    "swiss-punk-and-neue-grafik-digital-grotesk",
+    "dutch-total-design"
+   ],
+   "clashes_with": [
+    "brutalist-web",
+    "art-deco"
+   ],
+   "palette": {
+    "canvas": "#f1eee6",
+    "ink": "#0d0d0d",
+    "accent": "#e5322d",
+    "second": "#1f4ea1",
+    "halftone": "#7a7a7a"
+   },
+   "motion_language": "layered, rhythmic, accumulating"
+  },
+  {
+   "id": "op-art-kinetic",
+   "name": "Op Art and kinetic art",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/op-art-kinetic.md",
+   "era": "1950s-1970s, Paris, London, New York, Caracas",
+   "space": "both",
+   "tags": [
+    "movement",
+    "art",
+    "kinetic"
+   ],
+   "good_for": [
+    "music, club visuals, optics, eyewear, perception and AI themes",
+    "loops and ident bumpers",
+    "intros that must hypnotise"
+   ],
+   "not_for": [
+    "long text or dense information",
+    "warm, human, organic subjects",
+    "photosensitive audiences (see warning)"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "mid-century-modern",
+    "psychedelic-poster",
+    "bauhaus"
+   ],
+   "clashes_with": [
+    "victorian-letterpress-wood-type",
+    "arts-and-crafts-morris",
+    "dada-photomontage"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#000000",
+    "accent_a": "#e63b2e",
+    "accent_b": "#1d5fd1",
+    "accent_c": "#f2c200"
+   },
+   "motion_language": "periodic and hypnotic: phase shifts, moire, rotation"
+  },
+  {
+   "id": "polish-poster-school",
+   "name": "Polish School of Posters",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/polish-poster-school.md",
+   "era": "late 1940s-1980s, postwar Poland (Tomaszewski's film posters from 1947-48; Warsaw Academy poster department 1952; Poster Biennale 1966; Poster Museum at Wilanow 1968)",
+   "space": "both",
+   "tags": [
+    "movement",
+    "polish",
+    "school",
+    "posters"
+   ],
+   "good_for": [
+    "film, theatre, music festivals, cultural institutions",
+    "brand films that have one idea",
+    "anything that must be a metaphor, not a feature list",
+    "protest or editorial pieces with a wry edge"
+   ],
+   "not_for": [
+    "data-heavy B2B",
+    "UI explainers and instructions",
+    "luxury product beauty shots"
+   ],
+   "blends_with": [
+    "constructivism",
+    "swiss-international",
+    "push-pin-studios",
+    "dada-photomontage",
+    "cuban-ospaal-poster",
+    "paper-cutout-parallax-2-5d",
+    "cutout-collage-gilliam"
+   ],
+   "clashes_with": [
+    "memphis-milano",
+    "vaporwave-and-anti-design-net-art"
+   ],
+   "palette": {
+    "ground_yellow": "#e5c706",
+    "ground_ultramarine": "#3f73cf",
+    "ground_indigo": "#36396e",
+    "ground_black": "#2f2f2e",
+    "paper": "#dbcba5",
+    "ochre": "#ac825f",
+    "ink_dark": "#232938",
+    "rose": "#9e6965"
+   },
+   "motion_language": "expressive, wry, metaphor-first; moves like cut-out animation (Lenica) not like UI"
+  },
+  {
+   "id": "postmodern-emigre",
+   "name": "Postmodern digital typography (Emigre, Ray Gun)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/postmodern-emigre.md",
+   "era": "1984-2005 (Emigre, Berkeley); 1992-1995 Carson years at Ray Gun, Santa Monica",
+   "space": "both",
+   "tags": [
+    "movement",
+    "postmodern",
+    "digital",
+    "typography",
+    "emigre",
+    "ray",
+    "gun"
+   ],
+   "good_for": [
+    "music, culture, magazines, creative tooling",
+    "anti-corporate tone",
+    "design-literate audiences"
+   ],
+   "not_for": [
+    "finance, healthcare, onboarding where clarity is the point",
+    "kids"
+   ],
+   "blends_with": [
+    "memphis-milano",
+    "constructivism",
+    "vaporwave-and-anti-design-net-art",
+    "swiss-punk-and-neue-grafik-digital-grotesk",
+    "new-wave-weingart",
+    "punk-xerox-zine"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "de-stijl"
+   ],
+   "palette": {
+    "canvas": "#f4f4cc",
+    "ink": "#2c2b22",
+    "accent": "#d14d20",
+    "second": "#034ca0",
+    "spot_yellow": "#fcf005",
+    "spot_pink": "#db4b73",
+    "spot_green": "#0c6344"
+   },
+   "motion_language": "layered, glitchy, accumulating; proposed (the movement is print, no motion originals)"
+  },
+  {
+   "id": "psychedelic-poster",
+   "name": "San Francisco Psychedelic Poster",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/psychedelic-poster.md",
+   "era": "1966-1972, San Francisco (Fillmore, Avalon)",
+   "space": "both",
+   "tags": [
+    "movement",
+    "san",
+    "francisco",
+    "psychedelic",
+    "poster"
+   ],
+   "good_for": [
+    "music, festivals, wellness-with-an-edge, counter-culture or 1960s period pieces",
+    "hero text that must be felt rather than read"
+   ],
+   "not_for": [
+    "data, finance, medical, anything with dense legible copy"
+   ],
+   "blends_with": [
+    "art-nouveau",
+    "punk-xerox-zine",
+    "risograph-culture"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "ulm-braun-functionalism"
+   ],
+   "palette": {
+    "canvas": "#f4e9c8",
+    "ink": "#1a0f2e",
+    "vibrate_a": "#ff4b1f",
+    "vibrate_b": "#00a99d",
+    "hot": "#ff1e8e",
+    "violet": "#5b1fa8",
+    "sun": "#ffcf00"
+   },
+   "motion_language": "fluid, looping, breathing"
+  },
+  {
+   "id": "punk-xerox-zine",
+   "name": "Punk / Xerox Zine (cut-and-paste, ransom-note)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/punk-xerox-zine.md",
+   "era": "1975-1980s, New York and London; reused by hardcore and riot grrrl zines into the 1990s",
+   "space": "both",
+   "tags": [
+    "movement",
+    "punk",
+    "xerox",
+    "zine",
+    "cut",
+    "paste",
+    "ransom",
+    "note"
+   ],
+   "good_for": [
+    "music, subculture, protest or activist films",
+    "anti-corporate or anti-polish positioning",
+    "short, loud, low-budget-feeling hooks that are actually controlled"
+   ],
+   "not_for": [
+    "luxury, healthcare, finance, anything requiring calm trust"
+   ],
+   "blends_with": [
+    "risograph-culture",
+    "psychedelic-poster",
+    "postmodern-emigre",
+    "brutalist-web"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "art-deco",
+    "mid-century-modern"
+   ],
+   "palette": {
+    "canvas": "#e9e6dc",
+    "ink": "#0b0b0b",
+    "accent": "#ff2d6f",
+    "accent_2": "#f5e400",
+    "paper_shadow": "#b9b5a8"
+   },
+   "motion_language": "stop-frame, jittered, cut not eased"
+  },
+  {
+   "id": "push-pin-studios",
+   "name": "Push Pin Studios (the Push Pin Style)",
+   "kind": "studio",
+   "domain": "movements",
+   "path": "systems/movements/push-pin-studios.md",
+   "era": "1954-1970s, New York",
+   "space": "both",
+   "tags": [
+    "studio",
+    "push",
+    "pin",
+    "studios"
+   ],
+   "good_for": [
+    "editorial, music, food, culture",
+    "brands that want warmth and wit",
+    "history-flavoured explainers"
+   ],
+   "not_for": [
+    "strict B2B data",
+    "finance",
+    "minimal luxury"
+   ],
+   "blends_with": [
+    "polish-poster-school",
+    "memphis-milano",
+    "postmodern-emigre",
+    "psychedelic-poster"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "de-stijl"
+   ],
+   "palette": {
+    "canvas": "#f3e6c4",
+    "paper_cool": "#e9ede6",
+    "ink": "#602b1d",
+    "ink_black": "#1d1a1a",
+    "cyan": "#0ab3dd",
+    "orange": "#db6f09",
+    "green": "#14684c",
+    "red": "#d93a2b",
+    "blue": "#2a5db0",
+    "violet": "#6a3d9a"
+   },
+   "motion_language": "playful, eclectic, illustration-driven"
+  },
+  {
+   "id": "risograph-culture",
+   "name": "Risograph culture",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/risograph-culture.md",
+   "era": "machine 1980 (Japan); art-zine revival 2010s",
+   "space": "both",
+   "tags": [
+    "movement",
+    "risograph",
+    "culture"
+   ],
+   "good_for": [
+    "indie culture, publishing, community, education, food, zines, event films",
+    "friendly, handmade-but-graphic identities"
+   ],
+   "not_for": [
+    "corporate security, premium tech, medical precision"
+   ],
+   "blends_with": [
+    "punk-xerox-zine",
+    "new-wave-weingart",
+    "screenprint",
+    "paper-cut-and-papercraft",
+    "risograph-print"
+   ],
+   "clashes_with": [
+    "cassette-futurism"
+   ],
+   "palette": {
+    "fluo_pink": "#ff48b0",
+    "federal_blue": "#0078bf",
+    "sun_yellow": "#ffe800",
+    "teal": "#3d8e84",
+    "orange": "#ff6e40",
+    "green": "#a4dc30",
+    "hunter_green": "#407060",
+    "black": "#000000",
+    "paper": "#f4efe3"
+   },
+   "motion_language": "stepped, layered, slightly off-register"
+  },
+  {
+   "id": "scandinavian-modern-design",
+   "name": "Scandinavian modern design",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/scandinavian-modern-design.md",
+   "era": "1930s-1960s, Denmark, Finland, Sweden, Norway (golden age 1950s)",
+   "space": "both",
+   "tags": [
+    "movement",
+    "scandinavian",
+    "modern",
+    "design"
+   ],
+   "good_for": [
+    "home, furniture, wellbeing, family, sustainable brands, calm tech",
+    "UI of humane apps",
+    "explainers that need warmth"
+   ],
+   "not_for": [
+    "aggressive tech launches",
+    "nightlife",
+    "punk or political agitation"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "mid-century-modern",
+    "japanese-modern-tanaka-kamekura",
+    "data-journalism-isotype-neurath",
+    "paper-cut-and-papercraft",
+    "muji",
+    "ikea-brand-system"
+   ],
+   "clashes_with": [
+    "vaporwave-and-anti-design-net-art",
+    "y2k-chrome",
+    "cuban-ospaal-poster"
+   ],
+   "palette": {
+    "canvas": "#f9f9f9",
+    "wall": "#e6ded1",
+    "birch": "#c4af8c",
+    "oak": "#d2a771",
+    "walnut": "#765c40",
+    "dark_wood": "#52361d",
+    "marimekko_red": "#d73044",
+    "ink": "#23262b",
+    "sage": "#9aa58b",
+    "dusty_blue": "#8aa0b2"
+   },
+   "motion_language": "calm, functional, soft-landing"
+  },
+  {
+   "id": "soviet-space-age",
+   "name": "Soviet space-age graphics",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/soviet-space-age.md",
+   "era": "1957-1970s, USSR",
+   "space": "both",
+   "tags": [
+    "movement",
+    "soviet",
+    "space",
+    "age",
+    "graphics"
+   ],
+   "good_for": [
+    "science, engineering, aerospace, history, optimistic collective-achievement stories, retro-futurist trailers"
+   ],
+   "not_for": [
+    "individualist luxury, intimate drama; avoid using for real political promotion without care"
+   ],
+   "blends_with": [
+    "constructivism",
+    "swiss-international",
+    "cassette-futurism",
+    "risograph-culture"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "red": "#d52b1e",
+    "midnight": "#0b1f4b",
+    "gold": "#e8b923",
+    "white": "#f5f1e6",
+    "sky": "#2f6fb5",
+    "steel": "#8a9099"
+   },
+   "motion_language": "heroic ascent, declarative"
+  },
+  {
+   "id": "swiss-international",
+   "name": "Swiss International Style (International Typographic Style)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/swiss-international.md",
+   "era": "1940s-1970s, Zurich and Basel; spread to the US via MIT and corporate identity",
+   "space": "both",
+   "tags": [
+    "movement",
+    "swiss",
+    "international",
+    "typographic"
+   ],
+   "good_for": [
+    "data, infrastructure, B2B, explainers",
+    "institutions, transport, anything that must feel factual"
+   ],
+   "not_for": [
+    "warm consumer",
+    "kids",
+    "nostalgia",
+    "luxury"
+   ],
+   "blends_with": [
+    "bauhaus",
+    "de-stijl",
+    "polish-poster-school",
+    "international-typographic-corporate-identity",
+    "ulm-braun-functionalism",
+    "experimental-jetset",
+    "dutch-total-design"
+   ],
+   "clashes_with": [
+    "memphis-milano",
+    "postmodern-emigre",
+    "vaporwave-and-anti-design-net-art"
+   ],
+   "palette": {
+    "canvas": "#e8e9dd",
+    "paper_white": "#fefefe",
+    "ink": "#000000",
+    "grey": "#b9bbbc",
+    "accent": "#fc5b02"
+   },
+   "motion_language": "precise, orthogonal, rhythmic"
+  },
+  {
+   "id": "swiss-punk-and-neue-grafik-digital-grotesk",
+   "name": "Swiss Punk to the 2020s digital grotesk: Weingart, Neue Grafik and anti-design web",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/swiss-punk-and-neue-grafik-digital-grotesk.md",
+   "era": "1958 Neue Grafik; 1968-1970s Weingart Basel; 2010s-2020s web neo-grotesk and neubrutalism",
+   "space": "both",
+   "tags": [
+    "movement",
+    "swiss",
+    "punk",
+    "2020s",
+    "digital",
+    "grotesk",
+    "weingart",
+    "neue",
+    "grafik",
+    "anti",
+    "design",
+    "web"
+   ],
+   "good_for": [
+    "tech and design studios, editorial, cultural institutions, product launches wanting an anti-polish look",
+    "type-led typography-first films"
+   ],
+   "not_for": [
+    "warm family brands, wellness",
+    "heritage craft"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "punk-xerox-zine",
+    "brutalist-web",
+    "experimental-jetset"
+   ],
+   "clashes_with": [
+    "art-nouveau",
+    "frutiger-aero"
+   ],
+   "palette": {
+    "canvas": "#f1f1ee",
+    "ink": "#0b0b0b",
+    "signal": "#ff3b1f",
+    "second": "#2b3cff",
+    "highlight": "#d9ff3f"
+   },
+   "motion_language": "mechanical, abrupt, typographic"
+  },
+  {
+   "id": "ukiyo-e-and-japonisme",
+   "name": "Ukiyo-e woodblock prints and Japonisme",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/ukiyo-e-and-japonisme.md",
+   "era": "1670s-1860s Edo (ukiyo-e); 1860s-1910 Western Japonisme",
+   "space": "both",
+   "tags": [
+    "movement",
+    "ukiyo",
+    "woodblock",
+    "prints",
+    "japonisme"
+   ],
+   "good_for": [
+    "travel, heritage, craft, tea, food",
+    "stories about nature, weather, journeys, waves of change",
+    "culture-led brand films"
+   ],
+   "not_for": [
+    "hard-tech or fintech UI explainers",
+    "anything needing photo realism"
+   ],
+   "blends_with": [
+    "art-nouveau",
+    "swiss-international",
+    "scandinavian-modern-design",
+    "japanese-sixties-graphic-yokoo-poster"
+   ],
+   "clashes_with": [
+    "y2k-chrome"
+   ],
+   "palette": {
+    "paper": "#efe3c8",
+    "keyblock_ink": "#1d1b19",
+    "prussian_blue": "#1c3b6b",
+    "pale_indigo": "#7f9db5",
+    "vermilion": "#c8412b",
+    "ochre": "#d9a441",
+    "moss": "#7b8a4a"
+   },
+   "motion_language": "paper-and-block: layered plates printed in sequence, then a slow lateral drift"
+  },
+  {
+   "id": "ulm-braun-functionalism",
+   "name": "Ulm School and Braun Functionalism",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/ulm-braun-functionalism.md",
+   "era": "1953-1968 (HfG Ulm); Braun design under Dieter Rams 1955-1997",
+   "space": "both",
+   "tags": [
+    "movement",
+    "ulm",
+    "school",
+    "braun",
+    "functionalism"
+   ],
+   "good_for": [
+    "hardware, audio, appliances, tools, B2B and infrastructure",
+    "design systems, wayfinding, pictogram sets, identity manuals, serious explainers"
+   ],
+   "not_for": [
+    "emotional, handmade or decorative subjects; maximalist entertainment"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "japanese-modern-tanaka-kamekura",
+    "mid-century-modern",
+    "blueprint-technical-drawing",
+    "braun-dieter-rams-lineage",
+    "international-typographic-corporate-identity",
+    "muji"
+   ],
+   "clashes_with": [
+    "art-nouveau",
+    "psychedelic-poster",
+    "punk-xerox-zine"
+   ],
+   "palette": {
+    "canvas": "#d1d3d4",
+    "white": "#f5f8f1",
+    "ink": "#1a1618",
+    "graphite": "#2b3038",
+    "grey": "#9f9f9b",
+    "grey_warm": "#a8a99c",
+    "signal": "#e8590c",
+    "aicher_blue": "#2d6db5",
+    "green": "#4aa06a"
+   },
+   "motion_language": "precise, quiet, systematic"
+  },
+  {
+   "id": "vaporwave-and-anti-design-net-art",
+   "name": "Vaporwave, net.art and early-web anti-design",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/vaporwave-and-anti-design-net-art.md",
+   "era": "mid-1990s net.art; 2010s vaporwave (Floral Shoppe, 9 Dec 2011)",
+   "space": "both",
+   "tags": [
+    "movement",
+    "vaporwave",
+    "net",
+    "art",
+    "early",
+    "web",
+    "anti",
+    "design"
+   ],
+   "good_for": [
+    "music, nostalgia, internet-culture and gaming stories",
+    "ironic commentary on consumer tech",
+    "net.art side: web-history or hacker narratives"
+   ],
+   "not_for": [
+    "serious B2B finance",
+    "health",
+    "anything that must feel contemporary and clean"
+   ],
+   "blends_with": [
+    "cassette-futurism",
+    "vhs-analog",
+    "y2k-chrome",
+    "brutalist-web",
+    "pixel-game-ui"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "scandinavian-modern-design",
+    "ukiyo-e-and-japonisme"
+   ],
+   "palette": {
+    "canvas": "#0a0a14",
+    "pink": "#ff71ce",
+    "cyan": "#01cdfe",
+    "mint": "#05ffa1",
+    "violet": "#b967ff",
+    "yellow": "#fffb96",
+    "win95_grey": "#c0c0c0",
+    "win95_teal": "#008080"
+   },
+   "motion_language": "slow, looped, degraded; net.art: abrupt browser states, crashes, flicker"
+  },
+  {
+   "id": "victorian-letterpress-wood-type",
+   "name": "Victorian letterpress and wood type",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/victorian-letterpress-wood-type.md",
+   "era": "c.1805-1910, Britain and the US",
+   "space": "both",
+   "tags": [
+    "movement",
+    "victorian",
+    "letterpress",
+    "wood",
+    "type"
+   ],
+   "good_for": [
+    "history, craft food and drink, circus or fair, western, theatre, stories with a period character, pubs"
+   ],
+   "not_for": [
+    "tech, minimal, science, anything futuristic"
+   ],
+   "blends_with": [
+    "engraving-etching",
+    "newspaper-broadsheet",
+    "punk-xerox-zine",
+    "art-nouveau"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "dutch-total-design",
+    "frutiger-aero"
+   ],
+   "palette": {
+    "paper": "#eadfc4",
+    "ink": "#1b1712",
+    "red": "#a8261d",
+    "blue": "#1f3b66",
+    "ochre": "#c58a2b"
+   },
+   "motion_language": "mechanical, set by hand, line by line"
+  },
+  {
+   "id": "vienna-secession",
+   "name": "Vienna Secession and Wiener Werkstatte",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/vienna-secession.md",
+   "era": "1897-1914, Vienna (Secession founded 3 April 1897; Werkstatte 1903-1932)",
+   "space": "both",
+   "tags": [
+    "movement",
+    "vienna",
+    "secession",
+    "wiener",
+    "werkstatte"
+   ],
+   "good_for": [
+    "luxury, culture, museums, jewellery, architecture",
+    "heritage brands with a modern edge",
+    "title cards that need a ceremonial feel"
+   ],
+   "not_for": [
+    "raw, anti-establishment punk content",
+    "data dashboards"
+   ],
+   "blends_with": [
+    "art-nouveau",
+    "art-deco",
+    "japanese-modern-tanaka-kamekura",
+    "bauhaus"
+   ],
+   "clashes_with": [
+    "punk-xerox-zine",
+    "memphis-milano",
+    "futurism-italian"
+   ],
+   "palette": {
+    "canvas": "#f4efe3",
+    "ink": "#111111",
+    "accent": "#c9a24a",
+    "white": "#ffffff",
+    "deep": "#2a2f45"
+   },
+   "motion_language": "ceremonial and exact: grids that assemble, gold that arrives last"
+  },
+  {
+   "id": "vorticism-and-english-modernism",
+   "name": "Vorticism and English modernism (BLAST, Johnston, the Underground)",
+   "kind": "movement",
+   "domain": "movements",
+   "path": "systems/movements/vorticism-and-english-modernism.md",
+   "era": "1914-1920s, London",
+   "space": "both",
+   "tags": [
+    "movement",
+    "vorticism",
+    "english",
+    "modernism",
+    "blast",
+    "johnston",
+    "underground"
+   ],
+   "good_for": [
+    "manifestos, statements, brand declarations",
+    "industrial and engineering subjects",
+    "transit identity (Johnston) for clarity"
+   ],
+   "not_for": [
+    "soft consumer brands, wellness"
+   ],
+   "blends_with": [
+    "futurism-italian",
+    "constructivism",
+    "dada-photomontage",
+    "international-typographic-corporate-identity"
+   ],
+   "clashes_with": [
+    "art-nouveau",
+    "arts-and-crafts-morris",
+    "vienna-secession"
+   ],
+   "palette": {
+    "canvas": "#f3ecd9",
+    "ink": "#0c0c0c",
+    "magenta": "#d9266b",
+    "red": "#c1272d",
+    "blue": "#1c3f94",
+    "green": "#2c6b4f"
+   },
+   "motion_language": "hard, angular, declarative"
+  },
+  {
+   "id": "airbnb-brand-motion",
+   "name": "Airbnb Belo, Cereal and Lottie-era product motion",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/airbnb-brand-motion.md",
+   "era": "Belo and Rausch rebrand July 2014 (DesignStudio); Lottie 2017; Cereal 2018",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "airbnb",
+    "belo",
+    "cereal",
+    "lottie",
+    "product",
+    "motion"
+   ],
+   "good_for": [
+    "travel, hospitality, marketplace, community products",
+    "onboarding and product micro-animation",
+    "warm human B2C"
+   ],
+   "not_for": [
+    "austere technical",
+    "dark security",
+    "luxury minimalism"
+   ],
+   "blends_with": [
+    "ikea-brand-system",
+    "mid-century-modern",
+    "linear-style-ui-motion",
+    "apple-ui-spring-motion",
+    "squash-bounce-pop"
+   ],
+   "clashes_with": [
+    "brutalist-web"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#222222",
+    "accent": "#ff5a5f",
+    "secondary": "#767676",
+    "support": "Belo Blue (named in Hatchwise, hex not found)"
+   },
+   "motion_language": "friendly, springy, illustrative; micro-interactions drawn in After Effects and exported as vector JSON"
+  },
+  {
+   "id": "apple-product-films",
+   "name": "Apple product films and keynote language",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/apple-product-films.md",
+   "era": "1998 to present, Cupertino; product films with Jony Ive voiceover 1999-2019, Apple Park era events",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "apple",
+    "product",
+    "films",
+    "keynote",
+    "language"
+   ],
+   "good_for": [
+    "consumer hardware and software launches",
+    "premium product reveals",
+    "feature-by-feature explainers",
+    "anything that must feel considered and calm"
+   ],
+   "not_for": [
+    "punk, protest, chaotic or maximal looks",
+    "data-dense reports"
+   ],
+   "blends_with": [
+    "manvsmachine",
+    "swiss-international",
+    "ulm-braun-functionalism",
+    "linear-vercel-stripe-brand-systems",
+    "apple-keynote-type-reveal",
+    "product-turntable-cgi",
+    "macro-product-closeup"
+   ],
+   "clashes_with": [
+    "y2k-chrome",
+    "punk-xerox-zine"
+   ],
+   "palette": {
+    "canvas": "#000000",
+    "ink": "#f5f5f7",
+    "secondary": "#86868b",
+    "ink_on_light": "#1d1d1f",
+    "muted_on_light": "#6e6e73",
+    "accent": "product colour only"
+   },
+   "motion_language": "precise, smooth, slow-in slow-out; confident restraint"
+  },
+  {
+   "id": "bbc-idents",
+   "name": "BBC channel idents: Lambie-Nairn's objects, rhythm and circles",
+   "kind": "title-design",
+   "domain": "studios",
+   "path": "systems/studios/bbc-idents.md",
+   "era": "1991 to 2016 in the eras covered here, London",
+   "space": "both",
+   "tags": [
+    "title",
+    "design",
+    "bbc",
+    "channel",
+    "idents",
+    "lambie",
+    "nairn",
+    "objects",
+    "rhythm",
+    "circles"
+   ],
+   "good_for": [
+    "channel or series branding, openers, recurring stingers",
+    "public-service or broadcast tone, warm and curious",
+    "a repeatable ident family"
+   ],
+   "not_for": [
+    "single-shot hype films",
+    "dense data narratives"
+   ],
+   "blends_with": [
+    "nhk-broadcast-design",
+    "mtv-80s-idents",
+    "wolff-olins"
+   ],
+   "clashes_with": [
+    "pentagram-paula-scher-and-partners"
+   ],
+   "palette": {
+    "bbc2_viridian": "#40826d",
+    "bbc1_red": "#d8232a",
+    "bbc1_red_in_frame": "#942323",
+    "ground": "#101010",
+    "white": "#ffffff"
+   },
+   "motion_language": "object or movement leads, mark resolves at the end"
+  },
+  {
+   "id": "bloomberg-businessweek-turley",
+   "name": "Bloomberg Businessweek under Richard Turley",
+   "kind": "publication",
+   "domain": "studios",
+   "path": "systems/studios/bloomberg-businessweek-turley.md",
+   "era": "2010-2014, New York (redesign 2010, Turley as creative director)",
+   "space": "both",
+   "tags": [
+    "publication",
+    "bloomberg",
+    "businessweek",
+    "under",
+    "richard",
+    "turley"
+   ],
+   "good_for": [
+    "financial or business stories that need a wink",
+    "attention-grabbing editorial films, news-style explainers",
+    "projects whose truth is serious but whose tone is irreverent"
+   ],
+   "not_for": [
+    "quiet luxury",
+    "reassuring institutional communication",
+    "children"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "the-economist-graphics",
+    "postmodern-emigre"
+   ],
+   "clashes_with": [
+    "financial-times-graphics"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#000000",
+    "accent": "fluorescent or saturated spot colour per issue",
+    "image": "hard-lit photography, clip-art, stock"
+   },
+   "motion_language": "blunt, abrupt, comic"
+  },
+  {
+   "id": "braun-dieter-rams-lineage",
+   "name": "Braun and Dieter Rams: less, but better",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/braun-dieter-rams-lineage.md",
+   "era": "1955 to 1995 (Rams at Braun), lineage continues in Vitsoe and Apple",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "braun",
+    "dieter",
+    "rams",
+    "less",
+    "but",
+    "better"
+   ],
+   "good_for": [
+    "hardware, instruments, calm products",
+    "stories about restraint, durability, honesty",
+    "explainers of how something works"
+   ],
+   "not_for": [
+    "loud youth culture",
+    "maximalist or kinetic type films"
+   ],
+   "blends_with": [
+    "muji",
+    "swiss-international",
+    "nhk-broadcast-design"
+   ],
+   "clashes_with": [
+    "mtv-80s-idents",
+    "pentagram-paula-scher-and-partners",
+    "stefan-sagmeister-studio"
+   ],
+   "palette": {
+    "canvas": "#f0ede5",
+    "housing_grey": "#8a8a87",
+    "pebble": "#c5c3be",
+    "anthracite": "#2e2e2c",
+    "ink": "#1a1a18",
+    "signal_red": "#c02820",
+    "function_yellow": "#d4b018",
+    "et66_housing": "#2b2b2b"
+   },
+   "motion_language": "quiet, mechanical, exact"
+  },
+  {
+   "id": "buck-studio",
+   "name": "Buck (style-agnostic design-led animation studio)",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/buck-studio.md",
+   "era": "2004 to present, Los Angeles; offices Brooklyn (2006), Sydney (2015), Amsterdam (2021), London (2023)",
+   "space": "both",
+   "tags": [
+    "studio",
+    "buck",
+    "agnostic",
+    "design",
+    "led",
+    "animation"
+   ],
+   "good_for": [
+    "brand and product explainer films",
+    "launches that need craft and charm",
+    "tech and entertainment spots",
+    "mixed-media hybrid (physical plus CG)"
+   ],
+   "not_for": [
+    "a single fixed visual dogma"
+   ],
+   "blends_with": [
+    "manvsmachine",
+    "apple-product-films",
+    "swiss-international",
+    "paper-cut-and-papercraft",
+    "paper-cutout-parallax-2-5d",
+    "stop-motion-laika-replacement",
+    "swiss-precise-motion"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#000000",
+    "accent_a": "#f32c17",
+    "accent_b": "#196efa",
+    "accent_c": "#fceb2d",
+    "soft": "#9083b5"
+   },
+   "motion_language": "style-agnostic, precisely timed"
+  },
+  {
+   "id": "collins-studio",
+   "name": "Collins: brand systems for entertainment and tech (Spotify era)",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/collins-studio.md",
+   "era": "2010s to present, New York / San Francisco",
+   "space": "both",
+   "tags": [
+    "studio",
+    "collins",
+    "brand",
+    "systems",
+    "entertainment",
+    "tech",
+    "spotify"
+   ],
+   "good_for": [
+    "consumer entertainment and music products",
+    "year-in-review and recap formats",
+    "product brands that want an emotional, playful system"
+   ],
+   "not_for": [
+    "austere B2B",
+    "heritage or luxury"
+   ],
+   "blends_with": [
+    "wolff-olins",
+    "koto-studio",
+    "dia-studio-kinetic-type",
+    "mtv-80s-idents",
+    "spotify-wrapped",
+    "risograph-print",
+    "screenprint"
+   ],
+   "clashes_with": [
+    "braun-dieter-rams-lineage",
+    "muji"
+   ],
+   "palette": {
+    "canvas": "#191414",
+    "ink": "#ffffff",
+    "accent": "#1ed760",
+    "duo_a": "#509bf5",
+    "duo_b": "#f037a5",
+    "collins_paper": "#f8f8f7",
+    "collins_ink": "#140700",
+    "collins_orange": "#ff7600"
+   },
+   "motion_language": "energetic, music-led, shapes burst and pulse"
+  },
+  {
+   "id": "dia-studio-kinetic-type",
+   "name": "DIA Studio: kinetic identity and type as choreography",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/dia-studio-kinetic-type.md",
+   "era": "2010s to present; founded in SoHo, New York; now French Alps (per search summary)",
+   "space": "both",
+   "tags": [
+    "studio",
+    "dia",
+    "kinetic",
+    "identity",
+    "type",
+    "choreography"
+   ],
+   "good_for": [
+    "identity films, event openers, sports and fashion launches",
+    "looping hero text, posters that move",
+    "music and culture"
+   ],
+   "not_for": [
+    "long copy",
+    "legal or data-heavy explanation"
+   ],
+   "blends_with": [
+    "pentagram-paula-scher-and-partners",
+    "collins-studio",
+    "mtv-80s-idents",
+    "swiss-international"
+   ],
+   "clashes_with": [
+    "muji",
+    "braun-dieter-rams-lineage"
+   ],
+   "palette": {
+    "canvas": "#f4f4f0",
+    "ink": "#0b0b0b",
+    "accent": "#ff3b1f"
+   },
+   "motion_language": "choreographed, physical: weight, stretch, wave, overlap"
+  },
+  {
+   "id": "elastic-title-design",
+   "name": "Elastic (prestige-TV main titles: built worlds, double exposure, mechanical craft)",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/elastic-title-design.md",
+   "era": "2008 to present, Santa Monica / Los Angeles (now trading under MakeMake per the elastic.tv redirect)",
+   "space": "both",
+   "tags": [
+    "studio",
+    "elastic",
+    "prestige",
+    "main",
+    "titles",
+    "built",
+    "worlds",
+    "double",
+    "exposure",
+    "mechanical",
+    "craft"
+   ],
+   "good_for": [
+    "series and film main titles",
+    "worldbuilding and fantasy",
+    "dark prestige drama",
+    "brand origin stories where objects are built"
+   ],
+   "not_for": [
+    "quick social overlays",
+    "flat infographics"
+   ],
+   "blends_with": [
+    "kyle-cooper-imaginary-forces",
+    "territory-studio-fui",
+    "manvsmachine",
+    "engraving-etching"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "canvas": "#13161b",
+    "got_dark": "#2e170e",
+    "got_wood": "#64341f",
+    "got_leather": "#9d6d3f",
+    "got_brass": "#ccb16b",
+    "got_parchment": "#e7e8a8",
+    "got_sun": "#f1f8e5",
+    "td_rust": "#72392d",
+    "td_ink": "#18181d",
+    "ww_grey": "#909f96",
+    "ww_light": "#dfe4e1"
+   },
+   "motion_language": "slow, continuous, camera-driven; music-structured"
+  },
+  {
+   "id": "financial-times-graphics",
+   "name": "Financial Times pink paper and chart style",
+   "kind": "publication",
+   "domain": "studios",
+   "path": "systems/studios/financial-times-graphics.md",
+   "era": "pink paper since 2 January 1893; Financier typeface for the 2014 redesign; Visual Vocabulary 2016-",
+   "space": "both",
+   "tags": [
+    "publication",
+    "financial",
+    "times",
+    "pink",
+    "paper",
+    "chart"
+   ],
+   "good_for": [
+    "finance, markets, business explainers, B2B research",
+    "long time-series stories",
+    "serious but warm"
+   ],
+   "not_for": [
+    "youth culture",
+    "playful consumer",
+    "dark-mode tech"
+   ],
+   "blends_with": [
+    "the-economist-graphics",
+    "nyt-graphics-and-upshot",
+    "newspaper-broadsheet"
+   ],
+   "clashes_with": [
+    "brutalist-web"
+   ],
+   "palette": {
+    "ground": "#fff1e5",
+    "ink": "#33302e",
+    "structure": "#0f5499",
+    "accent": "#990f3d",
+    "pink": "#fcd0b1",
+    "teal": "#0d7680"
+   },
+   "motion_language": "measured, authoritative"
+  },
+  {
+   "id": "fincher-title-design-angus-wall",
+   "name": "Fincher titles: Se7en (Kyle Cooper) and Dragon Tattoo (Blur), edited by Angus Wall",
+   "kind": "title-design",
+   "domain": "studios",
+   "path": "systems/studios/fincher-title-design-angus-wall.md",
+   "era": "1995 (Se7en) and 2011 (The Girl with the Dragon Tattoo)",
+   "space": "both",
+   "tags": [
+    "title",
+    "design",
+    "fincher",
+    "titles",
+    "se7en",
+    "kyle",
+    "cooper",
+    "dragon",
+    "tattoo",
+    "blur",
+    "edited",
+    "angus",
+    "wall"
+   ],
+   "good_for": [
+    "thrillers, crime, true-crime podcasts, security or dark-tech reveals",
+    "music-driven title sequences",
+    "intros whose menace comes from texture"
+   ],
+   "not_for": [
+    "friendly consumer",
+    "wellness",
+    "any copy with a lot of explanatory text"
+   ],
+   "blends_with": [
+    "maurice-binder-and-bond-titles",
+    "punk-xerox-zine"
+   ],
+   "clashes_with": [
+    "swiss-international"
+   ],
+   "palette": {
+    "ground": "#000000",
+    "ink_scratch": "#f4f5f6",
+    "mid_grey": "#58595e",
+    "cold_tint": "#19262d",
+    "paper": "#d9d2c0"
+   },
+   "motion_language": "agitated, fragmented, dread"
+  },
+  {
+   "id": "ikea-brand-system",
+   "name": "IKEA brand system",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/ikea-brand-system.md",
+   "era": "1943-present, Almhult, Sweden; blue-yellow logo since 1983",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "ikea"
+   ],
+   "good_for": [
+    "consumer, home, retail, mass-market utility",
+    "explainers that must work without language",
+    "friendly accessible B2C"
+   ],
+   "not_for": [
+    "luxury",
+    "aggressive tech/dark UI",
+    "ironic or cynical tone"
+   ],
+   "blends_with": [
+    "scandinavian-modern-design",
+    "data-journalism-isotype-neurath",
+    "teenage-engineering",
+    "isometric-motion",
+    "architectural-flythrough"
+   ],
+   "clashes_with": [
+    "mtv-80s-idents"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#111111",
+    "secondary_ink": "#484848",
+    "brand_blue": "#0058a3",
+    "brand_yellow": "#ffdb00",
+    "offer_red": "#cc0008",
+    "surface": "#f5f5f5"
+   },
+   "motion_language": "calm, helpful, demonstrative"
+  },
+  {
+   "id": "koto-studio",
+   "name": "Koto: ambitious brands, one yellow, systems at scale",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/koto-studio.md",
+   "era": "2015 to present; offices in London, Berlin, New York, Los Angeles, Sydney",
+   "space": "both",
+   "tags": [
+    "studio",
+    "koto",
+    "ambitious",
+    "brands",
+    "one",
+    "yellow",
+    "systems",
+    "scale"
+   ],
+   "good_for": [
+    "tech and consumer brands at scale",
+    "rebrand reveals for big platforms",
+    "friendly, positive product films",
+    "identity and motion-system reveal films"
+   ],
+   "not_for": [
+    "heritage, severe, brutalist or gloomy stories"
+   ],
+   "blends_with": [
+    "collins-studio",
+    "wolff-olins",
+    "dia-studio-kinetic-type",
+    "spotify-wrapped",
+    "airbnb-brand-motion",
+    "squash-bounce-pop",
+    "apple-ui-spring-motion"
+   ],
+   "clashes_with": [
+    "braun-dieter-rams-lineage",
+    "stefan-sagmeister-studio"
+   ],
+   "palette": {
+    "canvas": "#060606",
+    "surface": "#141414",
+    "ink": "#ffffff",
+    "accent": "#ffe800",
+    "grey": "#989898",
+    "client_example": "#a136fc"
+   },
+   "motion_language": "optimistic, rhythmic, logo-led: the mark's own behaviour sets the system (Deezer logo pulses like a heartbeat and its beats become patterns, containers and sound)"
+  },
+  {
+   "id": "kyle-cooper-imaginary-forces",
+   "name": "Kyle Cooper and Imaginary Forces (scratched, analog-digital titles; Mad Men flat modernism)",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/kyle-cooper-imaginary-forces.md",
+   "era": "1995 (Se7en at R/Greenberg) to present; Imaginary Forces founded October 31, 1996, Los Angeles; Prologue 2003",
+   "space": "both",
+   "tags": [
+    "studio",
+    "kyle",
+    "cooper",
+    "imaginary",
+    "forces",
+    "scratched",
+    "analog",
+    "digital",
+    "titles",
+    "mad",
+    "men",
+    "flat",
+    "modernism"
+   ],
+   "good_for": [
+    "thriller, horror, crime",
+    "psychologically obsessive characters",
+    "titles built from physical objects",
+    "period drama with a modernist graphic wink (Mad Men mode)"
+   ],
+   "not_for": [
+    "clean corporate explainers",
+    "friendly consumer brands"
+   ],
+   "blends_with": [
+    "saul-bass",
+    "pablo-ferro",
+    "punk-xerox-zine",
+    "vhs-analog",
+    "elastic-title-design",
+    "kyle-cooper-scratch-type",
+    "macro-product-closeup",
+    "fincher-title-design-angus-wall",
+    "glitch-datamosh"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "swiss-international"
+   ],
+   "palette": {
+    "canvas": "#010302",
+    "shadow_ink": "#151510",
+    "gray_mid": "#2a2921",
+    "olive_grey": "#4a483d",
+    "emulsion_grey": "#66675c",
+    "highlight_cool": "#97a19b",
+    "mad_men_light": "#cccec5",
+    "mad_men_mid": "#a5a499",
+    "mad_men_shadow": "#535149",
+    "mad_men_black": "#080808",
+    "mad_men_skin_warm": "#a37a60"
+   },
+   "motion_language": "staccato, jittered, uneven frame rate, smear"
+  },
+  {
+   "id": "linear-vercel-stripe-brand-systems",
+   "name": "Linear, Vercel (Geist) and Stripe: software brand systems",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/linear-vercel-stripe-brand-systems.md",
+   "era": "2019 to present, San Francisco / global",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "linear",
+    "vercel",
+    "geist",
+    "stripe",
+    "software",
+    "systems"
+   ],
+   "good_for": [
+    "developer tools, SaaS, infrastructure",
+    "launch videos for B2B software",
+    "dashboards and data explainers",
+    "anything that must read as professional engineering"
+   ],
+   "not_for": [
+    "playful consumer brands",
+    "kids",
+    "heritage craft"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "apple-product-films",
+    "territory-studio-fui",
+    "terminal-crt",
+    "linear-style-ui-motion",
+    "screen-studio-cursor-zoom",
+    "swiss-precise-motion"
+   ],
+   "clashes_with": [
+    "memphis-milano",
+    "punk-xerox-zine"
+   ],
+   "palette": {
+    "linear_canvas": "#010102",
+    "linear_surface_1": "#0f1011",
+    "linear_surface_2": "#141516",
+    "linear_surface_3": "#191a1b",
+    "linear_border": "#23252a",
+    "linear_accent": "#5e6ad2",
+    "linear_accent_dark_ui": "#7170ff",
+    "linear_light_text_mercury": "#f4f5f8",
+    "linear_nordic_gray": "#222326",
+    "vercel_dark_bg": "#000000",
+    "vercel_light_bg": "#ffffff",
+    "vercel_light_bg2": "#fafafa",
+    "vercel_gray_1000_light": "#171717",
+    "vercel_gray_1000_dark": "#ededed",
+    "vercel_blue_700": "#0070f7",
+    "stripe_brand_600": "#533afd",
+    "stripe_brand_900": "#1c1e54",
+    "stripe_navy_ink": "#061b31",
+    "stripe_canary_focus": "#635bff",
+    "stripe_neutral_500": "#64748d",
+    "stripe_ruby": "#ea2261",
+    "stripe_orange": "#ff6118",
+    "stripe_magenta_100": "#ffd7ef",
+    "stripe_lemon_200": "#f9b900"
+   },
+   "motion_language": "fast, quiet, product-true; speed is the aesthetic"
+  },
+  {
+   "id": "manvsmachine",
+   "name": "ManvsMachine (London/LA design-and-direction studio: idea plus technique)",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/manvsmachine.md",
+   "era": "2007, Shoreditch, London; Los Angeles studio 2016; majority acquired by Landor (WPP) on 2 November 2015",
+   "space": "both",
+   "tags": [
+    "studio",
+    "manvsmachine",
+    "london",
+    "design",
+    "direction",
+    "idea",
+    "plus",
+    "technique"
+   ],
+   "good_for": [
+    "brand relaunches and commercials",
+    "product and automotive CG",
+    "broadcast idents and rebrands",
+    "film titles with a concept"
+   ],
+   "not_for": [
+    "rough punk or zine looks",
+    "flat illustration-only briefs"
+   ],
+   "blends_with": [
+    "apple-product-films",
+    "buck-studio",
+    "territory-studio-fui",
+    "elastic-title-design",
+    "macro-product-closeup",
+    "handheld-documentary",
+    "product-turntable-cgi",
+    "glass-product-cgi"
+   ],
+   "clashes_with": [
+    "vhs-analog"
+   ],
+   "palette": {
+    "canvas": "#05070c",
+    "surface": "#0b1d2b",
+    "light": "#a9b4b4",
+    "accent": "#a31305",
+    "brand_ink": "#231f20",
+    "brand_blue": "#0e1adf"
+   },
+   "motion_language": "considered, crafted, tool-agnostic; fast and aggressive when the product is (Mustang), slow and sculptural when it is food or fashion (proposed)"
+  },
+  {
+   "id": "maurice-binder-and-bond-titles",
+   "name": "Maurice Binder and the Bond title sequences",
+   "kind": "title-design",
+   "domain": "studios",
+   "path": "systems/studios/maurice-binder-and-bond-titles.md",
+   "era": "1962-1989 (Dr. No to Licence to Kill), London",
+   "space": "both",
+   "tags": [
+    "title",
+    "design",
+    "maurice",
+    "binder",
+    "bond",
+    "sequences"
+   ],
+   "good_for": [
+    "spy, thriller, glamour, retro-cool",
+    "intros built around a theme song",
+    "launch openers wanting graphic confidence"
+   ],
+   "not_for": [
+    "data-honest explainers",
+    "family or wellness",
+    "contemporary inclusive brand tone, unless reinterpreted"
+   ],
+   "blends_with": [
+    "saul-bass",
+    "mid-century-modern",
+    "pablo-ferro",
+    "op-art-kinetic",
+    "elastic-title-design",
+    "kyle-cooper-imaginary-forces",
+    "psychedelic-poster"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "ground": "#070405",
+    "ground_plum": "#363145",
+    "gunshot_red": "#660707",
+    "dot_blue": "#1777c8",
+    "dot_green": "#1ab027",
+    "bond_montage_black": "#060405",
+    "bond_montage_grey": "#474649",
+    "bond_montage_red": "#982b17",
+    "bond_montage_blue": "#2f3da9",
+    "field_proposed_orange": "#f26a1b",
+    "field_proposed_magenta": "#d6247a"
+   },
+   "motion_language": "seductive, rhythmic, graphic, tied to the theme song"
+  },
+  {
+   "id": "mtv-80s-idents",
+   "name": "MTV 1981: the logo that never looks the same twice",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/mtv-80s-idents.md",
+   "era": "1981 to mid 1980s, New York",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "mtv",
+    "1981",
+    "logo",
+    "looks",
+    "same",
+    "twice"
+   ],
+   "good_for": [
+    "music, youth culture, retro-80s films",
+    "any channel or brand that wants identity as a changing surface",
+    "stings and openers"
+   ],
+   "not_for": [
+    "quiet, institutional or heritage stories",
+    "precision product films"
+   ],
+   "blends_with": [
+    "wolff-olins",
+    "collins-studio",
+    "dia-studio-kinetic-type",
+    "cassette-futurism"
+   ],
+   "clashes_with": [
+    "braun-dieter-rams-lineage",
+    "muji",
+    "nhk-broadcast-design"
+   ],
+   "palette": {
+    "m_yellow": "#ffd400",
+    "tv_red": "#e8112d",
+    "ground": "#000000",
+    "free": "any colour or material"
+   },
+   "motion_language": "fast, mutating, graphic, music-driven"
+  },
+  {
+   "id": "muji",
+   "name": "Muji: no-brand emptiness",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/muji.md",
+   "era": "1980 to present, Tokyo",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "muji",
+    "emptiness"
+   ],
+   "good_for": [
+    "calm products, home, wellness, stationery, daily-use goods",
+    "stories of restraint and everyday use",
+    "a pause scene inside a louder film"
+   ],
+   "not_for": [
+    "loud launches, kinetic type, gaming"
+   ],
+   "blends_with": [
+    "braun-dieter-rams-lineage",
+    "nhk-broadcast-design",
+    "swiss-international",
+    "japanese-modern-tanaka-kamekura",
+    "scandinavian-modern-design"
+   ],
+   "clashes_with": [
+    "mtv-80s-idents",
+    "dia-studio-kinetic-type",
+    "pentagram-paula-scher-and-partners",
+    "nike-brand-motion"
+   ],
+   "palette": {
+    "canvas": "#e0d5c2",
+    "kraft": "#af8a6c",
+    "ink": "#35332b",
+    "logo_maroon": "#7d0018"
+   },
+   "motion_language": "slow, still, almost no motion"
+  },
+  {
+   "id": "national-geographic",
+   "name": "National Geographic yellow-frame identity",
+   "kind": "publication",
+   "domain": "studios",
+   "path": "systems/studios/national-geographic.md",
+   "era": "1888 society; yellow border from 1910; photographic covers from 1959; identity refresh 2016 (Gretel)",
+   "space": "both",
+   "tags": [
+    "publication",
+    "national",
+    "geographic",
+    "yellow",
+    "frame",
+    "identity"
+   ],
+   "good_for": [
+    "science, nature, travel, history, culture",
+    "documentary films, expedition and PR films with strong footage",
+    "anything where the image is the proof"
+   ],
+   "not_for": [
+    "abstract tech",
+    "typographic-first kinetic pieces",
+    "playful consumer UI"
+   ],
+   "blends_with": [
+    "museum-label-and-specimen"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "frame": "#fbd42c",
+    "ink": "#000000",
+    "canvas": "#ffffff",
+    "image": "full-colour photography"
+   },
+   "motion_language": "documentary, patient, observational"
+  },
+  {
+   "id": "nhk-broadcast-design",
+   "name": "NHK Educational design: Design Ah! and PythagoraSwitch",
+   "kind": "title-design",
+   "domain": "studios",
+   "path": "systems/studios/nhk-broadcast-design.md",
+   "era": "2002 (PythagoraSwitch), 2011 onward (Design Ah!), Tokyo",
+   "space": "both",
+   "tags": [
+    "title",
+    "design",
+    "nhk",
+    "educational",
+    "pythagoraswitch"
+   ],
+   "good_for": [
+    "explainers about objects, craft, design for curious audiences",
+    "playful educational pieces, kids and adults",
+    "chain-reaction or process films"
+   ],
+   "not_for": [
+    "brand hype",
+    "brutal or dark styles"
+   ],
+   "blends_with": [
+    "braun-dieter-rams-lineage",
+    "muji",
+    "bbc-idents"
+   ],
+   "clashes_with": [
+    "mtv-80s-idents",
+    "stefan-sagmeister-studio"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#1a1a1a",
+    "red": "#e60012",
+    "blue": "#0068b7",
+    "yellow": "#fff100"
+   },
+   "motion_language": "playful, exact, causal: one thing triggers the next"
+  },
+  {
+   "id": "nike-brand-motion",
+   "name": "Nike brand motion (Futura Condensed caps, black and white, athlete-first film)",
+   "kind": "brand-system",
+   "domain": "studios",
+   "path": "systems/studios/nike-brand-motion.md",
+   "era": "1971 Swoosh (Carolyn Davidson); 'Just Do It' 1988 with Wieden+Kennedy; film work to present",
+   "space": "both",
+   "tags": [
+    "brand",
+    "system",
+    "nike",
+    "motion",
+    "futura",
+    "condensed",
+    "caps",
+    "black",
+    "white",
+    "athlete",
+    "first",
+    "film"
+   ],
+   "good_for": [
+    "sports, performance, motivation",
+    "campaign films with a human claim",
+    "kinetic type with footage",
+    "apparel and product launches that need energy"
+   ],
+   "not_for": [
+    "delicate, luxury-quiet products",
+    "dense data"
+   ],
+   "blends_with": [
+    "manvsmachine",
+    "pablo-ferro",
+    "swiss-international",
+    "dia-modular-kinetic-type",
+    "whip-pan-match-cut",
+    "handheld-documentary"
+   ],
+   "clashes_with": [
+    "apple-product-films",
+    "muji"
+   ],
+   "palette": {
+    "canvas": "#111111",
+    "paper": "#ffffff",
+    "accent": "#fa5400",
+    "grey": "#8d8d8d"
+   },
+   "motion_language": "percussive, athletic, cut to the beat or VO"
+  },
+  {
+   "id": "nyt-graphics-and-upshot",
+   "name": "New York Times graphics and The Upshot",
+   "kind": "publication",
+   "domain": "studios",
+   "path": "systems/studios/nyt-graphics-and-upshot.md",
+   "era": "Cheltenham system 2003; article redesign 2013; The Upshot launched 22 April 2014",
+   "space": "both",
+   "tags": [
+    "publication",
+    "new",
+    "york",
+    "times",
+    "graphics",
+    "upshot"
+   ],
+   "good_for": [
+    "data journalism explainers",
+    "politics, economy, health, housing",
+    "any film where one dataset tells a layered story"
+   ],
+   "not_for": [
+    "decorative abstract motion",
+    "brand-led ads",
+    "kinetic type pieces"
+   ],
+   "blends_with": [
+    "the-economist-graphics",
+    "financial-times-graphics",
+    "swiss-international"
+   ],
+   "clashes_with": [
+    "y2k-chrome"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#121212",
+    "accent_primary": "one saturated hue per story",
+    "context": "#999999 / #cccccc greys"
+   },
+   "motion_language": "explanatory, scroll-driven, state changes of one chart"
+  },
+  {
+   "id": "pablo-ferro",
+   "name": "Pablo Ferro (hand lettering, multi-image split screen, quick-cut montage)",
+   "kind": "title-design",
+   "domain": "studios",
+   "path": "systems/studios/pablo-ferro.md",
+   "era": "1960s-2000s, New York then Los Angeles",
+   "space": "2d",
+   "tags": [
+    "title",
+    "design",
+    "pablo",
+    "ferro",
+    "hand",
+    "lettering",
+    "multi",
+    "image",
+    "split",
+    "screen",
+    "quick",
+    "cut",
+    "montage"
+   ],
+   "good_for": [
+    "montage-heavy sizzles and trailers",
+    "sport, action, caper tone",
+    "satire and comedy titles with a human hand",
+    "turning dense footage into rhythm"
+   ],
+   "not_for": [
+    "precise data graphics",
+    "luxury minimal product films"
+   ],
+   "blends_with": [
+    "saul-bass",
+    "kyle-cooper-imaginary-forces",
+    "punk-xerox-zine",
+    "swiss-international"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "canvas": "#282828",
+    "footage_grey_high": "#e3e3e3",
+    "footage_grey_mid": "#808080",
+    "tca_ink": "#1b1112",
+    "tca_warm": "#534e45",
+    "tca_blue": "#6e8290",
+    "tca_red": "#9f0006",
+    "ink": "#f4f1e8"
+   },
+   "motion_language": "montage-driven; rhythm comes from cutting and tiling, not from tweening"
+  },
+  {
+   "id": "pentagram-paula-scher-and-partners",
+   "name": "Pentagram: Paula Scher and the partner model",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/pentagram-paula-scher-and-partners.md",
+   "era": "1972 to present; Scher's Public Theater work from 1994",
+   "space": "both",
+   "tags": [
+    "studio",
+    "pentagram",
+    "paula",
+    "scher",
+    "partner",
+    "model"
+   ],
+   "good_for": [
+    "cultural institutions, theatre, festivals",
+    "identity reveals where the name is the hero",
+    "typographic launch films with a human, urban voice"
+   ],
+   "not_for": [
+    "quiet luxury",
+    "dense UI explanations",
+    "anything that wants soft gradients"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "dia-studio-kinetic-type",
+    "collins-studio",
+    "push-pin-studios"
+   ],
+   "clashes_with": [
+    "muji",
+    "braun-dieter-rams-lineage",
+    "frutiger-aero"
+   ],
+   "palette": {
+    "canvas": "#e7e3ee",
+    "ink": "#111111",
+    "accent_hot": "#ee3c15",
+    "accent_cool": "#7380c6",
+    "accent_signal": "#f49f1e",
+    "accent_warm": "#cd6f57"
+   },
+   "motion_language": "poster-in-motion: blocks and type slam and slide on a grid, then hold"
+  },
+  {
+   "id": "saul-bass",
+   "name": "Saul Bass (cut-paper title design and corporate identity)",
+   "kind": "title-design",
+   "domain": "studios",
+   "path": "systems/studios/saul-bass.md",
+   "era": "1955-1996, Los Angeles; titles for Preminger, Hitchcock, Scorsese; identities for Bell, United Airlines, AT&T",
+   "space": "both",
+   "tags": [
+    "title",
+    "design",
+    "saul",
+    "bass",
+    "cut",
+    "paper",
+    "corporate",
+    "identity"
+   ],
+   "good_for": [
+    "film or documentary titles with one strong metaphor",
+    "psychological, thriller, noir tone",
+    "brand lockups and logo stings that must read in one second",
+    "explainers that need a single symbolic image per beat"
+   ],
+   "not_for": [
+    "warm consumer lifestyle",
+    "data-dense dashboards",
+    "anything needing photoreal depth"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "polish-poster-school",
+    "kyle-cooper-imaginary-forces",
+    "saul-bass-cutout-type",
+    "paper-cut-and-papercraft"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "y2k-chrome"
+   ],
+   "palette": {
+    "canvas": "#eba606",
+    "ink": "#0e0e0e",
+    "accent": "#bb3e21",
+    "paper": "#f2f1ed",
+    "ground_grey": "#8b8b8b"
+   },
+   "motion_language": "percussive, beat-locked, graphic"
+  },
+  {
+   "id": "spotify-wrapped",
+   "name": "Spotify Wrapped (personal data as shareable story cards)",
+   "kind": "product-ui",
+   "domain": "studios",
+   "path": "systems/studios/spotify-wrapped.md",
+   "era": "2015 concept; 'Wrapped' name 2016; story format 2019; 10th anniversary edition 2024",
+   "space": "both",
+   "tags": [
+    "product",
+    "spotify",
+    "wrapped",
+    "personal",
+    "data",
+    "shareable",
+    "story",
+    "cards"
+   ],
+   "good_for": [
+    "year-in-review and personal data stories",
+    "social-first 9:16 recaps",
+    "campaign reveals with numbers",
+    "celebratory consumer moments"
+   ],
+   "not_for": [
+    "sober B2B",
+    "luxury restraint"
+   ],
+   "blends_with": [
+    "nike-brand-motion",
+    "dia-modular-kinetic-type",
+    "memphis-milano",
+    "swiss-international"
+   ],
+   "clashes_with": [
+    "apple-product-films",
+    "linear-vercel-stripe-brand-systems"
+   ],
+   "palette": {
+    "canvas": "#0a080b",
+    "ink": "#ffffff",
+    "red": "#d91f25",
+    "pink": "#f52ca8",
+    "pink_light": "#ee88c6",
+    "cyan": "#07b0ed",
+    "yellow": "#fdf000",
+    "dark_red": "#630e09"
+   },
+   "motion_language": "loopy, bouncy, celebratory, fast"
+  },
+  {
+   "id": "stefan-sagmeister-studio",
+   "name": "Sagmeister (and Sagmeister & Walsh): personal statement as design",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/stefan-sagmeister-studio.md",
+   "era": "1993 to present, New York; partnership with Jessica Walsh 2011 to 2019",
+   "space": "both",
+   "tags": [
+    "studio",
+    "sagmeister",
+    "walsh",
+    "personal",
+    "statement",
+    "design"
+   ],
+   "good_for": [
+    "manifestos, personal brand, culture, exhibitions",
+    "campaigns that want a human, risky voice"
+   ],
+   "not_for": [
+    "corporate neutrality",
+    "dense enterprise explainers"
+   ],
+   "blends_with": [
+    "pentagram-paula-scher-and-partners",
+    "wolff-olins",
+    "dia-studio-kinetic-type"
+   ],
+   "clashes_with": [
+    "braun-dieter-rams-lineage",
+    "muji",
+    "nhk-broadcast-design"
+   ],
+   "palette": {
+    "canvas": "#e5e7e2",
+    "paper_pale": "#fafafa",
+    "ink": "#141414",
+    "accent": "#deaf1c",
+    "accent2": "#4a1413",
+    "material_brown": "#8a6635"
+   },
+   "motion_language": "deadpan, camera-observed craft; stop-motion style, cut with a joke"
+  },
+  {
+   "id": "teenage-engineering",
+   "name": "Teenage Engineering",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/teenage-engineering.md",
+   "era": "2005-present, Stockholm",
+   "space": "both",
+   "tags": [
+    "studio",
+    "teenage",
+    "engineering"
+   ],
+   "good_for": [
+    "audio, hardware, creative-tool launches",
+    "anything that should feel like a well-made instrument",
+    "playful-but-precise B2C devices"
+   ],
+   "not_for": [
+    "warm lifestyle storytelling",
+    "financial or institutional trust",
+    "dense editorial explainers"
+   ],
+   "blends_with": [
+    "swiss-international",
+    "ulm-braun-functionalism",
+    "pixel-game-ui"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#000000",
+    "accent": "#ff6600",
+    "metal": "#d4d4d4",
+    "screen": "#00ff66",
+    "product_grey": "#b6b6b6",
+    "product_light": "#e3e3e3",
+    "product_warm": "#d7d2c9",
+    "product_red": "#b50d0a"
+   },
+   "motion_language": "playful but mechanical; the device's own UI animates (waveforms, tape reels, bouncing level meters)"
+  },
+  {
+   "id": "territory-studio-fui",
+   "name": "Territory Studio (fictional user interfaces and film screen graphics)",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/territory-studio-fui.md",
+   "era": "2010 to present, London (also San Francisco and New York)",
+   "space": "both",
+   "tags": [
+    "studio",
+    "territory",
+    "fictional",
+    "user",
+    "interfaces",
+    "film",
+    "screen",
+    "graphics"
+   ],
+   "good_for": [
+    "sci-fi and near-future worlds",
+    "data, security, command-and-control",
+    "product explainers with a cinematic HUD",
+    "making abstract systems look believable"
+   ],
+   "not_for": [
+    "warm consumer and lifestyle",
+    "print-like editorial looks"
+   ],
+   "blends_with": [
+    "elastic-title-design",
+    "manvsmachine",
+    "terminal-crt",
+    "cassette-futurism",
+    "blueprint-technical-drawing"
+   ],
+   "clashes_with": [],
+   "palette": {
+    "canvas": "#061822",
+    "cold_cyan": "#127383",
+    "pale_signal": "#dbe6e7",
+    "deep_green": "#0d3b2f",
+    "oxblood": "#492524",
+    "market_mint": "#abd8b5"
+   },
+   "motion_language": "state-machine: initial, action, loop"
+  },
+  {
+   "id": "the-economist-graphics",
+   "name": "The Economist chart and graphics style",
+   "kind": "publication",
+   "domain": "studios",
+   "path": "systems/studios/the-economist-graphics.md",
+   "era": "red nameplate 1959; chart style revised 2017; data team 2015-present, London",
+   "space": "2d",
+   "tags": [
+    "publication",
+    "economist",
+    "chart",
+    "graphics"
+   ],
+   "good_for": [
+    "data explainers, economics, B2B analysis, policy, finance",
+    "any film with a chart that must make one clear point"
+   ],
+   "not_for": [
+    "emotional brand storytelling",
+    "playful consumer launch"
+   ],
+   "blends_with": [
+    "financial-times-graphics",
+    "nyt-graphics-and-upshot",
+    "swiss-international"
+   ],
+   "clashes_with": [
+    "frutiger-aero"
+   ],
+   "palette": {
+    "canvas": "#f5f4f0",
+    "ink": "#0d0d0d",
+    "accent": "#e3120b",
+    "muted": "#999999",
+    "muted_light": "#bbbbbb",
+    "tint_red": "#ff9999"
+   },
+   "motion_language": "explanatory, restrained, dry"
+  },
+  {
+   "id": "wolff-olins",
+   "name": "Wolff Olins: strategy made visible",
+   "kind": "studio",
+   "domain": "studios",
+   "path": "systems/studios/wolff-olins.md",
+   "era": "1965 to present, London / New York",
+   "space": "both",
+   "tags": [
+    "studio",
+    "wolff",
+    "olins",
+    "strategy",
+    "made",
+    "visible"
+   ],
+   "good_for": [
+    "brand reveals and rebrand films",
+    "cultural institutions, platforms with many sub-brands",
+    "stories about a company changing"
+   ],
+   "not_for": [
+    "pure data explainers",
+    "retro or vernacular looks"
+   ],
+   "blends_with": [
+    "collins-studio",
+    "koto-studio",
+    "mtv-80s-idents",
+    "pentagram-paula-scher-and-partners"
+   ],
+   "clashes_with": [
+    "muji",
+    "braun-dieter-rams-lineage"
+   ],
+   "palette": {
+    "canvas": "#ffffff",
+    "ink": "#0a0a0a",
+    "accent": "#276ef1",
+    "signal": "#ff4d00"
+   },
+   "motion_language": "identity in transition: the mark moves between states and never settles on one"
+  },
+  {
+   "id": "afrofuturism",
+   "name": "Afrofuturism visual systems",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/afrofuturism.md",
+   "era": "1950s onward (Sun Ra, Chicago); term coined 1993-94 by Mark Dery; Africanfuturism distinguished by Nnedi Okorafor 2019; ongoing, diaspora and Africa",
+   "space": "both",
+   "tags": [
+    "afrofuturism",
+    "speculative",
+    "music",
+    "collage",
+    "space",
+    "diaspora",
+    "cosmic",
+    "funk",
+    "africanfuturism",
+    "vernacular",
+    "visual",
+    "systems"
+   ],
+   "good_for": [
+    "music, album and festival films",
+    "stories about futures, memory, return, ownership of technology",
+    "speculative-fiction trailers",
+    "brand stories asking 'whose future is this?'"
+   ],
+   "not_for": [
+    "a generic 'Black Panther'-style tech aesthetic with no point of view",
+    "corporate decks needing neutrality",
+    "using the look as costume for an unrelated product"
+   ],
+   "blends_with": [
+    "psychedelic-poster",
+    "screenprint",
+    "cuban-silkscreen-film-posters",
+    "soviet-space-age"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "glass-product-cgi"
+   ],
+   "palette": {
+    "canvas": "#0b0a1f",
+    "ink": "#f4efe2",
+    "accent": "#f2b705",
+    "second": "#7b2cbf",
+    "third": "#e63946",
+    "fourth": "#0fb5ae",
+    "sunra_gold": "#c5a548",
+    "sunra_ochre": "#8e5c3c",
+    "sunra_paper": "#ccbfa5",
+    "sunra_dark": "#494741"
+   },
+   "motion_language": "ceremonial and propulsive: slow ascent, then rhythm"
+  },
+  {
+   "id": "airport-wayfinding",
+   "name": "Airport and civic wayfinding (Aicher, Frutiger, Crouwel lineage)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/airport-wayfinding.md",
+   "era": "1960s–1970s, Munich / Paris / Amsterdam; still the default language of public signs",
+   "space": "both",
+   "tags": [
+    "signage",
+    "pictogram",
+    "wayfinding",
+    "public",
+    "grid",
+    "functional",
+    "vernacular",
+    "airport",
+    "civic",
+    "aicher",
+    "frutiger",
+    "crouwel",
+    "lineage"
+   ],
+   "good_for": [
+    "infrastructure, logistics, transit, maps and routes",
+    "onboarding flows that are literally a path",
+    "civic or institutional explainers",
+    "anything that must read in one second"
+   ],
+   "not_for": [
+    "intimate emotional storytelling",
+    "luxury",
+    "anything that needs texture or romance"
+   ],
+   "blends_with": [
+    "transit-map-beck",
+    "swiss-international",
+    "newspaper-broadsheet",
+    "museum-label-and-specimen",
+    "data-journalism-isotype-neurath"
+   ],
+   "clashes_with": [
+    "bollywood-hand-painted",
+    "vhs-analog",
+    "y2k-chrome"
+   ],
+   "palette": {
+    "canvas": "#e2edef",
+    "ink": "#060707",
+    "munich_blue": "#9cbae4",
+    "munich_green": "#73ba93",
+    "charcoal": "#37393d",
+    "sign_yellow": "#ffd400"
+   },
+   "motion_language": "orderly, directional, sequential"
+  },
+  {
+   "id": "bollywood-hand-painted",
+   "name": "Hand-painted Hindi cinema hoardings and posters",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/bollywood-hand-painted.md",
+   "era": "1930s-1990s peak, still practised in small studios; Mumbai (Bombay)",
+   "space": "both",
+   "tags": [
+    "india",
+    "mumbai",
+    "bollywood",
+    "hoarding",
+    "oil-painting",
+    "grid-method",
+    "montage",
+    "hand-lettering",
+    "cinema",
+    "vernacular",
+    "hand",
+    "painted",
+    "hindi",
+    "hoardings",
+    "posters"
+   ],
+   "good_for": [
+    "film, music and festival titles",
+    "drama, nostalgia, tribute pieces",
+    "bold single-hero announcements with a strong title"
+   ],
+   "not_for": [
+    "data-dense UI explainers",
+    "quiet minimal brands",
+    "any film that wants the look but not the people (it reads as costume)"
+   ],
+   "blends_with": [
+    "tamil-cinema-posters",
+    "indian-truck-art",
+    "south-asian-shop-signage-and-ghat-lettering",
+    "indian-matchbox-and-calendar-art",
+    "kalighat-and-indian-folk-painting-lines"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "brutalist-web"
+   ],
+   "palette": {
+    "canvas": "#c64d0d",
+    "canvas_deep": "#a71c08",
+    "shadow_red": "#811208",
+    "skin_light": "#bf824b",
+    "skin_shadow": "#895526",
+    "ink": "#3d261c",
+    "title_white": "#ecf2e9",
+    "title_yellow": "#c6ba52",
+    "poster_brown": "#9b582a",
+    "unfinished_cream": "#e8ebb6"
+   },
+   "motion_language": "stacked reveal, painted not animated"
+  },
+  {
+   "id": "cassette-futurism",
+   "name": "Cassette futurism (the 1970s-80s used future)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/cassette-futurism.md",
+   "era": "late 1970s-1980s hardware; named and revived 2010s-2020s",
+   "space": "both",
+   "tags": [
+    "cassette-futurism",
+    "retro-futurism",
+    "used-future",
+    "alien",
+    "braun",
+    "crt",
+    "amber",
+    "rocker-switch",
+    "hardware",
+    "70s-80s",
+    "vernacular",
+    "cassette",
+    "futurism",
+    "1970s",
+    "80s",
+    "used",
+    "future"
+   ],
+   "good_for": [
+    "sci-fi worlds, games, hardware or infrastructure stories",
+    "systems monitoring, space, industrial products",
+    "nostalgia for the physical interface"
+   ],
+   "not_for": [
+    "soft consumer lifestyle",
+    "luxury minimal",
+    "anything that must feel contemporary and fluid"
+   ],
+   "blends_with": [
+    "terminal-crt",
+    "vhs-analog",
+    "blueprint-technical-drawing",
+    "braun-dieter-rams-lineage",
+    "territory-studio-fui"
+   ],
+   "clashes_with": [
+    "y2k-chrome",
+    "frutiger-aero",
+    "vaporwave-and-web-nostalgia"
+   ],
+   "palette": {
+    "canvas": "#0d0d0a",
+    "housing": "#ceccbf",
+    "housing_shade": "#bcb7a6",
+    "seam": "#a19d92",
+    "phosphor": "#cc8d01",
+    "phosphor_hot": "#ffb000",
+    "signal": "#e2431f"
+   },
+   "motion_language": "mechanical, discrete, steppy"
+  },
+  {
+   "id": "cuban-silkscreen-film-posters",
+   "name": "ICAIC Cuban silkscreen film posters",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/cuban-silkscreen-film-posters.md",
+   "era": "1959 (ICAIC founded) to the 1980s; golden age usually placed 1960s-1970s, Havana",
+   "space": "both",
+   "tags": [
+    "silkscreen",
+    "poster",
+    "cuba",
+    "film",
+    "flat-colour",
+    "wit",
+    "icaic",
+    "overprint",
+    "limited-palette",
+    "vernacular",
+    "cuban",
+    "posters"
+   ],
+   "good_for": [
+    "film, festival, cultural-programme films",
+    "one-idea messages with wit",
+    "limited-colour, high-contrast identities",
+    "history or politics told with humour and design intelligence"
+   ],
+   "not_for": [
+    "dense data",
+    "photoreal product stories",
+    "any context that needs an apolitical tone: the tradition is bound to a revolutionary state's cultural project"
+   ],
+   "blends_with": [
+    "polish-poster-school",
+    "screenprint",
+    "push-pin-studios",
+    "risograph-print"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "glass-product-cgi"
+   ],
+   "palette": {
+    "canvas": "#f1e9d6",
+    "ink": "#171717",
+    "accent": "#e4372b",
+    "second": "#1a4fa0",
+    "third": "#f2c230",
+    "fourth": "#2a9d6f"
+   },
+   "motion_language": "witty and economical: one gag, timed"
+  },
+  {
+   "id": "frutiger-aero",
+   "name": "Frutiger Aero (Vista-era gloss, water, nature)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/frutiger-aero.md",
+   "era": "c. 2004-2013 (peak mid-2000s to early 2010s); name coined 2018",
+   "space": "both",
+   "tags": [
+    "frutiger-aero",
+    "aero",
+    "vista",
+    "glass",
+    "water",
+    "bokeh",
+    "nature",
+    "2000s",
+    "skeuomorphic",
+    "optimistic",
+    "vernacular",
+    "frutiger",
+    "gloss"
+   ],
+   "good_for": [
+    "nostalgia pieces about the 2000s internet and software",
+    "consumer wellness, water, eco, telecom with a friendly tone",
+    "UI-heavy openers with a warm optimistic read"
+   ],
+   "not_for": [
+    "serious editorial, security, finance",
+    "dark brooding films",
+    "minimal flat-design brands"
+   ],
+   "blends_with": [
+    "y2k-chrome",
+    "vaporwave-and-web-nostalgia",
+    "terminal-crt",
+    "glass-product-cgi"
+   ],
+   "clashes_with": [
+    "blueprint-technical-drawing",
+    "swiss-international",
+    "vhs-analog"
+   ],
+   "palette": {
+    "canvas": "#e9f4fb",
+    "ink": "#16405e",
+    "accent": "#10b1df",
+    "accent2": "#60d657",
+    "deep": "#12757a",
+    "glass": "rgba(255,255,255,.35)"
+   },
+   "motion_language": "smooth, airy, glassy"
+  },
+  {
+   "id": "ghanaian-film-posters",
+   "name": "Hand-painted Ghanaian film posters (mobile cinema, flour sacks)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/ghanaian-film-posters.md",
+   "era": "mid-1980s to c. 2000 (the 'golden age'); continuing as commissioned art after 2000, Accra and Kumasi",
+   "space": "both",
+   "tags": [
+    "hand-painted",
+    "poster",
+    "cinema",
+    "ghana",
+    "west-africa",
+    "flour-sack",
+    "horror",
+    "mobile-cinema",
+    "oil-enamel",
+    "vernacular-art",
+    "vernacular",
+    "hand",
+    "painted",
+    "ghanaian",
+    "film",
+    "posters",
+    "mobile",
+    "flour",
+    "sacks"
+   ],
+   "good_for": [
+    "film or music launches wanting raw, human, hand-made energy",
+    "horror, action and spectacle parody",
+    "anything about cinema, video culture or word of mouth",
+    "story where one piece of work is made by one person for one place"
+   ],
+   "not_for": [
+    "corporate or data-led explainers",
+    "luxury or quiet minimal brands",
+    "anything needing literal accuracy of a film or product"
+   ],
+   "blends_with": [
+    "indian-truck-art",
+    "bollywood-hand-painted",
+    "screenprint",
+    "risograph-print"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "frutiger-aero",
+    "glass-product-cgi"
+   ],
+   "palette": {
+    "canvas": "#c9b38a",
+    "ink": "#1b1410",
+    "accent": "#c4161c",
+    "second": "#f2c230",
+    "skin_light": "#e8b48a"
+   },
+   "motion_language": "stagey, impact-driven, hand-made; things land with a hit, then hold"
+  },
+  {
+   "id": "indian-matchbox-and-calendar-art",
+   "name": "Indian bazaar art: Ravi Varma oleographs, Sivakasi calendars and matchbox labels",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/indian-matchbox-and-calendar-art.md",
+   "era": "1894 (Ravi Varma Press) to 1980s peak; Bombay, Lonavala, Sivakasi, Calcutta",
+   "space": "both",
+   "tags": [
+    "india",
+    "bazaar-art",
+    "calendar-art",
+    "matchbox",
+    "chromolithograph",
+    "oleograph",
+    "sivakasi",
+    "ravi-varma",
+    "gods",
+    "print",
+    "vernacular",
+    "indian",
+    "bazaar",
+    "art",
+    "ravi",
+    "varma",
+    "oleographs",
+    "calendars",
+    "labels"
+   ],
+   "good_for": [
+    "heritage, festivals, devotional or family subjects",
+    "packaged goods, tea, spices, matches, sweets",
+    "nostalgia pieces about printing and trade",
+    "brand origins stories"
+   ],
+   "not_for": [
+    "technical or clinical subjects",
+    "anything that needs a flat modernist register"
+   ],
+   "blends_with": [
+    "kalighat-and-indian-folk-painting-lines",
+    "indian-truck-art",
+    "south-asian-shop-signage-and-ghat-lettering",
+    "mughal-miniature-and-rajput-painting"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "brutalist-web"
+   ],
+   "palette": {
+    "canvas": "#f0f0ef",
+    "ink": "#383c34",
+    "accent": "#c7171c",
+    "yellow": "#eadd3b",
+    "orange": "#d67b29",
+    "teal": "#6b8a89"
+   },
+   "motion_language": "devotional, framed, stable"
+  },
+  {
+   "id": "indian-truck-art",
+   "name": "Indian truck and lorry art",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/indian-truck-art.md",
+   "era": "1920s onward, living practice; Punjab, Rajasthan, Uttar Pradesh, Madhya Pradesh (Indore), Kerala",
+   "space": "both",
+   "tags": [
+    "india",
+    "truck-art",
+    "lorry",
+    "punjab",
+    "rajasthan",
+    "kerala",
+    "enamel",
+    "slogans",
+    "panels",
+    "mirror",
+    "tassels",
+    "vernacular",
+    "indian",
+    "truck",
+    "art"
+   ],
+   "good_for": [
+    "logistics, travel, road, music, street food, festival and regional brand energy",
+    "safety messages with humour",
+    "high-density celebratory titles"
+   ],
+   "not_for": [
+    "luxury, medical, minimal data products",
+    "anything that wants calm"
+   ],
+   "blends_with": [
+    "south-asian-shop-signage-and-ghat-lettering",
+    "tamil-cinema-posters",
+    "bollywood-hand-painted",
+    "indian-matchbox-and-calendar-art"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "mid-century-modern"
+   ],
+   "palette": {
+    "canvas": "#daa824",
+    "ink": "#080804",
+    "accent": "#d62b1f",
+    "green": "#1f9d55",
+    "blue": "#1e5fb4",
+    "mirror_silver": "#c8ccd0",
+    "weathered_red": "#a86a44"
+   },
+   "motion_language": "loud, rhythmic, additive"
+  },
+  {
+   "id": "kalighat-and-indian-folk-painting-lines",
+   "name": "Kalighat pat (Bengal bazaar painting), with notes on Madhubani, Warli and Patachitra",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/kalighat-and-indian-folk-painting-lines.md",
+   "era": "1830s-1930s Calcutta (Kolkata); continued by patua families in Medinipur and Birbhum, e.g. Anwar Chitrakar",
+   "space": "both",
+   "tags": [
+    "india",
+    "bengal",
+    "kalighat",
+    "pat",
+    "patua",
+    "bazaar-painting",
+    "line",
+    "watercolour",
+    "satire",
+    "folk",
+    "vernacular",
+    "bazaar",
+    "painting",
+    "notes",
+    "madhubani",
+    "warli",
+    "patachitra"
+   ],
+   "good_for": [
+    "satire, character studies, quick sharp portraits",
+    "story cards for myth and social commentary",
+    "calm editorial pieces with a human line"
+   ],
+   "not_for": [
+    "dense multi-panel narratives (use Madhubani fill or scroll logic)",
+    "glossy tech, anything that wants gradients and glow"
+   ],
+   "blends_with": [
+    "indian-matchbox-and-calendar-art",
+    "mughal-miniature-and-rajput-painting",
+    "south-asian-shop-signage-and-ghat-lettering",
+    "paper-cut-and-papercraft"
+   ],
+   "clashes_with": [
+    "bollywood-hand-painted",
+    "y2k-chrome",
+    "glass-product-cgi"
+   ],
+   "palette": {
+    "canvas": "#efe4d1",
+    "ink": "#1b201c",
+    "accent": "#b54e1d",
+    "turmeric": "#d9ab53",
+    "sage": "#717a63",
+    "indigo": "#25407a"
+   },
+   "motion_language": "brush-fast and clean"
+  },
+  {
+   "id": "mexican-loteria",
+   "name": "Mexican Lotería cards (Clemente Jacques / Don Clemente Gallo lineage)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/mexican-loteria.md",
+   "era": "Game in New Spain from c. 1769; standard 54-card deck published from 1887; printed and painted tablas through the 20th century to now, Mexico",
+   "space": "both",
+   "tags": [
+    "card-game",
+    "mexico",
+    "flat-colour",
+    "emblem",
+    "folk-print",
+    "tabla",
+    "caption",
+    "popular-art",
+    "vernacular",
+    "mexican",
+    "loter",
+    "cards",
+    "clemente",
+    "jacques",
+    "don",
+    "gallo",
+    "lineage"
+   ],
+   "good_for": [
+    "games, chance, community, luck, a card-per-idea structure",
+    "lists of 54 or 16 things, one image per idea",
+    "Latin American or Mexican-American cultural stories told by the community itself",
+    "explainers where each idea gets a named emblem"
+   ],
+   "not_for": [
+    "dense data",
+    "premium minimal tech unless used as a playful interlude",
+    "anything solemn"
+   ],
+   "blends_with": [
+    "engraving-etching",
+    "screenprint",
+    "newspaper-broadsheet",
+    "paper-cut-and-papercraft"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "glass-product-cgi"
+   ],
+   "palette": {
+    "canvas": "#efe3c4",
+    "ink": "#1d1a17",
+    "accent": "#c8301f",
+    "second": "#1f5c9e",
+    "third": "#e9b52b",
+    "fourth": "#2f7a4a"
+   },
+   "motion_language": "game-like, turn-based, deadpan with a flip and a caller's rhythm"
+  },
+  {
+   "id": "mexican-rotulista-and-latin-sign-painting",
+   "name": "Mexican rotulismo and Latin American hand-painted signs",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/mexican-rotulista-and-latin-sign-painting.md",
+   "era": "Popular after the Mexican Revolution; workshops numerous in Mexico City by the 1980s; declining under vinyl and digital print since the 2000s; still practised, Mexico and the border",
+   "space": "both",
+   "tags": [
+    "sign-painting",
+    "mexico",
+    "latin-america",
+    "hand-lettering",
+    "street",
+    "enamel",
+    "rotulo",
+    "working-class-art",
+    "brush-lettering",
+    "vernacular",
+    "mexican",
+    "rotulismo",
+    "latin",
+    "american",
+    "hand",
+    "painted",
+    "signs"
+   ],
+   "good_for": [
+    "street food, markets, local business, neighbourhood stories",
+    "campaigns about place, community, craft and labour",
+    "humour with warmth",
+    "anything that needs a sign to speak in the first person"
+   ],
+   "not_for": [
+    "luxury minimal",
+    "dense data",
+    "anything treating the form as 'quaint'; also avoid it as a stylistic costume for an unrelated product"
+   ],
+   "blends_with": [
+    "ghanaian-film-posters",
+    "indian-truck-art",
+    "screenprint",
+    "mexican-loteria"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "frutiger-aero",
+    "glass-product-cgi"
+   ],
+   "palette": {
+    "canvas": "#f4e9cf",
+    "ink": "#14110f",
+    "accent": "#e0301e",
+    "second": "#1c5db3",
+    "third": "#f6c218",
+    "fourth": "#139b6a"
+   },
+   "motion_language": "painted in front of you: stroke by stroke, then a wink"
+  },
+  {
+   "id": "mughal-miniature-and-rajput-painting",
+   "name": "Mughal miniature and Rajput court painting",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/mughal-miniature-and-rajput-painting.md",
+   "era": "16th-19th centuries; Mughal ateliers (Akbar 1556-1605, Jahangir, Shah Jahan), Rajput and Pahari courts (Mewar, Bundi, Kota, Kishangarh, Guler)",
+   "space": "both",
+   "tags": [
+    "india",
+    "mughal",
+    "rajput",
+    "pahari",
+    "miniature",
+    "court-painting",
+    "borders",
+    "flat-planes",
+    "gouache",
+    "calligraphy",
+    "vernacular",
+    "court",
+    "painting"
+   ],
+   "good_for": [
+    "history, poetry, music, courtly or garden subjects",
+    "heritage, craft, luxury of attention, slow documentaries",
+    "rhythm pieces in the Ragamala sense (a mood per scene)"
+   ],
+   "not_for": [
+    "speed, urgency, data dashboards",
+    "anything where religious paintings of Krishna and Radha would be used as casual decoration"
+   ],
+   "blends_with": [
+    "indian-matchbox-and-calendar-art",
+    "kalighat-and-indian-folk-painting-lines",
+    "paper-cut-and-papercraft"
+   ],
+   "clashes_with": [
+    "brutalist-web",
+    "y2k-chrome",
+    "bollywood-hand-painted"
+   ],
+   "palette": {
+    "canvas": "#f1e4c3",
+    "ink": "#2a1d15",
+    "lapis": "#1f3a8a",
+    "vermilion": "#c8321e",
+    "gold": "#c99a2e",
+    "malachite": "#2f7d57",
+    "flat_yellow": "#e6b800"
+   },
+   "motion_language": "still, composed, slow reveal"
+  },
+  {
+   "id": "museum-label-and-specimen",
+   "name": "Museum label and specimen plate (accession numbers, vitrine lighting, the illustrated treatise)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/museum-label-and-specimen.md",
+   "era": "Museum labels trace to c.530 BCE (Ennigaldi-Nanna's collection in Babylon); catalogue and accession practice from the 19th-century natural history museum; BHL-era plate books (stipple, lithograph, hand-colour)",
+   "space": "both",
+   "tags": [
+    "museum",
+    "label",
+    "specimen",
+    "natural-history",
+    "accession",
+    "vitrine",
+    "plate",
+    "treatise",
+    "archive",
+    "vernacular",
+    "numbers",
+    "lighting",
+    "illustrated"
+   ],
+   "good_for": [
+    "science, nature, history, archives, culture, the 'an idea as an artefact' device",
+    "explaining a taxonomy or a collection of items",
+    "calm, authoritative, a bit wry"
+   ],
+   "not_for": [
+    "fast, loud, commercial promos",
+    "UI walkthroughs"
+   ],
+   "blends_with": [
+    "engraving-etching",
+    "cyanotype",
+    "newspaper-broadsheet",
+    "paper-cut-and-papercraft",
+    "banknote-guilloche",
+    "glass-product-cgi"
+   ],
+   "clashes_with": [
+    "risograph-print",
+    "screenprint",
+    "y2k-chrome"
+   ],
+   "palette": {
+    "canvas": "#efeadc",
+    "ink": "#1a1916",
+    "label": "#f6f2e6",
+    "accent": "#7d2a24",
+    "case": "#1b1d1f",
+    "plate_blue": "#57639a",
+    "plate_blue_light": "#a8b6d2",
+    "plate_sepia_ink": "#453413"
+   },
+   "motion_language": "curatorial, slow, measured"
+  },
+  {
+   "id": "newspaper-broadsheet",
+   "name": "Broadsheet newspaper (column grid, masthead, Didone and slab, halftone newsprint)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/newspaper-broadsheet.md",
+   "era": "Broadsheet format in Britain after the 1712 page-count tax (the tax was reduced from the 1830s and ended in 1855); halftone photographs in print from 1869-1881; newsprint web-fed presses ever since",
+   "space": "both",
+   "tags": [
+    "publication",
+    "newspaper",
+    "broadsheet",
+    "editorial",
+    "halftone",
+    "newsprint",
+    "serif",
+    "column-grid",
+    "vernacular",
+    "column",
+    "grid",
+    "masthead",
+    "didone",
+    "slab"
+   ],
+   "good_for": [
+    "journalism, history, business, politics, true-story explainers, PR with a 'press' angle",
+    "headlines, quotes, data in column form",
+    "archive and period storytelling"
+   ],
+   "not_for": [
+    "luxury minimalism",
+    "futurist/sci-fi",
+    "kids"
+   ],
+   "blends_with": [
+    "screenprint",
+    "risograph-print",
+    "engraving-etching",
+    "museum-label-and-specimen",
+    "banknote-guilloche",
+    "blueprint-technical-drawing"
+   ],
+   "clashes_with": [
+    "glass-product-cgi",
+    "chrome-liquid-metal-cgi",
+    "frutiger-aero"
+   ],
+   "palette": {
+    "canvas": "#e6e0d0",
+    "ink": "#1b1a17",
+    "rule": "#2b2a26",
+    "accent": "#a3261c",
+    "halftone": "#3a3834",
+    "aged_scan_paper": "#d5bba9",
+    "aged_scan_ink": "#5f544b"
+   },
+   "motion_language": "typeset, columnar, editorial"
+  },
+  {
+   "id": "pixel-game-ui",
+   "name": "8-bit and 16-bit console game UI",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/pixel-game-ui.md",
+   "era": "1983-1996 (NES/Famicom, Game Boy, SNES, Mega Drive); revived in indie games",
+   "space": "both",
+   "tags": [
+    "pixel-art",
+    "8-bit",
+    "16-bit",
+    "nes",
+    "snes",
+    "game-ui",
+    "bitmap-font",
+    "dithering",
+    "tile-grid",
+    "press-start-2p",
+    "silkscreen",
+    "vernacular",
+    "bit",
+    "console",
+    "game"
+   ],
+   "good_for": [
+    "games, dev tools with a playful voice, retro-themed launches",
+    "indie music or lyric videos",
+    "gamified data or progress stories"
+   ],
+   "not_for": [
+    "luxury, healthcare, serious finance",
+    "photo-led stories",
+    "anything needing soft gradients"
+   ],
+   "blends_with": [
+    "terminal-crt",
+    "vhs-analog",
+    "vaporwave-and-web-nostalgia",
+    "cassette-futurism"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "y2k-chrome",
+    "swiss-international"
+   ],
+   "palette": {
+    "canvas": "#0f0f23",
+    "panel": "#1d2b53",
+    "ink": "#fff1e8",
+    "accent": "#ff004d",
+    "accent2": "#ffec27",
+    "green": "#00e436",
+    "gb_darkest": "#294139",
+    "gb_dark": "#39594a",
+    "gb_light": "#5a7942",
+    "gb_lightest": "#7b8210"
+   },
+   "motion_language": "stepped, frame-based"
+  },
+  {
+   "id": "south-asian-shop-signage-and-ghat-lettering",
+   "name": "South Asian hand-painted shop signage and street lettering",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/south-asian-shop-signage-and-ghat-lettering.md",
+   "era": "early 20th century to present; strongest documentation for Delhi, Mumbai, Chennai, Kerala; decline from the 1990s",
+   "space": "both",
+   "tags": [
+    "india",
+    "south-asia",
+    "signage",
+    "sign-painting",
+    "lettering",
+    "devanagari",
+    "tamil",
+    "urdu",
+    "delhi",
+    "mumbai",
+    "chennai",
+    "vernacular",
+    "south",
+    "asian",
+    "hand",
+    "painted",
+    "shop",
+    "street"
+   ],
+   "good_for": [
+    "local business and neighbourhood stories",
+    "markets, food and street culture",
+    "wayfinding in a bazaar",
+    "title cards for documentary"
+   ],
+   "not_for": [
+    "minimal luxury",
+    "corporate clarity needing consistent identity"
+   ],
+   "blends_with": [
+    "indian-truck-art",
+    "bollywood-hand-painted",
+    "tamil-cinema-posters",
+    "indian-matchbox-and-calendar-art"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "mid-century-modern"
+   ],
+   "palette": {
+    "canvas": "#1c4f9c",
+    "ink": "#0f0f10",
+    "accent": "#f0c419",
+    "red": "#d02a1f",
+    "white": "#fbf8ee",
+    "green": "#1f8a4c"
+   },
+   "motion_language": "layout by construction"
+  },
+  {
+   "id": "tamil-cinema-posters",
+   "name": "Tamil cinema banners, cut-outs and posters",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/tamil-cinema-posters.md",
+   "era": "1950s-2000s hand-painted peak; Chennai (Madras) and Tamil Nadu, with Coimbatore workshops",
+   "space": "both",
+   "tags": [
+    "india",
+    "tamil-nadu",
+    "chennai",
+    "cinema",
+    "banner",
+    "cut-out",
+    "hero",
+    "hand-lettering",
+    "tamil-script",
+    "vernacular",
+    "tamil",
+    "banners",
+    "cut",
+    "outs",
+    "posters"
+   ],
+   "good_for": [
+    "film and album announcements",
+    "hero-led brand or event launches",
+    "celebration, fan culture, mass entertainment"
+   ],
+   "not_for": [
+    "quiet subtle products",
+    "any case needing true Tamil text without a Tamil reader to check it"
+   ],
+   "blends_with": [
+    "bollywood-hand-painted",
+    "south-asian-shop-signage-and-ghat-lettering",
+    "indian-truck-art",
+    "indian-matchbox-and-calendar-art"
+   ],
+   "clashes_with": [
+    "swiss-international"
+   ],
+   "palette": {
+    "canvas": "#1f3fa8",
+    "ink": "#0e0e12",
+    "accent": "#e12b1f",
+    "highlight": "#ffd21f",
+    "skin_warm": "#d9965f",
+    "type_white": "#fffdf5"
+   },
+   "motion_language": "monumental, then punctuated"
+  },
+  {
+   "id": "terminal-crt",
+   "name": "CRT terminal (phosphor green and amber, VT100 lineage)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/terminal-crt.md",
+   "era": "1970s-1980s; VT100 released 1978",
+   "space": "both",
+   "tags": [
+    "terminal",
+    "crt",
+    "phosphor",
+    "green-screen",
+    "amber",
+    "vt100",
+    "monospace",
+    "scanlines",
+    "cli",
+    "ascii",
+    "vernacular",
+    "green",
+    "lineage"
+   ],
+   "good_for": [
+    "developer tools, security, infrastructure, AI-agent stories",
+    "hacker and systems nostalgia",
+    "CLI product demos"
+   ],
+   "not_for": [
+    "luxury, consumer lifestyle, healthcare",
+    "warm human stories"
+   ],
+   "blends_with": [
+    "cassette-futurism",
+    "vhs-analog",
+    "pixel-game-ui",
+    "blueprint-technical-drawing"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "y2k-chrome"
+   ],
+   "palette": {
+    "canvas": "#080907",
+    "phosphor_green": "#33ff66",
+    "phosphor_amber": "#ca8b02",
+    "amber_hot": "#ffb000",
+    "dim_green": "#1a7a33",
+    "dim_amber": "#84540b",
+    "ink": "#d6ffe0"
+   },
+   "motion_language": "character-by-character, rigid"
+  },
+  {
+   "id": "transit-map-beck",
+   "name": "Transit diagram (Beck's Tube map)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/transit-map-beck.md",
+   "era": "1931–1933 onward, London; copied by almost every metro",
+   "space": "both",
+   "tags": [
+    "diagram",
+    "map",
+    "routes",
+    "network",
+    "lines",
+    "schematic",
+    "vernacular",
+    "transit",
+    "beck",
+    "tube"
+   ],
+   "good_for": [
+    "networks, pipelines, workflows, dependencies, org charts",
+    "'how X connects to Y' explainers",
+    "journey and process films"
+   ],
+   "not_for": [
+    "emotional portraiture",
+    "geographic truth where distance matters"
+   ],
+   "blends_with": [
+    "airport-wayfinding",
+    "swiss-international",
+    "blueprint-technical-drawing",
+    "international-typographic-corporate-identity"
+   ],
+   "clashes_with": [
+    "frutiger-aero",
+    "vhs-analog"
+   ],
+   "palette": {
+    "canvas": "#f7f3f1",
+    "ink": "#1c1c1c",
+    "line_a": "#e32017",
+    "line_b": "#0019a8",
+    "line_c": "#00782a",
+    "line_d": "#ffd300",
+    "river": "#9bd5f0",
+    "scan_blue": "#1f2078"
+   },
+   "motion_language": "drawn, logical, sequential"
+  },
+  {
+   "id": "ukiyo-e-woodblock",
+   "name": "Ukiyo-e woodblock prints (key block, flat colour blocks, bokashi)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/ukiyo-e-woodblock.md",
+   "era": "17th-19th century, Edo (Tokyo); nishiki-e full-colour from the 1760s; Hokusai Great Wave 1831; Hiroshige Tokaido 1833-34 and Edo views 1856-58; decline after 1868",
+   "space": "both",
+   "tags": [
+    "woodblock",
+    "japan",
+    "ukiyo-e",
+    "print",
+    "landscape",
+    "flat-colour",
+    "bokashi",
+    "hokusai",
+    "hiroshige",
+    "edo",
+    "vernacular",
+    "ukiyo",
+    "prints",
+    "key",
+    "block",
+    "flat",
+    "colour",
+    "blocks"
+   ],
+   "good_for": [
+    "landscape, travel, weather, journey stories",
+    "calm, graphic, seasonal or poetic films",
+    "anything where flat planes and one decisive diagonal tell the story",
+    "culture, craft, process films about print"
+   ],
+   "not_for": [
+    "tech product interfaces",
+    "dense data",
+    "using a 'Japan' look as a generic costume"
+   ],
+   "blends_with": [
+    "engraving-etching",
+    "screenprint",
+    "risograph-print",
+    "paper-cut-and-papercraft",
+    "west-african-wax-print-and-kente"
+   ],
+   "clashes_with": [
+    "glass-product-cgi",
+    "brutalist-web",
+    "frutiger-aero"
+   ],
+   "palette": {
+    "paper": "#e7d8b5",
+    "key": "#22262b",
+    "prussian_blue": "#516c81",
+    "indigo": "#2c3e4f",
+    "sky_bokashi": "#d4d4b6",
+    "ochre": "#9b8d73",
+    "wave_green": "#7c9285",
+    "red": "#c94a38"
+   },
+   "motion_language": "printed in sequence: the picture is made by blocks"
+  },
+  {
+   "id": "vaporwave-and-web-nostalgia",
+   "name": "Vaporwave and 90s web nostalgia (Windows 95, GeoCities)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/vaporwave-and-web-nostalgia.md",
+   "era": "vaporwave 2010-2013 onward (Chuck Person's Eccojams 2010, Floral Shoppe 2011); source material 1980s-1990s; Windows 95 1995; GeoCities 1994-2009",
+   "space": "both",
+   "tags": [
+    "vaporwave",
+    "windows-95",
+    "geocities",
+    "90s-web",
+    "bevel",
+    "nostalgia",
+    "internet-culture",
+    "greek-bust",
+    "glitch",
+    "pastel",
+    "vernacular",
+    "90s",
+    "web",
+    "windows"
+   ],
+   "good_for": [
+    "music, lyric videos, internet-culture stories",
+    "irony-tinged nostalgia about the 90s computer",
+    "fashion and art-driven brand moments"
+   ],
+   "not_for": [
+    "serious finance, health, enterprise explainers",
+    "anything that needs to feel contemporary and neutral"
+   ],
+   "blends_with": [
+    "vhs-analog",
+    "pixel-game-ui",
+    "y2k-chrome",
+    "frutiger-aero",
+    "terminal-crt"
+   ],
+   "clashes_with": [
+    "blueprint-technical-drawing",
+    "cassette-futurism",
+    "swiss-international"
+   ],
+   "palette": {
+    "canvas": "#008080",
+    "chrome": "#c0c0c0",
+    "title": "#000080",
+    "ink": "#000000",
+    "pink": "#ff71ce",
+    "cyan": "#01cdfe",
+    "violet": "#b967ff",
+    "vga_blue_measured": "#0101a8",
+    "silver_measured": "#bfc6c8",
+    "vapor_pink_measured": "#df78d8",
+    "vapor_violet_measured": "#7d52c5",
+    "vapor_sky_measured": "#75b2ec",
+    "vapor_night": "#0a0722"
+   },
+   "motion_language": "slow, floaty, lo-fi"
+  },
+  {
+   "id": "vhs-analog",
+   "name": "VHS and camcorder analog video",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/vhs-analog.md",
+   "era": "1976 VHS; consumer camcorders from 1982 (VHS-C), Video8 1985, Hi8 1988; peak 1985-2000",
+   "space": "both",
+   "tags": [
+    "vhs",
+    "analog",
+    "camcorder",
+    "tracking",
+    "chroma-bleed",
+    "osd",
+    "date-stamp",
+    "ntsc",
+    "240p",
+    "found-footage",
+    "lo-fi",
+    "vernacular",
+    "video"
+   ],
+   "good_for": [
+    "nostalgia, home-movie memory, found-footage horror",
+    "music videos, lyric pieces about the 80s-90s",
+    "anything that wants to feel recorded rather than rendered"
+   ],
+   "not_for": [
+    "clean B2B product films",
+    "luxury minimal",
+    "medical or safety content"
+   ],
+   "blends_with": [
+    "terminal-crt",
+    "vaporwave-and-web-nostalgia",
+    "cassette-futurism"
+   ],
+   "clashes_with": [
+    "swiss-international",
+    "frutiger-aero",
+    "y2k-chrome"
+   ],
+   "palette": {
+    "canvas": "#101014",
+    "ink": "#f2f2f2",
+    "osd": "#ffffff",
+    "osd_date": "#ffd84a",
+    "red": "#ff2a2a",
+    "cyan": "#3ad7ff",
+    "magenta": "#ff3ad7",
+    "vcr_blue": "#0000c8"
+   },
+   "motion_language": "degraded, jittery, mechanical"
+  },
+  {
+   "id": "west-african-wax-print-and-kente",
+   "name": "West African textile pattern systems: Dutch wax print, kente and adinkra",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/west-african-wax-print-and-kente.md",
+   "era": "Kente: Asante and Ewe weaving, at least 17th-18th century, Bonwire/Kumasi, Ghana. Adinkra cloth: oldest surviving piece 1817. Wax print: Vlisco, Helmond, from 1846, sold in West Africa from the 1850s-1880s onwards",
+   "space": "both",
+   "tags": [
+    "textile",
+    "pattern",
+    "kente",
+    "adinkra",
+    "wax-print",
+    "vlisco",
+    "ghana",
+    "west-africa",
+    "symbol",
+    "craft",
+    "vernacular",
+    "west",
+    "african",
+    "systems",
+    "dutch",
+    "wax",
+    "print"
+   ],
+   "good_for": [
+    "stories about identity, trade, memory, family, craft",
+    "fashion, textile or museum films",
+    "pattern backgrounds that carry meaning",
+    "pieces where a name and a proverb are the point"
+   ],
+   "not_for": [
+    "a decorative 'African' background for an unrelated product",
+    "generic tribal-print wallpaper",
+    "using adinkra or kente patterns that carry royal or funerary meaning as casual decoration"
+   ],
+   "blends_with": [
+    "engraving-etching",
+    "screenprint",
+    "mexican-loteria",
+    "ukiyo-e-woodblock"
+   ],
+   "clashes_with": [
+    "glass-product-cgi",
+    "brutalist-web"
+   ],
+   "palette": {
+    "gold": "#cf8335",
+    "black_cloth": "#3b2e24",
+    "canvas": "#c5a27f",
+    "ink": "#1b1410",
+    "green": "#1f7a3d",
+    "red": "#b3261e",
+    "blue": "#1f4aa8"
+   },
+   "motion_language": "rhythmic and structural: strips, rows, repeats"
+  },
+  {
+   "id": "y2k-chrome",
+   "name": "Y2K chrome and bubble (millennium futurism)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/y2k-chrome.md",
+   "era": "c. 1997-2003; translucent plastics, Aqua, early web, blobjects",
+   "space": "both",
+   "tags": [
+    "y2k",
+    "chrome",
+    "bubble",
+    "translucent",
+    "blobject",
+    "aqua",
+    "gloss",
+    "late-90s",
+    "early-web",
+    "gummy",
+    "vernacular",
+    "millennium",
+    "futurism"
+   ],
+   "good_for": [
+    "consumer tech nostalgia, music and gaming, fashion drops",
+    "playful product reveals, retro-futurism with a smile",
+    "lyric videos about the early internet"
+   ],
+   "not_for": [
+    "serious B2B, finance, healthcare",
+    "anything that needs a calm, adult tone",
+    "dense data"
+   ],
+   "blends_with": [
+    "frutiger-aero",
+    "vaporwave-and-web-nostalgia",
+    "pixel-game-ui",
+    "chrome-liquid-metal-cgi",
+    "glass-product-cgi",
+    "gummy-inflatable-and-plastic-toy-3d"
+   ],
+   "clashes_with": [
+    "blueprint-technical-drawing",
+    "swiss-international",
+    "cassette-futurism"
+   ],
+   "palette": {
+    "canvas": "#eef3f8",
+    "ink": "#0b1a33",
+    "accent": "#ff3d8b",
+    "accent2": "#7dff3a",
+    "tangerine": "#e34905",
+    "bondi": "#528ba2",
+    "bondi_dark": "#3b6374",
+    "metal": "#c9d1dc"
+   },
+   "motion_language": "elastic, liquid, glossy"
+  }
+ ],
+ "motion": [
+  {
+   "id": "architectural-flythrough",
+   "name": "Architectural walkthrough and fly-through (eye level, level verticals, human pace)",
+   "family": "3d-cgi",
+   "domain": "3d-cgi",
+   "path": "motion/3d-cgi/architectural-flythrough.md",
+   "space": "3d",
+   "tags": [
+    "architectural",
+    "walkthrough",
+    "fly",
+    "through",
+    "eye",
+    "level",
+    "verticals",
+    "human",
+    "pace",
+    "archviz",
+    "animation",
+    "enscape",
+    "ray",
+    "corona",
+    "photography",
+    "perspective",
+    "control",
+    "camera"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    24,
+    35
+   ]
+  },
+  {
+   "id": "instanced-field-endless-floor",
+   "name": "Instanced field, endless floor (a world that is always under the camera, seeded per cell)",
+   "family": "3d-cgi",
+   "domain": "3d-cgi",
+   "path": "motion/3d-cgi/instanced-field-endless-floor.md",
+   "space": "3d",
+   "tags": [
+    "instanced",
+    "field",
+    "endless",
+    "floor",
+    "world",
+    "always",
+    "under",
+    "camera",
+    "seeded",
+    "per",
+    "cell",
+    "pdoom",
+    "paperclips",
+    "plate",
+    "infinite",
+    "lattice",
+    "low",
+    "glide",
+    "ceiling",
+    "slams",
+    "beats",
+    "procedural",
+    "generation",
+    "seed"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    24,
+    35
+   ]
+  },
+  {
+   "id": "liquid-metal-blob-3d",
+   "name": "Liquid metal blob (metaballs / smooth-min surface, reflection-driven chrome)",
+   "family": "3d-cgi",
+   "domain": "3d-cgi",
+   "path": "motion/3d-cgi/liquid-metal-blob-3d.md",
+   "space": "3d",
+   "tags": [
+    "liquid",
+    "metal",
+    "blob",
+    "metaballs",
+    "smooth",
+    "min",
+    "surface",
+    "reflection",
+    "driven",
+    "chrome",
+    "terminator",
+    "1000",
+    "ilm",
+    "1991",
+    "mapped",
+    "model",
+    "interpolation",
+    "jim",
+    "blinn",
+    "blobby",
+    "objects",
+    "cosmos"
+   ],
+   "eases": "power3.inOut",
+   "lens_mm": [
+    85,
+    100
+   ]
+  },
+  {
+   "id": "mixed-2d-3d-flat-to-depth-seam",
+   "name": "Mixed 2D and 3D: the flat-to-depth seam (a pixel contract between DOM and a 3D world)",
+   "family": "3d-cgi",
+   "domain": "3d-cgi",
+   "path": "motion/3d-cgi/mixed-2d-3d-flat-to-depth-seam.md",
+   "space": "both",
+   "tags": [
+    "mixed",
+    "flat",
+    "depth",
+    "seam",
+    "pixel",
+    "contract",
+    "between",
+    "dom",
+    "world",
+    "rasan3d",
+    "seams",
+    "camera",
+    "through",
+    "shared",
+    "element",
+    "pinned",
+    "references",
+    "section",
+    "spider",
+    "verse"
+   ],
+   "lens_mm": [
+    50
+   ]
+  },
+  {
+   "id": "product-turntable-cgi",
+   "name": "Product CGI turntable, done right (rotate to land, light that agrees)",
+   "family": "3d-cgi",
+   "domain": "3d-cgi",
+   "path": "motion/3d-cgi/product-turntable-cgi.md",
+   "space": "3d",
+   "tags": [
+    "product",
+    "cgi",
+    "turntable",
+    "done",
+    "right",
+    "rotate",
+    "land",
+    "light",
+    "agrees",
+    "apple",
+    "films",
+    "hero",
+    "shots",
+    "iphone",
+    "pro",
+    "titanium",
+    "studio",
+    "photography",
+    "softbox",
+    "gradient",
+    "reflections",
+    "virtual"
+   ],
+   "lens_mm": [
+    85,
+    135
+   ]
+  },
+  {
+   "id": "raymarched-abstract-iq",
+   "name": "Raymarched abstract worlds (Inigo Quilez / demoscene signed-distance fields)",
+   "family": "3d-cgi",
+   "domain": "3d-cgi",
+   "path": "motion/3d-cgi/raymarched-abstract-iq.md",
+   "space": "3d",
+   "tags": [
+    "raymarched",
+    "abstract",
+    "worlds",
+    "inigo",
+    "quilez",
+    "demoscene",
+    "signed",
+    "distance",
+    "fields",
+    "iquilezles",
+    "org",
+    "shadertoy",
+    "64k",
+    "intros",
+    "perlin",
+    "hypertexture",
+    "1989",
+    "early",
+    "sphere",
+    "tracing",
+    "example"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    20,
+    35
+   ]
+  },
+  {
+   "id": "volumetric-light-god-rays",
+   "name": "Volumetric light and god rays (shafts through dust, radial post, froxel-style fog)",
+   "family": "3d-cgi",
+   "domain": "3d-cgi",
+   "path": "motion/3d-cgi/volumetric-light-god-rays.md",
+   "space": "3d",
+   "tags": [
+    "volumetric",
+    "light",
+    "god",
+    "rays",
+    "shafts",
+    "through",
+    "dust",
+    "radial",
+    "post",
+    "froxel",
+    "fog",
+    "kenny",
+    "mitchell",
+    "gpu",
+    "gems",
+    "scattering",
+    "process",
+    "bart",
+    "wronski"
+   ],
+   "eases": "power2.out",
+   "lens_mm": [
+    28,
+    50
+   ]
+  },
+  {
+   "id": "dolly-zoom-vertigo",
+   "name": "Dolly zoom (the Vertigo effect)",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/dolly-zoom-vertigo.md",
+   "space": "both",
+   "tags": [
+    "dolly",
+    "zoom",
+    "vertigo",
+    "effect",
+    "1958",
+    "irmin",
+    "roberts",
+    "hitchcock",
+    "jaws",
+    "1975",
+    "brody",
+    "beach",
+    "goodfellas",
+    "1990",
+    "diner",
+    "raging",
+    "bull",
+    "1980"
+   ],
+   "eases": "power2.inOut",
+   "lens_mm": [
+    24,
+    85
+   ]
+  },
+  {
+   "id": "fincher-locked-precision",
+   "name": "Fincher locked-off precision: still frames, barely perceptible pushes, repeatable moves",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/fincher-locked-precision.md",
+   "space": "both",
+   "tags": [
+    "fincher",
+    "locked",
+    "off",
+    "precision",
+    "still",
+    "frames",
+    "barely",
+    "perceptible",
+    "pushes",
+    "repeatable",
+    "moves",
+    "zodiac",
+    "2007",
+    "social",
+    "network",
+    "2010",
+    "se7en",
+    "1995",
+    "gone",
+    "girl",
+    "2014",
+    "mindhunter"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    27,
+    40,
+    50
+   ]
+  },
+  {
+   "id": "handheld-documentary",
+   "name": "Handheld documentary camera: reactive, imperfect, never random",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/handheld-documentary.md",
+   "space": "both",
+   "tags": [
+    "handheld",
+    "documentary",
+    "camera",
+    "reactive",
+    "imperfect",
+    "random",
+    "bourne",
+    "supremacy",
+    "2004",
+    "paul",
+    "greengrass",
+    "saving",
+    "private",
+    "ryan",
+    "1998",
+    "thin",
+    "red",
+    "line",
+    "children",
+    "men",
+    "2006",
+    "birdman",
+    "2014"
+   ],
+   "eases": "sine.inOut (drift), expo.out (flinch decay)",
+   "lens_mm": [
+    18,
+    24,
+    35
+   ]
+  },
+  {
+   "id": "kubrick-one-point-symmetry",
+   "name": "Kubrick one-point perspective: the centred corridor and the long, level track",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/kubrick-one-point-symmetry.md",
+   "space": "both",
+   "tags": [
+    "kubrick",
+    "one",
+    "point",
+    "perspective",
+    "centred",
+    "corridor",
+    "long",
+    "level",
+    "track",
+    "shining",
+    "1980",
+    "overlook",
+    "corridors",
+    "hedge",
+    "maze",
+    "2001",
+    "space",
+    "odyssey",
+    "discovery",
+    "clockwork",
+    "orange",
+    "korova"
+   ],
+   "eases": "power1.inOut",
+   "lens_mm": [
+    18,
+    24
+   ]
+  },
+  {
+   "id": "macro-product-closeup",
+   "name": "Macro product close-up: razor-thin focus, slider moves, light that crawls across a surface",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/macro-product-closeup.md",
+   "space": "both",
+   "tags": [
+    "macro",
+    "product",
+    "close",
+    "razor",
+    "thin",
+    "focus",
+    "slider",
+    "moves",
+    "light",
+    "crawls",
+    "across",
+    "surface",
+    "probe",
+    "lens",
+    "cinematography",
+    "luxury",
+    "watch",
+    "jewellery",
+    "films",
+    "tabletop",
+    "commercial",
+    "work"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    60,
+    100,
+    125
+   ]
+  },
+  {
+   "id": "michael-bay-orbit",
+   "name": "Michael Bay 360: the low-angle slow-motion orbit hero shot",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/michael-bay-orbit.md",
+   "space": "both",
+   "tags": [
+    "michael",
+    "bay",
+    "360",
+    "low",
+    "angle",
+    "slow",
+    "motion",
+    "orbit",
+    "hero",
+    "shot",
+    "bad",
+    "boys",
+    "1995",
+    "circular",
+    "dolly",
+    "transformers",
+    "island"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    85,
+    100,
+    135
+   ]
+  },
+  {
+   "id": "one-take-through-scenes",
+   "name": "One take through scenes: a continuous camera with hidden seams",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/one-take-through-scenes.md",
+   "space": "both",
+   "tags": [
+    "one",
+    "take",
+    "through",
+    "scenes",
+    "continuous",
+    "camera",
+    "hidden",
+    "seams",
+    "1917",
+    "2019",
+    "about",
+    "shots",
+    "stitched",
+    "birdman",
+    "2014",
+    "lubezki",
+    "handheld",
+    "rope",
+    "1948",
+    "ten",
+    "segments",
+    "cuts"
+   ],
+   "eases": "power2.inOut (travel), power2.in then power2.out (across a seam)",
+   "lens_mm": [
+    18,
+    28
+   ]
+  },
+  {
+   "id": "spielberg-oner-reveal",
+   "name": "Spielberg oner: one take, many framings, the reveal held back by the reaction",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/spielberg-oner-reveal.md",
+   "space": "both",
+   "tags": [
+    "spielberg",
+    "oner",
+    "one",
+    "take",
+    "many",
+    "framings",
+    "reveal",
+    "held",
+    "back",
+    "reaction",
+    "jaws",
+    "1975",
+    "min",
+    "beach",
+    "shot",
+    "raiders",
+    "lost",
+    "ark",
+    "1981",
+    "bar",
+    "close",
+    "encounters",
+    "third",
+    "kind"
+   ],
+   "eases": "power2.inOut",
+   "lens_mm": [
+    28,
+    35,
+    50
+   ]
+  },
+  {
+   "id": "tilt-shift-miniature",
+   "name": "Tilt-shift miniature: a narrow focus band on a high angle",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/tilt-shift-miniature.md",
+   "space": "both",
+   "tags": [
+    "tilt",
+    "shift",
+    "miniature",
+    "narrow",
+    "focus",
+    "band",
+    "high",
+    "angle",
+    "photography",
+    "time",
+    "lapse",
+    "diorama",
+    "effect",
+    "model",
+    "railway",
+    "architectural",
+    "cinematography"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    85,
+    135
+   ]
+  },
+  {
+   "id": "wes-anderson-planimetric",
+   "name": "Wes Anderson planimetric camera: flat frontal planes, lateral tracks, whip pans",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/wes-anderson-planimetric.md",
+   "space": "both",
+   "tags": [
+    "wes",
+    "anderson",
+    "planimetric",
+    "camera",
+    "flat",
+    "frontal",
+    "planes",
+    "lateral",
+    "tracks",
+    "whip",
+    "pans",
+    "royal",
+    "tenenbaums",
+    "2001",
+    "grand",
+    "budapest",
+    "hotel",
+    "2014",
+    "life",
+    "aquatic",
+    "asteroid",
+    "city",
+    "2023",
+    "rushmore"
+   ],
+   "eases": "power1.inOut (tracks), expo.inOut (whips)",
+   "lens_mm": [
+    35,
+    40,
+    50
+   ]
+  },
+  {
+   "id": "whip-pan-match-cut",
+   "name": "Whip pan match cut: two blurred pans joined at the peak of the blur",
+   "family": "cinematic",
+   "domain": "cinematic",
+   "path": "motion/cinematic/whip-pan-match-cut.md",
+   "space": "both",
+   "tags": [
+    "whip",
+    "pan",
+    "match",
+    "cut",
+    "two",
+    "blurred",
+    "pans",
+    "joined",
+    "peak",
+    "blur",
+    "hot",
+    "fuzz",
+    "edgar",
+    "wright",
+    "grand",
+    "budapest",
+    "hotel",
+    "magnolia",
+    "land",
+    "boogie",
+    "nights",
+    "avengers",
+    "infinity",
+    "war"
+   ],
+   "eases": "power3.in (out leg) then power3.out (in leg)",
+   "lens_mm": [
+    24,
+    35
+   ]
+  },
+  {
+   "id": "cutout-collage-gilliam",
+   "name": "Cut-out collage animation (Terry Gilliam, Monty Python)",
+   "family": "collage",
+   "domain": "collage",
+   "path": "motion/collage/cutout-collage-gilliam.md",
+   "space": "both",
+   "tags": [
+    "cut",
+    "out",
+    "collage",
+    "animation",
+    "terry",
+    "gilliam",
+    "monty",
+    "python",
+    "flying",
+    "circus",
+    "1969",
+    "1974",
+    "karel",
+    "zeman",
+    "baron",
+    "prasil",
+    "multi",
+    "plane",
+    "outs"
+   ],
+   "eases": "none; incremental nudges, mechanical or deliberately jerky",
+   "lens_mm": [
+    85,
+    135
+   ]
+  },
+  {
+   "id": "paper-cutout-parallax-2-5d",
+   "name": "Paper cut-out parallax (multiplane 2.5D)",
+   "family": "collage",
+   "domain": "collage",
+   "path": "motion/collage/paper-cutout-parallax-2-5d.md",
+   "space": "both",
+   "tags": [
+    "paper",
+    "cut",
+    "out",
+    "parallax",
+    "multiplane",
+    "disney",
+    "camera",
+    "old",
+    "mill",
+    "1937",
+    "snow",
+    "white",
+    "lotte",
+    "reiniger",
+    "early",
+    "multi",
+    "layer",
+    "glass",
+    "setup",
+    "1923",
+    "karel",
+    "zeman",
+    "terry"
+   ],
+   "eases": "sine.inOut or power2.inOut on the camera; layers follow the same ease at different amplitudes",
+   "lens_mm": [
+    50,
+    85
+   ]
+  },
+  {
+   "id": "data-in-space",
+   "name": "Data in space (numbers as architecture under one light, read with a long lens)",
+   "family": "data-viz",
+   "domain": "data-viz",
+   "path": "motion/data-viz/data-in-space.md",
+   "space": "3d",
+   "tags": [
+    "data",
+    "space",
+    "numbers",
+    "architecture",
+    "under",
+    "one",
+    "light",
+    "read",
+    "long",
+    "lens",
+    "sculptures",
+    "physical",
+    "forms",
+    "journalism",
+    "terrain",
+    "column",
+    "fields",
+    "tufte",
+    "critique",
+    "chartjunk",
+    "chart"
+   ],
+   "eases": "power3.out",
+   "lens_mm": [
+    135,
+    200
+   ]
+  },
+  {
+   "id": "data-reveal-gapminder-nyt",
+   "name": "Animated data reveal (Gapminder bubbles, NYT-style annotated charts)",
+   "family": "data-viz",
+   "domain": "data-viz",
+   "path": "motion/data-viz/data-reveal-gapminder-nyt.md",
+   "space": "both",
+   "tags": [
+    "animated",
+    "data",
+    "reveal",
+    "gapminder",
+    "bubbles",
+    "nyt",
+    "annotated",
+    "charts",
+    "trendalyzer",
+    "hans",
+    "rosling",
+    "best",
+    "statistics",
+    "you",
+    "ever",
+    "seen",
+    "ted",
+    "2006",
+    "new",
+    "york",
+    "times",
+    "graphics",
+    "desk"
+   ],
+   "eases": "none for the time sweep (the year is the clock), power3.inOut for camera/axis rescale, power3.out for annotation entrances",
+   "lens_mm": [
+    35,
+    50
+   ]
+  },
+  {
+   "id": "glitch-datamosh",
+   "name": "Glitch and datamosh",
+   "family": "glitch",
+   "domain": "glitch",
+   "path": "motion/glitch/glitch-datamosh.md",
+   "space": "both",
+   "tags": [
+    "glitch",
+    "datamosh",
+    "takeshi",
+    "murata",
+    "monster",
+    "movie",
+    "2005",
+    "smithsonian",
+    "american",
+    "art",
+    "museum",
+    "kanye",
+    "west",
+    "welcome",
+    "heartbreak",
+    "2009",
+    "dir",
+    "nabil",
+    "ghost",
+    "town",
+    "media",
+    "owi",
+    "mahn"
+   ],
+   "eases": "none / hard cuts: glitch states are discontinuities",
+   "lens_mm": [
+    35,
+    50
+   ]
+  },
+  {
+   "id": "apple-keynote-type-reveal",
+   "name": "Apple keynote and product-film type reveal",
+   "family": "kinetic-type",
+   "domain": "kinetic-type",
+   "path": "motion/kinetic-type/apple-keynote-type-reveal.md",
+   "space": "both",
+   "tags": [
+    "apple",
+    "keynote",
+    "product",
+    "film",
+    "type",
+    "reveal",
+    "films",
+    "iphone",
+    "air",
+    "september",
+    "2025",
+    "keynotes",
+    "pages",
+    "pro",
+    "display",
+    "set",
+    "plainly",
+    "carbon"
+   ],
+   "eases": "expo.out or power4.out for reveals; power2.in for exits",
+   "lens_mm": [
+    85,
+    135
+   ]
+  },
+  {
+   "id": "dia-modular-kinetic-type",
+   "name": "DIA modular kinetic type systems",
+   "family": "kinetic-type",
+   "domain": "kinetic-type",
+   "path": "motion/kinetic-type/dia-modular-kinetic-type.md",
+   "space": "both",
+   "tags": [
+    "dia",
+    "modular",
+    "kinetic",
+    "type",
+    "systems",
+    "mitch",
+    "paone",
+    "meg",
+    "donohoe",
+    "trak",
+    "identity",
+    "2016",
+    "squarespace",
+    "rebrand",
+    "2018",
+    "nuits",
+    "sonores",
+    "generative",
+    "tool",
+    "nike"
+   ],
+   "eases": "power3.inOut for module moves; expo.out for snaps onto the grid; sine.inOut for continuous oscillation",
+   "lens_mm": [
+    35,
+    85
+   ]
+  },
+  {
+   "id": "kyle-cooper-scratch-type",
+   "name": "Kyle Cooper hand-scratched, found-artifact type",
+   "family": "kinetic-type",
+   "domain": "kinetic-type",
+   "path": "motion/kinetic-type/kyle-cooper-scratch-type.md",
+   "space": "both",
+   "tags": [
+    "kyle",
+    "cooper",
+    "hand",
+    "scratched",
+    "found",
+    "artifact",
+    "type",
+    "se7en",
+    "main",
+    "titles",
+    "1995",
+    "dir",
+    "david",
+    "fincher",
+    "imaginary",
+    "forces",
+    "prologue",
+    "films",
+    "title",
+    "work"
+   ],
+   "eases": "none / steps(1): changes are cuts, not tweens",
+   "lens_mm": [
+    50,
+    135
+   ]
+  },
+  {
+   "id": "saul-bass-cutout-type",
+   "name": "Saul Bass cut-out kinetic type",
+   "family": "kinetic-type",
+   "domain": "kinetic-type",
+   "path": "motion/kinetic-type/saul-bass-cutout-type.md",
+   "space": "both",
+   "tags": [
+    "saul",
+    "bass",
+    "cut",
+    "out",
+    "kinetic",
+    "type",
+    "anatomy",
+    "murder",
+    "1959",
+    "man",
+    "golden",
+    "arm",
+    "1955",
+    "john",
+    "whitney",
+    "north",
+    "northwest"
+   ],
+   "eases": "steps(4) to steps(8) for piece travel; none/linear for slides; power4.out only for a landing that has to stick",
+   "lens_mm": [
+    200,
+    400
+   ]
+  },
+  {
+   "id": "npr-engraving-stipple-pdoom",
+   "name": "NPR engraving and stipple in 3D (the pdoom treatise look)",
+   "family": "npr-3d",
+   "domain": "npr-3d",
+   "path": "motion/npr-3d/npr-engraving-stipple-pdoom.md",
+   "space": "3d",
+   "tags": [
+    "npr",
+    "engraving",
+    "stipple",
+    "pdoom",
+    "treatise",
+    "look",
+    "video",
+    "plates",
+    "illustrated",
+    "engraved",
+    "paperclips",
+    "hatched",
+    "shoggoth",
+    "copperplate",
+    "pen",
+    "ink",
+    "hatching",
+    "praun",
+    "real",
+    "time"
+   ],
+   "eases": "power3.inOut",
+   "lens_mm": [
+    29,
+    36
+   ]
+  },
+  {
+   "id": "toon-shaded-3d-arcane",
+   "name": "Toon-shaded 3D that reads as drawn (Guilty Gear Xrd cel logic, Arcane painted-3D hybrid)",
+   "family": "npr-3d",
+   "domain": "npr-3d",
+   "path": "motion/npr-3d/toon-shaded-3d-arcane.md",
+   "space": "3d",
+   "tags": [
+    "toon",
+    "shaded",
+    "reads",
+    "drawn",
+    "guilty",
+    "gear",
+    "xrd",
+    "cel",
+    "logic",
+    "arcane",
+    "painted",
+    "hybrid",
+    "fortiche",
+    "textures",
+    "effects",
+    "layered",
+    "fps",
+    "arc",
+    "system"
+   ],
+   "eases": "stepped",
+   "lens_mm": [
+    35,
+    85
+   ]
+  },
+  {
+   "id": "isometric-motion",
+   "name": "Isometric motion (parallel projection, axis-locked)",
+   "family": "other",
+   "domain": "other",
+   "path": "motion/other/isometric-motion.md",
+   "space": "both",
+   "tags": [
+    "isometric",
+    "motion",
+    "parallel",
+    "projection",
+    "axis",
+    "locked",
+    "dimetric",
+    "video",
+    "game",
+    "graphics",
+    "zaxxon",
+    "1982",
+    "treasure",
+    "island",
+    "1981",
+    "civilization",
+    "diablo",
+    "com",
+    "monument",
+    "valley",
+    "ustwo",
+    "games",
+    "2014"
+   ],
+   "eases": "power3.out for build-ups, power3.inOut for slides, expo.inOut for 90-degree world rotations",
+   "lens_mm": [
+    300,
+    600
+   ]
+  },
+  {
+   "id": "liquid-morph",
+   "name": "Liquid motion and shape morphing (metaball goo, path morphs)",
+   "family": "other",
+   "domain": "other",
+   "path": "motion/other/liquid-morph.md",
+   "space": "both",
+   "tags": [
+    "liquid",
+    "motion",
+    "shape",
+    "morphing",
+    "metaball",
+    "goo",
+    "path",
+    "morphs",
+    "metaballs",
+    "blobby",
+    "objects",
+    "jim",
+    "blinn",
+    "early",
+    "1980s",
+    "cosmos",
+    "svg",
+    "gooey",
+    "filter",
+    "blur",
+    "plus",
+    "alpha",
+    "threshold",
+    "gsap"
+   ],
+   "eases": "power3.in into a merge (surface tension pulls), expo.out out of a split (snap), sine.inOut for ambient wobble",
+   "lens_mm": [
+    50,
+    85
+   ]
+  },
+  {
+   "id": "swiss-precise-motion",
+   "name": "Swiss precise motion (grid-locked, objective)",
+   "family": "other",
+   "domain": "other",
+   "path": "motion/other/swiss-precise-motion.md",
+   "space": "both",
+   "tags": [
+    "swiss",
+    "precise",
+    "motion",
+    "grid",
+    "locked",
+    "objective",
+    "josef",
+    "muller",
+    "brockmann",
+    "tonhalle",
+    "zurich",
+    "posters",
+    "systems",
+    "graphic",
+    "design",
+    "1981",
+    "international",
+    "typographic",
+    "armin",
+    "hofmann",
+    "ernst",
+    "keller"
+   ],
+   "eases": "power3.out for arrivals, power2.inOut for grid moves, expo.out for line draws, none for counters",
+   "lens_mm": [
+    200,
+    400
+   ]
+  },
+  {
+   "id": "cloth-simulation",
+   "name": "Cloth simulation (XPBD: inextensible, bends only, driven by pins and wind)",
+   "family": "simulation",
+   "domain": "simulation",
+   "path": "motion/simulation/cloth-simulation.md",
+   "space": "3d",
+   "tags": [
+    "cloth",
+    "simulation",
+    "xpbd",
+    "inextensible",
+    "bends",
+    "only",
+    "driven",
+    "pins",
+    "wind",
+    "matthias",
+    "mueller",
+    "ten",
+    "minute",
+    "physics",
+    "position",
+    "based",
+    "dynamics",
+    "2007",
+    "jakobsen",
+    "2001",
+    "houdini"
+   ],
+   "eases": "power3.inOut",
+   "lens_mm": [
+    85,
+    135
+   ]
+  },
+  {
+   "id": "fluid-smoke-curl-noise",
+   "name": "Fluid and smoke from curl noise (divergence-free flow, volumetric and particle forms)",
+   "family": "simulation",
+   "domain": "simulation",
+   "path": "motion/simulation/fluid-smoke-curl-noise.md",
+   "space": "3d",
+   "tags": [
+    "fluid",
+    "smoke",
+    "curl",
+    "noise",
+    "divergence",
+    "free",
+    "flow",
+    "volumetric",
+    "particle",
+    "forms",
+    "bridson",
+    "hourihan",
+    "nordenstam",
+    "procedural",
+    "siggraph",
+    "2007",
+    "jos",
+    "stam",
+    "stable",
+    "fluids"
+   ],
+   "eases": "sine.inOut",
+   "lens_mm": [
+    50,
+    100
+   ]
+  },
+  {
+   "id": "generative-procedural-growth",
+   "name": "Generative growth (space colonization branching, L-systems, reaction-diffusion)",
+   "family": "simulation",
+   "domain": "simulation",
+   "path": "motion/simulation/generative-procedural-growth.md",
+   "space": "both",
+   "tags": [
+    "generative",
+    "growth",
+    "space",
+    "colonization",
+    "branching",
+    "systems",
+    "reaction",
+    "diffusion",
+    "runions",
+    "lane",
+    "prusinkiewicz",
+    "eurographics",
+    "nph",
+    "2007",
+    "lindenmayer",
+    "1968",
+    "algorithmic",
+    "beauty",
+    "plants",
+    "gray",
+    "scott"
+   ],
+   "eases": "power2.out",
+   "lens_mm": [
+    50,
+    85
+   ]
+  },
+  {
+   "id": "particle-swarm-simulation",
+   "name": "Particle swarm that obeys a rule (boids on k.simulate, curl swarms on k.gpuSimulate)",
+   "family": "simulation",
+   "domain": "simulation",
+   "path": "motion/simulation/particle-swarm-simulation.md",
+   "space": "3d",
+   "tags": [
+    "particle",
+    "swarm",
+    "obeys",
+    "rule",
+    "boids",
+    "simulate",
+    "curl",
+    "swarms",
+    "gpusimulate",
+    "craig",
+    "reynolds",
+    "siggraph",
+    "1987",
+    "batman",
+    "returns",
+    "bats",
+    "penguins",
+    "william",
+    "reeves",
+    "systems",
+    "star",
+    "trek"
+   ],
+   "eases": "expo.out",
+   "lens_mm": [
+    35,
+    85
+   ]
+  },
+  {
+   "id": "stop-motion-aardman-clay",
+   "name": "Aardman clay animation (plasticine, hand-made surface)",
+   "family": "stop-motion",
+   "domain": "stop-motion",
+   "path": "motion/stop-motion/stop-motion-aardman-clay.md",
+   "space": "both",
+   "tags": [
+    "aardman",
+    "clay",
+    "animation",
+    "plasticine",
+    "hand",
+    "made",
+    "surface",
+    "animations",
+    "wallace",
+    "gromit",
+    "creature",
+    "comforts",
+    "morph",
+    "shaun",
+    "sheep",
+    "chicken",
+    "run",
+    "nick",
+    "park",
+    "will",
+    "vinton",
+    "claymation",
+    "trademark"
+   ],
+   "eases": "none; every move is a hand-nudged pose with drawn spacing",
+   "lens_mm": [
+    28,
+    35,
+    50
+   ]
+  },
+  {
+   "id": "stop-motion-laika-replacement",
+   "name": "Stop-motion with replacement faces (Laika)",
+   "family": "stop-motion",
+   "domain": "stop-motion",
+   "path": "motion/stop-motion/stop-motion-laika-replacement.md",
+   "space": "both",
+   "tags": [
+    "stop",
+    "motion",
+    "replacement",
+    "faces",
+    "laika",
+    "coraline",
+    "2009",
+    "paranorman",
+    "2012",
+    "boxtrolls",
+    "2014",
+    "kubo",
+    "two",
+    "strings",
+    "2016",
+    "missing",
+    "link",
+    "2019",
+    "george",
+    "pal",
+    "doll"
+   ],
+   "eases": "none; discrete poses, each frame a physical re-pose",
+   "lens_mm": [
+    28,
+    35,
+    50
+   ]
+  },
+  {
+   "id": "anime-timing-kanada-smear",
+   "name": "Anime timing: Kanada irregular spacing, smear frames, impact frames",
+   "family": "traditional",
+   "domain": "traditional",
+   "path": "motion/traditional/anime-timing-kanada-smear.md",
+   "space": "both",
+   "tags": [
+    "anime",
+    "timing",
+    "kanada",
+    "irregular",
+    "spacing",
+    "smear",
+    "frames",
+    "impact",
+    "yoshinori",
+    "galaxy",
+    "express",
+    "999",
+    "harmagedon",
+    "lineage",
+    "animators",
+    "hiroyuki",
+    "imaishi",
+    "yoshiyama",
+    "takeshi",
+    "maenami",
+    "tex"
+   ],
+   "eases": "stepped, irregular",
+   "lens_mm": [
+    14,
+    24,
+    35
+   ]
+  },
+  {
+   "id": "cel-on-twos",
+   "name": "Hand-drawn cel animation on twos",
+   "family": "traditional",
+   "domain": "traditional",
+   "path": "motion/traditional/cel-on-twos.md",
+   "space": "both",
+   "tags": [
+    "hand",
+    "drawn",
+    "cel",
+    "animation",
+    "twos",
+    "disney",
+    "lineage",
+    "full",
+    "ones",
+    "fast",
+    "action",
+    "most",
+    "acting",
+    "studio",
+    "ghibli",
+    "selected",
+    "quick",
+    "shots",
+    "threes",
+    "dialogue",
+    "slow"
+   ],
+   "eases": "stepped in time, eased in spacing",
+   "lens_mm": [
+    35,
+    50
+   ]
+  },
+  {
+   "id": "limited-animation-upa-hanna-barbera",
+   "name": "Limited animation (UPA stylisation, Hanna-Barbera economy)",
+   "family": "traditional",
+   "domain": "traditional",
+   "path": "motion/traditional/limited-animation-upa-hanna-barbera.md",
+   "space": "both",
+   "tags": [
+    "limited",
+    "animation",
+    "upa",
+    "stylisation",
+    "hanna",
+    "barbera",
+    "economy",
+    "gerald",
+    "mcboing",
+    "boing",
+    "1950",
+    "magoo",
+    "ruff",
+    "reddy",
+    "huckleberry",
+    "hound",
+    "yogi",
+    "bear",
+    "dover",
+    "boys",
+    "pimento"
+   ],
+   "eases": "stepped; pose-to-pose with held extremes",
+   "lens_mm": []
+  },
+  {
+   "id": "rotoscope",
+   "name": "Rotoscope: traced live action, boiling lines, interpolated vector keys",
+   "family": "traditional",
+   "domain": "traditional",
+   "path": "motion/traditional/rotoscope.md",
+   "space": "both",
+   "tags": [
+    "rotoscope",
+    "traced",
+    "live",
+    "action",
+    "boiling",
+    "lines",
+    "interpolated",
+    "vector",
+    "keys",
+    "max",
+    "fleischer",
+    "out",
+    "inkwell",
+    "1918",
+    "1927",
+    "disney",
+    "snow",
+    "white",
+    "seven",
+    "dwarfs",
+    "1937",
+    "gulliver"
+   ],
+   "eases": "inherited from the live action; interpolated between keys with a gentle ease",
+   "lens_mm": [
+    35,
+    50
+   ]
+  },
+  {
+   "id": "rubber-hose",
+   "name": "Rubber-hose animation (1920s-30s American cartoon)",
+   "family": "traditional",
+   "domain": "traditional",
+   "path": "motion/traditional/rubber-hose.md",
+   "space": "2d",
+   "tags": [
+    "rubber",
+    "hose",
+    "animation",
+    "1920s",
+    "30s",
+    "american",
+    "cartoon",
+    "fleischer",
+    "studios",
+    "betty",
+    "boop",
+    "popeye",
+    "koko",
+    "bill",
+    "nolan",
+    "felix",
+    "cat",
+    "early",
+    "disney",
+    "oswald",
+    "mickey",
+    "cuphead",
+    "2017",
+    "modern"
+   ],
+   "eases": "stepped drawings with squash-and-stretch spacing",
+   "lens_mm": []
+  },
+  {
+   "id": "spider-verse-stepped-halftone",
+   "name": "Spider-Verse: stepped CG, halftone dots, print misregistration, ink lines",
+   "family": "traditional",
+   "domain": "traditional",
+   "path": "motion/traditional/spider-verse-stepped-halftone.md",
+   "space": "both",
+   "tags": [
+    "spider",
+    "verse",
+    "stepped",
+    "halftone",
+    "dots",
+    "print",
+    "misregistration",
+    "ink",
+    "lines",
+    "man",
+    "2018",
+    "sony",
+    "pictures",
+    "imageworks",
+    "vintage",
+    "four",
+    "colour",
+    "comic",
+    "printing",
+    "ben",
+    "day"
+   ],
+   "eases": "stepped, with eased spacing sampled at held time",
+   "lens_mm": [
+    24,
+    35,
+    50
+   ]
+  },
+  {
+   "id": "squash-bounce-pop",
+   "name": "Squash, bounce and pop (volume-preserving cartoon deformation)",
+   "family": "traditional",
+   "domain": "traditional",
+   "path": "motion/traditional/squash-bounce-pop.md",
+   "space": "both",
+   "tags": [
+    "squash",
+    "bounce",
+    "pop",
+    "volume",
+    "preserving",
+    "cartoon",
+    "deformation",
+    "disney",
+    "twelve",
+    "principles",
+    "stretch",
+    "anticipation",
+    "follow",
+    "through",
+    "thomas",
+    "johnston",
+    "illusion",
+    "life",
+    "1981",
+    "emile",
+    "cohl",
+    "fantasmagorie",
+    "1908"
+   ],
+   "eases": "back.out(1.2-1.6) for the settle only; power2.in on the fall, power2.out on the rise",
+   "lens_mm": [
+    35,
+    50
+   ]
+  },
+  {
+   "id": "apple-ui-spring-motion",
+   "name": "Apple UI spring motion (fluid interfaces)",
+   "family": "ui-motion",
+   "domain": "ui-motion",
+   "path": "motion/ui-motion/apple-ui-spring-motion.md",
+   "space": "both",
+   "tags": [
+    "apple",
+    "spring",
+    "motion",
+    "fluid",
+    "interfaces",
+    "wwdc18",
+    "designing",
+    "wwdc23",
+    "animate",
+    "springs",
+    "swiftui",
+    "snappy",
+    "smooth",
+    "bouncy",
+    "hig",
+    "principles"
+   ],
+   "eases": "spring(response, dampingFraction): 1.0 for no-momentum taps, about 0.8 for gestures with momentum",
+   "lens_mm": [
+    50
+   ]
+  },
+  {
+   "id": "linear-style-ui-motion",
+   "name": "Linear-style UI motion (calm, dark, dense)",
+   "family": "ui-motion",
+   "domain": "ui-motion",
+   "path": "motion/ui-motion/linear-style-ui-motion.md",
+   "space": "both",
+   "tags": [
+    "linear",
+    "motion",
+    "calm",
+    "dark",
+    "dense",
+    "app",
+    "2024",
+    "redesign",
+    "calmer",
+    "interface",
+    "product",
+    "marketing",
+    "site",
+    "shell",
+    "first",
+    "wider",
+    "design"
+   ],
+   "eases": "power3.out for entrances (ease-out is about 80 percent of UI motion), power2.inOut for moves, power2.in for exits",
+   "lens_mm": [
+    50,
+    85
+   ]
+  },
+  {
+   "id": "material-motion-easing",
+   "name": "Material Design motion: easing, duration tokens and transition patterns",
+   "family": "ui-motion",
+   "domain": "ui-motion",
+   "path": "motion/ui-motion/material-motion-easing.md",
+   "space": "both",
+   "tags": [
+    "material",
+    "design",
+    "motion",
+    "easing",
+    "duration",
+    "tokens",
+    "transition",
+    "patterns",
+    "container",
+    "transform",
+    "shared",
+    "axis",
+    "fade",
+    "through"
+   ],
+   "eases": "emphasized (0.2, 0, 0, 1); emphasized-decelerate (0.05, 0.7, 0.1, 1); emphasized-accelerate (0.3, 0, 0.8, 0.15); standard (0.2, 0, 0, 1)",
+   "lens_mm": [
+    50
+   ]
+  },
+  {
+   "id": "screen-studio-cursor-zoom",
+   "name": "Screen Studio cursor-follow zoom and smoothed cursor",
+   "family": "ui-motion",
+   "domain": "ui-motion",
+   "path": "motion/ui-motion/screen-studio-cursor-zoom.md",
+   "space": "both",
+   "tags": [
+    "screen",
+    "studio",
+    "cursor",
+    "follow",
+    "zoom",
+    "smoothed",
+    "macos",
+    "recorder",
+    "automatic",
+    "open",
+    "source",
+    "clones",
+    "screenstudio",
+    "alt",
+    "screenify",
+    "auto"
+   ],
+   "eases": "ease-in-out for zoom (350 to 500 ms), spring-like glide for the cursor",
+   "lens_mm": [
+    50
+   ]
+  }
+ ],
+ "problems": []
+}

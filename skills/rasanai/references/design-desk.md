@@ -1,0 +1,54 @@
+# The design desk: bespoke design systems, per film
+
+RasanAI does not show a menu of styles and does not pick one from a list. For every film a **design desk** researches the subject on the spot and builds **three new design systems** for the chosen story by blending references from an internal library. The user sees exactly those three at the Look (drawn live on their own first line) and picks one. This file is the desk's reference: who does what, the file formats, the library and the gate.
+
+## The flow
+
+1. **Design researcher** (`agents/design-researcher.md`), during the Brief, in parallel with the research desk: the subject's own visual world, its category's clichés, its audience, its materials, places and eras, with sources, plus a shortlist of 8 to 12 library references with why. Writes `research/design.md` and `research/design-refs.json`.
+2. **Three design-system designers** (`agents/design-system-designer.md`, keys Sure, Bold, Wild), after the story is chosen: each builds ONE system for that story by blending 2 to 4 library references with the subject's world. Writes `design/<label>/{DESIGN.md, specimen.html, recipe.json, blend.json}`. With a brand DESIGN.md, **Sure is the brand extended for motion** (its colours and type exactly, plus motion contract, camera and components); Bold and Wild push around it.
+3. **The gate**: `design.mjs check-system --dir design/<label>` per system (exit 0 or 2), `design.mjs check-systems --run "$RUN"` for the three together.
+4. **The Look**: `design.mjs look-payload --run "$RUN" --hook "<first line>"` is the console payload: exactly three styles, each with its name, the blend in one line, why it is right for this story, and the recipe the console draws live (each system's own `specimen.html` in a sandboxed iframe, `specimen.png` as the poster; `recipe.json` through `RasaPresets` / `RasaPresets3D` only when a system has no specimen). `more` asks the desk for new blends near the selected one; there is no style browser.
+5. **`choose`**: `design.mjs choose-system --run "$RUN" --label <Sure|Bold|Wild> --decisions "$RUN/decisions.json"` makes the chosen DESIGN.md the film's look: `look/DESIGN.md`, `look/frame.md` (through the same DESIGN.md to frame.md path as a brand), the system's taxonomy picks in decisions, then `motion-md.mjs write --design-system` writes the binding motion.md from the system's motion contract and `direction.mjs compile` writes DIRECTION.md with the system's own words (blend, subject world, Motion and camera) in it.
+6. **Lyric videos**: the treatment writers each carry a style bible; after the user picks a treatment, one designer (key = that treatment's label) builds the bible out into the complete system with the same gate. There is no Look picker.
+
+## The library (raw material, never a menu)
+
+`library/systems/**` (movements, studios, vernacular, material: palette logic, type, grid, shape, motion and camera, how to instruct a model to build it, cheap tells, sources) and `library/motion/**` (2D and 3D motion and camera styles: timings, eases, lens, recipes for HyperFrames GSAP and Rasan3D, pitfalls). `scripts/library.mjs index` merges the index fragments and every entry's frontmatter into `library/index.json` (rerunnable); `search --q "<words>" [--space 3d] [--kind <kind>]` ranks entries; `show <id> [--full]` reads one. The 403 style presets in `taxonomy/presets/` stay as extra raw material the designers may cite; they are not shown to the user and not picked from.
+
+Blend, don't copy: take one or two traits from each of two to four references (a palette logic, a grid, a texture, a timing curve, a camera grammar), add the subject's own world, and the result must be something no single reference is. A blend that cites one reference, or reads as one reference with a new name, fails the desk's own review.
+
+## File formats
+
+### `design/<label>/DESIGN.md`
+
+The format `scripts/lib/design-md.mjs` reads (`references/brand.md`). Frontmatter: `name`, `description`, `colors:` by role with `#` comments (`canvas`, `ink`, `accent`, `support`, `surface`, `muted`, `rule`), `typography:` (`display`, `body`, `mono`: `fontFamily`, `fontWeight`), `rounded:`, `shadows:`, `components:` (at least two). Body: `## Overview`, `## Colors`, `## Typography`, `## Layout and shape`, `## Components`, `## Motion and camera`, `## Do's and Don'ts`. A complete, gate-passing example is in `references/design-desk-example/Sure/`.
+
+**`## Motion and camera`** is what the animators build from, so it is numbers: the duration scale in ms, the holds, the stagger, the eases by GSAP name (enter, exit, move), what is banned, the signature entrance; the camera for flat scenes (locked, a push, parallax layers, a rack of focus); and, when the story has depth, a 3D camera grammar from the library's motion entries (lens in mm, camera height, moves and their easing, light, depth of field).
+
+### `design/<label>/specimen.html`
+
+The system drawn as a key frame on the chosen story's first on-screen line (`story/chosen.json` beats[0].on_screen), by the same bar as `agents/frame-designer.md`: a standalone 1600 x 900 page (`data-width` / `data-height` on the root), the system's own components and layout (the example: a receipt on ledger paper, mono figures, a vermilion stamp landing on the total), real fonts, the accent rationed as the DESIGN.md says, the headline as DOM text. GSAP is loaded from the CDN tag (the console and the gate substitute the vendored copy). Its signature motion is a paused GSAP timeline at `window.__specimen = { tl }`, 2.5 s at most, every tween with an ease named in the Motion and camera section, finished with `tl.progress(1)` so the page rests on its final frame; the console plays it from 0 on hover. A 3D-leaning system may use Rasan3D (`stage3d.mjs install --dest design/<label>`). `blend.json` may add `"specimen": {"accent_max": 0.3, "canvas": "absent"}` to override the gate's defaults. `design.mjs check-system` renders it to `specimen.png` (the console's poster), and `crew.mjs strip --file design/<label>/specimen.html --from 0 --to 2.5 --fps 6 --out ...` shows the hover motion. The worked example is `references/design-desk-example/Sure/specimen.html`.
+
+### `design/<label>/recipe.json`
+
+The fallback specimen (used only if a system has no `specimen.html`, and still required: it is what `RasaPresets` draws).
+
+```json
+{ "name": "Counting House", "tagline": "ledger paper, banknote green, one vermilion stamp",
+  "recipe": { "palette": {"canvas","ink","accent","accent2","surface","muted"}, "fonts": {"display","body","mono","displayWeight","bodyWeight"},
+              "layout": "record", "radius": 2, "stroke": {"width": 2, "style": "solid"}, "shadow": "soft", "surface": "paper",
+              "texture": "paper", "icons": "line", "motif": "rules", "motion": "snap", "effects": [] },
+  "three": { "base": "glass-3d", "note": "only for a 3D-leaning system" } }
+```
+
+The recipe is exactly what `RasaPresets.render()` takes (`scripts/lib/vocab.mjs` lists every allowed value). Its palette and fonts are the DESIGN.md's. `three.base` names one of the 3D specimen families `RasaPresets3D` can draw (the system's palette and fonts are applied to it), so a 3D-leaning system shows real depth at the Look.
+
+### `design/<label>/blend.json`
+
+`name`, `one_line` (the blend, in one line the user reads), `why_for_story` (one line, for this story), `references[{id, traits[], why}]` (2 to 4 real library ids), `subject_world[]`, `stack` (taxonomy ids: `visual-style`, `motion-language`, so DIRECTION.md compiles) and `motion_contract` (`language`, `scale_ms` (4 or more), `easing {enter, exit, move}`, `stagger_ms`, `hold_ms`, `banned`): the binding numbers `motion.md` and `obey.mjs` use, which must match the Motion and camera section.
+
+## The gate (`design.mjs check-system`, `lib/system.mjs`)
+
+Fails (exit 2) on: files missing (including `specimen.html`); a specimen that errors in the browser, whose rendered PNG is more than 50% off the system's palette, has no canvas/surface or no ink or no accent on it, or whose accent covers more than the DESIGN.md allows (8% when it says the accent is rationed or never fills a background, else 15%), whose first line is not in the DOM, whose timeline is missing, over 2.5 s, or uses eases the Motion and camera section doesn't name; DESIGN.md that doesn't parse with canvas, ink, accent and a display font, radii, components, at least 3 do's and 3 don'ts, an overview; ink on canvas under 4.5:1; a recipe that doesn't draw, or that disagrees with the DESIGN.md's palette and fonts; a font that is not on Google Fonts, Fontshare or in the project's files; a generic default (Inter or system type for everything, the purple-blue gradient, the "Claude look" of cream, rust and an italic serif, unless the brand is that); a blend citing fewer than two library ids that exist (or a reference without traits or a why); no `subject_world`; stack ids that don't resolve; a Motion and camera section without timings, eases and a camera (and, for a `three` system, a lens in mm); a motion contract that is incomplete. `check-systems` also fails when two of the three are alike (they must differ in at least three of palette, display face (always), layout, motion language) or blend exactly the same references, or when their specimens are the same layout recoloured (luminance and edge correlation above 0.85). `--brand <DESIGN.md>` makes Sure's colours and display face the brand's.
+
+Warnings (not blocking): an accent under 3:1 on the canvas, a defaulty display face, a thin motion section, a font that couldn't be verified offline.

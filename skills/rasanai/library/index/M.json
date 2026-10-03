@@ -1,0 +1,923 @@
+{
+ "systems": [
+  {
+   "id": "afrofuturism",
+   "name": "Afrofuturism visual systems",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/afrofuturism.md",
+   "tags": [
+    "afrofuturism",
+    "speculative",
+    "music",
+    "collage",
+    "space",
+    "diaspora",
+    "cosmic",
+    "funk",
+    "africanfuturism"
+   ],
+   "good_for": [
+    "music, album and festival films",
+    "stories about futures, memory, return, ownership of technology",
+    "speculative-fiction trailers",
+    "brand stories asking 'whose future is this?'"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "airport-wayfinding",
+   "name": "Airport and civic wayfinding (Aicher, Frutiger, Crouwel lineage)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/airport-wayfinding.md",
+   "tags": [
+    "signage",
+    "pictogram",
+    "wayfinding",
+    "public",
+    "grid",
+    "functional"
+   ],
+   "good_for": [
+    "infrastructure, logistics, transit, maps and routes",
+    "onboarding flows that are literally a path",
+    "civic or institutional explainers",
+    "anything that must read in one second"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "bollywood-hand-painted",
+   "name": "Hand-painted Hindi cinema hoardings and posters",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/bollywood-hand-painted.md",
+   "tags": [
+    "india",
+    "mumbai",
+    "bollywood",
+    "hoarding",
+    "oil-painting",
+    "grid-method",
+    "montage",
+    "hand-lettering",
+    "cinema"
+   ],
+   "good_for": [
+    "film, music and festival titles",
+    "drama, nostalgia, tribute pieces",
+    "bold single-hero announcements with a strong title"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "cassette-futurism",
+   "name": "Cassette futurism (the 1970s-80s used future)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/cassette-futurism.md",
+   "tags": [
+    "cassette-futurism",
+    "retro-futurism",
+    "used-future",
+    "alien",
+    "braun",
+    "crt",
+    "amber",
+    "rocker-switch",
+    "hardware",
+    "70s-80s"
+   ],
+   "good_for": [
+    "sci-fi worlds, games, hardware or infrastructure stories",
+    "systems monitoring, space, industrial products",
+    "nostalgia for the physical interface"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "cuban-silkscreen-film-posters",
+   "name": "ICAIC Cuban silkscreen film posters",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/cuban-silkscreen-film-posters.md",
+   "tags": [
+    "silkscreen",
+    "poster",
+    "cuba",
+    "film",
+    "flat-colour",
+    "wit",
+    "icaic",
+    "overprint",
+    "limited-palette"
+   ],
+   "good_for": [
+    "film, festival, cultural-programme films",
+    "one-idea messages with wit",
+    "limited-colour, high-contrast identities",
+    "history or politics told with humour and design intelligence"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "frutiger-aero",
+   "name": "Frutiger Aero (Vista-era gloss, water, nature)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/frutiger-aero.md",
+   "tags": [
+    "frutiger-aero",
+    "aero",
+    "vista",
+    "glass",
+    "water",
+    "bokeh",
+    "nature",
+    "2000s",
+    "skeuomorphic",
+    "optimistic"
+   ],
+   "good_for": [
+    "nostalgia pieces about the 2000s internet and software",
+    "consumer wellness, water, eco, telecom with a friendly tone",
+    "UI-heavy openers with a warm optimistic read"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "ghanaian-film-posters",
+   "name": "Hand-painted Ghanaian film posters (mobile cinema, flour sacks)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/ghanaian-film-posters.md",
+   "tags": [
+    "hand-painted",
+    "poster",
+    "cinema",
+    "ghana",
+    "west-africa",
+    "flour-sack",
+    "horror",
+    "mobile-cinema",
+    "oil-enamel",
+    "vernacular-art"
+   ],
+   "good_for": [
+    "film or music launches wanting raw, human, hand-made energy",
+    "horror, action and spectacle parody",
+    "anything about cinema, video culture or word of mouth",
+    "story where one piece of work is made by one person for one place"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "indian-matchbox-and-calendar-art",
+   "name": "Indian bazaar art: Ravi Varma oleographs, Sivakasi calendars and matchbox labels",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/indian-matchbox-and-calendar-art.md",
+   "tags": [
+    "india",
+    "bazaar-art",
+    "calendar-art",
+    "matchbox",
+    "chromolithograph",
+    "oleograph",
+    "sivakasi",
+    "ravi-varma",
+    "gods",
+    "print"
+   ],
+   "good_for": [
+    "heritage, festivals, devotional or family subjects",
+    "packaged goods, tea, spices, matches, sweets",
+    "nostalgia pieces about printing and trade",
+    "brand origins stories"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "indian-truck-art",
+   "name": "Indian truck and lorry art",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/indian-truck-art.md",
+   "tags": [
+    "india",
+    "truck-art",
+    "lorry",
+    "punjab",
+    "rajasthan",
+    "kerala",
+    "enamel",
+    "slogans",
+    "panels",
+    "mirror",
+    "tassels"
+   ],
+   "good_for": [
+    "logistics, travel, road, music, street food, festival and regional brand energy",
+    "safety messages with humour",
+    "high-density celebratory titles"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "kalighat-and-indian-folk-painting-lines",
+   "name": "Kalighat pat (Bengal bazaar painting), with notes on Madhubani, Warli and Patachitra",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/kalighat-and-indian-folk-painting-lines.md",
+   "tags": [
+    "india",
+    "bengal",
+    "kalighat",
+    "pat",
+    "patua",
+    "bazaar-painting",
+    "line",
+    "watercolour",
+    "satire",
+    "folk"
+   ],
+   "good_for": [
+    "satire, character studies, quick sharp portraits",
+    "story cards for myth and social commentary",
+    "calm editorial pieces with a human line"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "mexican-loteria",
+   "name": "Mexican Lotería cards (Clemente Jacques / Don Clemente Gallo lineage)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/mexican-loteria.md",
+   "tags": [
+    "card-game",
+    "mexico",
+    "flat-colour",
+    "emblem",
+    "folk-print",
+    "tabla",
+    "caption",
+    "popular-art"
+   ],
+   "good_for": [
+    "games, chance, community, luck, a card-per-idea structure",
+    "lists of 54 or 16 things, one image per idea",
+    "Latin American or Mexican-American cultural stories told by the community itself",
+    "explainers where each idea gets a named emblem"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "mexican-rotulista-and-latin-sign-painting",
+   "name": "Mexican rotulismo and Latin American hand-painted signs",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/mexican-rotulista-and-latin-sign-painting.md",
+   "tags": [
+    "sign-painting",
+    "mexico",
+    "latin-america",
+    "hand-lettering",
+    "street",
+    "enamel",
+    "rotulo",
+    "working-class-art",
+    "brush-lettering"
+   ],
+   "good_for": [
+    "street food, markets, local business, neighbourhood stories",
+    "campaigns about place, community, craft and labour",
+    "humour with warmth",
+    "anything that needs a sign to speak in the first person"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "mughal-miniature-and-rajput-painting",
+   "name": "Mughal miniature and Rajput court painting",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/mughal-miniature-and-rajput-painting.md",
+   "tags": [
+    "india",
+    "mughal",
+    "rajput",
+    "pahari",
+    "miniature",
+    "court-painting",
+    "borders",
+    "flat-planes",
+    "gouache",
+    "calligraphy"
+   ],
+   "good_for": [
+    "history, poetry, music, courtly or garden subjects",
+    "heritage, craft, luxury of attention, slow documentaries",
+    "rhythm pieces in the Ragamala sense (a mood per scene)"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "museum-label-and-specimen",
+   "name": "Museum label and specimen plate (accession numbers, vitrine lighting, the illustrated treatise)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/museum-label-and-specimen.md",
+   "tags": [
+    "museum",
+    "label",
+    "specimen",
+    "natural-history",
+    "accession",
+    "vitrine",
+    "plate",
+    "treatise",
+    "archive"
+   ],
+   "good_for": [
+    "science, nature, history, archives, culture, the 'an idea as an artefact' device",
+    "explaining a taxonomy or a collection of items",
+    "calm, authoritative, a bit wry"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "newspaper-broadsheet",
+   "name": "Broadsheet newspaper (column grid, masthead, Didone and slab, halftone newsprint)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/newspaper-broadsheet.md",
+   "tags": [
+    "publication",
+    "newspaper",
+    "broadsheet",
+    "editorial",
+    "halftone",
+    "newsprint",
+    "serif",
+    "column-grid"
+   ],
+   "good_for": [
+    "journalism, history, business, politics, true-story explainers, PR with a 'press' angle",
+    "headlines, quotes, data in column form",
+    "archive and period storytelling"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "pixel-game-ui",
+   "name": "8-bit and 16-bit console game UI",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/pixel-game-ui.md",
+   "tags": [
+    "pixel-art",
+    "8-bit",
+    "16-bit",
+    "nes",
+    "snes",
+    "game-ui",
+    "bitmap-font",
+    "dithering",
+    "tile-grid",
+    "press-start-2p",
+    "silkscreen"
+   ],
+   "good_for": [
+    "games, dev tools with a playful voice, retro-themed launches",
+    "indie music or lyric videos",
+    "gamified data or progress stories"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "south-asian-shop-signage-and-ghat-lettering",
+   "name": "South Asian hand-painted shop signage and street lettering",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/south-asian-shop-signage-and-ghat-lettering.md",
+   "tags": [
+    "india",
+    "south-asia",
+    "signage",
+    "sign-painting",
+    "lettering",
+    "devanagari",
+    "tamil",
+    "urdu",
+    "delhi",
+    "mumbai",
+    "chennai"
+   ],
+   "good_for": [
+    "local business and neighbourhood stories",
+    "markets, food and street culture",
+    "wayfinding in a bazaar",
+    "title cards for documentary"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "tamil-cinema-posters",
+   "name": "Tamil cinema banners, cut-outs and posters",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/tamil-cinema-posters.md",
+   "tags": [
+    "india",
+    "tamil-nadu",
+    "chennai",
+    "cinema",
+    "banner",
+    "cut-out",
+    "hero",
+    "hand-lettering",
+    "tamil-script"
+   ],
+   "good_for": [
+    "film and album announcements",
+    "hero-led brand or event launches",
+    "celebration, fan culture, mass entertainment"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "terminal-crt",
+   "name": "CRT terminal (phosphor green and amber, VT100 lineage)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/terminal-crt.md",
+   "tags": [
+    "terminal",
+    "crt",
+    "phosphor",
+    "green-screen",
+    "amber",
+    "vt100",
+    "monospace",
+    "scanlines",
+    "cli",
+    "ascii"
+   ],
+   "good_for": [
+    "developer tools, security, infrastructure, AI-agent stories",
+    "hacker and systems nostalgia",
+    "CLI product demos"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "transit-map-beck",
+   "name": "Transit diagram (Beck's Tube map)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/transit-map-beck.md",
+   "tags": [
+    "diagram",
+    "map",
+    "routes",
+    "network",
+    "lines",
+    "schematic"
+   ],
+   "good_for": [
+    "networks, pipelines, workflows, dependencies, org charts",
+    "'how X connects to Y' explainers",
+    "journey and process films"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "ukiyo-e-woodblock",
+   "name": "Ukiyo-e woodblock prints (key block, flat colour blocks, bokashi)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/ukiyo-e-woodblock.md",
+   "tags": [
+    "woodblock",
+    "japan",
+    "ukiyo-e",
+    "print",
+    "landscape",
+    "flat-colour",
+    "bokashi",
+    "hokusai",
+    "hiroshige",
+    "edo"
+   ],
+   "good_for": [
+    "landscape, travel, weather, journey stories",
+    "calm, graphic, seasonal or poetic films",
+    "anything where flat planes and one decisive diagonal tell the story",
+    "culture, craft, process films about print"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "vaporwave-and-web-nostalgia",
+   "name": "Vaporwave and 90s web nostalgia (Windows 95, GeoCities)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/vaporwave-and-web-nostalgia.md",
+   "tags": [
+    "vaporwave",
+    "windows-95",
+    "geocities",
+    "90s-web",
+    "bevel",
+    "nostalgia",
+    "internet-culture",
+    "greek-bust",
+    "glitch",
+    "pastel"
+   ],
+   "good_for": [
+    "music, lyric videos, internet-culture stories",
+    "irony-tinged nostalgia about the 90s computer",
+    "fashion and art-driven brand moments"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "vhs-analog",
+   "name": "VHS and camcorder analog video",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/vhs-analog.md",
+   "tags": [
+    "vhs",
+    "analog",
+    "camcorder",
+    "tracking",
+    "chroma-bleed",
+    "osd",
+    "date-stamp",
+    "ntsc",
+    "240p",
+    "found-footage",
+    "lo-fi"
+   ],
+   "good_for": [
+    "nostalgia, home-movie memory, found-footage horror",
+    "music videos, lyric pieces about the 80s-90s",
+    "anything that wants to feel recorded rather than rendered"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "west-african-wax-print-and-kente",
+   "name": "West African textile pattern systems: Dutch wax print, kente and adinkra",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/west-african-wax-print-and-kente.md",
+   "tags": [
+    "textile",
+    "pattern",
+    "kente",
+    "adinkra",
+    "wax-print",
+    "vlisco",
+    "ghana",
+    "west-africa",
+    "symbol",
+    "craft"
+   ],
+   "good_for": [
+    "stories about identity, trade, memory, family, craft",
+    "fashion, textile or museum films",
+    "pattern backgrounds that carry meaning",
+    "pieces where a name and a proverb are the point"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "y2k-chrome",
+   "name": "Y2K chrome and bubble (millennium futurism)",
+   "kind": "vernacular",
+   "domain": "vernacular",
+   "path": "systems/vernacular/y2k-chrome.md",
+   "tags": [
+    "y2k",
+    "chrome",
+    "bubble",
+    "translucent",
+    "blobject",
+    "aqua",
+    "gloss",
+    "late-90s",
+    "early-web",
+    "gummy"
+   ],
+   "good_for": [
+    "consumer tech nostalgia, music and gaming, fashion drops",
+    "playful product reveals, retro-futurism with a smile",
+    "lyric videos about the early internet"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "banknote-guilloche",
+   "name": "Banknote and guilloche (security print, intaglio, rainbow printing)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/banknote-guilloche.md",
+   "tags": [
+    "print",
+    "guilloche",
+    "banknote",
+    "security-print",
+    "intaglio",
+    "microprint",
+    "rainbow-print",
+    "geometry",
+    "ornament"
+   ],
+   "good_for": [
+    "money, trust, finance, certificates, authenticity, anti-counterfeit and verification stories",
+    "formal documents, diplomas, share certificates, seals",
+    "ornamental geometry as a motion device (the machine draws it)"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "bauhaus-in-3d",
+   "name": "Bauhaus in 3D (primary solids, Schlemmer stage)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/bauhaus-in-3d.md",
+   "tags": [
+    "bauhaus",
+    "primary-colours",
+    "geometry",
+    "solids",
+    "stage",
+    "matte",
+    "3d"
+   ],
+   "good_for": [
+    "education, design, architecture, culture",
+    "structured explainers",
+    "assembling a system from parts"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "blueprint-technical-drawing",
+   "name": "Blueprint and technical drawing (cyanotype white-line, ISO drafting)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/blueprint-technical-drawing.md",
+   "tags": [
+    "blueprint",
+    "cyanotype",
+    "technical-drawing",
+    "wireframe",
+    "iso-128",
+    "title-block",
+    "dimension-lines",
+    "engineering",
+    "white-line",
+    "schematic"
+   ],
+   "good_for": [
+    "engineering, hardware, architecture, infrastructure",
+    "how-it-works explainers, patents, specs",
+    "process and system diagrams, 'built' narratives"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "chrome-liquid-metal-cgi",
+   "name": "Chrome and liquid metal CGI",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/chrome-liquid-metal-cgi.md",
+   "tags": [
+    "chrome",
+    "metal",
+    "reflection",
+    "liquid",
+    "mercury",
+    "environment",
+    "3d"
+   ],
+   "good_for": [
+    "precision, power, futurism, crypto/AI-as-metal (use sparingly), music and fashion",
+    "logos and one-word title objects"
+   ],
+   "space": "3d"
+  },
+  {
+   "id": "claymation-and-soft-clay",
+   "name": "Claymation and soft clay",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/claymation-and-soft-clay.md",
+   "tags": [
+    "clay",
+    "plasticine",
+    "stop-motion",
+    "handmade",
+    "soft",
+    "tactile",
+    "on-twos"
+   ],
+   "good_for": [
+    "warmth, humour, craft, kids, human-scale stories",
+    "simple characters and objects with personality",
+    "anti-corporate explainers"
+   ],
+   "space": "3d"
+  },
+  {
+   "id": "concrete-brutalist-3d",
+   "name": "Concrete and Brutalist architecture (béton brut)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/concrete-brutalist-3d.md",
+   "tags": [
+    "concrete",
+    "brutalism",
+    "monumental",
+    "architecture",
+    "light",
+    "shadow",
+    "3d"
+   ],
+   "good_for": [
+    "infrastructure, strong institutions, security, solidity",
+    "manifesto and architecture-minded brand films",
+    "dramatic one-word reveals"
+   ],
+   "space": "3d"
+  },
+  {
+   "id": "cyanotype",
+   "name": "Cyanotype (Prussian blue sun prints, Atkins botanical photograms)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/cyanotype.md",
+   "tags": [
+    "photographic",
+    "cyanotype",
+    "prussian-blue",
+    "botanical",
+    "photogram",
+    "handmade",
+    "blueprint",
+    "monochrome"
+   ],
+   "good_for": [
+    "nature, science, climate, archives, craft, slow stories",
+    "blueprint and technical-drawing blends",
+    "a quiet, handmade, sun-lit register for a single idea"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "engraving-etching",
+   "name": "Engraving and etching (burin line, cross-hatch, stipple)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/engraving-etching.md",
+   "tags": [
+    "print",
+    "engraving",
+    "etching",
+    "hatching",
+    "stipple",
+    "intaglio",
+    "treatise",
+    "npr",
+    "monochrome"
+   ],
+   "good_for": [
+    "treatise, science, history, finance (banknote-adjacent), philosophy, long-form serious stories",
+    "visual puns and metaphors drawn as plates",
+    "anything that should feel authoritative and hand-made at once"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "glass-product-cgi",
+   "name": "Glass and frosted glass (product CGI and UI glass)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/glass-product-cgi.md",
+   "tags": [
+    "glass",
+    "transmission",
+    "refraction",
+    "frosted",
+    "translucent",
+    "product",
+    "3d"
+   ],
+   "good_for": [
+    "OS, device and fintech product films",
+    "clarity, transparency, trust, premium consumer tech",
+    "logos and numerals as physical objects"
+   ],
+   "space": "3d"
+  },
+  {
+   "id": "gummy-inflatable-and-plastic-toy-3d",
+   "name": "Gummy, inflatable and plastic toy 3D",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/gummy-inflatable-and-plastic-toy-3d.md",
+   "tags": [
+    "gummy",
+    "inflatable",
+    "balloon",
+    "plastic",
+    "toy",
+    "playful",
+    "3d"
+   ],
+   "good_for": [
+    "consumer, youth, fun, food, playful brands",
+    "kids, games, social",
+    "friendly tech"
+   ],
+   "space": "3d"
+  },
+  {
+   "id": "paper-cut-and-papercraft",
+   "name": "Paper cut and papercraft (layered shadow boxes, jianzhi, kirigami, papel picado)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/paper-cut-and-papercraft.md",
+   "tags": [
+    "paper",
+    "papercut",
+    "kirigami",
+    "shadow-box",
+    "layered",
+    "craft",
+    "handmade",
+    "parallax",
+    "stop-motion"
+   ],
+   "good_for": [
+    "children, families, storybooks, craft, culture, nature",
+    "festival and heritage stories (papel picado, jianzhi)",
+    "explaining a layered system (layers of a stack, a map, the atmosphere) in a warm way",
+    "any story where handmade warmth beats polish"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "risograph-print",
+   "name": "Risograph print (drum duplicator, soy ink, overprint)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/risograph-print.md",
+   "tags": [
+    "print",
+    "riso",
+    "overprint",
+    "grain",
+    "zine",
+    "flat-colour",
+    "handmade"
+   ],
+   "good_for": [
+    "zines, culture, indie music, events, small brands",
+    "explainers that want a human, handmade, risograph-lab voice",
+    "anything with two or three brand colours that can overprint"
+   ],
+   "space": "both"
+  },
+  {
+   "id": "screenprint",
+   "name": "Screenprint (serigraph, gig poster, Warhol-style spot colour and halftone)",
+   "kind": "material",
+   "domain": "material",
+   "path": "systems/material/screenprint.md",
+   "tags": [
+    "print",
+    "screenprint",
+    "serigraph",
+    "poster",
+    "spot-colour",
+    "halftone",
+    "pop-art",
+    "gig-poster"
+   ],
+   "good_for": [
+    "music, events, nightlife, culture",
+    "bold, loud brand statements",
+    "repetition and variation as a device (the same face in 6 colourways)"
+   ],
+   "space": "both"
+  }
+ ],
+ "motion": []
+}

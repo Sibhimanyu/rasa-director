@@ -6,7 +6,8 @@
 #   bash setup.sh --new           the same, but always a fresh run (a new video) rather than resuming an unfinished one
 #   bash setup.sh --node-only     just make sure Node >= 20 is available (used by install.sh)
 #
-# Prints KEY=VALUE lines (SKILL_DIR, RUN, NODE, PATH_PREFIX, UPDATE, UPDATED, HYPERFRAMES, BROWSER, CONSOLE)
+# Prints KEY=VALUE lines (SKILL_DIR, RUN, NODE, PATH_PREFIX, UPDATE, UPDATED, HYPERFRAMES, BROWSER, CONSOLE, MODEL, HARNESS)
+# (MODEL and HARNESS: the model running this session and where it runs, claude-code | codex | other; pass MODEL as --model to crew.mjs)
 # and PROBLEM: lines with the fix, then READY, or FAILED when a run can't start.
 # Node: the PATH first, then nvm / fnm / Volta / asdf / Homebrew / ~/.rasanai/node; if none is
 # >= 20, a private copy of the current Node LTS is downloaded from nodejs.org into
@@ -169,6 +170,8 @@ if C=$("$NODE" "$SKILL_DIR/scripts/console.mjs" serve --run "$RUN" $OPEN 2>&1); 
 else
   problem "the Director's Console did not start: $C (retry: node $SKILL_DIR/scripts/console.mjs serve --run $RUN --port 0 --open)"
 fi
+
+"$NODE" "$SKILL_DIR/scripts/crew.mjs" model --kv 2>/dev/null || { echo "MODEL=unknown"; echo "HARNESS=other"; }
 
 [ -n "$FAILED" ] && { echo "FAILED"; exit 1; }
 echo "READY"

@@ -23,6 +23,8 @@
 // 15. 3D: the Rasan3D runtime installs, a scaffolded scene builds, is seek-safe and passes the gate; planted
 //     nondeterminism, a linear drift and an ease outside motion.md are caught; strips and key frames wait for the build
 // 16. the 3D styles of the style library mount real Rasan3D canvases (presets3d.js); the console serves the runtime safely
+// 18. the design desk: library index and search, the design-system gate (a good system passes; generic, near-duplicate and invalid ones fail), choose-system, the crew plan
+// 19. model profiles and adaptive prompts (Claude vs GPT, dispatch per harness), the finish opt-out for stepped scenes
 // 17. lyric videos: the treatment gate and the crew's song route, lyrics.mjs (check, audio, align when whisper is there), the RasanMusic runtime in a page, the film finish (grade, blur)
 import fs from "node:fs";
 import os from "node:os";
@@ -971,6 +973,200 @@ window.__r = { same: A === B, i: A.i, nth: nth.i, miss: miss, starts: starts, ki
       }
       ok(`finish: blur averages sub-frames (8 samples): 30 frames out, a moving card smeared into soft edges (${Math.round((Date.now() - t0) / 1000)} s)`, bl.status === 0 && bj.frames?.expected === 30 && bj.frames?.got === 30 && partial >= 3, (bl.stderr || "").slice(0, 300) + bl.stdout.slice(0, 200) + partial);
     }
+  }
+}
+
+// 18. the design desk
+{
+  const ws = path.join(TMP, "desk-ws");
+  const run = path.join(ws, ".rasanai", "r1");
+  fs.mkdirSync(run, { recursive: true });
+  const offline = { ...env, RASANAI_OFFLINE: "1" };
+  const D = (a, o = {}) => spawnSync(process.execPath, [path.join(HERE, "design.mjs"), ...a], { encoding: "utf8", env: offline, cwd: ws, timeout: 120000, ...o });
+  const C = (a) => spawnSync(process.execPath, [path.join(HERE, "crew.mjs"), ...a], { encoding: "utf8", env: { ...offline }, cwd: ws, timeout: 120000 });
+  const L = (a) => spawnSync(process.execPath, [path.join(HERE, "library.mjs"), ...a], { encoding: "utf8", env, cwd: ws, timeout: 60000 });
+  const J3 = (r) => { try { return JSON.parse(r.stdout); } catch { return {}; } };
+  // library
+  const ix = J3(L(["index"]));
+  ok("library: index builds from the entries' frontmatter (systems and motion, no duplicates)", ix.ok && ix.systems >= 20 && ix.motion >= 5, JSON.stringify(ix).slice(0, 300));
+  const sr = J3(L(["search", "--q", "paper receipts ledger finance", "--limit", "6"]));
+  ok("library: search ranks entries for the words (ids, scores, why)", sr.ok && sr.results.length >= 1 && sr.results[0].score >= sr.results[sr.results.length - 1].score && sr.results.every((r) => r.id && r.path), JSON.stringify(sr).slice(0, 200));
+  const s3 = J3(L(["search", "--q", "camera lens corridor", "--space", "3d", "--type", "motion"]));
+  ok("library: --space 3d and --type motion narrow the search", s3.results.length >= 1 && s3.results.every((r) => r.type === "motion" && r.space !== "2d"));
+  const sh1 = J3(L(["show", "saul-bass"]));
+  ok("library: show returns an entry's tokens and sections; an unknown id exits 1", sh1.ok && sh1.tokens && sh1.tokens.palette && Object.keys(sh1.sections).length >= 3 && L(["show", "no-such-entry"]).status === 1);
+  // the example system
+  const EX = path.join(HERE, "..", "references", "design-desk-example", "Sure");
+  // a small specimen page of our own (a layout, a palette, a display face), so fixtures can differ in composition
+  const genSpec = ({ canvas, ink, accent, face, layout, text = "Every receipt, counted.", ease = "power4.out", throws = false, tl = true }) => `<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=${face.replace(/ /g, "+")}:wght@700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script><style>*{margin:0;box-sizing:border-box}html,body{width:1600px;height:900px;overflow:hidden;background:${canvas}}#root{position:relative;width:1600px;height:900px;background:${canvas};color:${ink};font-family:"${face}",sans-serif}h1{position:absolute;font-size:120px;font-weight:700;line-height:1;${layout === "L" ? "left:80px;top:80px;width:600px" : layout === "B" ? "left:80px;bottom:60px;width:1400px" : "right:60px;top:380px;width:560px;text-align:right;font-size:70px"}}.bars i{position:absolute;background:${ink};${layout === "L" ? "right:0;top:0;bottom:0;width:560px" : layout === "B" ? "left:0;right:0;top:0;height:420px" : "left:0;top:0;bottom:0;width:700px"}}.m{position:absolute;background:${accent};width:140px;height:60px;${layout === "L" ? "left:80px;bottom:80px" : layout === "B" ? "right:80px;bottom:80px" : "left:760px;top:120px"}}</style></head><body><div id="root" data-width="1600" data-height="900"><div class="bars"><i></i></div><h1 id="h">${text}</h1><div class="m" id="m"></div></div><script>${throws ? "nope.missing();" : ""}${tl ? `var tl=gsap.timeline({paused:true});tl.from("#h",{opacity:0,duration:.4,ease:"${ease}"}).from("#m",{scaleX:0,duration:.3,ease:"${ease}"});window.__specimen={tl:tl};tl.progress(1);` : ""}</script></body></html>`;
+  const copyTo = (dst, edit = {}) => {
+    fs.mkdirSync(dst, { recursive: true });
+    for (const f of ["DESIGN.md", "recipe.json", "blend.json", "specimen.html"]) {
+      if (f === "specimen.html" && edit.nospec) continue;
+      let t = fs.readFileSync(path.join(EX, f), "utf8");
+      for (const [a, b, only] of edit.subs || []) if (!only || only === f) t = t.split(a).join(b);
+      if (edit.raw && edit.raw[f] !== undefined) t = edit.raw[f];
+      fs.writeFileSync(path.join(dst, f), t);
+    }
+    return dst;
+  };
+  const chk = (dir) => D(["check-system", "--dir", dir, "--offline"]);
+  const good = copyTo(path.join(run, "design", "Sure"));
+  const gr = chk(good);
+  ok("design gate: the worked example system passes (canvas/ink/accent, contrast, real fonts, 4 references, motion and camera numbers)", gr.status === 0, gr.stdout.slice(0, 500));
+  const T = path.join(TMP, "desk-bad");
+  const refuse = (name, edit, re) => { const r = chk(copyTo(path.join(T, name), edit)); ok(`design gate refuses ${name}`, r.status === 2 && re.test(r.stdout), r.stdout.slice(0, 400)); };
+  refuse("Inter for everything", { subs: [["Bricolage Grotesque", "Inter"], ["IBM Plex Sans", "Inter"]] }, /generic type/);
+  refuse("low contrast ink", { subs: [["#10231c", "#9aa8a0"]] }, /needs 4\.5:1/);
+  refuse("a purple-blue gradient", { subs: [["#d4392b", "#6d4cff"], ["Don't use a gradient, a glow", "Use a gradient from violet to blue, a glow"]] }, /purple-blue gradient/);
+  refuse("the Claude look (cream, rust, italic serif)", { subs: [["#e9efe6", "#f4ece0"], ["Bricolage Grotesque", "Fraunces"], ["#d4392b", "#c4623a"], ['"bodyWeight": 400', '"bodyWeight": 400, "italic": true', "recipe.json"]] }, /Claude look/);
+  refuse("a blend of one reference", { raw: { "blend.json": JSON.stringify({ ...JSON.parse(fs.readFileSync(path.join(EX, "blend.json"), "utf8")), references: [{ id: "saul-bass", traits: ["x"], why: "y" }] }) } }, /cites 1 library references/);
+  refuse("a reference that is not in the library", { subs: [["banknote-guilloche", "made-up-style-of-1999", "blend.json"]] }, /not in the library/);
+  refuse("a system with no Motion and camera section", { subs: [["## Motion and camera", "## Notes", "DESIGN.md"]] }, /Motion and camera/);
+  refuse("motion written as adjectives (no timings, eases or camera)", { raw: { "DESIGN.md": fs.readFileSync(path.join(EX, "DESIGN.md"), "utf8").replace(/## Motion and camera[\s\S]*?(?=## Do's)/, "## Motion and camera\n\nSmooth, elegant and cinematic.\n\n") } }, /names 0 timings/);
+  refuse("a recipe that disagrees with the DESIGN.md", { subs: [['"accent": "#d4392b"', '"accent": "#2b39d4"', "recipe.json"]] }, /differs from DESIGN\.md/);
+  refuse("an invalid recipe vocabulary", { subs: [['"layout": "record"', '"layout": "hero-with-gradient"', "recipe.json"]] }, /layout/);
+  refuse("invalid JSON", { raw: { "blend.json": "{ not json" } }, /not valid JSON/);
+  refuse("a 3D system without a lens", { subs: [['"name": "Counting House",', '"name": "Counting House", "three": {"base": "glass-3d"},', "recipe.json"], ["24 mm lens", "wide lens", "DESIGN.md"], ["50 mm", "tight", "DESIGN.md"]] }, /lens in mm/);
+  // the specimen gate: the example's own page passes (above); each of these fails for its own reason
+  const sp = (name, edit, re, extra = []) => { const r = D(["check-system", "--dir", copyTo(path.join(T, name), edit), "--offline", ...extra]); ok(`specimen gate refuses ${name}`, r.status === 2 && re.test(r.stdout), r.stdout.slice(0, 500)); };
+  sp("a missing specimen.html", { nospec: true }, /specimen\.html is missing/);
+  sp("a specimen with a page error", { raw: { "specimen.html": genSpec({ canvas: "#e9efe6", ink: "#10231c", accent: "#d4392b", face: "Bricolage Grotesque", layout: "L", throws: true }) } }, /page error/);
+  sp("a specimen off the system's palette", { raw: { "specimen.html": genSpec({ canvas: "#2244aa", ink: "#8822aa", accent: "#d4392b", face: "Bricolage Grotesque", layout: "L" }) } }, /off the system's palette|canvas and surface cover/);
+  sp("a specimen flooded with the accent", { subs: [["#e9efe6", "#d4392b", "specimen.html"]] }, /accent covers/);
+  sp("a specimen whose headline is not the first line", { subs: [["Every receipt,", "Hello there", "specimen.html"]] }, /does not carry the story's first line/, ["--hook", "Every receipt, counted."]);
+  sp("a specimen with no timeline", { raw: { "specimen.html": genSpec({ canvas: "#e9efe6", ink: "#10231c", accent: "#d4392b", face: "Bricolage Grotesque", layout: "L", tl: false }) } }, /window\.__specimen/);
+  sp("a specimen easing outside the system's motion section", { raw: { "specimen.html": genSpec({ canvas: "#e9efe6", ink: "#10231c", accent: "#d4392b", face: "Bricolage Grotesque", layout: "L", ease: "bounce.out" }) } }, /doesn't name/);
+  const sj = JSON.parse(D(["check-system", "--dir", good, "--offline"]).stdout);
+  ok("specimen gate: the example's specimen is rendered to specimen.png and its colour shares are reported (accent rationed, canvas leading)", fs.existsSync(path.join(good, "specimen.png")) && sj.system.specimen && sj.system.specimen.share.canvas > 0.2 && sj.system.specimen.share.accent > 0 && sj.system.specimen.share.accent < 0.08, JSON.stringify(sj.system.specimen));
+  // three systems: a near-duplicate fails; three distinct ones pass
+  const bold = { subs: [["#e9efe6", "#101418"], ["#10231c", "#eef2f0"], ["#d4392b", "#f5b700"], ["#1f6f54", "#4cc9a0"], ["#f7faf4", "#1b2128"], ["#5d6f66", "#9aa7a0"], ["#b8c6bb", "#2a323a"], ["Bricolage Grotesque", "Space Grotesk"], ["IBM Plex Sans", "DM Sans"], ["Counting House", "Night Audit"], ['"layout": "record"', '"layout": "data"', "recipe.json"], ['"motion": "snap"', '"motion": "slide"', "recipe.json"], ["financial-times-graphics", "airport-wayfinding", "blend.json"], ["banknote-guilloche", "transit-map-beck", "blend.json"], ["The FT's paper-and-chart restraint, banknote engraving and Saul Bass's one hot accent, for receipts that become trusted numbers.", "Departure-board data rows and one amber signal, for receipts that read as a live reconciliation.", "blend.json"], ["The story turns a crumpled receipt into an audited number: a ledger desk with a single stamp is that moment, and nothing in the category looks like it.", "The story is a night shift matching every receipt: a dark board where each line turns green is the proof.", "blend.json"]] };
+  const wild = { subs: [["#e9efe6", "#f2d16b"], ["#10231c", "#1a0f2e"], ["#d4392b", "#e0245e"], ["#1f6f54", "#3b2a8c"], ["#f7faf4", "#fff3c4"], ["#5d6f66", "#5c4a6e"], ["#b8c6bb", "#d9b94a"], ["Bricolage Grotesque", "Syne"], ["IBM Plex Sans", "Work Sans"], ["Counting House", "Stamp Duty"], ['"layout": "record"', '"layout": "poster"', "recipe.json"], ['"motion": "snap"', '"motion": "pop"', "recipe.json"], ["financial-times-graphics", "constructivism", "blend.json"], ["banknote-guilloche", "de-stijl", "blend.json"], ["The FT's paper-and-chart restraint, banknote engraving and Saul Bass's one hot accent, for receipts that become trusted numbers.", "Primary blocks and a stamped number shouting 312, for receipts that finally get counted.", "blend.json"], ["The story turns a crumpled receipt into an audited number: a ledger desk with a single stamp is that moment, and nothing in the category looks like it.", "The story is a count that lands as a poster: one huge figure and a stamp, loud and certain.", "blend.json"]] };
+  copyTo(path.join(run, "design", "Bold"), { ...bold, raw: { "specimen.html": genSpec({ canvas: "#101418", ink: "#eef2f0", accent: "#f5b700", face: "Space Grotesk", layout: "B" }) } });
+  copyTo(path.join(run, "design", "Wild"), { ...wild, raw: { "specimen.html": genSpec({ canvas: "#f2d16b", ink: "#1a0f2e", accent: "#e0245e", face: "Syne", layout: "R" }) } });
+  const trio = D(["check-systems", "--run", run, "--offline"]);
+  ok("design gate: three distinct systems pass check-systems (palette, display face, layout, motion differ)", trio.status === 0, trio.stdout.slice(0, 600));
+  copyTo(path.join(run, "design", "Bold"), { subs: [["Counting House", "Counting House Two"]] });
+  const dup = D(["check-systems", "--run", run, "--offline"]);
+  ok("design gate: a near-duplicate pair is refused (too alike, same references)", dup.status === 2 && /too alike/.test(dup.stdout) && /exactly the same references/.test(dup.stdout) && /same layout recoloured/.test(dup.stdout), dup.stdout.slice(0, 500));
+  // the same composition in other colours scores near 1 on layout; a different composition scores low
+  {
+    const { decodePng, layoutSimilarity } = await import("./lib/png.mjs");
+    const A = decodePng(path.join(run, "design", "Sure", "specimen.png")), Bimg = decodePng(path.join(run, "design", "Wild", "specimen.png"));
+    const recol = { ...A, rgb: A.rgb.map((v) => 255 - v) };
+    ok("design gate: layout similarity sees a recoloured (inverted) copy as the same layout and a different composition as different", layoutSimilarity(A, recol) > 0.9 && layoutSimilarity(A, Bimg) < 0.85, `${layoutSimilarity(A, recol).toFixed(2)} / ${layoutSimilarity(A, Bimg).toFixed(2)}`);
+  }
+  copyTo(path.join(run, "design", "Bold"), { ...bold, raw: { "specimen.html": genSpec({ canvas: "#101418", ink: "#eef2f0", accent: "#f5b700", face: "Space Grotesk", layout: "B" }) } });
+  // a brand: Sure must be the brand
+  const brandMd = path.join(TMP, "brand.md");
+  fs.writeFileSync(brandMd, '---\nname: "Tally"\ncolors:\n  canvas: "#ffffff"   # page background\n  ink: "#101010"      # text\n  accent: "#0a7d4b"   # brand accent\ntypography:\n  display:\n    fontFamily: Manrope\n    fontWeight: 700\n  body:\n    fontFamily: Manrope\n    fontWeight: 400\nrounded:\n  md: 8px\n---\n## Overview\nTally is a bookkeeping app.\n');
+  const br = D(["check-system", "--dir", good, "--brand", brandMd, "--offline"]);
+  ok("design gate: with a brand DESIGN.md, Sure must be the brand (its colours and display face)", br.status === 2 && /must be the brand extended/.test(br.stdout) && /display face Manrope/.test(br.stdout), br.stdout.slice(0, 400));
+  // the Look payload, choose, motion.md, DIRECTION.md
+  const pl = D(["look-payload", "--run", run, "--hook", "Tax season. Again.", "--recommended", "bold"]);
+  const pj = J3(pl);
+  ok("look-payload: exactly the three bespoke systems with name, blend, why and a live recipe (no preset gallery)", pl.status === 0 && pj.styles.length === 3 && pj.recommended === "bold" && pj.styles.every((x) => x.name && x.blend && x.why && x.style.recipe.palette.canvas && x.references.length >= 2) && !pj.gallery && !pj.presets && pj.styles.every((x) => /specimen\.html$/.test(x.specimen || "") && /specimen\.png$/.test(x.poster || "")), pl.stdout.slice(0, 300));
+  const dec = path.join(run, "decisions.json");
+  fs.writeFileSync(dec, JSON.stringify({ subject: "Tally", picks: {} }));
+  const cs = D(["choose-system", "--run", run, "--label", "Bold", "--decisions", dec]);
+  const dj = JSON.parse(fs.readFileSync(dec, "utf8"));
+  ok("choose-system: the chosen DESIGN.md becomes the film's look (look/DESIGN.md, look/frame.md, decisions.look, the system's taxonomy picks)", cs.status === 0 && fs.existsSync(path.join(run, "look", "frame.md")) && /Night Audit|Space Grotesk/.test(fs.readFileSync(path.join(run, "look", "frame.md"), "utf8")) && dj.look.system === "Bold" && dj.picks["visual-style"] && dj.design_system.references.length >= 2 && fs.readFileSync(path.join(run, "look", "DESIGN.md"), "utf8").includes("#101418"), cs.stdout.slice(0, 300) + cs.stderr.slice(0, 200));
+  const mm = node("motion-md.mjs", ["write", "--design-system", path.join(run, "design", "Bold"), "--out", path.join(run, "motion.md")]);
+  ok("motion-md: write --design-system lays the system's contract on its motion language (eases, scale, stagger, bans)", mm.status === 0 && /"enter":"power4\.out"/.test(fs.readFileSync(path.join(run, "motion.md"), "utf8")) && /Bespoke motion language/.test(fs.readFileSync(path.join(run, "motion.md"), "utf8")), mm.stderr.slice(0, 300));
+  const dr = node("direction.mjs", ["compile", "--decisions", dec, "--out", path.join(run, "direction")], { cwd: ws });
+  ok("direction: compile carries the bespoke system's blend and its Motion and camera section into DIRECTION.md", dr.status === 0 && /The bespoke design system: Night Audit/.test(fs.readFileSync(path.join(run, "direction", "DIRECTION.md"), "utf8")) && /power4\.out/.test(fs.readFileSync(path.join(run, "direction", "DIRECTION.md"), "utf8")), dr.stderr.slice(0, 300) + dr.stdout.slice(0, 200));
+  // the console draws bespoke recipes inline: no gallery, no 403
+  const html = fs.readFileSync(path.join(HERE, "..", "console", "index.html"), "utf8");
+  ok("console: the Look step has no style browser (no 'Browse all', no gallery overlay); tiles draw each system's own recipe", !/Browse all/.test(html) && !/galleryOverlay/.test(html) && /New blends near this one/.test(html) && /s\.style \|\| null/.test(html));
+  ok("console: RasaPresets3D draws a bespoke system through its three.base family", /function keyOf\(preset\)/.test(fs.readFileSync(path.join(HERE, "..", "console", "presets3d.js"), "utf8")));
+  // the crew
+  const pln = J3(C(["plan", "--run", run, "--route", "product-launch-video", "--subject", "Tally", "--scenes", "4", "--model", "sonnet"]));
+  const members = (pln.phases || []).flatMap((x) => x.members);
+  ok("crew: the plan includes the design researcher (during the Brief) and three design-system designers (Sure, Bold, Wild) after the story", members.includes("design-researcher (inherit)") && ["Sure", "Bold", "Wild"].every((k) => members.includes(`design-system-designer:${k} (inherit)`)) && pln.phases.findIndex((x) => x.phase === "design-systems") > pln.phases.findIndex((x) => x.phase === "story"), JSON.stringify(members));
+  const lyr = J3(C(["plan", "--run", path.join(ws, ".rasanai", "r2"), "--route", "music-to-video", "--subject", "Song", "--model", "sonnet"])) ;
+  fs.mkdirSync(path.join(ws, ".rasanai", "r2"), { recursive: true });
+  const lyr2 = J3(C(["plan", "--run", path.join(ws, ".rasanai", "r2"), "--route", "music-to-video", "--subject", "Song", "--model", "sonnet"]));
+  ok("crew: a lyric video plans one design-system designer (from the chosen treatment), not three", (lyr2.phases || []).flatMap((x) => x.members).filter((m) => /design-system-designer/.test(m)).length === 1);
+  const bd = J3(C(["brief", "--run", run, "--role", "design-system-designer", "--key", "Bold"]));
+  const bp = bd.prompt ? fs.readFileSync(path.join(ws, bd.prompt), "utf8") : "";
+  ok("crew: a design-system designer's brief names its stance, the library commands, its three outputs and the gate", /Role: design system designer/.test(bp) && /Bold: push it/.test(bp) && /library\.mjs/.test(bp) && /design\/Bold\/DESIGN\.md/.test(bp) && /design\/Bold\/blend\.json/.test(bp) && /check-system --dir/.test(bp) && /Show off/.test(bp), bp.slice(0, 200));
+  ok("crew: check design-system-designer runs the system gate and the sibling comparison", C(["check", "--run", run, "--role", "design-system-designer", "--key", "Bold"]).status === 0 && C(["check", "--run", run, "--role", "design-system-designer", "--key", "Sure"]).status === 0);
+  copyTo(path.join(run, "design", "Wild"), { subs: [["Counting House", "Counting House Three"]] });
+  const sib = C(["check", "--run", run, "--role", "design-system-designer", "--key", "Wild"]);
+  ok("crew: a designer whose system is a copy of a sibling's fails the later one (too alike)", sib.status === 2 && /too alike/.test(sib.stdout), sib.stdout.slice(0, 300));
+  // the design researcher's gate
+  const dro = C(["check", "--run", run, "--role", "design-researcher"]);
+  ok("crew: check design-researcher refuses missing work (exit 2)", dro.status === 2 && /design\.md is missing/.test(dro.stdout));
+  const ids = J3(L(["ids"])).ids;
+  const mot = J3(L(["search", "--type", "motion", "--limit", "3"])).results.map((r) => r.id);
+  const refs = [...new Set([...mot.slice(0, 2), ...ids])].slice(0, 9).map((id) => ({ id, type: mot.includes(id) ? "motion" : "system", why: "fits the subject because its ledger paper logic carries", traits: ["t"], space: "both" }));
+  fs.mkdirSync(path.join(run, "research"), { recursive: true });
+  fs.writeFileSync(path.join(run, "research", "design.md"), "## The subject's visual world\nx https://a.example/1 https://a.example/2\n## Clichés to avoid\nx\n## Audience\nx\n## Materials, places, eras\nx https://a.example/3\n## Library references\nx\n## Sources\nhttps://a.example/4\n");
+  fs.writeFileSync(path.join(run, "research", "design-refs.json"), JSON.stringify({ subject: "Tally", world: { visual_culture: "v", cliches_to_avoid: ["a", "b", "c"], materials: ["paper"] }, references: refs, sources: [] }));
+  const drg = C(["check", "--run", run, "--role", "design-researcher"]);
+  ok("crew: check design-researcher accepts a world note with sources, clichés and 9 real library references", drg.status === 0, drg.stdout.slice(0, 400));
+  fs.writeFileSync(path.join(run, "research", "design-refs.json"), JSON.stringify({ subject: "Tally", world: { cliches_to_avoid: ["a", "b", "c"], materials: ["p"] }, references: [...refs.slice(0, 6), { id: "invented-style", why: "x" }] }));
+  const drb = C(["check", "--run", run, "--role", "design-researcher"]);
+  ok("crew: check design-researcher refuses a shortlist with a made-up id or fewer than 8", drb.status === 2 && /not in the library/.test(drb.stdout) && /shortlists 7/.test(drb.stdout), drb.stdout.slice(0, 300));
+}
+
+// 19. model profiles, adaptive prompts, and the finish opt-out for stepped scenes
+{
+  const ws = path.join(TMP, "models-ws");
+  const run = path.join(ws, ".rasanai", "r1");
+  fs.mkdirSync(run, { recursive: true });
+  const M = await import(path.join(HERE, "lib", "models.mjs"));
+  const { profileFor, detectModel, tierFor } = M;
+  ok("models: profiles", profileFor("claude-opus-5-5").key === "claude-opus" && profileFor("claude-sonnet-5-5").tier === "strong" && profileFor("claude-haiku-4-5").tier === "fast" && profileFor("gpt-5.6-sol").key === "gpt-frontier" && profileFor("gpt-5-codex").harness === "codex" && profileFor("whatever").key === "other");
+  ok("models: detect", detectModel({ RASANAI_MODEL: "gpt-5.6-sol" }).harness === "codex" && detectModel({ ANTHROPIC_MODEL: "claude-opus-5-5" }).harness === "claude-code" && detectModel({}).model === "unknown");
+  ok("models: tiers (gathering may run fast; judging never)", tierFor("scene-animator", profileFor("haiku")).ok === false && tierFor("local-scout", profileFor("haiku")).ok === true && tierFor("critic", profileFor("gpt-5-mini")).ok === false);
+  const C = (a) => spawnSync(process.execPath, [path.join(HERE, "crew.mjs"), ...a], { encoding: "utf8", env, cwd: ws, timeout: 120000 });
+  const J4 = (r) => { try { return JSON.parse(r.stdout); } catch { return {}; } };
+  const proj = path.join(ws, "videos", "t");
+  fs.mkdirSync(path.join(proj, ".hyperframes", "frame-packets"), { recursive: true });
+  const pl = J4(C(["plan", "--run", run, "--route", "product-launch-video", "--subject", "Tally", "--scenes", "2", "--project", proj, "--model", "gpt-5.6-sol"]));
+  ok("crew: plan records the model and harness", pl.model === "gpt-5.6-sol" && pl.harness === "codex", JSON.stringify(pl).slice(0, 200));
+  fs.mkdirSync(path.join(run, "motion"), { recursive: true });
+  const score = { spine: "s", scenes: [{ n: 1, title: "a", duration: 3, space: "2d", entrances: [{ type: "cut-in" }], shots: [] }, { n: 2, title: "b", duration: 3, space: "2d", entrances: [], shots: [] }] };
+  fs.writeFileSync(path.join(run, "motion", "score.json"), JSON.stringify(score));
+  const brief = (model) => { const r = J4(C(["brief", "--run", run, "--role", "scene-animator", "--key", "1", "--project", proj, "--model", model])); return { r, text: r.prompt ? fs.readFileSync(path.join(ws, r.prompt), "utf8") : "" }; };
+  const gp = brief("gpt-5.6-sol"), so = brief("sonnet"), op = brief("opus");
+  const same = (t) => /## Dispatch context/.test(t) && /crew\.mjs" check --run/.test(t) && /Show off/.test(t);
+  ok("models: the same job, dispatch context, check command and show-off ask reach every model", same(gp.text) && same(so.text) && same(op.text));
+  ok("models: GPT gets the contract first and the strict creative loop (reel-quality worked example, self-critique against the critic rubric, no clarifying questions, whole files)", /^You are running as a crew member under Codex/.test(gp.text) && /\*\*Start here\.\*\*/.test(gp.text) && /A reel-quality scene, worked/.test(gp.text) && /Self-critique before you hand back/.test(gp.text) && /at least 50% of the frame height/.test(gp.text) && /Never ask a clarifying question/.test(gp.text) && /Write each output file in full/.test(gp.text), gp.text.slice(0, 200));
+  ok("models: Sonnet gets the checklist and improvement passes; Opus the open ask; they differ", /Improvement pass 1/.test(so.text) && !/Improvement pass/.test(op.text) && so.text !== op.text && gp.text !== op.text && !/A reel-quality scene, worked/.test(so.text + op.text));
+  ok("models: Claude-only wording is neutralised for others", !/Opus is genuinely good|Opus-level/.test(gp.text + so.text));
+  const fd = J4(C(["brief", "--run", run, "--role", "frame-designer", "--key", "1-2", "--model", "gpt-5.6-sol"]));
+  ok("models: GPT frame designers also get the reel-quality key frame and the self-critique", /reel-quality key frame, worked/.test(fs.readFileSync(path.join(ws, fd.prompt), "utf8")));
+  ok("dispatch: Codex gets `codex exec -m <model> ... -s danger-full-access`, Claude Code gets Agent(... run_in_background: true)", /^codex exec -m gpt-5\.6-sol/.test(gp.r.dispatch || "") && /-s danger-full-access/.test(gp.r.dispatch) && /^Agent\(/.test(so.r.dispatch || "") && /run_in_background: true/.test(so.r.dispatch), `${gp.r.dispatch} | ${so.r.dispatch}`);
+  const gather = J4(C(["brief", "--run", run, "--role", "brand-researcher", "--model", "opus"]));
+  ok("dispatch: a gathering role on a Claude model may use a faster model", /model: "sonnet"/.test(gather.dispatch || ""), gather.dispatch);
+  const mk = spawnSync(process.execPath, [path.join(HERE, "crew.mjs"), "model", "--kv"], { encoding: "utf8", env: { ...env, RASANAI_MODEL: "gpt-5.6-sol" }, cwd: ws });
+  ok("crew.mjs model --kv prints MODEL= and HARNESS= (setup.sh passes them on)", /MODEL=gpt-5\.6-sol/.test(mk.stdout) && /HARNESS=codex/.test(mk.stdout));
+  ok("models: every addendum a profile names exists", ["claude-opus", "claude-sonnet", "claude-haiku", "gpt", "other"].every((n) => fs.existsSync(path.join(HERE, "..", "agents", "_models", `${n}.md`))));
+  // the finish opt-out: stepped scenes are rendered from the centre sub-frame, not averaged
+  const { sharpRanges, graphWithSharp } = await import(path.join(HERE, "lib", "sharp.mjs"));
+  const fp = path.join(ws, "fin");
+  fs.mkdirSync(path.join(fp, "compositions", "frames"), { recursive: true });
+  fs.writeFileSync(path.join(fp, "index.html"), '<div data-composition-id="root"><div id="s1" data-composition-id="a" data-composition-src="compositions/frames/a.html" data-start="0" data-duration="4"></div><div id="s2" data-composition-id="b" data-composition-src="compositions/frames/b.html" data-start="4" data-duration="3"></div><div id="s3" data-composition-id="c" data-composition-src="compositions/frames/c.html" data-start="7" data-duration="2" data-finish-blur="off"></div><div id="s4" data-composition-id="d" data-composition-src="compositions/frames/d.html" data-start="9" data-duration="5"></div></div>');
+  for (const [n, a] of [["a", ""], ["b", ' data-finish-blur="off"'], ["c", ""], ["d", ""]]) fs.writeFileSync(path.join(fp, "compositions", "frames", `${n}.html`), `<template><div data-composition-id="${n}"${a}></div></template>`);
+  const rg = sharpRanges(fp, { sharp: "20-22", "sharp-scenes": "1" });
+  ok("finish: sharp windows come from data-finish-blur=\"off\" on a frame root or a clip, --sharp seconds and --sharp-scenes", rg.some((r) => r[0] === 4 && r[1] === 7) && rg.some((r) => r[0] === 7 && r[1] === 9) && rg.some((r) => r[0] === 20) && rg.some((r) => r[0] === 0 && r[1] === 4) && !rg.some((r) => r[0] === 9), JSON.stringify(rg));
+  ok("finish: --no-auto-sharp ignores the markup", sharpRanges(fp, { "no-auto-sharp": true }).length === 0);
+  const ft = path.join(ws, "fin-test");
+  fs.mkdirSync(ft, { recursive: true });
+  const FF = (a) => spawnSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-y", ...a], { encoding: "utf8" });
+  const src = path.join(ft, "over.mp4");
+  const mk2 = FF(["-f", "lavfi", "-i", "color=c=black:s=320x180:r=240:d=2", "-f", "lavfi", "-i", "color=c=white:s=20x60:r=240:d=2", "-filter_complex", "[0][1]overlay=x='mod(t*600,300)':y=60", "-pix_fmt", "yuv420p", src]);
+  if (mk2.status !== 0) ok("finish: sharp windows leave the centre sub-frame unaveraged (needs ffmpeg)", false, mk2.stderr.slice(0, 200));
+  else {
+    const N = 8, fps = 30;
+    const chain = [`tpad=start=2:start_mode=clone:stop=2:stop_mode=clone`, `tmix=frames=5:weights='0.5 1 1 1 0.5'`, `trim=start_frame=4`, `setpts=PTS-STARTPTS`, `select='not(mod(n,${N}))'`, `setpts=N/(${fps}*TB)`].join(",");
+    const g = graphWithSharp("[0:v]", chain, { N, fps, ranges: [[1, 2, "scene"]] }) + `,fps=${fps}[out]`;
+    const out = path.join(ft, "out.mp4");
+    const r = FF(["-i", src, "-filter_complex", g, "-map", "[out]", out]);
+    const distinct = (n) => { const x = spawnSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-i", out, "-vf", `format=gray,select='eq(n,${n})',crop=320:2:0:90`, "-frames:v", "1", "-f", "rawvideo", "-"], { maxBuffer: 1 << 20 }); return new Set(x.stdout).size; };
+    ok("finish: inside a sharp window the frame is the centre sub-frame (hard edge), outside it the shutter averages (soft edge); frame count unchanged", r.status === 0 && distinct(45) <= 3 && distinct(15) >= 8, `${r.stderr.slice(0, 200)} sharp ${distinct(45)} blurred ${distinct(15)}`);
   }
 }
 

@@ -43,14 +43,15 @@ The bar: a senior motion designer's shot that a viewer would take for the produc
 
 ## A 3D or hybrid scene
 
-Your scene lives in real space: build it with Rasan3D (`references/3d.md`, read it in full), starting from `stage3d.mjs scaffold`, never a blank file. The 2D layers (ground and type) are still GSAP on the scene's one paused timeline and still checked by `obey.mjs`; the 3D layer is clocked by the same timeline and checked by `stage3d.mjs check`.
+Your scene lives in real space: build it with Rasan3D (`references/3d.md`, read it in full), starting from `stage3d.mjs scaffold`, never a blank file. **Invent the technique the shot needs.** The engine is open: write your own GLSL passes in the render graph (a raymarched world composited by depth, engraved or stippled shading, a custom post), run a deterministic simulation, pin real DOM in 3D, use any three.js addon or raw three.js. Presets (`k.material`, `k.rig`, `k.panel`) are shortcuts for when they happen to be the shot, not the menu. The design system (`frame.md`, DESIGN.md, the style bible) is the only bound on the look. The 2D layers (ground and type) are still GSAP on the scene's one paused timeline and still checked by `obey.mjs`; the 3D layer is clocked by the same timeline and checked by `stage3d.mjs check`.
 
 1. **Block it in metres.** Place the subject at the origin at real scale, the camera at the score's lens and distance, the key light from the score's direction. Get the landing pose right first (the peak frame should look like the key frame), then the legs into it.
 2. **The camera is the score's `camera3d`**: those legs, those eases, those holds. Lead the subject by 0.1 to 0.2 s; land every leg; hold where the line is read.
 3. **Seams with 2D scenes are pixel contracts.** `flat-to-depth`: lay the object out with `k.layout({ at: 0 })` at the outgoing scene's exact px rect, same texture, unlit face; hold the flat pose 0.1 to 0.3 s, then lift. `depth-to-flat`: land on `k.layout({ at: <end> })`. `camera-through`: match the neighbour's direction and speed at the cut.
 4. **Real product, real logo**: screenshots on `k.panel` faces, the official SVG through `k.svgUrl`, brand type through `k.extrudeText` (TTF/OTF) or DOM.
 5. **Look at it**: `stage3d.mjs stills` at the landings, `crew.mjs strip` at 15 fps across the camera move (it shows the real motion blur), and compare the seam frames with the neighbour's. Then `stage3d.mjs check --file <your file>` until it exits 0.
-6. **Brag with the space.** Parallax that proves the depth, a rack focus that moves the eye, layers that separate and settle a few frames apart, a shadow that lands a frame after the object. Never the three.js demo: no spin in a void, no constant-speed orbit, no torus knot, no glow on everything.
+6. **Brag with the space.** Parallax that proves the depth, a rack focus that moves the eye, layers that separate and settle a few frames apart, a shadow that lands a frame after the object, a technique nobody gets from a preset. Never the three.js demo: no spin in a void, no unmotivated constant-speed orbit, no torus knot, no glow on everything.
+7. **Intent overrides taste.** The gate errors only on what breaks a render (build failure, not seek-safe, blank frame, wall clock, `Math.random`, a second renderer, remote assets, unrenderable cost). Taste rules (`linear-drift`, `never-rests`, `stock-primitive`, `placeholder-material`, `fast-without-blur`, `ease-outside-set`) are warnings. If you did it on purpose, say so: `declare: { intent: { "linear-drift": "the endless glide across the floor is the shot" } }` (a reason of 12+ characters; the report lists it for the critics, who judge whether it holds). Intent is for the shot, never to dodge a note.
 
 ## A lyric video's scene (a plate)
 
@@ -75,4 +76,9 @@ If the delivery render goes through `finish.mjs all` (it does for every Final; d
 
 ## Done when
 
-`node "$SKILL_DIR/scripts/crew.mjs" check --run "$RUN" --role scene-animator --key <n> --project <project dir>` exits 0: your composition exists, obey reports nothing against it, your report lists its events, and your strips exist; for a 3D or hybrid scene, it is built with Rasan3D, `stage3d.mjs check` reports no error in it, and your report has its `## 3D` section.
+`node "$SKILL_DIR/scripts/crew.mjs" check --run "$RUN" --role scene-animator --key <n> --project <project dir>` exits 0: your composition exists, obey reports nothing against it, your report lists its events, and your strips exist; for a 3D or hybrid scene, it is built with Rasan3D, `stage3d.mjs check` reports no error in it (warnings are weighed against your declared intents), and your report has its `## 3D` section.
+
+
+## Stepped scenes and the film finish
+
+If this scene's look is stepped (animation on twos or threes, `steps(n)` eases, cel or stop-motion, datamosh), set `data-finish-blur="off"` on the scene's frame root: the film finish (`finish.mjs`, `references/finish.md`) averages sub-frames for motion blur, which would turn every step into a dissolve; a scene with the attribute is rendered from the centre sub-frame, sharp. Say so in your note.

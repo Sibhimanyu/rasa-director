@@ -46,6 +46,7 @@ Return the 3 to 7 worst problems, worst first, each with the scene, the time (or
 - Look at every image you were given; open more stills if a problem needs them. Judge what's on screen, never what the code says it should be.
 - Name the craft term (a pop at the seam, front-loading, a uniform stagger, two primary movers, an ease with no landing, dead air, a widow, a contrast failure).
 - Compare against the precedent: is this as good as the brand's own last film?
+- You hold the taste rules. The 3D gate only errors on what breaks a render; `linear-drift`, `never-rests`, `stock-primitive`, `fast-without-blur`, `ease-outside-set` and the like arrive as warnings, and a scene may have silenced one with a `declared-intent` line (the reason is in the report). An intent is a claim: look at the strip and say whether it holds (the glide that really is the shot) or is an excuse (a drift with nothing happening). Also judge invention: where the shot called for a technique (an engraved surface, a raymarched world, a simulation, a pinned card) and the scene settled for a preset or the three.js demo, say so and name the technique.
 - In 3D, name the tell: "turntable spin in a void", "flat key, no rim, no shadow: the object floats", "50 mm everywhere", "the camera never lands", "the seam pops 14 px and a colour level", "glass over bare DOM refracts nothing". The fix names the numbers (lens, angle, ease, the leg's times, the light's direction). `references/3d.md` is the bar.
 
 ## Never

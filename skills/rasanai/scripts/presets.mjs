@@ -1,6 +1,10 @@
 #!/usr/bin/env node
-// Style presets: hundreds of complete, named motion-graphics styles (taxonomy/presets/*.json, schema in
-// taxonomy/presets/SCHEMA.md) that users choose from by eye, each drawn by console/presets.js.
+// Style presets: 403 complete, named motion-graphics styles (taxonomy/presets/*.json, schema in
+// taxonomy/presets/SCHEMA.md), each drawn by console/presets.js. They are RAW MATERIAL for the design desk (designers may
+// cite them) and the website's live library: they are no longer the user's menu. The Look step shows the three bespoke
+// systems the desk makes per film (design.mjs look-payload); `gallery`, `suggest` and `pick` remain for the website, for
+// tooling, and for the one technical case where a workflow's gate wants a preset's frame.md verbatim (lyric videos,
+// where the bespoke system binds through DIRECTION.md and DISPATCH).
 //   node presets.mjs validate                       -> checks every preset (terms, recipe vocabulary, contrast, duplicates)
 //   node presets.mjs list [--family bold] [--q "shadow"]   -> id, name, family (search matches name, aka, what, feels, use)
 //   node presets.mjs show <id>                      -> one preset in full
@@ -26,30 +30,8 @@ const DIR = path.join(HERE, "..", "taxonomy", "presets");
 const args = parseArgs();
 const cmd = args._[0];
 
-export const VOCAB = {
-  layout: ["pills", "cards", "bento", "poster", "hud", "terminal", "window", "editorial", "device", "diagram", "collage", "data", "map", "split", "bignumber", "typegrid", "timeline", "photo", "stack", "list", "isometric", "chat", "ticker", "floorplan", "record"],
-  shadow: ["none", "soft", "hard", "long", "inset", "neu", "glow", "layered", "float"],
-  surface: ["flat", "gradient", "glass", "metal", "clay", "paper", "neon"],
-  texture: ["none", "grain", "halftone", "paper", "scanlines", "noise", "dots", "grid", "riso", "crt", "hatching", "checker", "woodgrain", "veining", "weave", "terrazzo", "perforation"],
-  icons: ["doodle", "line", "filled", "duotone", "pixel", "glyph", "emoji3d", "none"],
-  motif: ["none", "stars", "squiggles", "grid", "crosshair", "stickers", "blobs", "rays", "confetti", "rules", "circuit", "orbits", "particles", "refraction", "contours", "tiles", "stripes", "repeat", "pictograms"],
-  motion: ["pop", "snap", "slide", "mask", "type", "glitch", "spring", "drift", "step", "fade", "bounce"],
-  strokeStyle: ["solid", "dashed", "double", "sketch"],
-  // optional recipe fields (absent = the renderer's defaults)
-  effects: ["rgb-split", "extrude", "halation", "grain-heavy", "vignette", "blur-depth", "glint", "scanline-heavy", "misregister", "noise-bars", "light-leak"],
-  iconSet: ["default", "geometric", "nature", "tech", "hand", "ornament", "pictogram"],
-  density: ["airy", "balanced", "dense"],
-  chrome: ["auto", "mac", "classic", "tabs", "none"],
-  labels: ["kicker", "section", "date", "window", "title", "badge", "stat", "caption", "quote", "cta", "hint", "hud", "readouts", "steps", "dates", "items", "tags", "places", "before", "after", "messages", "ticker", "bug", "lines", "people", "corner", "emblem", "metrics", "times", "scale"],
-  chart: ["auto", "none", "bars", "line", "wave", "jagged", "spectrum", "steps", "scatter", "donut"],
-  scene: ["landscape", "city", "botanical", "interior", "poolside", "portrait", "still-life", "abstract", "night-sky"],
-  photoTone: ["smooth", "flat"],
-  photo: ["block", "plate", "none"],
-  marker: ["auto", "circle", "diamond", "square", "rect", "ring"],
-  diagram: ["flow", "tree", "network"],
-  edges: ["arrow", "line"],
-  families: ["bold", "soft", "editorial", "retro", "future", "handmade", "dimensional", "product", "data", "cinematic", "playful", "luxury", "heritage", "broadcast", "science", "print", "interface", "nature", "sound", "space"],
-};
+import { VOCAB } from "./lib/vocab.mjs";
+export { VOCAB };
 
 export function loadPresets() {
   const out = [];

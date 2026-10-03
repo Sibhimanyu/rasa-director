@@ -23,7 +23,7 @@ import crypto from "node:crypto";
 import os from "node:os";
 import { spawn, execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { parseArgs, die, SKILL_DIR, STATE_DIR } from "./lib/common.mjs";
+import { parseArgs, die, SKILL_DIR, STATE_DIR, GSAP_PATH } from "./lib/common.mjs";
 
 // this copy's version: a console started by an older copy is replaced, not reused
 const VERSION = (() => {
@@ -386,6 +386,7 @@ function serve() {
       return send(200, fs.readFileSync(UI, "utf8"), "text/html; charset=utf-8", { "set-cookie": `${COOKIE}=${token}; HttpOnly; SameSite=Strict; Path=/` });
     }
     if (!hasCookie(req)) return send(403, { error: "open the console URL first" });
+    if (u.pathname === "/__rasanai/gsap.min.js") return send(200, fs.readFileSync(GSAP_PATH, "utf8"), "text/javascript");
     // the style-preset renderer (the gallery draws hundreds of styles in the page)
     if (u.pathname === "/presets.js") return send(200, fs.readFileSync(path.join(SKILL_DIR, "console", "presets.js"), "utf8"), "text/javascript");
     // the real-3D specimens (Rasan3D draws the 3D family live); three.js and its addons are served from the skill's stage3d folder only
@@ -488,6 +489,11 @@ function serve() {
       const st = fs.statSync(real);
       if (!st.isFile()) return send(403, "not a file", "text/plain");
       const type = MIME[path.extname(real).toLowerCase()] || "application/octet-stream";
+      // a design system's specimen page: it loads the vendored GSAP instead of a CDN copy, and only this console may frame it
+      if (path.basename(real) === "specimen.html") {
+        const page = fs.readFileSync(real, "utf8").replace(/<script[^>]+src=["'][^"']*gsap(?:\.min)?\.js["'][^>]*><\/script>/gi, '<script src="/__rasanai/gsap.min.js"></script>');
+        return send(200, page, type, { "content-security-policy": "frame-ancestors 'self'" });
+      }
       const r = req.headers.range && /^bytes=(\d*)-(\d*)$/.exec(String(req.headers.range).trim());
       if (r && st.size > 0) {
         let startB, endB;

@@ -24,7 +24,7 @@ function copyDir(src, dst) {
 export function install(destRoot) {
   const dst = path.join(destRoot, "assets", "three");
   // the runtime file itself decides (a fix without a version bump still reaches the project)
-  const same = ["rasan3d.js", "rasan-music.js"].every((f) => exists(path.join(dst, f)) && fs.readFileSync(path.join(dst, f), "utf8") === fs.readFileSync(path.join(STAGE, f), "utf8"));
+  const same = ["rasan3d.js", "rasan-music.js", "glsl.js"].every((f) => exists(path.join(dst, f)) && fs.readFileSync(path.join(dst, f), "utf8") === fs.readFileSync(path.join(STAGE, f), "utf8"));
   const updated = !same || !exists(path.join(dst, "three.core.min.js"));
   if (updated) {
     fs.rmSync(dst, { recursive: true, force: true });
@@ -36,7 +36,7 @@ export function install(destRoot) {
 // ------------------------------------------------------------------ a local server (fetch() can't read file://)
 // three.js loads fonts, SVGs and models with fetch, which file:// pages can't use; HyperFrames serves projects
 // over http, so the tools do too: 127.0.0.1 only, files under the root only, plus the vendored GSAP.
-const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".otf": "font/otf", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".mp4": "video/mp4", ".wav": "audio/wav", ".mp3": "audio/mpeg" };
+const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json; charset=utf-8", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".otf": "font/otf", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".mp4": "video/mp4", ".wav": "audio/wav", ".mp3": "audio/mpeg" };
 export function serve(root) {
   return new Promise((resolve, reject) => {
     const base = path.resolve(root);
@@ -123,17 +123,36 @@ export async function stills(file, times, dir, quality = "final") {
 }
 
 // ------------------------------------------------------------------ the gate
+// Errors are only for what breaks a render: a build that fails, frames that depend on state (not seek-safe), a blank
+// frame, wall clock / Math.random / a free-running loop / a second WebGL context / remote assets / interactive controls,
+// a frame too costly to render, a missing runtime. Everything else is TASTE: a warning the critics weigh, which the
+// scene silences by stating its intent: declare: { intent: { "<rule>": "<why, 12+ characters>" } }. The report lists
+// every declared intent so the critics see the reason and judge it.
+export const MIN_INTENT = 12;           // characters of reason an intent needs
+export const FRAME_COST_WARN_MS = 2500; // a final frame slower than this: warning, with the estimated render time
+export const FRAME_COST_MAX_MS = 20000; // a final frame slower than this cannot be rendered: error
 const SMELLS = [
   { re: /Math\.random\s*\(/, rule: "nondeterministic-random", sev: "error", msg: "Math.random() changes every seek", fix: "use a seeded generator: k.rng(seed) or Rasan3D.rng(seed)" },
   { re: /Date\.now\s*\(|performance\.now\s*\(|new Date\s*\(/, rule: "wall-clock", sev: "error", msg: "reads the wall clock; frames must be a pure function of the scene's time", fix: "derive everything from t in pose(t, k)" },
   { re: /requestAnimationFrame\s*\(|setAnimationLoop\s*\(/, rule: "free-running-loop", sev: "error", msg: "a free-running render loop; HyperFrames seeks frame by frame", fix: "remove it: the stage draws on every seek of the scene's timeline" },
   { re: /new\s+(?:THREE\.)?WebGLRenderer\s*\(/, rule: "own-renderer", sev: "error", msg: "creates its own WebGLRenderer (a GL context per scene runs out at ~16 and skips the motion blur, DoF and grade)", fix: "use Rasan3D.stage(...); it shares one renderer across the film" },
   { re: /OrbitControls|TrackballControls|FlyControls/, rule: "interactive-controls", sev: "error", msg: "interactive controls in a rendered film", fix: "drive the camera from camera keys" },
-  { re: /MeshNormalMaterial/, rule: "placeholder-material", sev: "error", msg: "MeshNormalMaterial is the rainbow debug look", fix: "use a material preset from the look: k.material('clay'|'glass'|'chrome'|…, { color })" },
-  { re: /TorusKnotGeometry|new\s+(?:THREE\.)?(?:Torus|Icosahedron|Dodecahedron|Octahedron)Geometry/, rule: "stock-primitive", sev: "warning", msg: "a stock demo primitive (torus knot, icosahedron) is the 'three.js demo' tell", fix: "model the film's own object: the product, its UI as panels, the logo extruded from its SVG, type, or a shape from the motif" },
+  { re: /MeshNormalMaterial/, rule: "placeholder-material", sev: "warning", msg: "MeshNormalMaterial is the rainbow debug look", fix: "give it a material from the look (k.material('clay'|'glass'|…, { color }), or your own shader); if the debug look is the point, declare intent['placeholder-material'] with the reason" },
+  { re: /TorusKnotGeometry|new\s+(?:THREE\.)?(?:Torus|Icosahedron|Dodecahedron|Octahedron)Geometry/, rule: "stock-primitive", sev: "warning", msg: "a stock demo primitive (torus knot, icosahedron) is the 'three.js demo' tell", fix: "model the film's own object (the product, its UI as panels, the logo extruded, type, a shape from the motif) or declare intent['stock-primitive'] if the primitive is deliberate" },
   { re: /cdn\.jsdelivr\.net\/npm\/three|unpkg\.com\/three|three@\d/, rule: "remote-three", sev: "error", msg: "loads three.js from a CDN (a second copy, network at render time)", fix: 'load assets/three/rasan3d.js and use k.THREE' },
   { re: /\.load\(\s*["']https?:\/\//, rule: "remote-asset", sev: "error", msg: "loads a model or texture over the network at render time", fix: "copy the file into assets/ and load it project-root relative" },
 ];
+
+// the intents a stage declared that count (a rule id -> a reason of MIN_INTENT+ characters); legacy declare.linear = track names
+function intentsOf(manifest) {
+  const d = (manifest && manifest.declared) || {};
+  const out = {}, short = [];
+  for (const [rule, why] of Object.entries(d.intent || {})) {
+    if (typeof why === "string" && why.trim().length >= MIN_INTENT) out[rule] = why.trim();
+    else short.push(rule);
+  }
+  return { intent: out, short };
+}
 
 export async function checkFile(file, project, M, quality) {
   const findings = [];
@@ -147,6 +166,7 @@ export async function checkFile(file, project, M, quality) {
   const inSet = (e) => easeSet.some((x) => x.family === e.family && x.dir === e.dir);
   let couldNotRun = null;
   const stages = [];
+  const intentNotes = new Map();
   try {
     await withComposition(file, quality, async (b, { ready }) => {
       for (const s of ready.stages || []) if (s.error) add({ severity: "error", rule: "build-failed", stage: s.id, message: `the 3D scene failed to build: ${s.error}`, fix: "fix the error (open the page in a browser to see the stack)" });
@@ -177,8 +197,16 @@ export async function checkFile(file, project, M, quality) {
         const busiest = r.travel.reduce((a, x) => (x.px > a.px ? x : a), r.travel[0] || { t: 0, px: 0 });
         const cost = await b.eval(`(function(){ window.__rasan3dQuality = "final"; var s = window.__rasan3d.stages[${JSON.stringify(id)}], c = window["perf" + "ormance"];
           var t0 = c.now(); s.draw(${busiest.t}, true); s.ctx2d.getImageData(0, 0, 1, 1); var ms = c.now() - t0; window.__rasan3dQuality = ${JSON.stringify(quality)}; return { ms: Math.round(ms), samples: s.stats.lastSamples }; })()`);
-        stages.push({ id, deterministic: r.deterministic, cost, busiest, manifest: r.manifest });
+        const { intent, short } = intentsOf(r.manifest);
+        stages.push({ id, deterministic: r.deterministic, cost, busiest, manifest: r.manifest, intents: intent });
         const where = { stage: id };
+        // a taste finding is dropped when the stage declared the intent for its rule (and noted in the report)
+        const taste = (f) => {
+          if (intent[f.rule]) return;
+          if (short.includes(f.rule)) f = { ...f, fix: `${f.fix}; your declare.intent["${f.rule}"] reason is under ${MIN_INTENT} characters, so it doesn't count` };
+          pushOnce(f);
+        };
+        for (const [rule, why] of Object.entries(intent)) intentNotes.set(`${id}|${rule}`, { severity: "info", rule: "declared-intent", stage: id, declares: rule, message: `intent for ${rule}: ${why}`, fix: "critics: judge whether the intent holds on screen" });
         if (!r.deterministic) add({ severity: "error", rule: "not-seek-safe", ...where, message: "the same time rendered different pixels after seeking elsewhere: something carries state between frames", fix: "make pose(t, k) set every animated property from t alone (no += on positions, no counters, no simulation state)" });
         for (const x of r.blank) if (x.sd < 0.6 && !(r.manifest.declared && r.manifest.declared.plain)) add({ severity: "error", rule: "blank-frame", ...where, at: `${x.t.toFixed(2)}s`, message: `the 3D layer is a flat field at ${x.t.toFixed(2)}s (luma sd ${x.sd.toFixed(2)})`, fix: "check the camera aims at the subject and the subject is lit and in front of the near plane" });
         // eases (pose keys are grouped: one finding per rule and ease, naming how many keys share it)
@@ -193,29 +221,35 @@ export async function checkFile(file, project, M, quality) {
         };
         for (const tr of r.manifest.tracks || []) {
           for (const e of tr.eases || []) {
-            if (e === "(implicit)") pushOnce({ severity: "error", rule: "implicit-ease", ...where, track: tr.name, message: `track "${tr.name}" has a key with no ease (falls back to power2.inOut)`, fix: `name it on the key: [t, value, "${((M && M.easing) || {}).move || "power3.inOut"}"]` });
-            else if (e === "(function)") pushOnce({ severity: "warning", rule: "custom-ease", ...where, track: tr.name, message: `track "${tr.name}" eases with a function, which can't be checked against motion.md`, fix: "use a named GSAP ease from motion.md" });
+            if (e === "(implicit)") taste({ severity: "warning", rule: "implicit-ease", ...where, track: tr.name, message: `track "${tr.name}" has a key with no ease (falls back to power2.inOut)`, fix: `name it on the key: [t, value, "${((M && M.easing) || {}).move || "power3.inOut"}"]` });
+            else if (e === "(function)") taste({ severity: "warning", rule: "custom-ease", ...where, track: tr.name, message: `track "${tr.name}" eases with a function, which can't be checked against motion.md`, fix: "use a named GSAP ease from motion.md" });
             else {
               const pe = parseEase(e);
               const declared = (r.manifest.declared && r.manifest.declared.linear) || [];
-              if (pe.family === "none" && !inSet(pe) && !declared.includes(tr.name)) pushOnce({ severity: "error", rule: "linear-drift", ...where, track: tr.name, message: `track "${tr.name}" moves at a constant speed (ease none): the screensaver look`, fix: "ease it (a move eases in and out and lands), or declare it in declare.linear with the reason (a conveyor, a clock hand)" });
-              else if (pe.family !== "none" && easeSet.length && !inSet(pe)) pushOnce({ severity: "error", rule: "ease-outside-set", ...where, track: tr.name, ease: e, message: `track "${tr.name.startsWith("pose.") ? "pose()" : tr.name}" uses ${e}, not one of motion.md's eases (${Object.values(M.easing).join(", ")})`, fix: `use "${M.easing.move || Object.values(M.easing)[0]}"` });
+              if (pe.family === "none" && !inSet(pe) && !declared.includes(tr.name)) taste({ severity: "warning", rule: "linear-drift", ...where, track: tr.name, message: `track "${tr.name}" moves at a constant speed (ease none): the screensaver look`, fix: "ease it (a move eases in and out and lands), or state the intent: declare: { intent: { \"linear-drift\": \"why constant speed is the shot (a conveyor, a clock hand, the endless glide)\" } }" });
+              else if (pe.family !== "none" && easeSet.length && !inSet(pe)) taste({ severity: "warning", rule: "ease-outside-set", ...where, track: tr.name, ease: e, message: `track "${tr.name.startsWith("pose.") ? "pose()" : tr.name}" uses ${e}, not one of motion.md's eases (${Object.values(M.easing).join(", ")})`, fix: `use "${M.easing.move || Object.values(M.easing)[0]}", or state the intent: declare.intent["ease-outside-set"] = "<why this ease is the shot>"` });
             }
           }
           if (tr.fn) pushOnce({ severity: "info", rule: "function-track", ...where, track: tr.name, message: `track "${tr.name}" is a function of t (an orbit or a path): its ease is whatever the function does`, fix: "fine when it eases (Rasan3D.orbit eases); make sure it lands" });
         }
         // motion: blur on fast moves, a rest somewhere, and no ending at full speed into a cut
         const fast = r.travel.filter((x) => x.px > 6);
-        if (fast.length && r.manifest.motionBlur === false) add({ severity: "warning", rule: "fast-without-blur", ...where, at: `${fast[0].t}s`, message: `moves ${fast[0].px} px per frame with motion blur off: it will strobe`, fix: "remove motionBlur: false (the default is a 180° shutter)" });
+        if (fast.length && r.manifest.motionBlur === false) taste({ severity: "warning", rule: "fast-without-blur", ...where, at: `${fast[0].t}s`, message: `moves ${fast[0].px} px per frame with motion blur off: it will strobe`, fix: "remove motionBlur: false (the default is a 180° shutter)" });
         const still = r.travel.filter((x) => x.px < 0.4);
-        if (r.travel.length > 4 && !still.length) add({ severity: "warning", rule: "never-rests", ...where, message: "the 3D world never comes to rest: every sampled moment is moving", fix: "land the camera and hold (0.4 s or more) where the line is read; stillness is a choice" });
-        if (cost.ms > 2500) add({ severity: "warning", rule: "frame-cost", ...where, message: `a final frame at ${busiest.t}s takes ${cost.ms} ms (${cost.samples} samples): about ${Math.round(((cost.ms / 1000) * r.manifest.duration * r.manifest.fps) / 60)} min to render this scene`, fix: "lower motionBlur.samples, drop shadows on small lights, merge geometry, or shrink transmission (glass) to the hero" });
+        if (r.travel.length > 4 && !still.length) taste({ severity: "warning", rule: "never-rests", ...where, message: "the 3D world never comes to rest: every sampled moment is moving", fix: "land the camera and hold (0.4 s or more) where the line is read, or declare intent['never-rests'] when constant motion is the shot (an endless flight)" });
+        if (cost.ms > FRAME_COST_MAX_MS) add({ severity: "error", rule: "frame-cost", ...where, message: `a final frame at ${busiest.t}s takes ${cost.ms} ms (${cost.samples} samples), over the ${FRAME_COST_MAX_MS / 1000} s ceiling: this scene cannot be rendered in reasonable time`, fix: "lower motionBlur.samples, cut march steps or resolution of heavy passes, drop shadows on small lights, merge geometry" });
+        else if (cost.ms > FRAME_COST_WARN_MS) add({ severity: "warning", rule: "frame-cost", ...where, message: `a final frame at ${busiest.t}s takes ${cost.ms} ms (${cost.samples} samples): about ${Math.round(((cost.ms / 1000) * r.manifest.duration * r.manifest.fps) / 60)} min to render this scene`, fix: "lower motionBlur.samples, drop shadows on small lights, merge geometry, or shrink transmission (glass) to the hero" });
       }
     });
   } catch (e) {
     couldNotRun = String(e.message || e).split("\n")[0];
   }
-  return { findings, couldNotRun, stages };
+  // static (text) taste rules honour the stage's declared intent too
+  const allIntent = new Set(stages.flatMap((s) => Object.keys(s.intents || {})));
+  const kept = findings.filter((f) => !(f.severity === "warning" && !f.stage && allIntent.has(f.rule)));
+  for (const f of findings) if (!kept.includes(f)) { const st = stages.find((s) => s.intents && s.intents[f.rule]); if (st) intentNotes.set(`${st.id}|${f.rule}`, { file: f.file, severity: "info", rule: "declared-intent", stage: st.id, declares: f.rule, message: `intent for ${f.rule}: ${st.intents[f.rule]}`, fix: "critics: judge whether the intent holds on screen" }); }
+  for (const n of intentNotes.values()) kept.push({ file: path.relative(project, file), ...n });
+  return { findings: kept, couldNotRun, stages };
 }
 
 export function collect(dir, res = []) {

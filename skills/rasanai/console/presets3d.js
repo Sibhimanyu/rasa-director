@@ -2,7 +2,7 @@
 // 1600x900 specimen frame as RasaPresets.render. Plain browser JS, no build, no dependencies besides Rasan3D,
 // which this file loads itself from RasaPresets3D.base.
 //   RasaPresets3D.base = "/three/"                  // folder holding rasan3d.js (and three.js beside it)
-//   RasaPresets3D.has(preset)                       // true for the 20 styles drawn here
+//   RasaPresets3D.has(preset)                       // true for the 20 styles drawn here, and for any system whose recipe names one in three.base
 //   RasaPresets3D.mount(stageEl, preset, { headline, sub, brand, pixelRatio }) -> { ready, play(), destroy() }
 //   RasaPresets3D.whenAll()                         // every mounted specimen's ready (for stills)
 // Everything is a pure function of time (seeded rng only); requestAnimationFrame is used only for hover playback.
@@ -1305,12 +1305,14 @@
   }
 
   // ------------------------------------------------------------------ mount
-  api.has = function (preset) { return !!preset && IDS.indexOf(preset.id) >= 0; };
+  // a bespoke system names its 3D family in preset.three.base (its own palette and fonts are applied to that family's scene)
+  function keyOf(preset) { return preset && preset.three && preset.three.base ? preset.three.base : preset && preset.id; }
+  api.has = function (preset) { return !!preset && IDS.indexOf(keyOf(preset)) >= 0; };
 
   api.mount = function (stageEl, preset, o) {
     o = o || {};
     var h = { ready: null, play: function () {}, destroy: function () {} };
-    if (!stageEl || !api.has(preset) || !SCENES[preset.id]) { h.ready = Promise.resolve(); return h; }
+    if (!stageEl || !api.has(preset) || !SCENES[keyOf(preset)]) { h.ready = Promise.resolve(); return h; }
     var n = ++seq, id = "rp3d-" + preset.id + "-" + n;
     var saved = { html: stageEl.innerHTML, bg: stageEl.style.background };
     var S = { dead: false, swapped: false, stage: null, clock: Clock(DUR), raf: 0, going: false };
@@ -1330,7 +1332,7 @@
       var pr = o.pixelRatio || clamp(((box.width || W) * (root.devicePixelRatio || 1)) / W, 0.3, 1);
       return Promise.all([loadRuntime(), fontsReady(R)]).then(function () {
         if (S.dead) return;
-        var spec = SCENES[preset.id](P, { R: R, headline: o.headline, sub: o.sub });
+        var spec = SCENES[keyOf(preset)](P, { R: R, headline: o.headline, sub: o.sub });
         var canvas = document.createElement("canvas");
         canvas.style.cssText = "position:absolute;left:0;top:0;width:" + W + "px;height:" + H + "px;display:block;z-index:1";
         var opts = {

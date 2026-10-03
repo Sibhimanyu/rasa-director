@@ -25,6 +25,7 @@ import { resolvePicks, styleName, formula, promptParagraph, directionMd, suggest
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { readDesignMd } from "./lib/design-md.mjs";
+import { directionSection } from "./lib/system.mjs";
 import { track, report } from "./lib/report.mjs";
 
 const args = parseArgs();
@@ -55,7 +56,8 @@ if (cmd === "compile") {
   }
   const md = directionMd({ entries, subject: D.subject, decidedBy: D.decided_by || {}, notes: D.notes || {}, brand: brandName, motionMd: motionPath ? path.basename(motionPath) : null, avoid });
   const out = path.resolve(String(args.out));
-  writeFile(path.join(out, "DIRECTION.md"), md);
+  // a bespoke design system (design.mjs choose-system): its own words lead the art direction
+  writeFile(path.join(out, "DIRECTION.md"), md + directionSection(D));
   const resolved = {
     style_name: styleName(entries),
     formula: formula(entries),
