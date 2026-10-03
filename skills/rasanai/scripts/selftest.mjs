@@ -34,7 +34,7 @@ import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), "rasa-selftest-"));
-const env = { ...process.env, RASANAI_HOME: path.join(TMP, "home") };
+const env = { ...process.env, RASANAI_HOME: path.join(TMP, "home"), RASANAI_MODEL: "claude-opus-5-5" };
 const quick = process.argv.includes("--quick");
 let failed = 0;
 const node = (script, args, opts = {}) => spawnSync(process.execPath, [path.join(HERE, script), ...args], { encoding: "utf8", env, cwd: opts.cwd || TMP, timeout: 180000 });
